@@ -6,7 +6,6 @@ cardImage: assets/recipes/90-rodbetsagg-card.webp
 alt: Rosa inlagda ägg i rödbetslag
 categories: [preserves, party]
 tags: [Vegetarian, Dairy free, Gluten free, Pickles, Leftovers, Zero waste, Beginner friendly, Budget]
-time: 4340
 timeLabel: 20 min + 1–3 dygn
 facts:
   Förberedelse: 10 min + 1–3 dygn i kylen

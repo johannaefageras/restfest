@@ -137,7 +137,7 @@
 
 .pantry-chip:hover { background: #7ccb45; }
 .pantry-chip img { object-fit: contain; flex: none; }
-.pantry-chip span { font-size: 18px; flex: none; }
+.pantry-chip .fa-xmark { font-size: 13px; }
 .pantry-list li { max-width: 100%; }
 
 .pantry-chip.is-unknown {
@@ -279,7 +279,7 @@
   border-radius: 4px;
   padding: 4px 7px;
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -295,6 +295,8 @@
 .archive-card-art .favorite[aria-pressed="true"] {
   background: #f4a3c8;
 }
+
+.favorite .fa-heart { font-size: 22px; }
 
 .featured-body { padding: 19px 20px 16px; }
 
@@ -436,6 +438,40 @@
   margin-bottom: 28px;
 }
 
+/* The same idea as the archive filters: on a phone the 17 categories are one row you open. */
+.listing-links-panel > summary { list-style: none; }
+.listing-links-panel > summary::-webkit-details-marker { display: none; }
+.listing-links-current { color: var(--muted); font-weight: 500; }
+
+@media (max-width: 699px) {
+  .listing-links-panel { margin-bottom: 22px; }
+  .listing-links-panel > summary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 48px;
+    margin-bottom: 0;
+    padding: 8px 12px;
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius-button);
+    background: var(--surface);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .listing-links-panel > summary .fa-chevron-down { margin-inline-start: auto; }
+  .listing-links-panel:not([open]) > .listing-links { display: none; }
+  .listing-links-panel[open] > .listing-links { display: flex; margin-top: 12px; margin-bottom: 0; }
+  .listing-links { margin-bottom: 0; }
+}
+
+@media (min-width: 700px) {
+  .listing-links-panel > summary { display: none; }
+  .listing-links-panel:not([open]) > .listing-links { display: flex; }
+}
+
 .listing-links .food-filter[aria-current="page"] { background: #b4e48c; border-color: var(--ink); }
 
 /* mer-an-mat.html */
@@ -450,25 +486,80 @@
   letter-spacing: -.025em;
 }
 
+/* The heading links to the type page, e.g. typ/hemmaspa.html. The label and arrow share one span so the
+   arrow stays after the last word when the label wraps. */
+.more-heading a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.more-heading a:hover { text-decoration-line: underline; }
+/* Inline, not inline-block like other icons, so the &nbsp; before it keeps it on the last word's line. */
+.more-heading-arrow { display: inline; font-size: .7em; vertical-align: .1em; }
 .more-heading img { width: 32px; height: 32px; object-fit: contain; }
 .more-intro { margin: 6px 0 4px; font-size: 14px; color: var(--muted); }
 
-.archive-primary-filters,
+.archive-controls { display: grid; gap: 15px; }
+
 .archive-category,
 .archive-filters {
   display: grid;
   gap: 9px;
 }
 
-.archive-primary-filters { gap: 15px; }
 .archive-filters { margin: 9px 0 13px; }
 
-@media (min-width: 900px) {
-  .archive-primary-filters {
-    grid-template-columns: minmax(0, 650px) minmax(0, 320px);
-    align-items: end;
+/* On a phone the category, diet and quick filters sit behind one control so the
+   recipes start on the first screen. The count is how many of those are on. */
+.archive-filter-panel > summary { list-style: none; }
+.archive-filter-panel > summary::-webkit-details-marker { display: none; }
+
+.archive-filter-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding-inline: 6px;
+  border-radius: 999px;
+  background: #b4e48c;
+  font: 700 12px/1 var(--font-label);
+}
+
+@media (max-width: 699px) {
+  .archive-filter-panel > summary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 12px;
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius-button);
+    background: var(--surface);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
   }
 
+  .archive-filter-panel > summary .fa-chevron-down { margin-inline-start: auto; }
+  /* Author display beats the browser's closed-<details> rule, so hide the body explicitly. */
+  .archive-filter-panel:not([open]) > .archive-filter-panel-body { display: none; }
+  .archive-filter-panel[open] > .archive-filter-panel-body { display: grid; gap: 12px; padding-top: 12px; }
+  .archive-filters { margin: 0; }
+}
+
+@media (min-width: 700px) {
+  /* The closed <details> hides its body. This selector beats that, so the filters stay visible.
+     Search, category and quick filters stack. Sharing one grid row with the closed details
+     leaves an empty cell, so the category is not pulled up beside the search. */
+  .archive-filter-panel > summary { display: none; }
+  .archive-filter-panel:not([open]) > .archive-filter-panel-body { display: block; }
+}
+
+@media (min-width: 900px) {
   .archive-category .meal-picker > summary { min-height: 46px; }
 }
 
@@ -503,17 +594,14 @@
 .meal-picker > summary:hover, .meal-picker[open] > summary { border-color: var(--ink); }
 .meal-picker > summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 
-.meal-picker > summary::after {
-  content: '';
-  justify-self: center;
-  width: 8px;
-  height: 8px;
-  border: solid currentColor;
-  border-width: 0 2px 2px 0;
-  transform: translateY(-2px) rotate(45deg);
-}
+.meal-picker > summary > .fa-chevron-down { justify-self: center; font-size: 14px; }
 
-.meal-picker[open] > summary::after { transform: translateY(2px) rotate(225deg); }
+/* The <details> summaries (this picker, "Fler filter", the recipe's "Mått och ugnstemperaturer") show a
+   chevron from icons.css instead of the browser's triangle. It points up while open. */
+.archive-advanced-filters summary, .recipe-measurements summary { list-style: none; }
+.archive-advanced-filters summary::-webkit-details-marker,
+.recipe-measurements summary::-webkit-details-marker { display: none; }
+details[open] > summary > .fa-chevron-down { transform: rotate(180deg); }
 
 .meal-picker-options {
   position: absolute;
@@ -569,10 +657,15 @@
   width: fit-content;
   cursor: pointer;
   font-family: var(--font-label);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   padding: 8px 0;
 }
+
+/* .food-filters { display: flex } would otherwise show this block while the details is closed. */
+.archive-advanced-filters:not([open]) > :not(summary) { display: none; }
+
+.archive-advanced-filters summary .fa-chevron-down { margin-inline-start: 7px; vertical-align: -1px; }
 
 .archive-advanced-filters summary img {
   display: inline-block;
@@ -584,7 +677,7 @@
 .archive-advanced-filters > .food-filters { margin-bottom: 10px; }
 
 .filter-label {
-  font: 700 11px var(--font-label);
+  font: 700 12px var(--font-label);
   text-transform: uppercase;
 }
 
@@ -637,11 +730,17 @@
   align-items: center;
   gap: 5px;
   margin: 0 0 5px;
-  font: 11px var(--font-label);
+  font: 12px var(--font-label);
 }
 .archive-card-body > p { font-size: 13px; line-height: 1.5; color: var(--muted); margin: 7px 0 10px; }
+.archive-match {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font: 700 12px/1.4 var(--font-label);
+}
 .archive-card-body .ingredient-chips { margin-bottom: 4px; }
 .archive-card-body .open-recipe { margin-top: auto; }
+.open-recipe > .fa-arrow-up-right { font-size: 13px; }
 .archive-card:focus-within { border-color: var(--blue); }
 
 @media (min-width: 800px) {
@@ -681,7 +780,7 @@
   .fridge-actions .button { gap: 5px; padding-inline: 9px; font-size: 12px; }
   .fridge-actions .button img { width: 16px; height: 16px; }
   .tonight-heading h2 { font-size: 24px; }
-  .tonight-heading a { font-size: 11px; }
+  .tonight-heading a { font-size: 12px; }
   .featured-art { min-height: 178px; }
   .featured-plate { width: 135px; height: 135px; }
   .featured-body { padding: 15px; }
@@ -689,6 +788,7 @@
   .archive-card-art { min-height: 109px; }
   .archive-card-art > img { width: 59px; height: 59px; }
   .archive-card-art .favorite { width: 33px; height: 33px; right: 7px; top: 7px; }
+  .archive-card-art .favorite .fa-heart { font-size: 19px; }
   .archive-time { bottom: 6px; right: 6px; }
   .archive-card-body { padding: 11px 10px 8px; }
   .archive-card-body h3 { font-size: 17px; }
@@ -707,6 +807,9 @@
   background: #f4a3c8;
   border-bottom: 2px solid var(--ink);
 }
+
+.dialog-close { font-size: 18px; }
+.dialog-save .fa-heart { font-size: 16px; }
 
 /* Stays in the corner while the recipe scrolls, without taking up a row of its own. */
 #recipe-dialog > .dialog-close {
@@ -800,7 +903,7 @@
   accent-color: #579a27;
 }
 
-.cook-checklist .meta { font-size: 10px; }
+.cook-checklist .meta { font-size: 12px; }
 .cook-ingredient { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
 .ingredient-status {
   display: inline-flex;
@@ -809,7 +912,7 @@
   flex-shrink: 0;
   padding: 2px 5px;
   border-radius: 3px;
-  font: 10px var(--font-label);
+  font: 12px var(--font-label);
   line-height: 1.5;
 }
 .ingredient-status.have { background: #b4e48c; }
@@ -835,7 +938,7 @@
 }
 
 .cook-shopping .text-button { color: var(--ink); }
-.cook-shopping .count { min-width: 21px; height: 21px; font-size: 11px; }
+.cook-shopping .count { min-width: 22px; height: 22px; font-size: 12px; }
 
 .ingredients .cook-ingredient { align-items: center; padding-block: 5px; }
 .cook-ingredient label, .shopping-item > div { min-width: 0; overflow-wrap: anywhere; }
@@ -854,6 +957,11 @@
 
 .shopping-add:hover, .shopping-remove:hover { border-color: var(--ink); background: var(--well); }
 .shopping-add[aria-pressed="true"] { border-color: var(--ink); background: #b4e48c; }
+/* The add button stays quiet beside the ingredient list: smaller, with a grey plus that turns ink on hover. */
+.shopping-add { width: 28px; height: 28px; }
+.shopping-add > i { font-size: 14px; }
+.shopping-add > .fa-plus { color: var(--muted); }
+.shopping-add:hover > .fa-plus { color: var(--ink); }
 
 body:has(#shopping-dialog[open]) { overflow: hidden; }
 #shopping-dialog { max-width: 500px; }
@@ -862,7 +970,7 @@ body:has(#shopping-dialog[open]) { overflow: hidden; }
 #shopping-items:empty { display: none; }
 .shopping-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .shopping-item .meta { margin: 3px 0 0 24px; }
-.shopping-remove { font-size: 24px; line-height: 1; }
+.shopping-remove { font-size: 15px; }
 
 /* Header: with the menu in the top row there is no room for its icons. Below 1200px the
    buttons drop their labels, and below 960px the menu gets its own row with icons. */
@@ -971,7 +1079,7 @@ body:has(#shopping-dialog[open]) { overflow: hidden; }
 }
 
 .tag-picker-pill:hover { background: #c9b6ee; }
-.tag-picker-pill > span { font-size: 17px; line-height: 1; }
+.tag-picker-pill > .fa-xmark { font-size: 12px; }
 
 .tag-picker-suggestions,
 .tag-picker-empty {
@@ -1038,6 +1146,8 @@ body:has(#shopping-dialog[open]) { overflow: hidden; }
 }
 
 .recipe-facts > div {
+  position: relative;
+  container-type: inline-size;
   padding: 10px;
   border: 1px solid var(--line);
   border-radius: var(--radius-button);
@@ -1045,8 +1155,28 @@ body:has(#shopping-dialog[open]) { overflow: hidden; }
 }
 
 .recipe-facts dt {
-  font: 11px var(--font-label);
+  font: 12px var(--font-label);
   color: var(--muted);
+}
+
+/* Each label's icon (recipe.njk). Each box picks its layout from its own width, which differs between
+   the page, the pop-up, four columns and two: in a narrow box the icon goes above the label, and where
+   there's room for the label beside it, to the left, centred on the label and value together. The icon
+   is inside the dt, as a div in a dl may only hold dt and dd, so that one is positioned against the box. */
+.recipe-facts dt > i { display: block; margin-bottom: 7px; font-size: 18px; color: var(--ink); }
+
+@container (min-width: 130px) {
+  .recipe-facts > div:has(> dt > i) > * { padding-left: 32px; }
+
+  .recipe-facts dt > i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    width: 20px;
+    margin: -10px 0 0;
+    font-size: 20px;
+    text-align: center;
+  }
 }
 
 .recipe-facts dd {
@@ -1099,6 +1229,7 @@ body:has(#shopping-dialog[open]) { overflow: hidden; }
 .recipe-extra li, .recipe-measurements p { font-size: 14px; line-height: 1.55; }
 .recipe-extra li + li { margin-top: 6px; }
 .recipe-measurements summary { cursor: pointer; font-weight: 700; }
+.recipe-measurements summary .fa-chevron-down { margin-inline-start: 8px; font-size: 13px; }
 .recipe-measurements p { margin-top: 8px; }
 
 @media (max-width: 699px) {
@@ -1123,4 +1254,52 @@ body:has(#shopping-dialog[open]) { overflow: hidden; }
 
 @media (max-width: 699px) {
   .wrap.recipe-page { padding-block: 12px 36px; }
+}
+
+/* styles.css still sets these below 12px, including inside its phone breakpoints.
+   This sheet loads after it, so the floor holds. */
+.ingredient-chips span,
+.open-recipe,
+.dialog-kicker {
+  font-size: 12px;
+}
+
+@media (max-width: 899px) {
+  .greeting .eyebrow,
+  .how-heading .eyebrow,
+  .steps .eyebrow,
+  .recipes-section > .eyebrow,
+  .photo-work > .eyebrow,
+  .footer-inner > .text-button,
+  .dialog-save {
+    font-size: 12px;
+  }
+}
+
+/* Four dinners from the fridge, under tonight's match. */
+.week-plan { margin: 28px 0 8px; }
+.week-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px 20px;
+}
+.week-heading h2 {
+  font-size: clamp(26px, 3vw, 36px);
+  letter-spacing: -.03em;
+  line-height: 1.1;
+}
+.week-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.week-intro { margin: 10px 0 14px; max-width: 65ch; }
+.week-plan .match-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (max-width: 980px) {
+  .week-plan .match-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 699px) {
+  .week-plan .match-list { grid-template-columns: minmax(0, 1fr); }
+  .week-actions { width: 100%; }
+  .week-actions .button { flex: 1; }
 }

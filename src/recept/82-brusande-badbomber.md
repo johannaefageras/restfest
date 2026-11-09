@@ -6,7 +6,6 @@ cardImage: assets/recipes/82-brusande-badbomber-card.webp
 alt: Brusande badbomber med vanilj och kamomill
 categories: [spa]
 tags: [Bath, Family friendly, Make ahead, Gift, Budget]
-time: 1480
 timeLabel: 35–40 min + torktid
 facts:
   Förberedelse: 20 min + 1 dygns torkning

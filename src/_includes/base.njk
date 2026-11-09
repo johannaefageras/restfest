@@ -1,4 +1,5 @@
 {#- The layout every page shares: head, header, footer, shopping list and scripts.
+    Small UI icons (arrows, chevrons, close, the save heart) come from icons.css: see tools/icons.mjs.
     Page data it reads:
       title, description   <title> and meta description
       titleSuffix          added after the title, e.g. " · Restfest" on recipe pages
@@ -33,6 +34,7 @@
   <link rel="icon" href="{{ base }}assets/icons/favicon.png" type="image/png">
   <link rel="preload" href="{{ base }}assets/GTMaru-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ base }}styles.css">
+  <link rel="stylesheet" href="{{ base }}icons.css">
   <link rel="stylesheet" href="{{ base }}kitchen.css">
   {%- if recipe.structuredData %}
   <script type="application/ld+json">{{ recipe.structuredData | safe }}</script>
@@ -45,7 +47,6 @@
       <a class="brand" href="{{ homeUrl or '#' }}" aria-label="Restfest, startsida">
         <img src="{{ base }}assets/icons/square/cooking-pot.webp" width="38" height="38" alt="">
         <span>Restfest</span>
-        <span class="sticker">Demoköket</span>
       </a>
       <nav aria-label="Huvudmeny">
         <a href="{{ homeUrl }}#borja"><img src="{{ base }}assets/icons/fitted/refrigerator-closed.webp" alt="" width="20" height="20">Kylskåpet</a>
@@ -73,27 +74,22 @@
     <div class="wrap footer-inner">
       <a class="footer-brand" href="{{ homeUrl or '#' }}">Restfest<span class="footer-star" aria-hidden="true">✳</span></a>
       <p>Mer gott. Mindre svinn.</p>
-      <a class="text-button" href="{{ homeUrl }}#borja">Till kylskåpet <span aria-hidden="true">{{ '↑' if isHome else '↗' }}</span></a>
+      <a class="text-button" href="{{ homeUrl }}#borja">Till kylskåpet <i class="fas {{ 'fa-arrow-up' if isHome else 'fa-arrow-up-right' }}" aria-hidden="true"></i></a>
     </div>
   </footer>
   {%- if not recipe %}
   {#- Recipe pages show the recipe in the page, so only the other pages need the recipe pop-up. #}
-  <dialog id="recipe-dialog" aria-labelledby="recipe-title"><button class="dialog-close" type="button" aria-label="Stäng recept">×</button><div id="dialog-content"></div></dialog>
+  <dialog id="recipe-dialog" aria-labelledby="recipe-title"><button class="dialog-close" type="button" aria-label="Stäng recept"><i class="fas fa-xmark" aria-hidden="true"></i></button><div id="dialog-content"></div></dialog>
   {%- endif %}
   <dialog id="shopping-dialog" aria-labelledby="shopping-title">
     <div class="dialog-main">
-      <button class="dialog-close" type="button" aria-label="Stäng inköpslistan" autofocus>×</button>
+      <button class="dialog-close" type="button" aria-label="Stäng inköpslistan" autofocus><i class="fas fa-xmark" aria-hidden="true"></i></button>
       <h2 id="shopping-title"><img src="{{ base }}assets/icons/square/shopping-basket-1.webp" alt="" width="30" height="30">Inköpslista</h2>
       <p id="shopping-empty" class="dialog-intro">Listan är tom. Lägg till det du behöver köpa från ett recept.</p>
       <ul id="shopping-items" class="ingredients"></ul>
     </div>
   </dialog>
   <div id="toast" class="toast" role="status" hidden></div>
-  <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <symbol id="icon-heart" viewBox="0 0 24 24">
-      <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>
-    </symbol>
-  </svg>
   <script src="{{ base }}data/recipe-index.js"></script>
   <script src="{{ base }}recipes.js"></script>
   <script src="{{ base }}app.js"></script>

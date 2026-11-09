@@ -6,7 +6,6 @@ cardImage: assets/recipes/126-grytbrod-card.webp
 alt: Långjäst grytbröd utan knådning
 categories: [bread, baking]
 tags: [Vegan, Make ahead, Beginner friendly, Budget]
-time: 1200
 timeLabel: 14–20 tim
 facts:
   Förberedelse: 10 min + 12–18 tim jäsning + 1 tim

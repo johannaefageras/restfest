@@ -6,7 +6,6 @@ cardImage: assets/recipes/129-frukostfrallor-card.webp
 alt: Frukostfrallor med kall jäsning över natten
 categories: [bread, baking, breakfast]
 tags: [Vegan, Swedish, Make ahead, Beginner friendly, Budget]
-time: 750
 timeLabel: 8 tim 30 min–12 tim 30 min
 facts:
   Förberedelse: 15 min + 8–12 tim i kylen

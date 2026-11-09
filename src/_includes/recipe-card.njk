@@ -6,14 +6,14 @@
           <div class="archive-card-art has-photo">
             <img src="{{ base }}{{ card.cardImage }}" alt="" width="600" height="338" loading="lazy" decoding="async">
             <span class="archive-time">{{ card.timeLabel }}</span>
-            <button class="favorite" data-save="{{ card.id }}" aria-label="Spara {{ card.title }}" aria-pressed="false"><svg aria-hidden="true"><use href="#icon-heart"/></svg></button>
+            <button class="favorite" data-save="{{ card.id }}" aria-label="Spara {{ card.title }}" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i></button>
           </div>
           <div class="archive-card-body">
             <p class="archive-meal-type"><img src="{{ base }}assets/icons/square/{{ card.mealIcon }}.webp" alt="" width="20" height="20">{{ card.mealName }}</p>
             <h3><a class="recipe-main-link" href="{{ base }}recept/{{ card.id }}.html" data-open="{{ card.id }}">{{ card.title }}</a></h3>
             <p class="archive-description">{{ card.description }}</p>
             <div class="ingredient-chips">{% for chip in card.chips %}<span>{{ chip }}</span>{% endfor %}</div>
-            <a class="open-recipe" href="{{ base }}recept/{{ card.id }}.html" data-open="{{ card.id }}" aria-label="Öppna {{ card.title }}">{{ card.action }} <span aria-hidden="true">↗</span></a>
+            <a class="open-recipe" href="{{ base }}recept/{{ card.id }}.html" data-open="{{ card.id }}" aria-label="Öppna {{ card.title }}">{{ card.action }} <i class="fas fa-arrow-up-right" aria-hidden="true"></i></a>
           </div>
         </article>
 {%- endmacro %}

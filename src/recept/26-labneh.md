@@ -6,7 +6,6 @@ cardImage: assets/recipes/26-labneh-card.webp
 alt: Hemmagjord labneh med paprikasmör och örter
 categories: [sauce]
 tags: [Vegetarian, Gluten free, Dip, Middle Eastern, Make ahead, Beginner friendly, Budget]
-time: 1455
 timeLabel: 12 tim 15 min–24 tim 15 min
 facts:
   Förberedelse: 10 min + 12–24 tim silning

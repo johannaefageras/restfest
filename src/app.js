@@ -10,9 +10,11 @@ const assetUrl = path => siteBase + path;
 const recipeUrl = id => `${siteBase}recept/${id}.html`;
 const squareIconPath = name => assetUrl(`assets/icons/square/${name}.webp`);
 const squareIcon = (name, size = 22) => `<img src="${squareIconPath(name)}" alt="" width="${size}" height="${size}">`;
-const heartIcon = pressed => pressed
-  ? squareIcon('heart', 20)
-  : '<svg aria-hidden="true"><use href="#icon-heart"/></svg>';
+// Small UI icons from icons.css (see tools/icons.mjs). Arrows, chevrons and close buttons use the bold
+// weight (fas), which matches the label font's strokes; far is the regular weight.
+const faIcon = (name, weight = 'fas') => `<i class="${weight} fa-${name}" aria-hidden="true"></i>`;
+// The save heart: an outline (regular) when not saved, filled (bold) when saved.
+const heartIcon = pressed => faIcon('heart', pressed ? 'fas' : 'far');
 const savedKey = 'restfest-saved';
 const archiveSearch = $('#recipe-search');
 const selectedTags = new Set();
@@ -22,6 +24,7 @@ let foodFilter = 'all';
 let mealFilter = 'all';
 let quickOnly = false;
 let savedOnly = Boolean(archiveSearch) && new URLSearchParams(location.search).get('vy') === 'sparade';
+let revealedSavedFilters = false;
 let activeRecipe = null;
 let toastTimer;
 
@@ -193,6 +196,22 @@ function saveShoppingItems() {
     localStorage.setItem(shoppingKey, JSON.stringify([...shoppingItems.values()]));
   } catch {}
   updateShoppingButtons();
+  document.dispatchEvent(new Event('restfest:shopping'));
+}
+
+// Adds lines that are not already on the list. `id` is stable, so a week plan and a
+// second click do not duplicate the same råvara. Returns how many were new.
+function addShoppingLines(lines) {
+  shoppingItems = readShoppingItems() ?? shoppingItems;
+  let added = 0;
+  for (const line of lines) {
+    if (shoppingItems.has(line.id)) continue;
+    shoppingItems.set(line.id, {id: line.id, text: line.text, recipe: line.recipe, checked: false});
+    added += 1;
+  }
+  saveShoppingItems();
+  renderShoppingList();
+  return added;
 }
 
 function updateShoppingButtons() {
@@ -205,7 +224,8 @@ function updateShoppingButtons() {
     const added = shoppingItems.get(button.dataset.shoppingIngredient)?.text === button.dataset.shoppingText;
     button.setAttribute('aria-pressed', String(added));
     button.title = added ? 'Ta bort från inköpslistan' : 'Lägg till i inköpslistan';
-    $('img', button).src = squareIconPath(added ? 'check-mark' : 'plus-sign');
+    // A grey plus to add it; a check once it's on the list.
+    $('i', button).className = `fas fa-${added ? 'check' : 'plus'}`;
   });
   document.querySelectorAll('.recipe-view').forEach(updateMissingButton);
 }
@@ -218,7 +238,7 @@ function renderShoppingList() {
         <label><input type="checkbox" ${item.checked ? 'checked' : ''}><span>${escapeHtml(item.text)}</span></label>
         <p class="meta">${escapeHtml(item.recipe)}</p>
       </div>
-      <button type="button" class="shopping-remove" aria-label="Ta bort ${escapeHtml(item.text)}">×</button>
+      <button type="button" class="shopping-remove" aria-label="Ta bort ${escapeHtml(item.text)}">${faIcon('xmark')}</button>
     </li>`).join('');
 }
 
@@ -235,7 +255,19 @@ function saveButton(recipe) {
   return `<button class="favorite" data-save="${recipe.id}" aria-label="${label} ${escapeHtml(recipe.title)}" aria-pressed="${pressed}">${heartIcon(pressed)}</button>`;
 }
 
-function archiveCard(recipe) {
+function foodList(keys, max = 3) {
+  const names = keys.slice(0, max).map(key => foods[key].name.toLocaleLowerCase('sv-SE'));
+  const rest = keys.length - names.length;
+  return rest ? `${names.join(', ')} och ${rest} till` : names.join(', ');
+}
+
+function archiveMatchLine(match) {
+  if (!match?.mainCount) return '';
+  const missing = match.missing.length ? ` · Saknas: ${escapeHtml(foodList(match.missing))}` : '';
+  return `<p class="archive-match">${match.have.length} av ${match.mainCount}${missing}</p>`;
+}
+
+function archiveCard(recipe, match) {
   const meal = mealTypes[recipe.meals[0]];
   const photo = recipe.cardImage;
   const chips = recipe.tags?.slice(0, 3).map(tag => recipeTagLabels[tag] ?? tag) ?? recipe.chips;
@@ -250,8 +282,9 @@ function archiveCard(recipe) {
       <p class="archive-meal-type">${squareIcon(meal.icon, 20)}${escapeHtml(mealName(recipe.meals[0]))}</p>
       <h3><a class="recipe-main-link" href="${recipeUrl(recipe.id)}" data-open="${recipe.id}">${escapeHtml(recipe.title)}</a></h3>
       <p class="archive-description">${escapeHtml(recipe.description)}</p>
+      ${archiveMatchLine(match)}
       <div class="ingredient-chips">${chips.map(name => `<span>${escapeHtml(name)}</span>`).join('')}</div>
-      <a class="open-recipe" href="${recipeUrl(recipe.id)}" data-open="${recipe.id}" aria-label="Öppna ${escapeHtml(recipe.title)}">${action} <span aria-hidden="true">↗</span></a>
+      <a class="open-recipe" href="${recipeUrl(recipe.id)}" data-open="${recipe.id}" aria-label="Öppna ${escapeHtml(recipe.title)}">${action} ${faIcon('arrow-up-right')}</a>
     </div>
   </article>`;
 }
@@ -285,7 +318,20 @@ function renderArchive() {
     return matchesSearch(recipe, words);
   });
 
-  $('#recipe-grid').innerHTML = visible.map(archiveCard).join('');
+  // The same score as the home page. Recipes you can start from the fridge come first.
+  const pantryKeys = new Set(loadPantry().items.map(keyForIngredient));
+  const pantryInUse = [...pantryKeys].some(key => !key.startsWith('custom:'));
+  const ranked = pantryInUse ? visible.map(recipe => ({recipe, match: matchRecipe(recipe, pantryKeys)})) : null;
+  if (ranked) {
+    const rank = match => match.mainCount && match.ownMatches ? match.score : match.mainCount ? -1 : -2;
+    ranked.sort((a, b) => {
+      const byRank = rank(b.match) - rank(a.match);
+      if (byRank) return byRank;
+      return rank(a.match) > 0 ? b.match.have.length - a.match.have.length : 0;
+    });
+  }
+  $('#recipe-grid').innerHTML = (ranked ?? visible.map(recipe => ({recipe, match: null})))
+    .map(({recipe, match}) => archiveCard(recipe, match)).join('');
   const noSavedRecipes = savedOnly && saved.size === 0;
   $('#empty-saved').hidden = !noSavedRecipes;
   $('#empty-search').hidden = visible.length > 0 || noSavedRecipes;
@@ -314,6 +360,18 @@ function renderArchive() {
   const filterState = $('#advanced-filter-state');
   filterState.hidden = !filtersInUse.length;
   filterState.textContent = filtersInUse.length ? `· ${filtersInUse.join(' · ')}` : '';
+  const activeFilters = (mealFilter !== 'all' ? 1 : 0) + dietFilter.size
+    + (foodFilter !== 'all' ? 1 : 0) + selectedTags.size + (quickOnly ? 1 : 0) + (savedOnly ? 1 : 0);
+  const filterCount = $('#archive-filter-count');
+  if (filterCount) {
+    filterCount.hidden = activeFilters === 0;
+    filterCount.textContent = String(activeFilters);
+  }
+  if (!revealedSavedFilters && savedOnly) {
+    revealedSavedFilters = true;
+    const panel = $('#archive-filter-panel');
+    if (panel && window.matchMedia('(max-width: 699px)').matches) panel.open = true;
+  }
   document.querySelectorAll('[data-food-filter]').forEach(button => {
     button.setAttribute('aria-pressed', String(button.dataset.foodFilter === foodFilter));
   });
@@ -560,7 +618,7 @@ function setupTagPicker() {
     for (const tag of selectedTags) {
       const label = escapeHtml(recipeTagLabels[tag] ?? tag);
       input.insertAdjacentHTML('beforebegin',
-        `<button type="button" class="tag-picker-pill" data-tag="${escapeHtml(tag)}" aria-label="Ta bort taggen ${label}">${label}<span aria-hidden="true">×</span></button>`
+        `<button type="button" class="tag-picker-pill" data-tag="${escapeHtml(tag)}" aria-label="Ta bort taggen ${label}">${label}${faIcon('xmark')}</button>`
       );
     }
     input.placeholder = selectedTags.size ? 'Lägg till en tagg' : 'Sök taggar, t.ex. Italienskt';

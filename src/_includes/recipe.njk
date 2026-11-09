@@ -6,9 +6,9 @@ layout: base.njk
     The recipe pop-up on the other pages fetches these pages and shows their .recipe-view. -#}
   <main id="main" class="wrap recipe-page">
     {%- if recipe.food %}
-    <a class="text-button recipe-page-back" href="{{ base }}receptarkiv.html"><span aria-hidden="true">←</span> Till receptarkivet</a>
+    <a class="text-button recipe-page-back" href="{{ base }}receptarkiv.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Till receptarkivet</a>
     {%- else %}
-    <a class="text-button recipe-page-back" href="{{ base }}mer-an-mat.html"><span aria-hidden="true">←</span> Till Mer än mat</a>
+    <a class="text-button recipe-page-back" href="{{ base }}mer-an-mat.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Till Mer än mat</a>
     {%- endif %}
     <article class="recipe-view" data-recipe="{{ recipe.id }}">
       <div class="dialog-top cook-art has-photo">
@@ -19,7 +19,9 @@ layout: base.njk
         <p class="dialog-kicker"><span class="mini-badge">RESTFEST · {{ recipe.badge or 'RECEPT' }}</span>{% if not recipe.badge %}<span>{% for category in recipe.categoryLinks %}<a href="{{ base }}{{ category.path }}">{{ category.label }}</a>{{ ' · ' if not loop.last }}{% endfor %}</span>{% endif %}</p>
         <h1 id="recipe-title" class="recipe-heading">{{ recipe.title }}</h1>
         <p class="dialog-intro">{{ recipe.description }}</p>
-        <dl class="recipe-facts">{% for label, value in recipe.facts %}<div><dt>{{ label }}</dt><dd>{{ value }}</dd></div>{% endfor %}</dl>
+        {#- An icon per fact label (icons.css). These six are every label the recipes use; a new label shows without one. #}
+        {%- set factIcons = {'Förberedelse': 'knife-kitchen', 'Tillagning': 'fire-flame-curved', 'Portioner': 'utensils', 'Nivå': 'signal-bars', 'Räcker till': 'jar', 'Verkningstid': 'hourglass-half'} %}
+        <dl class="recipe-facts">{% for label, value in recipe.facts %}<div><dt>{% if factIcons[label] %}<i class="fas fa-{{ factIcons[label] }}" aria-hidden="true"></i>{% endif %}{{ label }}</dt><dd>{{ value }}</dd></div>{% endfor %}</dl>
         <ul class="recipe-tags" aria-label="Taggar">{% for tag in recipe.tagLinks %}<li><a href="{{ base }}{{ tag.path }}">{{ tag.label }}</a></li>{% endfor %}</ul>
         {%- if recipe.beforeYouStart %}
         <p class="recipe-tip"><b>Bra att veta.</b> {{ recipe.beforeYouStart }}</p>
@@ -27,7 +29,7 @@ layout: base.njk
         <section class="recipe-section" aria-labelledby="ingredients-heading">
           <div class="recipe-section-heading">
             <h2 id="ingredients-heading" class="cook-ingredient-heading"><img src="{{ base }}assets/icons/square/clipboard-2.webp" alt="" width="24" height="24">Det här behöver du</h2>
-            <button class="dialog-save" type="button" data-save="{{ recipe.id }}" aria-pressed="false"><svg aria-hidden="true"><use href="#icon-heart"/></svg>Spara {{ recipe.noun }}</button>
+            <button class="dialog-save" type="button" data-save="{{ recipe.id }}" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i>Spara {{ recipe.noun }}</button>
           </div>
           {%- if recipe.pantryKeys.length %}
           <div class="cook-pantry" hidden>
@@ -61,7 +63,7 @@ layout: base.njk
                   <label><input type="checkbox"><span>{{ item.name }}</span></label>
                   <div class="cook-ingredient-actions">
                     <span class="ingredient-status" hidden></span>
-                    <button class="shopping-add" type="button" data-shopping-ingredient="{{ item.shoppingId }}" data-shopping-text="{{ item.name }}" aria-label="{{ item.name }} på inköpslistan" aria-pressed="false"><img src="{{ base }}assets/icons/square/plus-sign.webp" alt="" width="16" height="16"></button>
+                    <button class="shopping-add" type="button" data-shopping-ingredient="{{ item.shoppingId }}" data-shopping-text="{{ item.name }}" aria-label="{{ item.name }} på inköpslistan" aria-pressed="false"><i class="fas fa-plus" aria-hidden="true"></i></button>
                   </div>
                 </li>
                 {%- endif %}
@@ -91,7 +93,7 @@ layout: base.njk
         {%- endfor %}
         {%- if not recipe.badge %}
         <details class="recipe-measurements">
-          <summary>Mått och ugnstemperaturer</summary>
+          <summary>Mått och ugnstemperaturer<i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
           <p>Måtten är svenska (dl, msk, tsk, krm). Ugnstemperaturerna gäller vanlig ugn med över- och undervärme; med varmluft, sänk med 20 grader.</p>
         </details>
         {%- endif %}

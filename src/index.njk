@@ -19,7 +19,7 @@ scripts: [kitchen.js]
             <h2 id="fridge-title">Vad finns <br>i kylen?</h2>
             <p class="fridge-intro">Skriv in det du har, så letar vi upp middagen.</p>
             <div class="fridge-actions">
-              <button id="try-example" class="button primary" type="button">Prova ett exempel <span aria-hidden="true">↗</span></button>
+              <button id="try-example" class="button primary" type="button">Prova ett exempel <i class="fas fa-arrow-up-right" aria-hidden="true"></i></button>
             </div>
           </div>
           <div class="fridge-art" aria-hidden="true">
@@ -50,12 +50,27 @@ scripts: [kitchen.js]
       <section class="tonight-panel" id="recept" aria-labelledby="tonight-title">
         <div class="tonight-heading">
           <div><p class="eyebrow">02 · HITTA EN MIDDAG</p><h2 id="tonight-title">Laga ikväll</h2></div>
-          <a class="text-button" href="receptarkiv.html">Receptarkivet <span aria-hidden="true">↗</span></a>
+          <a class="text-button" href="receptarkiv.html">Receptarkivet <i class="fas fa-arrow-up-right" aria-hidden="true"></i></a>
         </div>
         <p id="match-status" class="sr-only" role="status"></p>
         <div id="featured-recipe"></div>
       </section>
     </div>
+
+    <section id="vecka" class="week-plan" aria-labelledby="week-title" hidden>
+      <div class="week-heading">
+        <div>
+          <p class="eyebrow">03 · HELA VECKAN</p>
+          <h2 id="week-title">Middagar ur kylen</h2>
+        </div>
+        <div class="week-actions">
+          <button id="week-refresh" class="text-button" type="button">Ny vecka <i class="fas fa-arrow-up-right" aria-hidden="true"></i></button>
+          <button id="week-shop" class="button primary" type="button">Lägg saknade i inköpslistan</button>
+        </div>
+      </div>
+      <p id="week-intro" class="week-intro"></p>
+      <ul id="week-list" class="match-list"></ul>
+    </section>
 
     <section id="sa-funkar-det" class="how-section" aria-labelledby="how-heading">
       <div class="how-heading"><p class="eyebrow">FRÅN KYL TILL KVÄLLSMAT</p><h2 id="how-heading">Så funkar det</h2></div>

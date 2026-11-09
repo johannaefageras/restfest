@@ -6,7 +6,6 @@ cardImage: assets/recipes/106-allrengoringsspray-card.webp
 alt: Allrengöringsspray på citrusskal och ättika
 categories: [household]
 tags: [Cleaning, Kitchen, Bathroom, Natural, Leftovers, Zero waste, Beginner friendly, Budget]
-time: 20171
 timeLabel: 11 min + 1–2 veckor
 facts:
   Förberedelse: 10 min + 1–2 veckors dragtid

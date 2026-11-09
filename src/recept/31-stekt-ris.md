@@ -1,6 +1,6 @@
 ---
 title: Stekt ris med grillkyckling, ärter och sesam
-description: Gårdagens ris, resterna av en grillkyckling, frysta ärter och ett par ägg wokas snabbt med soja, vitlök och ingefära. Riset formas till en kupol och toppas med salladslök och rostade sesamfrön. Bättre än hämtmaten, och klart på 15 minuter.
+description: Gårdagens ris, resterna av en grillkyckling, frysta ärter och ett par ägg wokas snabbt med soja, vitlök och ingefära. Riset formas till en kupol och toppas med salladslök och rostade sesamfrön. Bättre än hämtmaten, och klart på 20 minuter.
 image: assets/recipes/31-stekt-ris.webp
 cardImage: assets/recipes/31-stekt-ris-card.webp
 alt: Stekt ris med grillkyckling, ärter och sesam

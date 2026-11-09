@@ -7,7 +7,7 @@ layout: base.njk
   <main id="main" class="wrap archive-page listing-page">
     <section class="greeting archive-greeting" aria-labelledby="listing-title">
       <div>
-        <a class="text-button archive-back" href="{{ base }}{{ listing.back.path }}"><span aria-hidden="true">←</span> {{ listing.back.label }}</a>
+        <a class="text-button archive-back" href="{{ base }}{{ listing.back.path }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> {{ listing.back.label }}</a>
         <h1 id="listing-title"><span class="marker">{{ listing.label }}.</span></h1>
         <p class="greeting-intro">{{ listing.intro }}</p>
       </div>
@@ -18,11 +18,20 @@ layout: base.njk
       </div>
     </section>
     {%- if listing.links %}
-    <nav class="listing-links" aria-label="Kategorier">
-      {%- for link in listing.links %}
-      <a class="food-filter" href="{{ base }}{{ link.path }}"{% if link.path == listing.path %} aria-current="page"{% endif %}><img src="{{ base }}assets/icons/square/{{ link.icon }}.webp" alt="" width="22" height="22">{{ link.label }}</a>
-      {%- endfor %}
-    </nav>
+    <details class="listing-links-panel">
+      <summary>
+        <span>Kategorier</span>
+        {%- if listing.kind == 'category' %}
+        <span class="listing-links-current">{{ listing.label }}</span>
+        {%- endif %}
+        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+      </summary>
+      <nav class="listing-links" aria-label="Kategorier">
+        {%- for link in listing.links %}
+        <a class="food-filter" href="{{ base }}{{ link.path }}"{% if link.path == listing.path %} aria-current="page"{% endif %}><img src="{{ base }}assets/icons/square/{{ link.icon }}.webp" alt="" width="22" height="22">{{ link.label }}</a>
+        {%- endfor %}
+      </nav>
+    </details>
     {%- endif %}
     <section class="recipes-section archive-recipes" aria-labelledby="listing-count">
       <h2 id="listing-count" class="eyebrow">{{ listing.recipes.length }} recept</h2>

@@ -52,10 +52,7 @@ function renderPantry() {
       button.append(image);
     }
     button.append(name);
-    const remove = document.createElement('span');
-    remove.setAttribute('aria-hidden', 'true');
-    remove.textContent = '×';
-    button.append(remove);
+    button.insertAdjacentHTML('beforeend', faIcon('xmark'));
     button.addEventListener('click', () => {
       pantry.items.splice(index, 1);
       updatePantry(`${name} togs bort.`);
@@ -110,6 +107,113 @@ function findMatches(available) {
     .sort((a, b) => b.score - a.score || b.have.length - a.have.length || time(a.recipe) - time(b.recipe));
 }
 
+const weekKey = 'restfest-week';
+let weekLines = [];
+let reshuffleWeek = false;
+
+function readWeekIds() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(weekKey));
+    if (Array.isArray(stored?.ids)) return stored.ids.filter(id => typeof id === 'string');
+  } catch {}
+  return [];
+}
+
+function saveWeekIds(ids) {
+  try {
+    localStorage.setItem(weekKey, JSON.stringify({ids}));
+  } catch {}
+}
+
+// The next dinner should share shopping with the ones already chosen, and stay a good fridge match.
+function bestWeekMatch(pool, chosen) {
+  let best = null;
+  let bestScore = -Infinity;
+  for (const match of pool) {
+    if (chosen.some(item => item.recipe.id === match.recipe.id)) continue;
+    const already = new Set(chosen.flatMap(item => item.missing));
+    const shared = match.missing.filter(key => already.has(key)).length;
+    const added = match.missing.length - shared;
+    const repeatsMeal = chosen.filter(item => item.recipe.meals[0] === match.recipe.meals[0]).length;
+    const score = match.score * 100 + shared * 8 - added * 5 - repeatsMeal * 4;
+    if (score > bestScore) {
+      bestScore = score;
+      best = match;
+    }
+  }
+  return best;
+}
+
+function weekShoppingLines(picks) {
+  const byKey = new Map();
+  for (const match of picks) {
+    for (const key of match.missing) {
+      const line = byKey.get(key) ?? {recipes: []};
+      line.recipes.push(match.recipe.title);
+      byKey.set(key, line);
+    }
+  }
+  return [...byKey].map(([key, line]) => ({
+    id: JSON.stringify(['week', key]),
+    text: foods[key].name,
+    recipe: line.recipes.join(' · ')
+  }));
+}
+
+function updateWeekShopButton() {
+  const button = $('#week-shop');
+  if (!button) return;
+  const items = readShoppingItems();
+  const onList = weekLines.length > 0 && items && weekLines.every(line => items.has(line.id));
+  button.hidden = weekLines.length === 0;
+  button.dataset.action = onList ? 'show' : 'add';
+  button.innerHTML = onList
+    ? `${squareIcon('check-mark', 16)}I inköpslistan · visa`
+    : 'Lägg saknade i inköpslistan';
+}
+
+function renderWeek() {
+  const section = $('#vecka');
+  if (!section) return;
+  const available = new Set(pantry.items.map(keyForIngredient));
+  const matches = findMatches(available);
+  if (!matches.length) {
+    section.hidden = true;
+    weekLines = [];
+    return;
+  }
+  const previousIds = readWeekIds();
+  const blocked = new Set(reshuffleWeek ? previousIds : []);
+  const picks = reshuffleWeek ? [] : previousIds.map(id => matches.find(match => match.recipe.id === id)).filter(Boolean);
+  reshuffleWeek = false;
+  const take = Math.min(4, matches.length);
+  while (picks.length < take) {
+    const unused = matches.filter(match => !picks.some(item => item.recipe.id === match.recipe.id));
+    const fresh = unused.filter(match => !blocked.has(match.recipe.id));
+    const next = bestWeekMatch(fresh.length ? fresh : unused, picks);
+    if (!next) break;
+    picks.push(next);
+  }
+  if (picks.length > 4) picks.length = 4;
+  saveWeekIds(picks.map(match => match.recipe.id));
+  const titles = {
+    1: 'En middag ur kylen',
+    2: 'Två middagar ur kylen',
+    3: 'Tre middagar ur kylen',
+    4: 'Fyra middagar ur kylen'
+  };
+  $('#week-title').textContent = titles[picks.length];
+  weekLines = weekShoppingLines(picks);
+  const missingCount = weekLines.length;
+  $('#week-intro').textContent = missingCount
+    ? `Valda så att de delar på det du behöver köpa. ${missingCount === 1 ? '1 råvara saknas' : `${missingCount} råvaror saknas`}.`
+    : 'Du har huvudråvarorna till de här middagarna.';
+  $('#week-refresh').hidden = matches.length <= picks.length;
+  $('#week-list').innerHTML = picks.map(matchItem).join('');
+  section.hidden = false;
+  updateWeekShopButton();
+}
+
 function renderFeaturedRecipe() {
   const available = new Set(pantry.items.map(keyForIngredient));
   const [match, ...others] = findMatches(available);
@@ -142,7 +246,7 @@ function renderFeaturedRecipe() {
       <h3>${escapeHtml(recipe.title)}</h3>
       <p class="featured-description">${escapeHtml(recipe.description)}</p>
       <div class="match-info">${explanation}</div>
-      <a class="button primary" href="${recipeUrl(recipe.id)}" data-open="${recipe.id}">Visa recept <span aria-hidden="true">↗</span></a>
+      <a class="button primary" href="${recipeUrl(recipe.id)}" data-open="${recipe.id}">Visa recept ${faIcon('arrow-up-right')}</a>
       <p class="meta featured-note">${match
         ? 'Förslaget jämför din lista med receptets råvaror. Salt, peppar, vatten, olja och kryddor räknas som basvaror.'
         : 'Lägg till det du har så letar vi bland middagsrecepten.'}</p>
@@ -155,6 +259,7 @@ function renderFeaturedRecipe() {
   $('#match-status').textContent = match
     ? `Bästa matchen: ${recipe.title}. Du har ${match.have.length} av ${match.mainCount} huvudråvaror.${more.length ? ` ${more.length} fler förslag.` : ''}`
     : 'Inget matchat recept.';
+  renderWeek();
 }
 
 Object.values(foods).sort((a, b) => a.name.localeCompare(b.name, 'sv-SE')).forEach(food => {
@@ -223,4 +328,21 @@ $('#try-example').addEventListener('click', () => {
 });
 
 document.addEventListener('restfest:saved', renderFeaturedRecipe);
+document.addEventListener('restfest:shopping', updateWeekShopButton);
+$('#week-refresh').addEventListener('click', () => {
+  reshuffleWeek = true;
+  renderWeek();
+});
+$('#week-shop').addEventListener('click', () => {
+  if ($('#week-shop').dataset.action === 'show') {
+    openShoppingList();
+    return;
+  }
+  const added = addShoppingLines(weekLines);
+  if (!added) {
+    openShoppingList();
+    return;
+  }
+  showToast(added === 1 ? 'Råvaran lades i inköpslistan.' : `${added} råvaror lades i inköpslistan.`);
+});
 renderPantry();

@@ -6,7 +6,6 @@ cardImage: assets/recipes/83-varmande-massageolja-card.webp
 alt: Värmande massageolja med kardemumma och vanilj
 categories: [spa]
 tags: [Body, Relaxing, Leftovers, Zero waste, Gift, Beginner friendly, Budget]
-time: 1525
 timeLabel: 1 tim 20–25 min + dragtid
 facts:
   Förberedelse: 10 min + 1 tim i vattenbad + 1 dygns dragtid
