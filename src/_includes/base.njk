@@ -1,0 +1,104 @@
+{#- The layout every page shares: head, header, footer, shopping list and scripts.
+    Page data it reads:
+      title, description   <title> and meta description
+      titleSuffix          added after the title, e.g. " · Restfest" on recipe pages
+      base                 "../" for pages one folder down (recept/, kategori/, …), so paths resolve from the site root
+      scripts              extra scripts after app.js, e.g. [kitchen.js] on the home page
+      recipe               set on recipe pages, which get share tags and recipe structured data -#}
+{%- set isHome = page.url == '/' -%}
+{#- The home page links to its own sections; the other pages link to the home page. -#}
+{%- set homeUrl = '' if isHome else (base or './') -%}
+<!doctype html>
+<html lang="sv"{% if base %} data-base="{{ base }}"{% endif %}>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>{{ title }}{{ titleSuffix }}</title>
+  <meta name="description" content="{{ description }}">
+  {%- if recipe %}
+  {%- if recipe.url %}
+  <link rel="canonical" href="{{ recipe.url }}">
+  <meta property="og:url" content="{{ recipe.url }}">
+  {%- endif %}
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Restfest">
+  <meta property="og:title" content="{{ recipe.title }}">
+  <meta property="og:description" content="{{ recipe.description }}">
+  {%- if recipe.imageUrl %}
+  <meta property="og:image" content="{{ recipe.imageUrl }}">
+  <meta name="twitter:card" content="summary_large_image">
+  {%- endif %}
+  {%- endif %}
+  <link rel="icon" href="{{ base }}assets/icons/favicon.png" type="image/png">
+  <link rel="preload" href="{{ base }}assets/GTMaru-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ base }}styles.css">
+  <link rel="stylesheet" href="{{ base }}kitchen.css">
+  {%- if recipe.structuredData %}
+  <script type="application/ld+json">{{ recipe.structuredData | safe }}</script>
+  {%- endif %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Hoppa till innehåll</a>
+  <header class="site-header">
+    <div class="header-inner wrap">
+      <a class="brand" href="{{ homeUrl or '#' }}" aria-label="Restfest, startsida">
+        <img src="{{ base }}assets/icons/square/cooking-pot.webp" width="38" height="38" alt="">
+        <span>Restfest</span>
+        <span class="sticker">Demoköket</span>
+      </a>
+      <nav aria-label="Huvudmeny">
+        <a href="{{ homeUrl }}#borja"><img src="{{ base }}assets/icons/fitted/refrigerator-closed.webp" alt="" width="20" height="20">Kylskåpet</a>
+        <a href="{{ base }}receptarkiv.html"{% if page.url == '/receptarkiv.html' %} aria-current="page"{% endif %}><img src="{{ base }}assets/icons/square/recipes.webp" alt="" width="20" height="20">Receptarkiv</a>
+        <a href="{{ base }}mer-an-mat.html"{% if page.url == '/mer-an-mat.html' %} aria-current="page"{% endif %}><img src="{{ base }}assets/icons/square/leaf.webp" alt="" width="20" height="20">Mer än mat</a>
+        <a class="nav-how" href="{{ homeUrl }}#sa-funkar-det"><img src="{{ base }}assets/icons/square/information-symbol.webp" alt="" width="20" height="20">Så funkar det</a>
+      </nav>
+      <div class="header-actions">
+        <a class="saved-nav" href="{{ base }}receptarkiv.html?vy=sparade" aria-label="Visa sparade recept">
+          <img src="{{ base }}assets/icons/square/heart.webp" alt="" width="24" height="24">
+          <span class="saved-label">Sparat</span>
+          <span id="saved-count" class="count">0</span>
+        </a>
+        <button id="shopping-nav" class="saved-nav" type="button" aria-label="Visa inköpslistan" aria-haspopup="dialog">
+          <img src="{{ base }}assets/icons/square/shopping-basket-1.webp" alt="" width="24" height="24">
+          <span class="shopping-nav-label">Inköpslista</span><span id="shopping-count" class="count" aria-hidden="true">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+{{ content | safe }}
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <a class="footer-brand" href="{{ homeUrl or '#' }}">Restfest<span class="footer-star" aria-hidden="true">✳</span></a>
+      <p>Mer gott. Mindre svinn.</p>
+      <a class="text-button" href="{{ homeUrl }}#borja">Till kylskåpet <span aria-hidden="true">{{ '↑' if isHome else '↗' }}</span></a>
+    </div>
+  </footer>
+  {%- if not recipe %}
+  {#- Recipe pages show the recipe in the page, so only the other pages need the recipe pop-up. #}
+  <dialog id="recipe-dialog" aria-labelledby="recipe-title"><button class="dialog-close" type="button" aria-label="Stäng recept">×</button><div id="dialog-content"></div></dialog>
+  {%- endif %}
+  <dialog id="shopping-dialog" aria-labelledby="shopping-title">
+    <div class="dialog-main">
+      <button class="dialog-close" type="button" aria-label="Stäng inköpslistan" autofocus>×</button>
+      <h2 id="shopping-title"><img src="{{ base }}assets/icons/square/shopping-basket-1.webp" alt="" width="30" height="30">Inköpslista</h2>
+      <p id="shopping-empty" class="dialog-intro">Listan är tom. Lägg till det du behöver köpa från ett recept.</p>
+      <ul id="shopping-items" class="ingredients"></ul>
+    </div>
+  </dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-heart" viewBox="0 0 24 24">
+      <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>
+    </symbol>
+  </svg>
+  <script src="{{ base }}data/recipe-index.js"></script>
+  <script src="{{ base }}recipes.js"></script>
+  <script src="{{ base }}app.js"></script>
+  {%- for script in scripts %}
+  <script src="{{ base }}{{ script }}"></script>
+  {%- endfor %}
+</body>
+</html>

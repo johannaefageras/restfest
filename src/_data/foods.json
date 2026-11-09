@@ -1,0 +1,698 @@
+{
+  "rodbetor": {
+    "name": "Inlagda rödbetor",
+    "group": "vegetables",
+    "aliases": [
+      "inlagda rödbetor"
+    ]
+  },
+  "rodlok": {
+    "name": "Rödlök",
+    "group": "vegetables",
+    "aliases": [
+      "rödlök"
+    ]
+  },
+  "arter": {
+    "name": "Gröna ärter",
+    "group": "legumes",
+    "aliases": [
+      "gröna ärter",
+      "ärter",
+      "ärtor",
+      "frysta ärter"
+    ]
+  },
+  "vita-bonor": {
+    "name": "Vita bönor",
+    "group": "legumes",
+    "aliases": [
+      "vita bönor"
+    ]
+  },
+  "havregradde": {
+    "name": "Havregrädde",
+    "group": "pantry",
+    "aliases": [
+      "havregrädde"
+    ]
+  },
+  "creme-fraiche": {
+    "name": "Crème fraiche",
+    "group": "dairy",
+    "aliases": [
+      "crème fraiche",
+      "creme fraiche",
+      "crème fraîche"
+    ]
+  },
+  "gradde": {
+    "name": "Vispgrädde",
+    "group": "dairy",
+    "aliases": [
+      "vispgrädde",
+      "grädde"
+    ]
+  },
+  "farskost": {
+    "name": "Färskost",
+    "group": "dairy",
+    "aliases": [
+      "färskost naturell",
+      "färskost"
+    ]
+  },
+  "vegansk-farskost": {
+    "name": "Vegansk färskost",
+    "group": "pantry",
+    "aliases": [
+      "vegansk färskost"
+    ]
+  },
+  "mjolk": {
+    "name": "Mjölk",
+    "group": "dairy",
+    "aliases": [
+      "mjölk"
+    ]
+  },
+  "filmjolk": {
+    "name": "Filmjölk",
+    "group": "dairy",
+    "aliases": [
+      "filmjölk"
+    ]
+  },
+  "fetaost": {
+    "name": "Fetaost",
+    "group": "dairy",
+    "aliases": [
+      "fetaost"
+    ]
+  },
+  "kvarg": {
+    "name": "Kvarg",
+    "group": "dairy",
+    "aliases": [
+      "kvarg naturell",
+      "kvarg"
+    ]
+  },
+  "ost-lagrad": {
+    "name": "Lagrad ost",
+    "group": "dairy",
+    "aliases": [
+      "lagrad ost",
+      "prästost",
+      "västerbottensost"
+    ]
+  },
+  "bacon": {
+    "name": "Bacon",
+    "group": "meat",
+    "aliases": [
+      "bacon"
+    ]
+  },
+  "makrill": {
+    "name": "Makrill i tomatsås",
+    "group": "fish",
+    "aliases": [
+      "makrill i tomatsås",
+      "makrill"
+    ]
+  },
+  "tonfisk": {
+    "name": "Tonfisk i olja",
+    "group": "fish",
+    "aliases": [
+      "tonfisk i olja",
+      "burktonfisk"
+    ]
+  },
+  "rom": {
+    "name": "Stenbitsrom",
+    "group": "fish",
+    "aliases": [
+      "stenbitsrom"
+    ]
+  },
+  "fiskpinnar": {
+    "name": "Fiskpinnar",
+    "group": "fish",
+    "aliases": [
+      "fiskpinnar"
+    ]
+  },
+  "sardeller": {
+    "name": "Sardellfiléer",
+    "group": "fish",
+    "aliases": [
+      "sardellfiléer",
+      "sardeller"
+    ]
+  },
+  "leverpastej": {
+    "name": "Leverpastej",
+    "group": "meat",
+    "aliases": [
+      "leverpastej"
+    ]
+  },
+  "kottbullar": {
+    "name": "Köttbullar",
+    "group": "meat",
+    "aliases": [
+      "köttbullar"
+    ]
+  },
+  "radisa": {
+    "name": "Rädisor",
+    "group": "vegetables",
+    "aliases": [
+      "rädisor",
+      "rädisa"
+    ]
+  },
+  "paprika": {
+    "name": "Paprika",
+    "group": "vegetables",
+    "aliases": [
+      "röd paprika",
+      "röda paprikor",
+      "paprika"
+    ]
+  },
+  "saltgurka": {
+    "name": "Saltgurka",
+    "group": "vegetables",
+    "aliases": [
+      "saltgurkor",
+      "saltgurka"
+    ]
+  },
+  "salladslok": {
+    "name": "Salladslök",
+    "group": "vegetables",
+    "aliases": [
+      "salladslökar",
+      "salladslök"
+    ]
+  },
+  "kalrot": {
+    "name": "Kålrot",
+    "group": "vegetables",
+    "aliases": [
+      "kålrot"
+    ]
+  },
+  "pepparrot": {
+    "name": "Pepparrot",
+    "group": "vegetables",
+    "aliases": [
+      "pepparrot"
+    ]
+  },
+  "apelsin": {
+    "name": "Apelsin",
+    "group": "fruit",
+    "aliases": [
+      "apelsiner",
+      "apelsin"
+    ]
+  },
+  "lime": {
+    "name": "Lime",
+    "group": "fruit",
+    "aliases": [
+      "limesaft",
+      "lime"
+    ]
+  },
+  "banan": {
+    "name": "Bananer",
+    "group": "fruit",
+    "aliases": [
+      "bananer",
+      "banan"
+    ]
+  },
+  "lingon": {
+    "name": "Lingon",
+    "group": "fruit",
+    "aliases": [
+      "lingon",
+      "rårörda lingon"
+    ]
+  },
+  "blabar": {
+    "name": "Blåbär",
+    "group": "fruit",
+    "aliases": [
+      "blåbär"
+    ]
+  },
+  "hallon": {
+    "name": "Hallon",
+    "group": "fruit",
+    "aliases": [
+      "hallon"
+    ]
+  },
+  "mandel": {
+    "name": "Mandel",
+    "group": "nuts",
+    "aliases": [
+      "mandelspån",
+      "mandlar",
+      "mandel"
+    ]
+  },
+  "hasselnot": {
+    "name": "Hasselnötter",
+    "group": "nuts",
+    "aliases": [
+      "hasselnötter"
+    ]
+  },
+  "fron": {
+    "name": "Frön",
+    "group": "nuts",
+    "aliases": []
+  },
+  "tahini": {
+    "name": "Tahini",
+    "group": "nuts",
+    "aliases": [
+      "tahini"
+    ]
+  },
+  "majo": {
+    "name": "Majonnäs",
+    "group": "pantry",
+    "aliases": [
+      "majonnäs"
+    ]
+  },
+  "havredryck": {
+    "name": "Havredryck",
+    "group": "pantry",
+    "aliases": [
+      "havredryck"
+    ]
+  },
+  "havreyoghurt": {
+    "name": "Havreyoghurt",
+    "group": "pantry",
+    "aliases": [
+      "havreyoghurt"
+    ]
+  },
+  "sirap": {
+    "name": "Ljus sirap",
+    "group": "pantry",
+    "aliases": [
+      "ljus sirap"
+    ]
+  },
+  "socker": {
+    "name": "Strösocker",
+    "group": "pantry",
+    "aliases": [
+      "strösocker"
+    ]
+  },
+  "honung": {
+    "name": "Honung",
+    "group": "pantry",
+    "aliases": [
+      "honung"
+    ]
+  },
+  "choklad": {
+    "name": "Mörk choklad",
+    "group": "pantry",
+    "aliases": [
+      "mörk choklad"
+    ]
+  },
+  "kapris": {
+    "name": "Kapris",
+    "group": "pantry",
+    "aliases": [
+      "kapris"
+    ]
+  },
+  "attika": {
+    "name": "Ättika",
+    "group": "pantry",
+    "aliases": [
+      "ättika"
+    ]
+  },
+  "vinager": {
+    "name": "Vinäger",
+    "group": "pantry",
+    "aliases": []
+  },
+  "tomatpure": {
+    "name": "Tomatpuré",
+    "group": "pantry",
+    "aliases": [
+      "tomatpuré"
+    ]
+  },
+  "potatismjol": {
+    "name": "Potatismjöl",
+    "group": "grains",
+    "aliases": [
+      "potatismjöl"
+    ]
+  },
+  "vetemjol": {
+    "name": "Vetemjöl",
+    "group": "grains",
+    "aliases": [
+      "vetemjöl"
+    ]
+  },
+  "smordeg": {
+    "name": "Smördeg",
+    "group": "grains",
+    "aliases": [
+      "smördeg"
+    ]
+  },
+  "kanelbullar": {
+    "name": "Kanelbullar",
+    "group": "grains",
+    "aliases": [
+      "kanelbullar"
+    ]
+  },
+  "grot": {
+    "name": "Risgrynsgröt",
+    "group": "grains",
+    "aliases": [
+      "risgrynsgröt"
+    ]
+  },
+  "strobrod": {
+    "name": "Ströbröd",
+    "group": "grains",
+    "aliases": [
+      "ströbröd"
+    ]
+  },
+  "kryddor": {
+    "name": "Kryddor",
+    "group": "herbs",
+    "aliases": []
+  },
+  "orter": {
+    "name": "Färska örter",
+    "group": "herbs",
+    "aliases": []
+  },
+  "selleri": {
+    "name": "Blekselleri",
+    "group": "vegetables",
+    "aliases": [
+      "blekselleri",
+      "selleristjälk",
+      "stjälkselleri"
+    ]
+  },
+  "vindruvor": {
+    "name": "Vindruvor",
+    "group": "fruit",
+    "aliases": [
+      "vindruvor",
+      "druvor"
+    ]
+  },
+  "stek": {
+    "name": "Tillagad stek",
+    "group": "meat",
+    "aliases": [
+      "kall stek",
+      "rostbiff",
+      "oxstek",
+      "fläskstek"
+    ]
+  },
+  "kinakal": {
+    "name": "Kinakål",
+    "group": "vegetables",
+    "aliases": [
+      "kinakål",
+      "salladskål"
+    ]
+  },
+  "jordnotter": {
+    "name": "Jordnötter",
+    "group": "nuts",
+    "aliases": [
+      "jordnötter"
+    ]
+  },
+  "schalottenlok": {
+    "name": "Schalottenlök",
+    "group": "vegetables",
+    "aliases": [
+      "schalottenlök",
+      "schalottenlökar"
+    ]
+  },
+  "purjolok": {
+    "name": "Purjolök",
+    "group": "vegetables",
+    "aliases": [
+      "purjolök",
+      "purjolökar"
+    ]
+  },
+  "blomkal": {
+    "name": "Blomkål",
+    "group": "vegetables",
+    "aliases": [
+      "blomkål",
+      "blomkålshuvud"
+    ]
+  },
+  "falukorv": {
+    "name": "Falukorv",
+    "group": "meat",
+    "aliases": [
+      "falukorv"
+    ]
+  },
+  "julskinka": {
+    "name": "Julskinka",
+    "group": "meat",
+    "aliases": [
+      "julskinka"
+    ]
+  },
+  "blandfars": {
+    "name": "Blandfärs",
+    "group": "meat",
+    "aliases": [
+      "blandfärs"
+    ]
+  },
+  "matlagningsgradde": {
+    "name": "Matlagningsgrädde",
+    "group": "dairy",
+    "aliases": [
+      "matlagningsgrädde"
+    ]
+  },
+  "fiskbuljong": {
+    "name": "Fiskbuljong",
+    "group": "pantry",
+    "aliases": [
+      "fiskbuljong",
+      "fiskbuljongtärning"
+    ]
+  },
+  "graddfil": {
+    "name": "Gräddfil",
+    "group": "dairy",
+    "aliases": [
+      "gräddfil"
+    ]
+  },
+  "adelost": {
+    "name": "Ädelost",
+    "group": "dairy",
+    "aliases": [
+      "ädelost"
+    ]
+  },
+  "mascarpone": {
+    "name": "Mascarpone",
+    "group": "dairy",
+    "aliases": [
+      "mascarpone"
+    ]
+  },
+  "ansjovis": {
+    "name": "Ansjovis",
+    "group": "fish",
+    "aliases": [
+      "ansjovis",
+      "ansjovisfiléer"
+    ]
+  },
+  "sardiner": {
+    "name": "Sardiner",
+    "group": "fish",
+    "aliases": [
+      "sardiner"
+    ]
+  },
+  "vit-fisk": {
+    "name": "Vit fisk",
+    "group": "fish",
+    "aliases": [
+      "vit fisk",
+      "sej",
+      "torsk",
+      "alaska pollock"
+    ]
+  },
+  "fiskbullar": {
+    "name": "Fiskbullar",
+    "group": "fish",
+    "aliases": [
+      "fiskbullar"
+    ]
+  },
+  "rakor": {
+    "name": "Räkor",
+    "group": "fish",
+    "aliases": [
+      "räkor"
+    ]
+  },
+  "janssons-frestelse": {
+    "name": "Janssons frestelse",
+    "group": "fish",
+    "aliases": [
+      "Janssons frestelse"
+    ]
+  },
+  "paron": {
+    "name": "Päron",
+    "group": "fruit",
+    "aliases": [
+      "päron"
+    ]
+  },
+  "bar": {
+    "name": "Blandade bär",
+    "group": "fruit",
+    "aliases": [
+      "bär",
+      "blandade bär",
+      "frysta bär"
+    ]
+  },
+  "majsmjol": {
+    "name": "Majsmjöl",
+    "group": "grains",
+    "aliases": [
+      "majsmjöl"
+    ]
+  },
+  "pepparkakor": {
+    "name": "Pepparkakor",
+    "group": "grains",
+    "aliases": [
+      "pepparkakor"
+    ]
+  },
+  "granola": {
+    "name": "Granola",
+    "group": "grains",
+    "aliases": [
+      "granola"
+    ]
+  },
+  "kakao": {
+    "name": "Kakao",
+    "group": "pantry",
+    "aliases": [
+      "kakao"
+    ]
+  },
+  "jordnotssmor": {
+    "name": "Jordnötssmör",
+    "group": "nuts",
+    "aliases": [
+      "jordnötssmör"
+    ]
+  },
+  "kaffe": {
+    "name": "Kaffe",
+    "group": "pantry",
+    "aliases": [
+      "kaffe",
+      "bryggkaffe"
+    ]
+  },
+  "sotpotatis": {
+    "name": "Sötpotatis",
+    "group": "vegetables",
+    "aliases": [
+      "sötpotatisar"
+    ]
+  },
+  "tofu": {
+    "name": "Tofu",
+    "group": "legumes",
+    "aliases": [
+      "fast tofu"
+    ]
+  },
+  "korngryn": {
+    "name": "Korngryn",
+    "group": "grains",
+    "aliases": [
+      "matkorn"
+    ]
+  },
+  "rotfrukter": {
+    "name": "Rotfrukter",
+    "group": "vegetables",
+    "aliases": []
+  },
+  "keso": {
+    "name": "Keso",
+    "group": "dairy",
+    "aliases": [
+      "cottage cheese"
+    ]
+  },
+  "mozzarella": {
+    "name": "Mozzarella",
+    "group": "dairy",
+    "aliases": []
+  },
+  "nudlar": {
+    "name": "Nudlar",
+    "group": "grains",
+    "aliases": [
+      "risnudlar",
+      "vetenudlar"
+    ]
+  },
+  "svartvinbar": {
+    "name": "Svarta vinbär",
+    "group": "fruit",
+    "aliases": [
+      "svartvinbär"
+    ]
+  }
+}
