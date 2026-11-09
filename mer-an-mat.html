@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Hemmaspa, städning och godis till husdjuren, gjort på kaffesump, citrusskal och annat som blev över.">
+  <title>Mer än mat · Restfest</title>
+  <link rel="icon" href="assets/icons/favicon.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="kitchen.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Hoppa till innehåll</a>
+  <header class="site-header">
+    <div class="header-inner wrap">
+      <a class="brand" href="./" aria-label="Restfest, startsida">
+        <img src="assets/icons/square/cooking-pot.webp" width="38" height="38" alt="">
+        <span>Restfest</span>
+        <span class="sticker">Demoköket</span>
+      </a>
+      <nav aria-label="Huvudmeny">
+        <a href="./#borja"><img src="assets/icons/fitted/refrigerator-closed.webp" alt="" width="20" height="20">Kylskåpet</a>
+        <a href="receptarkiv.html"><img src="assets/icons/square/recipes.webp" alt="" width="20" height="20">Receptarkiv</a>
+        <a href="mer-an-mat.html" aria-current="page"><img src="assets/icons/square/leaf.webp" alt="" width="20" height="20">Mer än mat</a>
+        <a class="nav-how" href="./#sa-funkar-det"><img src="assets/icons/square/information-symbol.webp" alt="" width="20" height="20">Så funkar det</a>
+      </nav>
+      <div class="header-actions">
+        <a class="saved-nav" href="receptarkiv.html?vy=sparade" aria-label="Visa sparade recept">
+          <img src="assets/icons/square/heart.webp" alt="" width="24" height="24">
+          <span class="saved-label">Sparat</span>
+          <span id="saved-count" class="count">0</span>
+        </a>
+        <button id="shopping-nav" class="saved-nav" type="button" aria-label="Visa inköpslistan" aria-haspopup="dialog">
+          <img src="assets/icons/square/shopping-basket-1.webp" alt="" width="24" height="24">
+          <span class="shopping-nav-label">Inköpslista</span><span id="shopping-count" class="count" aria-hidden="true">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="wrap archive-page more-page">
+    <section class="greeting archive-greeting" aria-labelledby="more-title">
+      <div>
+        <a class="text-button archive-back" href="receptarkiv.html"><span aria-hidden="true">←</span> Till receptarkivet</a>
+        <h1 id="more-title"><span class="marker">Mer än mat.</span></h1>
+        <p class="greeting-intro">Kaffesump, citrusskal och den sista bananen räcker till mer än middag. Här finns hemmaspa, städning och godis till husdjuren.</p>
+      </div>
+      <div class="greeting-aside" aria-hidden="true">
+        <div class="doodle-lineup">
+          <img src="assets/icons/square/towel-and-candle.webp" alt="" width="60" height="60">
+          <img src="assets/icons/square/spray-bottle.webp" alt="" width="60" height="60">
+          <img src="assets/icons/square/dog-bone.webp" alt="" width="60" height="60">
+        </div>
+      </div>
+    </section>
+
+    <section class="more-section" aria-labelledby="more-spa">
+      <h2 id="more-spa" class="more-heading"><img src="assets/icons/square/towel-and-candle.webp" alt="" width="32" height="32">Hemmaspa &amp; behandlingar</h2>
+      <p class="more-intro">Masker, skrubb och bad av kaffesump, havregryn, honung och övermogen frukt.</p>
+      <div class="recipe-grid" data-more="spa"></div>
+    </section>
+
+    <section class="more-section" aria-labelledby="more-household">
+      <h2 id="more-household" class="more-heading"><img src="assets/icons/square/spray-bottle.webp" alt="" width="32" height="32">Hushåll &amp; städ</h2>
+      <p class="more-intro">Rengöring och doft med citrusskal, ättika, bikarbonat och citronsyra.</p>
+      <div class="recipe-grid" data-more="household"></div>
+    </section>
+
+    <section class="more-section" aria-labelledby="more-pets">
+      <h2 id="more-pets" class="more-heading"><img src="assets/icons/square/dog-bone.webp" alt="" width="32" height="32">Husdjur</h2>
+      <p class="more-intro">Godis, glass och tassvård till hund och katt. Varje recept börjar med vad djuren inte tål.</p>
+      <div class="recipe-grid" data-more="pets"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <a class="footer-brand" href="./">Restfest<span class="footer-star" aria-hidden="true">✳</span></a>
+      <p>Mer gott. Mindre svinn.</p>
+      <a class="text-button" href="./#borja">Till kylskåpet <span aria-hidden="true">↗</span></a>
+    </div>
+  </footer>
+  <dialog id="recipe-dialog" aria-labelledby="recipe-title"><button class="dialog-close" type="button" aria-label="Stäng recept">×</button><div id="dialog-content"></div></dialog>
+  <dialog id="shopping-dialog" aria-labelledby="shopping-title">
+    <div class="dialog-main">
+      <button class="dialog-close" type="button" aria-label="Stäng inköpslistan" autofocus>×</button>
+      <h2 id="shopping-title"><img src="assets/icons/square/shopping-basket-1.webp" alt="" width="30" height="30">Inköpslista</h2>
+      <p id="shopping-empty" class="dialog-intro">Listan är tom. Lägg till det du behöver köpa från ett recept.</p>
+      <ul id="shopping-items" class="ingredients"></ul>
+    </div>
+  </dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-heart" viewBox="0 0 24 24">
+      <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>
+    </symbol>
+  </svg>
+  <script src="data/recipe-index.js"></script>
+  <script src="recipes.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

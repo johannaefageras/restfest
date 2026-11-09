@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+  <circle cx="80" cy="80" r="73" fill="#fff" stroke="#151515" stroke-width="3"/>
+  <circle cx="80" cy="80" r="61" stroke="#151515" stroke-width="1.5"/>
+  <defs>
+    <g id="pasta" stroke="#151515" stroke-width="2.2" stroke-linejoin="round">
+      <path d="M-18-12-4-6Q0-9 4-6L18-12l-1 7 2 5-2 5 1 7L4 6Q0 9-4 6l-14 6 1-7-2-5 2-5z" fill="#b4e48c"/>
+      <path d="M-5-5v10m10-10v10" stroke-linecap="round"/>
+    </g>
+    <g id="tomato" stroke="#151515" stroke-width="2.1">
+      <path d="M-12 0Q0-16 12 0 0 16-12 0Z" fill="#e07a76"/>
+      <path d="M-4 0h8" stroke-linecap="round"/>
+    </g>
+  </defs>
+  <use href="#pasta" transform="translate(62 54) rotate(-25)"/>
+  <use href="#pasta" transform="translate(96 62) rotate(20)"/>
+  <use href="#pasta" transform="translate(59 86) rotate(22)"/>
+  <use href="#pasta" transform="translate(91 91) rotate(-18)"/>
+  <use href="#pasta" transform="translate(76 116) rotate(9)"/>
+  <use href="#tomato" transform="translate(108 43) rotate(-22)"/>
+  <use href="#tomato" transform="translate(45 103) rotate(32)"/>
+  <use href="#tomato" transform="translate(115 105) rotate(22)"/>
+  <path d="M54 66q-20-11-23 7 16 6 23-7ZM106 78q13-15 23-4-7 15-23 4Z" fill="#7ccb45" stroke="#151515" stroke-width="2.1"/>
+</svg>
