@@ -7,7 +7,7 @@ description: Hemmaspa, städning och godis till husdjuren, gjort på kaffesump, 
   <main id="main" class="wrap archive-page more-page">
     <section class="greeting archive-greeting" aria-labelledby="more-title">
       <div>
-        <a class="text-button archive-back" href="receptarkiv.html"><span aria-hidden="true">←</span> Till receptarkivet</a>
+        <a class="text-button archive-back" href="receptarkiv.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Till receptarkivet</a>
         <h1 id="more-title"><span class="marker">Mer än mat.</span></h1>
         <p class="greeting-intro">Kaffesump, citrusskal och den sista bananen räcker till mer än middag. Här finns hemmaspa, städning och godis till husdjuren.</p>
       </div>
@@ -20,21 +20,14 @@ description: Hemmaspa, städning och godis till husdjuren, gjort på kaffesump, 
       </div>
     </section>
 
-    <section class="more-section" aria-labelledby="more-spa">
-      <h2 id="more-spa" class="more-heading"><img src="assets/icons/square/towel-and-candle.webp" alt="" width="32" height="32">Hemmaspa &amp; behandlingar</h2>
-      <p class="more-intro">Masker, skrubb och bad av kaffesump, havregryn, honung och övermogen frukt.</p>
-      <div class="recipe-grid" data-more="spa"></div>
-    </section>
+    {#- One section per non-food type (spa, household, pets) from collections.recipeTypes, so the label,
+        icon and intro are the ones on the type page the heading links to. app.js fills each grid. #}
+    {%- for type in collections.recipeTypes %}{% if type.key != 'food' %}
 
-    <section class="more-section" aria-labelledby="more-household">
-      <h2 id="more-household" class="more-heading"><img src="assets/icons/square/spray-bottle.webp" alt="" width="32" height="32">Hushåll &amp; städ</h2>
-      <p class="more-intro">Rengöring och doft med citrusskal, ättika, bikarbonat och citronsyra.</p>
-      <div class="recipe-grid" data-more="household"></div>
+    <section class="more-section" aria-labelledby="more-{{ type.key }}">
+      <h2 id="more-{{ type.key }}" class="more-heading"><a href="{{ type.path }}"><img src="assets/icons/square/{{ type.icon }}.webp" alt="" width="32" height="32"><span>{{ type.label }}&nbsp;<i class="fas fa-arrow-up-right more-heading-arrow" aria-hidden="true"></i></span></a></h2>
+      <p class="more-intro">{{ type.intro }}</p>
+      <div class="recipe-grid" data-more="{{ type.key }}"></div>
     </section>
-
-    <section class="more-section" aria-labelledby="more-pets">
-      <h2 id="more-pets" class="more-heading"><img src="assets/icons/square/dog-bone.webp" alt="" width="32" height="32">Husdjur</h2>
-      <p class="more-intro">Godis, glass och tassvård till hund och katt. Varje recept börjar med vad djuren inte tål.</p>
-      <div class="recipe-grid" data-more="pets"></div>
-    </section>
+    {%- endif %}{% endfor %}
   </main>

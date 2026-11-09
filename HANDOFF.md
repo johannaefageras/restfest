@@ -114,7 +114,13 @@ A spa, cleaning or pet recipe has exactly one category: `spa`, `household` or `p
 - `recipeTags`: every tag, sorted by Swedish label. Tag pages count implied tags as the archive does, so Vegetariskt includes the vegan recipes.
 - Eleventy also makes a collection per raw tag from `tags`, e.g. `collections.Vegan`.
 
-**Pages:** each recipe page links its categories (in the line above the title) and its tags to their pages. The Mat page and every category page have a row of links to all categories. Nothing links to the type pages yet apart from the sitemap, and nothing in the header, archive or Mer än mat links to any of the new pages. On phones the row of 17 category links fills most of the first screen (compare item 11). The cards on these pages are rendered at build time with the same markup as `archiveCard()` in `app.js`, so change both together; `app.js` then shows which hearts are saved.
+**Pages:** how visitors and search engines reach the new pages:
+- The archive intro links to the Mat page ("gå direkt till en kategori"). The Mat page and every category page have a row of links to all categories.
+- The three section headings on Mer än mat link to their type pages. `mer-an-mat.njk` renders those sections from `collections.recipeTypes`, so the label, icon and intro come from `lib/taxonomy.js`.
+- Each recipe page links its categories (in the line above the title) and its tags to their pages.
+- The header and footer don't link to them.
+
+The home page, archive and Mer än mat draw their recipe cards with JavaScript, so without it the category and type pages are the only links to the recipe pages. Following plain links from `index.html` reaches all 233 pages. On phones the row of 17 category links fills most of the first screen (compare item 11). The cards on these pages are rendered at build time with the same markup as `archiveCard()` in `app.js`, so change both together; `app.js` then shows which hearts are saved.
 
 **Recipe pop-up:** recipe links are real links, `<a href="recept/<id>.html" data-open="<id>">`. On a plain click, `openRecipe()` in `app.js`:
 1. fetches the recipe's page and takes its `.recipe-view`;
@@ -144,6 +150,12 @@ Related behaviour:
 - `assets/icons/favicon.png`.
 
 The original SVGs are still in the same folders but nothing loads them; they are item 18 cleanup. The previous chat converted them with a one-off script: Chrome canvas via playwright-core, then `cwebp -lossless -z 9`. That script was never added to the project, so a new icon needs the conversion redone.
+
+**Small UI icons** come from Font Awesome, not WebP: arrows, chevrons, close and remove buttons, and the save heart. The colourful icons stay WebP.
+- **Markup:** `<i class="fas fa-arrow-left" aria-hidden="true"></i>`. `fas` is bold, `far` regular. Arrows, chevrons and close buttons are bold, because it matches the label font's strokes. The save heart is `far` (outline) when not saved and `fas` (filled) when saved. In `app.js` and `kitchen.js`, use `faIcon(name, weight)`.
+- **Icons in use:** `arrow-left` (back links), `arrow-up-right` (the ↗ links), `arrow-up` (home page footer), `chevron-down` (`<details>` summaries; it turns over when open), `xmark`, `heart`, and on a recipe's ingredients `plus` (grey: add to the shopping list) and `check` (once it's on the list), both bold. The boxes under a recipe's description (`recipe.njk`) have one per label: Förberedelse `knife-kitchen`, Tillagning `fire-flame-curved`, Portioner `utensils`, Nivå `signal-bars`, Räcker till `jar`, Verkningstid `hourglass-half`.
+- **`src/icons.css` is generated** by `node tools/icons.mjs`. The script cuts both fonts down to the listed icons (2.9 KB, inlined) from the full font in `fa/`, which is about 640 KB. To add an icon, add its name to the list in the script, run it and commit `src/icons.css`. It needs `fa/` and `pyftsubset` (`pip install fonttools brotli`).
+- **`fa/` is in `.gitignore`:** it's the full Font Awesome Pro font, and the repo is public.
 
 ## Testing setup that worked
 
@@ -207,6 +219,8 @@ The original SVGs are still in the same folders but nothing loads them; they are
   - **`data/recipe-index.js`:** identical apart from the generated-file comment.
   - **Recipe pages:** identical, including the structured data, apart from the new category and tag links. One apostrophe is now written as `'` rather than `&#39;`.
   - **New:** 95 pages under `kategori/`, `typ/` and `tagg/`, also in the sitemap.
+- **Committed and merged:** the Eleventy move and the Markdown recipes are on `main` (PR #1); the `eleventy` branch is deleted.
+- **New pages reachable:** the archive intro links to the Mat page and its category row, and the Mer än mat headings link to the three type pages (see "Pages" under "Recipes"). The owner left the choice and the copy to me. The build output changed only in `receptarkiv.html`, `mer-an-mat.html` and `kitchen.css`.
 
 **Content caveat to pass on:** Chokladtryfflar and Banansoftis are tagged gluten-free but use oat cream or oat drink. Röd linssoppa and Chili sin carne have oat yoghurt as an optional topping. They're only gluten-free with products labelled "glutenfri". The owner has been told; nothing was changed.
 
@@ -271,17 +285,11 @@ The original SVGs are still in the same folders but nothing loads them; they are
 
 ## Suggested next steps
 
-Recommended after the Markdown recipes were done. The owner still picks; 15 is the owner's decision.
+Recommended after the new pages were made reachable. The owner still picks; 15 is the owner's decision.
 
-1. **Commit the work.** Git has only the initial commit, with the pre-Eleventy files. The Eleventy move and the Markdown recipes are uncommitted on the `eleventy` branch. Commit them (one or two commits) before changing anything else, so there's a safe point to go back to.
-2. **Make the new pages reachable.**
-   - Visitors only find the category and tag pages through the links on recipe pages. Nothing links to the four type pages.
-   - The sitemap doesn't help yet, since it's only written once the site address is set (item 20).
-   - Recommended: link the three section headings on Mer än mat to their type pages, and add a line to the archive intro linking to the category pages.
-   - These are content decisions: ask the owner before adding links or copy.
-3. **Item 11, with the category row on the new pages.** On phones the archive filters and the row of 17 category links on the Mat and category pages both fill the first screen. Solve them together.
-4. **Item 12, the recipe data errors.** Three recipes give a different time in the description than on the card. Each fix is a one-line edit in that recipe's file in `src/recept/`.
-5. **Item 20, once the owner knows the site address.** Setting it in `src/_data/site.js` turns on `sitemap.xml`, canonical links and share images. Every page other than the recipe pages still needs share tags.
+1. **Item 11, with the category row on the new pages.** On phones the archive filters and the row of 17 category links on the Mat and category pages both fill the first screen. Solve them together.
+2. **Item 12, the recipe data errors.** Three recipes give a different time in the description than on the card. Each fix is a one-line edit in that recipe's file in `src/recept/`.
+3. **Item 20, once the owner knows the site address.** Setting it in `src/_data/site.js` turns on `sitemap.xml`, canonical links and share images. Every page other than the recipe pages still needs share tags.
 
 Items 10 and 13 are small and can go in alongside any of these. Item 10 now means removing `.open-recipe` from both copies of the card (`app.js` and `src/_includes/recipe-card.njk`).
 
