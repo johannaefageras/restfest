@@ -1,0 +1,19 @@
+{#- A recipe card, rendered at build time on the category, type and tag pages.
+    It is the same card app.js builds in archiveCard() for the archive and Mer än mat: change both together.
+    `card` is recipe.card from lib/recipes.js. app.js shows the saved state of the heart once the page loads. -#}
+{%- macro recipeCard(card, base) -%}
+<article class="archive-card" data-tone="">
+          <div class="archive-card-art has-photo">
+            <img src="{{ base }}{{ card.cardImage }}" alt="" width="600" height="338" loading="lazy" decoding="async">
+            <span class="archive-time">{{ card.timeLabel }}</span>
+            <button class="favorite" data-save="{{ card.id }}" aria-label="Spara {{ card.title }}" aria-pressed="false"><svg aria-hidden="true"><use href="#icon-heart"/></svg></button>
+          </div>
+          <div class="archive-card-body">
+            <p class="archive-meal-type"><img src="{{ base }}assets/icons/square/{{ card.mealIcon }}.webp" alt="" width="20" height="20">{{ card.mealName }}</p>
+            <h3><a class="recipe-main-link" href="{{ base }}recept/{{ card.id }}.html" data-open="{{ card.id }}">{{ card.title }}</a></h3>
+            <p class="archive-description">{{ card.description }}</p>
+            <div class="ingredient-chips">{% for chip in card.chips %}<span>{{ chip }}</span>{% endfor %}</div>
+            <a class="open-recipe" href="{{ base }}recept/{{ card.id }}.html" data-open="{{ card.id }}" aria-label="Öppna {{ card.title }}">{{ card.action }} <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+{%- endmacro %}

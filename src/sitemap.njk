@@ -1,0 +1,17 @@
+---js
+// Written only when the site's address is set in _data/site.js.
+const permalink = data => data.site.url ? 'sitemap.xml' : false;
+const eleventyExcludeFromCollections = true;
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for path in ['', 'receptarkiv.html', 'mer-an-mat.html'] %}
+  <url><loc>{{ site.absolute(path) }}</loc></url>
+{%- endfor %}
+{%- for item in collections.recipes %}
+  <url><loc>{{ item.data.recipe.url }}</loc></url>
+{%- endfor %}
+{%- for listing in collections.recipeTypes.concat(collections.recipeCategories, collections.recipeTags) %}
+  <url><loc>{{ site.absolute(listing.path) }}</loc></url>
+{%- endfor %}
+</urlset>
