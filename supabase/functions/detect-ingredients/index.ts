@@ -20,7 +20,7 @@ const schema = {
   }
 };
 
-const system = `You look at photos of an open fridge, freezer or pantry for Restfest, a Swedish website that suggests dinners from what people have at home. List the foods you can see.
+const system = `You look at photos of an open fridge, freezer or pantry for Ofta bra efter, a Swedish website that suggests dinners from what people have at home. List the foods you can see.
 
 - keys: the key from the list below for each food you can see with reasonable certainty. Use the closest key: any pasta → pasta, grated or sliced cheese → cheddar, fresh herbs → orter, dried spices → kryddor. Read labels where you can; don't guess what's inside an opaque box or jar without a readable label.
 - other: foods that are clearly there but have no key, as short Swedish names the way they'd be written on a shopping list ("Halloumi", "Sriracha", "Gräddfil"). At most eight, most useful for cooking first.

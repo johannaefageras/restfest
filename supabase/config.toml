@@ -1,4 +1,4 @@
-# Supabase CLI settings for Restfest's AI features. Setup and deploy steps: HANDOFF.md, "Kylfoto och nya recept".
+# Supabase CLI settings for Ofta bra efter's AI features. Setup and deploy steps: HANDOFF.md, "Kylfoto och nya recept".
 project_id = "restfest"
 
 # The functions are public: visitors call them without signing in, and the daily caps in

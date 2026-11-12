@@ -17,7 +17,7 @@ layout: layouts/base.njk
           {%- if recipe.cardImage %} srcset="{{ base }}{{ recipe.cardImage }} 600w, {{ base }}{{ recipe.image }} 1200w" sizes="(min-width: 860px) 810px, 100vw"{% endif %} alt="{{ recipe.alt }}" width="1200" height="675" fetchpriority="high">
       </div>
       <div class="dialog-main">
-        <p class="dialog-kicker"><span class="mini-badge">RESTFEST · {{ recipe.badge or 'RECEPT' }}</span>{% if not recipe.badge %}<span>{% for category in recipe.categoryLinks %}<a href="{{ base }}{{ category.path }}">{{ category.label }}</a>{{ ' · ' if not loop.last }}{% endfor %}</span>{% endif %}</p>
+        <p class="dialog-kicker"><span class="mini-badge">OFTA BRA EFTER · {{ recipe.badge or 'RECEPT' }}</span>{% if not recipe.badge %}<span>{% for category in recipe.categoryLinks %}<a href="{{ base }}{{ category.path }}">{{ category.label }}</a>{{ ' · ' if not loop.last }}{% endfor %}</span>{% endif %}</p>
         <h1 id="recipe-title" class="recipe-heading">{{ recipe.title }}</h1>
         <p class="dialog-intro">{{ recipe.description }}</p>
         {#- An illustrated icon per fact label, from assets/icons/. These six are every label the recipes use;

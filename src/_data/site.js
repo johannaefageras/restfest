@@ -1,4 +1,4 @@
-// The site's public address, e.g. 'https://restfest.se'. When set, recipe pages get canonical
+// The site's public address, e.g. 'https://oftabraefter.se'. When set, recipe pages get canonical
 // links and share images with full URLs, and sitemap.xml is written.
 const url = '';
 

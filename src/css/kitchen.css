@@ -1592,6 +1592,15 @@ body:has(#shopping-dialog[open]) {
   }
 }
 
+/* On narrow phones the three-word name doesn't fit beside the two buttons at full size, so it shrinks
+   with the screen: the name is about 7.4em wide, and the bowl, the buttons and the gaps take about
+   250px. 22px again from 414px; 14px at 320px. The footer's name has its own row and stays as it is. */
+@media (max-width: 419px) {
+  .site-header .brand {
+    font-size: clamp(14px, calc((100vw - 250px) / 7.4), 22px);
+  }
+}
+
 /* From 960px the menu sits in the middle of the header, with the logo and the buttons at the edges:
    the side columns are equally wide, so the menu is centred on the page whatever the buttons show. */
 @media (min-width: 960px) {
@@ -2484,14 +2493,16 @@ body:has(#shopping-dialog[open]) {
 }
 
 /* Everything is in em, so the cut falls in the same place at every size: through the middle of the
-   lowercase letters, which leaves the tops of R, t and f whole. At 19vw the name spans about 83% of
-   the screen on any phone or desktop, up to 260px type on wide screens. */
+   lowercase letters, which leaves the tops of O, f, t and b whole. The name is three words on one
+   line (about 7.4em wide): at 11.2vw it spans about 83% of the screen on any phone or desktop, up to
+   153px type on wide screens. */
 .footer-mark {
   height: 0.52em;
   margin: clamp(8px, 1.5vw, 16px) 0 0;
   overflow: hidden;
   color: var(--yellow);
-  font-size: min(19vw, 260px);
+  font-size: min(11.2vw, 153px);
+  white-space: nowrap;
   font-weight: var(--font-weight-black);
   line-height: 0.72;
   letter-spacing: -0.03em;

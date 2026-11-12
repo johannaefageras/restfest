@@ -27,7 +27,7 @@
       });
     } catch {
       throw new Error(
-        "Kunde inte nå Restfest. Kolla uppkopplingen och prova igen.",
+        "Kunde inte nå Ofta bra efter. Kolla uppkopplingen och prova igen.",
       );
     }
     const result = await response.json().catch(() => ({}));

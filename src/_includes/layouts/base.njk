@@ -2,7 +2,7 @@
     Small UI icons (arrows, chevrons, close, the save heart) come from icons.css: see tools/icons.mjs.
     Page data it reads:
       title, description   <title> and meta description
-      titleSuffix          added after the title, e.g. " · Restfest" on recipe pages
+      titleSuffix          added after the title, e.g. " · Ofta bra efter" on recipe pages
       base                 "../" for pages one folder down (recept/, kategori/, …), so paths resolve from the site root
       scripts              extra scripts from js/ after app.js, e.g. [kitchen.js] on the home page
       modules              extra scripts from js/ loaded as modules, after the others, e.g. [new-recipe.js]
@@ -47,7 +47,7 @@
   <meta property="og:url" content="{{ recipe.url }}">
   {%- endif %}
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Restfest">
+  <meta property="og:site_name" content="Ofta bra efter">
   <meta property="og:title" content="{{ recipe.title }}">
   <meta property="og:description" content="{{ recipe.description }}">
   {%- if recipe.imageUrl %}
@@ -69,9 +69,9 @@
   <a class="skip-link" href="#main">Hoppa till innehåll</a>
   <header class="site-header">
     <div class="header-inner wrap">
-      <a class="brand" href="{{ homeUrl or '#' }}" aria-label="Restfest, startsida">
+      <a class="brand" href="{{ homeUrl or '#' }}" aria-label="Ofta bra efter, startsida">
         <img src="{{ base }}assets/illustrations/ramen-bowl.svg" width="38" height="38" alt="">
-        <span>Restfest</span>
+        <span>Ofta bra efter</span>
       </a>
       <nav aria-label="Huvudmeny">
         {{- recipeMenu(collections.recipeTypes, base, page.url, inRecipes, true) }}
@@ -99,9 +99,9 @@
       so screen readers skip it. #}
   <footer class="site-footer">
     <div class="footer-inner wrap">
-      <a class="brand" href="{{ homeUrl or '#' }}" aria-label="Restfest, startsida">
+      <a class="brand" href="{{ homeUrl or '#' }}" aria-label="Ofta bra efter, startsida">
         <img src="{{ base }}assets/illustrations/ramen-bowl.svg" width="38" height="38" alt="">
-        <span>Restfest</span>
+        <span>Ofta bra efter</span>
       </a>
       <p class="footer-tagline">Rädda resterna.</p>
       <nav aria-label="Sidfot">
@@ -109,7 +109,7 @@
         <a class="nav-link" href="{{ homeUrl }}#sa-funkar-det">Så funkar det</a>
       </nav>
     </div>
-    <p class="footer-mark" aria-hidden="true">Restfest</p>
+    <p class="footer-mark" aria-hidden="true">Ofta bra efter</p>
   </footer>
   {%- if not recipe %}
   {#- Recipe pages show the recipe in the page, so only the other pages need the recipe pop-up. #}

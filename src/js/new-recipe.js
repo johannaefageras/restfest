@@ -131,7 +131,7 @@ function recipeHtml(recipe, data) {
   return `<article class="recipe-view" data-recipe="${recipeId}">
     <div class="dialog-top cook-art has-photo" data-recipe-photo>${photoHtml(recipe, data.image)}</div>
     <div class="dialog-main">
-      <p class="dialog-kicker"><span class="mini-badge">RESTFEST · NYTT RECEPT</span><span>${recipe.categories
+      <p class="dialog-kicker"><span class="mini-badge">OFTA BRA EFTER · NYTT RECEPT</span><span>${recipe.categories
         .filter((key) => mealTypes[key])
         .map(
           (key) =>
@@ -274,7 +274,7 @@ async function load() {
     return;
   }
   const { recipe } = data;
-  document.title = `${recipe.title} · Restfest`;
+  document.title = `${recipe.title} · Ofta bra efter`;
   document
     .querySelector('meta[name="description"]')
     ?.setAttribute("content", recipe.description);

@@ -96,7 +96,7 @@ const foodList = Object.entries(data.foods)
   .map(([key, food]) => `${key}: ${food.name}${food.aliases.length ? ` (${food.aliases.slice(0, 5).join(', ')})` : ''}`)
   .join('\n');
 
-export const recipeSystem = `You write recipes for Restfest, a Swedish website about making dinner from what is already in the fridge. Its motto is "Rädda resterna." The visitors are Swedish home cooks, and everything you write except imagePrompt is in Swedish.
+export const recipeSystem = `You write recipes for Ofta bra efter, a Swedish website about making dinner from what is already in the fridge. Its motto is "Rädda resterna." The visitors are Swedish home cooks, and everything you write except imagePrompt is in Swedish.
 
 You get one visitor's fridge list. Write one new dinner recipe built on it.
 

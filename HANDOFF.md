@@ -1,10 +1,12 @@
-# Restfest – handoff
+# Ofta bra efter – handoff
 
-Restfest is a Swedish recipe site built around "Vad blir det till middag?" (what's for dinner?). You type what's in your fridge and it suggests dinners from a recipe archive. It's a static site built with Eleventy; the browser code has no framework. ChatGPT Sites originally generated it. A previous chat reviewed it and listed 20 issues, P0 to P3. Items 1–8 and 16 are done, the site has moved to Eleventy, and each recipe is now a Markdown file with pages per category, type and tag. The other items remain.
+Ofta bra efter is a Swedish recipe site built around "Vad blir det till middag?" (what's for dinner?). You type what's in your fridge and it suggests dinners from a recipe archive. It's a static site built with Eleventy; the browser code has no framework. ChatGPT Sites originally generated it. A previous chat reviewed it and listed 20 issues, P0 to P3. Items 1–8 and 16 are done, the site has moved to Eleventy, and each recipe is now a Markdown file with pages per category, type and tag. The other items remain.
 
 **How the owner likes to work:** they pick items by number ("Do 7", "Continue with 6 and 8"). Don't start the next item until asked. Ask before content or product decisions, and give a recommended option. Reply in English; all site copy is Swedish. When a batch is done, summarise it in plain language: what changed, what was verified, what to deploy and any caveats.
 
 **Git:** the project is on GitHub (`johannaefageras/restfest`, branch `main`). Commit only when the owner asks, on a branch.
+
+**The name:** the site was called Restfest until 2026-11-13, when the owner renamed it Ofta bra efter. Everything a visitor sees uses the new name, as do the instructions Claude gets in the Edge Functions (those take effect at the next function deploy). Names nobody sees were left as they were, on purpose: the browser storage keys (`restfest-saved` and the others, so nobody's saved recipes are lost), the script events (`restfest:pantry`), `<meta name="restfest-ai">`, `project_id` in `supabase/config.toml`, the first migration's comment, the GitHub repository, the project folder and the Supabase project's display name. The footer tagline "Rädda resterna." is unchanged. Two things were sized for the longer name in `kitchen.css`: the large name in the footer (`.footer-mark`, one line at 11.2vw), and the header logo below 420px, which shrinks so it doesn't run into the buttons.
 
 ## How the site works
 
@@ -244,14 +246,14 @@ The owner chose: **Supabase** for the backend, **option C** for generated recipe
 | -------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`                          | —                                           | Required                                                                                  |
 | `RATE_LIMIT_SALT`                                              | —                                           | Any long random text. Visitors are counted as a hash of IP + date + salt, never the IP    |
-| `ALLOWED_ORIGINS`                                              | `*`                                         | The site's address(es), comma-separated, e.g. `https://restfest.se,http://localhost:8080` |
+| `ALLOWED_ORIGINS`                                              | `*`                                         | The site's address(es), comma-separated, e.g. `https://oftabraefter.se,http://localhost:8080` |
 | `CLAUDE_MODEL` / `CLAUDE_DETECT_MODEL` / `CLAUDE_RECIPE_MODEL` | `claude-sonnet-5-5`                         | Haiku is cheaper and worth trying for the photos                                          |
 | `IMAGE_MODEL`, `IMAGE_QUALITY`, `IMAGE_SIZE`                   | `gpt-image-2.5-flare`, `medium`, `1536x864` | `gpt-image-2.5-sunburst` is slower and better                                             |
 | `IMAGE_STYLE_REFERENCES`                                       | on                                          | `off` draws from the text alone, if photos start copying the references                   |
 | `DETECT_PER_VISITOR`, `DETECT_PER_DAY`                         | 15, 150                                     | Photo analyses per visitor and in total per day                                           |
 | `RECIPE_PER_VISITOR`, `RECIPE_PER_DAY`                         | 5, 40                                       | New recipes (and so photos) per visitor and in total per day                              |
 
-**The project:** Supabase project "Restfest" (`yatffwoobcsrxcxplecd`, region eu-west-1, free plan) in the owner's organization. The migration has been run (tables, functions and bucket checked in the dashboard on 2026-11-11), and `src/_data/ai.js` points to it.
+**The project:** Supabase project "Restfest" (its display name from before the rename) (`yatffwoobcsrxcxplecd`, region eu-west-1, free plan) in the owner's organization. The migration has been run (tables, functions and bucket checked in the dashboard on 2026-11-11), and `src/_data/ai.js` points to it.
 
 **Setup (once).** Needs a Supabase account, an Anthropic API key and an OpenAI API key. Run in the project folder; `npx supabase` needs no install.
 
