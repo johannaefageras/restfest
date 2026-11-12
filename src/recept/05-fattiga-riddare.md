@@ -1,8 +1,9 @@
 ---
 title: Fattiga riddare med varma lingon och kardemummagrädde
+date: 2026-11-09
 description: Torrt bröd, mjölk, ägg och lingonen i frysen. Gyllene, krispiga skivor rullas i kanelsocker medan de är heta och serveras med varm, glänsande lingonkompott och fluffig grädde som doftar kardemumma. Svensk husmanskost som dessert på en finare restaurang.
-image: assets/recipes/05-fattiga-riddare.webp
-cardImage: assets/recipes/05-fattiga-riddare-card.webp
+image: assets/recipes/05-fattiga-riddare.png
+cardImage: assets/recipes/05-fattiga-riddare.png
 alt: Fattiga riddare med varma lingon och kardemummagrädde
 categories: [dessert, baking]
 tags: [Vegetarian, Swedish, Beginner friendly, Budget]

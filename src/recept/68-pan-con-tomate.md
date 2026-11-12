@@ -1,8 +1,9 @@
 ---
 title: Pan con tomate med sardiner, citron och chili
+date: 2026-11-09
 description: En burk sardiner i olivolja, två tomater och gårdagens bröd. Brödet rostas krispigt, gnids med vitlök och riven tomat och toppas med glänsande sardiner, citronskal, chili och persilja. Spansk tapas från en bar i Barcelona, gjord på det billigaste i fiskhyllan.
-image: assets/recipes/68-pan-con-tomate.webp
-cardImage: assets/recipes/68-pan-con-tomate-card.webp
+image: assets/recipes/68-pan-con-tomate.png
+cardImage: assets/recipes/68-pan-con-tomate.png
 alt: Pan con tomate med sardiner, citron och chili
 categories: [starter, sandwich, party]
 tags: [Pescatarian, Dairy free, Spanish, Leftovers, Beginner friendly, Budget]

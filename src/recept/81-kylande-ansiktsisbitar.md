@@ -1,8 +1,9 @@
 ---
 title: Kylande ansiktsisbitar med gurka, mynta och grönt te
+date: 2026-11-09
 description: En bit gurka, några myntablad och en kopp grönt te frysas till små, ljusgröna isbitar med blad och gurka infrusna som i glas. En isbit inlindad i en tunn tvättlapp glider över ansiktet på morgonen och får huden att kännas pigg och sval. Sociala mediers favoritknep, gjort i en vanlig isbitsform.
-image: assets/recipes/81-kylande-ansiktsisbitar.webp
-cardImage: assets/recipes/81-kylande-ansiktsisbitar-card.webp
+image: assets/recipes/81-kylande-ansiktsisbitar.png
+cardImage: assets/recipes/81-kylande-ansiktsisbitar.png
 alt: Kylande ansiktsisbitar med gurka, mynta och grönt te
 categories: [spa]
 tags: [Face, Refreshing, Natural, Leftovers, Beginner friendly, Budget]
@@ -13,7 +14,7 @@ facts:
   Verkningstid: 1–2 min
   Räcker till: ca 12 isbitar
   Nivå: Nybörjare
-beforeYouStart: 'Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn.'
+beforeYouStart: "Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn."
 pantryKeys: []
 ingredients:
   - name: 1 påse grönt te, gärna en redan använd
@@ -23,6 +24,7 @@ ingredients:
   - name: 12 små myntablad
     key: orter
   - name: 1 tunn, ren tvättlapp eller bomullsduk
+    tool: true
 ---
 
 1. Låt tepåsen dra i det kokande vattnet i 3 minuter. Ta upp påsen och låt teet svalna helt.

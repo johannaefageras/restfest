@@ -1,11 +1,21 @@
 ---
 title: Grönsaksbuljong på skal och kanter
+date: 2026-11-09
 description: Lökskal, morotstoppar, purjolöksblast och persiljestjälkar samlas i en påse i frysen tills den är full. Då kokas allt till en klar, gyllene buljong som smakar mer än någon tärning och blir grunden i soppor, grytor och risotto. Gratis, gott och det mest hållbara receptet i hela samlingen.
-image: assets/recipes/91-gronsaksbuljong.webp
-cardImage: assets/recipes/91-gronsaksbuljong-card.webp
+image: assets/recipes/91-gronsaksbuljong.png
+cardImage: assets/recipes/91-gronsaksbuljong.png
 alt: Grönsaksbuljong på skal och kanter
 categories: [basics]
-tags: [Vegan, Gluten free, Make ahead, Leftovers, Zero waste, Beginner friendly, Budget]
+tags:
+  [
+    Vegan,
+    Gluten free,
+    Make ahead,
+    Leftovers,
+    Zero waste,
+    Beginner friendly,
+    Budget,
+  ]
 time: 70
 timeLabel: 1 tim 10 min
 facts:
@@ -15,7 +25,7 @@ facts:
   Nivå: Nybörjare
 pantryKeys: []
 ingredients:
-  - name: '1 full fryspåse grönsaksrester (ca 500 g): skal och kanter av lök, morot, purjolök, selleri, palsternacka och svamp, och stjälkar av persilja och timjan'
+  - name: "1 full fryspåse grönsaksrester (ca 500 g): skal och kanter av lök, morot, purjolök, selleri, palsternacka och svamp, och stjälkar av persilja och timjan"
   - name: 1 gul lök, med skal, delad
     key: lok
   - name: 2 vitlöksklyftor, krossade

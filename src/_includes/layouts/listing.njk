@@ -1,0 +1,44 @@
+---
+layout: layouts/base.njk
+---
+{#- The layout for the category, type and tag pages (pages/kategori.njk, typ.njk, tagg.njk).
+    `listing` is one entry of collections.recipeCategories, recipeTypes or recipeTags (lib/recipes.js). -#}
+{%- from 'recipe-card.njk' import recipeCard -%}
+  <main id="main" class="wrap archive-page listing-page">
+    <section class="greeting archive-greeting" aria-labelledby="listing-title">
+      <div>
+        <a class="text-button archive-back" href="{{ base }}{{ listing.back.path }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> {{ listing.back.label }}</a>
+        <h1 id="listing-title"><span class="marker">{{ listing.label }}.</span></h1>
+        <p class="greeting-intro">{{ listing.intro }}</p>
+      </div>
+      <div class="greeting-aside" aria-hidden="true">
+        <div class="doodle-lineup">
+          <img src="{{ base }}assets/icons/{{ listing.icon }}.svg" alt="" width="60" height="60">
+        </div>
+      </div>
+    </section>
+    {%- if listing.links %}
+    <details class="listing-links-panel">
+      <summary>
+        <span>Kategorier</span>
+        {%- if listing.kind == 'category' %}
+        <span class="listing-links-current">{{ listing.label }}</span>
+        {%- endif %}
+        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+      </summary>
+      <nav class="listing-links" aria-label="Kategorier">
+        {%- for link in listing.links %}
+        <a class="food-filter" href="{{ base }}{{ link.path }}"{% if link.path == listing.path %} aria-current="page"{% endif %}><img src="{{ base }}assets/icons/{{ link.icon }}.svg" alt="" width="22" height="22">{{ link.label }}</a>
+        {%- endfor %}
+      </nav>
+    </details>
+    {%- endif %}
+    <section class="recipes-section archive-recipes" aria-labelledby="listing-count">
+      <h2 id="listing-count" class="eyebrow">{{ listing.recipes.length }} recept</h2>
+      <div class="recipe-grid">
+        {%- for item in listing.recipes %}
+        {{ recipeCard(item.data.recipe.card, base) }}
+        {%- endfor %}
+      </div>
+    </section>
+  </main>

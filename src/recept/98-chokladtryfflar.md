@@ -1,8 +1,9 @@
 ---
 title: Chokladtryfflar med apelsin, rullade i kakao
+date: 2026-11-09
 description: En kaka mörk choklad, en skvätt havregrädde och skalet från en apelsin. Ganachen rörs blank, kyls och rullas till små, ojämna tryfflar som får ett sammetslent täcke av kakao. Fransk konfekt som smälter på tungan, helt vegansk utan att någon märker det.
-image: assets/recipes/98-chokladtryfflar.webp
-cardImage: assets/recipes/98-chokladtryfflar-card.webp
+image: assets/recipes/98-chokladtryfflar.png
+cardImage: assets/recipes/98-chokladtryfflar.png
 alt: Chokladtryfflar med apelsin, rullade i kakao
 categories: [candy]
 tags: [Vegan, Gluten free, Christmas, Make ahead, Gift]

@@ -1,8 +1,9 @@
 ---
 title: Krispig thaisallad på söndagsstekens rester med lime och jordnötter
+date: 2026-11-09
 description: De sista skivorna av söndagssteken, en bit kinakål och en morot. Köttet vänds med krispiga grönsaker, färska örter och en syrlig, het limedressing och toppas med rostade jordnötter. Färgsprakande som en sallad från ett gatukök i Bangkok, och lika god med köpt rostbiff.
-image: assets/recipes/43-thaisallad.webp
-cardImage: assets/recipes/43-thaisallad-card.webp
+image: assets/recipes/43-thaisallad.png
+cardImage: assets/recipes/43-thaisallad.png
 alt: Krispig thaisallad på söndagsstekens rester med lime och jordnötter
 categories: [salad, main]
 tags: [Dairy free, Asian, Thai, Leftovers, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 25 min
 facts:
   Förberedelse: 20 min
   Tillagning: 5 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [stek, kinakal, morot, gurka, jordnotter]
 ingredients:

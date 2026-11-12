@@ -1,8 +1,9 @@
 ---
 title: Grön ärtvelouté med citronolja och vitlökskrutonger
+date: 2026-11-09
 description: En påse frysta ärter, en gul lök och gårdagens bröd. Det blir en lysande grön, sammetslen soppa med droppar av gyllene citronolja och krispiga vitlökskrutonger. Servera i små skålar eller glas och låt den smaka vår mitt i november.
-image: assets/recipes/06-gron-artveloute.webp
-cardImage: assets/recipes/06-gron-artveloute-card.webp
+image: assets/recipes/06-gron-artveloute.png
+cardImage: assets/recipes/06-gron-artveloute.png
 alt: Grön ärtvelouté med citronolja och vitlökskrutonger
 categories: [soup, starter]
 tags: [Vegan, Beginner friendly, Budget]

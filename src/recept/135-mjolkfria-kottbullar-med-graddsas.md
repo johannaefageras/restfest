@@ -1,11 +1,22 @@
 ---
 title: Köttbullar utan ägg och mjölk med gräddsås på havregrädde
+date: 2026-11-09
 description: Ett paket köttfärs, en kall kokt potatis från igår och en skvätt havredryck. Potatisen tar äggets plats och gör köttbullarna mjuka och saftiga, och gräddsåsen blir lika len med havregrädde. Med lingon, pressgurka och potatismos blir Sveriges nationalrätt något alla vid bordet kan äta.
-image: assets/recipes/135-mjolkfria-kottbullar-med-graddsas.webp
-cardImage: assets/recipes/135-mjolkfria-kottbullar-med-graddsas-card.webp
+image: assets/recipes/135-mjolkfria-kottbullar-med-graddsas.png
+cardImage: assets/recipes/135-mjolkfria-kottbullar-med-graddsas.png
 alt: Köttbullar utan ägg och mjölk med gräddsås på havregrädde
 categories: [main]
-tags: [Dairy free, Egg free, Swedish, Comfort food, Family friendly, Leftovers, Beginner friendly, Budget]
+tags:
+  [
+    Dairy free,
+    Egg free,
+    Swedish,
+    Comfort food,
+    Family friendly,
+    Leftovers,
+    Beginner friendly,
+    Budget,
+  ]
 time: 50
 timeLabel: 50 min
 facts:

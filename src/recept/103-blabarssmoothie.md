@@ -1,8 +1,9 @@
 ---
 title: Blåbärssmoothie med havre och kvarg
+date: 2026-11-09
 description: En näve frysta blåbär, några skedar havregryn och en burk kvarg mixas till en tjock, djupt lila smoothie som mättar ända fram till middagen. Toppad med frostiga blåbär och lite granola ser den ut att komma från ett juicecafé. Klar på fem minuter, och helt utan banan.
-image: assets/recipes/103-blabarssmoothie.webp
-cardImage: assets/recipes/103-blabarssmoothie-card.webp
+image: assets/recipes/103-blabarssmoothie.png
+cardImage: assets/recipes/103-blabarssmoothie.png
 alt: Blåbärssmoothie med havre och kvarg
 categories: [snack, drink, breakfast]
 tags: [Vegetarian, Family friendly, Beginner friendly, Budget]

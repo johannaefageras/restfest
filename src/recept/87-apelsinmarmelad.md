@@ -1,8 +1,9 @@
 ---
 title: Apelsinmarmelad med tunt skurna skal
+date: 2026-11-09
 description: Tre apelsiner och en citron ur fruktskålen, socker och lite tålamod. Skalen skärs i tunna strimlor och kokas tills de blir mjuka och genomskinliga, svävande i en klar, gyllene gelé. Bittersöt brittisk frukostmarmelad som lyser som solsken på frukostbordet.
-image: assets/recipes/87-apelsinmarmelad.webp
-cardImage: assets/recipes/87-apelsinmarmelad-card.webp
+image: assets/recipes/87-apelsinmarmelad.png
+cardImage: assets/recipes/87-apelsinmarmelad.png
 alt: Apelsinmarmelad med tunt skurna skal
 categories: [preserves]
 tags: [Vegan, Gluten free, Marmalade, Zero waste, Gift]

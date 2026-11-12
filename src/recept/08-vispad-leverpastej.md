@@ -1,8 +1,9 @@
 ---
 title: Vispad leverpastej på rågbröd med picklad gurka och lingon
+date: 2026-11-09
 description: Leverpastejen från frukostbordet vispas med grädde till en fluffig mousse. Den spritsas på rostat rågbröd och toppas med knaprig snabbpicklad gurka, glänsande lingon och en kvist timjan. Smörgåsklassikern förklädd till fransk bistropaté, och en självklar bit på julbordet.
-image: assets/recipes/08-vispad-leverpastej.webp
-cardImage: assets/recipes/08-vispad-leverpastej-card.webp
+image: assets/recipes/08-vispad-leverpastej.png
+cardImage: assets/recipes/08-vispad-leverpastej.png
 alt: Vispad leverpastej på rågbröd med picklad gurka och lingon
 categories: [starter, party]
 tags: [Swedish, Christmas, Beginner friendly, Budget]

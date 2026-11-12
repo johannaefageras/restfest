@@ -1,8 +1,9 @@
 ---
 title: Smöriga ostkex på de sista ostkanterna
+date: 2026-11-09
 description: De hårda ostkanterna längst in i kylen, ett paket smör och lite mjöl. Allt rivs och arbetas ihop till en deg som rullas, skivas och gräddas till krispiga, smöriga kex med kummin, sesam och flingsalt. Ser ut som från en delikatessbutik och smälter i munnen.
-image: assets/recipes/54-ostkex.webp
-cardImage: assets/recipes/54-ostkex-card.webp
+image: assets/recipes/54-ostkex.png
+cardImage: assets/recipes/54-ostkex.png
 alt: Smöriga ostkex på de sista ostkanterna
 categories: [party, baking]
 tags: [Vegetarian, Leftovers, Zero waste, Gift, Budget]

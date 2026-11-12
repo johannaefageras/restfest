@@ -1,8 +1,9 @@
 ---
 title: Snabb hummus med grönsaksstavar
+date: 2026-11-09
 description: En burk kikärtor, en sked tahini och en citron mixas på fem minuter till en fluffig, sidenlen hummus. Den bres ut i en virvel med olivolja och paprikapulver och serveras med krispiga morötter, gurka och paprika att doppa. Mellanmålet som får grönsakslådan att ta slut.
-image: assets/recipes/105-hummus.webp
-cardImage: assets/recipes/105-hummus-card.webp
+image: assets/recipes/105-hummus.png
+cardImage: assets/recipes/105-hummus.png
 alt: Snabb hummus med grönsaksstavar
 categories: [snack, sauce]
 tags: [Vegan, Gluten free, Middle Eastern, Beginner friendly, Budget]

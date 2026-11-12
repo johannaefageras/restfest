@@ -1,8 +1,9 @@
 ---
 title: Kladdkaka utan ägg och mjölk
+date: 2026-11-09
 description: Mjölkfritt margarin, socker, kakao och havredryck rörs ihop i en kastrull på fem minuter. Kakan får en krispig, sprucken yta och en kladdig, nästan mousseaktig mitt, precis som den ska. Servera med vispad havregrädde och hallon, så märker ingen på kalaset att ägg och smör saknas.
-image: assets/recipes/131-agg-och-mjolkfri-kladdkaka.webp
-cardImage: assets/recipes/131-agg-och-mjolkfri-kladdkaka-card.webp
+image: assets/recipes/131-agg-och-mjolkfri-kladdkaka.png
+cardImage: assets/recipes/131-agg-och-mjolkfri-kladdkaka.png
 alt: Kladdkaka utan ägg och mjölk
 categories: [baking, dessert]
 tags: [Vegan, Swedish, Family friendly, Beginner friendly, Budget]

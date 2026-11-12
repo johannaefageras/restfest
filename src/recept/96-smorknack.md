@@ -1,8 +1,9 @@
 ---
 title: Smörknäck med mörk choklad och rostad mandel
+date: 2026-11-09
 description: Ett paket smör, socker och en skvätt vatten kokas till en djupt gyllene knäck som spricker med ett krasande ljud. Den täcks med smält mörk choklad, rostad mandel och flingsalt och bryts i stora, oregelbundna flak. Engelsk toffee som ser ut att komma från en dyr chokladbutik.
-image: assets/recipes/96-smorknack.webp
-cardImage: assets/recipes/96-smorknack-card.webp
+image: assets/recipes/96-smorknack.png
+cardImage: assets/recipes/96-smorknack.png
 alt: Smörknäck med mörk choklad och rostad mandel
 categories: [candy]
 tags: [Vegetarian, Gluten free, Christmas, Make ahead, Gift]

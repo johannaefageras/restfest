@@ -1,8 +1,9 @@
 ---
 title: Tunna pannkakor på havredryck utan ägg
+date: 2026-11-09
 description: Mjöl, havredryck och en nypa salt. Smeten får vila en halvtimme och steks sedan till tunna, gyllene pannkakor med spetsiga, krispiga kanter, som rullas eller viks i trianglar. Med sylt, bär och vispad havregrädde blir torsdagens ärtsoppa och pannkaka något alla kan äta.
-image: assets/recipes/132-aggfria-havrepannkakor.webp
-cardImage: assets/recipes/132-aggfria-havrepannkakor-card.webp
+image: assets/recipes/132-aggfria-havrepannkakor.png
+cardImage: assets/recipes/132-aggfria-havrepannkakor.png
 alt: Tunna pannkakor på havredryck utan ägg
 categories: [breakfast]
 tags: [Vegan, Swedish, Family friendly, Beginner friendly, Budget]

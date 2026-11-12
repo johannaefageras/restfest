@@ -1,8 +1,9 @@
 ---
 title: Gyllene mjölk med ingefära, kanel och honung
+date: 2026-11-09
 description: Gurkmejan som står orörd i kryddhyllan, mjölk och en sked honung blir en lysande gul, skummig dryck som värmer ända ut i fingrarna. Den serveras i glas med ett damm av kanel och en kanelstång. Perfekt en mörk novemberkväll i soffan.
-image: assets/recipes/14-gyllene-mjolk.webp
-cardImage: assets/recipes/14-gyllene-mjolk-card.webp
+image: assets/recipes/14-gyllene-mjolk.png
+cardImage: assets/recipes/14-gyllene-mjolk.png
 alt: Gyllene mjölk med ingefära, kanel och honung
 categories: [drink]
 tags: [Vegetarian, Gluten free, Hot drink, Autumn, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 15 min
 facts:
   Förberedelse: 5 min
   Tillagning: 10 min
-  Portioner: '2'
+  Portioner: "2"
   Nivå: Nybörjare
 pantryKeys: []
 ingredients:

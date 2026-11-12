@@ -1,8 +1,9 @@
 ---
 title: Äggfri majonnäs på kikärtsspad
+date: 2026-11-09
 description: Spadet från en burk kikärtor, en sked senap och neutral olja mixas på en minut till en tjock, blank majonnäs som är svår att skilja från den vanliga. Den håller ihop potatissallad, smörgåsar och dippsåser, och blir aioli med en vitlöksklyfta. Kikärtorna sparar du till hummusen i recept 105.
-image: assets/recipes/133-aggfri-kikartsmajonas.webp
-cardImage: assets/recipes/133-aggfri-kikartsmajonas-card.webp
+image: assets/recipes/133-aggfri-kikartsmajonas.png
+cardImage: assets/recipes/133-aggfri-kikartsmajonas.png
 alt: Äggfri majonnäs på kikärtsspad
 categories: [sauce, basics]
 tags: [Vegan, Gluten free, Zero waste, Budget]

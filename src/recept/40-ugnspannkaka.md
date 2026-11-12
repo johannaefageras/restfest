@@ -1,8 +1,9 @@
 ---
 title: Ugnspannkaka med krispigt bacon och rårörda lingon
+date: 2026-11-09
 description: Mjölk, ägg, mjöl och ett paket bacon. Smeten hälls i en rykande het gjutjärnspanna och reser sig i ugnen till en gyllene pannkaka med höga, frasiga kanter och knaprigt bacon inbakat. Den bärs ut direkt i pannan och serveras med glänsande lingon. Mormors fläskpannkaka i söndagskläder.
-image: assets/recipes/40-ugnspannkaka.webp
-cardImage: assets/recipes/40-ugnspannkaka-card.webp
+image: assets/recipes/40-ugnspannkaka.png
+cardImage: assets/recipes/40-ugnspannkaka.png
 alt: Ugnspannkaka med krispigt bacon och rårörda lingon
 categories: [main, breakfast]
 tags: [Swedish, Comfort food, Family friendly, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 45 min
 facts:
   Förberedelse: 10 min
   Tillagning: 35 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [vetemjol, mjolk, agg, bacon]
 ingredients:

@@ -1,8 +1,9 @@
 ---
 title: Brusande badbomber med vanilj och kamomill
+date: 2026-11-09
 description: Bikarbonat, citronsyra och potatismjöl ur bakskåpet, och innehållet i en påse kamomillte. Allt pressas till runda, pastellfärgade bomber med små gyllene blommor på toppen, som brusar och doftar vanilj när de möter badvattnet. Ser ut som från en dyr skönhetsbutik och är ett perfekt pyssel en regnig söndag.
-image: assets/recipes/82-brusande-badbomber.webp
-cardImage: assets/recipes/82-brusande-badbomber-card.webp
+image: assets/recipes/82-brusande-badbomber.png
+cardImage: assets/recipes/82-brusande-badbomber.png
 alt: Brusande badbomber med vanilj och kamomill
 categories: [spa]
 tags: [Bath, Family friendly, Make ahead, Gift, Budget]
@@ -12,7 +13,7 @@ facts:
   Verkningstid: 15–20 min i badet
   Räcker till: ca 6 bomber
   Nivå: Medelsvårt
-beforeYouStart: 'Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn.'
+beforeYouStart: "Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn."
 pantryKeys: []
 ingredients:
   - name: 2 dl bikarbonat (ca 200 g)
@@ -28,6 +29,7 @@ ingredients:
   - name: Vatten i en sprayflaska
     basic: true
   - name: 1 muffinsform i silikon eller några små formar
+    tool: true
 ---
 
 1. Blanda bikarbonat, citronsyra, potatismjöl och vaniljsocker i en torr skål. Krossa eventuella klumpar med fingrarna.

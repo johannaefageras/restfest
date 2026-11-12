@@ -1,8 +1,9 @@
 ---
 title: Frukostfrallor med kall jäsning över natten
+date: 2026-11-09
 description: Degen rörs ihop på tio minuter på kvällen och jäser i kylen medan du sover. På morgonen skärs den direkt i bitar, utan knådning eller formning, och gräddas till rustika, luftiga frallor med krispig skorpa och frön på toppen. Nybakat till helgfrukosten, utan att gå upp tidigt.
-image: assets/recipes/129-frukostfrallor.webp
-cardImage: assets/recipes/129-frukostfrallor-card.webp
+image: assets/recipes/129-frukostfrallor.png
+cardImage: assets/recipes/129-frukostfrallor.png
 alt: Frukostfrallor med kall jäsning över natten
 categories: [bread, baking, breakfast]
 tags: [Vegan, Swedish, Make ahead, Beginner friendly, Budget]

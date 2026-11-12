@@ -1,8 +1,9 @@
 ---
 title: Mjuk smörkola med flingsalt i vaxpapper
+date: 2026-11-09
 description: Grädde, socker, sirap och en klick smör kokas långsamt till en blank, djupt gyllene kola. Den skärs i små bitar, får några flingsaltkorn och viras in i papper med tvinnade ändar. Ser ut som från en gammaldags karamellbutik och är en av julens finaste presenter.
-image: assets/recipes/48-smorkola.webp
-cardImage: assets/recipes/48-smorkola-card.webp
+image: assets/recipes/48-smorkola.png
+cardImage: assets/recipes/48-smorkola.png
 alt: Mjuk smörkola med flingsalt i vaxpapper
 categories: [candy, baking]
 tags: [Vegetarian, Gluten free, Swedish, Christmas, Make ahead, Gift, Budget]

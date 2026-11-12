@@ -1,11 +1,13 @@
 ---
 title: Sammetslent rotmos med pepparrot och gräslöksolja
+date: 2026-11-09
 description: En kålrot och några potatisar vispas till ett silkeslent mos med smör och färsk riven pepparrot. Moset toppas med en lysande grön gräslöksolja som samlas i små gropar på ytan. Husmanskost som ser ut som från en finkrog.
-image: assets/recipes/24-rotmos.webp
-cardImage: assets/recipes/24-rotmos-card.webp
+image: assets/recipes/24-rotmos.png
+cardImage: assets/recipes/24-rotmos.png
 alt: Sammetslent rotmos med pepparrot och gräslöksolja
 categories: [side]
-tags: [Vegetarian, Gluten free, Swedish, Comfort food, Beginner friendly, Budget]
+tags:
+  [Vegetarian, Gluten free, Swedish, Comfort food, Beginner friendly, Budget]
 time: 50
 timeLabel: 50 min
 facts:

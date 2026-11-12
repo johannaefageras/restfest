@@ -1,8 +1,9 @@
 ---
 title: Ugnsbakad potatisgnocchi på gårdagens potatis med tomat och mozzarella
+date: 2026-11-09
 description: Gårdagens kokta potatis, ett ägg och lite mjöl blir mjuka, fluffiga gnocchi som vänds i en enkel tomatsås. De gräddas i ugnen under smält mozzarella tills såsen bubblar och osten får gyllene fläckar. Italiensk mammamat av det som annars hade blivit stekt potatis.
-image: assets/recipes/124-gnocchi.webp
-cardImage: assets/recipes/124-gnocchi-card.webp
+image: assets/recipes/124-gnocchi.png
+cardImage: assets/recipes/124-gnocchi.png
 alt: Ugnsbakad potatisgnocchi på gårdagens potatis med tomat och mozzarella
 categories: [main]
 tags: [Vegetarian, Italian, Comfort food, Family friendly, Leftovers, Budget]
@@ -11,7 +12,7 @@ timeLabel: 55 min
 facts:
   Förberedelse: 30 min
   Tillagning: 25 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Medelsvårt
 pantryKeys: [potatis, kross, mozzarella, vetemjol]
 ingredients:

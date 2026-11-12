@@ -1,17 +1,19 @@
 ---
 title: Krispig pastafrittata på gårdagens spagetti
+date: 2026-11-09
 description: Gårdagens spagetti, fem ägg och en bit lagrad ost. Pastan vänds i ägg och ost och steks tills den bildar en gyllene, krispig kaka med ett mönster av knapriga pastasträngar, mjuk och krämig i mitten. Den skärs i tårtbitar och toppas med tomater och basilika. Neapels bästa sätt att ta hand om överbliven pasta.
-image: assets/recipes/45-pastafrittata.webp
-cardImage: assets/recipes/45-pastafrittata-card.webp
+image: assets/recipes/45-pastafrittata.png
+cardImage: assets/recipes/45-pastafrittata.png
 alt: Krispig pastafrittata på gårdagens spagetti
 categories: [main]
-tags: [Vegetarian, Italian, Family friendly, Leftovers, Beginner friendly, Budget]
+tags:
+  [Vegetarian, Italian, Family friendly, Leftovers, Beginner friendly, Budget]
 time: 30
 timeLabel: 30 min
 facts:
   Förberedelse: 10 min
   Tillagning: 20 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [pasta, agg, ost-lagrad, mjolk]
 ingredients:

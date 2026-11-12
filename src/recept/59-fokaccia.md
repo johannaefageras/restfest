@@ -1,8 +1,9 @@
 ---
 title: Fokaccia med rödlök, rosmarin och flingsalt
+date: 2026-11-09
 description: Mjöl, vatten, jäst och en generös skvätt olivolja. Degen jäser över natten i kylen och gräddas till ett gyllene, luftigt bröd med krispig botten och djupa gropar där olivoljan samlas. Ovanpå ligger rödlök, körsbärstomater, rosmarin och flingsalt. Ser ut att komma från ett italienskt bageri, men kräver ingen knådning alls.
-image: assets/recipes/59-fokaccia.webp
-cardImage: assets/recipes/59-fokaccia-card.webp
+image: assets/recipes/59-fokaccia.png
+cardImage: assets/recipes/59-fokaccia.png
 alt: Fokaccia med rödlök, rosmarin och flingsalt
 categories: [bread, baking, side]
 tags: [Vegan, Italian, Make ahead, Beginner friendly, Budget]

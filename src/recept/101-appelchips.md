@@ -1,11 +1,13 @@
 ---
 title: Krispiga äppelchips med kanel
+date: 2026-11-09
 description: De lite mjuka äpplena i fruktskålen skivas papperstunt och torkas långsamt i ugnen till krispiga chips med ett litet stjärnmönster i mitten. Ett pudrigt lager kanel gör att de doftar äppelpaj. Lika knapriga som chips, men gjorda av bara frukt.
-image: assets/recipes/101-appelchips.webp
-cardImage: assets/recipes/101-appelchips-card.webp
+image: assets/recipes/101-appelchips.png
+cardImage: assets/recipes/101-appelchips.png
 alt: Krispiga äppelchips med kanel
 categories: [snack]
-tags: [Vegan, Gluten free, Family friendly, Leftovers, Beginner friendly, Budget]
+tags:
+  [Vegan, Gluten free, Family friendly, Leftovers, Beginner friendly, Budget]
 time: 135
 timeLabel: 1 tim 45 min–2 tim 15 min
 facts:

@@ -1,8 +1,9 @@
 ---
 title: Krispig hasselbackspotatis med ströbröd och lagrad ost
+date: 2026-11-09
 description: Potatisen i påsen skärs i tunna solfjädrar, penslas med smör och rostas tills varje lamell är krispig som chips och insidan krämig. Till sist får den ett gyllene täcke av ströbröd och riven lagrad ost. Sveriges vackraste potatis, och den är lättare att göra än den ser ut.
-image: assets/recipes/22-hasselbackspotatis.webp
-cardImage: assets/recipes/22-hasselbackspotatis-card.webp
+image: assets/recipes/22-hasselbackspotatis.png
+cardImage: assets/recipes/22-hasselbackspotatis.png
 alt: Krispig hasselbackspotatis med ströbröd och lagrad ost
 categories: [side]
 tags: [Vegetarian, Swedish, Classic, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 1 tim 25 min
 facts:
   Förberedelse: 20 min
   Tillagning: 65 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: []
 ingredients:

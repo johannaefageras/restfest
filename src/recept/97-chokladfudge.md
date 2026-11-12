@@ -1,11 +1,21 @@
 ---
 title: Chokladfudge med pepparkakssmulor och flingsalt
+date: 2026-11-09
 description: En burk sötad kondenserad mjölk, chokladkakorna i skafferiet och de sista pepparkakorna i burken. Allt smälts ihop till en tät, sammetslen fudge med knapriga pepparkaksbitar, som skärs i små, blanka rutor med flingsalt på toppen. Ingen termometer, ingen ugn, och klar på tio minuter innan kylen gör resten.
-image: assets/recipes/97-chokladfudge.webp
-cardImage: assets/recipes/97-chokladfudge-card.webp
+image: assets/recipes/97-chokladfudge.png
+cardImage: assets/recipes/97-chokladfudge.png
 alt: Chokladfudge med pepparkakssmulor och flingsalt
 categories: [candy]
-tags: [Vegetarian, Christmas, No bake, Make ahead, Leftovers, Gift, Beginner friendly]
+tags:
+  [
+    Vegetarian,
+    Christmas,
+    No bake,
+    Make ahead,
+    Leftovers,
+    Gift,
+    Beginner friendly,
+  ]
 time: 200
 timeLabel: 3 tim 20 min
 facts:

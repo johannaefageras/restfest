@@ -1,8 +1,9 @@
 ---
 title: Röstiblinier med crème fraiche och stenbitsrom
+date: 2026-11-09
 description: Råriven potatis, en burk stenbitsrom och en burk crème fraiche. Små krispiga potatisplättar toppas med en klick crème fraiche, glänsande svart och röd rom, finhackad rödlök och dill. Det ser ut som kaviar på en finkrog men kostar som en vardagsmiddag.
-image: assets/recipes/07-rostiblinier.webp
-cardImage: assets/recipes/07-rostiblinier-card.webp
+image: assets/recipes/07-rostiblinier.png
+cardImage: assets/recipes/07-rostiblinier.png
 alt: Röstiblinier med crème fraiche och stenbitsrom
 categories: [starter, party]
 tags: [Pescatarian, Gluten free, Swedish, Budget]

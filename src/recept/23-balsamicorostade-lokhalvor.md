@@ -1,8 +1,9 @@
 ---
 title: Balsamicorostade lökhalvor med timjan
+date: 2026-11-09
 description: Den gula löken, kökets mest anonyma råvara, halveras och rostas långsamt tills den är söt och mjuk som marmelad. Den glaseras blank med balsamvinäger, och lökringarna syns som årsringar i ett träd. Passar till kött, linser eller på en ostbricka.
-image: assets/recipes/23-balsamicorostade-lokhalvor.webp
-cardImage: assets/recipes/23-balsamicorostade-lokhalvor-card.webp
+image: assets/recipes/23-balsamicorostade-lokhalvor.png
+cardImage: assets/recipes/23-balsamicorostade-lokhalvor.png
 alt: Balsamicorostade lökhalvor med timjan
 categories: [side]
 tags: [Vegan, Gluten free, Beginner friendly, Budget]

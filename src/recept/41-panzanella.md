@@ -1,8 +1,9 @@
 ---
 title: Panzanella på gammalt bröd med tomater, gurka och kapris
+date: 2026-11-09
 description: Gårdagens bröd, en ask körsbärstomater och en halv gurka. Brödet rostas till gyllene krutonger som suger upp tomatsaft, olivolja och vinäger tills de är krispiga utanpå och saftiga inuti. Rödlök, kapris och basilika gör resten. En toskansk sommarsallad som går att göra året om.
-image: assets/recipes/41-panzanella.webp
-cardImage: assets/recipes/41-panzanella-card.webp
+image: assets/recipes/41-panzanella.png
+cardImage: assets/recipes/41-panzanella.png
 alt: Panzanella på gammalt bröd med tomater, gurka och kapris
 categories: [salad, side]
 tags: [Vegan, Italian, Leftovers, Beginner friendly, Budget]

@@ -1,8 +1,9 @@
 ---
 title: Frasig pajdeg med smör
+date: 2026-11-09
 description: Mjöl, kallt smör och några skedar isvatten. Degen nyps ihop på fem minuter och gräddas till ett frasigt, gyllene pajskal som håller för allt från kylskåpets sista grönsaker och ostbitar till en söt äppelpaj. Grundreceptet som gör rester till middag.
-image: assets/recipes/92-pajdeg.webp
-cardImage: assets/recipes/92-pajdeg-card.webp
+image: assets/recipes/92-pajdeg.png
+cardImage: assets/recipes/92-pajdeg.png
 alt: Frasig pajdeg med smör
 categories: [basics, baking]
 tags: [Vegetarian, Make ahead, Beginner friendly, Budget]

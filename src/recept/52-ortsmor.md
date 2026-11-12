@@ -1,11 +1,22 @@
 ---
 title: Rullat örtsmör med citron och vitlök
+date: 2026-11-09
 description: Ett paket smör och de örter som håller på att vissna i kylen. Allt rörs ihop med citronskal och vitlök, rullas till en tjock rulle i bakplåtspapper och kyls. Skivorna ser ut som grönsprängd marmor och smälter till glänsande pölar över stekt fisk, kött, potatis och varmt bröd.
-image: assets/recipes/52-ortsmor.webp
-cardImage: assets/recipes/52-ortsmor-card.webp
+image: assets/recipes/52-ortsmor.png
+cardImage: assets/recipes/52-ortsmor.png
 alt: Rullat örtsmör med citron och vitlök
 categories: [sauce]
-tags: [Vegetarian, Gluten free, Condiment, Make ahead, Leftovers, Zero waste, Beginner friendly, Budget]
+tags:
+  [
+    Vegetarian,
+    Gluten free,
+    Condiment,
+    Make ahead,
+    Leftovers,
+    Zero waste,
+    Beginner friendly,
+    Budget,
+  ]
 time: 135
 timeLabel: 2 tim 15 min
 facts:

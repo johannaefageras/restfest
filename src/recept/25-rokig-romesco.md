@@ -1,8 +1,9 @@
 ---
 title: Rökig romesco på paprika, gammalt bröd och mandel
+date: 2026-11-09
 description: Två paprikor som börjat bli skrynkliga, en skiva gammalt bröd och en näve mandlar rostas och mixas med vitlök, rökt paprikapulver och vinäger. Det blir en tegelröd, sammetslen röra som toppas med olivolja och rostade mandelspån. Passar till grönsaker, potatis, fisk eller bara bröd.
-image: assets/recipes/25-rokig-romesco.webp
-cardImage: assets/recipes/25-rokig-romesco-card.webp
+image: assets/recipes/25-rokig-romesco.png
+cardImage: assets/recipes/25-rokig-romesco.png
 alt: Rökig romesco på paprika, gammalt bröd och mandel
 categories: [sauce]
 tags: [Vegan, Dip, Spanish, Make ahead, Leftovers, Budget]

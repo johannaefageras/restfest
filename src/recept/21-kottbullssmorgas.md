@@ -1,8 +1,9 @@
 ---
 title: Köttbullsmörgås med rödbetssallad och knaprig gurka
+date: 2026-11-09
 description: Överblivna köttbullar halveras och läggs på rågbröd med krämig, rosaröd rödbetssallad. Ovanpå kommer tunna band av saltgurka, rödlöksringar och persilja. Julbordsklassikern som en snygg delismörgås.
-image: assets/recipes/21-kottbullssmorgas.webp
-cardImage: assets/recipes/21-kottbullssmorgas-card.webp
+image: assets/recipes/21-kottbullssmorgas.png
+cardImage: assets/recipes/21-kottbullssmorgas.png
 alt: Köttbullsmörgås med rödbetssallad och knaprig gurka
 categories: [sandwich]
 tags: [Swedish, Lunch, Christmas, Leftovers, Beginner friendly, Budget]

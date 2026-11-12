@@ -1,8 +1,9 @@
 ---
 title: Glansande hårinpackning med banan, honung och olivolja
+date: 2026-11-09
 description: Den övermogna bananen som ingen ville äta mixas med honung och olivolja till en len, doftande inpackning. Den ger torrt och slitet hår mjukhet och glans. En lyxig söndagsritual för håret, för en bråkdel av vad en salongsbehandling kostar.
-image: assets/recipes/36-harinpackning.webp
-cardImage: assets/recipes/36-harinpackning-card.webp
+image: assets/recipes/36-harinpackning.png
+cardImage: assets/recipes/36-harinpackning.png
 alt: Glansande hårinpackning med banan, honung och olivolja
 categories: [spa]
 tags: [Hair, Natural, Leftovers, Zero waste, Beginner friendly, Budget]

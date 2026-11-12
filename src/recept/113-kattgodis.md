@@ -1,8 +1,9 @@
 ---
 title: Krispigt kattgodis med tonfisk
+date: 2026-11-09
 description: En burk tonfisk, ett ägg och lite mjöl mixas till en deg som skärs i små rutor och gräddas till krispiga, fiskdoftande godisbitar. Katten hör burken öppnas från andra sidan huset. Lika uppskattat av hundar, så hela hushållet blir nöjt.
-image: assets/recipes/113-kattgodis.webp
-cardImage: assets/recipes/113-kattgodis-card.webp
+image: assets/recipes/113-kattgodis.png
+cardImage: assets/recipes/113-kattgodis.png
 alt: Krispigt kattgodis med tonfisk
 categories: [pets]
 tags: [Treats, Dog, Cat, Make ahead, Beginner friendly, Budget]

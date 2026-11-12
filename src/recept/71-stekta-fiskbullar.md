@@ -1,8 +1,9 @@
 ---
 title: Stekta fiskbullar med ärtpuré, citronsmör och krasse
+date: 2026-11-09
 description: Den mest förlöjligade burken i skafferiet, en påse frysta ärter och en citron. Fiskbullarna halveras och steks gyllene och krispiga i smör, och läggs på en klargrön ärtpuré under ett blankt citronsmör med kapris och en tuss krasse. Ingen kommer att gissa att de kom ur en burk.
-image: assets/recipes/71-stekta-fiskbullar.webp
-cardImage: assets/recipes/71-stekta-fiskbullar-card.webp
+image: assets/recipes/71-stekta-fiskbullar.png
+cardImage: assets/recipes/71-stekta-fiskbullar.png
 alt: Stekta fiskbullar med ärtpuré, citronsmör och krasse
 categories: [main]
 tags: [Pescatarian, Swedish, Family friendly, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 30 min
 facts:
   Förberedelse: 10 min
   Tillagning: 20 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [fiskbullar, arter, citron]
 ingredients:

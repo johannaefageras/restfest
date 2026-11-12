@@ -1,17 +1,28 @@
 ---
 title: Kaffegranita på morgonens kaffe med vispad grädde
+date: 2026-11-09
 description: Kaffet som blev kvar i bryggaren, lite socker och en form i frysen. Kaffet skrapas med en gaffel var halvtimme tills det blir glittrande, mörka iskristaller, som serveras i kalla glas under ett moln av lättvispad grädde och riven choklad. Den sicilianska klassikern, gjord på kaffe som annars hamnar i vasken.
-image: assets/recipes/75-kaffegranita.webp
-cardImage: assets/recipes/75-kaffegranita-card.webp
+image: assets/recipes/75-kaffegranita.png
+cardImage: assets/recipes/75-kaffegranita.png
 alt: Kaffegranita på morgonens kaffe med vispad grädde
 categories: [dessert]
-tags: [Vegetarian, Gluten free, Italian, Make ahead, Leftovers, Zero waste, Beginner friendly, Budget]
+tags:
+  [
+    Vegetarian,
+    Gluten free,
+    Italian,
+    Make ahead,
+    Leftovers,
+    Zero waste,
+    Beginner friendly,
+    Budget,
+  ]
 time: 250
 timeLabel: 3 tim 10 min–4 tim 10 min
 facts:
   Förberedelse: 10 min + 3–4 tim i frysen
   Tillagning: 0 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: []
 ingredients:

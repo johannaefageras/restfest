@@ -1,11 +1,22 @@
 ---
 title: Rökig tacokrydda i burk
+date: 2026-11-09
 description: Paprika, spiskummin, chili och oregano ur kryddhyllan blandas till en rökig, djupröd tacokrydda utan tillsatser, i en glasburk som räcker till många fredagar. Den smakar mer och saltar mindre än påsarna, och du bestämmer själv hur het den blir. I randiga lager i en hög burk blir den dessutom en fin present.
-image: assets/recipes/94-tacokrydda.webp
-cardImage: assets/recipes/94-tacokrydda-card.webp
+image: assets/recipes/94-tacokrydda.png
+cardImage: assets/recipes/94-tacokrydda.png
 alt: Rökig tacokrydda i burk
 categories: [basics]
-tags: [Vegan, Gluten free, Spice blend, Mexican, Make ahead, Gift, Beginner friendly, Budget]
+tags:
+  [
+    Vegan,
+    Gluten free,
+    Spice blend,
+    Mexican,
+    Make ahead,
+    Gift,
+    Beginner friendly,
+    Budget,
+  ]
 time: 10
 timeLabel: 10 min
 facts:

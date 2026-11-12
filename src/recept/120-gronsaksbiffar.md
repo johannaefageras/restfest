@@ -1,11 +1,13 @@
 ---
 title: Grönsaksbiffar på rotfruktsrester med tzatziki
+date: 2026-11-09
 description: De sista morötterna, en bit palsternacka och rotselleri som ingen visste vad de skulle göra med rivs och blandas med fetaost, ägg och havre. Biffarna steks krispiga och gyllene med färgglada strimlor i snittet och serveras med kall, frisk tzatziki. Grönsakslådans sista dagar som en färgsprakande middag.
-image: assets/recipes/120-gronsaksbiffar.webp
-cardImage: assets/recipes/120-gronsaksbiffar-card.webp
+image: assets/recipes/120-gronsaksbiffar.png
+cardImage: assets/recipes/120-gronsaksbiffar.png
 alt: Grönsaksbiffar på rotfruktsrester med tzatziki
 categories: [main]
-tags: [Vegetarian, Family friendly, Meal prep, Leftovers, Beginner friendly, Budget]
+tags:
+  [Vegetarian, Family friendly, Meal prep, Leftovers, Beginner friendly, Budget]
 time: 45
 timeLabel: 45 min
 facts:

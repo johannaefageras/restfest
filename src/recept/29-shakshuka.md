@@ -1,11 +1,13 @@
 ---
 title: Shakshuka med fetaost och örter
+date: 2026-11-09
 description: En burk krossade tomater, en lök och några ägg. Äggen sjuder i en kryddig, djupröd tomatsås tills vitan har stelnat och gulan är krämig. Toppas med smulad fetaost och gröna örter och serveras direkt i pannan, med bröd att doppa.
-image: assets/recipes/29-shakshuka.webp
-cardImage: assets/recipes/29-shakshuka-card.webp
+image: assets/recipes/29-shakshuka.png
+cardImage: assets/recipes/29-shakshuka.png
 alt: Shakshuka med fetaost och örter
 categories: [main, breakfast]
-tags: [Vegetarian, Gluten free, Middle Eastern, One pot, Beginner friendly, Budget]
+tags:
+  [Vegetarian, Gluten free, Middle Eastern, One pot, Beginner friendly, Budget]
 time: 30
 timeLabel: 30 min
 facts:

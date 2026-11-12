@@ -1,8 +1,9 @@
 ---
 title: Krispig waldorfsallad med äpple, selleri och glaserade valnötter
+date: 2026-11-09
 description: Ett par äpplen, några stjälkar blekselleri och en näve valnötter. Allt vänds i en lätt, citronfrisk dressing på yoghurt och majonnäs och serveras i små skålar av smörsallad, toppat med glänsande glaserade valnötter och druvor. En hotellklassiker från 1890-talets New York, lika snygg på julbordet som till en vardagslunch.
-image: assets/recipes/42-waldorfsallad.webp
-cardImage: assets/recipes/42-waldorfsallad-card.webp
+image: assets/recipes/42-waldorfsallad.png
+cardImage: assets/recipes/42-waldorfsallad.png
 alt: Krispig waldorfsallad med äpple, selleri och glaserade valnötter
 categories: [salad, side]
 tags: [Vegetarian, Gluten free, American, Christmas, Beginner friendly, Budget]

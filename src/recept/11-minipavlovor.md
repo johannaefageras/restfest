@@ -1,8 +1,9 @@
 ---
 title: Minipavlovor med citronkvarg och blåbär
+date: 2026-11-09
 description: Några överblivna äggvitor, socker, en burk kvarg och frysta blåbär. Det blir krispiga små moln som är sega inuti, fyllda med syrlig citronkvarg och glänsande blåbärskompott. Perfekt efter rödbetspytten, som lämnar exakt fyra äggvitor över.
-image: assets/recipes/11-minipavlovor.webp
-cardImage: assets/recipes/11-minipavlovor-card.webp
+image: assets/recipes/11-minipavlovor.png
+cardImage: assets/recipes/11-minipavlovor.png
 alt: Minipavlovor med citronkvarg och blåbär
 categories: [dessert]
 tags: [Vegetarian, Gluten free, Make ahead, Leftovers, Budget]

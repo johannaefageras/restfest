@@ -1,8 +1,9 @@
 ---
 title: Pasta aglio e olio med citronpangrattato
+date: 2026-11-09
 description: Spagetti, vitlök, olivolja och en skiva gammalt bröd. Brödet rostas till gyllene, krispiga smulor med citronskal och chili och strös över blank, vitlöksdoftande pasta. Italiensk nattmat på 20 minuter.
-image: assets/recipes/28-pasta-aglio-e-olio.webp
-cardImage: assets/recipes/28-pasta-aglio-e-olio-card.webp
+image: assets/recipes/28-pasta-aglio-e-olio.png
+cardImage: assets/recipes/28-pasta-aglio-e-olio.png
 alt: Pasta aglio e olio med citronpangrattato
 categories: [main]
 tags: [Vegan, Italian, Leftovers, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 20 min
 facts:
   Förberedelse: 5 min
   Tillagning: 15 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [pasta, brod, vitlok, citron, olja]
 ingredients:

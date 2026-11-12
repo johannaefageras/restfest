@@ -1,11 +1,21 @@
 ---
 title: Chokladbollar i tre dräkter med kokos, pärlsocker och rostad mandel
-description: 'Havregryn, kakao, smör och en skvätt av morgonens kaffe. Barnens favoritfika rullas till perfekt runda kulor och klär sig i tre olika dräkter: snövit kokos, glittrande pärlsocker och gyllene rostad mandel. I små pappersformar, uppradade i en ask, ser de ut som pralinerna i en chokladbutik.'
-image: assets/recipes/47-chokladbollar.webp
-cardImage: assets/recipes/47-chokladbollar-card.webp
+date: 2026-11-09
+description: "Havregryn, kakao, smör och en skvätt av morgonens kaffe. Barnens favoritfika rullas till perfekt runda kulor och klär sig i tre olika dräkter: snövit kokos, glittrande pärlsocker och gyllene rostad mandel. I små pappersformar, uppradade i en ask, ser de ut som pralinerna i en chokladbutik."
+image: assets/recipes/47-chokladbollar.png
+cardImage: assets/recipes/47-chokladbollar.png
 alt: Chokladbollar i tre dräkter med kokos, pärlsocker och rostad mandel
 categories: [baking]
-tags: [Vegetarian, Swedish, Family friendly, No bake, Gift, Beginner friendly, Budget]
+tags:
+  [
+    Vegetarian,
+    Swedish,
+    Family friendly,
+    No bake,
+    Gift,
+    Beginner friendly,
+    Budget,
+  ]
 time: 55
 timeLabel: 55 min
 facts:

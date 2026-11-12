@@ -1,8 +1,9 @@
 ---
 title: Svalkande ögonkuddar av använda gröntepåsar och gurka
+date: 2026-11-09
 description: Två använda tepåsar med grönt te och en bit gurka. Tepåsarna kyls i frysen och läggs över ögonlocken tillsammans med tunna gurkskivor, medan du vilar under en kall, fuktig tvättlapp. Tio minuter som får trötta ögon att kännas svalare och piggare, gjorda av det som annars hamnar i soporna.
-image: assets/recipes/76-svalkande-ogonkuddar.webp
-cardImage: assets/recipes/76-svalkande-ogonkuddar-card.webp
+image: assets/recipes/76-svalkande-ogonkuddar.png
+cardImage: assets/recipes/76-svalkande-ogonkuddar.png
 alt: Svalkande ögonkuddar av använda gröntepåsar och gurka
 categories: [spa]
 tags: [Eyes, Soothing, Leftovers, Zero waste, Beginner friendly, Budget]
@@ -13,13 +14,14 @@ facts:
   Verkningstid: 10 min
   Räcker till: 1 behandling
   Nivå: Nybörjare
-beforeYouStart: 'Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn.'
+beforeYouStart: "Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn."
 pantryKeys: []
 ingredients:
   - name: 2 använda tepåsar med grönt eller svart te
   - name: ¼ gurka, kall från kylen
     key: gurka
   - name: 1 tvättlapp eller liten handduk
+    tool: true
   - name: Kallt vatten
     basic: true
 ---

@@ -1,11 +1,22 @@
 ---
 title: Rosa inlagda ägg i rödbetslag
+date: 2026-11-09
 description: Lagen som blev kvar i rödbetsburken och ett halvdussin ägg. Äggen får ligga i den söta, syrliga lagen i kylen tills vitan blivit klart cerise, och när de delas syns en rosa ring runt den gyllene gulan. Lika vackra på påskbordet som på julbordet, och ett perfekt sätt att ta vara på lagen.
-image: assets/recipes/90-rodbetsagg.webp
-cardImage: assets/recipes/90-rodbetsagg-card.webp
+image: assets/recipes/90-rodbetsagg.png
+cardImage: assets/recipes/90-rodbetsagg.png
 alt: Rosa inlagda ägg i rödbetslag
 categories: [preserves, party]
-tags: [Vegetarian, Dairy free, Gluten free, Pickles, Leftovers, Zero waste, Beginner friendly, Budget]
+tags:
+  [
+    Vegetarian,
+    Dairy free,
+    Gluten free,
+    Pickles,
+    Leftovers,
+    Zero waste,
+    Beginner friendly,
+    Budget,
+  ]
 timeLabel: 20 min + 1–3 dygn
 facts:
   Förberedelse: 10 min + 1–3 dygn i kylen

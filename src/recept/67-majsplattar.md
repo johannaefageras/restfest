@@ -1,8 +1,9 @@
 ---
 title: Krispiga majsplättar med limecrème och koriander
+date: 2026-11-09
 description: En burk majs, två ägg och lite mjöl. Smeten steks till små gyllene plättar, så fulla av majskorn att de knastrar i pannan, och toppas med syrlig limecrème, koriander, salladslök och färsk chili. Lika bra till brunch som till mingel eller en lätt vardagsmiddag.
-image: assets/recipes/67-majsplattar.webp
-cardImage: assets/recipes/67-majsplattar-card.webp
+image: assets/recipes/67-majsplattar.png
+cardImage: assets/recipes/67-majsplattar.png
 alt: Krispiga majsplättar med limecrème och koriander
 categories: [main, party, breakfast]
 tags: [Vegetarian, Family friendly, Beginner friendly, Budget]

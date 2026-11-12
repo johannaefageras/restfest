@@ -1,8 +1,9 @@
 ---
 title: Tassbalsam med kokosolja och bivax
+date: 2026-11-09
 description: En sked kokosolja, lite olivolja och några bivaxpastiller smälts ihop till en mjuk, gyllene balsam för torra trampdynor. Den skyddar tassarna mot is, grus och vägsalt på vinterpromenaderna och masseras in på några sekunder. Helt utan parfym, och ofarlig om hunden slickar lite.
-image: assets/recipes/114-tassbalsam.webp
-cardImage: assets/recipes/114-tassbalsam-card.webp
+image: assets/recipes/114-tassbalsam.png
+cardImage: assets/recipes/114-tassbalsam.png
 alt: Tassbalsam med kokosolja och bivax
 categories: [pets]
 tags: [Dog, Cat, Paws, Winter, Natural, Gift, Beginner friendly, Budget]

@@ -1,8 +1,9 @@
 ---
 title: Glöggpocherade päron med pepparkakssmul och vaniljglass
+date: 2026-11-09
 description: Den halva flaskan glögg som blev över, fyra päron och några pepparkakor ur burken. Päronen sjuder i glöggen tills de är mjuka och djupt vinröda, och glöggen kokas ihop till en blank, kryddig sirap. De serveras stående, med krossade pepparkakor och en kula vaniljglass. Juldessert från en finkrog, för nästan ingenting.
-image: assets/recipes/64-gloggpocherade-paron.webp
-cardImage: assets/recipes/64-gloggpocherade-paron-card.webp
+image: assets/recipes/64-gloggpocherade-paron.png
+cardImage: assets/recipes/64-gloggpocherade-paron.png
 alt: Glöggpocherade päron med pepparkakssmul och vaniljglass
 categories: [dessert]
 tags: [Vegetarian, Christmas, Make ahead, Leftovers, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 50 min
 facts:
   Förberedelse: 10 min
   Tillagning: 40 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: []
 ingredients:

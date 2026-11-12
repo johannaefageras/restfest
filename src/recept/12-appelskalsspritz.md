@@ -1,8 +1,9 @@
 ---
 title: Äppelskalsspritz med rosmarin
+date: 2026-11-09
 description: Skal och kärnhus från äpplen, som annars hamnar i komposten, kokas till en gyllene sirap med kanel och en skvätt äppelcidervinäger. Sirapen toppas med iskallt kolsyrat vatten, tunna äppelskivor och en kvist rosmarin. Bubblig, klar och vacker som champagne, helt utan alkohol.
-image: assets/recipes/12-appelskalsspritz.webp
-cardImage: assets/recipes/12-appelskalsspritz-card.webp
+image: assets/recipes/12-appelskalsspritz.png
+cardImage: assets/recipes/12-appelskalsspritz.png
 alt: Äppelskalsspritz med rosmarin
 categories: [drink]
 tags: [Vegan, Gluten free, Alcohol free, Leftovers, Zero waste, Budget]

@@ -1,8 +1,9 @@
 ---
 title: Mjölk- och honungsbad med apelsinskal
+date: 2026-11-09
 description: En liter mjölk, några skedar honung och skalen från fruktskålens apelsiner. Allt rörs ut i ett varmt bad, där mjölken gör vattnet silkeslent och skalen flyter som små gyllene båtar. Kleopatras berömda mjölkbad, gjort på vanliga varor ur kylskåpet.
-image: assets/recipes/80-mjolk-och-honungsbad.webp
-cardImage: assets/recipes/80-mjolk-och-honungsbad-card.webp
+image: assets/recipes/80-mjolk-och-honungsbad.png
+cardImage: assets/recipes/80-mjolk-och-honungsbad.png
 alt: Mjölk- och honungsbad med apelsinskal
 categories: [spa]
 tags: [Body, Bath, Relaxing, Natural, Leftovers, Beginner friendly, Budget]
@@ -13,7 +14,7 @@ facts:
   Verkningstid: 15–20 min
   Räcker till: 1 bad
   Nivå: Nybörjare
-beforeYouStart: 'Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn.'
+beforeYouStart: "Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn."
 pantryKeys: []
 ingredients:
   - name: 1 liter mjölk, gärna standardmjölk

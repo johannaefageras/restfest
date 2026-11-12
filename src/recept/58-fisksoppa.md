@@ -1,8 +1,9 @@
 ---
 title: Krämig fisksoppa med dill, citron och aioli
+date: 2026-11-09
 description: Ett paket fryst vit fisk, en burk krossade tomater och en morot. Fisken sjuder i en krämig, korallröd buljong med dill och citron, tills den delar sig i saftiga flak. Till soppan serveras rostat bröd med en rejäl klick vitlöksaioli. Ser ut som fiskgrytan på en hamnkrog, men är klar på en halvtimme.
-image: assets/recipes/58-fisksoppa.webp
-cardImage: assets/recipes/58-fisksoppa-card.webp
+image: assets/recipes/58-fisksoppa.png
+cardImage: assets/recipes/58-fisksoppa.png
 alt: Krämig fisksoppa med dill, citron och aioli
 categories: [soup]
 tags: [Pescatarian, Swedish, One pot, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 40 min
 facts:
   Förberedelse: 15 min
   Tillagning: 25 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [vit-fisk, purjolok, kross, matlagningsgradde]
 ingredients:

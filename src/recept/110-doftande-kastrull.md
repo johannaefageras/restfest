@@ -1,11 +1,21 @@
 ---
 title: Doftande kastrull med apelsinskal, kanel och nejlika
+date: 2026-11-09
 description: Apelsinskal, ett par kanelstänger och några nejlikor ur kryddhyllan sjuder i en kastrull vatten på spisen. På några minuter doftar hela hemmet som ett julbord, utan doftljus eller sprayer. Det billigaste och vackraste sättet att få hemmet att kännas varmt en mörk vinterkväll.
-image: assets/recipes/110-doftande-kastrull.webp
-cardImage: assets/recipes/110-doftande-kastrull-card.webp
+image: assets/recipes/110-doftande-kastrull.png
+cardImage: assets/recipes/110-doftande-kastrull.png
 alt: Doftande kastrull med apelsinskal, kanel och nejlika
 categories: [household]
-tags: [Home fragrance, Christmas, Natural, Leftovers, Zero waste, Beginner friendly, Budget]
+tags:
+  [
+    Home fragrance,
+    Christmas,
+    Natural,
+    Leftovers,
+    Zero waste,
+    Beginner friendly,
+    Budget,
+  ]
 timeLabel: 5 min förberedelse
 facts:
   Förberedelse: 5 min

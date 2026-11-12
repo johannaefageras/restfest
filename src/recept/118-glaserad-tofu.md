@@ -1,8 +1,9 @@
 ---
 title: Glaserad ugnstofu med broccoli, ris och sesam
+date: 2026-11-09
 description: Ett paket tofu, ett broccolihuvud och en påse ris. Tofun vänds i lite majsstärkelse och rostas krispig i ugnen, och vänds sedan i en blank, söt och salt glasyr av soja, sirap, vitlök och ingefära. Med rostad broccoli, sesamfrön och salladslök ser den ut som från en asiatisk restaurang och tar fyrtio minuter.
-image: assets/recipes/118-glaserad-tofu.webp
-cardImage: assets/recipes/118-glaserad-tofu-card.webp
+image: assets/recipes/118-glaserad-tofu.png
+cardImage: assets/recipes/118-glaserad-tofu.png
 alt: Glaserad ugnstofu med broccoli, ris och sesam
 categories: [main]
 tags: [Vegan, Asian, Family friendly, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 50 min
 facts:
   Förberedelse: 20 min
   Tillagning: 30 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [tofu, broccoli, ris, soja]
 ingredients:
@@ -26,7 +27,7 @@ ingredients:
         basic: true
   - title: Glasyr
     items:
-      - name: 'Allroundmarinaden i recept 95, gjord med sirap, eller:'
+      - name: "Allroundmarinaden i recept 95, gjord med sirap, eller:"
         note: true
       - name: 3 msk japansk soja
         key: soja

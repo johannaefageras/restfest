@@ -1,0 +1,16 @@
+# Supabase CLI settings for Restfest's AI features. Setup and deploy steps: HANDOFF.md, "Kylfoto och nya recept".
+project_id = "restfest"
+
+# The functions are public: visitors call them without signing in, and the daily caps in
+# _shared/limits.ts stand in for a login. The platform's JWT check would turn them away.
+[functions.detect-ingredients]
+verify_jwt = false
+
+[functions.generate-recipe]
+verify_jwt = false
+
+[functions.recipe-image]
+verify_jwt = false
+
+[functions.get-recipe]
+verify_jwt = false

@@ -1,11 +1,22 @@
 ---
 title: Allrengöringsspray på citrusskal och ättika
+date: 2026-11-09
 description: Skalen från veckans apelsiner och citroner får dra i en burk ättika tills vätskan blir gyllene och doftar citrus i stället för vinäger. Utspädd i en sprayflaska blir den en allrengöring som får kakel, kranar och glas att blänka. Det du brukar slänga blir det du städar med.
-image: assets/recipes/106-allrengoringsspray.webp
-cardImage: assets/recipes/106-allrengoringsspray-card.webp
+image: assets/recipes/106-allrengoringsspray.png
+cardImage: assets/recipes/106-allrengoringsspray.png
 alt: Allrengöringsspray på citrusskal och ättika
 categories: [household]
-tags: [Cleaning, Kitchen, Bathroom, Natural, Leftovers, Zero waste, Beginner friendly, Budget]
+tags:
+  [
+    Cleaning,
+    Kitchen,
+    Bathroom,
+    Natural,
+    Leftovers,
+    Zero waste,
+    Beginner friendly,
+    Budget,
+  ]
 timeLabel: 11 min + 1–2 veckor
 facts:
   Förberedelse: 10 min + 1–2 veckors dragtid

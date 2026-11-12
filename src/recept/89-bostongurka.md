@@ -1,8 +1,9 @@
 ---
 title: Bostongurka på slokiga gurkor och paprika
+date: 2026-11-09
 description: Gurkorna som börjat slokna i grönsakslådan, en röd paprika och två lökar. Allt finhackas, saltas och kokas i en söt och syrlig lag med senapsfrön och gurkmeja till en lysande gul, krispig relish. Korvkioskens klassiker, betydligt godare hemmagjord.
-image: assets/recipes/89-bostongurka.webp
-cardImage: assets/recipes/89-bostongurka-card.webp
+image: assets/recipes/89-bostongurka.png
+cardImage: assets/recipes/89-bostongurka.png
 alt: Bostongurka på slokiga gurkor och paprika
 categories: [preserves]
 tags: [Vegan, Gluten free, Pickles, Swedish, Make ahead, Leftovers, Budget]

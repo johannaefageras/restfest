@@ -1,0 +1,12 @@
+---js
+// One page per food category, e.g. kategori/soppor.html
+// The pages come from collections.recipeCategories (eleventy.config.js, lib/recipes.js); the layout is _includes/layouts/listing.njk.
+const layout = 'layouts/listing.njk';
+const base = '../';
+const pagination = {data: 'collections.recipeCategories', size: 1, alias: 'listing'};
+const permalink = data => data.listing.path;
+const eleventyComputed = {
+  title: data => `${data.listing.label} · Restfest`,
+  description: data => data.listing.description
+};
+---

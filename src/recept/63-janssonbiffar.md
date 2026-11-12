@@ -1,11 +1,21 @@
 ---
 title: Krispiga janssonbiffar med rödbetssallad och dill
+date: 2026-11-09
 description: Resterna av Janssons frestelse, ett ägg och lite ströbröd. Den kalla gratängen formas till runda biffar, vänds i ströbröd och steks i smör tills de är krispiga och gyllene utanpå och krämiga inuti. De serveras med julbordets rödbetssallad, rödlök och dill. Julens mest omtyckta rätt, ännu godare dagen efter.
-image: assets/recipes/63-janssonbiffar.webp
-cardImage: assets/recipes/63-janssonbiffar-card.webp
+image: assets/recipes/63-janssonbiffar.png
+cardImage: assets/recipes/63-janssonbiffar.png
 alt: Krispiga janssonbiffar med rödbetssallad och dill
 categories: [main]
-tags: [Pescatarian, Swedish, Christmas, Comfort food, Leftovers, Beginner friendly, Budget]
+tags:
+  [
+    Pescatarian,
+    Swedish,
+    Christmas,
+    Comfort food,
+    Leftovers,
+    Beginner friendly,
+    Budget,
+  ]
 time: 60
 timeLabel: 1 tim
 facts:

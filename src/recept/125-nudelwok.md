@@ -1,8 +1,9 @@
 ---
 title: Nudelwok med krämig jordnötssås och grönsaker
+date: 2026-11-09
 description: Ett paket nudlar, en burk jordnötssmör och grönsakslådans morot, paprika och kål. Grönsakerna wokas krispiga på hög värme och vänds med nudlarna i en len, söt och salt jordnötssås med lime och ingefära. Toppa med rostade jordnötter och koriander. Klart på en kvart, och godare än hämtmaten.
-image: assets/recipes/125-nudelwok.webp
-cardImage: assets/recipes/125-nudelwok-card.webp
+image: assets/recipes/125-nudelwok.png
+cardImage: assets/recipes/125-nudelwok.png
 alt: Nudelwok med krämig jordnötssås och grönsaker
 categories: [main]
 tags: [Vegan, Asian, Family friendly, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 25 min
 facts:
   Förberedelse: 15 min
   Tillagning: 10 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [nudlar, jordnotssmor, kal, morot, paprika]
 ingredients:

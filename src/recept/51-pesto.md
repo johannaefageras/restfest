@@ -1,8 +1,9 @@
 ---
 title: Grön pesto på broccolistjälk, persilja och solrosfrön
+date: 2026-11-09
 description: Broccolistjälken, som oftast hamnar i soporna, en halvslokig kruka persilja och en näve solrosfrön mixas till en klargrön, len pesto med citron och vitlök. Den lyser i burken och smakar som basilikapesto, för en bråkdel av priset. Ringla den över pasta, soppa eller rostade grönsaker.
-image: assets/recipes/51-pesto.webp
-cardImage: assets/recipes/51-pesto-card.webp
+image: assets/recipes/51-pesto.png
+cardImage: assets/recipes/51-pesto.png
 alt: Grön pesto på broccolistjälk, persilja och solrosfrön
 categories: [sauce]
 tags: [Vegan, Gluten free, Leftovers, Zero waste, Beginner friendly, Budget]

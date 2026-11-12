@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -o -E '\\(^|\\\\}\\)a\\(:[a-z-]+\\)?\\\\{[^}]*\\\\}|[ ,]a\\\\{[^}]*\\\\}' src/styles.css)",
+      "Bash(grep -n -E '^a[ ,{:]|^a$' src/kitchen.css)"
+    ]
+  }
+}

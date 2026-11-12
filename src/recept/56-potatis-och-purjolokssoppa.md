@@ -1,8 +1,9 @@
 ---
 title: Potatis- och purjolökssoppa med krispiga potatisskal
+date: 2026-11-09
 description: Några potatisar, en purjolök och skalen du annars slänger. Soppan mixas sammetslen och blek som grädde, och skalen rostas i ugnen till gyllene chips som läggs i en hög mitt i skålen, med gräslök och olivolja runt om. Fransk vardagssoppa som ser ut som förrätten på en brasserie, helt vegansk och utan svinn.
-image: assets/recipes/56-potatis-och-purjolokssoppa.webp
-cardImage: assets/recipes/56-potatis-och-purjolokssoppa-card.webp
+image: assets/recipes/56-potatis-och-purjolokssoppa.png
+cardImage: assets/recipes/56-potatis-och-purjolokssoppa.png
 alt: Potatis- och purjolökssoppa med krispiga potatisskal
 categories: [soup]
 tags: [Vegan, French, Leftovers, Zero waste, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 50 min
 facts:
   Förberedelse: 15 min
   Tillagning: 35 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [potatis, purjolok, lok, havregradde]
 ingredients:

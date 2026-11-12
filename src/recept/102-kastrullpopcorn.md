@@ -1,8 +1,9 @@
 ---
 title: Kastrullpopcorn med smör, flingsalt och rökt paprika
+date: 2026-11-09
 description: En påse popcornmajs, en klick smör och kryddhyllans rökta paprika. Majskornen poppas i kastrull på fem minuter och vänds i smält smör och flingsalt till stora, frasiga popcorn som slår allt i mikropåse. Fredagens självklara mellanmål, i en stor skål mitt i soffan.
-image: assets/recipes/102-kastrullpopcorn.webp
-cardImage: assets/recipes/102-kastrullpopcorn-card.webp
+image: assets/recipes/102-kastrullpopcorn.png
+cardImage: assets/recipes/102-kastrullpopcorn.png
 alt: Kastrullpopcorn med smör, flingsalt och rökt paprika
 categories: [snack, party]
 tags: [Vegetarian, Gluten free, Family friendly, Beginner friendly, Budget]

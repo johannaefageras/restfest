@@ -1,8 +1,9 @@
 ---
 title: Krispiga kikärtor med rökt paprika, lime och flingsalt
+date: 2026-11-09
 description: En burk kikärtor, gärna de som blev över efter chokladmoussen i recept 9. De rostas i ugnen tills de är krispiga hela vägen igenom och vänds i rökt paprika, spiskummin, limeskal och flingsalt. Servera dem i små skålar till drinken, de tar slut fortare än chipsen.
-image: assets/recipes/53-krispiga-kikartor.webp
-cardImage: assets/recipes/53-krispiga-kikartor-card.webp
+image: assets/recipes/53-krispiga-kikartor.png
+cardImage: assets/recipes/53-krispiga-kikartor.png
 alt: Krispiga kikärtor med rökt paprika, lime och flingsalt
 categories: [party]
 tags: [Vegan, Gluten free, Leftovers, Beginner friendly, Budget]

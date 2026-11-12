@@ -1,8 +1,9 @@
 ---
 title: Rödbetspytt i torn med gyllene äggula
+date: 2026-11-09
 description: Gårdagens kokta potatis, en burk inlagda rödbetor och en gul lök blir ett rubinrött torn med krispiga kanter. Överst vilar en lysande äggula som smälter ner i pytten när du skär i den. Pyttipanna i finkläder, perfekt till en långsam helgbrunch.
-image: assets/recipes/01-rodbetspytt.webp
-cardImage: assets/recipes/01-rodbetspytt-card.webp
+image: assets/recipes/01-rodbetspytt.png
+cardImage: assets/recipes/01-rodbetspytt.png
 alt: Rödbetspytt i torn med gyllene äggula
 categories: [main, breakfast]
 tags: [Vegetarian, Gluten free, Swedish, Leftovers, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 35 min
 facts:
   Förberedelse: 15 min
   Tillagning: 20 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [potatis, lok, rodbetor, agg]
 ingredients:

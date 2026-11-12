@@ -9,7 +9,7 @@
             <button class="favorite" data-save="{{ card.id }}" aria-label="Spara {{ card.title }}" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i></button>
           </div>
           <div class="archive-card-body">
-            <p class="archive-meal-type"><img src="{{ base }}assets/icons/square/{{ card.mealIcon }}.webp" alt="" width="20" height="20">{{ card.mealName }}</p>
+            <p class="archive-meal-type"><img src="{{ base }}assets/icons/{{ card.mealIcon }}.svg" alt="" width="20" height="20">{{ card.mealName }}</p>
             <h3><a class="recipe-main-link" href="{{ base }}recept/{{ card.id }}.html" data-open="{{ card.id }}">{{ card.title }}</a></h3>
             <p class="archive-description">{{ card.description }}</p>
             <div class="ingredient-chips">{% for chip in card.chips %}<span>{{ chip }}</span>{% endfor %}</div>

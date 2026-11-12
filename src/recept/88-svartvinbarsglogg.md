@@ -1,11 +1,22 @@
 ---
 title: Glöggsaft på frysta svartvinbär
+date: 2026-11-09
 description: En påse frysta svartvinbär och kryddhyllans kanel, nejlika, kardemumma och ingefära kokas till en djupt mörkröd, kryddig saft som doftar jul. Späd den med hett vatten och servera med russin och mandel, så har du alkoholfri glögg på en minut. I en vacker flaska blir den adventstidens finaste värdinnepresent.
-image: assets/recipes/88-svartvinbarsglogg.webp
-cardImage: assets/recipes/88-svartvinbarsglogg-card.webp
+image: assets/recipes/88-svartvinbarsglogg.png
+cardImage: assets/recipes/88-svartvinbarsglogg.png
 alt: Glöggsaft på frysta svartvinbär
 categories: [preserves, drink]
-tags: [Vegan, Gluten free, Cordial, Alcohol free, Christmas, Make ahead, Gift, Budget]
+tags:
+  [
+    Vegan,
+    Gluten free,
+    Cordial,
+    Alcohol free,
+    Christmas,
+    Make ahead,
+    Gift,
+    Budget,
+  ]
 time: 60
 timeLabel: 1 tim
 facts:

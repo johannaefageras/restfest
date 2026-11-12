@@ -1,11 +1,21 @@
 ---
 title: Glaserad köttfärslimpa med gräddsås och pressgurka
+date: 2026-11-09
 description: Ett paket köttfärs, en lök och lite ströbröd. Limpan bakas saftig i ugnen och glaseras med en blank, mörkröd glasyr av tomatpuré, sirap och senap, som karamelliseras i kanterna. Den skivas tjockt och serveras med gräddsås, potatis och pressgurka. Klassisk svensk söndagsmiddag, med en glasyr som får den att glänsa på bordet.
-image: assets/recipes/72-kottfarslimpa.webp
-cardImage: assets/recipes/72-kottfarslimpa-card.webp
+image: assets/recipes/72-kottfarslimpa.png
+cardImage: assets/recipes/72-kottfarslimpa.png
 alt: Glaserad köttfärslimpa med gräddsås och pressgurka
 categories: [main]
-tags: [Swedish, Sunday dinner, Comfort food, Family friendly, Make ahead, Beginner friendly, Budget]
+tags:
+  [
+    Swedish,
+    Sunday dinner,
+    Comfort food,
+    Family friendly,
+    Make ahead,
+    Beginner friendly,
+    Budget,
+  ]
 time: 70
 timeLabel: 1 tim 10 min
 facts:

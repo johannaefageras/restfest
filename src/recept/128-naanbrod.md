@@ -1,8 +1,9 @@
 ---
 title: Snabba naanbröd i stekpanna med vitlökssmör
+date: 2026-11-09
 description: Mjöl, en burk yoghurt och lite bakpulver blir en mjuk deg som kavlas tunt och gräddas i en het, torr stekpanna. Bröden blåser upp med stora bubblor och svedda fläckar, och penslas med smält vitlökssmör och färska örter. Ingen jäsning, ingen ugn, klart på en halvtimme.
-image: assets/recipes/128-naanbrod.webp
-cardImage: assets/recipes/128-naanbrod-card.webp
+image: assets/recipes/128-naanbrod.png
+cardImage: assets/recipes/128-naanbrod.png
 alt: Snabba naanbröd i stekpanna med vitlökssmör
 categories: [bread, baking, side]
 tags: [Vegetarian, Indian, Family friendly, Beginner friendly, Budget]

@@ -1,17 +1,19 @@
 ---
 title: Krämig kokoscurry med sötpotatis och spenat
+date: 2026-11-09
 description: Två sötpotatisar, en burk kokosmjölk och en påse spenat puttrar ihop med curry, ingefära och vitlök till en solgul, krämig gryta. Sötpotatisen blir mjuk som smör, och spenaten vänds ner sist så att den behåller sin klargröna färg. Toppa med koriander och rostade nötter, och servera med ris. Allt i en kastrull.
-image: assets/recipes/117-kokoscurry.webp
-cardImage: assets/recipes/117-kokoscurry-card.webp
+image: assets/recipes/117-kokoscurry.png
+cardImage: assets/recipes/117-kokoscurry.png
 alt: Krämig kokoscurry med sötpotatis och spenat
 categories: [main]
-tags: [Vegan, Gluten free, Indian, One pot, Meal prep, Beginner friendly, Budget]
+tags:
+  [Vegan, Gluten free, Indian, One pot, Meal prep, Beginner friendly, Budget]
 time: 40
 timeLabel: 40 min
 facts:
   Förberedelse: 15 min
   Tillagning: 25 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [sotpotatis, spenat, kokosmjolk, kross]
 ingredients:

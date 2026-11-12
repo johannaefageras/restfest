@@ -1,8 +1,9 @@
 ---
 title: Värmande fotbad med salt, rosmarin och timjan
+date: 2026-11-09
 description: Grovt salt, några kvistar rosmarin och timjan och en näve havregryn i en balja med varmt vatten. Örterna flyter i vattnet och doften fyller badrummet. En stunds lyx efter en lång dag på kalla novembergator.
-image: assets/recipes/35-fotbad.webp
-cardImage: assets/recipes/35-fotbad-card.webp
+image: assets/recipes/35-fotbad.png
+cardImage: assets/recipes/35-fotbad.png
 alt: Värmande fotbad med salt, rosmarin och timjan
 categories: [spa]
 tags: [Feet, Autumn, Relaxing, Natural, Beginner friendly, Budget]
@@ -26,6 +27,7 @@ ingredients:
   - name: ½ dl havregryn
     key: havre
   - name: 1 tunn tygpåse, en ren nylonstrumpa eller ett teefilter
+    tool: true
 ---
 
 1. Lägg rosmarin och timjan i en kastrull och häll över 1 liter kokande vatten. Låt örterna dra i 10 minuter, som ett starkt örtte.

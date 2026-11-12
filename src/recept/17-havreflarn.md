@@ -1,8 +1,9 @@
 ---
 title: Spröda havreflarn doppade i mörk choklad
+date: 2026-11-09
 description: Havregryn, sirap, socker och växtbaserat margarin blir tunna, gyllene flarn som är nästan genomskinliga, som spets. Halva flarnet doppas i mörk choklad och får några flingsaltkorn. Elegant till kaffet och fint att ge bort i en burk med band.
-image: assets/recipes/17-havreflarn.webp
-cardImage: assets/recipes/17-havreflarn-card.webp
+image: assets/recipes/17-havreflarn.png
+cardImage: assets/recipes/17-havreflarn.png
 alt: Spröda havreflarn doppade i mörk choklad
 categories: [baking]
 tags: [Vegan, Swedish, Gift, Budget]

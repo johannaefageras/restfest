@@ -1,8 +1,9 @@
 ---
 title: Kanderade apelsinskal doppade i mörk choklad
+date: 2026-11-09
 description: Skalen från fruktskålens apelsiner, som annars hamnar i komposten, kokas mjuka och kanderas tills de lyser som bärnsten. Halva staven doppas i mörk choklad och får några flingsaltkorn. Konfekt som ser ut att kosta en förmögenhet, gjord på det du brukar slänga.
-image: assets/recipes/49-kanderade-apelsinskal.webp
-cardImage: assets/recipes/49-kanderade-apelsinskal-card.webp
+image: assets/recipes/49-kanderade-apelsinskal.png
+cardImage: assets/recipes/49-kanderade-apelsinskal.png
 alt: Kanderade apelsinskal doppade i mörk choklad
 categories: [candy, baking]
 tags: [Vegan, Gluten free, Christmas, Zero waste, Gift]

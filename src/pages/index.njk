@@ -1,0 +1,140 @@
+---
+layout: layouts/base.njk
+permalink: index.html
+title: Restfest — ditt lilla kylskåpskök
+description: Middag av det du redan har. Skriv in vad som finns i kylen och få receptförslag ur Restfests receptarkiv.
+scripts: [kitchen.js, fridge-ai.js]
+---
+{#- The home page: a purple hero, then three steps with the same kind of heading (.step-heading):
+    01 Inventera (the fridge list, and the fridge photo when it's turned on), 02 Matcha (tonight's dinner)
+    and 03 Planera (a week of dinners, shown once the list matches enough recipes). "Så funkar det" at
+    the bottom names the same three steps. -#}
+  <main id="main" class="wrap kitchen-page">
+    <section class="kitchen-hero" aria-labelledby="hero-heading">
+      <div class="kitchen-hero-copy">
+        <p class="eyebrow">RÄDDA RESTERNA</p>
+        <h1 id="hero-heading">Vad blir det till middag i&nbsp;kväll?</h1>
+        <p class="kitchen-hero-intro">Ett halvt paket crème&nbsp;fraiche, två morötter och en ensam paprika? Utgå från det du har hemma, hitta ett recept och se vad som saknas.</p>
+        <button id="try-example" class="button primary" type="button">Prova ett exempel <i class="fas fa-arrow-up-right" aria-hidden="true"></i></button>
+      </div>
+      <div class="kitchen-hero-art" aria-hidden="true">
+        <img src="assets/illustrations/noodles.svg" width="1176" height="1175" alt="">
+      </div>
+    </section>
+
+    <div class="kitchen-grid">
+      <section class="kitchen-step" id="borja" aria-labelledby="fridge-title">
+        <div class="step-heading">
+          <div><p class="eyebrow">01 · INVENTERA</p><h2 id="fridge-title">Vad finns i kylen?</h2></div>
+        </div>
+        {#- Two ways in, side by side from 800px (the photo first on phones), and the list they both fill below. #}
+        <div class="inventory">
+          <div class="inventory-inputs{{ ' has-photo' if ai.functionsUrl }}">
+            <div class="add-card">
+              <h3>Lägg till vad som finns hemma</h3>
+              <p id="add-help" class="card-intro">Lägg till en råvara i taget från kyl, frys eller skafferi.</p>
+              <form id="pantry-form" class="pantry-form">
+                <label class="sr-only" for="ingredient-input">Lägg till råvara</label>
+                <input id="ingredient-input" maxlength="80" list="ingredient-options" placeholder="T.ex. pasta" autocomplete="off" aria-describedby="add-help">
+                <datalist id="ingredient-options"></datalist>
+                <button class="button primary" type="submit">Lägg till råvara <i class="fas fa-plus" aria-hidden="true"></i></button>
+              </form>
+            </div>
+            {%- if ai.functionsUrl %}
+            {#- The fridge photo: Claude lists the foods it sees and they go into the list. Without `capture`,
+                phones offer both the camera and the photo library. src/js/fridge-ai.js #}
+            <div class="photo-card" id="fota">
+              <div class="photo-card-body">
+                <div class="photo-card-copy">
+                  <h3>Ta en bild av ditt kylskåp</h3>
+                  <p class="card-intro">Ta 1–3 bilder av kylskåpet, frysen eller skafferiet, och så letar vi upp vilka råvaror de innehåller – och du slipper inventera.</p>
+                </div>
+                <div class="photo-card-art" aria-hidden="true">
+                  <img src="assets/illustrations/fridge-viewfinder.svg" width="1133" height="1123" alt="">
+                </div>
+                <div class="photo-actions">
+                  <button id="fridge-photo" class="button primary" type="button"><i class="fas fa-camera" aria-hidden="true"></i><span>Fota eller välj bilder</span></button>
+                  <input id="fridge-photo-input" type="file" accept="image/*" multiple hidden>
+                </div>
+              </div>
+            </div>
+            {%- endif %}
+          </div>
+          <div class="pantry-panel is-empty">
+            <div class="pane-heading">
+              <h3>Det här finns hemma redan</h3>
+              <span id="pantry-count" class="count" aria-live="polite">0</span>
+            </div>
+            <p id="pantry-help" class="pantry-help">Inget här än.</p>
+            <ul id="pantry-list" class="pantry-list" aria-label="Dina råvaror"></ul>
+            <ul id="pantry-unknown" class="pantry-unknown" aria-label="Råvaror som inte känns igen" hidden></ul>
+            <div class="pantry-footer">
+              <p id="pantry-status" class="meta" role="status"></p>
+              <button id="clear-pantry" class="text-button" type="button" hidden>Rensa listan</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="kitchen-step" id="recept" aria-labelledby="tonight-title">
+        <div class="step-heading">
+          <div><p class="eyebrow">02 · MATCHA</p><h2 id="tonight-title">Laga ikväll</h2></div>
+          <a class="text-button" href="receptarkiv.html">Receptarkivet <i class="fas fa-arrow-up-right" aria-hidden="true"></i></a>
+        </div>
+        <p id="match-status" class="sr-only" role="status"></p>
+        <div id="featured-recipe"></div>
+        {%- if ai.functionsUrl %}
+        {#- Shown once the list has something the site recognises. src/js/fridge-ai.js #}
+        <section id="invent-recipe" class="invent-recipe" aria-labelledby="invent-title" hidden>
+          <img src="assets/icons/cooking-pot.svg" width="48" height="48" alt="">
+          <div>
+            <p class="eyebrow">NYTT RECEPT</p>
+            <h3 id="invent-title">Inget som lockar?</h3>
+            <p>Låt Claude hitta på en ny middag av det som finns i din lista. Receptet tar ungefär en halv minut, fotot en stund till.</p>
+            <button id="invent-button" class="button primary" type="button">Hitta på ett recept <i class="fas fa-arrow-up-right" aria-hidden="true"></i></button>
+            <p id="invent-status" class="meta invent-status" role="status"></p>
+          </div>
+        </section>
+        {%- endif %}
+      </section>
+
+      <section id="vecka" class="kitchen-step week-plan" aria-labelledby="week-title" hidden>
+        <div class="step-heading">
+          <div>
+            <p class="eyebrow">03 · PLANERA</p>
+            <h2 id="week-title">Middagar ur kylen</h2>
+          </div>
+          <div class="week-actions">
+            <button id="week-refresh" class="text-button" type="button">Ny vecka <i class="fas fa-arrow-up-right" aria-hidden="true"></i></button>
+            <button id="week-shop" class="button primary" type="button">Lägg saknade i inköpslistan</button>
+          </div>
+        </div>
+        <p id="week-intro" class="week-intro"></p>
+        <ul id="week-list" class="match-list"></ul>
+      </section>
+    </div>
+
+    <section id="sa-funkar-det" class="how-section" aria-labelledby="how-heading">
+      <div class="how-heading"><p class="eyebrow">FRÅN KYL TILL KVÄLLSMAT</p><h2 id="how-heading">Så funkar det</h2></div>
+      <ol class="steps">
+        <li>
+          <img src="assets/illustrations/fridge-opened.svg" width="878" height="1121" alt="">
+          <p class="eyebrow">01 · INVENTERA</p>
+          <h3>Vad har du?</h3>
+          <p>{{ 'Skriv in eller fota det som finns i kyl, frys och skafferi, eller prova exempelkylskåpet.' if ai.functionsUrl else 'Skriv in det som finns i kyl, frys och skafferi, eller prova exempelkylskåpet.' }}</p>
+        </li>
+        <li>
+          <img src="assets/illustrations/cook-book.svg" width="733" height="881" alt="">
+          <p class="eyebrow">02 · MATCHA</p>
+          <h3>Hitta ett recept.</h3>
+          <p>Du får de middagar som passar bäst, ser vad som saknas och bockar av råvarorna medan du lagar.</p>
+        </li>
+        <li>
+          <img src="assets/illustrations/serving-cloche.svg" width="1145" height="1059" alt="">
+          <p class="eyebrow">03 · PLANERA</p>
+          <h3>Planera veckan.</h3>
+          <p>Fyra middagar som delar på det du behöver köpa, med det som saknas i inköpslistan.</p>
+        </li>
+      </ol>
+    </section>
+  </main>

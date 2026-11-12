@@ -1,8 +1,9 @@
 ---
 title: Brûlée på gårdagens risgrynsgröt med apelsin
+date: 2026-11-09
 description: Resterna från grötkastrullen, lite grädde och socker. Under ett knäckigt, glasblankt karamelltäcke väntar en krämig gröt som doftar vanilj och apelsin. Bredvid ligger saftiga skivor av färsk apelsin. Julens rester blir fransk bistrodessert.
-image: assets/recipes/10-brulee.webp
-cardImage: assets/recipes/10-brulee-card.webp
+image: assets/recipes/10-brulee.png
+cardImage: assets/recipes/10-brulee.png
 alt: Brûlée på gårdagens risgrynsgröt med apelsin
 categories: [dessert]
 tags: [Vegetarian, Gluten free, Swedish, Christmas, Leftovers, Budget]
@@ -10,7 +11,7 @@ timeLabel: Minst 1 tim 25 min
 facts:
   Förberedelse: 15 min + minst 1 tim i kylen
   Tillagning: 10 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: []
 ingredients:

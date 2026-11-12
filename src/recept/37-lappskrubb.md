@@ -1,8 +1,9 @@
 ---
 title: Rosa läppskrubb med socker, honung och hallon
+date: 2026-11-09
 description: En sked socker, en skvätt honung och lite olja rörs ihop till en glittrande läppskrubb som gör läpparna mjuka och släta. En gnutta hallonsylt ger den en rosa färg och doftar sommar mitt i vintern. Fylld i en liten glasburk blir den en present som ser ut att komma från en dyr skönhetsbutik.
-image: assets/recipes/37-lappskrubb.webp
-cardImage: assets/recipes/37-lappskrubb-card.webp
+image: assets/recipes/37-lappskrubb.png
+cardImage: assets/recipes/37-lappskrubb.png
 alt: Rosa läppskrubb med socker, honung och hallon
 categories: [spa]
 tags: [Lips, Natural, Gift, Beginner friendly, Budget]

@@ -1,8 +1,9 @@
 ---
 title: Avkalkare med citronsyra för vattenkokare och kaffebryggare
+date: 2026-11-09
 description: Påsen med citronsyra som står kvar sedan saftkokningen, och en liter vatten. Lösningen kokas eller körs genom bryggaren och löser upp vita kalkavlagringar på en halvtimme, så att vattenkokaren blänker som ny och kaffet smakar renare. Fungerar lika bra på duschmunstycken och kranar.
-image: assets/recipes/108-avkalkare.webp
-cardImage: assets/recipes/108-avkalkare-card.webp
+image: assets/recipes/108-avkalkare.png
+cardImage: assets/recipes/108-avkalkare.png
 alt: Avkalkare med citronsyra för vattenkokare och kaffebryggare
 categories: [household]
 tags: [Cleaning, Kitchen, Bathroom, Natural, Beginner friendly, Budget]

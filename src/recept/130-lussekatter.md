@@ -1,8 +1,9 @@
 ---
 title: Saftiga lussekatter med kesella
+date: 2026-11-09
 description: Saffran, smör, mjölk och en burk kesella, hemligheten bakom lussekatter som håller sig saftiga i flera dagar. Degen lyser solgul, och bullarna rullas till klassiska S med ett russin i varje snirkel och gräddas blanka och gyllene. Luciamorgonens doft, gjord hemma.
-image: assets/recipes/130-lussekatter.webp
-cardImage: assets/recipes/130-lussekatter-card.webp
+image: assets/recipes/130-lussekatter.png
+cardImage: assets/recipes/130-lussekatter.png
 alt: Saftiga lussekatter med kesella
 categories: [bread, baking]
 tags: [Vegetarian, Swedish, Christmas, Make ahead]

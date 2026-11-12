@@ -1,11 +1,21 @@
 ---
 title: Mörk kavring med filmjölk och sirap
+date: 2026-11-09
 description: Filmjölken som närmar sig bäst före-datum, en skvätt mörk sirap och rågmjöl rörs ihop utan jäst och utan knådning. Kavringen gräddas långsamt till ett mörkt, saftigt och lite sött bröd som doftar fänkål och anis. Tunna skivor med smör och ost, eller till sill och leverpastej på julbordet.
-image: assets/recipes/127-kavring.webp
-cardImage: assets/recipes/127-kavring-card.webp
+image: assets/recipes/127-kavring.png
+cardImage: assets/recipes/127-kavring.png
 alt: Mörk kavring med filmjölk och sirap
 categories: [bread, baking]
-tags: [Vegetarian, Swedish, Christmas, Make ahead, Leftovers, Beginner friendly, Budget]
+tags:
+  [
+    Vegetarian,
+    Swedish,
+    Christmas,
+    Make ahead,
+    Leftovers,
+    Beginner friendly,
+    Budget,
+  ]
 time: 80
 timeLabel: 1 tim 20 min
 facts:

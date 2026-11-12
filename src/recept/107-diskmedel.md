@@ -1,8 +1,9 @@
 ---
 title: Diskmedel på grön såpa och bikarbonat
+date: 2026-11-09
 description: En skvätt grön såpa från städskåpet, lite bikarbonat och varmt vatten blandas till ett mjukt, ljusgrönt diskmedel som löser fett utan parfym och färgämnen. I en glasflaska med pump vid diskhon ser det ut som från en designbutik. Kostar några kronor per flaska.
-image: assets/recipes/107-diskmedel.webp
-cardImage: assets/recipes/107-diskmedel-card.webp
+image: assets/recipes/107-diskmedel.png
+cardImage: assets/recipes/107-diskmedel.png
 alt: Diskmedel på grön såpa och bikarbonat
 categories: [household]
 tags: [Cleaning, Kitchen, Natural, Beginner friendly, Budget]

@@ -1,8 +1,9 @@
 ---
 title: Krämig potatisgratäng utan mjölk
+date: 2026-11-09
 description: En påse potatis, en lök och ett paket havregrädde. Tunna potatisskivor gräddas långsamt i en vitlöksdoftande havregrädde med timjan och muskot, tills de blir krämiga inuti och gyllene och krispiga överst. Söndagsstekens bästa vän, som även den mjölkallergiska kan ta två portioner av.
-image: assets/recipes/134-mjolkfri-potatisgratang.webp
-cardImage: assets/recipes/134-mjolkfri-potatisgratang-card.webp
+image: assets/recipes/134-mjolkfri-potatisgratang.png
+cardImage: assets/recipes/134-mjolkfri-potatisgratang.png
 alt: Krämig potatisgratäng utan mjölk
 categories: [side]
 tags: [Vegan, Swedish, Sunday dinner, Beginner friendly, Budget]

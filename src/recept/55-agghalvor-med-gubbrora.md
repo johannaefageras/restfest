@@ -1,8 +1,9 @@
 ---
 title: Ägghalvor med gubbröra, rödlök och dill
+date: 2026-11-09
 description: Sex ägg, en burk ansjovis och en rödlök. Äggulorna mosas med gräddfil, finhackad ansjovis, dill och rödlök till en gyllene, salt röra som spritsas tillbaka i vitorna. Toppa med en ansjovisremsa och en dillkvist. Den klassiska gubbröran klädd för mingel, och en självklar bit på julbordet.
-image: assets/recipes/55-agghalvor-med-gubbrora.webp
-cardImage: assets/recipes/55-agghalvor-med-gubbrora-card.webp
+image: assets/recipes/55-agghalvor-med-gubbrora.png
+cardImage: assets/recipes/55-agghalvor-med-gubbrora.png
 alt: Ägghalvor med gubbröra, rödlök och dill
 categories: [starter, party]
 tags: [Pescatarian, Gluten free, Swedish, Christmas, Beginner friendly, Budget]

@@ -1,17 +1,19 @@
 ---
 title: Linsbolognese med röda linser och morot
+date: 2026-11-09
 description: En påse röda linser, två burkar krossade tomater och ett par morötter puttrar till en tjock, djupröd köttfärssås helt utan kött. Linserna kokar sönder och ger samma mustiga konsistens, och en skvätt soja ger djup. Vänd den med spagetti och toppa med basilika, så blir det söndagspasta mitt i veckan.
-image: assets/recipes/116-linsbolognese.webp
-cardImage: assets/recipes/116-linsbolognese-card.webp
+image: assets/recipes/116-linsbolognese.png
+cardImage: assets/recipes/116-linsbolognese.png
 alt: Linsbolognese med röda linser och morot
 categories: [main]
-tags: [Vegan, Pasta, Italian, Family friendly, Meal prep, Beginner friendly, Budget]
+tags:
+  [Vegan, Pasta, Italian, Family friendly, Meal prep, Beginner friendly, Budget]
 time: 45
 timeLabel: 45 min
 facts:
   Förberedelse: 10 min
   Tillagning: 35 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [linser, morot, kross, pasta]
 ingredients:

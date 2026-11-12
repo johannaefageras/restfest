@@ -1,8 +1,9 @@
 ---
 title: Äppelrosor i smördeg med kanel
+date: 2026-11-09
 description: En rulle smördeg, två röda äpplen och en sked sylt. Tunna äppelskivor rullas ihop med smördegen till rosor, där de röda skalkanterna blir kronblad. De gräddas gyllene och pudras med florsocker. Ser ut som från ett franskt konditori.
-image: assets/recipes/18-appelrosor.webp
-cardImage: assets/recipes/18-appelrosor-card.webp
+image: assets/recipes/18-appelrosor.png
+cardImage: assets/recipes/18-appelrosor.png
 alt: Äppelrosor i smördeg med kanel
 categories: [baking, dessert, party]
 tags: [Vegetarian, Budget]

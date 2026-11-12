@@ -1,8 +1,9 @@
 ---
 title: Värmande massageolja med kardemumma och vanilj
+date: 2026-11-09
 description: En flaska rapsolja, en näve kardemummakapslar och vaniljstången som blev över efter bakningen. Kryddorna får dra i oljan på låg värme tills den doftar som en nybakad kardemummabulle. Oljan masseras in i axlar, armar och ben, gärna direkt efter badet. Spamassage på skafferiets vanligaste varor.
-image: assets/recipes/83-varmande-massageolja.webp
-cardImage: assets/recipes/83-varmande-massageolja-card.webp
+image: assets/recipes/83-varmande-massageolja.png
+cardImage: assets/recipes/83-varmande-massageolja.png
 alt: Värmande massageolja med kardemumma och vanilj
 categories: [spa]
 tags: [Body, Relaxing, Leftovers, Zero waste, Gift, Beginner friendly, Budget]
@@ -12,7 +13,7 @@ facts:
   Verkningstid: 10–15 min massage
   Räcker till: ca 2 dl
   Nivå: Nybörjare
-beforeYouStart: 'Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn.'
+beforeYouStart: "Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn."
 pantryKeys: []
 ingredients:
   - name: 2 dl kallpressad rapsolja eller olivolja

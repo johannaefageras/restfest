@@ -1,8 +1,9 @@
 ---
 title: Små bananplättar med havre och kanel
+date: 2026-11-09
 description: Två brunfläckiga bananer, två ägg och en näve havregryn mixas till en tjock smet som steks till små, gyllene plättar som doftar banankaka. De staplas i höga torn med yoghurt och bär. Lika bra som mellanmål efter skolan som till helgfrukost, och helt utan tillsatt socker.
-image: assets/recipes/104-bananplattar.webp
-cardImage: assets/recipes/104-bananplattar-card.webp
+image: assets/recipes/104-bananplattar.png
+cardImage: assets/recipes/104-bananplattar.png
 alt: Små bananplättar med havre och kanel
 categories: [snack, breakfast]
 tags: [Vegetarian, Family friendly, Leftovers, Beginner friendly, Budget]

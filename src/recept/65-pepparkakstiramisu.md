@@ -1,16 +1,26 @@
 ---
 title: Pepparkakstiramisu med apelsin och kaffe
+date: 2026-11-09
 description: Pepparkakorna som blev kvar i burken, morgonens kaffe, en burk mascarpone och en apelsin. Kakorna doppas i kaffe och varvas med en luftig, apelsinfrisk kräm i små glas. Toppen pudras med kakao och några pepparkakssmulor. Italiens mest älskade dessert i svensk julskrud, utan att du behöver sätta på ugnen.
-image: assets/recipes/65-pepparkakstiramisu.webp
-cardImage: assets/recipes/65-pepparkakstiramisu-card.webp
+image: assets/recipes/65-pepparkakstiramisu.png
+cardImage: assets/recipes/65-pepparkakstiramisu.png
 alt: Pepparkakstiramisu med apelsin och kaffe
 categories: [dessert]
-tags: [Vegetarian, Italian, Christmas, No bake, Make ahead, Leftovers, Beginner friendly]
+tags:
+  [
+    Vegetarian,
+    Italian,
+    Christmas,
+    No bake,
+    Make ahead,
+    Leftovers,
+    Beginner friendly,
+  ]
 timeLabel: Minst 4 tim 20 min
 facts:
   Förberedelse: 20 min + minst 4 tim i kylen
   Tillagning: 0 min
-  Portioner: '6'
+  Portioner: "6"
   Nivå: Nybörjare
 pantryKeys: []
 ingredients:

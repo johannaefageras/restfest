@@ -1,8 +1,9 @@
 ---
 title: Brända mandlar med kanel
+date: 2026-11-09
 description: En påse mandlar, socker, vatten och kanel. Mandlarna rörs i en het panna tills sockret först blir till sand och sedan smälter till ett knaprigt, glansigt och knöligt skal. Doften fyller hela köket som en julmarknad, och i en strut av bakplåtspapper blir de en present som tar femton minuter.
-image: assets/recipes/100-branda-mandlar.webp
-cardImage: assets/recipes/100-branda-mandlar-card.webp
+image: assets/recipes/100-branda-mandlar.png
+cardImage: assets/recipes/100-branda-mandlar.png
 alt: Brända mandlar med kanel
 categories: [candy]
 tags: [Vegan, Gluten free, Christmas, Gift, Beginner friendly, Budget]

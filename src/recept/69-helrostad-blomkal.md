@@ -1,8 +1,9 @@
 ---
 title: Helrostad blomkål med tahinisås, citron och rostade mandlar
+date: 2026-11-09
 description: Ett helt blomkålshuvud, en burk tahini och en citron. Blomkålen förkokas, penslas med kryddolja och rostas hel i ugnen tills den är gyllene och krispig utanpå och mjuk som smör inuti. Den bärs in hel på ett fat under tahinisås, mandlar, persilja och chili, och skärs upp vid bordet som en söndagsstek.
-image: assets/recipes/69-helrostad-blomkal.webp
-cardImage: assets/recipes/69-helrostad-blomkal-card.webp
+image: assets/recipes/69-helrostad-blomkal.png
+cardImage: assets/recipes/69-helrostad-blomkal.png
 alt: Helrostad blomkål med tahinisås, citron och rostade mandlar
 categories: [main, side]
 tags: [Vegan, Gluten free, Middle Eastern, Sunday dinner, Budget]
@@ -11,7 +12,7 @@ timeLabel: 1 tim 15 min
 facts:
   Förberedelse: 15 min
   Tillagning: 60 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Medelsvårt
 pantryKeys: [blomkal, tahini, citron]
 ingredients:

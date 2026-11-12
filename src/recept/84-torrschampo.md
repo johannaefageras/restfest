@@ -1,8 +1,9 @@
 ---
 title: Torrschampo av potatismjöl och kakao
+date: 2026-11-09
 description: Ett paket potatismjöl och lite kakao. Pulvret pudras på hårbotten med en stor, mjuk borste, suger upp fettet och ger håret lyft och fräschör en dag till. Ett riktigt nödknep, i en vacker burk som får stå framme i badrummet.
-image: assets/recipes/84-torrschampo.webp
-cardImage: assets/recipes/84-torrschampo-card.webp
+image: assets/recipes/84-torrschampo.png
+cardImage: assets/recipes/84-torrschampo.png
 alt: Torrschampo av potatismjöl och kakao
 categories: [spa]
 tags: [Hair, Natural, Beginner friendly, Budget]
@@ -13,7 +14,7 @@ facts:
   Verkningstid: 5 min
   Räcker till: ca 10 användningar
   Nivå: Nybörjare
-beforeYouStart: 'Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn.'
+beforeYouStart: "Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn."
 pantryKeys: []
 ingredients:
   - title: Ljust hår
@@ -35,6 +36,7 @@ ingredients:
   - title: Att använda
     items:
       - name: 1 stor, mjuk puderborste
+        tool: true
       - name: 1 liten burk med lock, gärna en kryddburk med strölock
 ---
 

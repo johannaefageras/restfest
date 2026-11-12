@@ -1,8 +1,9 @@
 ---
 title: Rosa hallonsour med timjan
+date: 2026-11-09
 description: Frysta hallon, socker, citron och en äggvita, eller kikärtsspad för en vegansk variant. Allt skakas till en djuprosa drink med ett tjockt, sammetslent skum, toppad med en timjankvist och några droppar hallonsirap. Görs med gin eller vodka, eller helt utan sprit.
-image: assets/recipes/13-rosa-hallonsour.webp
-cardImage: assets/recipes/13-rosa-hallonsour-card.webp
+image: assets/recipes/13-rosa-hallonsour.png
+cardImage: assets/recipes/13-rosa-hallonsour.png
 alt: Rosa hallonsour med timjan
 categories: [drink, party]
 tags: [Vegetarian, Gluten free, Cocktail, Alcohol free option]

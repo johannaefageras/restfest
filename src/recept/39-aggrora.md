@@ -1,8 +1,9 @@
 ---
 title: Krämig äggröra på smörstekt surdeg med gräslök och krasse
+date: 2026-11-09
 description: Sex ägg, en klick smör och gårdagens surdegsbröd. Äggen röras långsamt på låg värme tills de blir krämiga som en sås, med mjuka, glänsande flak. De vilar på krispigt smörstekt bröd under ett täcke av gräslök och krasse. Hotellfrukost på tio minuter, för en bråkdel av priset.
-image: assets/recipes/39-aggrora.webp
-cardImage: assets/recipes/39-aggrora-card.webp
+image: assets/recipes/39-aggrora.png
+cardImage: assets/recipes/39-aggrora.png
 alt: Krämig äggröra på smörstekt surdeg med gräslök och krasse
 categories: [breakfast, sandwich]
 tags: [Vegetarian, French, Leftovers, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 15 min
 facts:
   Förberedelse: 5 min
   Tillagning: 10 min
-  Portioner: '2'
+  Portioner: "2"
   Nivå: Nybörjare
 pantryKeys: [agg, brod]
 ingredients:

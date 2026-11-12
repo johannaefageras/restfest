@@ -1,8 +1,9 @@
 ---
 title: Tonnatosås på burktonfisk med kapris och citron
+date: 2026-11-09
 description: En burk tonfisk, majonnäs, kapris och citron mixas till en sidenlen italiensk sås. Den ringlas över kall stek, kyckling, ägghalvor eller rostad potatis och toppas med krispigt stekt kapris. Klassisk vitello tonnato utan dyra råvaror.
-image: assets/recipes/27-tonnatosas.webp
-cardImage: assets/recipes/27-tonnatosas-card.webp
+image: assets/recipes/27-tonnatosas.png
+cardImage: assets/recipes/27-tonnatosas.png
 alt: Tonnatosås på burktonfisk med kapris och citron
 categories: [sauce]
 tags: [Pescatarian, Gluten free, Dip, Italian, Leftovers, Budget]

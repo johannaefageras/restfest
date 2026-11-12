@@ -1,8 +1,9 @@
 ---
 title: Chokladmousse på kikärtsspad med frostiga hallon
+date: 2026-11-09
 description: Spadet från en burk kikärtor och en kaka mörk choklad. Spadet vispas fluffigt som äggvita och blir en luftig, sidenlen mousse där smaken av kikärtor försvinner helt. Ingen skulle gissa att den är vegansk. Den serveras i små glas med frysta hallon, rostade hasselnötter och några flingsaltkorn.
-image: assets/recipes/09-chokladmousse.webp
-cardImage: assets/recipes/09-chokladmousse-card.webp
+image: assets/recipes/09-chokladmousse.png
+cardImage: assets/recipes/09-chokladmousse.png
 alt: Chokladmousse på kikärtsspad med frostiga hallon
 categories: [dessert]
 tags: [Vegan, Gluten free, Chocolate, Make ahead]
@@ -10,7 +11,7 @@ timeLabel: Minst 3 tim 25 min
 facts:
   Förberedelse: 20 min + minst 3 tim i kylen
   Tillagning: 5 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Medelsvårt
 pantryKeys: []
 ingredients:

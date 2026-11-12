@@ -1,17 +1,27 @@
 ---
 title: Spenatlasagne med keso och tomatsås
+date: 2026-11-09
 description: En påse fryst spenat, två burkar keso och ett paket lasagneplattor. Lagren av klargrön spenat- och kesofyllning och djupröd tomatsås gräddas under ett gyllene, bubblande ostlock. Ingen béchamel att stå och röra i, bara en saftig, mättande lasagne som blir ännu godare dagen efter.
-image: assets/recipes/122-spenatlasagne.webp
-cardImage: assets/recipes/122-spenatlasagne-card.webp
+image: assets/recipes/122-spenatlasagne.png
+cardImage: assets/recipes/122-spenatlasagne.png
 alt: Spenatlasagne med keso och tomatsås
 categories: [main]
-tags: [Vegetarian, Pasta, Italian, Family friendly, Make ahead, Beginner friendly, Budget]
+tags:
+  [
+    Vegetarian,
+    Pasta,
+    Italian,
+    Family friendly,
+    Make ahead,
+    Beginner friendly,
+    Budget,
+  ]
 time: 80
 timeLabel: 1 tim 20 min
 facts:
   Förberedelse: 25 min
   Tillagning: 45 min + 10 min vila
-  Portioner: '6'
+  Portioner: "6"
   Nivå: Nybörjare
 pantryKeys: [spenat, keso, kross, pasta]
 ingredients:

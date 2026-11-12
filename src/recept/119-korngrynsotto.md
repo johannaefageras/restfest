@@ -1,8 +1,9 @@
 ---
 title: Korngrynsotto med gröna ärtor, citron och parmesan
+date: 2026-11-09
 description: Svenska korngryn, en påse frysta ärter och en bit lagrad ost. Kornet kokas långsamt som en risotto tills det blir krämigt men behåller sin tuggighet, och hälften av ärterna mixas till en klargrön puré som färgar hela grytan. Toppad med ärtskott, citronskal och parmesan blir den vår på tallriken mitt i vintern.
-image: assets/recipes/119-korngrynsotto.webp
-cardImage: assets/recipes/119-korngrynsotto-card.webp
+image: assets/recipes/119-korngrynsotto.png
+cardImage: assets/recipes/119-korngrynsotto.png
 alt: Korngrynsotto med gröna ärtor, citron och parmesan
 categories: [main]
 tags: [Vegetarian, Swedish, Italian, Comfort food, Budget]
@@ -11,7 +12,7 @@ timeLabel: 45 min
 facts:
   Förberedelse: 10 min
   Tillagning: 35 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Medelsvårt
 pantryKeys: [korngryn, arter, citron, ost]
 ingredients:

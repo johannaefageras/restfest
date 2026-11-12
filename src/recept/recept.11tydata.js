@@ -7,7 +7,7 @@ import {types} from 'node:util';
 import {recipePage} from '../../lib/recipes.js';
 
 export default {
-  layout: 'recipe.njk',
+  layout: 'layouts/recipe.njk',
   base: '../',
   titleSuffix: ' · Restfest',
   eleventyComputed: {

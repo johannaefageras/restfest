@@ -1,11 +1,13 @@
 ---
 title: Ångbad för ansiktet med kamomill, citrusskal och rosmarin
+date: 2026-11-09
 description: En påse kamomillte, skalet från en apelsin och en kvist rosmarin. Örterna dras i hett vatten i en stor skål, och du lutar dig över den under en handduk medan den doftande ångan värmer och mjukar upp huden. Fem minuter som känns som ångrummet på ett spa, och ett perfekt första steg före en ansiktsmask.
-image: assets/recipes/77-ansiktsangbad.webp
-cardImage: assets/recipes/77-ansiktsangbad-card.webp
+image: assets/recipes/77-ansiktsangbad.png
+cardImage: assets/recipes/77-ansiktsangbad.png
 alt: Ångbad för ansiktet med kamomill, citrusskal och rosmarin
 categories: [spa]
-tags: [Face, Relaxing, Natural, Leftovers, Zero waste, Beginner friendly, Budget]
+tags:
+  [Face, Relaxing, Natural, Leftovers, Zero waste, Beginner friendly, Budget]
 time: 13
 timeLabel: 10–13 min
 facts:
@@ -13,7 +15,7 @@ facts:
   Verkningstid: 5–8 min
   Räcker till: 1 behandling
   Nivå: Nybörjare
-beforeYouStart: 'Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn.'
+beforeYouStart: "Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn."
 pantryKeys: []
 ingredients:
   - name: 1½ liter vatten
@@ -23,6 +25,7 @@ ingredients:
     key: apelsin
   - name: 1 kvist färsk rosmarin eller timjan
   - name: 1 stor handduk
+    tool: true
 ---
 
 1. Koka upp vattnet.

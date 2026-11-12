@@ -1,8 +1,9 @@
 ---
 title: Päron- och vaniljsylt med kardemumma
+date: 2026-11-09
 description: De mjuka päronen längst ner i fruktskålen, en citron och en vaniljstång kokas till en gyllene, genomskinlig sylt med små mjuka fruktbitar och doft av nystött kardemumma. Den lyser som bärnsten i burken. Perfekt till ost, gröt och nygräddade scones, och en självklar julklapp.
-image: assets/recipes/86-paron-och-vaniljsylt.webp
-cardImage: assets/recipes/86-paron-och-vaniljsylt-card.webp
+image: assets/recipes/86-paron-och-vaniljsylt.png
+cardImage: assets/recipes/86-paron-och-vaniljsylt.png
 alt: Päron- och vaniljsylt med kardemumma
 categories: [preserves]
 tags: [Vegan, Gluten free, Jam, Leftovers, Gift, Budget]

@@ -1,8 +1,9 @@
 ---
 title: Pizzadeg med kall jäsning
+date: 2026-11-09
 description: Mjöl, vatten, en nypa jäst och salt. Degen jäser långsamt i kylen i ett till tre dygn och blir luftig, smakrik och lätt att forma, med krispig botten och bubbliga, lätt brända kanter. En deg, fyra pizzor och ett sätt att göra fredagsmys av kylskåpets rester.
-image: assets/recipes/93-pizzadeg.webp
-cardImage: assets/recipes/93-pizzadeg-card.webp
+image: assets/recipes/93-pizzadeg.png
+cardImage: assets/recipes/93-pizzadeg.png
 alt: Pizzadeg med kall jäsning
 categories: [basics]
 tags: [Vegan, Italian, Family friendly, Make ahead, Budget]

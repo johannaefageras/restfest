@@ -1,8 +1,9 @@
 ---
 title: Croque madame på julskinka med senapsbéchamel
+date: 2026-11-09
 description: Julskinkan som aldrig tar slut, några skivor bröd och en bit ost. Smörgåsarna fylls med skinka och senapssås, täcks med riven ost och gratineras gyllene och bubblande i ugnen. Ovanpå vilar ett stekt ägg med lysande gula. Den franska caféklassikern är som gjord för annandagen.
-image: assets/recipes/62-croque-madame.webp
-cardImage: assets/recipes/62-croque-madame-card.webp
+image: assets/recipes/62-croque-madame.png
+cardImage: assets/recipes/62-croque-madame.png
 alt: Croque madame på julskinka med senapsbéchamel
 categories: [sandwich, breakfast]
 tags: [French, Christmas, Comfort food, Leftovers, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 35 min
 facts:
   Förberedelse: 15 min
   Tillagning: 20 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [brod, julskinka, cheddar, agg]
 ingredients:

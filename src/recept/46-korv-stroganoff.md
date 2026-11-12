@@ -1,17 +1,19 @@
 ---
 title: Rökig korv stroganoff med smörris och gräddfil
+date: 2026-11-09
 description: En falukorv, en gul lök och en tub tomatpuré. Korven bryns i stavar tills den får krispiga kanter och puttrar sedan i en djupt orange, rökig gräddsås med senap. Den läggs bredvid glänsande smörris och toppas med en klick gräddfil och persilja. Sveriges mest älskade vardagsmiddag i lördagskläder.
-image: assets/recipes/46-korv-stroganoff.webp
-cardImage: assets/recipes/46-korv-stroganoff-card.webp
+image: assets/recipes/46-korv-stroganoff.png
+cardImage: assets/recipes/46-korv-stroganoff.png
 alt: Rökig korv stroganoff med smörris och gräddfil
 categories: [main]
-tags: [Swedish, Comfort food, Family friendly, One pot, Beginner friendly, Budget]
+tags:
+  [Swedish, Comfort food, Family friendly, One pot, Beginner friendly, Budget]
 time: 35
 timeLabel: 35 min
 facts:
   Förberedelse: 10 min
   Tillagning: 25 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [falukorv, ris, lok, tomatpure]
 ingredients:

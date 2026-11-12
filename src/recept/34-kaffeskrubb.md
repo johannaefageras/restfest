@@ -1,8 +1,9 @@
 ---
 title: Kaffeskrubb av gårdagens kaffesump
+date: 2026-11-09
 description: Kaffesumpen från morgonens bryggare blandas med farinsocker och kokosolja till en doftande skrubb som gör huden len och glansig. Den fylls på en vacker glasburk med en träsked. Det du brukar slänga blir en present du gärna ger bort.
-image: assets/recipes/34-kaffeskrubb.webp
-cardImage: assets/recipes/34-kaffeskrubb-card.webp
+image: assets/recipes/34-kaffeskrubb.png
+cardImage: assets/recipes/34-kaffeskrubb.png
 alt: Kaffeskrubb av gårdagens kaffesump
 categories: [spa]
 tags: [Body, Natural, Leftovers, Zero waste, Gift, Beginner friendly, Budget]

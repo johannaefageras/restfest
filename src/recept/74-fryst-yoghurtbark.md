@@ -1,8 +1,9 @@
 ---
 title: Fryst yoghurtbark med bär, honung och granola
+date: 2026-11-09
 description: Den sista burken turkisk yoghurt, en påse frysta bär och en sked honung. Yoghurten breds ut på en plåt, marmoreras med krossade bär, strös över med granola och fryses tills den kan brytas i stora, glittrande flak. Ett kallt, krispigt mellanmål som ser ut som skärvor av rosa marmor.
-image: assets/recipes/74-fryst-yoghurtbark.webp
-cardImage: assets/recipes/74-fryst-yoghurtbark-card.webp
+image: assets/recipes/74-fryst-yoghurtbark.png
+cardImage: assets/recipes/74-fryst-yoghurtbark.png
 alt: Fryst yoghurtbark med bär, honung och granola
 categories: [dessert, snack]
 tags: [Vegetarian, Family friendly, Make ahead, Beginner friendly, Budget]

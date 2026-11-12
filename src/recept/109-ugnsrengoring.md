@@ -1,8 +1,9 @@
 ---
 title: Ugnsrengöring med bikarbonat och ättika över natten
+date: 2026-11-09
 description: En burk bikarbonat, lite vatten och en sprayflaska ättika. Pastan breds ut i den kalla ugnen och får jobba över natten, så att fastbränt fett och gamla ostrester lossnar. På morgonen fräser ättikan bort det sista. Ingen skurning med starka kemikalier, bara en blank ugn.
-image: assets/recipes/109-ugnsrengoring.webp
-cardImage: assets/recipes/109-ugnsrengoring-card.webp
+image: assets/recipes/109-ugnsrengoring.png
+cardImage: assets/recipes/109-ugnsrengoring.png
 alt: Ugnsrengöring med bikarbonat och ättika över natten
 categories: [household]
 tags: [Cleaning, Kitchen, Natural, Beginner friendly, Budget]

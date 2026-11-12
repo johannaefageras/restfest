@@ -1,11 +1,13 @@
 ---
 title: Kokostoppar på överblivna äggvitor, doppade i choklad
+date: 2026-11-09
 description: De överblivna äggvitorna i kylen, en påse kokosflingor och lite socker. Smeten formas till små toppar som gräddas tills spetsarna blir gyllene och krispiga, med en seg, saftig insida. Botten doppas i mörk choklad. Mormors kakburkskaka i konfektaskens finkläder.
-image: assets/recipes/99-kokostoppar.webp
-cardImage: assets/recipes/99-kokostoppar-card.webp
+image: assets/recipes/99-kokostoppar.png
+cardImage: assets/recipes/99-kokostoppar.png
 alt: Kokostoppar på överblivna äggvitor, doppade i choklad
 categories: [baking, candy]
-tags: [Vegetarian, Gluten free, Swedish, Leftovers, Gift, Beginner friendly, Budget]
+tags:
+  [Vegetarian, Gluten free, Swedish, Leftovers, Gift, Beginner friendly, Budget]
 time: 60
 timeLabel: 1 tim
 facts:

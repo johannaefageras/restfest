@@ -1,8 +1,9 @@
 ---
 title: Krämig röd linssoppa med kokos och chiliolja
+date: 2026-11-09
 description: Röda linser, en burk krossade tomater och en burk kokosmjölk kokas till en sammetslen, solgul soppa med spiskummin och ingefära. Den toppas med glödande röd chiliolja, en virvel kokosmjölk och färsk koriander. Värmande, mättande och klar på en halvtimme.
-image: assets/recipes/32-rod-linssoppa.webp
-cardImage: assets/recipes/32-rod-linssoppa-card.webp
+image: assets/recipes/32-rod-linssoppa.png
+cardImage: assets/recipes/32-rod-linssoppa.png
 alt: Krämig röd linssoppa med kokos och chiliolja
 categories: [soup, main]
 tags: [Vegan, Gluten free, Indian, Meal prep, Budget]
@@ -11,7 +12,7 @@ timeLabel: 35 min
 facts:
   Förberedelse: 10 min
   Tillagning: 25 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [linser, kokosmjolk, kross, lok, buljong]
 ingredients:

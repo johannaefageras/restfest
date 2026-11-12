@@ -1,8 +1,9 @@
 ---
 title: Bananbröd med brynt smör och karamelliserad banan
+date: 2026-11-09
 description: De bruna, övermogna bananerna som ingen vill äta blir ett saftigt bananbröd med nötig smak av brynt smör. En banan delad på längden läggs ovanpå och karamelliseras till en blank, gyllene yta. Ser ut som från ett café i Köpenhamn.
-image: assets/recipes/15-bananbrod.webp
-cardImage: assets/recipes/15-bananbrod-card.webp
+image: assets/recipes/15-bananbrod.png
+cardImage: assets/recipes/15-bananbrod.png
 alt: Bananbröd med brynt smör och karamelliserad banan
 categories: [baking]
 tags: [Vegetarian, Leftovers, Zero waste, Beginner friendly, Budget]

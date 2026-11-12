@@ -1,8 +1,9 @@
 ---
 title: Ugnsbakade falafel med tahinisås och picklad rödkål
+date: 2026-11-09
 description: En påse torkade kikärtor, en lök och en stor näve örter mixas till en grön, kryddig smet som formas till små bollar och bakas krispiga i ugnen, utan frityr. De serveras i pitabröd med len tahinisås och knaprig, neonrosa picklad rödkål. Gatumat från Mellanöstern som går att förbereda dagen innan.
-image: assets/recipes/123-falafel.webp
-cardImage: assets/recipes/123-falafel-card.webp
+image: assets/recipes/123-falafel.png
+cardImage: assets/recipes/123-falafel.png
 alt: Ugnsbakade falafel med tahinisås och picklad rödkål
 categories: [main]
 tags: [Vegan, Middle Eastern, Meal prep, Budget]

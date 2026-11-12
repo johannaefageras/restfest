@@ -1,8 +1,9 @@
 ---
 title: Hundkex med jordnötssmör, havre och banan
+date: 2026-11-09
 description: En brunfläckig banan, en klick jordnötssmör och några nävar havre och mjöl blir en fast deg som stansas ut till små ben, hjärtan och tassar. Kexen gräddas gyllene och torkas hårda, så att de knastrar mellan tänderna och håller i veckor. Ser ut som från en hunddelikatessbutik, och hunden kommer att sitta fint utan att bli tillsagd.
-image: assets/recipes/111-hundkex.webp
-cardImage: assets/recipes/111-hundkex-card.webp
+image: assets/recipes/111-hundkex.png
+cardImage: assets/recipes/111-hundkex.png
 alt: Hundkex med jordnötssmör, havre och banan
 categories: [pets]
 tags: [Treats, Dog, Make ahead, Leftovers, Gift, Beginner friendly, Budget]

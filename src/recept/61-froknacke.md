@@ -1,8 +1,9 @@
 ---
 title: Fröknäcke med pumpafrön, sesam och flingsalt
+date: 2026-11-09
 description: De sista nävarna frön i skafferiet, lite majsmjöl, olja och kokande vatten. Smeten breds ut tunt och torkas långsamt i ugnen till ett knaprigt, gyllene knäcke som ser ut som en mosaik när ljuset lyser igenom. Glutenfritt, veganskt och betydligt dyrare i butiken än det är svårt att göra.
-image: assets/recipes/61-froknacke.webp
-cardImage: assets/recipes/61-froknacke-card.webp
+image: assets/recipes/61-froknacke.png
+cardImage: assets/recipes/61-froknacke.png
 alt: Fröknäcke med pumpafrön, sesam och flingsalt
 categories: [bread, baking, side]
 tags: [Vegan, Gluten free, Swedish, Make ahead, Beginner friendly, Budget]

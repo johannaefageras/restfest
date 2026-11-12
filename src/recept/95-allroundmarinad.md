@@ -1,8 +1,9 @@
 ---
 title: Allroundmarinad med soja, honung, vitlök och ingefära
+date: 2026-11-09
 description: Soja, honung, vitlök och ingefära rörs ihop på två minuter till en söt, salt och djupt smakrik marinad som passar kyckling, fläsk, lax, tofu och grönsaker. Den sparade halvan kokas ihop till en blank glasyr som karamelliseras i pannan. Grundreceptet som får en vanlig vardagsmiddag att se ut som från en asiatisk grillrestaurang.
-image: assets/recipes/95-allroundmarinad.webp
-cardImage: assets/recipes/95-allroundmarinad-card.webp
+image: assets/recipes/95-allroundmarinad.png
+cardImage: assets/recipes/95-allroundmarinad.png
 alt: Allroundmarinad med soja, honung, vitlök och ingefära
 categories: [basics]
 tags: [Vegetarian, Dairy free, Marinade, Asian, Beginner friendly, Budget]

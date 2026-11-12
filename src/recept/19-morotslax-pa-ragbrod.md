@@ -1,8 +1,9 @@
 ---
 title: Morotslax på rågbröd med dill och kapris
+date: 2026-11-09
 description: Några helt vanliga morötter hyvlas tunt och marineras i en rökig, salt citronmarinad tills de liknar gravad lax i både färg och konsistens. De läggs i mjuka veck på rågbröd med vegansk färskost, rödlök, kapris och dill. Ser ut som en klassisk laxsmörgås men är bara morötter.
-image: assets/recipes/19-morotslax-pa-ragbrod.webp
-cardImage: assets/recipes/19-morotslax-pa-ragbrod-card.webp
+image: assets/recipes/19-morotslax-pa-ragbrod.png
+cardImage: assets/recipes/19-morotslax-pa-ragbrod.png
 alt: Morotslax på rågbröd med dill och kapris
 categories: [sandwich]
 tags: [Vegan, Swedish, Lunch, Make ahead, Budget]

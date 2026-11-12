@@ -1,8 +1,9 @@
 ---
 title: Lugnande havrebad för hund med kliande hud
+date: 2026-11-09
 description: Ett par deciliter havregryn mals till ett fint mjöl som gör badvattnet mjölkigt och mjukt. Hunden får stå i det ljumma vattnet medan du öser och masserar, och huden lugnas utan parfym eller starka tvättmedel. Ett spabad för hunden, gjort på frukostens havregryn.
-image: assets/recipes/115-lugnande-havrebad.webp
-cardImage: assets/recipes/115-lugnande-havrebad-card.webp
+image: assets/recipes/115-lugnande-havrebad.png
+cardImage: assets/recipes/115-lugnande-havrebad.png
 alt: Lugnande havrebad för hund med kliande hud
 categories: [pets]
 tags: [Dog, Grooming, Soothing, Natural, Beginner friendly, Budget]
@@ -20,6 +21,7 @@ ingredients:
     key: havre
   - name: Ljummet vatten
   - name: 1–2 stora handdukar
+    tool: true
 ---
 
 1. Mixa havregrynen till ett fint mjöl i en mixer eller matberedare. Rör ner en tesked i ett glas vatten. Blir vattnet mjölkigt är mjölet fint nog.

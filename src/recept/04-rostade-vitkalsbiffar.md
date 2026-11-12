@@ -1,8 +1,9 @@
 ---
 title: Rostade vitkålsbiffar med brynt smör, bacon och äpple
-description: 'Ett vitkålshuvud, ett paket bacon och ett äpple ur fruktskålen. Tjocka skivor vitkål rostas tills kanterna karamelliseras och mitten blir söt och mjuk. Ovanpå: nötigt brynt smör, krispigt bacon, frasig salvia och friska äppelstickor. Rustikt, gyllene och oväntat elegant.'
-image: assets/recipes/04-rostade-vitkalsbiffar.webp
-cardImage: assets/recipes/04-rostade-vitkalsbiffar-card.webp
+date: 2026-11-09
+description: "Ett vitkålshuvud, ett paket bacon och ett äpple ur fruktskålen. Tjocka skivor vitkål rostas tills kanterna karamelliseras och mitten blir söt och mjuk. Ovanpå: nötigt brynt smör, krispigt bacon, frasig salvia och friska äppelstickor. Rustikt, gyllene och oväntat elegant."
+image: assets/recipes/04-rostade-vitkalsbiffar.png
+cardImage: assets/recipes/04-rostade-vitkalsbiffar.png
 alt: Rostade vitkålsbiffar med brynt smör, bacon och äpple
 categories: [main, side]
 tags: [Gluten free, Low carb, Swedish, Autumn, Comfort food, Budget]
@@ -11,7 +12,7 @@ timeLabel: 55 min
 facts:
   Förberedelse: 15 min
   Tillagning: 40 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Medelsvårt
 pantryKeys: [kal, bacon, apple, smor]
 ingredients:

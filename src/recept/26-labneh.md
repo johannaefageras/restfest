@@ -1,11 +1,21 @@
 ---
 title: Hemmagjord labneh med paprikasmör och örter
+date: 2026-11-09
 description: En burk turkisk yoghurt silas över natten och blir en krämig, syrlig färskost. Den bres ut i virvlar och toppas med glödande rött paprikasmör, flingsalt och färska örter. Ser ut som en meze från Istanbul.
-image: assets/recipes/26-labneh.webp
-cardImage: assets/recipes/26-labneh-card.webp
+image: assets/recipes/26-labneh.png
+cardImage: assets/recipes/26-labneh.png
 alt: Hemmagjord labneh med paprikasmör och örter
 categories: [sauce]
-tags: [Vegetarian, Gluten free, Dip, Middle Eastern, Make ahead, Beginner friendly, Budget]
+tags:
+  [
+    Vegetarian,
+    Gluten free,
+    Dip,
+    Middle Eastern,
+    Make ahead,
+    Beginner friendly,
+    Budget,
+  ]
 timeLabel: 12 tim 15 min–24 tim 15 min
 facts:
   Förberedelse: 10 min + 12–24 tim silning

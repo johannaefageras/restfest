@@ -1,8 +1,9 @@
 ---
 title: Fiskpinnetacos med rödkålsslaw och limemajonnäs
+date: 2026-11-09
 description: Frysta fiskpinnar blir krispiga tacos med knaprig, lila rödkålsslaw, limemajonnäs och koriander i varma tortillas. Barnens favoritmat i en färgsprakande vuxenversion, klar på 35 minuter.
-image: assets/recipes/30-fiskpinnetacos.webp
-cardImage: assets/recipes/30-fiskpinnetacos-card.webp
+image: assets/recipes/30-fiskpinnetacos.png
+cardImage: assets/recipes/30-fiskpinnetacos.png
 alt: Fiskpinnetacos med rödkålsslaw och limemajonnäs
 categories: [main]
 tags: [Pescatarian, Mexican, Family friendly, Beginner friendly, Budget]

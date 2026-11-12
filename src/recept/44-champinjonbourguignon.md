@@ -1,8 +1,9 @@
 ---
 title: Champinjonbourguignon med schalottenlök och potatismos
+date: 2026-11-09
 description: Två askar champinjoner, ett par morötter och några schalottenlökar. Svampen bryns hårt tills den blir köttig och djupt gyllene, och puttrar sedan i en blank, mörk sås med rödvin, timjan och tomat. Grytan serveras i en grop av fluffigt potatismos. En fransk vintergryta helt utan kött, och ingen kommer att sakna det.
-image: assets/recipes/44-champinjonbourguignon.webp
-cardImage: assets/recipes/44-champinjonbourguignon-card.webp
+image: assets/recipes/44-champinjonbourguignon.png
+cardImage: assets/recipes/44-champinjonbourguignon.png
 alt: Champinjonbourguignon med schalottenlök och potatismos
 categories: [main]
 tags: [Vegan, Stew, French, Comfort food, Make ahead, Budget]
@@ -11,7 +12,7 @@ timeLabel: 1 tim 10 min
 facts:
   Förberedelse: 20 min
   Tillagning: 50 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Medelsvårt
 pantryKeys: [svamp, schalottenlok, morot, potatis]
 ingredients:

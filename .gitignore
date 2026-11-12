@@ -139,5 +139,9 @@ dist
 _site/
 
 # The full Font Awesome Pro font (licensed, not for a public repo). tools/icons.mjs cuts the icons the
-# site uses out of it into src/icons.css, which is committed.
+# site uses out of it into src/css/icons.css, which is committed.
 fa/
+
+# The Supabase CLI's local state (supabase link, supabase start)
+supabase/.temp/
+supabase/.branches/

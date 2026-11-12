@@ -1,8 +1,9 @@
 ---
 title: Knaprig granola med hasselnötter, havreyoghurt och frostiga bär
+date: 2026-11-09
 description: De sista havregrynen i paketet, en näve frön och lite sirap rostas till stora, knapriga granolakluster som doftar kanel och kardemumma. De varvas i höga glas med havreyoghurt och frysta bär som tinar till en rosa sky. Ser ut som frukostbuffén på ett boutiquehotell, och en sats räcker i två veckor.
-image: assets/recipes/38-granola.webp
-cardImage: assets/recipes/38-granola-card.webp
+image: assets/recipes/38-granola.png
+cardImage: assets/recipes/38-granola.png
 alt: Knaprig granola med hasselnötter, havreyoghurt och frostiga bär
 categories: [breakfast]
 tags: [Vegan, Make ahead, Gift, Beginner friendly, Budget]

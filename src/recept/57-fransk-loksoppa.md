@@ -1,8 +1,9 @@
 ---
 title: Fransk löksoppa med gratinerade ostkrutonger
+date: 2026-11-09
 description: Sex gula lökar, gårdagens bröd och en bit lagrad ost. Löken steks långsamt tills den blir mörkt bärnstensfärgad och söt som marmelad, och kokas sedan till en djup, glänsande buljong. Ovanpå flyter brödskivor under ett bubblande, gyllene ostlock. En parisisk klassiker, gjord på kökets billigaste råvara.
-image: assets/recipes/57-fransk-loksoppa.webp
-cardImage: assets/recipes/57-fransk-loksoppa-card.webp
+image: assets/recipes/57-fransk-loksoppa.png
+cardImage: assets/recipes/57-fransk-loksoppa.png
 alt: Fransk löksoppa med gratinerade ostkrutonger
 categories: [soup]
 tags: [Vegetarian, French, Comfort food, Leftovers, Budget]
@@ -11,7 +12,7 @@ timeLabel: 1 tim 30 min
 facts:
   Förberedelse: 15 min
   Tillagning: 75 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Medelsvårt
 pantryKeys: [lok, brod, ost-lagrad]
 ingredients:

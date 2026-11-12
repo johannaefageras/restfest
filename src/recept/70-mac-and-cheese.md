@@ -1,11 +1,21 @@
 ---
 title: Krämig mac and cheese med kylskåpets ostbitar och krispigt täcke
+date: 2026-11-09
 description: Ett paket makaroner, mjölk och alla ostbitar som ligger kvar i kylen. Pastan vänds i en sidenlen ostsås med senap, täcks med smörigt ströbröd och gratineras tills ytan knastrar och osten bubblar upp längs kanterna. Barnens favorit, och de vuxnas, i söndagskläder.
-image: assets/recipes/70-mac-and-cheese.webp
-cardImage: assets/recipes/70-mac-and-cheese-card.webp
+image: assets/recipes/70-mac-and-cheese.png
+cardImage: assets/recipes/70-mac-and-cheese.png
 alt: Krämig mac and cheese med kylskåpets ostbitar och krispigt täcke
 categories: [main]
-tags: [Vegetarian, American, Comfort food, Family friendly, Leftovers, Beginner friendly, Budget]
+tags:
+  [
+    Vegetarian,
+    American,
+    Comfort food,
+    Family friendly,
+    Leftovers,
+    Beginner friendly,
+    Budget,
+  ]
 time: 50
 timeLabel: 50 min
 facts:

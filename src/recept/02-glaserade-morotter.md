@@ -1,8 +1,9 @@
 ---
 title: Glaserade morötter på vit bönkräm med frödukkah
+date: 2026-11-09
 description: Morötterna längst in i grönsakslådan och en burk vita bönor blir en rätt som ser ut att komma från en bistro. Sirapsglaserade morötter med karamelliserade kanter vilar på en sidenlen bönkräm med citron och vitlök. Över allt strös rostade frön med spiskummin och koriander som knastrar i varje tugga.
-image: assets/recipes/02-glaserade-morotter.webp
-cardImage: assets/recipes/02-glaserade-morotter-card.webp
+image: assets/recipes/02-glaserade-morotter.png
+cardImage: assets/recipes/02-glaserade-morotter.png
 alt: Glaserade morötter på vit bönkräm med frödukkah
 categories: [side, starter, main]
 tags: [Vegan, Gluten free, Middle Eastern, Beginner friendly, Budget]

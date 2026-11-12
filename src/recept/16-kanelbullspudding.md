@@ -1,8 +1,9 @@
 ---
 title: Kanelbullspudding med vaniljkräm
+date: 2026-11-09
 description: Gårdagens torra kanelbullar bakas i en krämig äggstanning tills toppen är gyllene och krispig och insidan mjuk som en sufflé. Pärlsocker knastrar på ytan. Puddingen serveras ljummen med kall, fluffig vaniljkräm som smälter ner i alla skrymslen. Svensk fika möter engelsk bread pudding.
-image: assets/recipes/16-kanelbullspudding.webp
-cardImage: assets/recipes/16-kanelbullspudding-card.webp
+image: assets/recipes/16-kanelbullspudding.png
+cardImage: assets/recipes/16-kanelbullspudding.png
 alt: Kanelbullspudding med vaniljkräm
 categories: [baking, dessert]
 tags: [Vegetarian, Swedish, Leftovers, Beginner friendly, Budget]
@@ -11,7 +12,7 @@ timeLabel: 1 tim 15 min
 facts:
   Förberedelse: 15 min + 20 min dragtid
   Tillagning: 40 min
-  Portioner: '6'
+  Portioner: "6"
   Nivå: Nybörjare
 pantryKeys: []
 ingredients:

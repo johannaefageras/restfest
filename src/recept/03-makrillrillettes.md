@@ -1,8 +1,9 @@
 ---
 title: Makrillrillettes på knäcke med rosa picklad lök
+date: 2026-11-09
 description: Den där burken makrill i tomatsås som alla har men ingen vet vad man ska göra med blir krämiga rillettes med färskost, citron och dill. De serveras på knaprigt knäckebröd under neonrosa ringar av snabbpicklad rödlök. En förrätt eller mingelbit som ser beställd ut, för en bråkdel av priset.
-image: assets/recipes/03-makrillrillettes.webp
-cardImage: assets/recipes/03-makrillrillettes-card.webp
+image: assets/recipes/03-makrillrillettes.png
+cardImage: assets/recipes/03-makrillrillettes.png
 alt: Makrillrillettes på knäcke med rosa picklad lök
 categories: [starter, party]
 tags: [Pescatarian, Swedish, Beginner friendly, Budget]

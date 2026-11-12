@@ -1,11 +1,13 @@
 ---
 title: Chili sin carne med svarta bönor, kakao och limecrème
+date: 2026-11-09
 description: Två burkar bönor, en burk krossade tomater och en sked kakao puttrar till en mörk, rökig och mustig chili som smakar som om den stått på spisen hela dagen. Den serveras med syrlig limecrème, koriander och rödlök. En gryta som räcker till hela veckans matlådor, helt vegansk.
-image: assets/recipes/121-chili-sin-carne.webp
-cardImage: assets/recipes/121-chili-sin-carne-card.webp
+image: assets/recipes/121-chili-sin-carne.png
+cardImage: assets/recipes/121-chili-sin-carne.png
 alt: Chili sin carne med svarta bönor, kakao och limecrème
 categories: [main]
-tags: [Vegan, Gluten free, Mexican, One pot, Meal prep, Beginner friendly, Budget]
+tags:
+  [Vegan, Gluten free, Mexican, One pot, Meal prep, Beginner friendly, Budget]
 time: 45
 timeLabel: 45 min
 facts:

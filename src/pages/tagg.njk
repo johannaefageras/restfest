@@ -1,0 +1,12 @@
+---js
+// One page per tag, e.g. tagg/veganskt.html
+// The pages come from collections.recipeTags (eleventy.config.js, lib/recipes.js); the layout is _includes/layouts/listing.njk.
+const layout = 'layouts/listing.njk';
+const base = '../';
+const pagination = {data: 'collections.recipeTags', size: 1, alias: 'listing'};
+const permalink = data => data.listing.path;
+const eleventyComputed = {
+  title: data => `${data.listing.label} · Restfest`,
+  description: data => data.listing.description
+};
+---

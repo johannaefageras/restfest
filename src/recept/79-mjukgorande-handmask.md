@@ -1,8 +1,9 @@
 ---
 title: Mjukgörande handmask på övermogen avokado och olivolja
+date: 2026-11-09
 description: Avokadon som hann bli för mogen, en sked olivolja och ett par bomullsvantar. Den mosade avokadon masseras in i torra vinterhänder och får verka under värmande vantar medan du vilar. Händerna blir mjuka som efter en manikyr, för en bråkdel av priset.
-image: assets/recipes/79-mjukgorande-handmask.webp
-cardImage: assets/recipes/79-mjukgorande-handmask-card.webp
+image: assets/recipes/79-mjukgorande-handmask.png
+cardImage: assets/recipes/79-mjukgorande-handmask.png
 alt: Mjukgörande handmask på övermogen avokado och olivolja
 categories: [spa]
 tags: [Hands, Natural, Leftovers, Zero waste, Beginner friendly, Budget]
@@ -13,13 +14,14 @@ facts:
   Verkningstid: 20 min
   Räcker till: 1 behandling
   Nivå: Nybörjare
-beforeYouStart: 'Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn.'
+beforeYouStart: "Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn."
 pantryKeys: []
 ingredients:
   - name: ½ övermogen avokado
   - name: 1 msk olivolja
     key: olja
   - name: 1 par rena bomullsvantar, eller två plastpåsar och en handduk
+    tool: true
 ---
 
 1. Mosa avokadon helt slät med en gaffel och rör ner olivoljan.

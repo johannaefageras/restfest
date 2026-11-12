@@ -1,8 +1,9 @@
 ---
 title: Krispig chiliolja med vitlök, lök och sesam
+date: 2026-11-09
 description: En gul lök, ett helt vitlökshuvud och chiliflakesen i kryddhyllan steks långsamt i olja tills de blir gyllene och knapriga. Allt blandas med sesamfrön, soja och socker till en glödande röd, krispig chiliolja. En sked lyfter allt från stekta ägg och ris till nudlar och soppor.
-image: assets/recipes/50-chiliolja.webp
-cardImage: assets/recipes/50-chiliolja-card.webp
+image: assets/recipes/50-chiliolja.png
+cardImage: assets/recipes/50-chiliolja.png
 alt: Krispig chiliolja med vitlök, lök och sesam
 categories: [sauce]
 tags: [Vegan, Condiment, Asian, Make ahead, Gift, Budget]

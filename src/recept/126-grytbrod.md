@@ -1,8 +1,9 @@
 ---
 title: Långjäst grytbröd utan knådning
+date: 2026-11-09
 description: Mjöl, vatten, salt och en nypa jäst rörs ihop på fem minuter och får jäsa i lugn och ro över natten. Brödet gräddas i en het gjutjärnsgryta och får en mörk, knastrande skorpa och en luftig, blank inkråm med stora hål. Det sjunger när det svalnar, och ser ut att komma från ett surdegsbageri.
-image: assets/recipes/126-grytbrod.webp
-cardImage: assets/recipes/126-grytbrod-card.webp
+image: assets/recipes/126-grytbrod.png
+cardImage: assets/recipes/126-grytbrod.png
 alt: Långjäst grytbröd utan knådning
 categories: [bread, baking]
 tags: [Vegan, Make ahead, Beginner friendly, Budget]

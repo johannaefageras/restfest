@@ -1,0 +1,112 @@
+---
+layout: layouts/base.njk
+permalink: receptarkiv.html
+title: Receptarkivet · Restfest
+description: Hitta något att laga i Restfests receptarkiv och samla dina favoriter.
+---
+  <main id="main" class="wrap archive-page">
+    <section class="greeting archive-greeting" aria-labelledby="archive-title">
+      <div>
+        <a class="text-button archive-back" href="./"><i class="fas fa-arrow-left" aria-hidden="true"></i> Till startsidan</a>
+        <h1 id="archive-title"><span class="marker">Receptarkivet.</span></h1>
+        <p class="greeting-intro">Bläddra bland middagar, fika, drycker och skafferirecept, och spara dina favoriter. Du kan också <a href="typ/mat.html">gå direkt till en kategori</a>. Hemmaspa, städning och godis till husdjuren finns under <a href="mer-an-mat.html">Mer än mat</a>.</p>
+      </div>
+      <div class="greeting-aside" aria-hidden="true">
+        <div class="doodle-lineup">
+          <img id="archive-category-icon" src="assets/icons/recipes.svg" alt="" width="60" height="60">
+        </div>
+      </div>
+    </section>
+
+    <div class="archive-workspace">
+      <section class="recipes-section archive-recipes" aria-labelledby="recipes-heading">
+        <h2 id="recipes-heading" class="eyebrow">Hitta ett recept</h2>
+        <div class="archive-controls">
+          <div class="archive-search">
+            <label for="recipe-search">Sök på namn, ingrediens eller tagg</label>
+            <div class="archive-search-field">
+              <img src="assets/icons/magnifying-glass.svg" alt="" width="23" height="23">
+              <input id="recipe-search" type="search" placeholder="T.ex. pasta, spenat eller kikärter" autocomplete="off">
+            </div>
+          </div>
+          <details id="archive-filter-panel" class="archive-filter-panel">
+            <summary>
+              <img src="assets/icons/funnel.svg" alt="" width="18" height="18">
+              <span>Filter</span>
+              <span id="archive-filter-count" class="archive-filter-count" hidden>0</span>
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </summary>
+            <div class="archive-filter-panel-body">
+              <div class="archive-category">
+                <p class="filter-label" id="meal-filters-label">Kategori</p>
+                <details id="meal-picker" class="meal-picker">
+                  <summary aria-labelledby="meal-filters-label meal-filter-value">
+                    <img src="assets/icons/grid.svg" alt="" width="24" height="24">
+                    <span id="meal-filter-value">Alla kategorier</span>
+                    <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                  </summary>
+                  <div id="meal-filters" class="meal-picker-options" role="group" aria-labelledby="meal-filters-label"></div>
+                </details>
+              </div>
+              <div class="archive-filters">
+                <details class="archive-advanced-filters">
+                  <summary><img src="assets/icons/funnel.svg" alt="" width="18" height="18">Fler filter <span id="advanced-filter-state" hidden></span><i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+                  <p class="filter-label" id="diet-filters-label">Kost</p>
+                  <div id="diet-filters" class="food-filters" role="group" aria-labelledby="diet-filters-label"></div>
+                  <p class="filter-label" id="food-filters-label">Råvarutyp</p>
+                  <div id="food-filters" class="food-filters" role="group" aria-labelledby="food-filters-label"></div>
+                  <div class="archive-tag-filter">
+                    <label for="recipe-tag-search" class="filter-label">Taggar</label>
+                    <div class="tag-picker">
+                      <div class="tag-picker-field">
+                        <img src="assets/icons/magnifying-glass.svg" alt="" width="21" height="21">
+                        <input id="recipe-tag-search" type="text" role="combobox" aria-autocomplete="list"
+                          aria-controls="recipe-tag-suggestions" aria-expanded="false" aria-describedby="recipe-tag-hint"
+                          autocomplete="off" spellcheck="false" placeholder="Sök taggar, t.ex. Italienskt">
+                      </div>
+                      <ul id="recipe-tag-suggestions" class="tag-picker-suggestions" role="listbox" aria-label="Taggförslag" hidden></ul>
+                      <p class="tag-picker-empty" role="status"></p>
+                    </div>
+                    <p id="recipe-tag-hint">Recepten måste matcha alla valda taggar.</p>
+                  </div>
+                </details>
+                <div class="archive-quick-filters" role="group" aria-label="Snabbfilter">
+                  <button id="quick-filter" class="food-filter" type="button" aria-pressed="false"><img src="assets/icons/stopwatch.svg" alt="" width="22" height="22">Under 20 min</button>
+                  <button id="saved-filter" class="food-filter" type="button" aria-pressed="false">
+                    <img src="assets/icons/heart.svg" alt="" width="22" height="22"> Sparade
+                  </button>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+        <div class="archive-results-row">
+          <p id="archive-results" class="meta archive-results" role="status"></p>
+          {#- app.js adds "Bäst matchning" first, and picks it, when the fridge list on the home page has something on it. #}
+          <div class="archive-sort">
+            <label for="archive-sort">Sortera</label>
+            <div class="archive-sort-field">
+              <select id="archive-sort" autocomplete="off">
+                <option value="newest">Nyast först</option>
+                <option value="title">A–Ö</option>
+              </select>
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+        <p id="archive-elsewhere" class="meta archive-elsewhere" hidden></p>
+        <div id="recipe-grid" class="recipe-grid"></div>
+        <div id="empty-saved" class="empty-saved" hidden>
+          <img src="assets/icons/heart.svg" width="52" height="52" alt="">
+          <h3>Inga sparade recept än.</h3>
+          <p>Tryck på hjärtat vid ett recept så hittar du det här.</p>
+          <button id="show-all" class="text-button">Visa alla recept <i class="fas fa-arrow-up-right" aria-hidden="true"></i></button>
+        </div>
+        <div id="empty-search" class="empty-saved" hidden>
+          <h3>Inga träffar.</h3>
+          <p>Prova en annan ingrediens eller rensa filtren.</p>
+          <button id="clear-recipe-filters" class="text-button">Rensa filtren</button>
+        </div>
+      </section>
+    </div>
+  </main>

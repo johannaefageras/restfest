@@ -1,17 +1,19 @@
 ---
 title: Ugnsbakade stora vita bönor i tomatsås med dill och citron
+date: 2026-11-09
 description: Två burkar stora vita bönor, en burk krossade tomater och en lök. Bönorna bakas i ugnen i en söt, djupröd tomatsås med vitlök, oregano och mycket olivolja, tills såsen är tjock som sylt och bönorna överst har fått krispiga kanter. Toppa med dill, citronskal och ett varv olivolja. Grekisk tavernamat ur skafferiet.
-image: assets/recipes/66-ugnsbakade-vita-bonor.webp
-cardImage: assets/recipes/66-ugnsbakade-vita-bonor-card.webp
+image: assets/recipes/66-ugnsbakade-vita-bonor.png
+cardImage: assets/recipes/66-ugnsbakade-vita-bonor.png
 alt: Ugnsbakade stora vita bönor i tomatsås med dill och citron
 categories: [main, side]
-tags: [Vegan, Gluten free, Greek, One pot, Make ahead, Beginner friendly, Budget]
+tags:
+  [Vegan, Gluten free, Greek, One pot, Make ahead, Beginner friendly, Budget]
 time: 60
 timeLabel: 1 tim
 facts:
   Förberedelse: 10 min
   Tillagning: 50 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: [vita-bonor, kross, lok, morot]
 ingredients:

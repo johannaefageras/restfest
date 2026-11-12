@@ -1,8 +1,9 @@
 ---
 title: Smørrebrød med kall potatis, rostad lök och krasse
+date: 2026-11-09
 description: Gårdagens kokta potatis skivas tunt och läggs som fjäll på smörat rågbröd med små prickar av majonnäs. Ovanpå kommer krispig rostad lök, rosa rädisor, krasse, gräslök och flingsalt. En Köpenhamnsklassiker som gör rester till lunch på en finare restaurang.
-image: assets/recipes/20-smorrebrod.webp
-cardImage: assets/recipes/20-smorrebrod-card.webp
+image: assets/recipes/20-smorrebrod.png
+cardImage: assets/recipes/20-smorrebrod.png
 alt: Smørrebrød med kall potatis, rostad lök och krasse
 categories: [sandwich]
 tags: [Vegetarian, Danish, Lunch, Leftovers, Beginner friendly, Budget]

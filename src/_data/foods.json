@@ -694,5 +694,59 @@
     "aliases": [
       "svartvinbär"
     ]
+  },
+  "zucchini": {
+    "name": "Zucchini",
+    "group": "vegetables",
+    "aliases": [
+      "zucchini",
+      "zucchinis",
+      "squash"
+    ]
+  },
+  "avokado": {
+    "name": "Avokado",
+    "group": "vegetables",
+    "aliases": [
+      "avokado",
+      "avokador",
+      "avocado"
+    ]
+  },
+  "pumpa": {
+    "name": "Pumpa",
+    "group": "vegetables",
+    "aliases": [
+      "pumpa",
+      "butternut",
+      "butternutpumpa",
+      "pumpapuré"
+    ]
+  },
+  "ingefara": {
+    "name": "Färsk ingefära",
+    "group": "herbs",
+    "aliases": [
+      "ingefära",
+      "ingefärsrot"
+    ]
+  },
+  "mango": {
+    "name": "Mango",
+    "group": "fruit",
+    "aliases": [
+      "mango",
+      "mangobitar",
+      "frysta mangobitar"
+    ]
+  },
+  "dadlar": {
+    "name": "Dadlar",
+    "group": "fruit",
+    "aliases": [
+      "dadlar",
+      "dadel",
+      "torkade dadlar"
+    ]
   }
 }

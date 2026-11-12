@@ -1,8 +1,9 @@
 ---
 title: Fryst hundglass i tassformar med yoghurt och blåbär
+date: 2026-11-09
 description: En burk naturell yoghurt och en näve frysta blåbär blir små, marmorerade tassar i lila och vitt. De fryses i en silikonform och serveras som belöning, efter en lång promenad eller i en ihålig gummileksak som håller hunden sysselsatt en lång stund. Hundens egen glassbar, utan socker.
-image: assets/recipes/112-hundglass.webp
-cardImage: assets/recipes/112-hundglass-card.webp
+image: assets/recipes/112-hundglass.png
+cardImage: assets/recipes/112-hundglass.png
 alt: Fryst hundglass i tassformar med yoghurt och blåbär
 categories: [pets]
 tags: [Treats, Dog, No bake, Make ahead, Frozen, Beginner friendly, Budget]
@@ -23,6 +24,7 @@ ingredients:
   - name: 1 msk jordnötssmör utan xylitol (valfritt)
     key: jordnotssmor
   - name: 1 silikonform med små fack, gärna tassar eller ben
+    tool: true
 ---
 
 1. Mosa hälften av blåbären med en gaffel så att de släpper sin saft.

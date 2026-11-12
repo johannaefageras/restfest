@@ -1,8 +1,9 @@
 ---
 title: Banansoftis med kakao, jordnötssmör och rostade hasselnötter
+date: 2026-11-09
 description: De bruna bananerna som ingen vill äta skivas, fryses och mixas till en len, krämig softglass utan grädde, socker eller glassmaskin. Den skopas i höga virvlar, ringlas med varmt jordnötssmör och toppas med rostade hasselnötter, riven choklad och flingsalt. Ser ut som från en glassbar och är helt vegansk.
-image: assets/recipes/73-banansoftis.webp
-cardImage: assets/recipes/73-banansoftis-card.webp
+image: assets/recipes/73-banansoftis.png
+cardImage: assets/recipes/73-banansoftis.png
 alt: Banansoftis med kakao, jordnötssmör och rostade hasselnötter
 categories: [dessert]
 tags: [Vegan, Gluten free, Leftovers, Zero waste, Beginner friendly, Budget]
@@ -10,7 +11,7 @@ timeLabel: Minst 4 tim 15 min
 facts:
   Förberedelse: 10 min + minst 4 tim i frysen
   Tillagning: 5 min
-  Portioner: '4'
+  Portioner: "4"
   Nivå: Nybörjare
 pantryKeys: []
 ingredients:

@@ -1,8 +1,9 @@
 ---
 title: Lugnande havremask med honung och yoghurt
+date: 2026-11-09
 description: Havregryn, en sked honung och en klick yoghurt rörs ihop till en mjuk, krämig mask som lugnar och återfuktar huden. Den serveras i en liten keramikskål med en pensel och en varm, rullad handduk. Som en ansiktsbehandling på ett lyxigt spa, med det du redan har i skafferiet.
-image: assets/recipes/33-havremask.webp
-cardImage: assets/recipes/33-havremask-card.webp
+image: assets/recipes/33-havremask.png
+cardImage: assets/recipes/33-havremask.png
 alt: Lugnande havremask med honung och yoghurt
 categories: [spa]
 tags: [Face, Soothing, Natural, Beginner friendly, Budget]

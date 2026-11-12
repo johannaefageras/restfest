@@ -1,8 +1,9 @@
 ---
 title: Filmjölksscones med lagrad ost och gräslök
+date: 2026-11-09
 description: Filmjölken som närmar sig bäst före-datum, en bit lagrad ost och lite mjöl. Snabba scones utan jäst, som reser sig höga i ugnen med gyllene, knapriga ostkanter och en mjuk, fluffig insida. Servera dem varma med kallt smör till soppa eller helgfrukost. Från tom brödkorg till nybakat på tjugofem minuter.
-image: assets/recipes/60-filmjolksscones.webp
-cardImage: assets/recipes/60-filmjolksscones-card.webp
+image: assets/recipes/60-filmjolksscones.png
+cardImage: assets/recipes/60-filmjolksscones.png
 alt: Filmjölksscones med lagrad ost och gräslök
 categories: [bread, baking, breakfast]
 tags: [Vegetarian, Leftovers, Beginner friendly, Budget]

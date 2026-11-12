@@ -1,8 +1,9 @@
 ---
 title: Glanssköljning för håret med äppelcidervinäger och rosmarin
+date: 2026-11-09
 description: En skvätt äppelcidervinäger, en kvist rosmarin och en kanna vatten. Sköljningen hälls över håret efter tvätten och gör det mjukt, lättkammat och blankt, helt utan köpta produkter. Ett sista steg i duschen som kostar några kronor och doftar som en örtträdgård.
-image: assets/recipes/78-harglansskoljning.webp
-cardImage: assets/recipes/78-harglansskoljning-card.webp
+image: assets/recipes/78-harglansskoljning.png
+cardImage: assets/recipes/78-harglansskoljning.png
 alt: Glanssköljning för håret med äppelcidervinäger och rosmarin
 categories: [spa]
 tags: [Hair, Natural, Beginner friendly, Budget]
@@ -13,7 +14,7 @@ facts:
   Verkningstid: 2 min
   Räcker till: 1 behandling
   Nivå: Nybörjare
-beforeYouStart: 'Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn.'
+beforeYouStart: "Gör ett lapptest innan du provar något nytt: stryk lite på insidan av underarmen och vänta ett dygn."
 pantryKeys: []
 ingredients:
   - name: 5 dl vatten
