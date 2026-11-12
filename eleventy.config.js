@@ -20,7 +20,7 @@
 // Collections:
 //   recipes            every recipe, in id order (01-…, 02-…, 135-…)
 //   recipeCategories   the food categories, for kategori/<slug>.html (src/pages/kategori.njk)
-//   recipeTypes        Mat, Hemmaspa, Hushåll & städ and Husdjur, for typ/<slug>.html (src/pages/typ.njk)
+//   recipeTypes        Mat, Hemmaspa, Hushåll & rengöring and Husdjur, for typ/<slug>.html (src/pages/typ.njk)
 //   recipeTags         every tag, for tagg/<slug>.html (src/pages/tagg.njk)
 // Eleventy also makes a collection per tag from the recipes' `tags`, e.g. collections.Vegan.
 

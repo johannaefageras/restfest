@@ -41,7 +41,7 @@ const mealTypes = {
   // so the card still shows what kind of dish it is.
   kids: {label: 'Barnvänligt', icon: 'teddy-bear'},
   spa: {label: 'Hemmaspa & behandlingar', name: 'Hemmaspa', icon: 'towel-and-candle', badge: 'HEMMASPA', action: 'Visa behandling'},
-  household: {label: 'Hushåll & städ', icon: 'spray-bottle', badge: 'HUSHÅLL & STÄD', action: 'Visa instruktioner'},
+  household: {label: 'Hushåll & rengöring', icon: 'spray-bottle', badge: 'HUSHÅLL & RENGÖRING', action: 'Visa instruktioner'},
   pets: {label: 'Husdjur', icon: 'dog-bone', badge: 'HUSDJUR'}
 };
 

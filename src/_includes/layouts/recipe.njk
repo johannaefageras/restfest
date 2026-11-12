@@ -10,11 +10,7 @@ layout: layouts/base.njk
     which src/recept/recept.11tydata.js works out from the front matter and the text (lib/recipes.js).
     The recipe pop-up on the other pages fetches these pages and shows their .recipe-view. -#}
   <main id="main" class="wrap recipe-page">
-    {%- if recipe.food %}
-    <a class="text-button recipe-page-back" href="{{ base }}receptarkiv.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Till receptarkivet</a>
-    {%- else %}
-    <a class="text-button recipe-page-back" href="{{ base }}mer-an-mat.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Till Mer än mat</a>
-    {%- endif %}
+    <a class="text-button recipe-page-back" href="{{ base }}{{ recipe.back.path }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> {{ recipe.back.label }}</a>
     <article class="recipe-view" data-recipe="{{ recipe.id }}">
       <div class="dialog-top cook-art has-photo">
         <img src="{{ base }}{{ recipe.image }}"

@@ -12,6 +12,21 @@
 {%- set isHome = page.url == '/' -%}
 {#- The home page links to its own sections; the other pages link to the home page. -#}
 {%- set homeUrl = '' if isHome else (base or './') -%}
+{#- The "Recept" menu, in the header (opens downwards) and the footer (opens upwards): one entry per
+    recipe type, from `menu` in lib/taxonomy.js. It is a <details>, so it opens without JavaScript;
+    app.js closes it on Escape, on a click outside and when focus leaves it. The word is marked as
+    the current page on every page that lists recipes. -#}
+{%- set inRecipes = page.url == '/receptarkiv.html' or page.url == '/mer-an-mat.html' or page.url.startsWith('/typ/') or page.url.startsWith('/kategori/') or page.url.startsWith('/tagg/') -%}
+{%- macro recipeMenu(types, base, url, current, icon) %}
+        <details class="nav-menu">
+          <summary class="nav-link{% if current %} is-current{% endif %}">{% if icon %}<img src="{{ base }}assets/icons/recipes.svg" alt="" width="20" height="20">{% endif %}<span>Recept</span><i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+          <ul class="nav-menu-panel">
+            {%- for type in types %}
+            <li><a href="{{ base }}{{ type.menu.path }}" data-type="{{ type.key }}"{% if url == '/' + type.menu.path %} aria-current="page"{% endif %}><img src="{{ base }}assets/icons/{{ type.icon }}.svg" alt="" width="32" height="32"><span><strong>{{ type.menu.label }}</strong><small>{{ type.menu.note }}</small></span></a></li>
+            {%- endfor %}
+          </ul>
+        </details>
+{%- endmacro -%}
 <!doctype html>
 <html lang="sv"{% if base %} data-base="{{ base }}"{% endif %}>
 <head>
@@ -55,14 +70,12 @@
   <header class="site-header">
     <div class="header-inner wrap">
       <a class="brand" href="{{ homeUrl or '#' }}" aria-label="Restfest, startsida">
-        <img src="{{ base }}assets/icons/cooking-pot.svg" width="38" height="38" alt="">
+        <img src="{{ base }}assets/illustrations/ramen-bowl.svg" width="38" height="38" alt="">
         <span>Restfest</span>
       </a>
       <nav aria-label="Huvudmeny">
-        <a href="{{ homeUrl }}#borja"><img src="{{ base }}assets/illustrations/fridge-closed.svg" alt="" width="20" height="20">Kylskåpet</a>
-        <a href="{{ base }}receptarkiv.html"{% if page.url == '/receptarkiv.html' %} aria-current="page"{% endif %}><img src="{{ base }}assets/icons/recipes.svg" alt="" width="20" height="20">Receptarkiv</a>
-        <a href="{{ base }}mer-an-mat.html"{% if page.url == '/mer-an-mat.html' %} aria-current="page"{% endif %}><img src="{{ base }}assets/icons/leaf.svg" alt="" width="20" height="20">Mer än mat</a>
-        <a class="nav-how" href="{{ homeUrl }}#sa-funkar-det"><img src="{{ base }}assets/icons/information-symbol.svg" alt="" width="20" height="20">Så funkar det</a>
+        {{- recipeMenu(collections.recipeTypes, base, page.url, inRecipes, true) }}
+        <a class="nav-link" href="{{ homeUrl }}#sa-funkar-det"><img src="{{ base }}assets/icons/information-symbol.svg" alt="" width="20" height="20">Så funkar det</a>
       </nav>
       <div class="header-actions">
         <a class="saved-nav" href="{{ base }}receptarkiv.html?vy=sparade" aria-label="Visa sparade recept">
@@ -80,12 +93,23 @@
 
 {{ content | safe }}
 
+  {#- The footer is the header turned over: the same rule, brand and menu, with the tagline where the
+      header has its buttons. Its "Recept" menu opens upwards.
+      Below them the name in large yellow type, cut off by the bottom of the page. It is decoration,
+      so screen readers skip it. #}
   <footer class="site-footer">
-    <div class="wrap footer-inner">
-      <a class="footer-brand" href="{{ homeUrl or '#' }}">Restfest<span class="footer-star" aria-hidden="true">✳</span></a>
-      <p>Mer gott. Mindre svinn.</p>
-      <a class="text-button" href="{{ homeUrl }}#borja">Till kylskåpet <i class="fas {{ 'fa-arrow-up' if isHome else 'fa-arrow-up-right' }}" aria-hidden="true"></i></a>
+    <div class="footer-inner wrap">
+      <a class="brand" href="{{ homeUrl or '#' }}" aria-label="Restfest, startsida">
+        <img src="{{ base }}assets/illustrations/ramen-bowl.svg" width="38" height="38" alt="">
+        <span>Restfest</span>
+      </a>
+      <p class="footer-tagline">Rädda resterna.</p>
+      <nav aria-label="Sidfot">
+        {{- recipeMenu(collections.recipeTypes, base, page.url, inRecipes, false) }}
+        <a class="nav-link" href="{{ homeUrl }}#sa-funkar-det">Så funkar det</a>
+      </nav>
     </div>
+    <p class="footer-mark" aria-hidden="true">Restfest</p>
   </footer>
   {%- if not recipe %}
   {#- Recipe pages show the recipe in the page, so only the other pages need the recipe pop-up. #}

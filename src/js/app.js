@@ -1369,6 +1369,30 @@ $("#shopping-items").addEventListener("click", (event) => {
   ).focus();
 });
 
+// The "Recept" menus in the header and footer (layouts/base.njk) are <details>, so they open and
+// close on their own. Here they also close on Escape, on a click outside, when focus leaves them,
+// and when the visitor comes back to the page with Back.
+const navMenus = [...document.querySelectorAll(".nav-menu")];
+for (const menu of navMenus) {
+  menu.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !menu.open) return;
+    event.preventDefault();
+    menu.open = false;
+    menu.querySelector("summary").focus({ preventScroll: true });
+  });
+  menu.addEventListener("focusout", (event) => {
+    if (event.relatedTarget && !menu.contains(event.relatedTarget))
+      menu.open = false;
+  });
+}
+document.addEventListener("click", (event) => {
+  for (const menu of navMenus)
+    if (menu.open && !menu.contains(event.target)) menu.open = false;
+});
+window.addEventListener("pageshow", () => {
+  for (const menu of navMenus) menu.open = false;
+});
+
 // On a recipe's own page (recept/<id>.html) the recipe is part of the page.
 const pageRecipe = $("main .recipe-view");
 if (pageRecipe) enhanceRecipe(pageRecipe);
