@@ -129,6 +129,9 @@
       <nav aria-label="Sidfot">
         {{- recipeMenu(collections.recipeTypes, base, page.url, inRecipes, false) }}
         <a class="nav-link" href="{{ homeUrl }}#sa-funkar-det">Så funkar det</a>
+        {%- if ai.accounts %}
+        <a class="nav-link" href="{{ base }}integritet.html"{% if page.url == '/integritet.html' %} aria-current="page"{% endif %}>Integritet</a>
+        {%- endif %}
       </nav>
     </div>
     <p class="footer-mark" aria-hidden="true">Ofta bra efter</p>

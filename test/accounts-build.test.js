@@ -61,6 +61,11 @@ test('with a publishable key every page gets the account button and the account 
     assert.ok(html.includes('<script type="module" src="js/profile.js"></script>'), `${page} loads profile.js`);
     assert.ok(html.includes(`<a href="${page}" aria-current="page">${name}</a>`), `${page} is marked in the account menu`);
   }
+  const privacy = site.read('integritet.html');
+  assert.equal(privacy.includes('name="robots"'), false, 'the privacy page may be indexed');
+  assert.match(privacy, /<h1[^>]*>.*Integritet/s);
+  for (const [page, base] of [['index.html', ''], ['recept/01-rodbetspytt.html', '../'], ['logga-in.html', '']])
+    assert.ok(site.read(page).includes(`<a class="nav-link" href="${base}integritet.html"`), `${page} links to the privacy page in the footer`);
   assert.ok(site.has('js/account.js'));
   assert.ok(site.has('js/account-helpers.js'));
   assert.match(site.read('js/vendor/supabase.js'), /createClient/);

@@ -46,7 +46,7 @@ Eleventy builds the site from `src/` into `_site/`. `_site/` is generated and no
 - **Paths:** pages use relative paths. Pages one folder down (recipes, categories, types, tags) set `base: '../'`, and the layout puts `{{ base }}` in front of every path and adds `data-base` to `<html>` for `app.js`. Opening the built files from disk still works.
 - **URLs are unchanged from before Eleventy:** `receptarkiv.html`, `mer-an-mat.html`, `recept/<id>.html`. Every template in `src/pages/` sets its own `permalink:`, because the folder isn't part of the address (`index.njk` has `index.html`). Without one, Eleventy writes `pages/name/index.html`.
 - **New URLs:** `kategori/<slug>.html` (18 food categories), `typ/<slug>.html` (`mat`, `hemmaspa`, `hushall-och-rengoring`, `husdjur`) and `tagg/<slug>.html` (85 tags). The slug comes from the Swedish label: "Fika & bakning" → `fika-och-bakning`. Renaming a label changes the address; the build stops if two labels give the same one.
-- **localStorage keys:** `restfest-pantry`, `restfest-saved`, `restfest-shopping-list`.
+- **localStorage keys:** `restfest-pantry`, `restfest-saved`, `restfest-shopping-list`, `restfest-week`. With accounts also `restfest-account`, `restfest-saved-generated` and `restfest-saved-queue` (see "Konton och receptbok").
 
 **Build:** `npm install` once, then:
 
@@ -278,9 +278,96 @@ The owner chose: **Supabase** for the backend, **option C** for generated recipe
 - **The page needs a server:** `nytt-recept.html` loads a module, which browsers don't load from `file://`.
 - **Testing the functions locally:** `npx supabase start` and `npx supabase functions serve` (needs Docker), with the secrets in `supabase/functions/.env`.
 
+## Konton och receptbok (accounts and the recipe book)
+
+Visitors can create an account and sign in, with email + password or Google. An account gives them **Min receptbok**, which holds the recipes they generate and the archive recipes they heart and is the same on every device, and **preferences** (diets, foods they don't eat, portions) that Claude follows when it writes them a new recipe. Nothing that worked without an account needs one now.
+
+The design and the plan it was built from are in `docs/superpowers/specs/2026-11-12-accounts-design.md` and `docs/superpowers/plans/2026-11-13-accounts.md`. The design says which choices were the owner's and which were Claude's.
+
+**Off until the key is set.** Accounts need `publishableKey` in `src/_data/ai.js`. While it's empty the six account pages aren't built (`accountPages` in `eleventy.config.js`), the layout has no account button, and every HTML page is byte for byte what it was before accounts existed. `npm test` builds the site both ways and checks this.
+
+**What a visitor gets:**
+
+- **Signed out:** as before, plus a "Logga in" button in the header (a link in the menu row below 520px) and "Spara i receptboken" on a generated recipe, which leads to the sign-in page and back.
+- **Signed in:** "Sparat" in the header becomes "Receptbok" and counts hearted and generated recipes together; "Logga in" becomes "Konto". Hearts work as before and are also stored in the account. A recipe generated while signed in goes into the book by itself, and its page has a heart.
+- **Signing out** empties the hearts in that browser (they stay in the account) and leaves the fridge list, the shopping list and the week plan alone.
+- **Deleting the account** (Konto) removes the sign-in, the profile and the book. Generated recipes stay: they are never tied to a person, only listed in a book.
+
+**Files:**
+
+| File | Role |
+| --- | --- |
+| `src/_data/ai.js` | `publishableKey` and `accounts` (true when the project address and the key are set). The layout puts both in `<meta name="restfest-account">` |
+| `src/_includes/layouts/base.njk` | With accounts: that meta tag, a one-line script in the head that adds the class `signed-in` to `<html>` before the first paint, the account button and link, the footer's "Integritet" link, and `js/account.js` |
+| `src/js/account.js` | **Every page.** Who is signed in, the header's state, loading the Supabase library, keeping the hearts in step with the account. Gives the other scripts `window.restfestAccount` (listed at the top of the file) |
+| `lib/account-helpers.js` | Pure helpers, copied to `js/account-helpers.js` and tested by `npm test`: the return-address check, the queue of unsent heart changes, error texts in Swedish, the "äter inte" list |
+| `src/js/account-forms.js` | What the forms share: running a request with the buttons off, showing what went wrong |
+| `src/pages/logga-in.njk`, `nytt-losenord.njk`, `src/js/auth-forms.js` | Sign in, create an account, forgotten password, choose a new password |
+| `src/pages/receptbok.njk`, `src/js/recipe-book.js` | Min receptbok |
+| `src/pages/profil.njk`, `konto.njk`, `src/js/profile.js` | Name and preferences; email, password, sign out, delete |
+| `src/_includes/account-nav.njk` | The menu the three signed-in pages share |
+| `src/pages/integritet.njk` | The privacy page. Indexed, unlike the other five. **Keep it true** when what the site stores or sends changes |
+| `src/js/new-recipe.js`, `src/js/fridge-ai.js` | The heart on a generated recipe; the sign-in sent along with "Hitta på ett recept" |
+| `supabase/migrations/…_accounts.sql` | Tables `profiles`, `saved_recipes`, `saved_generated_recipes`, their row level security, and `my_generated_recipes()` |
+| `supabase/functions/_shared/auth.ts` | `userFor(req)`: the signed-in visitor behind a request, or null |
+| `supabase/functions/_shared/preferences.ts` | Cleans a profile's preferences and writes them as lines for Claude. Tested by `npm test` |
+| `supabase/functions/generate-recipe` | Now takes an optional sign-in: follows the caller's preferences and adds the recipe to their book (`saved` in the answer) |
+| `supabase/functions/delete-account` | Deletes the caller's user; the database removes the rest |
+| `supabase/templates/` | The three mails in Swedish, pasted into the dashboard by hand (its README says how) |
+| `tools/standin/` | A stand-in backend and two checks that need no real project (see "Testing" below) |
+| `src/assets/icons/account.svg` | The account button's icon. Written for this, since the icon set has no person; swap the file for a better one |
+
+**How signing in works:**
+
+- **The library** is `@supabase/supabase-js`, pinned in `package.json` and copied from `node_modules` to `js/vendor/supabase.js` (220 KB, about 60 KB compressed). A signed-out visitor never downloads it: `account.js` loads it only on the account pages, or when the browser has `restfest-account` in localStorage, which marks "signed in here".
+- **Implicit flow, not PKCE** (`client()` in `account.js`): a link in a mail has to work in a browser other than the one that asked for it, such as signing up on a laptop and opening the mail on a phone.
+- **Mail links and Google** come back to `logga-in.html`, which reads the sign-in from the address and goes on to `?till=<path>`, or to the recipe book. Only a path within the site is accepted (`safeReturnPath`). The password link goes to `nytt-losenord.html`.
+- **A sign-in that has run out** just signs the visitor out on the next page load, without a message. Supabase being unreachable changes nothing.
+- **The functions** get the visitor's access token in the `Authorization` header and check it themselves (`userFor`). `verify_jwt` stays off in `config.toml`.
+
+**How the hearts stay in step.** `app.js` still draws hearts from `restfest-saved`, signed in or not. For a signed-in visitor that list is a copy of the account's, and `account.js` keeps it so:
+
+- **At the first sign-in in a browser**, the hearts it already holds are added to the account, so none is lost.
+- **Every change** goes into a queue (`restfest-saved-queue`) and is sent at once. What can't be sent (offline, Supabase down) stays queued and goes with the next page load. The heart click itself is never blocked or undone.
+- **On a page load**, at most once a minute, the queue is sent and then the account's lists replace the browser's. So a heart from another device shows up, and a heart removed offline stays removed.
+- **Generated recipes** in the book are kept as ids in `restfest-saved-generated`. `toggleSave()` in `app.js` tells `account.js` about a change with the event `restfest:save-change`; `account.js` sends `restfest:account` when the sign-in or the book changes.
+- **A book holds at most 1000 recipes of each kind** (a trigger in the migration).
+
+**The recipe book's cards.** Archive recipes use `archiveCard()` from `app.js`. `generatedCard()` in `recipe-book.js` repeats that markup for a generated recipe, so there are now three places to change together: `archiveCard()`, `_includes/recipe-card.njk` and `generatedCard()`.
+
+**Preferences and Claude.** `generate-recipe` adds the caller's preferences to the request as a few Swedish lines (`preferencesPrompt`), and `recipeSystem` in `_shared/recipe.ts` has a PREFERENCES section saying how to follow them. Claude leaves out what doesn't fit. If nothing is left to cook from it answers `unsuitable: true`, and the visitor gets a message pointing to their profile. That attempt still counts against the day's cap, since it cost a Claude call. The recipe is not checked against the preferences afterwards. The foods a visitor "doesn't eat" are their own words: they are cleaned, quoted and named as a list of foods, and Claude is told to ignore instructions in them.
+
+**Setup (once), the owner's part.** The code can't do these:
+
+1. **Publishable key:** Supabase dashboard → Project Settings → API keys → copy the publishable key (`sb_publishable_…`) into `publishableKey` in `src/_data/ai.js`. It is meant to be public. Never put a secret key there.
+2. **Addresses:** Authentication → URL Configuration. Set the Site URL to the site's address, and add the addresses the site runs on to the redirect list: `http://localhost:8080/**` for the local server, and the public address with `/**` once there is one.
+3. **Password length:** Authentication → Sign In / Providers → Email: minimum password length 8, and keep "Confirm email" on. The site checks 8 characters itself, but Supabase's own default is 6.
+4. **Mails:** paste the three templates from `supabase/templates/` (see its README for which goes where and the subjects).
+5. **Google:** create an OAuth client in Google Cloud Console (Web application), with the redirect address shown on Supabase's Google provider page (`https://yatffwoobcsrxcxplecd.supabase.co/auth/v1/callback`), and enter its id and secret on that page.
+6. **Mail delivery, before real visitors:** Supabase's built-in sender only delivers to the project's own team and sends 2 mails an hour. Connect a mail service (Resend, Postmark, AWS SES …) under Authentication → Emails → SMTP Settings; it needs a domain you control. Until then, email sign-up works for your own address only. Google sign-in works for everyone.
+7. **A contact address** for the privacy page: `contact` in `src/_data/site.js`.
+8. Deploy: `npx supabase db push` (one new migration) and `npx supabase functions deploy`, then build and upload as usual.
+
+**Things to know:**
+
+- **Google's screen** says the visitor is continuing to `yatffwoobcsrxcxplecd.supabase.co`, not to Ofta bra efter, unless the project gets a custom domain, which is a paid Supabase add-on.
+- **Any signed-in visitor can add any generated recipe to their book** if they have its link. The pages are public anyway.
+- **With Supabase down**, the recipe book page shows its error after about 7 seconds: the library retries reads before giving up.
+- **A changed email address** takes effect when the visitor clicks the link sent to the new address.
+- **The Google button has no Google logo.** Add the official one if you want it; don't redraw it.
+- **Restart `npm start` after adding the key:** which pages are built is decided when the server starts.
+- **Not built:** syncing the fridge list, shopping list or week plan to the account; preferences affecting the archive matching; a higher daily cap for signed-in visitors; other sign-in methods; an admin page.
+
+**Testing.** Three things in `tools/standin/` need no real project and touch nothing real:
+
+- **`server.mjs`:** a stand-in for the Supabase project (sign-in, the tables, the functions) in memory, to try the account features in a browser. Its header comment has the two commands: start it, then serve a build with `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` pointing at it. Every page and flow of the accounts was checked this way with the Playwright tools.
+- **`check-rls.mjs`:** runs the migrations in an in-memory Postgres and checks what each role can reach (34 checks). **Run it after any change to a migration**; it is the only test of the row level security.
+- **`check-functions.ts`:** runs `generate-recipe` and `delete-account` with Claude and Supabase replaced (17 checks).
+
 ## Testing setup that worked
 
-- **Serve the site:** `npx @11ty/eleventy --serve --port 8765` in the project root, run in the background, then test with the Playwright MCP tools.
+- **Serve the site:** `npx @11ty/eleventy --serve --port 8765 --output=<a folder in the scratchpad>` in the project root, run in the background, then test with the Playwright MCP tools. Give it its own `--output`: the owner often has `npm start` running, and two servers writing to `_site/` overwrite each other. For the same reason `_site/` is no baseline to compare against; build the comparison from a temporary `git worktree` of `main`.
+- **A long-running `npm start` goes stale** for code in `lib/` (Node keeps the first version it loaded) and for `eleventy.config.js`. If the owner's preview shows something old, such as the previous site name on category pages, restarting it fixes it.
 - **Browser cache gotcha:** the Eleventy server sends no cache headers either, so a reload can show stale CSS, JS or HTML. Refresh them with `fetch(path, {cache: 'reload'})`, or add `?t=…` to the address. Real visitors could hit the same problem after a deploy, so a host setting that makes browsers always check HTML for a newer version is worth recommending.
 - **Compare output before and after a refactor:** copy `_site/` to the scratchpad first, then diff the new build against it with the whitespace between tags collapsed. The Eleventy move was checked this way: all 135 recipe pages came out identical.
 - **Overflow check:** sweep widths 320–1440 for horizontal overflow on `index.html`, `receptarkiv.html`, `mer-an-mat.html` and one recipe page. The header is tight (see item 13).
@@ -361,6 +448,14 @@ The owner chose: **Supabase** for the backend, **option C** for generated recipe
   - the home page and `nytt-recept.html` in headless Chrome against a stand-in backend: photo → list, list → recipe → placeholder → photo, stepper, fridge comparison, shopping list, category and tag links, Back, unknown ids, and no overflow at 375 px;
   - `npm run promote` output passes the build, and its front matter reads back unchanged;
   - with `ai.js` empty, the home page has no trace of the features.
+
+- **Konton och receptbok:** sign-in with email + password or Google, Min receptbok, preferences, the profile, account and privacy pages. See "Konton och receptbok" for files, setup and limits. The site was also renamed from Restfest to Ofta bra efter just before (see "The name" at the top). Verified without the real project:
+  - `npm test`: 34 tests, among them two full builds (with and without the key);
+  - without the key, every HTML page is byte for byte the same as before accounts;
+  - the migration in an in-memory Postgres: 34 checks of who can reach what, the limits, and what deleting a user removes;
+  - `generate-recipe` and `delete-account` with Claude and Supabase replaced: 17 checks;
+  - every page and flow in a browser against the stand-in backend: signing up, in and out, mail links opened in a cleared browser, Google, a new password, hearts merging at sign-in and surviving a backend outage, the recipe book, preferences, deleting the account, keyboard order and labels, and no overflow from 320 to 1440px;
+  - a signed-out visitor downloads `js/account.js` and `js/account-helpers.js` and nothing else new, and no request goes to Supabase.
 
 **Content caveat to pass on:** Chokladtryfflar and Banansoftis are tagged gluten-free but use oat cream or oat drink. Röd linssoppa and Chili sin carne have oat yoghurt as an optional topping. They're only gluten-free with products labelled "glutenfri". The owner has been told; nothing was changed.
 

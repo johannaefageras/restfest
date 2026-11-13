@@ -1,0 +1,50 @@
+---js
+// integritet.html: what the site stores about a visitor, where, and how to have it deleted. Linked
+// from the footer and the sign-up form. Built only when the site has accounts (accountPages in
+// eleventy.config.js); HANDOFF.md, "Konton och receptbok". The owner approves the text.
+// Keep it true: when what the site stores or sends changes, this page changes with it.
+const layout = 'layouts/base.njk';
+const title = 'Integritet · Ofta bra efter';
+const description = 'Vilka uppgifter Ofta bra efter sparar om dig, var de finns och hur du tar bort dem.';
+const permalink = 'integritet.html';
+---
+  <main id="main" class="wrap account-page privacy-page">
+    <article class="account-card privacy-text" aria-labelledby="privacy-title">
+      <h1 id="privacy-title"><span class="marker">Integritet.</span></h1>
+      <p class="account-intro">Kort om vilka uppgifter Ofta bra efter sparar om dig, var de finns och hur du tar bort dem.</p>
+
+      <h2>Utan konto</h2>
+      <p>Du behöver inget konto för att använda sidan. Din kyllista, din inköpslista, din veckoplan och recepten du har sparat med hjärtat ligger i din egen webbläsare och skickas inte till oss. De försvinner om du rensar webbläsarens data.</p>
+
+      <h2>Med konto</h2>
+      <p>Skapar du ett konto sparar vi:</p>
+      <ul>
+        <li>din e-postadress, och ditt namn om du anger det</li>
+        <li>ditt lösenord, i en form som vi inte kan läsa</li>
+        <li>dina preferenser: kost, råvaror du inte äter och hur många du brukar laga till</li>
+        <li>din receptbok, alltså vilka recept du har sparat.</li>
+      </ul>
+      <p>Loggar du in med Google får vi din e-postadress och ditt namn från Google, men inget lösenord.</p>
+      <p>Vi använder uppgifterna för att du ska kunna logga in, för att receptboken ska följa med mellan dina enheter och för att nya recept ska passa dig. Vi säljer dem inte och använder dem inte till reklam.</p>
+      <p>Uppgifterna lagras hos Supabase, på servrar inom EU.</p>
+
+      <h2>Kylfoto och nya recept</h2>
+      <ul>
+        <li>Foton du tar av kylen skickas till Anthropic, som läser av vilka råvaror som syns. Vi sparar inte bilderna, och Anthropic raderar dem inom 30 dagar.</li>
+        <li>När du ber oss hitta på ett recept skickas din kyllista till Anthropic, som skriver receptet. Är du inloggad skickas dina preferenser med. En beskrivning av rätten skickas sedan till OpenAI, som gör bilden. Varken ditt namn eller din e-postadress skickas med.</li>
+        <li>Ett recept vi har hittat på får en egen sida, som alla med länken kan öppna. Sidan säger inte vem som bad om receptet.</li>
+        <li>För att tjänsten inte ska överbelastas räknar vi hur många foton och recept som begärs per dag. Det gör vi med en anonym kod i stället för din IP-adress. Koden går inte att spåra tillbaka till dig och raderas inom två dagar.</li>
+      </ul>
+
+      <h2>Kakor</h2>
+      <p>Vi använder inga kakor för reklam eller statistik. När du loggar in sparas inloggningen i din webbläsare, så att du slipper logga in varje gång.</p>
+
+      <h2>Ta bort dina uppgifter</h2>
+      <p>Under <a href="konto.html">Konto</a> kan du ta bort ditt konto. Då raderas din inloggning, din profil och din receptbok direkt. Recept du har hittat på ligger kvar på sina sidor, men utan koppling till dig.</p>
+      {%- if site.contact %}
+
+      <h2>Frågor</h2>
+      <p>Har du frågor om dina uppgifter, eller vill du ha ut det vi har sparat om dig? Skriv till <a href="mailto:{{ site.contact }}">{{ site.contact }}</a>.</p>
+      {%- endif %}
+    </article>
+  </main>

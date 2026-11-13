@@ -3075,3 +3075,32 @@ a.dialog-save {
   gap: 10px;
   margin-top: 22px;
 }
+
+/* Integritet (pages/integritet.njk): running text, a little wider than the forms. */
+.wrap.privacy-page {
+  max-width: calc(620px + 64px);
+}
+.privacy-text > h2 {
+  margin: 30px 0 8px;
+  font-size: 20px;
+}
+.privacy-text > p:not(.account-intro),
+.privacy-text > ul {
+  font-size: 15px;
+  line-height: 1.6;
+}
+.privacy-text > p + p,
+.privacy-text > ul + p {
+  margin-top: 10px;
+}
+.privacy-text > ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+.privacy-text > ul > li + li {
+  margin-top: 6px;
+}
+.privacy-text a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
