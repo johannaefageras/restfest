@@ -1,4 +1,4 @@
-# GT Maru and GT Maru Mono in Restfest
+# GT Maru and GT Maru Mono in Ofta bra efter
 
 Researched 10 November 2026 against Grilli Type's sources and the actual version 2.000 font files in `src/assets/fonts/`. The axis coordinates and feature inventories below were read from those files with fontTools; recheck them if the font files are replaced.
 
@@ -6,7 +6,7 @@ Researched 10 November 2026 against Grilli Type's sources and the actual version
 
 Thierry Blancpain designed GT Maru around rounded Latin lettering on Japanese wayfinding signs. Rounded terminals, monolinear strokes, and short ascenders and descenders give it its compact character. Mono translates that design into a square rhythm: its character advance equals its capital height. These are Latin fonts inspired by Japanese signage; that origin does not imply Japanese character coverage. See the [design story](https://www.gt-maru.com/) and [family overview](https://www.grillitype.com/typeface/gt-maru).
 
-For Restfest, proportional Maru handles prose, recipe titles, headings, and ordinary controls. Mono supplies the existing short labels, metadata, badges, and counters. Its wide cells need room: a character advances 1440/2048 em, about 8.44px at 12px. Keep long passages proportional and avoid tightening Mono to squeeze in long labels. This is a project recommendation, not a foundry rule.
+For Ofta bra efter, proportional Maru handles prose, recipe titles, headings, and ordinary controls. Mono supplies the existing short labels, metadata, badges, and counters. Its wide cells need room: a character advances 1440/2048 em, about 8.44px at 12px. Keep long passages proportional and avoid tightening Mono to squeeze in long labels. This is a project recommendation, not a foundry rule.
 
 The family also contains Mega and Emoji. They are separate designs and are not installed here. The minisite's optical-size controls and outline/shaded/glow effects belong to Mega. Neither Maru nor Mono has those axes or effects.
 
@@ -93,7 +93,7 @@ Examples for future component styles:
 .reference-code { font-variant-numeric: slashed-zero; }
 ```
 
-Keep fractions scoped: globally enabling them can reinterpret unrelated slash-separated numbers. Use semantic numeric properties when available. Feature-setting lists replace one another, so a component needing both alternates must list both: `"ss01" 1, "ss02" 1`. Default alternates remain unchanged in Restfest pending visual evaluation.
+Keep fractions scoped: globally enabling them can reinterpret unrelated slash-separated numbers. Use semantic numeric properties when available. Feature-setting lists replace one another, so a component needing both alternates must list both: `"ss01" 1, "ss02" 1`. Default alternates remain unchanged in Ofta bra efter pending visual evaluation.
 
 The purchase page also lists features from Mega. Its alternate `l` and `ss03`–`ss08` effects are not features of these two installed fonts. Both fonts here use `ss01` for a **and** g and `ss02` for exclamation marks. The [foundry's specimen PDF](https://www.grillitype.com/api/storage/app/uploads/public/60d/347/abd/60d347abd7499952514160.pdf) separates the subfamilies' feature examples.
 

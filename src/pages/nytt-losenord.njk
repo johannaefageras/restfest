@@ -1,0 +1,34 @@
+---js
+// nytt-losenord.html: where the link in the "glömt lösenordet" mail leads. The link signs the visitor
+// in for this one purpose; src/js/auth-forms.js then stores the new password.
+const layout = 'layouts/base.njk';
+const title = 'Nytt lösenord · Ofta bra efter';
+const description = 'Välj ett nytt lösenord till ditt konto hos Ofta bra efter.';
+const noindex = true;
+const modules = ['auth-forms.js'];
+const permalink = 'nytt-losenord.html';
+---
+  <main id="main" class="wrap account-page" data-auth-page="password">
+    <section class="account-card" aria-labelledby="auth-title">
+      <img class="account-art" src="assets/illustrations/pencil.svg" alt="" width="72" height="72">
+      <h1 id="auth-title"><span class="marker">Nytt lösenord.</span></h1>
+      <p class="account-status" role="status" data-password-wait>Kontrollerar länken …</p>
+
+      <form class="account-form" data-password-form novalidate hidden>
+        <div class="account-field">
+          <label for="new-password">Nytt lösenord</label>
+          <input id="new-password" name="password" type="password" autocomplete="new-password" required aria-describedby="new-password-hint">
+          <p id="new-password-hint" class="account-hint">Minst 8 tecken.</p>
+        </div>
+        <p class="account-error" role="alert" data-password-error hidden></p>
+        <button class="button primary account-wide" type="submit">Spara lösenordet</button>
+      </form>
+
+      <div data-password-expired hidden>
+        <p class="account-intro">Länken har gått ut eller redan använts.</p>
+        <p class="account-links"><a href="logga-in.html">Till inloggningen</a>, där du kan be om en ny.</p>
+      </div>
+
+      <noscript><p class="account-error">Sidan behöver JavaScript.</p></noscript>
+    </section>
+  </main>

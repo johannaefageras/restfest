@@ -9,7 +9,7 @@ import {recipePage} from '../../lib/recipes.js';
 export default {
   layout: 'layouts/recipe.njk',
   base: '../',
-  titleSuffix: ' · Restfest',
+  titleSuffix: ' · Ofta bra efter',
   eleventyComputed: {
     permalink: data => `recept/${data.page.fileSlug}.html`,
     // Everything the page, its card and the recipe index need (lib/recipes.js).

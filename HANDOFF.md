@@ -1,10 +1,12 @@
-# Restfest – handoff
+# Ofta bra efter – handoff
 
-Restfest is a Swedish recipe site built around "Vad blir det till middag?" (what's for dinner?). You type what's in your fridge and it suggests dinners from a recipe archive. It's a static site built with Eleventy; the browser code has no framework. ChatGPT Sites originally generated it. A previous chat reviewed it and listed 20 issues, P0 to P3. Items 1–8 and 16 are done, the site has moved to Eleventy, and each recipe is now a Markdown file with pages per category, type and tag. The other items remain.
+Ofta bra efter is a Swedish recipe site built around "Vad blir det till middag?" (what's for dinner?). You type what's in your fridge and it suggests dinners from a recipe archive. It's a static site built with Eleventy; the browser code has no framework. ChatGPT Sites originally generated it. A previous chat reviewed it and listed 20 issues, P0 to P3. Items 1–8 and 16 are done, the site has moved to Eleventy, and each recipe is now a Markdown file with pages per category, type and tag. The other items remain.
 
 **How the owner likes to work:** they pick items by number ("Do 7", "Continue with 6 and 8"). Don't start the next item until asked. Ask before content or product decisions, and give a recommended option. Reply in English; all site copy is Swedish. When a batch is done, summarise it in plain language: what changed, what was verified, what to deploy and any caveats.
 
 **Git:** the project is on GitHub (`johannaefageras/restfest`, branch `main`). Commit only when the owner asks, on a branch.
+
+**The name:** the site was called Restfest until 2026-11-13, when the owner renamed it Ofta bra efter. Everything a visitor sees uses the new name, as do the instructions Claude gets in the Edge Functions (those take effect at the next function deploy). Names nobody sees were left as they were, on purpose: the browser storage keys (`restfest-saved` and the others, so nobody's saved recipes are lost), the script events (`restfest:pantry`), `<meta name="restfest-ai">`, `project_id` in `supabase/config.toml`, the first migration's comment, the GitHub repository, the project folder and the Supabase project's display name. The footer tagline "Rädda resterna." is unchanged. Two things were sized for the longer name in `kitchen.css`: the large name in the footer (`.footer-mark`, one line at 11.2vw), and the header logo below 420px, which shrinks so it doesn't run into the buttons.
 
 ## How the site works
 
@@ -12,39 +14,39 @@ Eleventy builds the site from `src/` into `_site/`. `_site/` is generated and no
 
 `src/` has one folder per kind of file: `pages/` (page templates), `recept/` (recipes), `_includes/layouts/` (layouts), `_includes/` (snippets the layouts include), `_data/` (data), `css/`, `js/` and `assets/`.
 
-| File | Role |
-| --- | --- |
-| `src/pages/index.njk` | Home page: a yellow hero with the page title, then three steps with the same heading (`.step-heading`): 01 Inventera (fridge list, and the fridge photo when it's on), 02 Matcha (tonight's dinner), 03 Planera (the week plan). "Så funkar det" at the bottom names the same three steps |
-| `src/pages/receptarkiv.njk` | Recipe archive with search and filters, food only |
-| `src/pages/mer-an-mat.njk` | "Mer än mat": spa, cleaning and pet recipes, in three sections |
-| `src/pages/kategori.njk`, `typ.njk`, `tagg.njk` | Build one page per category, recipe type and tag from the collections, with the layout `src/_includes/layouts/listing.njk` and the cards in `src/_includes/recipe-card.njk` |
-| `src/pages/recipe-index.njk` | Builds `data/recipe-index.js`: the slim index for the home page and archive, with no amounts and no instructions |
-| `src/pages/sitemap.njk` | Builds `sitemap.xml`, only when the site address is set |
-| `src/recept/<id>.md` | **The recipes**, one Markdown file each (205). Builds `recept/<id>.html`. Format under "Recipes" below |
-| `src/recept/recept.11tydata.js` | Settings for every recipe file: layout, address, and the computed `recipe` the templates use |
-| `src/_includes/layouts/base.njk` | **The layout every page shares:** head, header, footer, recipe pop-up, shopping dialog, icon sprite and scripts. The header and footer exist only here |
-| `src/_includes/layouts/recipe.njk` | The recipe page layout |
-| `src/_includes/layouts/listing.njk` | The layout for the category, type and tag pages |
-| `src/_includes/recipe-card.njk` | The recipe card on the category, type and tag pages |
-| `src/_data/foods.json` | **The ingredient list:** each key with its name, food group and the words people type for it. Recipes refer to these keys |
-| `src/_data/site.js` | The site's public address (empty for now). Setting it adds canonical links, `og:image` and `sitemap.xml` |
-| `src/js/recipes.js` | Taxonomy and helpers: `foodGroups`, `mealTypes` (the categories), `mealName()`, `nonFoodMeals`, `isFood()`, `dietTags`, `impliedTags`, `allTags()`, `hasTag()`, `recipeTagLabels`, `foods` with extra aliases. Used by the browser, and loaded by the build (`lib/taxonomy.js`) so both use the same lists |
-| `src/js/app.js` | Shared code: saving, shopping list, archive rendering and filters, Mer än mat grids, ingredient matching, the recipe pop-up |
-| `src/js/kitchen.js` | Home page only: the fridge list, unknown-ingredient suggestions, the best match and three more |
-| `src/css/styles.css` | Original styles, much of it dead (item 17) |
-| `src/css/kitchen.css` | Everything newer. It overrides `styles.css` |
-| `src/css/icons.css` | The Font Awesome UI icons, generated by `tools/icons.mjs` (see "Icons" below) |
-| `lib/recipe-body.js` | Build only: reads the Markdown below a recipe's front matter (steps, tips, extra sections) |
-| `lib/recipes.js` | Build only: checks a recipe's front matter and works out its page, card and index entry; groups the recipes for the category, type and tag pages |
-| `lib/taxonomy.js` | Build only: loads `src/js/recipes.js` and `foods.json`; makes the page addresses for categories, types and tags |
-| `eleventy.config.js` | Which files are copied as they are, which files the local server watches, and the recipe collections |
+| File                                            | Role                                                                                                                                                                                                                                                                                                       |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/pages/index.njk`                           | Home page: a yellow hero with the page title, then three steps with the same heading (`.step-heading`): 01 Inventera (fridge list, and the fridge photo when it's on), 02 Matcha (tonight's dinner), 03 Planera (the week plan). "Så funkar det" at the bottom names the same three steps                  |
+| `src/pages/receptarkiv.njk`                     | Recipe archive with search and filters, food only                                                                                                                                                                                                                                                          |
+| `src/pages/mer-an-mat.njk`                      | "Mer än mat": spa, cleaning and pet recipes, in three sections                                                                                                                                                                                                                                             |
+| `src/pages/kategori.njk`, `typ.njk`, `tagg.njk` | Build one page per category, recipe type and tag from the collections, with the layout `src/_includes/layouts/listing.njk` and the cards in `src/_includes/recipe-card.njk`                                                                                                                                |
+| `src/pages/recipe-index.njk`                    | Builds `data/recipe-index.js`: the slim index for the home page and archive, with no amounts and no instructions                                                                                                                                                                                           |
+| `src/pages/sitemap.njk`                         | Builds `sitemap.xml`, only when the site address is set                                                                                                                                                                                                                                                    |
+| `src/recept/<id>.md`                            | **The recipes**, one Markdown file each (205). Builds `recept/<id>.html`. Format under "Recipes" below                                                                                                                                                                                                     |
+| `src/recept/recept.11tydata.js`                 | Settings for every recipe file: layout, address, and the computed `recipe` the templates use                                                                                                                                                                                                               |
+| `src/_includes/layouts/base.njk`                | **The layout every page shares:** head, header, footer, recipe pop-up, shopping dialog, icon sprite and scripts. The header and footer exist only here                                                                                                                                                     |
+| `src/_includes/layouts/recipe.njk`              | The recipe page layout                                                                                                                                                                                                                                                                                     |
+| `src/_includes/layouts/listing.njk`             | The layout for the category, type and tag pages                                                                                                                                                                                                                                                            |
+| `src/_includes/recipe-card.njk`                 | The recipe card on the category, type and tag pages                                                                                                                                                                                                                                                        |
+| `src/_data/foods.json`                          | **The ingredient list:** each key with its name, food group and the words people type for it. Recipes refer to these keys                                                                                                                                                                                  |
+| `src/_data/site.js`                             | The site's public address (empty for now). Setting it adds canonical links, `og:image` and `sitemap.xml`                                                                                                                                                                                                   |
+| `src/js/recipes.js`                             | Taxonomy and helpers: `foodGroups`, `mealTypes` (the categories), `mealName()`, `nonFoodMeals`, `isFood()`, `dietTags`, `impliedTags`, `allTags()`, `hasTag()`, `recipeTagLabels`, `foods` with extra aliases. Used by the browser, and loaded by the build (`lib/taxonomy.js`) so both use the same lists |
+| `src/js/app.js`                                 | Shared code: saving, shopping list, archive rendering and filters, Mer än mat grids, ingredient matching, the recipe pop-up                                                                                                                                                                                |
+| `src/js/kitchen.js`                             | Home page only: the fridge list, unknown-ingredient suggestions, the best match and three more                                                                                                                                                                                                             |
+| `src/css/styles.css`                            | Original styles, much of it dead (item 17)                                                                                                                                                                                                                                                                 |
+| `src/css/kitchen.css`                           | Everything newer. It overrides `styles.css`                                                                                                                                                                                                                                                                |
+| `src/css/icons.css`                             | The Font Awesome UI icons, generated by `tools/icons.mjs` (see "Icons" below)                                                                                                                                                                                                                              |
+| `lib/recipe-body.js`                            | Build only: reads the Markdown below a recipe's front matter (steps, tips, extra sections)                                                                                                                                                                                                                 |
+| `lib/recipes.js`                                | Build only: checks a recipe's front matter and works out its page, card and index entry; groups the recipes for the category, type and tag pages                                                                                                                                                           |
+| `lib/taxonomy.js`                               | Build only: loads `src/js/recipes.js` and `foods.json`; makes the page addresses for categories, types and tags                                                                                                                                                                                            |
+| `eleventy.config.js`                            | Which files are copied as they are, which files the local server watches, and the recipe collections                                                                                                                                                                                                       |
 
 - **Scripts:** they are plain scripts sharing one global scope, loaded in this order: `data/recipe-index.js` → `js/recipes.js` → `js/app.js` → `js/kitchen.js` (home page only). A page lists extra scripts from `src/js/` in its front matter (`scripts: [kitchen.js]`).
 - **CSS paths:** the stylesheets are served from `css/`, so their `url()`s start with `../` (`url("../assets/fonts/…")`).
 - **Paths:** pages use relative paths. Pages one folder down (recipes, categories, types, tags) set `base: '../'`, and the layout puts `{{ base }}` in front of every path and adds `data-base` to `<html>` for `app.js`. Opening the built files from disk still works.
 - **URLs are unchanged from before Eleventy:** `receptarkiv.html`, `mer-an-mat.html`, `recept/<id>.html`. Every template in `src/pages/` sets its own `permalink:`, because the folder isn't part of the address (`index.njk` has `index.html`). Without one, Eleventy writes `pages/name/index.html`.
-- **New URLs:** `kategori/<slug>.html` (18 food categories), `typ/<slug>.html` (`mat`, `hemmaspa`, `hushall-och-stad`, `husdjur`) and `tagg/<slug>.html` (85 tags). The slug comes from the Swedish label: "Fika & bakning" → `fika-och-bakning`. Renaming a label changes the address; the build stops if two labels give the same one.
-- **localStorage keys:** `restfest-pantry`, `restfest-saved`, `restfest-shopping-list`.
+- **New URLs:** `kategori/<slug>.html` (18 food categories), `typ/<slug>.html` (`mat`, `hemmaspa`, `hushall-och-rengoring`, `husdjur`) and `tagg/<slug>.html` (85 tags). The slug comes from the Swedish label: "Fika & bakning" → `fika-och-bakning`. Renaming a label changes the address; the build stops if two labels give the same one.
+- **localStorage keys:** `restfest-pantry`, `restfest-saved`, `restfest-shopping-list`, `restfest-week`. With accounts also `restfest-account`, `restfest-saved-generated`, `restfest-saved-queue` and `restfest-saved-stash` (see "Konton och receptbok").
 
 **Build:** `npm install` once, then:
 
@@ -124,7 +126,7 @@ A spa, cleaning or pet recipe has exactly one category: `spa`, `household` or `p
 
 - `recipes`: all recipes in id order.
 - `recipeCategories`: food categories with recipes.
-- `recipeTypes`: Mat, Hemmaspa & behandlingar, Hushåll & städ, Husdjur. The type follows from the categories: `spa`, `household` or `pets`, otherwise food.
+- `recipeTypes`: Mat, Hemmaspa & behandlingar, Hushåll & rengöring, Husdjur. The type follows from the categories: `spa`, `household` or `pets`, otherwise food.
 - `recipeTags`: every tag, sorted by Swedish label. Tag pages count implied tags as the archive does, so Vegetariskt includes the vegan recipes.
 - Eleventy also makes a collection per raw tag from `tags`, e.g. `collections.Vegan`.
 
@@ -133,7 +135,19 @@ A spa, cleaning or pet recipe has exactly one category: `spa`, `household` or `p
 - The archive intro links to the Mat page ("gå direkt till en kategori"). The Mat page and every category page have a row of links to all categories.
 - The three section headings on Mer än mat link to their type pages. `mer-an-mat.njk` renders those sections from `collections.recipeTypes`, so the label, icon and intro come from `lib/taxonomy.js`.
 - Each recipe page links its categories (in the line above the title) and its tags to their pages.
-- The header and footer don't link to them.
+- **The "Recept" menu** in the header and footer links to the archive (as "Mat & dryck") and to the three type pages Hemmaspa, Hushåll and Husdjur. It replaced the Receptarkiv and Mer än mat links (2026-11-12, the owner's choice). `mer-an-mat.html` is still built but is no longer in the menu: the archive intro, the archive's search note and the back links on the three type pages lead to it.
+- A spa, cleaning or pet recipe's back link goes to its own type page ("Till Hemmaspa"); before, it went to Mer än mat.
+- The header and footer don't link to the category and tag pages.
+
+**The "Recept" menu** (`recipeMenu` in `base.njk`, styles at the end of `kitchen.css`, script near the end of `app.js`):
+
+- **Entries:** one per recipe type, from `menu` in `typeDetails` (`lib/taxonomy.js`): a short label, a line about what's there and, for Mat & dryck, the archive's address instead of the type page's. The owner chose the four names and that Mat & dryck leads to the archive; the lines under the names are mine.
+- **Markup:** a `<details>`, so it opens without JavaScript. `app.js` closes it on Escape (focus goes back to "Recept"), on a click outside, when focus leaves it and when the visitor comes back with Back.
+- **Look:** in the header the panel hangs from the header's rule; in the footer it opens upwards and stands on the footer's rule. Its 3px edge lies on the rule, so `nav` has to stay as tall as its bar (`align-self: stretch`). In the header the panel starts at the left edge of the word "Recept"; in the footer it ends at the page's right edge. Centring it under the word was tried on 2026-11-12 and the owner preferred it this way. Below 960px the footer's panel floats above the menu row instead, and below 520px both panels are as wide as the row. Each row has its own colour on hover and on its own page.
+- **Header layout:** from 960px the two menu links sit in the middle of the header, with the logo and the buttons at the edges (`.header-inner` is a three-column grid with equal side columns). The owner chose this on 2026-11-12: with only two links beside the buttons, the header and the open panel looked pushed to the right. The footer's menu stays at the right edge.
+- **Current page:** "Recept" has the yellow underline on the archive, Mer än mat and every category, type and tag page (`inRecipes` in `base.njk`); the entry for the page itself has `aria-current="page"`.
+- **Top-level menu links have the class `nav-link`** (the "Recept" summary and "Så funkar det"), so the menu styles don't reach the links inside the panel.
+- **Hushåll & rengöring** was "Hushåll & städ" until 2026-11-12 (label and badge in `src/js/recipes.js`, address `typ/hushall-och-rengoring.html`). The old address isn't redirected; the site had no public address then.
 
 The home page, archive and Mer än mat draw their recipe cards with JavaScript, so without it the category and type pages are the only links to the recipe pages. Following plain links from `index.html` reaches all 315 pages. On phones the row of 18 category links fills most of the first screen (compare item 11). The cards on these pages are rendered at build time with the same markup as `archiveCard()` in `app.js`, so change both together; `app.js` then shows which hearts are saved.
 
@@ -184,7 +198,7 @@ Related behaviour:
 **Icons and illustrations:** the colourful pictures are SVG, used directly in `<img>` elements. They live in two folders under `src/assets/`, split by what they're for (paths below are as served):
 
 - `assets/icons/*.svg`: icons drawn on a square canvas, so a row of them lines up at the same size. Menu, buttons, categories, ingredient chips, recipe fact boxes, filters. Templates and the `squareIconPath(name)` helper in `app.js` load them by name, so a file name here is part of the code: rename one and grep for the old name first.
-- `assets/illustrations/*.svg`: pictures cropped to the drawing, for when the picture is the point. `noodles` (the hero), `fridge-closed` (the menu), `fridge-viewfinder` (Fota kylen), and `fridge-opened`, `cook-book` and `serving-cloche` (the three steps in "Så funkar det"). The bowl and the fridges exist in all nine palette colours; the site uses the blue ones everywhere, so they read as the same set. File names say what the picture is, not its colour, so changing colour means replacing the files.
+- `assets/illustrations/*.svg`: pictures cropped to the drawing, for when the picture is the point. `noodles` (the hero), `fridge-closed` (the menu), `fridge-viewfinder` (Fota kylen), and `pencil`, `camera`, `light-bulb`, `grocery-basket` and `cook-book` ("Så funkar det": the four steps and the archive note under them). `fridge-opened`, `serving-cloche` and `recipe-archive` are unused since that section went from three steps to four. The bowl and the fridges exist in all nine palette colours; the site uses the blue ones everywhere, so they read as the same set. File names say what the picture is, not its colour, so changing colour means replacing the files.
 - `assets/favicon.png`.
 
 `design/` (outside `src/`, so never published) holds art that isn't on the site: `design/unused/` has the icons, illustrations and doodles nothing referenced when the folders were sorted (November 2026), kept in case they're wanted later. New illustrated icons need only the SVG, with no raster conversion.
@@ -210,36 +224,36 @@ The owner chose: **Supabase** for the backend, **option C** for generated recipe
 
 **How it fits together:**
 
-| File | Role |
-| --- | --- |
-| `src/_data/ai.js` | The Supabase project address. Empty = features off. The layout puts the functions' address in `<meta name="restfest-ai">` |
-| `src/js/fridge-ai.js` | Home page: the photo button and "Hitta på ett recept". Listens for `restfest:pantry`, which `renderPantry()` in `kitchen.js` now sends |
-| `src/pages/nytt-recept.njk`, `src/js/new-recipe.js` | The generated recipe page. `new-recipe.js` is a module (layout front matter `modules:`), draws the same markup as `recipe.njk` and calls `enhanceRecipe()` from `app.js`, so the stepper, fridge comparison, checklist and shopping list work. `noindex` |
-| `lib/recipe-amounts.js` | Also copied to `js/recipe-amounts.js` (`eleventy.config.js`), so the new-recipe page marks scalable amounts with the build's own parser |
-| `supabase/migrations/…_ai_recipes.sql` | Tables `generated_recipes` and `ai_requests`, functions `ai_allow` (daily caps) and `claim_recipe_image` (one photo per recipe), public bucket `recipe-images`. RLS on with no policies: only the functions read and write |
-| `supabase/functions/detect-ingredients` | POST photos → `{keys, other}` (Claude, vision) |
-| `supabase/functions/generate-recipe` | POST fridge list → `{id, recipe}` (Claude). Checks and mends the answer (`_shared/recipe.ts`), stores it |
-| `supabase/functions/recipe-image` | POST `{id}` → makes the photo once (OpenAI), stores it in the bucket |
-| `supabase/functions/get-recipe` | GET `?id=` → the stored recipe and photo status |
-| `supabase/functions/_shared/` | CORS and errors (`http.ts`), database (`db.ts`), caps (`limits.ts`), Claude call (`claude.ts`), recipe format, prompt and checks (`recipe.ts`), photo (`image.ts`) |
-| `supabase/functions/_shared/data.ts`, `style-references.ts` | **Generated** by `npm run supabase-data` (`tools/supabase-data.mjs`): ingredient keys, dinner categories, tags used by dinner recipes, three example recipes (45, 29, 200), and the style photos from `supabase/style/` as data URLs |
-| `supabase/config.toml` | `verify_jwt = false` for the four functions: they're public, and Supabase's new API keys aren't JWTs |
-| `tools/promote.mjs` | `npm run promote -- <id or link>`: writes `src/recept/<next>-<name>.md` and downloads the photo |
+| File                                                        | Role                                                                                                                                                                                                                                                     |
+| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/_data/ai.js`                                           | The Supabase project address. Empty = features off. The layout puts the functions' address in `<meta name="restfest-ai">`                                                                                                                                |
+| `src/js/fridge-ai.js`                                       | Home page: the photo button and "Hitta på ett recept". Listens for `restfest:pantry`, which `renderPantry()` in `kitchen.js` now sends                                                                                                                   |
+| `src/pages/nytt-recept.njk`, `src/js/new-recipe.js`         | The generated recipe page. `new-recipe.js` is a module (layout front matter `modules:`), draws the same markup as `recipe.njk` and calls `enhanceRecipe()` from `app.js`, so the stepper, fridge comparison, checklist and shopping list work. `noindex` |
+| `lib/recipe-amounts.js`                                     | Also copied to `js/recipe-amounts.js` (`eleventy.config.js`), so the new-recipe page marks scalable amounts with the build's own parser                                                                                                                  |
+| `supabase/migrations/…_ai_recipes.sql`                      | Tables `generated_recipes` and `ai_requests`, functions `ai_allow` (daily caps) and `claim_recipe_image` (one photo per recipe), public bucket `recipe-images`. RLS on with no policies: only the functions read and write                               |
+| `supabase/functions/detect-ingredients`                     | POST photos → `{keys, other}` (Claude, vision)                                                                                                                                                                                                           |
+| `supabase/functions/generate-recipe`                        | POST fridge list → `{id, recipe}` (Claude). Checks and mends the answer (`_shared/recipe.ts`), stores it                                                                                                                                                 |
+| `supabase/functions/recipe-image`                           | POST `{id}` → makes the photo once (OpenAI), stores it in the bucket                                                                                                                                                                                     |
+| `supabase/functions/get-recipe`                             | GET `?id=` → the stored recipe and photo status                                                                                                                                                                                                          |
+| `supabase/functions/_shared/`                               | CORS and errors (`http.ts`), database (`db.ts`), caps (`limits.ts`), Claude call (`claude.ts`), recipe format, prompt and checks (`recipe.ts`), photo (`image.ts`)                                                                                       |
+| `supabase/functions/_shared/data.ts`, `style-references.ts` | **Generated** by `npm run supabase-data` (`tools/supabase-data.mjs`): ingredient keys, dinner categories, tags used by dinner recipes, three example recipes (45, 29, 200), and the style photos from `supabase/style/` as data URLs                     |
+| `supabase/config.toml`                                      | `verify_jwt = false` for the four functions: they're public, and Supabase's new API keys aren't JWTs                                                                                                                                                     |
+| `tools/promote.mjs`                                         | `npm run promote -- <id or link>`: writes `src/recept/<next>-<name>.md` and downloads the photo                                                                                                                                                          |
 
 **Models and settings.** Claude answers through structured outputs (`output_config.format` with a JSON schema), so the recipe always has the right fields; enum values can come back in another case, which `recipe.ts` corrects. The photo uses OpenAI's edits endpoint with two archive photos (`supabase/style/29-shakshuka.jpg`, `117-kokoscurry.jpg`, 1024 px) as style references, at 1536×864 (16:9), JPEG. All of these are Supabase secrets, changeable without a deploy:
 
-| Secret | Default | |
-| --- | --- | --- |
-| `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` | — | Required |
-| `RATE_LIMIT_SALT` | — | Any long random text. Visitors are counted as a hash of IP + date + salt, never the IP |
-| `ALLOWED_ORIGINS` | `*` | The site's address(es), comma-separated, e.g. `https://restfest.se,http://localhost:8080` |
-| `CLAUDE_MODEL` / `CLAUDE_DETECT_MODEL` / `CLAUDE_RECIPE_MODEL` | `claude-sonnet-5-5` | Haiku is cheaper and worth trying for the photos |
-| `IMAGE_MODEL`, `IMAGE_QUALITY`, `IMAGE_SIZE` | `gpt-image-2.5-flare`, `medium`, `1536x864` | `gpt-image-2.5-sunburst` is slower and better |
-| `IMAGE_STYLE_REFERENCES` | on | `off` draws from the text alone, if photos start copying the references |
-| `DETECT_PER_VISITOR`, `DETECT_PER_DAY` | 15, 150 | Photo analyses per visitor and in total per day |
-| `RECIPE_PER_VISITOR`, `RECIPE_PER_DAY` | 5, 40 | New recipes (and so photos) per visitor and in total per day |
+| Secret                                                         | Default                                     |                                                                                           |
+| -------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`                          | —                                           | Required                                                                                  |
+| `RATE_LIMIT_SALT`                                              | —                                           | Any long random text. Visitors are counted as a hash of IP + date + salt, never the IP    |
+| `ALLOWED_ORIGINS`                                              | `*`                                         | The site's address(es), comma-separated, e.g. `https://oftabraefter.se,http://localhost:8080` |
+| `CLAUDE_MODEL` / `CLAUDE_DETECT_MODEL` / `CLAUDE_RECIPE_MODEL` | `claude-sonnet-5-5`                         | Haiku is cheaper and worth trying for the photos                                          |
+| `IMAGE_MODEL`, `IMAGE_QUALITY`, `IMAGE_SIZE`                   | `gpt-image-2.5-flare`, `medium`, `1536x864` | `gpt-image-2.5-sunburst` is slower and better                                             |
+| `IMAGE_STYLE_REFERENCES`                                       | on                                          | `off` draws from the text alone, if photos start copying the references                   |
+| `DETECT_PER_VISITOR`, `DETECT_PER_DAY`                         | 15, 150                                     | Photo analyses per visitor and in total per day                                           |
+| `RECIPE_PER_VISITOR`, `RECIPE_PER_DAY`                         | 5, 40                                       | New recipes (and so photos) per visitor and in total per day                              |
 
-**The project:** Supabase project "Restfest" (`yatffwoobcsrxcxplecd`, region eu-west-1, free plan) in the owner's organization. The migration has been run (tables, functions and bucket checked in the dashboard on 2026-11-11), and `src/_data/ai.js` points to it.
+**The project:** Supabase project "Restfest" (its display name from before the rename) (`yatffwoobcsrxcxplecd`, region eu-west-1, free plan) in the owner's organization. The migration has been run (tables, functions and bucket checked in the dashboard on 2026-11-11), and `src/_data/ai.js` points to it.
 
 **Setup (once).** Needs a Supabase account, an Anthropic API key and an OpenAI API key. Run in the project folder; `npx supabase` needs no install.
 
@@ -264,9 +278,100 @@ The owner chose: **Supabase** for the backend, **option C** for generated recipe
 - **The page needs a server:** `nytt-recept.html` loads a module, which browsers don't load from `file://`.
 - **Testing the functions locally:** `npx supabase start` and `npx supabase functions serve` (needs Docker), with the secrets in `supabase/functions/.env`.
 
+## Konton och receptbok (accounts and the recipe book)
+
+Visitors can create an account and sign in, with email + password or Google. An account gives them **Min receptbok**, which holds the recipes they generate and the archive recipes they heart and is the same on every device, and **preferences** (diets, foods they don't eat, portions) that Claude follows when it writes them a new recipe. Nothing that worked without an account needs one now.
+
+The design and the plan it was built from are in `docs/superpowers/specs/2026-11-12-accounts-design.md` and `docs/superpowers/plans/2026-11-13-accounts.md`. The design says which choices were the owner's and which were Claude's.
+
+**Off until the key is set.** Accounts need `publishableKey` in `src/_data/ai.js`. While it's empty the six account pages aren't built (`accountPages` in `eleventy.config.js`), the layout has no account button, and every HTML page is byte for byte what it was before accounts existed. `npm test` builds the site both ways and checks this.
+
+**What a visitor gets:**
+
+- **Signed out:** as before, plus a "Logga in" button in the header (a link in the menu row below 520px) and "Spara i receptboken" on a generated recipe, which leads to the sign-in page and back.
+- **Signed in:** "Sparat" in the header becomes "Receptbok" and counts hearted and generated recipes together; "Logga in" becomes "Konto". Hearts work as before and are also stored in the account. A recipe generated while signed in goes into the book by itself, and its page has a heart.
+- **Signing out** empties the hearts in that browser (they stay in the account) and leaves the fridge list, the shopping list and the week plan alone. Heart changes that hadn't reached the account yet are tried once more and otherwise put aside out of sight (`restfest-saved-stash`), and sent when the same visitor signs in on that browser again.
+- **Deleting the account** (Konto) removes the sign-in, the profile and the book. Generated recipes stay: they are never tied to a person, only listed in a book.
+
+**Files:**
+
+| File | Role |
+| --- | --- |
+| `src/_data/ai.js` | `publishableKey` and `accounts` (true when the project address and the key are set). The layout puts both in `<meta name="restfest-account">` |
+| `src/_includes/layouts/base.njk` | With accounts: that meta tag, a one-line script in the head that adds the class `signed-in` to `<html>` before the first paint, the account button and link, the footer's "Integritet" link, and `js/account.js` |
+| `src/js/account.js` | **Every page.** Who is signed in, the header's state, loading the Supabase library, keeping the hearts in step with the account. Gives the other scripts `window.restfestAccount` (listed at the top of the file) |
+| `lib/account-helpers.js` | Pure helpers, copied to `js/account-helpers.js` and tested by `npm test`: the return-address check, the queue of unsent heart changes, error texts in Swedish, the "äter inte" list |
+| `src/js/account-forms.js` | What the forms share: running a request with the buttons off, showing what went wrong |
+| `src/pages/logga-in.njk`, `nytt-losenord.njk`, `src/js/auth-forms.js` | Sign in, create an account, forgotten password, choose a new password |
+| `src/pages/receptbok.njk`, `src/js/recipe-book.js` | Min receptbok |
+| `src/pages/profil.njk`, `konto.njk`, `src/js/profile.js` | Name and preferences; email, password, sign out, delete |
+| `src/_includes/account-nav.njk` | The menu the three signed-in pages share |
+| `src/pages/integritet.njk` | The privacy page. Indexed, unlike the other five. **Keep it true** when what the site stores or sends changes |
+| `src/js/new-recipe.js`, `src/js/fridge-ai.js` | The heart on a generated recipe; the sign-in sent along with "Hitta på ett recept" |
+| `supabase/migrations/…_accounts.sql` | Tables `profiles`, `saved_recipes`, `saved_generated_recipes`, their row level security, and `my_generated_recipes()` |
+| `supabase/functions/_shared/auth.ts` | `userFor(req)`: the signed-in visitor behind a request, or null |
+| `supabase/functions/_shared/preferences.ts` | Cleans a profile's preferences and writes them as lines for Claude. Tested by `npm test` |
+| `supabase/functions/generate-recipe` | Now takes an optional sign-in: follows the caller's preferences and adds the recipe to their book (`saved` in the answer) |
+| `supabase/functions/delete-account` | Deletes the caller's user; the database removes the rest |
+| `supabase/templates/` | The three mails in Swedish, pasted into the dashboard by hand (its README says how) |
+| `tools/standin/` | A stand-in backend and two checks that need no real project (see "Testing" below) |
+| `src/assets/icons/account.svg` | The account button's icon. Written for this, since the icon set has no person; swap the file for a better one |
+
+**How signing in works:**
+
+- **The library** is `@supabase/supabase-js`, pinned in `package.json` and copied from `node_modules` to `js/vendor/supabase.js` (220 KB, about 60 KB compressed). A signed-out visitor never downloads it: `account.js` loads it only on the account pages, or when the browser has `restfest-account` in localStorage, which marks "signed in here".
+- **Implicit flow, not PKCE** (`client()` in `account.js`): a link in a mail has to work in a browser other than the one that asked for it, such as signing up on a laptop and opening the mail on a phone.
+- **Mail links and Google** come back to `logga-in.html`, which reads the sign-in from the address and goes on to `?till=<path>`, or to the recipe book. Only a path within the site is accepted (`safeReturnPath`). The password link goes to `nytt-losenord.html`.
+- **A sign-in that has run out** just signs the visitor out on the next page load, without a message. Supabase being unreachable changes nothing.
+- **A sign-in that lands on the wrong page** is passed on. If an address is missing from Supabase's redirect list (setup step 2), a mail link or Google comes back to the front page instead; `account.js` then sends the visitor on to `logga-in.html` or `nytt-losenord.html` with the sign-in intact.
+- **Signing in before confirming the address** shows the "Kolla din mejl" box with "Skicka igen". **Signing up with an address that already has an account** says so: Supabase answers such a sign-up as if it worked and sends no mail, which `auth-forms.js` recognises by the empty list of sign-in methods.
+- **The name in the account menu** is the profile's, fetched with the book, so a name changed on one device shows on the others.
+- **The functions** get the visitor's access token in the `Authorization` header and check it themselves (`userFor`). `verify_jwt` stays off in `config.toml`.
+
+**How the hearts stay in step.** `app.js` still draws hearts from `restfest-saved`, signed in or not. For a signed-in visitor that list is a copy of the account's, and `account.js` keeps it so:
+
+- **At the first sign-in in a browser**, the hearts it already holds are added to the account, so none is lost.
+- **Every change** goes into a queue (`restfest-saved-queue`) and is sent at once. What can't be sent (offline, Supabase down) stays queued and goes with the next page load. The heart click itself is never blocked or undone.
+- **On a page load**, at most once a minute, the queue is sent and then the account's lists replace the browser's. So a heart from another device shows up, and a heart removed offline stays removed.
+- **Generated recipes** in the book are kept as ids in `restfest-saved-generated`. `toggleSave()` in `app.js` tells `account.js` about a change with the event `restfest:save-change`; `account.js` sends `restfest:account` when the sign-in or the book changes.
+- **A change the database refuses for good** (a recipe that no longer exists, a full book: status 400, 409 or 422) is dropped from the queue with a console warning. Everything else, including 404, which is what a table that isn't there yet answers, is tried again.
+- **A book holds at most 1000 recipes of each kind** (a trigger in the migration).
+
+**The recipe book's cards.** Archive recipes use `archiveCard()` from `app.js`. `generatedCard()` in `recipe-book.js` repeats that markup for a generated recipe, so there are now three places to change together: `archiveCard()`, `_includes/recipe-card.njk` and `generatedCard()`.
+
+**Preferences and Claude.** `generate-recipe` adds the caller's preferences to the request as a few Swedish lines (`preferencesPrompt`), and `recipeSystem` in `_shared/recipe.ts` has a PREFERENCES section saying how to follow them. Claude leaves out what doesn't fit. If nothing is left to cook from it answers `unsuitable: true`, and the visitor gets a message pointing to their profile. That attempt still counts against the day's cap, since it cost a Claude call. The recipe is not checked against the preferences afterwards. The foods a visitor "doesn't eat" are their own words: they are cleaned, quoted and named as a list of foods, and Claude is told to ignore instructions in them.
+
+**Setup (once), the owner's part.** The code can't do these:
+
+1. **Publishable key:** Supabase dashboard → Project Settings → API keys → copy the publishable key (`sb_publishable_…`) into `publishableKey` in `src/_data/ai.js`. It is meant to be public. Never put a secret key there.
+2. **Addresses:** Authentication → URL Configuration. Set the Site URL to the site's address, and add the addresses the site runs on to the redirect list: `http://localhost:8080/**` for the local server (and `http://localhost:8765/**` if tests are run on that port, as Claude does), and the public address with `/**` once there is one.
+3. **Password length:** Authentication → Sign In / Providers → Email: minimum password length 8, and keep "Confirm email" on. The site checks 8 characters itself, but Supabase's own default is 6.
+4. **Mails:** paste the three templates from `supabase/templates/` (see its README for which goes where and the subjects).
+5. **Google:** create an OAuth client in Google Cloud Console (Web application), with the redirect address shown on Supabase's Google provider page (`https://yatffwoobcsrxcxplecd.supabase.co/auth/v1/callback`), and enter its id and secret on that page.
+6. **Mail delivery, before real visitors:** Supabase's built-in sender only delivers to the project's own team and sends 2 mails an hour. Connect a mail service (Resend, Postmark, AWS SES …) under Authentication → Emails → SMTP Settings; it needs a domain you control. Until then, email sign-up works for your own address only. Google sign-in works for everyone.
+7. **A contact address** for the privacy page: `contact` in `src/_data/site.js`.
+8. Deploy: `npx supabase db push` (one new migration) and `npx supabase functions deploy`, then build and upload as usual.
+
+**Things to know:**
+
+- **Google's screen** says the visitor is continuing to `yatffwoobcsrxcxplecd.supabase.co`, not to Ofta bra efter, unless the project gets a custom domain, which is a paid Supabase add-on.
+- **Any signed-in visitor can add any generated recipe to their book** if they have its link. The pages are public anyway.
+- **With Supabase down**, the recipe book page shows its error after about 7 seconds: the library retries reads before giving up.
+- **A changed email address** takes effect when the visitor clicks the link sent to the new address.
+- **The Google button has no Google logo.** Add the official one if you want it; don't redraw it.
+- **Restart `npm start` after adding the key:** which pages are built is decided when the server starts.
+- **Not built:** syncing the fridge list, shopping list or week plan to the account; preferences affecting the archive matching; a higher daily cap for signed-in visitors; other sign-in methods; an admin page.
+
+**Testing.** Three things in `tools/standin/` need no real project and touch nothing real:
+
+- **`server.mjs`:** a stand-in for the Supabase project (sign-in, the tables, the functions) in memory, to try the account features in a browser. Its header comment has the two commands: start it, then serve a build with `RESTFEST_SUPABASE_URL` and `RESTFEST_PUBLISHABLE_KEY` pointing at it. Every page and flow of the accounts was checked this way with the Playwright tools.
+- **`check-rls.mjs`:** runs the migrations in an in-memory Postgres and checks what each role can reach (35 checks). **Run it after any change to a migration**; it is the only test of the row level security.
+- **`check-functions.ts`:** runs `generate-recipe` and `delete-account` with Claude and Supabase replaced (19 checks).
+
 ## Testing setup that worked
 
-- **Serve the site:** `npx @11ty/eleventy --serve --port 8765` in the project root, run in the background, then test with the Playwright MCP tools.
+- **Serve the site:** `npx @11ty/eleventy --serve --port 8765 --output=<a folder in the scratchpad>` in the project root, run in the background, then test with the Playwright MCP tools. Give it its own `--output`: the owner often has `npm start` running, and two servers writing to `_site/` overwrite each other. For the same reason `_site/` is no baseline to compare against; build the comparison from a temporary `git worktree` of `main`.
+- **A long-running `npm start` goes stale** for code in `lib/` (Node keeps the first version it loaded) and for `eleventy.config.js`. If the owner's preview shows something old, such as the previous site name on category pages, restarting it fixes it.
 - **Browser cache gotcha:** the Eleventy server sends no cache headers either, so a reload can show stale CSS, JS or HTML. Refresh them with `fetch(path, {cache: 'reload'})`, or add `?t=…` to the address. Real visitors could hit the same problem after a deploy, so a host setting that makes browsers always check HTML for a newer version is worth recommending.
 - **Compare output before and after a refactor:** copy `_site/` to the scratchpad first, then diff the new build against it with the whitespace between tags collapsed. The Eleventy move was checked this way: all 135 recipe pages came out identical.
 - **Overflow check:** sweep widths 320–1440 for horizontal overflow on `index.html`, `receptarkiv.html`, `mer-an-mat.html` and one recipe page. The header is tight (see item 13).
@@ -308,7 +413,7 @@ The owner chose: **Supabase** for the backend, **option C** for generated recipe
    - The archive is food only, but the Sparade view still shows saved non-food items.
    - Archive search says when there are matches under Mer än mat.
    - New header link "Mer än mat".
-   - To make room, the desktop menu dropped its icons. Below 1200px the Sparat and Inköpslista buttons show icon and count only. Below 960px the menu gets its own row. Below 520px "Så funkar det" is hidden.
+   - To make room, the desktop menu dropped its icons. Below 1200px the Sparat and Inköpslista buttons show icon and count only. Below 960px the menu gets its own row. Below 520px "Så funkar det" was hidden. Since the "Recept" menu (see "Pages") the menu has two entries and shows both at every width.
    - I offered a footer link too but didn't add one; the owner hasn't been asked about that.
 
 **Also done:**
@@ -347,6 +452,15 @@ The owner chose: **Supabase** for the backend, **option C** for generated recipe
   - the home page and `nytt-recept.html` in headless Chrome against a stand-in backend: photo → list, list → recipe → placeholder → photo, stepper, fridge comparison, shopping list, category and tag links, Back, unknown ids, and no overflow at 375 px;
   - `npm run promote` output passes the build, and its front matter reads back unchanged;
   - with `ai.js` empty, the home page has no trace of the features.
+
+- **Konton och receptbok:** sign-in with email + password or Google, Min receptbok, preferences, the profile, account and privacy pages. See "Konton och receptbok" for files, setup and limits. The site was also renamed from Restfest to Ofta bra efter just before (see "The name" at the top). Verified without the real project:
+  - `npm test`: 39 tests, among them two full builds (with and without the key);
+  - without the key, every HTML page is byte for byte the same as before accounts;
+  - the migration in an in-memory Postgres: 35 checks of who can reach what, the limits, and what deleting a user removes;
+  - `generate-recipe` and `delete-account` with Claude and Supabase replaced: 19 checks;
+  - an independent review of the whole branch found no way to reach another visitor's data; what it did find (hearts lost when signing out with unsent changes, no "skicka igen" before confirming, a silent sign-up for an existing address, a gap in the return-address check) was fixed and re-tested;
+  - every page and flow in a browser against the stand-in backend: signing up, in and out, mail links opened in a cleared browser, Google, a new password, hearts merging at sign-in and surviving a backend outage, the recipe book, preferences, deleting the account, keyboard order and labels, and no overflow from 320 to 1440px;
+  - a signed-out visitor downloads `js/account.js` and `js/account-helpers.js` and nothing else new, and no request goes to Supabase.
 
 **Content caveat to pass on:** Chokladtryfflar and Banansoftis are tagged gluten-free but use oat cream or oat drink. Röd linssoppa and Chili sin carne have oat yoghurt as an optional topping. They're only gluten-free with products labelled "glutenfri". The owner has been told; nothing was changed.
 

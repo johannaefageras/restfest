@@ -1,4 +1,4 @@
-.site-header nav a {
+.site-header .nav-link {
   gap: 6px;
 }
 
@@ -1571,12 +1571,12 @@ body:has(#shopping-dialog[open]) {
   gap: 24px;
   margin-right: 24px;
 }
-.site-header nav a {
+.site-header .nav-link {
   white-space: nowrap;
 }
 
 @media (min-width: 960px) {
-  .site-header nav img {
+  .site-header .nav-link > img {
     display: none;
   }
 }
@@ -1589,6 +1589,59 @@ body:has(#shopping-dialog[open]) {
   .header-actions .saved-label,
   .shopping-nav-label {
     display: none;
+  }
+}
+
+/* On narrow phones the three-word name doesn't fit beside the two buttons at full size, so it shrinks
+   with the screen: the name is about 7.4em wide, and the bowl, the buttons and the gaps take about
+   250px. 22px again from 414px; 14px at 320px. The footer's name has its own row and stays as it is. */
+@media (max-width: 419px) {
+  .site-header .brand {
+    font-size: clamp(14px, calc((100vw - 250px) / 7.4), 22px);
+  }
+}
+
+/* Accounts (layouts/base.njk, js/account.js). The pages are built signed out, and <html> gets the
+   class signed-in before the first paint, so each state hides what belongs to the other.
+   The account link is a third button in the header from 520px, without its label below 1200px like
+   the other two. On phones there is no room for a third button beside the name, so there it is a
+   link in the menu row instead. */
+:root:not(.signed-in) .when-signed-in,
+:root.signed-in .when-signed-out {
+  display: none !important;
+}
+.site-header .account-menu-link {
+  display: none;
+}
+@media (max-width: 1199px) {
+  .account-label {
+    display: none;
+  }
+}
+@media (max-width: 519px) {
+  .header-actions .account-nav {
+    display: none;
+  }
+  .site-header .account-menu-link {
+    display: inline-flex;
+  }
+}
+
+/* From 960px the menu sits in the middle of the header, with the logo and the buttons at the edges:
+   the side columns are equally wide, so the menu is centred on the page whatever the buttons show. */
+@media (min-width: 960px) {
+  .header-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+  .site-header .brand {
+    justify-self: start;
+  }
+  .site-header nav {
+    margin-inline: 0;
+  }
+  .header-actions {
+    justify-self: end;
   }
 }
 
@@ -1612,19 +1665,12 @@ body:has(#shopping-dialog[open]) {
     font-size: 12px;
   }
 
-  .site-header nav a {
+  .site-header .nav-link {
     gap: 4px;
   }
-  .site-header nav img {
+  .site-header .nav-link > img {
     width: 16px;
     height: 16px;
-  }
-}
-
-/* Four links don't fit on a phone. "Så funkar det" is a section further down the home page. */
-@media (max-width: 519px) {
-  .site-header nav .nav-how {
-    display: none;
   }
 }
 
@@ -1632,7 +1678,7 @@ body:has(#shopping-dialog[open]) {
   .site-header nav {
     gap: 0;
   }
-  .site-header nav img {
+  .site-header .nav-link > img {
     display: none;
   }
 }
@@ -2087,7 +2133,6 @@ body:has(#shopping-dialog[open]) {
   .greeting .eyebrow,
   .recipes-section > .eyebrow,
   .photo-work > .eyebrow,
-  .footer-inner > .text-button,
   .dialog-save {
     font-size: 12px;
   }
@@ -2131,8 +2176,10 @@ body:has(#shopping-dialog[open]) {
   }
 }
 
-/* "Så funkar det", at the bottom of the home page: the three steps again, each one a centred stack of
-   picture, eyebrow, title and a line of text. Three columns from 700px, one below that. */
+/* "Så funkar det", at the bottom of the home page: each step a centred stack of picture, eyebrow, title
+   and a line of text, and below them a note that links to the archive. Four steps with the fridge photo
+   turned on (.has-photo), three without: one row on wide screens, two by two on tablets (four steps
+   only), one column on phones. */
 .how-section {
   margin-top: clamp(40px, 5vw, 64px);
   padding-block: clamp(28px, 4vw, 44px) clamp(32px, 4.5vw, 56px);
@@ -2148,6 +2195,10 @@ body:has(#shopping-dialog[open]) {
   padding: 0;
   list-style: none;
 }
+.steps.has-photo {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.6vw, 36px);
+}
 .steps li {
   display: flex;
   flex-direction: column;
@@ -2158,23 +2209,18 @@ body:has(#shopping-dialog[open]) {
 .steps img {
   width: auto;
   max-width: 100%;
-  height: clamp(104px, 12vw, 148px);
+  height: clamp(90px, 8vw, 100px);
   object-fit: contain;
-}
-.steps li:nth-child(1) > img {
-  rotate: -4deg;
-}
-.steps li:nth-child(3) > img {
-  rotate: 4deg;
 }
 .steps .eyebrow {
   margin-top: 22px;
 }
 .steps h3 {
   margin-top: 8px;
-  font-size: clamp(20px, 2.2vw, 24px);
+  font-size: clamp(19px, 1.8vw, 22px);
   line-height: 1.2;
   letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 .steps p:not(.eyebrow) {
   max-width: 22em;
@@ -2184,14 +2230,48 @@ body:has(#shopping-dialog[open]) {
   color: var(--muted);
   text-wrap: balance;
 }
+.how-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(36px, 5vw, 56px);
+  font-size: 17px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+}
+.how-more img {
+  width: auto;
+  height: 64px;
+}
+.how-more a {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.how-more a:hover {
+  color: #555;
+}
+
+@media (max-width: 1023px) {
+  .steps.has-photo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px clamp(20px, 4vw, 40px);
+  }
+  .steps.has-photo img {
+    height: 90px;
+  }
+}
 
 @media (max-width: 699px) {
-  .steps {
+  .steps,
+  .steps.has-photo {
     grid-template-columns: minmax(0, 1fr);
     gap: 36px;
   }
-  .steps img {
-    height: 120px;
+  .steps img,
+  .steps.has-photo img {
+    height: 90px;
   }
 }
 
@@ -2389,6 +2469,638 @@ body:has(#shopping-dialog[open]) {
 }
 
 .new-recipe-note a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* The footer (layouts/base.njk) is the header turned over: its rule on top, the brand, the tagline and
+   the menu in the header's type. Below 960px the menu gets its own row, as in the header.
+   Last comes .footer-mark, the name in large yellow type with only its top half showing. */
+.site-footer {
+  margin-top: clamp(32px, 5vw, 56px);
+  border-top: 3px solid var(--ink);
+}
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 20px;
+  min-height: 73px;
+}
+.footer-tagline {
+  color: var(--muted);
+  font-family: var(--font-label);
+  font-size: 12px;
+}
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 24px;
+  margin-left: auto;
+  font-family: var(--font-label);
+  font-size: 13px;
+}
+.site-footer .nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  white-space: nowrap;
+}
+.site-footer .nav-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.site-footer .nav-link:is([aria-current="page"], .is-current) {
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+/* Everything is in em, so the cut falls in the same place at every size: through the middle of the
+   lowercase letters, which leaves the tops of O, f, t and b whole. The name is three words on one
+   line (about 7.4em wide): at 11.2vw it spans about 83% of the screen on any phone or desktop, up to
+   153px type on wide screens. */
+.footer-mark {
+  height: 0.52em;
+  margin: clamp(8px, 1.5vw, 16px) 0 0;
+  overflow: hidden;
+  color: var(--yellow);
+  font-size: min(11.2vw, 153px);
+  white-space: nowrap;
+  font-weight: var(--font-weight-black);
+  line-height: 0.72;
+  letter-spacing: -0.03em;
+  text-align: center;
+  user-select: none;
+}
+
+@media (max-width: 959px) {
+  .footer-inner {
+    padding-top: 12px;
+    row-gap: 8px;
+  }
+  .footer-tagline {
+    margin-left: auto;
+  }
+  .site-footer nav {
+    flex-basis: 100%;
+    justify-content: space-between;
+    column-gap: 4px;
+    border-top: 1px solid var(--rule);
+    font-size: 12px;
+  }
+}
+@media (max-width: 519px) {
+  .footer-inner {
+    row-gap: 0;
+  }
+  .footer-tagline {
+    flex-basis: 100%;
+    margin: 2px 0 10px;
+  }
+}
+
+/* The "Recept" menu in the header and footer (layouts/base.njk): a <details> whose panel lists the
+   recipe types. The panel is placed against the menu row (nav), which is as tall as its bar. In the
+   header it hangs from the header's rule, and in the footer it stands on the footer's: the panel's
+   3px edge lies on the rule, so the two read as one line. It unrolls from that line when it opens.
+   Each row takes its own colour on hover and on its own page. */
+.site-header nav,
+.site-footer nav {
+  position: relative;
+  align-self: stretch;
+}
+.nav-menu > summary {
+  gap: 6px;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+.nav-menu > summary::-webkit-details-marker {
+  display: none;
+}
+.nav-menu > summary:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+.nav-menu > summary > .fa-chevron-down {
+  font-size: 11px;
+}
+/* The underline of a hovered or current link belongs to the word, not to the chevron beside it. */
+.nav-menu > summary.nav-link:is(:hover, .is-current) {
+  text-decoration-line: none;
+}
+.nav-menu > summary:hover > span {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.nav-menu > summary.is-current > span {
+  text-decoration: underline var(--yellow) 3px;
+  text-underline-offset: 6px;
+}
+
+.nav-menu-panel {
+  position: absolute;
+  z-index: 30;
+  top: 100%;
+  left: -18px;
+  width: 272px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  border: 2px solid var(--ink);
+  border-top-width: 3px;
+  border-radius: 0 0 8px 9px;
+  background: var(--surface);
+  box-shadow: 0 6px 14px rgb(0 0 0 / 0.1);
+  font-family: var(--font-body);
+  font-size: 15px;
+}
+.nav-menu[open] > .nav-menu-panel {
+  animation: nav-menu-down 0.16s ease-out;
+}
+@keyframes nav-menu-down {
+  from {
+    clip-path: inset(0 -20px 100% -20px);
+  }
+  to {
+    clip-path: inset(0 -20px -20px -20px);
+  }
+}
+
+.nav-menu-panel a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: 5px 7px 5px 6px;
+}
+.nav-menu-panel img {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+.nav-menu-panel span {
+  display: grid;
+  min-width: 0;
+}
+.nav-menu-panel strong {
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.nav-menu-panel small {
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+.nav-menu-panel a:hover,
+.nav-menu-panel a[aria-current="page"] {
+  background: var(--menu-tint, var(--well));
+}
+.nav-menu-panel a:hover small,
+.nav-menu-panel a[aria-current="page"] small {
+  color: var(--ink);
+}
+.nav-menu-panel a:focus-visible {
+  outline-offset: -3px;
+}
+.nav-menu-panel [data-type="food"] {
+  --menu-tint: #ffe48a;
+}
+.nav-menu-panel [data-type="spa"] {
+  --menu-tint: #f7bcd7;
+}
+.nav-menu-panel [data-type="household"] {
+  --menu-tint: #b4e48c;
+}
+.nav-menu-panel [data-type="pets"] {
+  --menu-tint: #c9b6ee;
+}
+
+/* The footer's menu opens upwards, so its chevron points up until then. On wide screens the menu
+   is at the right edge, and the panel lines up with that edge. */
+.site-footer .nav-menu > summary > .fa-chevron-down {
+  transform: rotate(180deg);
+}
+.site-footer .nav-menu[open] > summary > .fa-chevron-down {
+  transform: none;
+}
+.site-footer .nav-menu-panel {
+  top: auto;
+  bottom: 100%;
+  left: auto;
+  right: 0;
+  border-width: 2px 2px 3px;
+  border-radius: 8px 11px 0 0;
+  box-shadow: 0 -6px 14px rgb(0 0 0 / 0.1);
+}
+.site-footer .nav-menu[open] > .nav-menu-panel {
+  animation-name: nav-menu-up;
+}
+@keyframes nav-menu-up {
+  from {
+    clip-path: inset(100% -20px 0 -20px);
+  }
+  to {
+    clip-path: inset(-20px -20px 0 -20px);
+  }
+}
+
+/* Below 960px the menu has its own row, and the panel starts at its left edge. The footer's row has
+   the brand above it instead of the footer's rule, so there the panel floats free of the row. */
+@media (max-width: 959px) {
+  .nav-menu-panel {
+    left: 0;
+  }
+  .site-footer .nav-menu-panel {
+    bottom: calc(100% + 6px);
+    left: 0;
+    right: auto;
+    border-width: 2px;
+    border-radius: var(--radius-card);
+  }
+}
+/* On phones the panel is as wide as the row. */
+@media (max-width: 519px) {
+  .nav-menu-panel,
+  .site-footer .nav-menu-panel {
+    right: 0;
+    width: auto;
+  }
+}
+
+/* The account pages (logga-in, nytt-losenord, receptbok, profil, konto, integritet; HANDOFF.md,
+   "Konton och receptbok"). Forms sit in one narrow column; fields are drawn like the fridge field
+   on the home page: a 2px ink line with the buttons' uneven corners. */
+.wrap.account-page {
+  max-width: calc(460px + 64px);
+  padding-block: clamp(28px, 6vw, 56px) 56px;
+}
+.account-card > h1 {
+  font-size: clamp(32px, 7vw, 40px);
+}
+.account-art {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 14px;
+  transform: rotate(-4deg);
+}
+.account-intro {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.account-card > [data-auth-main],
+.account-card > form,
+.account-card > .account-sent {
+  margin-top: 26px;
+}
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.account-field label {
+  display: block;
+  margin-bottom: 6px;
+  font: var(--font-weight-bold) 12px/1.4 var(--font-label);
+}
+.account-optional {
+  color: var(--muted);
+  font-weight: var(--font-weight-body);
+}
+.account-field input,
+.account-field select {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-button);
+  padding: 9px 14px;
+  background: var(--surface);
+  /* 16px keeps iOS from zooming in when the field gets focus. */
+  font-size: 16px;
+}
+.account-field input:focus-visible,
+.account-field select:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.account-hint {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.account-hint a,
+.account-links a,
+.account-intro a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.account-wide {
+  width: 100%;
+}
+.account-form[aria-busy="true"] .button,
+[data-auth-main][aria-busy="true"] .button,
+.account-sent[aria-busy="true"] .button {
+  opacity: 0.6;
+}
+/* "eller" between Google and the form, with a rule on either side. */
+.account-or {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-block: 18px;
+  color: var(--muted);
+  font: var(--font-weight-body) 12px var(--font-label);
+}
+.account-or::before,
+.account-or::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--line);
+}
+.account-error {
+  padding: 10px 12px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-button);
+  background: #ffe48a;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.account-status {
+  font-size: 14px;
+  line-height: 1.45;
+}
+.account-status:empty {
+  display: none;
+}
+.account-links {
+  margin-top: 12px;
+  font-size: 14px;
+}
+.account-links .text-button {
+  min-height: 0;
+  padding: 0;
+}
+.account-sent > p:first-child {
+  font-size: 16px;
+  line-height: 1.5;
+}
+.account-sent .button {
+  margin-top: 14px;
+}
+
+/* The menu on the signed-in pages (_includes/account-nav.njk): the header's label type, with the
+   current page underlined in yellow like the header's own menu, and "Logga ut" at the far end. */
+.account-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 22px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-label);
+  font-size: 13px;
+}
+.account-tabs > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.account-tabs > a:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.account-tabs > a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+.account-tabs > .text-button {
+  margin-left: auto;
+}
+
+/* Min receptbok (pages/receptbok.njk). The cards and their grid are the archive's. */
+.book-page .book-filter {
+  margin-bottom: 12px;
+}
+.book-page .archive-match {
+  color: var(--muted);
+}
+.book-empty,
+.book-signed-out {
+  max-width: 560px;
+  padding-block: 8px 24px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.book-empty-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+.book-signed-out .meta {
+  margin-top: 14px;
+}
+.book-signed-out .meta a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* "Spara i receptboken" on a generated recipe is a link to the sign-in page, drawn as the button. */
+a.dialog-save {
+  text-decoration: none;
+}
+
+/* Profil and Konto (pages/profil.njk, konto.njk). */
+.account-who {
+  margin-left: auto;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 14ch;
+}
+.account-who:not([hidden]) + .text-button {
+  margin-left: 0;
+}
+.account-card > .account-tabs {
+  margin-top: 18px;
+}
+.account-card > .account-tabs + .account-intro {
+  margin-top: 0;
+}
+.account-group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.account-group legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font: var(--font-weight-bold) 12px/1.4 var(--font-label);
+}
+.account-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+/* Drawn like the archive's filter buttons, green when ticked. */
+.account-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 5px 12px 5px 10px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-button);
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+}
+.account-check:hover {
+  border-color: var(--ink);
+}
+.account-check:has(input:checked) {
+  background: #b4e48c;
+  border-color: var(--ink);
+}
+.account-check:has(input:disabled) {
+  cursor: default;
+  opacity: 0.75;
+}
+.account-check input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--ink);
+}
+.account-add {
+  display: flex;
+  gap: 8px;
+}
+.account-add .button {
+  flex: none;
+}
+.account-field > .account-error {
+  margin-top: 8px;
+}
+.account-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.account-chips:empty {
+  display: none;
+}
+.account-chips li {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-button);
+  background: var(--well);
+  font-size: 14px;
+}
+.account-chips li > span {
+  padding: 6px 2px 6px 11px;
+  overflow-wrap: anywhere;
+}
+.account-chips button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  min-height: 40px;
+  border: 0;
+  background: none;
+  font-size: 13px;
+}
+.account-submit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+.account-section {
+  padding-block: 22px;
+  border-top: 1px solid var(--rule);
+}
+.account-section:first-child {
+  padding-top: 4px;
+  border-top: 0;
+}
+.account-section > h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.account-section > .account-hint {
+  margin: 0 0 14px;
+}
+.account-email {
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  overflow-wrap: anywhere;
+}
+.account-dialog {
+  max-width: 460px;
+}
+.account-dialog h2 {
+  margin-bottom: 12px;
+  font-size: 22px;
+}
+.account-dialog p {
+  font-size: 15px;
+  line-height: 1.5;
+}
+.account-dialog .account-error {
+  margin-top: 14px;
+}
+.account-dialog-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+/* Integritet (pages/integritet.njk): running text, a little wider than the forms. */
+.wrap.privacy-page {
+  max-width: calc(620px + 64px);
+}
+.privacy-text > h2 {
+  margin: 30px 0 8px;
+  font-size: 20px;
+}
+.privacy-text > p:not(.account-intro),
+.privacy-text > ul {
+  font-size: 15px;
+  line-height: 1.6;
+}
+.privacy-text > p + p,
+.privacy-text > ul + p {
+  margin-top: 10px;
+}
+.privacy-text > ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+.privacy-text > ul > li + li {
+  margin-top: 6px;
+}
+.privacy-text a {
   text-decoration: underline;
   text-underline-offset: 3px;
 }

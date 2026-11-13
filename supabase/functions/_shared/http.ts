@@ -1,7 +1,7 @@
 // Responses, CORS and error handling shared by the Edge Functions.
 
 // The site's address, so other sites can't call the functions from their pages, e.g.
-// ALLOWED_ORIGINS=https://restfest.se,http://localhost:8080. Leave it unset to allow any origin.
+// ALLOWED_ORIGINS=https://oftabraefter.se,http://localhost:8080. Leave it unset to allow any origin.
 const allowedOrigins = (Deno.env.get('ALLOWED_ORIGINS') ?? '*')
   .split(',').map(origin => origin.trim()).filter(Boolean);
 
@@ -11,7 +11,8 @@ function corsHeaders(req: Request): Record<string, string> {
   return {
     'Access-Control-Allow-Origin': allow,
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'content-type',
+    // authorization carries a signed-in visitor's access token (auth.ts); supabase-js adds the other two.
+    'Access-Control-Allow-Headers': 'content-type, authorization, apikey, x-client-info',
     'Vary': 'Origin'
   };
 }

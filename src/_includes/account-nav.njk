@@ -1,0 +1,9 @@
+{#- The menu on the signed-in pages (receptbok, profil, konto). Set `current` to the page's name before
+    including it. "Logga ut" and the visitor's name are handled by js/account.js. -#}
+<nav class="account-tabs" aria-label="Ditt konto">
+  <a href="receptbok.html"{% if current == 'receptbok' %} aria-current="page"{% endif %}>Receptbok</a>
+  <a href="profil.html"{% if current == 'profil' %} aria-current="page"{% endif %}>Profil</a>
+  <a href="konto.html"{% if current == 'konto' %} aria-current="page"{% endif %}>Konto</a>
+  <span class="account-who" data-account-name hidden></span>
+  <button class="text-button" type="button" data-sign-out>Logga ut</button>
+</nav>

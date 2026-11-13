@@ -651,11 +651,25 @@ function toggleSave(id) {
       ? "Sparat bland dina favoriter ♡"
       : "Receptet har tagits bort från sparade",
   );
+  // For a signed-in visitor, account.js stores the change in their account as well.
+  document.dispatchEvent(
+    new CustomEvent("restfest:save-change", {
+      detail: { id, saved: saved.has(id) },
+    }),
+  );
 }
 
 function refreshSavedRecipes() {
   saved = readSavedRecipes() ?? saved;
   refreshSavedViews();
+}
+
+// Replaces the saved recipes with `ids`: the hearts in a signed-in visitor's account (account.js).
+function setSavedRecipes(ids) {
+  try {
+    localStorage.setItem(savedKey, JSON.stringify(ids));
+  } catch {}
+  refreshSavedRecipes();
 }
 
 window.addEventListener("storage", (event) => {
@@ -1367,6 +1381,30 @@ $("#shopping-items").addEventListener("click", (event) => {
     buttons[Math.min(index, buttons.length - 1)] ??
     $(".dialog-close", shoppingDialog)
   ).focus();
+});
+
+// The "Recept" menus in the header and footer (layouts/base.njk) are <details>, so they open and
+// close on their own. Here they also close on Escape, on a click outside, when focus leaves them,
+// and when the visitor comes back to the page with Back.
+const navMenus = [...document.querySelectorAll(".nav-menu")];
+for (const menu of navMenus) {
+  menu.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !menu.open) return;
+    event.preventDefault();
+    menu.open = false;
+    menu.querySelector("summary").focus({ preventScroll: true });
+  });
+  menu.addEventListener("focusout", (event) => {
+    if (event.relatedTarget && !menu.contains(event.relatedTarget))
+      menu.open = false;
+  });
+}
+document.addEventListener("click", (event) => {
+  for (const menu of navMenus)
+    if (menu.open && !menu.contains(event.target)) menu.open = false;
+});
+window.addEventListener("pageshow", () => {
+  for (const menu of navMenus) menu.open = false;
 });
 
 // On a recipe's own page (recept/<id>.html) the recipe is part of the page.
