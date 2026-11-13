@@ -9,9 +9,12 @@
 import { amountParts, recipeServings } from "./recipe-amounts.js";
 
 const api = document.querySelector('meta[name="restfest-ai"]')?.content;
+// Accounts (account.js, which runs before this module), or undefined when the site has none.
+const account = window.restfestAccount;
 const main = $("#main");
 const message = $("[data-new-recipe-message]");
-const id = new URLSearchParams(location.search).get("id") ?? "";
+const pageParams = new URLSearchParams(location.search);
+const id = (pageParams.get("id") ?? "").toLowerCase();
 const photoWait = 3 * 60 * 1000;
 
 const homeLink = `<a href="${assetUrl("")}#borja">Till kylskåpet</a>`;
@@ -152,6 +155,7 @@ function recipeHtml(recipe, data) {
       <section class="recipe-section" aria-labelledby="ingredients-heading">
         <div class="recipe-section-heading">
           <h2 id="ingredients-heading" class="cook-ingredient-heading"><img src="${squareIconPath("clipboard-2")}" alt="" width="24" height="24">Det här behöver du</h2>
+          <span data-book-save></span>
         </div>
         ${
           recipe.pantryKeys.length
@@ -261,6 +265,42 @@ async function loadPhoto(article, recipe, image) {
   else showNoPhoto(article);
 }
 
+// Where an archive recipe has its "Spara recept" heart: the same button for a signed-in visitor, which
+// puts the recipe in their recipe book or takes it out, and a link to the sign-in page for anyone
+// else. Signing in from that link comes back here with ?spara=1, and the recipe is saved.
+function drawBookSave({ focus = false } = {}) {
+  const slot = $("[data-book-save]", main);
+  if (!slot || !account) return;
+  if (account.signedIn()) {
+    const inBook = account.generatedIds().has(id);
+    slot.innerHTML = `<button class="dialog-save" type="button" data-save-generated="${id}" aria-pressed="${inBook}">${heartIcon(inBook)}${inBook ? "Sparat" : "Spara recept"}</button>`;
+  } else {
+    const back = `${location.pathname}?id=${encodeURIComponent(id)}&spara=1`;
+    slot.innerHTML = `<a class="dialog-save" href="${escapeHtml(account.loginUrl(back))}">${heartIcon(false)}Spara i receptboken</a>`;
+  }
+  if (focus) slot.firstElementChild.focus({ preventScroll: true });
+}
+
+function setInBook(on) {
+  account.setGenerated(id, on);
+  showToast(
+    on ? "Sparat i din receptbok ♡" : "Receptet har tagits bort från receptboken",
+  );
+}
+
+if (account) {
+  main.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-save-generated]");
+    if (!button) return;
+    setInBook(button.getAttribute("aria-pressed") !== "true");
+    drawBookSave({ focus: true });
+  });
+  document.addEventListener("restfest:account", () => {
+    const focused = $("[data-book-save]", main)?.contains(document.activeElement);
+    drawBookSave({ focus: Boolean(focused) });
+  });
+}
+
 async function load() {
   let data;
   try {
@@ -283,6 +323,16 @@ async function load() {
   main.removeAttribute("aria-busy");
   const article = $(".recipe-view", main);
   enhanceRecipe(article);
+  drawBookSave();
+  // Back from signing in through "Spara i receptboken".
+  if (pageParams.get("spara") === "1") {
+    if (account?.signedIn() && !account.generatedIds().has(id)) {
+      setInBook(true);
+      drawBookSave();
+    }
+    pageParams.delete("spara");
+    history.replaceState(null, "", `${location.pathname}?${pageParams}`);
+  }
   if (data.image.status !== "done" || !data.image.url)
     loadPhoto(article, recipe, data.image);
 }

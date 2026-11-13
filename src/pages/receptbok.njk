@@ -1,0 +1,47 @@
+---js
+// receptbok.html: a signed-in visitor's recipe book: the recipes they generated and the archive
+// recipes they hearted, newest first. Built only when the site has accounts (accountPages in
+// eleventy.config.js). src/js/recipe-book.js fetches and draws it; HANDOFF.md, "Konton och receptbok".
+const layout = 'layouts/base.njk';
+const title = 'Min receptbok · Ofta bra efter';
+const description = 'Din egen receptbok hos Ofta bra efter: recept du har hittat på och recept du har sparat.';
+const noindex = true;
+const modules = ['recipe-book.js'];
+const permalink = 'receptbok.html';
+---
+  <main id="main" class="wrap archive-page book-page">
+    <section class="greeting archive-greeting" aria-labelledby="book-title">
+      <div>
+        <h1 id="book-title"><span class="marker">Min receptbok.</span></h1>
+        <p class="greeting-intro when-signed-in">Recept du har hittat på och recept du har sparat ur arkivet, samlade på ett ställe.</p>
+        <p class="greeting-intro when-signed-out">Logga in för att se din receptbok.</p>
+      </div>
+      <div class="greeting-aside" aria-hidden="true">
+        <div class="doodle-lineup">
+          <img src="assets/illustrations/cook-book.svg" alt="" width="60" height="60">
+        </div>
+      </div>
+    </section>
+
+    <div class="when-signed-in">
+      {%- set current = 'receptbok' %}
+      {% include "account-nav.njk" %}
+      <div class="food-filters book-filter" role="group" aria-label="Visa">
+        <button class="food-filter" type="button" data-book-filter="alla" aria-pressed="true">Alla</button>
+        <button class="food-filter" type="button" data-book-filter="egna" aria-pressed="false">Egna recept</button>
+        <button class="food-filter" type="button" data-book-filter="arkiv" aria-pressed="false">Från arkivet</button>
+      </div>
+      <p class="meta archive-results" role="status" data-book-status>Hämtar receptboken …</p>
+      <div class="recipe-grid" data-book-grid></div>
+      <div class="book-empty" data-book-empty hidden>
+        <p>Receptboken är tom. Skriv in vad du har hemma så hittar vi på något, eller spara recept ur arkivet med hjärtat.</p>
+        <p class="book-empty-links"><a class="button primary" href="./#borja">Till kylskåpet</a> <a class="button" href="receptarkiv.html">Till receptarkivet</a></p>
+      </div>
+    </div>
+
+    <div class="book-signed-out when-signed-out">
+      <p><a class="button primary" href="logga-in.html" data-account-link>Logga in</a></p>
+      <p class="meta">Recept du har sparat utan konto finns under <a href="receptarkiv.html?vy=sparade">Sparat i receptarkivet</a>.</p>
+    </div>
+    <noscript><p class="meta">Receptboken behöver JavaScript.</p></noscript>
+  </main>

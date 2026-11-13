@@ -49,6 +49,12 @@ test('with a publishable key every page gets the account button and the account 
     assert.ok(html.includes('<script type="module" src="js/auth-forms.js"></script>'), `${page} loads auth-forms.js`);
     assert.ok(html.indexOf('js/account.js') < html.indexOf('js/auth-forms.js'), `${page} loads account.js first`);
   }
+  const book = site.read('receptbok.html');
+  assert.match(book, /<meta name="robots" content="noindex">/);
+  assert.ok(book.includes('<script type="module" src="js/recipe-book.js"></script>'), 'receptbok.html loads recipe-book.js');
+  assert.match(book, /<a href="receptbok\.html" aria-current="page">/, 'the account menu marks the recipe book as the current page');
+  for (const link of ['href="profil.html"', 'href="konto.html"', 'data-sign-out'])
+    assert.ok(book.includes(link), `the account menu has ${link}`);
   assert.ok(site.has('js/account.js'));
   assert.ok(site.has('js/account-helpers.js'));
   assert.match(site.read('js/vendor/supabase.js'), /createClient/);

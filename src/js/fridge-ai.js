@@ -17,12 +17,19 @@
   const generalError = "Något gick fel. Prova igen om en stund.";
 
   // The functions answer {error} in Swedish when something is wrong; a lost connection doesn't.
-  async function post(name, body) {
+  async function post(name, body, { signedIn = false } = {}) {
     let response;
     try {
+      const headers = { "Content-Type": "application/json" };
+      // A signed-in visitor's access token (account.js), so the function knows whose preferences
+      // to follow and whose recipe book the recipe goes in. Without one it works as before.
+      const token = signedIn
+        ? await window.restfestAccount?.token().catch(() => null)
+        : null;
+      if (token) headers.Authorization = `Bearer ${token}`;
       response = await fetch(`${api}/${name}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers,
         body: JSON.stringify(body),
       });
     } catch {
@@ -160,7 +167,13 @@
       inventStatus.textContent = "Snart klart …";
     }, 25000);
     try {
-      const { id } = await post("generate-recipe", { items: listItems() });
+      const { id, saved } = await post(
+        "generate-recipe",
+        { items: listItems() },
+        { signedIn: true },
+      );
+      // The function has put it in the visitor's recipe book; tell this browser's copy.
+      if (saved) window.restfestAccount?.noteGenerated(id);
       inventStatus.textContent = "Klart. Öppnar receptet …";
       location.href = `${siteBase}nytt-recept.html?id=${encodeURIComponent(id)}`;
     } catch (error) {

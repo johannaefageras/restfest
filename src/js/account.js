@@ -18,6 +18,7 @@
 //   loginUrl(returnPath)   the sign-in page's address, coming back to returnPath (default: this page)
 //   generatedIds()         the generated recipes in the visitor's recipe book, as a Set of ids
 //   setGenerated(id, on)   adds a generated recipe to the book, or takes it out
+//   noteGenerated(id)      records that the server has added a generated recipe to the book
 //   refreshBook()          fetches the book again now; resolves to true when it could
 // and listen for `restfest:account` on document, sent when any of this changes.
 //
@@ -263,14 +264,27 @@ function queue(change) {
   bookTask(sendWaiting);
 }
 
-function setGenerated(id, on) {
-  if (!signedIn()) return;
+// The browser's copy of which generated recipes are in the book.
+function keepGenerated(id, on) {
   const ids = generatedIds();
   if (on) ids.add(id);
   else ids.delete(id);
   store(generatedKey, [...ids]);
   showCount();
+}
+
+function setGenerated(id, on) {
+  if (!signedIn()) return;
+  keepGenerated(id, on);
   queue({ kind: "generated", id, saved: Boolean(on) });
+  announce();
+}
+
+// generate-recipe adds a signed-in visitor's new recipe to their book itself, so there is nothing
+// to send: only the browser's copy needs to know.
+function noteGenerated(id) {
+  if (!signedIn()) return;
+  keepGenerated(id, true);
   announce();
 }
 
@@ -326,6 +340,7 @@ if (meta) {
     loginUrl,
     generatedIds,
     setGenerated,
+    noteGenerated,
     refreshBook,
   };
   showState();
