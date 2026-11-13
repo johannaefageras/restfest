@@ -651,11 +651,25 @@ function toggleSave(id) {
       ? "Sparat bland dina favoriter ♡"
       : "Receptet har tagits bort från sparade",
   );
+  // For a signed-in visitor, account.js stores the change in their account as well.
+  document.dispatchEvent(
+    new CustomEvent("restfest:save-change", {
+      detail: { id, saved: saved.has(id) },
+    }),
+  );
 }
 
 function refreshSavedRecipes() {
   saved = readSavedRecipes() ?? saved;
   refreshSavedViews();
+}
+
+// Replaces the saved recipes with `ids`: the hearts in a signed-in visitor's account (account.js).
+function setSavedRecipes(ids) {
+  try {
+    localStorage.setItem(savedKey, JSON.stringify(ids));
+  } catch {}
+  refreshSavedRecipes();
 }
 
 window.addEventListener("storage", (event) => {

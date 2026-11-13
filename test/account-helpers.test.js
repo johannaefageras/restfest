@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { authErrorText, passwordProblem, queueChange, safeReturnPath } from '../lib/account-helpers.js';
+import {
+  applyQueue, authErrorText, heartsToQueue, passwordProblem, queueChange, safeReturnPath, sendQueue, withoutSent
+} from '../lib/account-helpers.js';
 
 const origin = 'https://example.se';
 
@@ -45,4 +47,44 @@ test('authErrorText gives Swedish texts for the common cases', () => {
 test('passwordProblem wants 8 characters', () => {
   assert.equal(passwordProblem('1234567'), 'Lösenordet behöver vara minst 8 tecken.');
   assert.equal(passwordProblem('12345678'), null);
+});
+
+// Keeping the browser's hearts in step with the account (src/js/account.js).
+const add = (id, kind = 'archive') => ({kind, id, saved: true});
+const drop = (id, kind = 'archive') => ({kind, id, saved: false});
+
+test('sendQueue sends the changes in order and returns what is left', async () => {
+  const sent = [];
+  const left = await sendQueue([add('a'), drop('b'), add('c')], async change => { sent.push(change.id); });
+  assert.deepEqual(sent, ['a', 'b', 'c']);
+  assert.deepEqual(left, []);
+});
+
+test('sendQueue stops at the first change that cannot be sent and keeps it and the rest', async () => {
+  const sent = [];
+  const left = await sendQueue([add('a'), drop('b'), add('c')], async change => {
+    if (change.id === 'b') throw new Error('offline');
+    sent.push(change.id);
+  });
+  assert.deepEqual(sent, ['a']);
+  assert.deepEqual(left, [drop('b'), add('c')]);
+});
+
+test('withoutSent removes what was sent and keeps changes made meanwhile', () => {
+  // While "add a" was on its way, the visitor removed a again and hearted d.
+  const now = [drop('a'), add('b'), add('d')];
+  assert.deepEqual(withoutSent(now, [add('a'), add('b')]), [drop('a'), add('d')]);
+  assert.deepEqual(withoutSent([add('x', 'generated')], [add('x', 'archive')]), [add('x', 'generated')]);
+});
+
+test('applyQueue lays unsent changes over the account\'s list', () => {
+  const queue = [drop('b'), add('d'), add('g1', 'generated')];
+  assert.deepEqual(applyQueue(['a', 'b', 'c'], queue, 'archive'), ['a', 'c', 'd']);
+  assert.deepEqual(applyQueue(['g0'], queue, 'generated'), ['g0', 'g1']);
+  assert.deepEqual(applyQueue(['a'], [add('a')], 'archive'), ['a']);
+});
+
+test('heartsToQueue queues the browser\'s own hearts as additions, skipping ids that are not recipe ids', () => {
+  assert.deepEqual(heartsToQueue(['01-rodbetspytt', 'Not An Id', 7, '29-shakshuka'], [drop('29-shakshuka')]),
+    [add('01-rodbetspytt'), add('29-shakshuka')]);
 });
