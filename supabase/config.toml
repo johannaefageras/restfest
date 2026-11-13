@@ -14,3 +14,8 @@ verify_jwt = false
 
 [functions.get-recipe]
 verify_jwt = false
+
+# Needs a sign-in, which the function checks itself (_shared/auth.ts), like generate-recipe does for
+# its optional one.
+[functions.delete-account]
+verify_jwt = false

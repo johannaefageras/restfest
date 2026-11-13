@@ -11,7 +11,8 @@ function corsHeaders(req: Request): Record<string, string> {
   return {
     'Access-Control-Allow-Origin': allow,
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'content-type',
+    // authorization carries a signed-in visitor's access token (auth.ts); supabase-js adds the other two.
+    'Access-Control-Allow-Headers': 'content-type, authorization, apikey, x-client-info',
     'Vary': 'Origin'
   };
 }
