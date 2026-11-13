@@ -8,7 +8,11 @@
       modules              extra scripts from js/ loaded as modules, after the others, e.g. [new-recipe.js]
       noindex              true keeps search engines away, e.g. on nytt-recept.html
       recipe               set on recipe pages, which get share tags and recipe structured data
-    The address of the AI functions (_data/ai.js) goes in <meta name="restfest-ai"> once it's set. -#}
+    The address of the AI functions (_data/ai.js) goes in <meta name="restfest-ai"> once it's set.
+    Accounts (ai.accounts, HANDOFF.md "Konton och receptbok") add <meta name="restfest-account">, the
+    account button and js/account.js. The pages are built signed out; a small script in the head adds
+    the class signed-in to <html> before the first paint, and elements with the class when-signed-in
+    or when-signed-out show in that state only (kitchen.css). -#}
 {%- set isHome = page.url == '/' -%}
 {#- The home page links to its own sections; the other pages link to the home page. -#}
 {%- set homeUrl = '' if isHome else (base or './') -%}
@@ -40,6 +44,10 @@
   {%- endif %}
   {%- if ai.functionsUrl %}
   <meta name="restfest-ai" content="{{ ai.functionsUrl }}">
+  {%- endif %}
+  {%- if ai.accounts %}
+  <meta name="restfest-account" content="{{ ai.supabaseUrl }}" data-key="{{ ai.publishableKey }}">
+  <script>try { if (localStorage.getItem('restfest-account')) document.documentElement.classList.add('signed-in') } catch {}</script>
   {%- endif %}
   {%- if recipe %}
   {%- if recipe.url %}
@@ -76,17 +84,31 @@
       <nav aria-label="Huvudmeny">
         {{- recipeMenu(collections.recipeTypes, base, page.url, inRecipes, true) }}
         <a class="nav-link" href="{{ homeUrl }}#sa-funkar-det"><img src="{{ base }}assets/icons/information-symbol.svg" alt="" width="20" height="20">Så funkar det</a>
+        {%- if ai.accounts %}
+        {#- On phones the account link sits in the menu row; from 520px it is a button beside the others. #}
+        <a class="nav-link account-menu-link" href="{{ base }}logga-in.html" data-account-link><span class="when-signed-out">Logga in</span><span class="when-signed-in">Konto</span></a>
+        {%- endif %}
       </nav>
       <div class="header-actions">
-        <a class="saved-nav" href="{{ base }}receptarkiv.html?vy=sparade" aria-label="Visa sparade recept">
+        <a class="saved-nav" href="{{ base }}receptarkiv.html?vy=sparade" aria-label="Visa sparade recept"{% if ai.accounts %} data-saved-link{% endif %}>
           <img src="{{ base }}assets/icons/heart.svg" alt="" width="24" height="24">
+          {%- if ai.accounts %}
+          <span class="saved-label when-signed-out">Sparat</span><span class="saved-label when-signed-in">Receptbok</span>
+          {%- else %}
           <span class="saved-label">Sparat</span>
+          {%- endif %}
           <span id="saved-count" class="count">0</span>
         </a>
         <button id="shopping-nav" class="saved-nav" type="button" aria-label="Visa inköpslistan" aria-haspopup="dialog">
           <img src="{{ base }}assets/icons/shopping-basket-1.svg" alt="" width="24" height="24">
           <span class="shopping-nav-label">Inköpslista</span><span id="shopping-count" class="count" aria-hidden="true">0</span>
         </button>
+        {%- if ai.accounts %}
+        <a class="saved-nav account-nav" href="{{ base }}logga-in.html" aria-label="Logga in" data-account-link>
+          <img src="{{ base }}assets/icons/account.svg" alt="" width="24" height="24">
+          <span class="account-label when-signed-out">Logga in</span><span class="account-label when-signed-in">Konto</span>
+        </a>
+        {%- endif %}
       </div>
     </div>
   </header>
@@ -130,6 +152,9 @@
   {%- for script in scripts %}
   <script src="{{ base }}js/{{ script }}"></script>
   {%- endfor %}
+  {%- if ai.accounts %}
+  <script type="module" src="{{ base }}js/account.js"></script>
+  {%- endif %}
   {%- for module in modules %}
   <script type="module" src="{{ base }}js/{{ module }}"></script>
   {%- endfor %}

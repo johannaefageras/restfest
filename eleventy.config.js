@@ -37,6 +37,10 @@ export default function (eleventyConfig) {
   // The quantity parser the build uses, for the new-recipe page (src/js/new-recipe.js), which marks
   // the amounts in the browser.
   eleventyConfig.addPassthroughCopy({'lib/recipe-amounts.js': 'js/recipe-amounts.js'});
+  // For the accounts (src/js/account.js): the helpers the tests also use, and supabase-js as one
+  // file for the browser. Only signed-in visitors and the account pages load the library.
+  eleventyConfig.addPassthroughCopy({'lib/account-helpers.js': 'js/account-helpers.js'});
+  eleventyConfig.addPassthroughCopy({'node_modules/@supabase/supabase-js/dist/umd/supabase.js': 'js/vendor/supabase.js'});
 
   // The build reads the categories and tag labels from js/recipes.js (lib/taxonomy.js),
   // so tell the local server to rebuild when it changes.

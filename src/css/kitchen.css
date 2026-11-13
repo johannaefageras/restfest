@@ -1601,6 +1601,32 @@ body:has(#shopping-dialog[open]) {
   }
 }
 
+/* Accounts (layouts/base.njk, js/account.js). The pages are built signed out, and <html> gets the
+   class signed-in before the first paint, so each state hides what belongs to the other.
+   The account link is a third button in the header from 520px, without its label below 1200px like
+   the other two. On phones there is no room for a third button beside the name, so there it is a
+   link in the menu row instead. */
+:root:not(.signed-in) .when-signed-in,
+:root.signed-in .when-signed-out {
+  display: none !important;
+}
+.site-header .account-menu-link {
+  display: none;
+}
+@media (max-width: 1199px) {
+  .account-label {
+    display: none;
+  }
+}
+@media (max-width: 519px) {
+  .header-actions .account-nav {
+    display: none;
+  }
+  .site-header .account-menu-link {
+    display: inline-flex;
+  }
+}
+
 /* From 960px the menu sits in the middle of the header, with the logo and the buttons at the edges:
    the side columns are equally wide, so the menu is centred on the page whatever the buttons show. */
 @media (min-width: 960px) {
