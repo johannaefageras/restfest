@@ -104,54 +104,60 @@ async function loginPage() {
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    busy(mainBox, errorBox, async () => {
-      const address = emailValue(form.email);
-      const password = form.password.value;
-      const client = await account.client();
-      if (mode === "logga") {
-        if (!password) throw problem("Skriv ditt lösenord.");
-        const { error } = await client.auth.signInWithPassword({
-          email: address,
-          password,
-        });
-        // The link in the first mail may be lost or too old by now: offer a new one.
-        if (error?.code === "email_not_confirmed") {
-          showSent(
-            address,
-            `Du behöver bekräfta e-postadressen innan du kan logga in. Vi skickade en länk till ${address} när kontot skapades.`,
-          );
+    const fields = { email: form.email, password: form.password };
+    busy(
+      mainBox,
+      errorBox,
+      async () => {
+        const address = emailValue(form.email);
+        const password = form.password.value;
+        const client = await account.client();
+        if (mode === "logga") {
+          if (!password) throw problem("Skriv ditt lösenord.", form.password);
+          const { error } = await client.auth.signInWithPassword({
+            email: address,
+            password,
+          });
+          // The link in the first mail may be lost or too old by now: offer a new one.
+          if (error?.code === "email_not_confirmed") {
+            showSent(
+              address,
+              `Du behöver bekräfta e-postadressen innan du kan logga in. Vi skickade en länk till ${address} när kontot skapades.`,
+            );
+            return;
+          }
+          if (error) throw error;
+          await finish(destination);
           return;
         }
-        if (error) throw error;
-        await finish(destination);
-        return;
-      }
-      const short = passwordProblem(password);
-      if (short) throw problem(short);
-      const data = checked(
-        await client.auth.signUp({
-          email: address,
-          password,
-          options: {
-            data: { display_name: nameInput.value.trim().slice(0, 80) },
-            emailRedirectTo: backHere,
-          },
-        }),
-      );
-      // Without mail confirmation the account works at once.
-      if (data.session) {
-        await finish(destination);
-        return;
-      }
-      // For an address that already has an account, Supabase answers as if a new one was made, but
-      // with no sign-in methods, and sends no mail. Say so instead of leaving the visitor waiting.
-      if (data.user && (data.user.identities ?? []).length === 0)
-        throw { code: "user_already_exists" };
-      showSent(
-        address,
-        `Kolla din mejl. Vi har skickat en länk till ${address}. Klicka på den för att börja använda kontot.`,
-      );
-    });
+        const short = passwordProblem(password);
+        if (short) throw problem(short, form.password);
+        const data = checked(
+          await client.auth.signUp({
+            email: address,
+            password,
+            options: {
+              data: { display_name: nameInput.value.trim().slice(0, 80) },
+              emailRedirectTo: backHere,
+            },
+          }),
+        );
+        // Without mail confirmation the account works at once.
+        if (data.session) {
+          await finish(destination);
+          return;
+        }
+        // For an address that already has an account, Supabase answers as if a new one was made, but
+        // with no sign-in methods, and sends no mail. Say so instead of leaving the visitor waiting.
+        if (data.user && (data.user.identities ?? []).length === 0)
+          throw { code: "user_already_exists" };
+        showSent(
+          address,
+          `Kolla din mejl. Vi har skickat en länk till ${address}. Klicka på den för att börja använda kontot.`,
+        );
+      },
+      fields,
+    );
   });
 
   $("[data-google]").addEventListener("click", () => {
@@ -200,20 +206,25 @@ async function loginPage() {
     event.preventDefault();
     const status = $("[data-reset-status]");
     show(status, "");
-    busy(resetForm, $("[data-reset-error]"), async () => {
-      const address = emailValue(resetForm.email);
-      const client = await account.client();
-      checked(
-        await client.auth.resetPasswordForEmail(address, {
-          redirectTo: assetUrl("nytt-losenord.html"),
-        }),
-      );
-      // The same answer whether or not the address has an account.
-      show(
-        status,
-        "Om det finns ett konto med den adressen har vi skickat en länk. Kolla din mejl.",
-      );
-    });
+    busy(
+      resetForm,
+      $("[data-reset-error]"),
+      async () => {
+        const address = emailValue(resetForm.email);
+        const client = await account.client();
+        checked(
+          await client.auth.resetPasswordForEmail(address, {
+            redirectTo: assetUrl("nytt-losenord.html"),
+          }),
+        );
+        // The same answer whether or not the address has an account.
+        show(
+          status,
+          "Om det finns ett konto med den adressen har vi skickat en länk. Kolla din mejl.",
+        );
+      },
+      { email: resetForm.email },
+    );
   });
 
   // Arriving from a mail link or from Google, or already signed in.
@@ -258,13 +269,20 @@ async function passwordPage() {
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    busy(form, errorBox, async () => {
-      const short = passwordProblem(form.password.value);
-      if (short) throw problem(short);
-      const client = await account.client();
-      checked(await client.auth.updateUser({ password: form.password.value }));
-      await finish(assetUrl("receptbok.html"));
-    });
+    busy(
+      form,
+      errorBox,
+      async () => {
+        const short = passwordProblem(form.password.value);
+        if (short) throw problem(short, form.password);
+        const client = await account.client();
+        checked(
+          await client.auth.updateUser({ password: form.password.value }),
+        );
+        await finish(assetUrl("receptbok.html"));
+      },
+      { password: form.password },
+    );
   });
 }
 

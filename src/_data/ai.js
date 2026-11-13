@@ -11,7 +11,7 @@ const supabaseUrl = process.env.RESTFEST_SUPABASE_URL ?? 'https://yatffwoobcsrxc
 // use; RESTFEST_SUPABASE_URL does the same for the address, to try the site against a stand-in backend
 // (tools/standin/server.mjs). The names are the project's own, so a host that sets SUPABASE_URL for
 // its own purposes can't repoint the site by accident.
-const publishableKey = process.env.RESTFEST_PUBLISHABLE_KEY ?? '';
+const publishableKey = process.env.RESTFEST_PUBLISHABLE_KEY ?? 'sb_publishable_OIRfXMGxAMwY2TSn72TJ2w_9KpVs5uU';
 
 export default {
   supabaseUrl,

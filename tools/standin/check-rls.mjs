@@ -94,6 +94,13 @@ check('A cannot read generated_recipes directly', (Array.isArray(r) && r.length 
 r = await as('authenticated', A, `select * from my_generated_recipes()`);
 check('my_generated_recipes gives A their saved, non-hidden recipes with card fields', Array.isArray(r) && r.length === 1 && r[0].title === 'Gratäng' && r[0].time_label === '40 min' && JSON.stringify(r[0].tags) === '["Vegetarian"]' && r[0].image_status === 'pending', r);
 
+// The functions a visitor can call that run with the owner's rights (the server's own, like ai_allow,
+// are closed to visitors and not counted).
+r = await db.query(`select proname, proconfig from pg_proc where pronamespace = 'public'::regnamespace and prosecdef
+  and (has_function_privilege('authenticated', oid, 'execute') or has_function_privilege('anon', oid, 'execute')) order by proname`);
+check('a function that visitors can call with the owner\'s rights has an empty search path',
+  r.rows.length >= 1 && r.rows.every(row => (row.proconfig ?? []).some(setting => /^search_path=("")?$/.test(setting))), r.rows);
+
 // As B
 r = await as('authenticated', B, `select * from saved_recipes`);
 check("B sees none of A's hearts", Array.isArray(r) && r.length === 0, r);

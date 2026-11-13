@@ -17,6 +17,7 @@ const storage = `${document.querySelector('meta[name="restfest-account"]')?.cont
 // {kind: 'archive', id, savedAt, recipe} or {kind: 'generated', id, savedAt, row}
 let entries = [];
 let loaded = false;
+let loading = false;
 let filter = "alla";
 
 function generatedCard(row) {
@@ -76,7 +77,9 @@ function render() {
 }
 
 async function load() {
-  if (!account.signedIn()) return;
+  // account.js says "the book has changed" while this is fetching it; once is enough.
+  if (!account.signedIn() || loading) return;
+  loading = true;
   status.textContent = "Hämtar receptboken …";
   try {
     // Sends any heart that hasn't reached the account yet, so the lists below are complete. When the
@@ -113,6 +116,8 @@ async function load() {
     empty.hidden = true;
     status.innerHTML =
       'Kunde inte hämta receptboken. <button class="text-button" type="button" data-book-retry>Försök igen</button>';
+  } finally {
+    loading = false;
   }
 }
 

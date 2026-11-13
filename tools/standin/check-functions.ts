@@ -1,7 +1,7 @@
 // Runs generate-recipe and delete-account with Claude, Supabase Auth and the database replaced by an
 // in-memory fetch, and checks what they answer and what they store: no sign-in, a valid one with and
-// without preferences, an invalid one, an unsuitable fridge list, a failing book insert, CORS, and
-// deleting an account. Deno.serve is replaced too, which hands us each function's handler.
+// without preferences, an invalid one, an unsuitable fridge list, a failing book insert, the day's cap,
+// CORS, and deleting an account. Deno.serve is replaced too, which hands us each function's handler.
 //
 //   DENO_NO_PACKAGE_JSON=1 npx -y deno run -A tools/standin/check-functions.ts
 //
@@ -23,7 +23,10 @@ const state = {
   recipeInserts: 0,
   deleted: [] as string[],
   failSaved: false,
-  claudeCalls: 0
+  claudeCalls: 0,
+  capReached: false,
+  signInChecks: 0,
+  profileReads: 0
 };
 const goodDraft = {
   title: 'Potatisgratäng', shortName: 'Gratäng', description: 'En gratäng.', categories: ['main'], tags: ['Vegetarian'],
@@ -44,6 +47,7 @@ globalThis.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
     return json({stop_reason: 'end_turn', content: [{type: 'text', text: JSON.stringify(state.draft)}]});
   }
   if (url.pathname === '/auth/v1/user') {
+    state.signInChecks++;
     return req.headers.get('authorization') === 'Bearer good-token'
       ? json({id: '11111111-1111-4111-8111-111111111111', aud: 'authenticated', email: 'a@example.se'})
       : json({code: 403, error_code: 'bad_jwt', msg: 'invalid JWT'}, 403);
@@ -56,7 +60,8 @@ globalThis.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
     state.deleted.push(url.pathname.split('/').pop()!);
     return json({});
   }
-  if (url.pathname === '/rest/v1/rpc/ai_allow') return json(true);
+  if (url.pathname === '/rest/v1/rpc/ai_allow') return json(!state.capReached);
+  if (url.pathname === '/rest/v1/profiles') state.profileReads++;
   if (url.pathname === '/rest/v1/profiles') return state.profile ? json(state.profile) : json({code: 'PGRST116', message: 'no rows'}, 406);
   if (url.pathname === '/rest/v1/generated_recipes') { state.recipeInserts++; return json({id: '22222222-2222-4222-8222-222222222222'}, 201); }
   if (url.pathname === '/rest/v1/saved_generated_recipes') {
@@ -77,7 +82,7 @@ function check(name: string, ok: boolean, detail?: unknown) {
   console.log(`${ok ? 'ok  ' : 'FAIL'} ${name}${ok || detail === undefined ? '' : ` — ${JSON.stringify(detail)}`}`);
 }
 function reset() {
-  Object.assign(state, {draft: goodDraft, profile: null, claudePrompts: [], savedInserts: [], recipeInserts: 0, deleted: [], failSaved: false, claudeCalls: 0});
+  Object.assign(state, {draft: goodDraft, profile: null, claudePrompts: [], savedInserts: [], recipeInserts: 0, deleted: [], failSaved: false, claudeCalls: 0, capReached: false, signInChecks: 0, profileReads: 0});
 }
 const items = {items: [{name: 'potatis', key: 'potatis'}, {name: 'kyckling', key: 'kyckling'}]};
 async function call(handler: (req: Request) => Promise<Response>, {token, body = items, method = 'POST'}: {token?: string; body?: unknown; method?: string} = {}) {
@@ -132,6 +137,15 @@ reset();
 state.failSaved = true;
 r = await call(generate, {token: 'good-token'});
 check('book insert fails: the recipe is still returned, saved false', r.status === 200 && r.body.saved === false && Boolean(r.body.id), r);
+
+// Once the day's recipes are used up, nothing more is looked up or paid for.
+reset();
+state.capReached = true;
+state.profile = {diets: ['Vegan'], avoid: [], servings: null};
+r = await call(generate, {token: 'good-token'});
+check('cap reached: 429 with the cap text', r.status === 429 && r.body.error === 'Dagens nya recept är slut. Prova igen i morgon, eller hitta en middag i receptarkivet.', r);
+check('cap reached: no sign-in check, no profile read, no Claude call', state.signInChecks === 0 && state.profileReads === 0 && state.claudeCalls === 0,
+  {signInChecks: state.signInChecks, profileReads: state.profileReads, claudeCalls: state.claudeCalls});
 
 r = await call(generate, {method: 'OPTIONS'});
 check('preflight allows the authorization header', r.status === 204 && /authorization/i.test(r.headers.get('access-control-allow-headers') ?? ''), r.headers.get('access-control-allow-headers'));

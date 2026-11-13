@@ -31,19 +31,18 @@
 //   - every change is put in a queue (`restfest-saved-queue`) and sent; what can't be sent now
 //     (offline, Supabase down) stays queued and goes with the next page load;
 //   - on a page load, once the queue is empty, the account's lists replace the browser's.
-// A heart click is never blocked or undone by any of this.
+// A heart click is never blocked or undone by any of this. The order of it all is bookSync in
+// lib/account-helpers.js, which `npm test` checks; here it gets the browser's storage, the tables
+// and a lock that keeps two open tabs from sending at the same time.
 
 import {
-  applyQueue,
+  bookSync,
   heartsToQueue,
-  queueChange,
   refusedForGood,
   resumeQueue,
   safeReturnPath,
-  sendQueue,
   signInPage,
   stashQueue,
-  withoutSent,
 } from "./account-helpers.js";
 
 const meta = document.querySelector('meta[name="restfest-account"]');
@@ -197,90 +196,97 @@ function showCount() {
   if (count && signedIn()) count.textContent = saved.size + generatedIds().size;
 }
 
-// One change to the account. Throws when it should be tried again later; a change the database
-// refuses for good (a recipe that no longer exists, a full book) is dropped instead.
-async function sendChange(db, change) {
-  const table =
-    change.kind === "generated" ? "saved_generated_recipes" : "saved_recipes";
-  const { error, status } = change.saved
-    ? await db
-        .from(table)
-        .upsert(
-          { recipe_id: change.id },
+// The account, as bookSync wants it.
+const tables = { archive: "saved_recipes", generated: "saved_generated_recipes" };
+const remote = {
+  // Some hearts added or removed in one request. True when stored, and false when the database
+  // refuses for good (a recipe that no longer exists, a full book). Throws when it should be tried
+  // again later.
+  async change({ kind, saved, ids }) {
+    const table = (await client()).from(tables[kind]);
+    const { error, status } = saved
+      ? await table.upsert(
+          ids.map((id) => ({ recipe_id: id })),
           { onConflict: "user_id,recipe_id", ignoreDuplicates: true },
         )
-    : await db.from(table).delete().eq("recipe_id", change.id);
-  if (!error) return;
-  if (!refusedForGood(status)) throw error;
-  console.warn("The recipe book refused a change:", change, error.message);
-}
-
-// Sends what is queued. True when the queue is empty afterwards.
-async function sendWaiting(db) {
-  const waiting = readList(queueKey);
-  if (!waiting.length) return true;
-  const left = await sendQueue(waiting, (change) => sendChange(db, change));
-  const sent = waiting.slice(0, waiting.length - left.length);
-  // Read again: the visitor may have clicked a heart meanwhile.
-  const now = withoutSent(readList(queueKey), sent);
-  store(queueKey, now);
-  return now.length === 0;
-}
+      : await table.delete().in("recipe_id", ids);
+    if (!error) return true;
+    if (!refusedForGood(status)) throw error;
+    // A refused group is sent again one by one, so the warning names the recipe that is the trouble.
+    if (ids.length === 1)
+      console.warn(
+        "The recipe book refused a change:",
+        { kind, id: ids[0], saved },
+        error.message,
+      );
+    return false;
+  },
+  // The book's ids and the name, or null when they can't be read.
+  async book() {
+    const db = await client();
+    const [archive, generated, profile] = await Promise.all([
+      db.from("saved_recipes").select("recipe_id"),
+      // Not the table itself: the function leaves out recipes the owner has hidden, as
+      // receptbok.html does, so the header's count and the page agree.
+      db.rpc("my_generated_recipes").select("id"),
+      db.from("profiles").select("display_name").maybeSingle(),
+    ]);
+    if (archive.error || generated.error) return null;
+    return {
+      archive: archive.data.map((row) => row.recipe_id),
+      generated: generated.data.map((row) => row.id),
+      name:
+        profile.error || !profile.data
+          ? null
+          : (profile.data.display_name ?? ""),
+    };
+  },
+};
 
 const sameIds = (a, b) =>
   a.length === b.length && [...a].sort().join() === [...b].sort().join();
 
-// The account's book into the browser, once everything queued has been sent.
-async function fetchBook(db) {
-  if (!(await sendWaiting(db))) return false;
-  const [archive, generated, profile] = await Promise.all([
-    db.from("saved_recipes").select("recipe_id"),
-    db.from("saved_generated_recipes").select("recipe_id"),
-    db.from("profiles").select("display_name").maybeSingle(),
-  ]);
-  if (archive.error || generated.error) return false;
+// The account's book into the browser.
+function showBook({ archive, generated, name }) {
+  // Signed out while the book was on its way, here or in another tab: it isn't this browser's to
+  // show any more.
+  if (!signedIn()) return;
   // The name as the profile has it now: it may have been changed on another device.
-  if (!profile.error && profile.data) {
-    const marker = readStored(markerKey, {});
-    const name = profile.data.display_name ?? "";
-    if (signedIn() && marker.name !== name) {
-      store(markerKey, { ...marker, name });
-      showState();
-    }
+  const marker = readStored(markerKey, {});
+  if (name != null && marker.name !== name) {
+    store(markerKey, { ...marker, name });
+    showState();
   }
-  const waiting = readList(queueKey);
-  const ids = (result, kind) =>
-    applyQueue(
-      result.data.map((row) => row.recipe_id),
-      waiting,
-      kind,
-    );
-  const archiveIds = ids(archive, "archive");
-  if (!sameIds(archiveIds, readList(savedKey))) setSavedRecipes(archiveIds);
-  store(generatedKey, ids(generated, "generated"));
+  if (!sameIds(archive, readList(savedKey))) setSavedRecipes(archive);
+  store(generatedKey, generated);
   try {
     sessionStorage.setItem(syncedKey, String(Date.now()));
   } catch {}
   showCount();
   announce();
-  return true;
 }
 
-// One at a time, so two runs can't send the same change or overwrite each other's lists.
-let bookWork = Promise.resolve();
-function bookTask(task) {
-  const run = bookWork.then(async () => {
-    try {
-      return await task(await client());
-    } catch {
-      // Unreachable for now. What's queued stays queued.
-      return false;
-    }
-  });
-  bookWork = run;
-  return run;
+// One tab at a time, with the Web Locks API. A tab that has waited 15 seconds for its turn gives up
+// until the next page load; what it had queued stays queued. A browser without the API runs each
+// tab for itself.
+function oneTab(task) {
+  if (!navigator.locks) return task();
+  const patience = AbortSignal.timeout
+    ? { signal: AbortSignal.timeout(15000) }
+    : {};
+  return navigator.locks.request("restfest-book", patience, () => task());
 }
-const refreshBook = () => bookTask(fetchBook);
+
+const book = bookSync({
+  queue: {
+    read: () => readList(queueKey),
+    write: (list) => store(queueKey, list),
+  },
+  remote,
+  show: showBook,
+  lock: oneTab,
+});
+const refreshBook = () => book.refresh();
 
 function fetchedRecently() {
   try {
@@ -288,11 +294,6 @@ function fetchedRecently() {
   } catch {
     return false;
   }
-}
-
-function queue(change) {
-  store(queueKey, queueChange(readList(queueKey), change));
-  bookTask(sendWaiting);
 }
 
 // The browser's copy of which generated recipes are in the book.
@@ -307,7 +308,7 @@ function keepGenerated(id, on) {
 function setGenerated(id, on) {
   if (!signedIn()) return;
   keepGenerated(id, on);
-  queue({ kind: "generated", id, saved: Boolean(on) });
+  book.change({ kind: "generated", id, saved: Boolean(on) });
   announce();
 }
 
@@ -369,7 +370,7 @@ async function signOut(notice) {
   // sent is put aside by forget().
   if (signedIn() && readList(queueKey).length) {
     await Promise.race([
-      bookTask(sendWaiting),
+      book.send(),
       new Promise((resolve) => setTimeout(resolve, 4000)),
     ]);
   }
@@ -416,7 +417,11 @@ if (arrival && !/\/(logga-in|nytt-losenord)\.html$/.test(location.pathname)) {
   // A heart on an archive recipe (toggleSave in app.js).
   document.addEventListener("restfest:save-change", (event) => {
     if (!signedIn()) return;
-    queue({ kind: "archive", id: event.detail.id, saved: event.detail.saved });
+    book.change({
+      kind: "archive",
+      id: event.detail.id,
+      saved: event.detail.saved,
+    });
   });
   document.addEventListener("restfest:saved", showCount);
 
@@ -450,7 +455,8 @@ if (arrival && !/\/(logga-in|nytt-losenord)\.html$/.test(location.pathname)) {
       const marker = readStored(markerKey, {});
       if (marker.id !== session.user.id)
         store(markerKey, { ...marker, id: session.user.id });
-      if (!fetchedRecently() || readList(queueKey).length) refreshBook();
+      // Not again if a page that needs the book now (receptbok.html) has just fetched it.
+      book.refreshIfStale(fetchedRecently);
     });
   }
 }

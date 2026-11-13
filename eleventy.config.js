@@ -48,9 +48,12 @@ export default function (eleventyConfig) {
   // the amounts in the browser.
   eleventyConfig.addPassthroughCopy({'lib/recipe-amounts.js': 'js/recipe-amounts.js'});
   // For the accounts (src/js/account.js): the helpers the tests also use, and supabase-js as one
-  // file for the browser. Only signed-in visitors and the account pages load the library.
+  // file for the browser. Only signed-in visitors and the account pages load the library, and a site
+  // without accounts doesn't get it at all.
   eleventyConfig.addPassthroughCopy({'lib/account-helpers.js': 'js/account-helpers.js'});
-  eleventyConfig.addPassthroughCopy({'node_modules/@supabase/supabase-js/dist/umd/supabase.js': 'js/vendor/supabase.js'});
+  if (ai.accounts) {
+    eleventyConfig.addPassthroughCopy({'node_modules/@supabase/supabase-js/dist/umd/supabase.js': 'js/vendor/supabase.js'});
+  }
 
   // The build reads the categories and tag labels from js/recipes.js (lib/taxonomy.js),
   // so tell the local server to rebuild when it changes.

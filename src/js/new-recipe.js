@@ -6,6 +6,7 @@
 // enhanceRecipe, mealTypes, recipeTagLabels …) and import the build's quantity parser.
 // The recipe's shape is RecipeDoc in supabase/functions/_shared/recipe.ts.
 
+import { intendedSave, saveIntent } from "./account-helpers.js";
 import { amountParts, recipeServings } from "./recipe-amounts.js";
 
 const api = document.querySelector('meta[name="restfest-ai"]')?.content;
@@ -267,7 +268,11 @@ async function loadPhoto(article, recipe, image) {
 
 // Where an archive recipe has its "Spara recept" heart: the same button for a signed-in visitor, which
 // puts the recipe in their recipe book or takes it out, and a link to the sign-in page for anyone
-// else. Signing in from that link comes back here with ?spara=1, and the recipe is saved.
+// else. Signing in from that link comes back here with ?spara=1, and the recipe is saved, if this
+// browser remembers the click on the link (intentKey): the address alone saves nothing, since anyone
+// can put ?spara=1 in a link.
+const intentKey = "restfest-save-intent";
+
 function drawBookSave({ focus = false } = {}) {
   const slot = $("[data-book-save]", main);
   if (!slot || !account) return;
@@ -276,7 +281,7 @@ function drawBookSave({ focus = false } = {}) {
     slot.innerHTML = `<button class="dialog-save" type="button" data-save-generated="${id}" aria-pressed="${inBook}">${heartIcon(inBook)}${inBook ? "Sparat" : "Spara recept"}</button>`;
   } else {
     const back = `${location.pathname}?id=${encodeURIComponent(id)}&spara=1`;
-    slot.innerHTML = `<a class="dialog-save" href="${escapeHtml(account.loginUrl(back))}">${heartIcon(false)}Spara i receptboken</a>`;
+    slot.innerHTML = `<a class="dialog-save" href="${escapeHtml(account.loginUrl(back))}" data-save-intent>${heartIcon(false)}Spara i receptboken</a>`;
   }
   if (focus) slot.firstElementChild.focus({ preventScroll: true });
 }
@@ -288,7 +293,32 @@ function setInBook(on) {
   );
 }
 
+// The visitor's request to save, taken out of the browser: it is good for one return.
+function takeSaveIntent() {
+  try {
+    const intent = JSON.parse(localStorage.getItem(intentKey));
+    localStorage.removeItem(intentKey);
+    return intent;
+  } catch {
+    return null;
+  }
+}
+
 if (account) {
+  // "Spara i receptboken", also when it's opened in a new tab.
+  for (const type of ["click", "auxclick"]) {
+    main.addEventListener(type, (event) => {
+      if (!event.target.closest("[data-save-intent]")) return;
+      try {
+        localStorage.setItem(
+          intentKey,
+          JSON.stringify(saveIntent(id, Date.now())),
+        );
+      } catch {
+        // Without storage the recipe isn't saved on the way back; the heart is there to click.
+      }
+    });
+  }
   main.addEventListener("click", (event) => {
     const button = event.target.closest("[data-save-generated]");
     if (!button) return;
@@ -326,7 +356,8 @@ async function load() {
   drawBookSave();
   // Back from signing in through "Spara i receptboken".
   if (pageParams.get("spara") === "1") {
-    if (account?.signedIn() && !account.generatedIds().has(id)) {
+    const asked = intendedSave(takeSaveIntent(), id, Date.now());
+    if (asked && account?.signedIn() && !account.generatedIds().has(id)) {
       setInBook(true);
       drawBookSave();
     }

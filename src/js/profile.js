@@ -56,7 +56,7 @@ async function profilePage(db, user) {
 
   function addFromField() {
     const result = addFood(avoid, avoidInput.value);
-    show(avoidError, result.problem);
+    show(avoidError, result.problem, avoidInput);
     if (result.problem) return;
     avoid = result.list;
     avoidInput.value = "";
@@ -192,10 +192,11 @@ async function accountPage(db, sessionUser) {
     event.preventDefault();
     const status = $("[data-email-status]");
     show(status, "");
+    const input = emailForm.elements.namedItem("email");
     busy(emailForm, $("[data-email-error]"), async () => {
-      const address = emailValue(emailForm.elements.namedItem("email"));
+      const address = emailValue(input);
       if (address.toLowerCase() === (user.email ?? "").toLowerCase())
-        throw problem("Det är redan din e-postadress.");
+        throw problem("Det är redan din e-postadress.", input);
       checked(
         await db.auth.updateUser(
           { email: address },
@@ -207,23 +208,23 @@ async function accountPage(db, sessionUser) {
         status,
         `Vi har skickat en länk till ${address}. Bytet gäller när du har klickat på den.`,
       );
-    });
+    }, { email: input });
   });
 
   passwordForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const status = $("[data-password-status]");
     show(status, "");
+    const input = passwordForm.elements.namedItem("password");
     busy(passwordForm, $("[data-password-error]"), async () => {
-      const input = passwordForm.elements.namedItem("password");
       const short = passwordProblem(input.value);
-      if (short) throw problem(short);
+      if (short) throw problem(short, input);
       const data = checked(await db.auth.updateUser({ password: input.value }));
       if (data.user) user = data.user;
       passwordForm.reset();
       drawLogin();
       show(status, "Lösenordet är sparat.");
-    });
+    }, { password: input });
   });
 
   const opener = $("[data-delete-open]");

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  addFood, applyQueue, authErrorText, heartsToQueue, passwordProblem, queueChange, refusedForGood, resumeQueue,
-  safeReturnPath, sendQueue, signInPage, stashQueue, withoutSent
+  addFood, applyQueue, authErrorText, heartsToQueue, intendedSave, passwordProblem, queueChange, refusedForGood,
+  resumeQueue, safeReturnPath, saveIntent, sendQueue, signInPage, stashQueue, withoutSent
 } from '../lib/account-helpers.js';
 
 const origin = 'https://example.se';
@@ -54,21 +54,54 @@ test('passwordProblem wants 8 characters', () => {
 const add = (id, kind = 'archive') => ({kind, id, saved: true});
 const drop = (id, kind = 'archive') => ({kind, id, saved: false});
 
-test('sendQueue sends the changes in order and returns what is left', async () => {
-  const sent = [];
-  const left = await sendQueue([add('a'), drop('b'), add('c')], async change => { sent.push(change.id); });
-  assert.deepEqual(sent, ['a', 'b', 'c']);
+// sendQueue's `send` gets {kind, saved, ids}: true when stored, false when refused for good, and it
+// throws when the account can't be reached. This one records what it was asked.
+function sender({down = () => false, refuse = () => false} = {}) {
+  const calls = [];
+  const send = async group => {
+    calls.push(`${group.saved ? '+' : '-'}${group.kind}:${group.ids.join(',')}`);
+    if (down(group)) throw new Error('offline');
+    return !refuse(group);
+  };
+  return {calls, send};
+}
+
+test('sendQueue sends the changes of one kind together, removals first', async () => {
+  const {calls, send} = sender();
+  const left = await sendQueue([add('a'), drop('b'), add('g', 'generated'), add('c'), drop('h', 'generated')], send);
+  assert.deepEqual(calls, ['-archive:b', '-generated:h', '+archive:a,c', '+generated:g']);
   assert.deepEqual(left, []);
 });
 
-test('sendQueue stops at the first change that cannot be sent and keeps it and the rest', async () => {
-  const sent = [];
-  const left = await sendQueue([add('a'), drop('b'), add('c')], async change => {
-    if (change.id === 'b') throw new Error('offline');
-    sent.push(change.id);
-  });
-  assert.deepEqual(sent, ['a']);
-  assert.deepEqual(left, [drop('b'), add('c')]);
+test('sendQueue sends at most 50 recipes in one go', async () => {
+  const {calls, send} = sender();
+  await sendQueue(Array.from({length: 120}, (_, index) => add(`r-${index}`)), send);
+  assert.deepEqual(calls.map(call => call.split(',').length), [50, 50, 20]);
+});
+
+test('sendQueue stops when the account cannot be reached and keeps what was not sent', async () => {
+  const {calls, send} = sender({down: group => group.saved});
+  const left = await sendQueue([add('a'), drop('b'), add('g', 'generated')], send);
+  assert.deepEqual(calls, ['-archive:b', '+archive:a']);
+  assert.deepEqual(left, [add('a'), add('g', 'generated')]);
+});
+
+test('sendQueue sends a refused group one recipe at a time, so only the refused one is dropped', async () => {
+  const {calls, send} = sender({refuse: group => group.ids.includes('gone')});
+  const left = await sendQueue([add('a'), add('gone'), add('c')], send);
+  assert.deepEqual(calls, ['+archive:a,gone,c', '+archive:a', '+archive:gone', '+archive:c']);
+  assert.deepEqual(left, []);
+});
+
+test('sendQueue keeps the rest of a refused group when the account goes out of reach', async () => {
+  const {send} = sender({refuse: group => group.ids.length > 1, down: group => group.ids.join() === 'b'});
+  assert.deepEqual(await sendQueue([add('a'), add('b'), add('c')], send), [add('b'), add('c')]);
+});
+
+test('sendQueue drops a change of a kind it does not know, so it cannot hold up the rest forever', async () => {
+  const {calls, send} = sender();
+  assert.deepEqual(await sendQueue([{kind: 'nonsense', id: 'a', saved: true}, add('b')], send), []);
+  assert.deepEqual(calls, ['+archive:b']);
 });
 
 test('withoutSent removes what was sent and keeps changes made meanwhile', () => {
@@ -143,4 +176,23 @@ test('signInPage says where a sign-in in the address belongs', () => {
   assert.equal(signInPage('#error=access_denied&error_code=otp_expired&error_description=x'), 'logga-in.html');
   for (const other of ['', '#borja', '#sa-funkar-det', '#recept', '#token=1'])
     assert.equal(signInPage(other), null, other);
+});
+
+// "Spara i receptboken" on a generated recipe, signed out (src/js/new-recipe.js).
+const hour = 60 * 60 * 1000;
+
+test('intendedSave is true for the recipe the visitor asked to save, for an hour', () => {
+  const intent = saveIntent('recipe-1', 1000);
+  assert.equal(intendedSave(intent, 'recipe-1', 1000), true);
+  assert.equal(intendedSave(intent, 'recipe-1', 1000 + hour - 1), true);
+  assert.equal(intendedSave(JSON.parse(JSON.stringify(intent)), 'recipe-1', 2000), true);
+});
+
+test('intendedSave is false for another recipe, a later hour, or no request at all', () => {
+  const intent = saveIntent('recipe-1', 1000);
+  assert.equal(intendedSave(intent, 'recipe-2', 2000), false);
+  assert.equal(intendedSave(intent, 'recipe-1', 1000 + hour), false);
+  assert.equal(intendedSave(intent, 'recipe-1', 500), false);
+  for (const nothing of [null, undefined, 'recipe-1', {}, {id: 'recipe-1'}, {id: 'recipe-1', at: 'now'}])
+    assert.equal(intendedSave(nothing, 'recipe-1', 2000), false, JSON.stringify(nothing));
 });

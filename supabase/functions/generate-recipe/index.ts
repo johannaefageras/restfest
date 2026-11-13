@@ -38,9 +38,10 @@ serve(['POST'], async req => {
   if (!items.some(item => item.key)) {
     throw new VisitorError(400, 'Lägg till minst en råvara som känns igen, så har receptet något att utgå från.');
   }
+  // The cap first: once the day's recipes are used up, the sign-in and the profile aren't looked up.
+  await checkCap(req, 'recipe');
   const user = await userFor(req);
   const preferences = user ? await preferencesFor(user.id) : '';
-  await checkCap(req, 'recipe');
 
   // Structured outputs keep the answer to the schema, so a second try is for the rare recipe that
   // still misses a title or steps.

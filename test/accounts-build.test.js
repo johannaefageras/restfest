@@ -30,6 +30,7 @@ test('without a publishable key the pages have no trace of accounts', t => {
       assert.equal(html.includes(trace), false, `${page} mentions ${trace}`);
   }
   for (const page of accountPages) assert.equal(site.has(page), false, `${page} was built`);
+  assert.equal(site.has('js/vendor/supabase.js'), false, 'the Supabase library was copied, though no page loads it');
 });
 
 test('with a publishable key every page gets the account button and the account script', t => {

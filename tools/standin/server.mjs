@@ -7,7 +7,7 @@
 //     npx @11ty/eleventy --serve --port 8765 --output=<a folder outside the project>
 //
 // POST /__control changes what it holds and how it behaves (see control() below): reset, add users,
-// seed a recipe book, make every call fail, or get a link like the ones in the mails.
+// seed a recipe book, hide a generated recipe, make every call fail, or get a link like the ones in the mails.
 // GET /__state shows what it holds, including every request it has received.
 // "Fortsätt med Google" signs in google@example.se at once.
 import { createServer } from 'node:http';
@@ -139,8 +139,10 @@ async function handle(req, url, body) {
       return [201, null];
     }
     if (req.method === 'DELETE') {
-      const id = q.get('recipe_id')?.replace(/^eq\./, '');
-      for (let i = rows.length - 1; i >= 0; i--) if (rows[i].user_id === user.id && rows[i].recipe_id === id) rows.splice(i, 1);
+      // recipe_id=eq.<id> or recipe_id=in.(<id>,<id>)
+      const filter = q.get('recipe_id') ?? '';
+      const ids = filter.startsWith('in.') ? filter.slice(4, -1).split(',').map(id => id.replace(/^"|"$/g, '')) : [filter.replace(/^eq\./, '')];
+      for (let i = rows.length - 1; i >= 0; i--) if (rows[i].user_id === user.id && ids.includes(rows[i].recipe_id)) rows.splice(i, 1);
       return [204, null];
     }
   }
@@ -156,9 +158,12 @@ async function handle(req, url, body) {
   }
   if (path === '/rest/v1/rpc/my_generated_recipes') {
     if (!user) return [401, { message: 'permission denied' }];
+    // ?select=id gives only those columns, as PostgREST does.
+    const columns = q.get('select')?.split(',');
     return [200, state.savedGenerated.filter(row => row.user_id === user.id && !state.generated.get(row.recipe_id)?.hidden)
       .sort((a, b) => b.created_at.localeCompare(a.created_at))
-      .map(row => { const g = state.generated.get(row.recipe_id); return { id: row.recipe_id, saved_at: row.created_at, title: g.recipe.title, description: g.recipe.description, time_label: g.recipe.timeLabel, categories: g.recipe.categories, tags: g.recipe.tags, image_status: g.image_status, image_path: g.image_path, promoted_as: null }; })];
+      .map(row => { const g = state.generated.get(row.recipe_id); return { id: row.recipe_id, saved_at: row.created_at, title: g.recipe.title, description: g.recipe.description, time_label: g.recipe.timeLabel, categories: g.recipe.categories, tags: g.recipe.tags, image_status: g.image_status, image_path: g.image_path, promoted_as: null }; })
+      .map(row => columns ? Object.fromEntries(columns.map(name => [name, row[name]])) : row)];
   }
 
   // Edge Functions
@@ -198,6 +203,8 @@ function control(body) {
     state.generated.set(id, { recipe: recipeDoc(title), image_status: 'pending', image_path: null, hidden: false, created_at: now() });
     state.savedGenerated.push({ user_id: state.users.get(email).id, recipe_id: id, created_at: now() });
   }
+  // Hides generated recipes, as the owner does in the database: [title, …].
+  for (const title of body.hide ?? []) for (const g of state.generated.values()) if (g.recipe.title === title) g.hidden = true;
   if (body.profile) Object.assign(state.profiles.get(state.users.get(body.profile.email).id), body.profile.values);
   // A link like the ones in the mails: lands on `to` signed in as `email`.
   if (body.link) {
