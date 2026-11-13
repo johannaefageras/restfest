@@ -1,0 +1,65 @@
+---js
+// logga-in.html: sign in, create an account, ask for a new password. Built only when the site has
+// accounts (accountPages in eleventy.config.js). src/js/auth-forms.js does the work; HANDOFF.md, "Konton och receptbok".
+// ?till=<path> is where to go afterwards, ?lage=skapa opens "Skapa konto".
+const layout = 'layouts/base.njk';
+const title = 'Logga in · Ofta bra efter';
+const description = 'Logga in eller skapa ett konto för att samla dina recept i en egen receptbok.';
+const noindex = true;
+const modules = ['auth-forms.js'];
+const permalink = 'logga-in.html';
+---
+  <main id="main" class="wrap account-page" data-auth-page="login">
+    <section class="account-card" aria-labelledby="auth-title">
+      <img class="account-art" src="assets/illustrations/cook-book.svg" alt="" width="72" height="72">
+      <h1 id="auth-title"><span class="marker" data-auth-title>Logga in.</span></h1>
+      <p class="account-intro" data-auth-intro>Med ett konto får du en egen receptbok, som följer med mellan mobilen och datorn.</p>
+
+      <div data-auth-main>
+        <button class="button account-wide" type="button" data-google>Fortsätt med Google</button>
+        <p class="account-or"><span>eller</span></p>
+        <form class="account-form" data-auth-form novalidate>
+          <div class="account-field" data-only="skapa" hidden>
+            <label for="auth-name">Namn <span class="account-optional">(valfritt)</span></label>
+            <input id="auth-name" name="name" type="text" autocomplete="name" maxlength="80">
+          </div>
+          <div class="account-field">
+            <label for="auth-email">E-postadress</label>
+            <input id="auth-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" required>
+          </div>
+          <div class="account-field">
+            <label for="auth-password">Lösenord</label>
+            <input id="auth-password" name="password" type="password" autocomplete="current-password" required aria-describedby="auth-password-hint">
+            <p id="auth-password-hint" class="account-hint" data-only="skapa" hidden>Minst 8 tecken.</p>
+          </div>
+          <p class="account-error" role="alert" data-auth-error hidden></p>
+          <button class="button primary account-wide" type="submit" data-auth-submit>Logga in</button>
+        </form>
+        <p class="account-links" data-only="logga"><button class="text-button" type="button" data-forgot>Glömt lösenordet?</button></p>
+        <p class="account-links" data-only="logga">Har du inget konto? <a href="logga-in.html?lage=skapa" data-mode="skapa">Skapa konto</a></p>
+        <p class="account-links" data-only="skapa" hidden>Har du redan ett konto? <a href="logga-in.html" data-mode="logga">Logga in</a></p>
+        <p class="account-hint" data-only="skapa" hidden>Vi sparar din e-postadress, ditt namn och det du lägger i receptboken. <a href="integritet.html">Så hanterar vi dina uppgifter</a>.</p>
+      </div>
+
+      <form class="account-form" data-reset-form novalidate hidden>
+        <p class="account-intro">Skriv din e-postadress, så skickar vi en länk där du väljer ett nytt lösenord.</p>
+        <div class="account-field">
+          <label for="reset-email">E-postadress</label>
+          <input id="reset-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" required>
+        </div>
+        <p class="account-error" role="alert" data-reset-error hidden></p>
+        <p class="account-status" role="status" data-reset-status></p>
+        <button class="button primary account-wide" type="submit">Skicka länk</button>
+        <p class="account-links"><button class="text-button" type="button" data-reset-back><i class="fas fa-arrow-left" aria-hidden="true"></i> Till inloggningen</button></p>
+      </form>
+
+      <div class="account-sent" data-auth-sent hidden>
+        <p role="status" data-sent-text></p>
+        <p class="account-hint">Kom inget mejl? Titta i skräpposten, eller skicka länken igen.</p>
+        <p class="account-error" role="alert" data-sent-error hidden></p>
+        <button class="button" type="button" data-resend>Skicka igen</button>
+      </div>
+
+      <noscript><p class="account-error">Inloggningen behöver JavaScript.</p></noscript>
+    </section>
+  </main>

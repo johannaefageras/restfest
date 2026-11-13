@@ -2,12 +2,13 @@
 // HANDOFF.md, "Kylfoto och nya recept" and "Konton och receptbok"), e.g.
 // 'https://abcdefghijklmnop.supabase.co'. While it's empty the site has no photo button, no
 // "Hitta på ett recept" and no accounts, and works as before.
-const supabaseUrl = 'https://yatffwoobcsrxcxplecd.supabase.co';
+const supabaseUrl = process.env.SUPABASE_URL ?? 'https://yatffwoobcsrxcxplecd.supabase.co';
 
 // The project's publishable key (sb_publishable_…, from the dashboard: Project Settings → API keys).
 // It is meant to be public: what a visitor may reach is decided by the database's row level
 // security, not by this key. Never put a secret key (sb_secret_…) here. While it's empty the site has
-// no accounts. SUPABASE_PUBLISHABLE_KEY in the environment replaces it for one build, which the tests use.
+// no accounts. SUPABASE_PUBLISHABLE_KEY in the environment replaces it for one build, which the tests
+// use; SUPABASE_URL does the same for the address, to try the site against a stand-in backend.
 const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY ?? '';
 
 export default {

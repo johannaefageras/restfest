@@ -43,6 +43,12 @@ test('with a publishable key every page gets the account button and the account 
     assert.ok(html.indexOf("localStorage.getItem('restfest-account')") < html.indexOf('rel="stylesheet"'), `${page} sets the state before the styles`);
     assert.equal(html.includes('vendor/supabase.js'), false, `${page} must not load the library itself`);
   }
+  for (const page of ['logga-in.html', 'nytt-losenord.html']) {
+    const html = site.read(page);
+    assert.match(html, /<meta name="robots" content="noindex">/, `${page} is kept out of search engines`);
+    assert.ok(html.includes('<script type="module" src="js/auth-forms.js"></script>'), `${page} loads auth-forms.js`);
+    assert.ok(html.indexOf('js/account.js') < html.indexOf('js/auth-forms.js'), `${page} loads account.js first`);
+  }
   assert.ok(site.has('js/account.js'));
   assert.ok(site.has('js/account-helpers.js'));
   assert.match(site.read('js/vendor/supabase.js'), /createClient/);

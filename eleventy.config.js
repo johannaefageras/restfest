@@ -25,11 +25,21 @@
 // Eleventy also makes a collection per tag from the recipes' `tags`, e.g. collections.Vegan.
 
 import {recipeListings} from './lib/recipes.js';
+import ai from './src/_data/ai.js';
 
 const recipes = api => api.getFilteredByGlob('src/recept/*.md')
   .sort((a, b) => parseInt(a.fileSlug, 10) - parseInt(b.fileSlug, 10));
 
+// Sign-in, the recipe book and the pages around them (HANDOFF.md, "Konton och receptbok").
+const accountPages = ['logga-in', 'nytt-losenord', 'receptbok', 'profil', 'konto', 'integritet'];
+
 export default function (eleventyConfig) {
+  // The account pages are built only when the site has accounts (src/_data/ai.js): without a
+  // publishable key these templates are skipped, and the layout leaves out the account button.
+  if (!ai.accounts) {
+    for (const page of accountPages) eleventyConfig.ignores.add(`src/pages/${page}.njk`);
+  }
+
   // Copied to _site/ as they are.
   eleventyConfig.addPassthroughCopy('src/assets');
   eleventyConfig.addPassthroughCopy('src/css');
