@@ -2919,3 +2919,159 @@ body:has(#shopping-dialog[open]) {
 a.dialog-save {
   text-decoration: none;
 }
+
+/* Profil and Konto (pages/profil.njk, konto.njk). */
+.account-who {
+  margin-left: auto;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 14ch;
+}
+.account-who:not([hidden]) + .text-button {
+  margin-left: 0;
+}
+.account-card > .account-tabs {
+  margin-top: 18px;
+}
+.account-card > .account-tabs + .account-intro {
+  margin-top: 0;
+}
+.account-group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.account-group legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font: var(--font-weight-bold) 12px/1.4 var(--font-label);
+}
+.account-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+/* Drawn like the archive's filter buttons, green when ticked. */
+.account-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 5px 12px 5px 10px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-button);
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+}
+.account-check:hover {
+  border-color: var(--ink);
+}
+.account-check:has(input:checked) {
+  background: #b4e48c;
+  border-color: var(--ink);
+}
+.account-check:has(input:disabled) {
+  cursor: default;
+  opacity: 0.75;
+}
+.account-check input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--ink);
+}
+.account-add {
+  display: flex;
+  gap: 8px;
+}
+.account-add .button {
+  flex: none;
+}
+.account-field > .account-error {
+  margin-top: 8px;
+}
+.account-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.account-chips:empty {
+  display: none;
+}
+.account-chips li {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-button);
+  background: var(--well);
+  font-size: 14px;
+}
+.account-chips li > span {
+  padding: 6px 2px 6px 11px;
+  overflow-wrap: anywhere;
+}
+.account-chips button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  min-height: 40px;
+  border: 0;
+  background: none;
+  font-size: 13px;
+}
+.account-submit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+.account-section {
+  padding-block: 22px;
+  border-top: 1px solid var(--rule);
+}
+.account-section:first-child {
+  padding-top: 4px;
+  border-top: 0;
+}
+.account-section > h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.account-section > .account-hint {
+  margin: 0 0 14px;
+}
+.account-email {
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  overflow-wrap: anywhere;
+}
+.account-dialog {
+  max-width: 460px;
+}
+.account-dialog h2 {
+  margin-bottom: 12px;
+  font-size: 22px;
+}
+.account-dialog p {
+  font-size: 15px;
+  line-height: 1.5;
+}
+.account-dialog .account-error {
+  margin-top: 14px;
+}
+.account-dialog-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}

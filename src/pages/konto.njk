@@ -1,0 +1,80 @@
+---js
+// konto.html: a signed-in visitor's sign-in details: change the email address or the password, sign
+// out, delete the account. Built only when the site has accounts (accountPages in eleventy.config.js).
+// src/js/profile.js; HANDOFF.md, "Konton och receptbok".
+const layout = 'layouts/base.njk';
+const title = 'Konto · Ofta bra efter';
+const description = 'Din inloggning hos Ofta bra efter.';
+const noindex = true;
+const modules = ['profile.js'];
+const permalink = 'konto.html';
+---
+  <main id="main" class="wrap account-page" data-profile-page="konto">
+    <section class="account-card" aria-labelledby="account-title">
+      <h1 id="account-title"><span class="marker">Konto.</span></h1>
+      {%- set current = 'konto' %}
+      {% include "account-nav.njk" %}
+      <p class="account-status" role="status" data-account-wait>Hämtar ditt konto …</p>
+
+      <div data-account-sections hidden>
+        <section class="account-section" aria-labelledby="account-login-title">
+          <h2 id="account-login-title">Inloggning</h2>
+          <p class="account-email" data-account-email></p>
+          <p class="account-hint" data-account-methods></p>
+        </section>
+
+        <section class="account-section" aria-labelledby="account-email-title">
+          <h2 id="account-email-title">Byt e-postadress</h2>
+          <form class="account-form" data-email-form novalidate>
+            <div class="account-field">
+              <label for="account-new-email">Ny e-postadress</label>
+              <input id="account-new-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" required>
+            </div>
+            <p class="account-error" role="alert" data-email-error hidden></p>
+            <p class="account-status" role="status" data-email-status></p>
+            <div class="account-submit"><button class="button" type="submit">Byt e-postadress</button></div>
+          </form>
+        </section>
+
+        <section class="account-section" aria-labelledby="account-password-title">
+          <h2 id="account-password-title" data-password-title>Byt lösenord</h2>
+          <p class="account-hint" data-password-intro hidden>Med ett lösenord kan du också logga in utan Google.</p>
+          <form class="account-form" data-password-change novalidate>
+            <div class="account-field">
+              <label for="account-new-password">Nytt lösenord</label>
+              <input id="account-new-password" name="password" type="password" autocomplete="new-password" required aria-describedby="account-new-password-hint">
+              <p id="account-new-password-hint" class="account-hint">Minst 8 tecken.</p>
+            </div>
+            <p class="account-error" role="alert" data-password-error hidden></p>
+            <p class="account-status" role="status" data-password-status></p>
+            <div class="account-submit"><button class="button" type="submit">Spara lösenordet</button></div>
+          </form>
+        </section>
+
+        <section class="account-section" aria-labelledby="account-out-title">
+          <h2 id="account-out-title">Logga ut</h2>
+          <p class="account-hint">Du loggas ut på den här enheten. Receptboken finns kvar i ditt konto.</p>
+          <div class="account-submit"><button class="button" type="button" data-sign-out>Logga ut</button></div>
+        </section>
+
+        <section class="account-section" aria-labelledby="account-delete-title">
+          <h2 id="account-delete-title">Ta bort kontot</h2>
+          <p class="account-hint">Kontot, din profil och din receptbok tas bort. Det går inte att ångra.</p>
+          <div class="account-submit"><button class="button" type="button" data-delete-open aria-haspopup="dialog">Ta bort kontot …</button></div>
+        </section>
+      </div>
+      <noscript><p class="account-error">Sidan behöver JavaScript.</p></noscript>
+    </section>
+
+    <dialog id="delete-dialog" class="account-dialog" aria-labelledby="delete-title">
+      <div class="dialog-main">
+        <h2 id="delete-title">Ta bort kontot?</h2>
+        <p>Kontot, din profil och din receptbok tas bort. Det går inte att ångra. Recept du har hittat på ligger kvar på sina sidor, men inte under ditt namn.</p>
+        <p class="account-error" role="alert" data-delete-error hidden></p>
+        <div class="account-dialog-buttons">
+          <button class="button" type="button" data-delete-cancel autofocus>Avbryt</button>
+          <button class="button primary" type="button" data-delete-confirm>Ta bort kontot</button>
+        </div>
+      </div>
+    </dialog>
+  </main>

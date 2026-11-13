@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  applyQueue, authErrorText, heartsToQueue, passwordProblem, queueChange, safeReturnPath, sendQueue, withoutSent
+  addFood, applyQueue, authErrorText, heartsToQueue, passwordProblem, queueChange, safeReturnPath, sendQueue, withoutSent
 } from '../lib/account-helpers.js';
 
 const origin = 'https://example.se';
@@ -87,4 +87,24 @@ test('applyQueue lays unsent changes over the account\'s list', () => {
 test('heartsToQueue queues the browser\'s own hearts as additions, skipping ids that are not recipe ids', () => {
   assert.deepEqual(heartsToQueue(['01-rodbetspytt', 'Not An Id', 7, '29-shakshuka'], [drop('29-shakshuka')]),
     [add('01-rodbetspytt'), add('29-shakshuka')]);
+});
+
+// The "Äter inte" list on profil.html.
+test('addFood cleans the name and adds it last', () => {
+  assert.deepEqual(addFood(['svamp'], '  färsk   koriander '), {list: ['svamp', 'färsk koriander'], problem: null});
+  assert.equal(addFood([], 'a'.repeat(120)).list[0].length, 80);
+});
+
+test('addFood ignores empty names and ones already in the list', () => {
+  assert.deepEqual(addFood(['Svamp'], '   '), {list: ['Svamp'], problem: null});
+  assert.deepEqual(addFood(['Svamp'], 'svamp'), {list: ['Svamp'], problem: null});
+});
+
+test('addFood refuses the 31st food', () => {
+  const full = Array.from({length: 30}, (_, i) => `mat ${i}`);
+  assert.deepEqual(addFood(full, 'en till'), {list: full, problem: 'Listan rymmer 30 råvaror. Ta bort någon för att lägga till en ny.'});
+});
+
+test('authErrorText explains when a fresh sign-in is needed', () => {
+  assert.equal(authErrorText({code: 'reauthentication_needed'}), 'Logga ut och in igen, så kan du byta lösenord.');
 });

@@ -1,0 +1,62 @@
+---js
+// profil.html: a signed-in visitor's name and preferences (diets, foods they don't eat, portions),
+// which Claude follows when it writes them a new recipe. Built only when the site has accounts
+// (accountPages in eleventy.config.js). src/js/profile.js; HANDOFF.md, "Konton och receptbok".
+const layout = 'layouts/base.njk';
+const title = 'Profil · Ofta bra efter';
+const description = 'Ditt namn och dina preferenser hos Ofta bra efter.';
+const noindex = true;
+const modules = ['profile.js'];
+const permalink = 'profil.html';
+---
+  <main id="main" class="wrap account-page" data-profile-page="profil">
+    <section class="account-card" aria-labelledby="profile-title">
+      <h1 id="profile-title"><span class="marker">Profil.</span></h1>
+      {%- set current = 'profil' %}
+      {% include "account-nav.njk" %}
+      <p class="account-intro">Vi följer det här när vi hittar på nya recept åt dig.</p>
+      <p class="account-status" role="status" data-profile-wait>Hämtar din profil …</p>
+
+      <form class="account-form" data-profile-form novalidate hidden>
+        <div class="account-field">
+          <label for="profile-name">Namn <span class="account-optional">(valfritt)</span></label>
+          <input id="profile-name" name="display_name" type="text" autocomplete="name" maxlength="80">
+        </div>
+
+        <fieldset class="account-group">
+          <legend>Kost</legend>
+          <div class="account-checks" data-diets></div>
+          <p class="account-hint">Veganskt räknas också som vegetariskt, mjölkfritt och äggfritt.</p>
+        </fieldset>
+
+        <div class="account-field">
+          <label for="profile-avoid">Äter inte</label>
+          <div class="account-add">
+            <input id="profile-avoid" type="text" maxlength="80" autocomplete="off" enterkeyhint="done" aria-describedby="profile-avoid-hint">
+            <button class="button" type="button" data-avoid-add>Lägg till</button>
+          </div>
+          <p id="profile-avoid-hint" class="account-hint">Råvaror du inte vill ha i nya recept, en i taget. Till exempel koriander eller svamp.</p>
+          <p class="account-error" role="alert" data-avoid-error hidden></p>
+          <ul class="account-chips" data-avoid-list aria-label="Råvaror du inte äter"></ul>
+        </div>
+
+        <div class="account-field">
+          <label for="profile-servings">Portioner</label>
+          <select id="profile-servings" name="servings">
+            <option value="">Låt receptet bestämma</option>
+            {%- for count in range(1, 13) %}
+            <option value="{{ count }}">{{ count }}</option>
+            {%- endfor %}
+          </select>
+          <p class="account-hint">Så många brukar du laga till.</p>
+        </div>
+
+        <p class="account-error" role="alert" data-profile-error hidden></p>
+        <div class="account-submit">
+          <button class="button primary" type="submit">Spara</button>
+          <p class="account-status" role="status" data-profile-saved></p>
+        </div>
+      </form>
+      <noscript><p class="account-error">Sidan behöver JavaScript.</p></noscript>
+    </section>
+  </main>

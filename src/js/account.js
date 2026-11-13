@@ -14,12 +14,14 @@
 //   token()                a fresh access token for the Edge Functions, or null
 //   user()                 the signed-in user, or null
 //   signedInNow()          call after a successful sign-in
-//   signOut()              signs out here and goes to the home page
+//   signOut(notice)        signs out here and goes to the home page, where `notice` (if any) is
+//                          shown as a toast
 //   loginUrl(returnPath)   the sign-in page's address, coming back to returnPath (default: this page)
 //   generatedIds()         the generated recipes in the visitor's recipe book, as a Set of ids
 //   setGenerated(id, on)   adds a generated recipe to the book, or takes it out
 //   noteGenerated(id)      records that the server has added a generated recipe to the book
 //   refreshBook()          fetches the book again now; resolves to true when it could
+//   setName(name)          the visitor's name has changed (profil.html)
 // and listen for `restfest:account` on document, sent when any of this changes.
 //
 // THE RECIPE BOOK. app.js draws hearts from `restfest-saved` in localStorage, signed in or not. For a
@@ -103,7 +105,22 @@ function showState() {
     if (link.hasAttribute("aria-label"))
       link.setAttribute("aria-label", inside ? "Ditt konto" : "Logga in");
   });
+  // The visitor's name in the account pages' menu (_includes/account-nav.njk).
+  const name = inside ? (readStored(markerKey, {})?.name ?? "") : "";
+  document.querySelectorAll("[data-account-name]").forEach((element) => {
+    element.textContent = name;
+    element.hidden = !name;
+  });
 }
+
+function setName(name) {
+  if (!signedIn()) return;
+  store(markerKey, { name: name ?? "" });
+  showState();
+}
+
+// A line to show as a toast on the next page, e.g. after deleting the account.
+const noticeKey = "restfest-notice";
 
 function announce() {
   document.dispatchEvent(new Event("restfest:account"));
@@ -318,9 +335,15 @@ async function signedInNow() {
   announce();
 }
 
-async function signOut() {
+async function signOut(notice) {
+  if (typeof notice === "string" && notice) {
+    try {
+      sessionStorage.setItem(noticeKey, notice);
+    } catch {}
+  }
   try {
-    // Here only: other devices stay signed in.
+    // Here only: other devices stay signed in. This also removes the sign-in the library keeps in
+    // the browser, which matters after deleting the account: the old one would otherwise linger.
     await (await client()).auth.signOut({ scope: "local" });
   } catch {
     // Unreachable or already signed out. The browser forgets the sign-in either way.
@@ -342,9 +365,15 @@ if (meta) {
     setGenerated,
     noteGenerated,
     refreshBook,
+    setName,
   };
   showState();
   showCount();
+  try {
+    const notice = sessionStorage.getItem(noticeKey);
+    sessionStorage.removeItem(noticeKey);
+    if (notice) showToast(notice);
+  } catch {}
 
   // A heart on an archive recipe (toggleSave in app.js).
   document.addEventListener("restfest:save-change", (event) => {

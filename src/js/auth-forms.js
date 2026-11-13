@@ -6,6 +6,7 @@
 // client reads it when it starts. After signing in the visitor goes to ?till=<path> when that is a
 // path within the site, otherwise to the recipe book.
 
+import { busy, checked, emailValue, problem, show } from "./account-forms.js";
 import {
   authErrorText,
   passwordProblem,
@@ -16,45 +17,6 @@ const account = window.restfestAccount;
 const main = $("#main");
 const params = new URLSearchParams(location.search);
 const returnPath = safeReturnPath(params.get("till"), location.origin);
-
-function show(element, text) {
-  element.textContent = text ?? "";
-  element.hidden = !text;
-}
-
-// Runs `work` with the form's buttons off, and shows what went wrong in `errorBox`.
-async function busy(container, errorBox, work) {
-  const buttons = [...container.querySelectorAll("button")];
-  show(errorBox, "");
-  buttons.forEach((button) => (button.disabled = true));
-  container.setAttribute("aria-busy", "true");
-  try {
-    await work();
-  } catch (error) {
-    show(errorBox, error.visitorText ?? authErrorText(error));
-  } finally {
-    buttons.forEach((button) => (button.disabled = false));
-    container.removeAttribute("aria-busy");
-  }
-}
-
-// A problem the visitor can fix, in Swedish.
-function problem(text) {
-  return Object.assign(new Error(text), { visitorText: text });
-}
-
-// supabase-js returns its errors; throw them so busy() shows them.
-function checked({ data, error }) {
-  if (error) throw error;
-  return data;
-}
-
-function email(input) {
-  const value = input.value.trim();
-  if (!value) throw problem("Skriv din e-postadress.");
-  if (!input.checkValidity()) throw problem("E-postadressen ser inte rätt ut.");
-  return value;
-}
 
 let finishing = false;
 async function finish(destination) {
@@ -135,7 +97,7 @@ async function loginPage() {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     busy(mainBox, errorBox, async () => {
-      const address = email(form.email);
+      const address = emailValue(form.email);
       const password = form.password.value;
       const client = await account.client();
       if (mode === "logga") {
@@ -209,7 +171,7 @@ async function loginPage() {
     const status = $("[data-reset-status]");
     show(status, "");
     busy(resetForm, $("[data-reset-error]"), async () => {
-      const address = email(resetForm.email);
+      const address = emailValue(resetForm.email);
       const client = await account.client();
       checked(
         await client.auth.resetPasswordForEmail(address, {
