@@ -12,7 +12,7 @@ create table public.profiles (
   display_name text check (char_length(display_name) <= 80),
   -- Keys from dietTags in src/js/recipes.js.
   diets text[] not null default '{}'
-    check (diets <@ array['Vegetarian', 'Vegan', 'Dairy free', 'Egg free', 'Gluten free']),
+    check (diets <@ array['Vegetarian', 'Vegan', 'Dairy free', 'Egg free', 'Gluten free'] and cardinality(diets) <= 5),
   -- Foods the visitor doesn't eat, as typed: at most 30 of at most 80 characters. The total length
   -- is what's checked here; generate-recipe cleans each one again before Claude sees it
   -- (supabase/functions/_shared/preferences.ts).

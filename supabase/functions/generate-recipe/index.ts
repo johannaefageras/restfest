@@ -54,6 +54,8 @@ serve(['POST'], async req => {
       maxTokens: 6000
     });
     try {
+      // Only preferences can make a fridge list unsuitable. Without them the flag is a slip.
+      if (!preferences) draft.unsuitable = false;
       recipe = recipeDoc(draft);
     } catch (error) {
       // Nothing on the list fits the preferences. The request has still used one of today's recipes.

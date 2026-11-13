@@ -3,7 +3,7 @@
 // all in memory and nothing like complete: just what the site calls. HANDOFF.md, "Konton och receptbok".
 //
 //   node tools/standin/server.mjs [port]        (default 54399)
-//   SUPABASE_URL=http://localhost:54399 SUPABASE_PUBLISHABLE_KEY=sb_publishable_test \
+//   RESTFEST_SUPABASE_URL=http://localhost:54399 RESTFEST_PUBLISHABLE_KEY=sb_publishable_test \
 //     npx @11ty/eleventy --serve --port 8765 --output=<a folder outside the project>
 //
 // POST /__control changes what it holds and how it behaves (see control() below): reset, add users,

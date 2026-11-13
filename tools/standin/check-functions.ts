@@ -118,6 +118,16 @@ r = await call(generate, {token: 'good-token'});
 check('unsuitable: 422 with the preferences text', r.status === 422 && r.body.error === 'Det som finns i kyllistan passar inte dina preferenser. Lägg till fler råvaror, eller ändra preferenserna på din profil.', r);
 check('unsuitable: one Claude call, nothing stored', state.claudeCalls === 1 && state.recipeInserts === 0, {calls: state.claudeCalls, inserts: state.recipeInserts});
 
+// The flag only means something when preferences were sent. Without them it is ignored.
+reset();
+state.draft = {...goodDraft, unsuitable: true};
+r = await call(generate);
+check('unsuitable without preferences: ignored, the recipe is returned', r.status === 200 && r.body.recipe?.title === 'Potatisgratäng', r);
+reset();
+state.draft = {...goodDraft, unsuitable: true};
+r = await call(generate, {token: 'good-token'});
+check('unsuitable for a signed-in visitor without preferences: ignored too', r.status === 200 && r.body.saved === true, r);
+
 reset();
 state.failSaved = true;
 r = await call(generate, {token: 'good-token'});

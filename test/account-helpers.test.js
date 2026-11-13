@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  addFood, applyQueue, authErrorText, heartsToQueue, passwordProblem, queueChange, safeReturnPath, sendQueue, withoutSent
+  addFood, applyQueue, authErrorText, heartsToQueue, passwordProblem, queueChange, refusedForGood, resumeQueue,
+  safeReturnPath, sendQueue, signInPage, stashQueue, withoutSent
 } from '../lib/account-helpers.js';
 
 const origin = 'https://example.se';
@@ -107,4 +108,39 @@ test('addFood refuses the 31st food', () => {
 
 test('authErrorText explains when a fresh sign-in is needed', () => {
   assert.equal(authErrorText({code: 'reauthentication_needed'}), 'Logga ut och in igen, så kan du byta lösenord.');
+});
+
+// Found by the review of the accounts branch.
+test('safeReturnPath refuses paths that resolve to another site', () => {
+  for (const bad of ['/.//evil.example', '/..//evil.example', '/%2e//evil.example', '/a/..//evil.example'])
+    assert.equal(safeReturnPath(bad, origin), null, bad);
+  assert.equal(safeReturnPath('/a/../receptbok.html', origin), '/receptbok.html');
+});
+
+test('refusedForGood is true only for answers that will never change', () => {
+  for (const status of [400, 409, 422]) assert.equal(refusedForGood(status), true, String(status));
+  // Signed out, forbidden, not found (the table may not be there yet), too many requests, server trouble, no answer.
+  for (const status of [0, undefined, 401, 403, 404, 408, 429, 500, 503]) assert.equal(refusedForGood(status), false, String(status));
+});
+
+test('stashQueue keeps unsent changes for the visitor who made them', () => {
+  assert.deepEqual(stashQueue('user-1', [add('a')]), {user: 'user-1', queue: [add('a')]});
+  assert.equal(stashQueue('user-1', []), null);
+  assert.equal(stashQueue(undefined, [add('a')]), null);
+});
+
+test('resumeQueue gives the stashed changes back to the same visitor only', () => {
+  const stash = {user: 'user-1', queue: [add('a'), drop('b')]};
+  assert.deepEqual(resumeQueue(stash, 'user-1', [add('b'), add('c')]), [add('a'), add('b'), add('c')]);
+  assert.deepEqual(resumeQueue(stash, 'user-2', [add('c')]), [add('c')]);
+  assert.deepEqual(resumeQueue(null, 'user-1', [add('c')]), [add('c')]);
+  assert.deepEqual(resumeQueue({user: 'user-1', queue: 'nonsense'}, 'user-1', []), []);
+});
+
+test('signInPage says where a sign-in in the address belongs', () => {
+  assert.equal(signInPage('#access_token=abc&refresh_token=def&type=signup'), 'logga-in.html');
+  assert.equal(signInPage('#access_token=abc&type=recovery'), 'nytt-losenord.html');
+  assert.equal(signInPage('#error=access_denied&error_code=otp_expired&error_description=x'), 'logga-in.html');
+  for (const other of ['', '#borja', '#sa-funkar-det', '#recept', '#token=1'])
+    assert.equal(signInPage(other), null, other);
 });

@@ -37,8 +37,12 @@ import {
   applyQueue,
   heartsToQueue,
   queueChange,
+  refusedForGood,
+  resumeQueue,
   safeReturnPath,
   sendQueue,
+  signInPage,
+  stashQueue,
   withoutSent,
 } from "./account-helpers.js";
 
@@ -46,6 +50,8 @@ const meta = document.querySelector('meta[name="restfest-account"]');
 const markerKey = "restfest-account";
 const generatedKey = "restfest-saved-generated";
 const queueKey = "restfest-saved-queue";
+// Changes that hadn't reached the account when the visitor signed out, kept for their next sign-in.
+const stashKey = "restfest-saved-stash";
 // When the book was last fetched, so a visitor clicking around doesn't fetch it on every page.
 const syncedKey = "restfest-book-synced";
 const root = document.documentElement;
@@ -115,7 +121,7 @@ function showState() {
 
 function setName(name) {
   if (!signedIn()) return;
-  store(markerKey, { name: name ?? "" });
+  store(markerKey, { ...readStored(markerKey, {}), name: name ?? "" });
   showState();
 }
 
@@ -205,9 +211,7 @@ async function sendChange(db, change) {
         )
     : await db.from(table).delete().eq("recipe_id", change.id);
   if (!error) return;
-  const refused =
-    status >= 400 && status < 500 && ![401, 403, 408, 429].includes(status);
-  if (!refused) throw error;
+  if (!refusedForGood(status)) throw error;
   console.warn("The recipe book refused a change:", change, error.message);
 }
 
@@ -229,11 +233,21 @@ const sameIds = (a, b) =>
 // The account's book into the browser, once everything queued has been sent.
 async function fetchBook(db) {
   if (!(await sendWaiting(db))) return false;
-  const [archive, generated] = await Promise.all([
+  const [archive, generated, profile] = await Promise.all([
     db.from("saved_recipes").select("recipe_id"),
     db.from("saved_generated_recipes").select("recipe_id"),
+    db.from("profiles").select("display_name").maybeSingle(),
   ]);
   if (archive.error || generated.error) return false;
+  // The name as the profile has it now: it may have been changed on another device.
+  if (!profile.error && profile.data) {
+    const marker = readStored(markerKey, {});
+    const name = profile.data.display_name ?? "";
+    if (signedIn() && marker.name !== name) {
+      store(markerKey, { ...marker, name });
+      showState();
+    }
+  }
   const waiting = readList(queueKey);
   const ids = (result, kind) =>
     applyQueue(
@@ -307,7 +321,11 @@ function noteGenerated(id) {
 
 // This browser is no longer signed in: drop the marker and the copies of the account's recipe book.
 // The fridge list, the shopping list and the week plan belong to the browser and stay.
+// Heart changes that never reached the account aren't thrown away: they are put aside under the
+// visitor's id, out of sight, and sent when the same visitor signs in here again.
 function forget() {
+  const stash = stashQueue(readStored(markerKey, {})?.id, readList(queueKey));
+  if (stash) store(stashKey, stash);
   forgetStored(markerKey, generatedKey, queueKey);
   try {
     sessionStorage.removeItem(syncedKey);
@@ -322,15 +340,21 @@ async function signedInNow() {
   if (!session) return;
   const first = !signedIn();
   const data = session.user.user_metadata ?? {};
+  // The name from the sign-up, until the profile's own arrives with the book below.
   store(markerKey, {
+    id: session.user.id,
     name: data.display_name || data.full_name || data.name || "",
   });
   showState();
   // The hearts this browser held before signing in go into the account, so none is lost. Only at
   // the first sign-in: later the list is the account's own, and a recipe taken out of the book on
   // another device must not come back from here.
-  if (first)
-    store(queueKey, heartsToQueue(readList(savedKey), readList(queueKey)));
+  let waiting = readList(queueKey);
+  if (first) waiting = heartsToQueue(readList(savedKey), waiting);
+  // And what this visitor left unsent the last time they signed out here.
+  waiting = resumeQueue(readStored(stashKey, null), session.user.id, waiting);
+  forgetStored(stashKey);
+  store(queueKey, waiting);
   await refreshBook();
   announce();
 }
@@ -340,6 +364,14 @@ async function signOut(notice) {
     try {
       sessionStorage.setItem(noticeKey, notice);
     } catch {}
+  }
+  // First one more try at sending what is queued, for a few seconds at most. What still can't be
+  // sent is put aside by forget().
+  if (signedIn() && readList(queueKey).length) {
+    await Promise.race([
+      bookTask(sendWaiting),
+      new Promise((resolve) => setTimeout(resolve, 4000)),
+    ]);
   }
   try {
     // Here only: other devices stay signed in. This also removes the sign-in the library keeps in
@@ -352,7 +384,13 @@ async function signOut(notice) {
   location.href = assetUrl("");
 }
 
-if (meta) {
+// A sign-in in the address on a page that can't take it: the mail link or Google came back to the
+// site's front page because the page that asked isn't in Supabase's list of allowed addresses
+// (HANDOFF.md, setup step 2). Pass it on to the page that can, instead of leaving it unused.
+const arrival = meta && !signedIn() ? signInPage(location.hash) : null;
+if (arrival && !/\/(logga-in|nytt-losenord)\.html$/.test(location.pathname)) {
+  location.replace(assetUrl(arrival) + location.hash);
+} else if (meta) {
   window.restfestAccount = {
     signedIn,
     client,
@@ -404,9 +442,15 @@ if (meta) {
     // Check that the sign-in still holds. One that has expired or been withdrawn just signs the
     // visitor out, without an error; an unreachable Supabase changes nothing.
     currentSession().then(({ session, unknown }) => {
-      if (!session && !unknown && signedIn()) forget();
-      else if (session && (!fetchedRecently() || readList(queueKey).length))
-        refreshBook();
+      if (!session && !unknown && signedIn()) {
+        forget();
+        return;
+      }
+      if (!session) return;
+      const marker = readStored(markerKey, {});
+      if (marker.id !== session.user.id)
+        store(markerKey, { ...marker, id: session.user.id });
+      if (!fetchedRecently() || readList(queueKey).length) refreshBook();
     });
   }
 }

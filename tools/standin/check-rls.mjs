@@ -69,6 +69,7 @@ check('A cannot delete a profile', denied(r), r);
 for (const [name, sql] of [
   ['an unknown diet', `update profiles set diets = '{Keto}'`],
   ['31 foods', `update profiles set avoid = array(select 'f' || g from generate_series(1, 31) g)`],
+  ['the same diet many times over', `update profiles set diets = array(select 'Vegan' from generate_series(1, 6))`],
   ['13 portions', `update profiles set servings = 13`],
   ['a name of 81 characters', `update profiles set display_name = repeat('x', 81)`]
 ]) {

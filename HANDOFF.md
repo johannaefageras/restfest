@@ -46,7 +46,7 @@ Eleventy builds the site from `src/` into `_site/`. `_site/` is generated and no
 - **Paths:** pages use relative paths. Pages one folder down (recipes, categories, types, tags) set `base: '../'`, and the layout puts `{{ base }}` in front of every path and adds `data-base` to `<html>` for `app.js`. Opening the built files from disk still works.
 - **URLs are unchanged from before Eleventy:** `receptarkiv.html`, `mer-an-mat.html`, `recept/<id>.html`. Every template in `src/pages/` sets its own `permalink:`, because the folder isn't part of the address (`index.njk` has `index.html`). Without one, Eleventy writes `pages/name/index.html`.
 - **New URLs:** `kategori/<slug>.html` (18 food categories), `typ/<slug>.html` (`mat`, `hemmaspa`, `hushall-och-rengoring`, `husdjur`) and `tagg/<slug>.html` (85 tags). The slug comes from the Swedish label: "Fika & bakning" → `fika-och-bakning`. Renaming a label changes the address; the build stops if two labels give the same one.
-- **localStorage keys:** `restfest-pantry`, `restfest-saved`, `restfest-shopping-list`, `restfest-week`. With accounts also `restfest-account`, `restfest-saved-generated` and `restfest-saved-queue` (see "Konton och receptbok").
+- **localStorage keys:** `restfest-pantry`, `restfest-saved`, `restfest-shopping-list`, `restfest-week`. With accounts also `restfest-account`, `restfest-saved-generated`, `restfest-saved-queue` and `restfest-saved-stash` (see "Konton och receptbok").
 
 **Build:** `npm install` once, then:
 
@@ -290,7 +290,7 @@ The design and the plan it was built from are in `docs/superpowers/specs/2026-11
 
 - **Signed out:** as before, plus a "Logga in" button in the header (a link in the menu row below 520px) and "Spara i receptboken" on a generated recipe, which leads to the sign-in page and back.
 - **Signed in:** "Sparat" in the header becomes "Receptbok" and counts hearted and generated recipes together; "Logga in" becomes "Konto". Hearts work as before and are also stored in the account. A recipe generated while signed in goes into the book by itself, and its page has a heart.
-- **Signing out** empties the hearts in that browser (they stay in the account) and leaves the fridge list, the shopping list and the week plan alone.
+- **Signing out** empties the hearts in that browser (they stay in the account) and leaves the fridge list, the shopping list and the week plan alone. Heart changes that hadn't reached the account yet are tried once more and otherwise put aside out of sight (`restfest-saved-stash`), and sent when the same visitor signs in on that browser again.
 - **Deleting the account** (Konto) removes the sign-in, the profile and the book. Generated recipes stay: they are never tied to a person, only listed in a book.
 
 **Files:**
@@ -323,6 +323,9 @@ The design and the plan it was built from are in `docs/superpowers/specs/2026-11
 - **Implicit flow, not PKCE** (`client()` in `account.js`): a link in a mail has to work in a browser other than the one that asked for it, such as signing up on a laptop and opening the mail on a phone.
 - **Mail links and Google** come back to `logga-in.html`, which reads the sign-in from the address and goes on to `?till=<path>`, or to the recipe book. Only a path within the site is accepted (`safeReturnPath`). The password link goes to `nytt-losenord.html`.
 - **A sign-in that has run out** just signs the visitor out on the next page load, without a message. Supabase being unreachable changes nothing.
+- **A sign-in that lands on the wrong page** is passed on. If an address is missing from Supabase's redirect list (setup step 2), a mail link or Google comes back to the front page instead; `account.js` then sends the visitor on to `logga-in.html` or `nytt-losenord.html` with the sign-in intact.
+- **Signing in before confirming the address** shows the "Kolla din mejl" box with "Skicka igen". **Signing up with an address that already has an account** says so: Supabase answers such a sign-up as if it worked and sends no mail, which `auth-forms.js` recognises by the empty list of sign-in methods.
+- **The name in the account menu** is the profile's, fetched with the book, so a name changed on one device shows on the others.
 - **The functions** get the visitor's access token in the `Authorization` header and check it themselves (`userFor`). `verify_jwt` stays off in `config.toml`.
 
 **How the hearts stay in step.** `app.js` still draws hearts from `restfest-saved`, signed in or not. For a signed-in visitor that list is a copy of the account's, and `account.js` keeps it so:
@@ -331,6 +334,7 @@ The design and the plan it was built from are in `docs/superpowers/specs/2026-11
 - **Every change** goes into a queue (`restfest-saved-queue`) and is sent at once. What can't be sent (offline, Supabase down) stays queued and goes with the next page load. The heart click itself is never blocked or undone.
 - **On a page load**, at most once a minute, the queue is sent and then the account's lists replace the browser's. So a heart from another device shows up, and a heart removed offline stays removed.
 - **Generated recipes** in the book are kept as ids in `restfest-saved-generated`. `toggleSave()` in `app.js` tells `account.js` about a change with the event `restfest:save-change`; `account.js` sends `restfest:account` when the sign-in or the book changes.
+- **A change the database refuses for good** (a recipe that no longer exists, a full book: status 400, 409 or 422) is dropped from the queue with a console warning. Everything else, including 404, which is what a table that isn't there yet answers, is tried again.
 - **A book holds at most 1000 recipes of each kind** (a trigger in the migration).
 
 **The recipe book's cards.** Archive recipes use `archiveCard()` from `app.js`. `generatedCard()` in `recipe-book.js` repeats that markup for a generated recipe, so there are now three places to change together: `archiveCard()`, `_includes/recipe-card.njk` and `generatedCard()`.
@@ -340,7 +344,7 @@ The design and the plan it was built from are in `docs/superpowers/specs/2026-11
 **Setup (once), the owner's part.** The code can't do these:
 
 1. **Publishable key:** Supabase dashboard → Project Settings → API keys → copy the publishable key (`sb_publishable_…`) into `publishableKey` in `src/_data/ai.js`. It is meant to be public. Never put a secret key there.
-2. **Addresses:** Authentication → URL Configuration. Set the Site URL to the site's address, and add the addresses the site runs on to the redirect list: `http://localhost:8080/**` for the local server, and the public address with `/**` once there is one.
+2. **Addresses:** Authentication → URL Configuration. Set the Site URL to the site's address, and add the addresses the site runs on to the redirect list: `http://localhost:8080/**` for the local server (and `http://localhost:8765/**` if tests are run on that port, as Claude does), and the public address with `/**` once there is one.
 3. **Password length:** Authentication → Sign In / Providers → Email: minimum password length 8, and keep "Confirm email" on. The site checks 8 characters itself, but Supabase's own default is 6.
 4. **Mails:** paste the three templates from `supabase/templates/` (see its README for which goes where and the subjects).
 5. **Google:** create an OAuth client in Google Cloud Console (Web application), with the redirect address shown on Supabase's Google provider page (`https://yatffwoobcsrxcxplecd.supabase.co/auth/v1/callback`), and enter its id and secret on that page.
@@ -360,9 +364,9 @@ The design and the plan it was built from are in `docs/superpowers/specs/2026-11
 
 **Testing.** Three things in `tools/standin/` need no real project and touch nothing real:
 
-- **`server.mjs`:** a stand-in for the Supabase project (sign-in, the tables, the functions) in memory, to try the account features in a browser. Its header comment has the two commands: start it, then serve a build with `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` pointing at it. Every page and flow of the accounts was checked this way with the Playwright tools.
-- **`check-rls.mjs`:** runs the migrations in an in-memory Postgres and checks what each role can reach (34 checks). **Run it after any change to a migration**; it is the only test of the row level security.
-- **`check-functions.ts`:** runs `generate-recipe` and `delete-account` with Claude and Supabase replaced (17 checks).
+- **`server.mjs`:** a stand-in for the Supabase project (sign-in, the tables, the functions) in memory, to try the account features in a browser. Its header comment has the two commands: start it, then serve a build with `RESTFEST_SUPABASE_URL` and `RESTFEST_PUBLISHABLE_KEY` pointing at it. Every page and flow of the accounts was checked this way with the Playwright tools.
+- **`check-rls.mjs`:** runs the migrations in an in-memory Postgres and checks what each role can reach (35 checks). **Run it after any change to a migration**; it is the only test of the row level security.
+- **`check-functions.ts`:** runs `generate-recipe` and `delete-account` with Claude and Supabase replaced (19 checks).
 
 ## Testing setup that worked
 
@@ -450,10 +454,11 @@ The design and the plan it was built from are in `docs/superpowers/specs/2026-11
   - with `ai.js` empty, the home page has no trace of the features.
 
 - **Konton och receptbok:** sign-in with email + password or Google, Min receptbok, preferences, the profile, account and privacy pages. See "Konton och receptbok" for files, setup and limits. The site was also renamed from Restfest to Ofta bra efter just before (see "The name" at the top). Verified without the real project:
-  - `npm test`: 34 tests, among them two full builds (with and without the key);
+  - `npm test`: 39 tests, among them two full builds (with and without the key);
   - without the key, every HTML page is byte for byte the same as before accounts;
-  - the migration in an in-memory Postgres: 34 checks of who can reach what, the limits, and what deleting a user removes;
-  - `generate-recipe` and `delete-account` with Claude and Supabase replaced: 17 checks;
+  - the migration in an in-memory Postgres: 35 checks of who can reach what, the limits, and what deleting a user removes;
+  - `generate-recipe` and `delete-account` with Claude and Supabase replaced: 19 checks;
+  - an independent review of the whole branch found no way to reach another visitor's data; what it did find (hearts lost when signing out with unsent changes, no "skicka igen" before confirming, a silent sign-up for an existing address, a gap in the return-address check) was fixed and re-tested;
   - every page and flow in a browser against the stand-in backend: signing up, in and out, mail links opened in a cleared browser, Google, a new password, hearts merging at sign-in and surviving a backend outage, the recipe book, preferences, deleting the account, keyboard order and labels, and no overflow from 320 to 1440px;
   - a signed-out visitor downloads `js/account.js` and `js/account-helpers.js` and nothing else new, and no request goes to Supabase.
 

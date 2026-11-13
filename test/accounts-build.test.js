@@ -13,7 +13,7 @@ function build(publishableKey) {
   const out = mkdtempSync(join(tmpdir(), 'restfest-build-'));
   execFileSync(join(root, 'node_modules/.bin/eleventy'), [`--output=${out}`, '--quiet'], {
     cwd: root,
-    env: { ...process.env, SUPABASE_PUBLISHABLE_KEY: publishableKey },
+    env: { ...process.env, RESTFEST_PUBLISHABLE_KEY: publishableKey },
     stdio: 'pipe'
   });
   return { out, read: path => readFileSync(join(out, path), 'utf8'), has: path => existsSync(join(out, path)) };

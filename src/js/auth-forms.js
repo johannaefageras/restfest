@@ -82,6 +82,14 @@ async function loginPage() {
     (part.querySelector("input") ?? part.querySelector("button"))?.focus();
   }
 
+  // The box with "Skicka igen": after signing up, and when signing in before confirming.
+  function showSent(address, text) {
+    $("[data-sent-text]").textContent = text;
+    show($("[data-sent-error]"), "");
+    sentBox.dataset.email = address;
+    showPart(sentBox);
+  }
+
   setMode(params.get("lage") === "skapa" ? "skapa" : "logga", {
     address: false,
   });
@@ -102,9 +110,19 @@ async function loginPage() {
       const client = await account.client();
       if (mode === "logga") {
         if (!password) throw problem("Skriv ditt lösenord.");
-        checked(
-          await client.auth.signInWithPassword({ email: address, password }),
-        );
+        const { error } = await client.auth.signInWithPassword({
+          email: address,
+          password,
+        });
+        // The link in the first mail may be lost or too old by now: offer a new one.
+        if (error?.code === "email_not_confirmed") {
+          showSent(
+            address,
+            `Du behöver bekräfta e-postadressen innan du kan logga in. Vi skickade en länk till ${address} när kontot skapades.`,
+          );
+          return;
+        }
+        if (error) throw error;
         await finish(destination);
         return;
       }
@@ -125,10 +143,14 @@ async function loginPage() {
         await finish(destination);
         return;
       }
-      $("[data-sent-text]").textContent =
-        `Kolla din mejl. Vi har skickat en länk till ${address}. Klicka på den för att börja använda kontot.`;
-      sentBox.dataset.email = address;
-      showPart(sentBox);
+      // For an address that already has an account, Supabase answers as if a new one was made, but
+      // with no sign-in methods, and sends no mail. Say so instead of leaving the visitor waiting.
+      if (data.user && (data.user.identities ?? []).length === 0)
+        throw { code: "user_already_exists" };
+      showSent(
+        address,
+        `Kolla din mejl. Vi har skickat en länk till ${address}. Klicka på den för att börja använda kontot.`,
+      );
     });
   });
 
@@ -165,6 +187,14 @@ async function loginPage() {
     showPart(resetForm);
   });
   $("[data-reset-back]").addEventListener("click", () => showPart(mainBox));
+  // Back from "Kolla din mejl", e.g. after confirming on another device: sign in with the same address.
+  $("[data-sent-back]").addEventListener("click", () => {
+    setMode("logga");
+    form.email.value = sentBox.dataset.email ?? "";
+    form.password.value = "";
+    showPart(mainBox);
+    (form.email.value ? form.password : form.email).focus();
+  });
 
   resetForm.addEventListener("submit", (event) => {
     event.preventDefault();
