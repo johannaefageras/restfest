@@ -1,0 +1,36 @@
+---js
+// The signed-in shopping list keeps an offline copy and syncs individual changes with the account.
+const layout = 'layouts/base.njk';
+const title = 'Inköpslista · Ofta bra efter';
+const description = 'Det du behöver köpa, samlat på din inköpslista hos Ofta bra efter.';
+const noindex = true;
+const modules = ['shopping-list.js'];
+const permalink = 'inkopslista.html';
+---
+  <main id="main" class="wrap account-page account-dashboard shopping-page">
+    <section class="account-card" aria-labelledby="shopping-page-title">
+      <header class="greeting archive-greeting">
+        <div>
+          <h1 id="shopping-page-title" tabindex="-1"><span class="marker">Inköpslista.</span></h1>
+          <p class="greeting-intro">Det du behöver köpa, samlat på ett ställe. Bocka av medan du handlar.</p>
+        </div>
+        <div class="greeting-aside" aria-hidden="true">
+          <div class="doodle-lineup"><img src="assets/icons/shopping-basket-1.svg" alt="" width="60" height="60"></div>
+        </div>
+      </header>
+      <div class="when-signed-in">
+        {%- set current = 'inkopslista' %}
+        {% include "account-nav.njk" %}
+        <div class="shopping-sync-status">
+          <p class="meta" role="status" data-shopping-sync-status>Hämtar inköpslistan …</p>
+          <button class="text-button" type="button" data-shopping-sync-retry hidden>Försök igen</button>
+        </div>
+        <section class="shopping-panel" data-shopping-list aria-label="Din inköpslista">
+          {% include "shopping-controls.njk" %}
+          {% set shoppingListPrefix = 'shopping-page' %}
+          {% include "shopping-items.njk" %}
+        </section>
+      </div>
+      <noscript><p class="account-error">Inköpslistan behöver JavaScript.</p></noscript>
+    </section>
+  </main>

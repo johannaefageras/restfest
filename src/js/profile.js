@@ -280,6 +280,8 @@ async function accountPage(db, sessionUser) {
         throw problem(result.error || "Något gick fel. Prova igen om en stund.");
       }
       // The account is gone; this removes what the browser still holds of it and goes home.
+      window.restfestShopping?.discard();
+      account.discardBook();
       await account.signOut("Kontot är borttaget.");
     });
   });

@@ -64,6 +64,12 @@ globalThis.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
   if (url.pathname === '/rest/v1/profiles') state.profileReads++;
   if (url.pathname === '/rest/v1/profiles') return state.profile ? json(state.profile) : json({code: 'PGRST116', message: 'no rows'}, 406);
   if (url.pathname === '/rest/v1/generated_recipes') { state.recipeInserts++; return json({id: '22222222-2222-4222-8222-222222222222'}, 201); }
+  if (url.pathname === '/rest/v1/rpc/store_generated_recipe') {
+    state.recipeInserts++;
+    const body = await req.json();
+    if (body.save_for && !state.failSaved) state.savedInserts.push({ user_id: body.save_for, recipe_id: '22222222-2222-4222-8222-222222222222' });
+    return json({ id: '22222222-2222-4222-8222-222222222222', saved: Boolean(body.save_for && !state.failSaved), saveFor: body.save_for });
+  }
   if (url.pathname === '/rest/v1/saved_generated_recipes') {
     if (state.failSaved) return json({message: 'boom'}, 500);
     state.savedInserts.push(await req.json());
@@ -143,6 +149,7 @@ reset();
 state.failSaved = true;
 r = await call(generate, {token: 'good-token'});
 check('book insert fails: the recipe is still returned, saved false', r.status === 200 && r.body.saved === false && Boolean(r.body.id), r);
+check('book insert fails: the verified owner accompanies the retryable save', r.body.saveFor === '11111111-1111-4111-8111-111111111111', r.body.saveFor);
 
 // Once the day's recipes are used up, nothing more is looked up or paid for.
 reset();

@@ -31,7 +31,7 @@ const recipes = api => api.getFilteredByGlob('src/recept/*.md')
   .sort((a, b) => parseInt(a.fileSlug, 10) - parseInt(b.fileSlug, 10));
 
 // Sign-in, the recipe book and the pages around them (HANDOFF.md, "Konton och receptbok").
-const accountPages = ['logga-in', 'nytt-losenord', 'receptbok', 'profil', 'konto', 'integritet'];
+const accountPages = ['logga-in', 'nytt-losenord', 'receptbok', 'inkopslista', 'profil', 'konto', 'integritet'];
 
 export default function (eleventyConfig) {
   // The account pages are built only when the site has accounts (src/_data/ai.js): without a
@@ -51,8 +51,13 @@ export default function (eleventyConfig) {
   // file for the browser. Only signed-in visitors and the account pages load the library, and a site
   // without accounts doesn't get it at all.
   eleventyConfig.addPassthroughCopy({'lib/account-helpers.js': 'js/account-helpers.js'});
+  eleventyConfig.addPassthroughCopy({'lib/shopping-sync.js': 'js/shopping-sync.js'});
+  eleventyConfig.addPassthroughCopy({'lib/shopping-groups.js': 'js/shopping-groups.js'});
+  eleventyConfig.addPassthroughCopy({'lib/account-sync.js': 'js/account-sync.js'});
+  eleventyConfig.addPassthroughCopy({'lib/recipe-book-sync.js': 'js/recipe-book-sync.js'});
   if (ai.accounts) {
     eleventyConfig.addPassthroughCopy({'node_modules/@supabase/supabase-js/dist/umd/supabase.js': 'js/vendor/supabase.js'});
+    eleventyConfig.addPassthroughCopy({'src/shopping-worker.js': 'shopping-worker.js'});
   }
 
   // The build reads the categories and tag labels from js/recipes.js (lib/taxonomy.js),

@@ -19,41 +19,30 @@
 //   loginUrl(returnPath)   the sign-in page's address, coming back to returnPath (default: this page)
 //   generatedIds()         the generated recipes in the visitor's recipe book, as a Set of ids
 //   setGenerated(id, on)   adds a generated recipe to the book, or takes it out
-//   noteGenerated(id)      records that the server has added a generated recipe to the book
+//   noteGenerated(data)    caches a generation result and queues a safe initial-save retry
 //   refreshBook()          fetches the book again now; resolves to true when it could
 //   setName(name)          the visitor's name has changed (profil.html)
+//   bookSnapshot()         cached book with pending heart changes applied
+//   bookStatus()           sync status for the recipe-book page
+//   rememberRecipe(data)   cache a viewed generated recipe for offline reading
+//   cachedRecipe(id)       that user's cached recipe, or null
 // and listen for `restfest:account` on document, sent when any of this changes.
 //
-// THE RECIPE BOOK. app.js draws hearts from `restfest-saved` in localStorage, signed in or not. For a
-// signed-in visitor that list is a copy of the account's (the tables saved_recipes and
-// saved_generated_recipes), kept in step here:
-//   - at the first sign-in in a browser, the hearts it already holds are added to the account;
-//   - every change is put in a queue (`restfest-saved-queue`) and sent; what can't be sent now
-//     (offline, Supabase down) stays queued and goes with the next page load;
-//   - on a page load, once the queue is empty, the account's lists replace the browser's.
-// A heart click is never blocked or undone by any of this. The order of it all is bookSync in
-// lib/account-helpers.js, which `npm test` checks; here it gets the browser's storage, the tables
-// and a lock that keeps two open tabs from sending at the same time.
+// THE RECIPE BOOK. Both archive favorites and generated recipes use recipe-book-account.js and
+// the same durable outbox engine as the shopping list. Every change has its own operation id and
+// user-scoped storage entry. Failed sends retry on reconnection, focus and visible-page polling.
+// The cached snapshot renders offline; signing out restores the separate guest favorites.
 
-import {
-  bookSync,
-  heartsToQueue,
-  refusedForGood,
-  resumeQueue,
-  safeReturnPath,
-  signInPage,
-  stashQueue,
-} from "./account-helpers.js";
+import { safeReturnPath, signInPage } from "./account-helpers.js";
+import { createShoppingAccount } from "./shopping-account.js";
+import { createRecipeBookAccount } from "./recipe-book-account.js";
 
 const meta = document.querySelector('meta[name="restfest-account"]');
 const markerKey = "restfest-account";
 const generatedKey = "restfest-saved-generated";
-const queueKey = "restfest-saved-queue";
-// Changes that hadn't reached the account when the visitor signed out, kept for their next sign-in.
-const stashKey = "restfest-saved-stash";
-// When the book was last fetched, so a visitor clicking around doesn't fetch it on every page.
-const syncedKey = "restfest-book-synced";
 const root = document.documentElement;
+let shopping;
+let book;
 
 function readStored(key, fallback) {
   try {
@@ -95,6 +84,9 @@ function loginUrl(returnPath = location.pathname + location.search) {
 function showState() {
   const inside = signedIn();
   root.classList.toggle("signed-in", inside);
+  const owner = inside ? readStored(markerKey, {})?.id : null;
+  shopping?.activate(owner);
+  book?.activate(owner);
   const savedLink = document.querySelector("[data-saved-link]");
   if (savedLink) {
     savedLink.href = assetUrl(
@@ -196,142 +188,45 @@ function showCount() {
   if (count && signedIn()) count.textContent = saved.size + generatedIds().size;
 }
 
-// The account, as bookSync wants it.
-const tables = { archive: "saved_recipes", generated: "saved_generated_recipes" };
-const remote = {
-  // Some hearts added or removed in one request. True when stored, and false when the database
-  // refuses for good (a recipe that no longer exists, a full book). Throws when it should be tried
-  // again later.
-  async change({ kind, saved, ids }) {
-    const table = (await client()).from(tables[kind]);
-    const { error, status } = saved
-      ? await table.upsert(
-          ids.map((id) => ({ recipe_id: id })),
-          { onConflict: "user_id,recipe_id", ignoreDuplicates: true },
-        )
-      : await table.delete().in("recipe_id", ids);
-    if (!error) return true;
-    if (!refusedForGood(status)) throw error;
-    // A refused group is sent again one by one, so the warning names the recipe that is the trouble.
-    if (ids.length === 1)
-      console.warn(
-        "The recipe book refused a change:",
-        { kind, id: ids[0], saved },
-        error.message,
-      );
-    return false;
-  },
-  // The book's ids and the name, or null when they can't be read.
-  async book() {
-    const db = await client();
-    const [archive, generated, profile] = await Promise.all([
-      db.from("saved_recipes").select("recipe_id"),
-      // Not the table itself: the function leaves out recipes the owner has hidden, as
-      // receptbok.html does, so the header's count and the page agree.
-      db.rpc("my_generated_recipes").select("id"),
-      db.from("profiles").select("display_name").maybeSingle(),
-    ]);
-    if (archive.error || generated.error) return null;
-    return {
-      archive: archive.data.map((row) => row.recipe_id),
-      generated: generated.data.map((row) => row.id),
-      name:
-        profile.error || !profile.data
-          ? null
-          : (profile.data.display_name ?? ""),
-    };
-  },
-};
-
 const sameIds = (a, b) =>
   a.length === b.length && [...a].sort().join() === [...b].sort().join();
 
 // The account's book into the browser.
 function showBook({ archive, generated, name }) {
-  // Signed out while the book was on its way, here or in another tab: it isn't this browser's to
-  // show any more.
-  if (!signedIn()) return;
+  // The controller supplies the separate guest list on sign-out. Late network responses are
+  // discarded before they reach this function.
+  if (!signedIn()) {
+    setSavedRecipes(archive.map(row => row.recipe_id));
+    forgetStored(generatedKey);
+    announce();
+    return;
+  }
   // The name as the profile has it now: it may have been changed on another device.
   const marker = readStored(markerKey, {});
   if (name != null && marker.name !== name) {
     store(markerKey, { ...marker, name });
     showState();
   }
-  if (!sameIds(archive, readList(savedKey))) setSavedRecipes(archive);
-  store(generatedKey, generated);
-  try {
-    sessionStorage.setItem(syncedKey, String(Date.now()));
-  } catch {}
+  const archiveIds = archive.map(row => row.recipe_id);
+  const generatedIds = generated.map(row => row.id);
+  if (!sameIds(archiveIds, readList(savedKey))) setSavedRecipes(archiveIds);
+  store(generatedKey, generatedIds);
   showCount();
   announce();
 }
 
-// One tab at a time, with the Web Locks API. A tab that has waited 15 seconds for its turn gives up
-// until the next page load; what it had queued stays queued. A browser without the API runs each
-// tab for itself.
-function oneTab(task) {
-  if (!navigator.locks) return task();
-  const patience = AbortSignal.timeout
-    ? { signal: AbortSignal.timeout(15000) }
-    : {};
-  return navigator.locks.request("restfest-book", patience, () => task());
-}
-
-const book = bookSync({
-  queue: {
-    read: () => readList(queueKey),
-    write: (list) => store(queueKey, list),
-  },
-  remote,
-  show: showBook,
-  lock: oneTab,
-});
 const refreshBook = () => book.refresh();
-
-function fetchedRecently() {
-  try {
-    return Date.now() - Number(sessionStorage.getItem(syncedKey)) < 60000;
-  } catch {
-    return false;
-  }
-}
-
-// The browser's copy of which generated recipes are in the book.
-function keepGenerated(id, on) {
-  const ids = generatedIds();
-  if (on) ids.add(id);
-  else ids.delete(id);
-  store(generatedKey, [...ids]);
-  showCount();
-}
-
 function setGenerated(id, on) {
-  if (!signedIn()) return;
-  keepGenerated(id, on);
-  book.change({ kind: "generated", id, saved: Boolean(on) });
-  announce();
+  if (signedIn()) book.change({ kind: "generated", id, saved: Boolean(on) });
 }
-
-// generate-recipe adds a signed-in visitor's new recipe to their book itself, so there is nothing
-// to send: only the browser's copy needs to know.
-function noteGenerated(id) {
-  if (!signedIn()) return;
-  keepGenerated(id, true);
-  announce();
-}
+function noteGenerated(data) { book?.noteGenerated(data); }
 
 // This browser is no longer signed in: drop the marker and the copies of the account's recipe book.
-// The fridge list, the shopping list and the week plan belong to the browser and stay.
-// Heart changes that never reached the account aren't thrown away: they are put aside under the
-// visitor's id, out of sight, and sent when the same visitor signs in here again.
+// The shopping outbox stays scoped to its owner; signing out restores the separate guest list.
+// The fridge list and week plan belong to the browser and stay.
+// Heart changes that never reached the account stay in its private outbox for the next sign-in.
 function forget() {
-  const stash = stashQueue(readStored(markerKey, {})?.id, readList(queueKey));
-  if (stash) store(stashKey, stash);
-  forgetStored(markerKey, generatedKey, queueKey);
-  try {
-    sessionStorage.removeItem(syncedKey);
-  } catch {}
-  setSavedRecipes([]);
+  forgetStored(markerKey, generatedKey);
   showState();
   announce();
 }
@@ -339,7 +234,6 @@ function forget() {
 async function signedInNow() {
   const { session } = await currentSession();
   if (!session) return;
-  const first = !signedIn();
   const data = session.user.user_metadata ?? {};
   // The name from the sign-up, until the profile's own arrives with the book below.
   store(markerKey, {
@@ -347,16 +241,7 @@ async function signedInNow() {
     name: data.display_name || data.full_name || data.name || "",
   });
   showState();
-  // The hearts this browser held before signing in go into the account, so none is lost. Only at
-  // the first sign-in: later the list is the account's own, and a recipe taken out of the book on
-  // another device must not come back from here.
-  let waiting = readList(queueKey);
-  if (first) waiting = heartsToQueue(readList(savedKey), waiting);
-  // And what this visitor left unsent the last time they signed out here.
-  waiting = resumeQueue(readStored(stashKey, null), session.user.id, waiting);
-  forgetStored(stashKey);
-  store(queueKey, waiting);
-  await refreshBook();
+  await Promise.all([refreshBook(), shopping?.refresh()]);
   announce();
 }
 
@@ -368,9 +253,9 @@ async function signOut(notice) {
   }
   // First one more try at sending what is queued, for a few seconds at most. What still can't be
   // sent is put aside by forget().
-  if (signedIn() && readList(queueKey).length) {
+  if (signedIn()) {
     await Promise.race([
-      book.send(),
+      Promise.all([book?.refresh(), shopping?.refresh()]),
       new Promise((resolve) => setTimeout(resolve, 4000)),
     ]);
   }
@@ -405,7 +290,22 @@ if (arrival && !/\/(logga-in|nytt-losenord)\.html$/.test(location.pathname)) {
     noteGenerated,
     refreshBook,
     setName,
+    bookSnapshot: () => book.snapshot(),
+    bookStatus: () => book.status(),
+    rememberRecipe: data => book.rememberRecipe(data),
+    cachedRecipe: id => book.cachedRecipe(id),
+    discardBook: () => book.discard(),
   };
+  shopping = createShoppingAccount({
+    client,
+    currentUser: () => signedIn() ? readStored(markerKey, {})?.id ?? null : null,
+  });
+  window.restfestShopping = shopping;
+  book = createRecipeBookAccount({
+    client,
+    currentUser: () => signedIn() ? readStored(markerKey, {})?.id ?? null : null,
+    show: showBook,
+  });
   showState();
   showCount();
   try {
@@ -453,10 +353,12 @@ if (arrival && !/\/(logga-in|nytt-losenord)\.html$/.test(location.pathname)) {
       }
       if (!session) return;
       const marker = readStored(markerKey, {});
-      if (marker.id !== session.user.id)
+      if (marker.id !== session.user.id) {
         store(markerKey, { ...marker, id: session.user.id });
-      // Not again if a page that needs the book now (receptbok.html) has just fetched it.
-      book.refreshIfStale(fetchedRecently);
+        showState();
+      }
+      // The book also refreshes on focus, reconnection and visible-page polling.
+      book.refresh();
     });
   }
 }

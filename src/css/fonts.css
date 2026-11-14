@@ -1,0 +1,225 @@
+/* TRIO GROTESK */
+
+@font-face {
+  font-family: "Trio Grotesk";
+  src:
+    url("../assets/fonts/TrioGrotesk-Regular.woff2") format("woff2"),
+    url("../assets/fonts/TrioGrotesk-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Trio Grotesk";
+  src:
+    url("../assets/fonts/TrioGrotesk-RegularItalic.woff2") format("woff2"),
+    url("../assets/fonts/TrioGrotesk-RegularItalic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Trio Grotesk";
+  src:
+    url("../assets/fonts/TrioGrotesk-Medium.woff2") format("woff2"),
+    url("../assets/fonts/TrioGrotesk-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Trio Grotesk";
+  src:
+    url("../assets/fonts/TrioGrotesk-MediumItalic.woff2") format("woff2"),
+    url("../assets/fonts/TrioGrotesk-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Trio Grotesk";
+  src:
+    url("../assets/fonts/TrioGrotesk-Bold.woff2") format("woff2"),
+    url("../assets/fonts/TrioGrotesk-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Trio Grotesk";
+  src:
+    url("../assets/fonts/TrioGrotesk-BoldItalic.woff2") format("woff2"),
+    url("../assets/fonts/TrioGrotesk-BoldItalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* SPOT GROTESK */
+
+@font-face {
+  font-family: "Spot Grotesk";
+  src:
+    url("../assets/fonts/SpotGrotesk-Light.woff2") format("woff2"),
+    url("../assets/fonts/SpotGrotesk-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Grotesk";
+  src:
+    url("../assets/fonts/SpotGrotesk-LightItalic.woff2") format("woff2"),
+    url("../assets/fonts/SpotGrotesk-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Grotesk";
+  src:
+    url("../assets/fonts/SpotGrotesk-Regular.woff2") format("woff2"),
+    url("../assets/fonts/SpotGrotesk-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Grotesk";
+  src:
+    url("../assets/fonts/SpotGrotesk-RegularItalic.woff2") format("woff2"),
+    url("../assets/fonts/SpotGrotesk-RegularItalic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Grotesk";
+  src:
+    url("../assets/fonts/SpotGrotesk-Medium.woff2") format("woff2"),
+    url("../assets/fonts/SpotGrotesk-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Grotesk";
+  src:
+    url("../assets/fonts/SpotGrotesk-MediumItalic.woff2") format("woff2"),
+    url("../assets/fonts/SpotGrotesk-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Grotesk";
+  src:
+    url("../assets/fonts/SpotGrotesk-Bold.woff2") format("woff2"),
+    url("../assets/fonts/SpotGrotesk-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Grotesk";
+  src:
+    url("../assets/fonts/SpotGrotesk-BoldItalic.woff2") format("woff2"),
+    url("../assets/fonts/SpotGrotesk-BoldItalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* SPOT SEMI */
+
+@font-face {
+  font-family: "Spot Semi";
+  src:
+    url("../assets/fonts/SpotSemi-Light.woff2") format("woff2"),
+    url("../assets/fonts/SpotSemi-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Semi";
+  src:
+    url("../assets/fonts/SpotSemi-LightItalic.woff2") format("woff2"),
+    url("../assets/fonts/SpotSemi-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Semi";
+  src:
+    url("../assets/fonts/SpotSemi-Regular.woff2") format("woff2"),
+    url("../assets/fonts/SpotSemi-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Semi";
+  src:
+    url("../assets/fonts/SpotSemi-RegularItalic.woff2") format("woff2"),
+    url("../assets/fonts/SpotSemi-RegularItalic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Semi";
+  src:
+    url("../assets/fonts/SpotSemi-Medium.woff2") format("woff2"),
+    url("../assets/fonts/SpotSemi-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Semi";
+  src:
+    url("../assets/fonts/SpotSemi-MediumItalic.woff2") format("woff2"),
+    url("../assets/fonts/SpotSemi-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Semi";
+  src:
+    url("../assets/fonts/SpotSemi-Bold.woff2") format("woff2"),
+    url("../assets/fonts/SpotSemi-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spot Semi";
+  src:
+    url("../assets/fonts/SpotSemi-BoldItalic.woff2") format("woff2"),
+    url("../assets/fonts/SpotSemi-BoldItalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}

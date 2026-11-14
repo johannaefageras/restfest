@@ -19,7 +19,7 @@ function build(publishableKey) {
   return { out, read: path => readFileSync(join(out, path), 'utf8'), has: path => existsSync(join(out, path)) };
 }
 
-const accountPages = ['logga-in.html', 'nytt-losenord.html', 'receptbok.html', 'profil.html', 'konto.html', 'integritet.html'];
+const accountPages = ['logga-in.html', 'nytt-losenord.html', 'receptbok.html', 'inkopslista.html', 'profil.html', 'konto.html', 'integritet.html'];
 
 test('without a publishable key the pages have no trace of accounts', t => {
   const site = build('');
@@ -30,7 +30,13 @@ test('without a publishable key the pages have no trace of accounts', t => {
       assert.equal(html.includes(trace), false, `${page} mentions ${trace}`);
   }
   for (const page of accountPages) assert.equal(site.has(page), false, `${page} was built`);
+  assert.match(site.read('index.html'), /<button id="shopping-nav"[^>]*aria-haspopup="dialog"/, 'shopping still opens a modal without accounts');
+  assert.match(site.read('index.html'), /data-shopping-add/, 'guests can add their own items');
+  assert.match(site.read('index.html'), /data-shopping-recipe-tools/, 'guests can manage recipe contributions');
+  for (const section of ['pending', 'bought'])
+    assert.match(site.read('index.html'), new RegExp(`data-shopping-items="${section}"`), `guests have the ${section} section`);
   assert.equal(site.has('js/vendor/supabase.js'), false, 'the Supabase library was copied, though no page loads it');
+  assert.equal(site.has('shopping-worker.js'), false, 'a site without accounts has no shopping worker');
 });
 
 test('with a publishable key every page gets the account button and the account script', t => {
@@ -41,6 +47,7 @@ test('with a publishable key every page gets the account button and the account 
     assert.match(html, /<meta name="restfest-account" content="https:\/\/[a-z0-9]+\.supabase\.co" data-key="sb_publishable_test">/);
     assert.ok(html.includes(`<script type="module" src="${base}js/account.js"></script>`), `${page} loads account.js`);
     assert.ok(html.includes(`href="${base}logga-in.html"`), `${page} links to the sign-in page`);
+    assert.match(html, new RegExp(`<a id="shopping-nav"[^>]*href="${base}inkopslista.html"`), `${page} links to the shopping page`);
     assert.ok(html.indexOf("localStorage.getItem('restfest-account')") < html.indexOf('rel="stylesheet"'), `${page} sets the state before the styles`);
     assert.equal(html.includes('vendor/supabase.js'), false, `${page} must not load the library itself`);
   }
@@ -54,7 +61,7 @@ test('with a publishable key every page gets the account button and the account 
   assert.match(book, /<meta name="robots" content="noindex">/);
   assert.ok(book.includes('<script type="module" src="js/recipe-book.js"></script>'), 'receptbok.html loads recipe-book.js');
   assert.match(book, /<a href="receptbok\.html" aria-current="page">/, 'the account menu marks the recipe book as the current page');
-  for (const link of ['href="profil.html"', 'href="konto.html"', 'data-sign-out'])
+  for (const link of ['href="inkopslista.html"', 'href="profil.html"', 'href="konto.html"', 'data-sign-out'])
     assert.ok(book.includes(link), `the account menu has ${link}`);
   for (const [page, name] of [['profil.html', 'Profil'], ['konto.html', 'Konto']]) {
     const html = site.read(page);
@@ -62,6 +69,26 @@ test('with a publishable key every page gets the account button and the account 
     assert.ok(html.includes('<script type="module" src="js/profile.js"></script>'), `${page} loads profile.js`);
     assert.ok(html.includes(`<a href="${page}" aria-current="page">${name}</a>`), `${page} is marked in the account menu`);
   }
+  const shopping = site.read('inkopslista.html');
+  assert.match(shopping, /<meta name="robots" content="noindex">/);
+  assert.ok(shopping.includes('<script type="module" src="js/shopping-list.js"></script>'));
+  assert.match(shopping, /<a href="inkopslista\.html" aria-current="page">Inköpslista<\/a>/);
+  assert.match(shopping, /class="shopping-panel" data-shopping-list/);
+  assert.equal((shopping.match(/id="shopping-items"/g) ?? []).length, 1, 'the modal and page have no duplicate shopping ids');
+  for (const section of ['pending', 'bought']) {
+    assert.equal((shopping.match(new RegExp(`data-shopping-items="${section}"`, 'g')) ?? []).length, 2, `both views have the ${section} section`);
+    assert.equal((shopping.match(new RegExp(`data-shopping-section-count="${section}"`, 'g')) ?? []).length, 2, 'both sections have their own counts');
+  }
+  const shoppingIds = [...shopping.matchAll(/\bid="(shopping[^"]*)"/g)].map(match => match[1]);
+  assert.equal(new Set(shoppingIds).size, shoppingIds.length, 'section labels and lists have unique ids across both views');
+  assert.equal((shopping.match(/data-shopping-add/g) ?? []).length, 2, 'account and modal both support direct additions');
+  assert.equal((shopping.match(/data-shopping-recipe-tools/g) ?? []).length, 2, 'recipe controls are shared by the page and modal');
+  assert.ok(site.has('shopping-worker.js'));
+  assert.ok(site.has('js/shopping-sync.js'));
+  assert.ok(site.has('js/shopping-account.js'));
+  const worker = site.read('shopping-worker.js');
+  for (const path of [...worker.matchAll(/'([^']+\.(?:js|html|css|woff2|svg))'/g)].map(match => match[1]))
+    assert.ok(site.has(path), `the shopping worker's offline asset ${path} exists`);
   const privacy = site.read('integritet.html');
   assert.equal(privacy.includes('name="robots"'), false, 'the privacy page may be indexed');
   assert.match(privacy, /<h1[^>]*>.*Integritet/s);

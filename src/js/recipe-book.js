@@ -24,9 +24,9 @@ let filter = "alla";
 function generatedCard(row) {
   const key = (row.categories ?? []).find((name) => mealTypes[name]) ?? "main";
   const photo =
-    row.image_status === "done" && row.image_path
+    (row.image_status === "done" && row.image_path
       ? `${storage}/${row.image_path}`
-      : null;
+      : row.image_url ?? null);
   const url = assetUrl(`nytt-recept.html?id=${encodeURIComponent(row.id)}`);
   const title = escapeHtml(row.title ?? "Recept");
   const chips = (row.tags ?? [])
@@ -77,49 +77,56 @@ function render() {
     status.textContent = `Visar ${visible.length}${visible.length === entries.length ? "" : ` av ${entries.length}`} recept`;
 }
 
-async function load() {
-  // account.js says "the book has changed" while this is fetching it; once is enough.
-  if (!account.signedIn() || loading) return;
-  loading = true;
-  status.textContent = "Hämtar receptboken …";
-  try {
-    // Sends any heart that hasn't reached the account yet, so the lists below are complete. When the
-    // account can't be reached, stop here: supabase-js has already retried for several seconds.
-    if (!(await account.refreshBook())) throw new Error("The recipe book is out of reach.");
-    const db = await account.client();
-    const [archive, generated] = await Promise.all([
-      db.from("saved_recipes").select("recipe_id, created_at"),
-      db.rpc("my_generated_recipes"),
-    ]);
-    if (archive.error) throw archive.error;
-    if (generated.error) throw generated.error;
-    entries = [
-      ...archive.data
-        .map((row) => ({
-          kind: "archive",
-          id: row.recipe_id,
-          savedAt: row.created_at,
-          // A recipe that has left the archive isn't shown.
-          recipe: recipes.find((recipe) => recipe.id === row.recipe_id),
-        }))
-        .filter((entry) => entry.recipe),
-      ...generated.data.map((row) => ({
-        kind: "generated",
-        id: row.id,
-        savedAt: row.saved_at,
-        row,
-      })),
-    ].sort((a, b) => b.savedAt.localeCompare(a.savedAt));
-    loaded = true;
-    render();
-  } catch {
-    grid.innerHTML = "";
-    empty.hidden = true;
-    status.innerHTML =
-      'Kunde inte hämta receptboken. <button class="text-button" type="button" data-book-retry>Försök igen</button>';
-  } finally {
-    loading = false;
+function drawSnapshot() {
+  if (!account.signedIn()) {
+    entries = []; grid.innerHTML = ""; toolbar.hidden = true; empty.hidden = true; status.textContent = "";
+    loaded = false;
+    return;
   }
+  const snapshot = account.bookSnapshot();
+  const next = [
+    ...snapshot.archive.map(row => ({ kind: "archive", id: row.recipe_id, savedAt: row.created_at ?? "", recipe: recipes.find(recipe => recipe.id === row.recipe_id) })).filter(entry => entry.recipe),
+    ...snapshot.generated.map(row => ({ kind: "generated", id: row.id, savedAt: row.saved_at ?? "", row })),
+  ].sort((a, b) => b.savedAt.localeCompare(a.savedAt));
+  const changed = JSON.stringify(next) !== JSON.stringify(entries);
+  const wasLoaded = loaded;
+  entries = next;
+  loaded = snapshot.fetched || entries.length > 0;
+  if (changed || (!wasLoaded && loaded)) {
+    const focused = document.activeElement;
+    const heart = focused?.closest(".favorite");
+    const index = heart ? [...grid.querySelectorAll(".favorite")].indexOf(heart) : -1;
+    render();
+    if (index >= 0) focusAfterRemoval(index);
+  }
+  if (!loaded) {
+    empty.hidden = true;
+    status.textContent = navigator.onLine ? "Hämtar receptboken …" : "Det finns ingen sparad kopia av receptboken på den här enheten än.";
+  }
+}
+
+function showSync() {
+  const state = account.bookStatus();
+  const label = $("[data-book-sync-status]");
+  const retry = $("[data-book-sync-retry]");
+  retry.hidden = state.phase !== "waiting" || !navigator.onLine;
+  if (!state.durable && state.pending) label.textContent = "Ändringarna kan inte sparas på enheten. Håll sidan öppen tills de har synkats.";
+  else if (!state.durable) label.textContent = "Receptboken är sparad i kontot, men kan inte sparas på den här enheten för offlineanvändning.";
+  else if (!navigator.onLine) label.textContent = "Du är offline. Sparade recept visas från enheten och ändringarna synkas när du är online igen.";
+  else if (state.pendingGenerated) label.textContent = "Receptboken är full. Ta bort ett recept för att ge plats åt nya recept som väntar på att sparas.";
+  else if (state.issue === "full") label.textContent = "Receptboken är full. Ta bort ett recept och försök spara igen.";
+  else if (state.issue === "missing") label.textContent = "Ett recept kunde inte sparas eftersom det har tagits bort.";
+  else if (state.phase === "waiting") label.textContent = "Kunde inte synka just nu. Sparade recept och ändringar finns kvar på den här enheten.";
+  else if (state.phase === "loading") label.textContent = "Hämtar receptboken …";
+  else if (state.phase === "syncing" || state.phase === "pending") label.textContent = "Synkar receptboken …";
+  else label.textContent = "Sparat i kontot.";
+}
+async function load() {
+  drawSnapshot();
+  if (loading || !account.signedIn()) return;
+  loading = true;
+  try { await account.refreshBook(); }
+  finally { loading = false; drawSnapshot(); showSync(); }
 }
 
 // After a card is taken out, the keyboard's place moves to the next card's heart, or to the filter.
@@ -151,33 +158,16 @@ if (account) {
     if (!heart) return;
     const index = [...grid.querySelectorAll(".favorite")].indexOf(heart);
     account.setGenerated(heart.dataset.saveGenerated, false);
-    entries = entries.filter(
-      (entry) =>
-        entry.kind !== "generated" || entry.id !== heart.dataset.saveGenerated,
-    );
-    render();
     focusAfterRemoval(index);
     showToast("Receptet har tagits bort från receptboken");
   });
 
-  // A heart on an archive card (toggleSave in app.js): the recipe leaves the book.
-  document.addEventListener("restfest:saved", () => {
-    if (!loaded) return;
-    const kept = entries.filter(
-      (entry) => entry.kind !== "archive" || saved.has(entry.id),
-    );
-    if (kept.length === entries.length) return;
-    const focused = document.activeElement;
-    const index = [...grid.querySelectorAll(".favorite")].indexOf(focused);
-    entries = kept;
-    render();
-    if (index >= 0) focusAfterRemoval(index);
-  });
-
-  // Signed in from another tab while this one was open.
-  document.addEventListener("restfest:account", () => {
-    if (!loaded && account.signedIn()) load();
-  });
-
+  document.addEventListener("restfest:book", drawSnapshot);
+  document.addEventListener("restfest:book-sync", showSync);
+  document.addEventListener("restfest:account", drawSnapshot);
+  window.addEventListener("online", showSync);
+  window.addEventListener("offline", showSync);
+  $("[data-book-sync-retry]").addEventListener("click", load);
+  showSync();
   load();
 }

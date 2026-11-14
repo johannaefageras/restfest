@@ -22,10 +22,13 @@ const permalink = 'integritet.html';
         <li>din e-postadress, och ditt namn om du anger det</li>
         <li>ditt lösenord, i en form som vi inte kan läsa</li>
         <li>dina preferenser: kost, råvaror du inte äter, hur många du brukar laga till och hur lång tid du vill lägga på middagen</li>
-        <li>din receptbok, alltså vilka recept du har sparat.</li>
+        <li>din receptbok, alltså vilka recept du har sparat</li>
+        <li>din inköpslista, dina anteckningar om varorna och vilka varor du har bockat av.</li>
       </ul>
       <p>Loggar du in med Google får vi din e-postadress och ditt namn från Google, men inget lösenord.</p>
-      <p>Vi använder uppgifterna för att du ska kunna logga in, för att receptboken ska följa med mellan dina enheter och för att nya recept ska passa dig. Vi säljer dem inte och använder dem inte till reklam.</p>
+      <p>Vi använder uppgifterna för att du ska kunna logga in, för att receptboken och inköpslistan ska följa med mellan dina enheter och för att nya recept ska passa dig. Vi säljer dem inte och använder dem inte till reklam.</p>
+      <p>Inköpslistan sparas också på din enhet, så att du kan använda den offline. Ändringarna synkas när du är online igen. När du loggar in läggs varor du har samlat utan konto till i din inköpslista. När du loggar ut döljs kontots lista på enheten.</p>
+      <p>Receptboken och recept du har öppnat sparas också på enheten för offlineanvändning. Sparade favoriter och ändringar hör till ditt konto och döljs när du loggar ut. Om ett nytt recept inte kan läggas i receptboken direkt sparas en begäran om att försöka igen, så att receptet inte tappas bort.</p>
       <p>Uppgifterna lagras hos Supabase, på servrar inom EU.</p>
 
       <h2>Kylfoto och nya recept</h2>
@@ -40,7 +43,7 @@ const permalink = 'integritet.html';
       <p>Vi använder inga kakor för reklam eller statistik. När du loggar in sparas inloggningen i din webbläsare, så att du slipper logga in varje gång.</p>
 
       <h2>Ta bort dina uppgifter</h2>
-      <p>Under <a href="konto.html">Konto</a> kan du ta bort ditt konto. Då raderas din inloggning, din profil och din receptbok direkt. Recept du har hittat på ligger kvar på sina sidor, men utan koppling till dig.</p>
+      <p>Under <a href="konto.html">Konto</a> kan du ta bort ditt konto. Då raderas din inloggning, din profil, din receptbok och din inköpslista direkt. Recept du har hittat på ligger kvar på sina sidor, men utan koppling till dig.</p>
       {%- if site.contact %}
 
       <h2>Frågor</h2>

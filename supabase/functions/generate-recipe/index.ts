@@ -68,19 +68,11 @@ serve(['POST'], async req => {
     }
   }
 
-  const {data, error} = await db
-    .from('generated_recipes')
-    .insert({pantry: items.map(item => item.name), recipe})
-    .select('id')
-    .single();
+  // Recipe and initial-save intent are committed together. A failed attachment can be retried
+  // from the durable server queue even if the response is lost or the browser closes.
+  const {data, error} = await db.rpc('store_generated_recipe', {
+    recipe_data: recipe, pantry_names: items.map(item => item.name), save_for: user?.id ?? null,
+  });
   if (error) throw error;
-
-  // Into the caller's recipe book, in this request: the page moves on as soon as the answer arrives.
-  let saved = false;
-  if (user) {
-    const {error: bookError} = await db.from('saved_generated_recipes').insert({user_id: user.id, recipe_id: data.id});
-    if (bookError) console.error('Could not add the recipe to the book:', bookError.message);
-    saved = !bookError;
-  }
-  return {id: data.id, recipe, saved};
+  return {...data, recipe};
 });

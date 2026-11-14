@@ -167,15 +167,15 @@
       inventStatus.textContent = "Snart klart …";
     }, 25000);
     try {
-      const { id, saved } = await post(
+      const result = await post(
         "generate-recipe",
         { items: listItems() },
         { signedIn: true },
       );
-      // The function has put it in the visitor's recipe book; tell this browser's copy.
-      if (saved) window.restfestAccount?.noteGenerated(id);
+      // Cache the recipe and persist a retry before navigating, even when the initial save failed.
+      window.restfestAccount?.noteGenerated(result);
       inventStatus.textContent = "Klart. Öppnar receptet …";
-      location.href = `${siteBase}nytt-recept.html?id=${encodeURIComponent(id)}`;
+      location.href = `${siteBase}nytt-recept.html?id=${encodeURIComponent(result.id)}`;
     } catch (error) {
       inventStatus.textContent = error.message;
       inventButton.disabled = false;

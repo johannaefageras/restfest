@@ -1,0 +1,10 @@
+<p id="{{ shoppingListPrefix }}-empty" class="dialog-intro" data-shopping-empty>Listan är tom. Lägg till en vara här eller från ett recept.</p>
+<section class="shopping-section" data-shopping-pending aria-labelledby="{{ shoppingListPrefix }}-pending-title" hidden>
+  <h3 id="{{ shoppingListPrefix }}-pending-title" class="shopping-section-title" data-shopping-pending-heading tabindex="-1">Att köpa <span class="count" data-shopping-section-count="pending">0</span></h3>
+  <p class="meta shopping-section-empty" data-shopping-pending-empty hidden>Allt är köpt.</p>
+  <ul id="{{ shoppingListPrefix }}-items" class="ingredients" data-shopping-items="pending"></ul>
+</section>
+<details class="shopping-bought" data-shopping-bought hidden>
+  <summary>Köpt <span class="count" data-shopping-section-count="bought">0</span><i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+  <ul id="{{ shoppingListPrefix }}-bought-items" class="ingredients" data-shopping-items="bought"></ul>
+</details>

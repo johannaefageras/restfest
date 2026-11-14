@@ -31,7 +31,7 @@ scripts: [kitchen.js, fridge-ai.js]
         <div class="inventory">
           <div class="inventory-inputs{{ ' has-photo' if ai.functionsUrl }}">
             <div class="add-card">
-              <h3>Lägg till vad som finns hemma</h3>
+              <h3>Lägg till det du har</h3>
               <p id="add-help" class="card-intro">Lägg till en råvara i taget från kyl, frys eller skafferi.</p>
               <form id="pantry-form" class="pantry-form">
                 <label class="sr-only" for="ingredient-input">Lägg till råvara</label>
@@ -53,7 +53,7 @@ scripts: [kitchen.js, fridge-ai.js]
                   <img src="assets/illustrations/fridge-viewfinder.svg" width="1133" height="1123" alt="">
                 </div>
                 <div class="photo-actions">
-                  <button id="fridge-photo" class="button primary" type="button"><img src="assets/icons/camera.svg" alt="" width="22" height="22"><span>Fota eller välj bilder</span></button>
+                  <button id="fridge-photo" class="button primary" type="button"><i class="fas fa-camera" aria-hidden="true"></i><span>Fota eller välj bilder</span></button>
                   <input id="fridge-photo-input" type="file" accept="image/*" multiple hidden>
                 </div>
               </div>
@@ -129,14 +129,14 @@ scripts: [kitchen.js, fridge-ai.js]
         <li>
           <img src="assets/illustrations/camera.svg" width="1134" height="998" alt="">
           <p class="eyebrow">FOTA</p>
-          <h3>Eller fota kylen.</h3>
+          <h3>Eller ta en bild av kylen.</h3>
           <p>Ta 1–3 bilder av kylskåpet, frysen eller skafferiet, så letar vi upp råvarorna åt dig.</p>
         </li>
         {%- endif %}
         <li>
           <img src="assets/illustrations/light-bulb.svg" width="925" height="1182" alt="">
           <p class="eyebrow">MATCHA</p>
-          <h3>Få receptförslag.</h3>
+          <h3>Få ett receptförslag.</h3>
           <p>Du får de middagar som passar bäst, för i kväll eller hela veckan, och ser vad som saknas.</p>
         </li>
         <li>

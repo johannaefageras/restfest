@@ -71,20 +71,19 @@ async (page) => {
   await settle();
   await signIn('a@example.se');
   let s = await state();
-  const posts = s.log.filter(entry => entry.method === 'POST' && entry.path.startsWith('/rest/v1/saved_recipes'));
+  const posts = s.log.filter(entry => entry.method === 'POST' && entry.path.startsWith('/rest/v1/rpc/sync_recipe_book') && entry.body.changes?.some(change => change.kind === 'archive' && change.saved));
   check('4 five hearts reach the account at the first sign-in', s.saved['a@example.se'].length === 5, s.saved['a@example.se']);
   check('4 in one request', posts.length === 1, posts.map(entry => entry.body));
 
-  // 5. Opening the recipe book fetches the lists once.
-  await page.evaluate(() => sessionStorage.removeItem('restfest-book-synced'));
+  // 5. Opening the recipe book fetches a combined snapshot rather than separate ids and cards.
   let mark = (await state()).log.length;
   await page.goto(`${site}/receptbok.html`);
   await page.waitForFunction(() => /^Visar/.test(document.querySelector('[data-book-status]')?.textContent ?? ''));
   await settle();
   let log = (await state()).log.slice(mark);
   const reads = name => log.filter(entry => entry.method !== 'OPTIONS' && entry.path.startsWith(name)).map(entry => entry.path);
-  check('5 the book page reads the hearts twice (ids, then the cards) and the profile once',
-    reads('/rest/v1/saved_recipes').length === 2 && reads('/rest/v1/profiles').length === 1,
+  check('5 the book page uses the combined snapshot endpoint',
+    reads('/rest/v1/rpc/sync_recipe_book').length >= 1 && reads('/rest/v1/saved_recipes').length === 0 && reads('/rest/v1/profiles').length === 0,
     { saved: reads('/rest/v1/saved_recipes'), profiles: reads('/rest/v1/profiles'), generated: reads('/rest/v1/saved_generated'), rpc: reads('/rest/v1/rpc') });
   const shown = await page.evaluate(() => document.querySelector('[data-book-status]').textContent);
   check('5 the book shows five hearts and the one visible generated recipe', shown === 'Visar 6 recept', shown);
@@ -121,7 +120,6 @@ async (page) => {
 
   // Hearts one at a time (b is signed in): a removal, then the same heart again.
   await control({ saved: { 'b@example.se': ['01-rodbetspytt'] } });
-  await page.evaluate(() => sessionStorage.removeItem('restfest-book-synced'));
   await page.goto(`${site}/recept/01-rodbetspytt.html`);
   await page.waitForSelector('.dialog-save[data-save][aria-pressed="true"]');
   await settle();
@@ -129,23 +127,24 @@ async (page) => {
   await settle();
   s = await state();
   check('a heart taken out leaves the account', !s.saved['b@example.se'].includes('01-rodbetspytt'), s.saved['b@example.se']);
-  const removal = s.log.filter(entry => entry.method === 'DELETE').at(-1)?.path;
-  check('with the id in the request', /recipe_id=in\.(%28|\()01-rodbetspytt/.test(removal ?? ''), removal);
+  const removal = s.log.filter(entry => entry.method === 'POST' && entry.path.startsWith('/rest/v1/rpc/sync_recipe_book')).flatMap(entry => entry.body.changes ?? []).findLast(change => change.id === '01-rodbetspytt' && !change.saved);
+  check('with the id in the queued operation', Boolean(removal?.op), removal);
 
   // 3. While another tab holds the book's lock, this tab waits its turn; the heart itself doesn't.
   let mark2 = (await state()).log.length;
   await page.evaluate(() => {
     window.releaseBook = null;
-    navigator.locks.request('restfest-book', () => new Promise(resolve => { window.releaseBook = resolve; }));
+    const owner = JSON.parse(localStorage.getItem('restfest-account')).id;
+    navigator.locks.request(`restfest-book:${owner}`, () => new Promise(resolve => { window.releaseBook = resolve; }));
   });
   await page.waitForFunction(() => window.releaseBook);
   await page.click('.dialog-save[data-save]');
   await page.waitForTimeout(800);
   const pressedNow = await page.getAttribute('.dialog-save[data-save]', 'aria-pressed');
-  let sentMeanwhile = (await state()).log.slice(mark2).filter(entry => entry.method === 'POST' && entry.path.startsWith('/rest/v1/saved_recipes'));
+  let sentMeanwhile = (await state()).log.slice(mark2).filter(entry => entry.method === 'POST' && entry.path.startsWith('/rest/v1/rpc/sync_recipe_book') && entry.body.changes?.length);
   check('3 the heart shows at once while another tab is at work', pressedNow === 'true', pressedNow);
   check('3 and nothing is sent until that tab is done', sentMeanwhile.length === 0, sentMeanwhile);
-  await page.evaluate(() => window.releaseBook());
+  await page.evaluate(() => { window.releaseBook(); window.dispatchEvent(new Event('focus')); });
   await settle();
   s = await state();
   check('3 then it is sent', s.saved['b@example.se'].includes('01-rodbetspytt'), s.saved['b@example.se']);

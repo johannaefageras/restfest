@@ -26,6 +26,7 @@ const icons = [
   'check',            // a recipe's ingredient once it's on the shopping list
   'chevron-down',     // the archive's category picker and the other <details> summaries
   'heart',            // save buttons
+  'pen-to-square',    // edit an item on the shopping list
   'plus',             // a recipe's ingredient: add it to the shopping list
   'xmark'             // close and remove buttons
 ];

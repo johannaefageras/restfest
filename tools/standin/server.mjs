@@ -12,6 +12,7 @@
 // "Fortsätt med Google" signs in google@example.se at once.
 import { createServer } from 'node:http';
 import { randomUUID } from 'node:crypto';
+import { applyShoppingChanges } from '../../lib/shopping-sync.js';
 
 const port = Number(process.argv[2] ?? 54399);
 const b64 = value => Buffer.from(JSON.stringify(value)).toString('base64url');
@@ -23,6 +24,9 @@ function reset() {
     profiles: new Map(),     // user id → {display_name, diets, avoid, servings, max_cooking_minutes}
     saved: [],               // {user_id, recipe_id, created_at}
     savedGenerated: [],      // {user_id, recipe_id, created_at}
+    shopping: new Map(),     // user id → items, receipts and tombstones
+    bookOps: new Map(),      // user id → operation ids
+    bookRemoved: new Map(),  // user id → removed recipe keys
     generated: new Map(),    // id → {recipe, image_status, image_path, hidden, created_at}
     fail: false,             // true → every /rest and /functions call answers 503
     unsuitable: false,       // true → generate-recipe answers 422
@@ -165,6 +169,46 @@ async function handle(req, url, body) {
       .map(row => { const g = state.generated.get(row.recipe_id); return { id: row.recipe_id, saved_at: row.created_at, title: g.recipe.title, description: g.recipe.description, time_label: g.recipe.timeLabel, categories: g.recipe.categories, tags: g.recipe.tags, image_status: g.image_status, image_path: g.image_path, promoted_as: null }; })
       .map(row => columns ? Object.fromEntries(columns.map(name => [name, row[name]])) : row)];
   }
+  if (path === '/rest/v1/rpc/sync_shopping_list') {
+    if (!user) return [401, { message: 'permission denied' }];
+    const list = state.shopping.get(user.id) ?? { items: [], seen: new Set(), removed: new Set() };
+    for (const change of body.changes ?? []) {
+      if (list.seen.has(change.op)) continue;
+      list.seen.add(change.op);
+      if (change.kind === 'import' && list.removed.has(change.id)) continue;
+      list.items = applyShoppingChanges(list.items, [change]);
+      if (change.kind === 'remove') list.removed.add(change.id);
+      if (change.kind === 'add') list.removed.delete(change.id);
+    }
+    state.shopping.set(user.id, list);
+    return [200, list.items];
+  }
+  if (path === '/rest/v1/rpc/sync_recipe_book') {
+    if (!user) return [401, { message: 'permission denied' }];
+    const receipts = state.bookOps.get(user.id) ?? new Set();
+    const removed = state.bookRemoved.get(user.id) ?? new Set();
+    for (const change of body.changes ?? []) {
+      if (receipts.has(change.op)) continue;
+      receipts.add(change.op);
+      const key = change.kind + ':' + change.id;
+      if (change.saved && change.import && removed.has(key)) continue;
+      const rows = change.kind === 'generated' ? state.savedGenerated : state.saved;
+      if (change.saved) {
+        if (change.kind === 'generated' && (!state.generated.has(change.id) || state.generated.get(change.id).hidden)) continue;
+        if (!rows.some(row => row.user_id === user.id && row.recipe_id === change.id)) rows.push({ user_id: user.id, recipe_id: change.id, created_at: now() });
+        removed.delete(key);
+      } else {
+        for (let i = rows.length - 1; i >= 0; i--) if (rows[i].user_id === user.id && rows[i].recipe_id === change.id) rows.splice(i, 1);
+        removed.add(key);
+      }
+    }
+    state.bookOps.set(user.id, receipts); state.bookRemoved.set(user.id, removed);
+    const generated = state.savedGenerated.filter(row => row.user_id === user.id && !state.generated.get(row.recipe_id)?.hidden).map(row => {
+      const data = state.generated.get(row.recipe_id);
+      return { id: row.recipe_id, saved_at: row.created_at, title: data.recipe.title, description: data.recipe.description, time_label: data.recipe.timeLabel, categories: data.recipe.categories, tags: data.recipe.tags, image_status: data.image_status, image_path: data.image_path };
+    });
+    return [200, { archive: state.saved.filter(row => row.user_id === user.id), generated, name: state.profiles.get(user.id)?.display_name, rejected: [], pendingGenerated: 0 }];
+  }
 
   // Edge Functions
   if (path === '/functions/v1/generate-recipe') {
@@ -173,7 +217,7 @@ async function handle(req, url, body) {
     const recipe = recipeDoc(`Potatisfest ${state.generated.size + 1}`);
     state.generated.set(id, { recipe, image_status: 'pending', image_path: null, hidden: false, created_at: now() });
     if (user) state.savedGenerated.push({ user_id: user.id, recipe_id: id, created_at: now() });
-    return [200, { id, recipe, saved: Boolean(user) }];
+    return [200, { id, recipe, saved: Boolean(user), saveFor: user?.id ?? null }];
   }
   if (path === '/functions/v1/get-recipe') {
     const g = state.generated.get(q.get('id'));
@@ -187,6 +231,7 @@ async function handle(req, url, body) {
     state.users.delete(user.email);
     state.saved = state.saved.filter(row => row.user_id !== user.id);
     state.savedGenerated = state.savedGenerated.filter(row => row.user_id !== user.id);
+    state.shopping.delete(user.id);
     return [200, { deleted: true }];
   }
   return [404, { message: `stand-in has no ${req.method} ${path}` }];
@@ -220,6 +265,7 @@ function snapshot() {
   return {
     users: [...state.users.values()].map(({ email, confirmed, password, providers, data }) => ({ email, confirmed, password, providers, data })),
     saved: byEmail(state.saved), savedGenerated: byEmail(state.savedGenerated),
+    shopping: Object.fromEntries([...state.users.values()].map(user => [user.email, state.shopping.get(user.id)?.items ?? []])),
     profiles: Object.fromEntries([...state.users.values()].map(user => [user.email, state.profiles.get(user.id)])),
     generated: [...state.generated.entries()].map(([id, g]) => ({ id, title: g.recipe.title })),
     mails: state.mails, deleted: state.deleted, log: state.log

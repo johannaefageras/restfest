@@ -199,19 +199,18 @@ function bestWeekMatch(pool, chosen) {
 }
 
 function weekShoppingLines(picks) {
-  const byKey = new Map();
+  const lines = [];
   for (const match of picks) {
     for (const key of match.missing) {
-      const line = byKey.get(key) ?? { recipes: [] };
-      line.recipes.push(match.recipe.title);
-      byKey.set(key, line);
+      lines.push({
+        id: JSON.stringify([match.recipe.id, "week", key]),
+        text: foods[key].name,
+        recipe: match.recipe.title,
+        source: `archive:${match.recipe.id}`,
+      });
     }
   }
-  return [...byKey].map(([key, line]) => ({
-    id: JSON.stringify(["week", key]),
-    text: foods[key].name,
-    recipe: line.recipes.join(" · "),
-  }));
+  return lines;
 }
 
 function updateWeekShopButton() {
@@ -270,7 +269,7 @@ function renderWeek() {
   };
   $("#week-title").textContent = titles[picks.length];
   weekLines = weekShoppingLines(picks);
-  const missingCount = weekLines.length;
+  const missingCount = new Set(picks.flatMap(match => match.missing)).size;
   $("#week-intro").textContent = missingCount
     ? `Valda så att de delar på det du behöver köpa. ${missingCount === 1 ? "1 råvara saknas" : `${missingCount} råvaror saknas`}.`
     : "Du har huvudråvarorna till de här middagarna.";

@@ -25,6 +25,10 @@ const permalink = 'receptbok.html';
       <div class="when-signed-in">
         {%- set current = 'receptbok' %}
         {% include "account-nav.njk" %}
+        <div class="shopping-sync-status">
+          <p class="meta" role="status" data-book-sync-status>Hämtar receptboken …</p>
+          <button class="text-button" type="button" data-book-sync-retry hidden>Försök igen</button>
+        </div>
         <div class="book-toolbar" data-book-toolbar hidden>
           <div class="food-filters book-filter" role="group" aria-label="Visa">
             <button class="food-filter" type="button" data-book-filter="alla" aria-pressed="true"><img src="assets/icons/cook-book.svg" alt="" width="22" height="22">Alla</button>

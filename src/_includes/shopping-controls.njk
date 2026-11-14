@@ -1,0 +1,21 @@
+<form class="shopping-add-form" data-shopping-add>
+  <div class="shopping-add-row">
+    <label class="shopping-field"><span>Vara och mängd</span><input name="text" type="text" placeholder="T.ex. 2 l mjölk" required maxlength="4000" autocomplete="off"></label>
+    <button class="button" type="submit">Lägg till</button>
+  </div>
+  <details class="shopping-add-note">
+    <summary>Lägg till anteckning<i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+    <label class="shopping-field"><span>Anteckning <span class="shopping-optional">(valfritt)</span></span><input name="note" type="text" maxlength="500" placeholder="T.ex. laktosfri" autocomplete="off"></label>
+  </details>
+</form>
+<div class="shopping-recipe-tools" data-shopping-recipe-tools>
+  <details class="shopping-recipes" data-shopping-recipes hidden>
+    <summary>Recept i listan <span class="count" data-shopping-recipe-count>0</span><i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+    <ul class="shopping-recipe-items" data-shopping-recipe-items></ul>
+  </details>
+  <p class="shopping-recipe-notice meta" data-shopping-recipe-notice role="status" hidden></p>
+  <div class="shopping-recipe-filter" data-shopping-recipe-filter hidden>
+    <div><p data-shopping-filter-label tabindex="-1"></p><p class="meta" data-shopping-filter-hint>Mängderna nedan gäller bara det här receptet.</p></div>
+    <button class="text-button" type="button" data-shopping-source-clear>Visa hela listan</button>
+  </div>
+</div>

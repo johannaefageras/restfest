@@ -1,3 +1,5 @@
+> **Out of date (2026-11-14).** The site no longer uses GT Maru. It is set in Trio Grotesk, Spot Grotesk and Spot Semi: see `Typography Guidelines.md` for the rules and "Type" in `HANDOFF.md` for how the site applies them. The notes below describe the old fonts.
+
 # GT Maru and GT Maru Mono in Ofta bra efter
 
 Researched 10 November 2026 against Grilli Type's sources and the actual version 2.000 font files in `src/assets/fonts/`. The axis coordinates and feature inventories below were read from those files with fontTools; recheck them if the font files are replaced.

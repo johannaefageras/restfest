@@ -45,6 +45,19 @@ let pantry = loadPantry();
 const shoppingKey = "restfest-shopping-list";
 const shoppingDialog = $("#shopping-dialog");
 let shoppingItems = readShoppingItems() ?? new Map();
+let shoppingEditor = null;
+let shoppingRecipeTools = null;
+let shoppingRecipeFilter = null;
+let shoppingRecipeUndo = null;
+// Start with individual rows while the small shared parser loads. The saved source entries always
+// remain usable, including if an old offline cache does not yet contain the new parser.
+let groupShoppingItems = items => items.map(item => ({ ...item, text: item.customText || item.text, items: [item] }));
+import(assetUrl("js/shopping-groups.js")).then(module => {
+  groupShoppingItems = module.groupShoppingItems;
+  shoppingRecipeTools = module;
+  updateShoppingButtons();
+  renderShoppingList();
+}).catch(() => {});
 
 function escapeHtml(value) {
   return value.replace(
@@ -298,14 +311,20 @@ function readShoppingItems() {
             typeof item.recipe === "string" &&
             typeof item.checked === "boolean",
         )
-        .map((item) => [item.id, item]),
+        .map((item) => [item.id, { ...item,
+          customText: typeof item.customText === "string" ? item.customText : "",
+          note: typeof item.note === "string" ? item.note : "",
+          source: typeof item.source === "string" ? item.source : "",
+        }]),
     );
   } catch {
     return null;
   }
 }
 
-function saveShoppingItems() {
+function saveShoppingItems(changes) {
+  const items = window.restfestShopping?.change(changes);
+  if (items) shoppingItems = new Map(items.map(item => [item.id, item]));
   try {
     localStorage.setItem(
       shoppingKey,
@@ -316,28 +335,41 @@ function saveShoppingItems() {
   document.dispatchEvent(new Event("restfest:shopping"));
 }
 
+// A fetched account list (plus pending local changes), never another user action to send back.
+function setShoppingItems(items) {
+  if (JSON.stringify([...shoppingItems.values()]) === JSON.stringify(items)) return;
+  shoppingItems = new Map(items.map(item => [item.id, item]));
+  try { localStorage.setItem(shoppingKey, JSON.stringify(items)); } catch {}
+  updateShoppingButtons();
+  renderShoppingList();
+  document.dispatchEvent(new Event("restfest:shopping"));
+}
+
 // Adds lines that are not already on the list. `id` is stable, so a week plan and a
 // second click do not duplicate the same råvara. Returns how many were new.
 function addShoppingLines(lines) {
   shoppingItems = readShoppingItems() ?? shoppingItems;
   let added = 0;
+  const changes = [];
   for (const line of lines) {
     if (shoppingItems.has(line.id)) continue;
     shoppingItems.set(line.id, {
       id: line.id,
       text: line.text,
       recipe: line.recipe,
+      source: line.source || "",
       checked: false,
     });
+    changes.push({ kind: "add", id: line.id, item: shoppingItems.get(line.id) });
     added += 1;
   }
-  saveShoppingItems();
+  saveShoppingItems(changes);
   renderShoppingList();
   return added;
 }
 
 function updateShoppingButtons() {
-  const count = [...shoppingItems.values()].filter(
+  const count = shoppingRows().filter(
     (item) => !item.checked,
   ).length;
   $("#shopping-count").textContent = count;
@@ -345,6 +377,11 @@ function updateShoppingButtons() {
     "aria-label",
     `Visa inköpslistan (${count} kvar att köpa)`,
   );
+  const inside = document.documentElement.classList.contains("signed-in");
+  document.querySelectorAll("#shopping-nav, .cook-open-shopping").forEach((button) => {
+    if (inside) button.removeAttribute("aria-haspopup");
+    else button.setAttribute("aria-haspopup", "dialog");
+  });
   document.querySelectorAll(".cook-shopping-count").forEach((element) => {
     element.textContent = count;
   });
@@ -363,23 +400,198 @@ function updateShoppingButtons() {
   document.querySelectorAll(".recipe-view").forEach(updateMissingButton);
 }
 
-function renderShoppingList() {
-  $("#shopping-empty").hidden = shoppingItems.size > 0;
-  $("#shopping-items").innerHTML = [...shoppingItems.values()]
-    .map(
-      (item) => `
-    <li class="shopping-item" data-shopping-item="${escapeHtml(item.id)}">
-      <div>
-        <label><input type="checkbox" ${item.checked ? "checked" : ""}><span>${escapeHtml(item.text)}</span></label>
-        <p class="meta">${escapeHtml(item.recipe)}</p>
+function shoppingRows(items = [...shoppingItems.values()]) {
+  return groupShoppingItems(items);
+}
+
+function shoppingRowIds(row) {
+  return JSON.parse(row.dataset.shoppingMembers);
+}
+
+function findShoppingRow(list, id) {
+  return [...list.querySelectorAll("[data-shopping-item]")].find(row => row.dataset.shoppingItem === id || (row.dataset.shoppingMembers && shoppingRowIds(row).includes(id)));
+}
+
+function shoppingListFocus(root) {
+  return root.querySelector('[data-shopping-items="pending"] input[type="checkbox"]')
+    ?? root.querySelector('[data-shopping-bought]:not([hidden]) > summary')
+    ?? root.querySelector('[data-shopping-add] [name="text"]');
+}
+
+function shoppingSources() {
+  const owner = shoppingOwner();
+  if (shoppingRecipeUndo?.owner !== owner) shoppingRecipeUndo = null;
+  if (shoppingRecipeFilter?.owner !== owner) shoppingRecipeFilter = null;
+  const sources = shoppingRecipeTools?.shoppingRecipeSources(
+    [...shoppingItems.values()], recipes, window.restfestAccount?.bookSnapshot?.()?.generated ?? [],
+  ) ?? [];
+  if (shoppingRecipeFilter) {
+    const source = sources.find(source => source.key === shoppingRecipeFilter.key)
+      ?? sources.find(source => source.items.some(item => shoppingRecipeFilter.ids.includes(item.id)));
+    if (source) shoppingRecipeFilter.key = source.key;
+    else shoppingRecipeFilter = null;
+  }
+  return sources;
+}
+
+function renderShoppingSources(sources = shoppingSources()) {
+  document.querySelectorAll("[data-shopping-list]").forEach(root => {
+    const tools = $("[data-shopping-recipe-tools]", root);
+    if (!tools) return;
+    const focused = tools.contains(document.activeElement) ? document.activeElement : null;
+    const focusedSource = focused?.closest("[data-shopping-source]")?.dataset.shoppingSource;
+    const action = focused?.matches("[data-shopping-source-filter]") ? "[data-shopping-source-filter]"
+      : focused?.matches("[data-shopping-source-remove]") ? "[data-shopping-source-remove]" : "a";
+    tools.dataset.shoppingOwner = shoppingOwner() ?? "";
+    $("[data-shopping-recipes]", tools).hidden = !sources.length;
+    $("[data-shopping-recipe-count]", tools).textContent = sources.length;
+    const list = $("[data-shopping-recipe-items]", tools);
+    const html = sources.map(source => `<li data-shopping-source="${escapeHtml(source.key)}" data-shopping-members="${escapeHtml(JSON.stringify(source.items.map(item => item.id)))}">
+      <div class="shopping-recipe-caption">
+        <strong>${source.path ? `<a href="${escapeHtml(assetUrl(source.path))}">${escapeHtml(source.title)}</a>` : escapeHtml(source.title)}</strong>
+        <p class="meta">${source.remaining} kvar att köpa · ${source.items.length} totalt</p>
+        ${source.kind === "legacy-week" ? '<p class="meta">Delade poster från en äldre veckoplan. De hör fortfarande ihop.</p>' : ""}
       </div>
-      <button type="button" class="shopping-remove" aria-label="Ta bort ${escapeHtml(item.text)}">${faIcon("xmark")}</button>
-    </li>`,
-    )
-    .join("");
+      <div class="shopping-recipe-actions"><button class="text-button" type="button" data-shopping-source-filter aria-pressed="${shoppingRecipeFilter?.key === source.key}" ${shoppingEditor ? "disabled" : ""}>${shoppingRecipeFilter?.key === source.key ? "Visar varor" : "Visa varor"}</button>
+      <button class="shopping-remove" type="button" data-shopping-source-remove aria-label="Ta bort ${escapeHtml(source.title)} från inköpslistan" title="Ta bort receptets varor" ${shoppingEditor ? "disabled" : ""}>${faIcon("xmark")}</button></div>
+    </li>`).join("");
+    if (list.shoppingMarkup !== html) { list.innerHTML = html; list.shoppingMarkup = html; }
+    const notice = $("[data-shopping-recipe-notice]", tools);
+    notice.hidden = !shoppingRecipeUndo;
+    const noticeHtml = shoppingRecipeUndo ? `${escapeHtml(shoppingRecipeUndo.title)} togs bort från inköpslistan. <button class="text-button" type="button" data-shopping-source-undo ${shoppingEditor ? "disabled" : ""}>Ångra</button>` : "";
+    if (notice.shoppingMarkup !== noticeHtml) { notice.innerHTML = noticeHtml; notice.shoppingMarkup = noticeHtml; }
+    const selected = sources.find(source => source.key === shoppingRecipeFilter?.key);
+    $("[data-shopping-recipe-filter]", tools).hidden = !selected;
+    $("[data-shopping-filter-label]", tools).textContent = selected ? `Visar varor från ${selected.title}` : "";
+    $("[data-shopping-filter-hint]", tools).textContent = selected?.kind === "legacy-week"
+      ? "Visar de delade posterna från den äldre veckoplanen." : "Mängderna nedan gäller bara det här receptet.";
+    $("[data-shopping-source-clear]", tools).disabled = Boolean(shoppingEditor);
+    if (focusedSource && !focused.isConnected) {
+      ([...list.children].find(row => row.dataset.shoppingSource === focusedSource)?.querySelector(action)
+        ?? notice.querySelector("button") ?? root.querySelector('[data-shopping-add] [name="text"]'))?.focus({ preventScroll: true });
+    }
+  });
+}
+
+function renderShoppingList() {
+  const focused = document.activeElement;
+  const focusedList = focused?.closest("[data-shopping-items]");
+  const focusedId = focused?.closest("[data-shopping-item]")?.dataset.shoppingItem;
+  const focusedEntry = focused?.closest("[data-shopping-edit-entry]")?.dataset.shoppingEditEntry;
+  const focusSelector = focused?.name ? `[name="${focused.name}"]`
+    : focused?.matches(".shopping-edit") ? ".shopping-edit"
+    : focused?.matches(".shopping-remove") ? ".shopping-remove"
+    : focused?.matches("[data-shopping-cancel]") ? "[data-shopping-cancel]"
+    : focused?.matches("[data-shopping-delete-entry]") ? "[data-shopping-delete-entry]"
+    : focused?.matches("summary") ? "summary"
+    : focused?.matches('button[type="submit"]') ? 'button[type="submit"]' : 'input[type="checkbox"]';
+  const selection = focused?.matches('input[type="text"]') ? [focused.selectionStart, focused.selectionEnd] : null;
+  if (shoppingEditor && shoppingEditor.owner !== shoppingOwner()) shoppingEditor = null;
+  if (shoppingEditor && !shoppingItems.has(shoppingEditor.id)) {
+    shoppingEditor = null;
+    showToast("Varan har tagits bort från listan.");
+  }
+  const sources = shoppingSources();
+  const visibleItems = shoppingRecipeFilter ? sources.find(source => source.key === shoppingRecipeFilter.key).items : [...shoppingItems.values()];
+  document.querySelectorAll("[data-shopping-list]").forEach((root) => {
+    $("[data-shopping-empty]", root).hidden = shoppingItems.size > 0;
+    $("[data-shopping-pending]", root).hidden = !shoppingItems.size;
+    const bought = $("[data-shopping-bought]", root);
+    if (root.dataset.shoppingItemsOwner !== (shoppingOwner() ?? "")) {
+      bought.open = false;
+      root.dataset.shoppingItemsOwner = shoppingOwner() ?? "";
+    }
+    let rows = shoppingRows(visibleItems);
+    if (shoppingEditor && root.contains(shoppingEditor.list)) {
+      // Keep an open editor's original entries together while a different device changes the list.
+      // Its section stays fixed during the draft, even if a remote purchase changes its state.
+      const ids = new Set(shoppingEditor.entries.map(entry => entry.id));
+      rows = shoppingRows(visibleItems.filter(item => !ids.has(item.id)));
+    }
+    root.querySelectorAll("[data-shopping-items]").forEach(items => {
+      const isBought = items.dataset.shoppingItems === "bought";
+      const sectionRows = rows.filter(item => item.checked === isBought);
+      if (shoppingEditor?.list === items) {
+        sectionRows.splice(Math.min(shoppingEditor.position, sectionRows.length), 0, { id: shoppingEditor.id });
+      }
+      $(`[data-shopping-section-count="${items.dataset.shoppingItems}"]`, root).textContent = sectionRows.length;
+      if (isBought) {
+        bought.hidden = !sectionRows.length;
+        if (bought.hidden) bought.open = false;
+      } else {
+        $("[data-shopping-pending-empty]", root).hidden = Boolean(sectionRows.length);
+        $("[data-shopping-pending-empty]", root).textContent = shoppingRecipeFilter ? "Allt från receptet är köpt." : "Allt är köpt.";
+      }
+      const openDetails = new Set([...items.querySelectorAll("details[open]")].map(details => details.closest("[data-shopping-item]").dataset.shoppingItem));
+      items.innerHTML = sectionRows.map(item => {
+        if (shoppingEditor?.id === item.id && shoppingEditor.list === items) {
+          return `<li class="shopping-item is-editing" data-shopping-item="${escapeHtml(item.id)}">
+            <form class="shopping-edit-form" data-shopping-edit>
+              ${shoppingEditor.entries.length > 1 ? '<p class="meta shopping-edit-source">Ändra delposterna. Mängderna räknas ihop när du sparar.</p>' : ""}
+              ${shoppingEditor.entries.filter(entry => shoppingItems.has(entry.id)).map(entry => `
+              <fieldset class="shopping-edit-entry" data-shopping-edit-entry="${escapeHtml(entry.id)}">
+                <legend class="meta">${escapeHtml(shoppingItems.get(entry.id).recipe || "Egen vara")}</legend>
+                ${entry.removed ? `<p class="meta shopping-edit-source">${escapeHtml(entry.text)} tas bort när du sparar.</p><button class="text-button" type="button" data-shopping-delete-entry>Ångra</button>` : `
+                <label class="shopping-field"><span>Vara och mängd</span><input name="text" type="text" required maxlength="4000" value="${escapeHtml(entry.text)}" autocomplete="off"></label>
+                <label class="shopping-field"><span>Anteckning <span class="shopping-optional">(valfritt)</span></span><input name="note" type="text" maxlength="500" value="${escapeHtml(entry.note)}" autocomplete="off"></label>
+                ${shoppingEditor.entries.length > 1 ? '<button class="text-button shopping-delete-entry" type="button" data-shopping-delete-entry>Ta bort delpost</button>' : ""}`}
+              </fieldset>`).join("")}
+              <div class="shopping-edit-actions"><button class="button" type="submit">Spara</button><button class="text-button" type="button" data-shopping-cancel>Avbryt</button></div>
+            </form>
+          </li>`;
+        }
+        const text = item.text;
+        return `
+      <li class="shopping-item" data-shopping-item="${escapeHtml(item.id)}" data-shopping-members="${escapeHtml(JSON.stringify(item.items.map(source => source.id)))}">
+        <div>
+          <label><input type="checkbox" ${item.checked ? "checked" : ""}><span>${escapeHtml(text)}</span></label>
+          ${item.recipe ? `<p class="meta">${escapeHtml(item.recipe)}</p>` : ""}
+          ${item.note ? `<p class="meta shopping-note">${escapeHtml(item.note)}</p>` : ""}
+          ${item.items.length > 1 ? `<details class="shopping-breakdown" ${openDetails.has(item.id) ? "open" : ""}><summary>Visa ${item.items.length} delposter${faIcon("chevron-down")}</summary>
+            <ul>${item.items.map(source => `<li>${escapeHtml(shoppingText(source))}${source.recipe ? `<span class="meta">${escapeHtml(source.recipe)}</span>` : '<span class="meta">Egen vara</span>'}</li>`).join("")}</ul></details>` : ""}
+        </div>
+        <div class="shopping-item-actions"><button type="button" class="shopping-edit" aria-label="Ändra ${escapeHtml(text)}" title="Ändra">${faIcon("pen-to-square")}</button>
+        <button type="button" class="shopping-remove" aria-label="Ta bort ${escapeHtml(text)}">${faIcon("xmark")}</button></div>
+      </li>`;
+      }).join("");
+    });
+  });
+  if (focusedList && focusedId) {
+    const root = focusedList.closest("[data-shopping-list]");
+    const row = findShoppingRow(root, focusedId);
+    const entry = focusedEntry && [...(row?.querySelectorAll("[data-shopping-edit-entry]") ?? [])].find(entry => entry.dataset.shoppingEditEntry === focusedEntry);
+    const target = row?.closest('[data-shopping-bought]:not([open])')?.querySelector("summary")
+      ?? (entry || row)?.querySelector(focusSelector) ?? row?.querySelector(".shopping-edit")
+      ?? shoppingListFocus(root);
+    target?.focus({ preventScroll: true });
+    if (selection && target?.matches('input[type="text"]')) target.setSelectionRange(...selection);
+  }
+  renderShoppingSources(sources);
+}
+
+function shoppingText(item) {
+  return typeof item.customText === "string" && item.customText ? item.customText : item.text;
+}
+
+function shoppingOwner() {
+  try { return localStorage.getItem("restfest-shopping-owner"); } catch { return null; }
+}
+
+function finishShoppingEdit(list) {
+  const id = shoppingEditor?.entries.find(entry => shoppingItems.has(entry.id))?.id ?? shoppingEditor?.id;
+  shoppingEditor = null;
+  renderShoppingList();
+  const root = list.closest("[data-shopping-list]");
+  const row = findShoppingRow(root, id);
+  (row?.closest('[data-shopping-bought]:not([open])')?.querySelector("summary")
+    ?? row?.querySelector(".shopping-edit") ?? shoppingListFocus(root))?.focus();
 }
 
 function openShoppingList() {
+  if (document.documentElement.classList.contains("signed-in")) {
+    location.href = assetUrl("inkopslista.html");
+    return;
+  }
   shoppingItems = readShoppingItems() ?? shoppingItems;
   updateShoppingButtons();
   renderShoppingList();
@@ -678,7 +890,7 @@ window.addEventListener("storage", (event) => {
   if (event.key === shoppingKey || event.key === null) {
     shoppingItems = readShoppingItems() ?? shoppingItems;
     updateShoppingButtons();
-    if (shoppingDialog.open) renderShoppingList();
+    renderShoppingList();
   }
   if (event.key === pantryKey || event.key === null) {
     document.querySelectorAll(".recipe-view").forEach(renderPantryStatus);
@@ -687,6 +899,9 @@ window.addEventListener("storage", (event) => {
 window.addEventListener("pageshow", (event) => {
   if (!event.persisted) return;
   refreshSavedRecipes();
+  shoppingItems = readShoppingItems() ?? shoppingItems;
+  updateShoppingButtons();
+  renderShoppingList();
   document.querySelectorAll(".recipe-view").forEach(renderPantryStatus);
 });
 
@@ -1208,6 +1423,7 @@ function enhanceServings(article) {
 function enhanceRecipe(article) {
   enhanceServings(article);
   const title = $(".recipe-heading", article).textContent;
+  const source = article.dataset.shoppingSource || (article.dataset.recipe ? `archive:${article.dataset.recipe}` : "");
   const list = $(".cook-ingredient-columns", article);
   list.addEventListener("change", () => updateChecklistProgress(article));
   list.addEventListener("click", (event) => {
@@ -1215,9 +1431,10 @@ function enhanceRecipe(article) {
     if (!button) return;
     const { shoppingIngredient: id, shoppingText: text } = button.dataset;
     shoppingItems = readShoppingItems() ?? shoppingItems;
-    if (shoppingItems.get(id)?.text === text) shoppingItems.delete(id);
-    else shoppingItems.set(id, { id, text, recipe: title, checked: false });
-    saveShoppingItems();
+    const remove = shoppingItems.get(id)?.text === text;
+    if (remove) shoppingItems.delete(id);
+    else shoppingItems.set(id, { id, text, recipe: title, source, checked: false });
+    saveShoppingItems([{ kind: remove ? "remove" : "add", id, ...(remove ? {} : { item: shoppingItems.get(id) }) }]);
   });
   $(".cook-open-shopping", article).addEventListener("click", openShoppingList);
   $(".cook-add-missing", article)?.addEventListener("click", (event) => {
@@ -1226,13 +1443,15 @@ function enhanceRecipe(article) {
       return;
     }
     const buttons = missingToBuy(article);
+    const changes = [];
     shoppingItems = readShoppingItems() ?? shoppingItems;
     for (const {
       dataset: { shoppingIngredient: id, shoppingText: text },
     } of buttons) {
-      shoppingItems.set(id, { id, text, recipe: title, checked: false });
+      shoppingItems.set(id, { id, text, recipe: title, source, checked: false });
+      changes.push({ kind: "add", id, item: shoppingItems.get(id) });
     }
-    saveShoppingItems();
+    saveShoppingItems(changes);
     showToast(
       buttons.length === 1
         ? "1 råvara lades i inköpslistan"
@@ -1353,35 +1572,201 @@ if (recipeDialog) {
   });
 }
 
-$("#shopping-nav").addEventListener("click", openShoppingList);
+// Signed in, the header is a regular link (including opening it in a new tab).
+$("#shopping-nav").addEventListener("click", (event) => {
+  if (document.documentElement.classList.contains("signed-in")) return;
+  event.preventDefault();
+  openShoppingList();
+});
+document.addEventListener("restfest:account", () => {
+  updateShoppingButtons();
+  if (document.documentElement.classList.contains("signed-in") && shoppingDialog.open)
+    shoppingDialog.close();
+  if ((shoppingRecipeFilter && shoppingRecipeFilter.owner !== shoppingOwner())
+    || (shoppingRecipeUndo && shoppingRecipeUndo.owner !== shoppingOwner())) renderShoppingList();
+  else renderShoppingSources();
+});
+document.addEventListener("restfest:book", () => renderShoppingSources());
 $(".dialog-close", shoppingDialog).addEventListener("click", () =>
   shoppingDialog.close(),
 );
-$("#shopping-items").addEventListener("change", (event) => {
-  const id = event.target.closest("[data-shopping-item]").dataset.shoppingItem;
-  shoppingItems = readShoppingItems() ?? shoppingItems;
-  const item = shoppingItems.get(id);
-  if (!item) {
-    renderShoppingList();
-    return;
-  }
-  item.checked = event.target.checked;
-  saveShoppingItems();
+document.querySelectorAll("[data-shopping-recipe-tools]").forEach(tools => {
+  tools.addEventListener("click", event => {
+    const button = event.target.closest("button");
+    if (!button || button.disabled || shoppingEditor || !shoppingRecipeTools) return;
+    const root = tools.closest("[data-shopping-list]");
+    if (tools.dataset.shoppingOwner !== (shoppingOwner() ?? "")) { renderShoppingList(); return; }
+    shoppingItems = readShoppingItems() ?? shoppingItems;
+    if (button.matches("[data-shopping-source-clear]")) {
+      shoppingRecipeFilter = null;
+      renderShoppingList();
+      shoppingListFocus(root)?.focus();
+      return;
+    }
+    if (button.matches("[data-shopping-source-undo]")) {
+      if (!shoppingRecipeUndo || shoppingRecipeUndo.owner !== shoppingOwner()) return;
+      const key = shoppingRecipeUndo.key;
+      const changes = shoppingRecipeTools.restoreShoppingRecipe([...shoppingItems.values()], shoppingRecipeUndo.removed);
+      for (const change of changes) shoppingItems.set(change.id, change.item);
+      shoppingRecipeUndo = null;
+      if (changes.length) saveShoppingItems(changes);
+      renderShoppingList();
+      ([...root.querySelectorAll("[data-shopping-source]")].find(row => row.dataset.shoppingSource === key)?.querySelector("[data-shopping-source-filter]")
+        ?? root.querySelector('[data-shopping-add] [name="text"]')).focus();
+      showToast("Receptets varor finns i listan igen.");
+      return;
+    }
+    const row = button.closest("[data-shopping-source]");
+    if (!row) return;
+    const ids = shoppingRowIds(row);
+    const source = shoppingSources().find(source => source.key === row.dataset.shoppingSource)
+      ?? shoppingSources().find(source => source.items.some(item => ids.includes(item.id)));
+    if (!source) { renderShoppingList(); return; }
+    if (button.matches("[data-shopping-source-filter]")) {
+      shoppingRecipeFilter = shoppingRecipeFilter?.key === source.key ? null : { key: source.key, ids, owner: shoppingOwner() };
+      renderShoppingList();
+      (shoppingRecipeFilter ? root.querySelector("[data-shopping-filter-label]") : root.querySelector('[data-shopping-add] [name="text"]')).focus();
+    } else if (button.matches("[data-shopping-source-remove]")) {
+      const { changes, removed } = shoppingRecipeTools.removeShoppingRecipe([...shoppingItems.values()], ids);
+      if (!changes.length) { renderShoppingList(); return; }
+      shoppingRecipeUndo = { owner: shoppingOwner(), key: source.key, title: source.title, removed };
+      for (const change of changes) shoppingItems.delete(change.id);
+      saveShoppingItems(changes);
+      renderShoppingList();
+      root.querySelector("[data-shopping-source-undo]")?.focus();
+    }
+  });
 });
-$("#shopping-items").addEventListener("click", (event) => {
-  const remove = event.target.closest(".shopping-remove");
-  if (!remove) return;
-  const row = remove.closest("[data-shopping-item]");
-  const index = [...row.parentElement.children].indexOf(row);
-  shoppingItems = readShoppingItems() ?? shoppingItems;
-  shoppingItems.delete(row.dataset.shoppingItem);
-  saveShoppingItems();
-  renderShoppingList();
-  const buttons = shoppingDialog.querySelectorAll(".shopping-remove");
-  (
-    buttons[Math.min(index, buttons.length - 1)] ??
-    $(".dialog-close", shoppingDialog)
-  ).focus();
+document.querySelectorAll("[data-shopping-items]").forEach((list) => {
+  list.addEventListener("input", (event) => {
+    if (shoppingEditor?.list !== list || !event.target.closest("[data-shopping-edit]")) return;
+    const id = event.target.closest("[data-shopping-edit-entry]")?.dataset.shoppingEditEntry;
+    const entry = shoppingEditor.entries.find(entry => entry.id === id);
+    if (entry && ["text", "note"].includes(event.target.name)) entry[event.target.name] = event.target.value;
+  });
+  list.addEventListener("submit", (event) => {
+    const form = event.target.closest("[data-shopping-edit]");
+    if (!form || shoppingEditor?.list !== list) return;
+    event.preventDefault();
+    if (shoppingEditor.owner !== shoppingOwner()) { shoppingEditor = null; renderShoppingList(); return; }
+    shoppingItems = readShoppingItems() ?? shoppingItems;
+    if (!shoppingItems.has(shoppingEditor.id)) { renderShoppingList(); return; }
+    const changes = [];
+    for (const node of form.querySelectorAll("[data-shopping-edit-entry]")) {
+      const entry = shoppingEditor.entries.find(entry => entry.id === node.dataset.shoppingEditEntry);
+      const item = shoppingItems.get(entry.id);
+      if (!item) continue; // A late save must not recreate a source another device removed.
+      if (entry.removed) { changes.push({ kind: "remove", id: item.id }); continue; }
+      const input = node.querySelector('[name="text"]');
+      const text = input.value.trim(), note = node.querySelector('[name="note"]').value.trim();
+      if (!text) {
+        input.setCustomValidity("Skriv en vara.");
+        input.reportValidity();
+        input.addEventListener("input", () => input.setCustomValidity(""), { once: true });
+        return;
+      }
+      // Patch only changed fields, preserving independently edited notes and purchases.
+      const fields = {};
+      if (text !== entry.initialText) fields.customText = text === item.text ? "" : text;
+      if (note !== entry.initialNote) fields.note = note;
+      if (Object.keys(fields).length) changes.push({ kind: "edit", id: item.id, fields });
+    }
+    for (const change of changes) {
+      if (change.kind === "remove") shoppingItems.delete(change.id);
+      else Object.assign(shoppingItems.get(change.id), change.fields);
+    }
+    if (changes.length) saveShoppingItems(changes);
+    finishShoppingEdit(list);
+    showToast("Varan är uppdaterad.");
+  });
+  list.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !event.target.closest("[data-shopping-edit]")) return;
+    event.preventDefault();
+    event.stopPropagation();
+    finishShoppingEdit(list);
+  });
+  list.addEventListener("change", (event) => {
+    const row = event.target.closest("[data-shopping-item]");
+    if (!row || !event.target.matches('input[type="checkbox"]')) return;
+    const checked = event.target.checked;
+    const index = [...list.children].indexOf(row);
+    shoppingItems = readShoppingItems() ?? shoppingItems;
+    const changes = shoppingRowIds(row).filter(id => shoppingItems.has(id)).map(id => {
+      shoppingItems.get(id).checked = checked;
+      return { kind: "check", id, checked };
+    });
+    if (changes.length) saveShoppingItems(changes);
+    renderShoppingList();
+    const checkboxes = list.querySelectorAll('input[type="checkbox"]');
+    (checkboxes[Math.min(index, checkboxes.length - 1)] ?? shoppingListFocus(list.closest("[data-shopping-list]")))?.focus({ preventScroll: true });
+    if (changes.length) showToast(checked ? "Flyttad till Köpt." : "Flyttad till Att köpa.");
+  });
+  list.addEventListener("click", (event) => {
+    const deleteEntry = event.target.closest("[data-shopping-delete-entry]");
+    if (deleteEntry && shoppingEditor?.list === list) {
+      const id = deleteEntry.closest("[data-shopping-edit-entry]").dataset.shoppingEditEntry;
+      const entry = shoppingEditor.entries.find(entry => entry.id === id);
+      entry.removed = !entry.removed;
+      renderShoppingList();
+      [...list.querySelectorAll("[data-shopping-edit-entry]")].find(node => node.dataset.shoppingEditEntry === id)?.querySelector("[data-shopping-delete-entry]")?.focus();
+      return;
+    }
+    const edit = event.target.closest(".shopping-edit");
+    if (edit) {
+      shoppingItems = readShoppingItems() ?? shoppingItems;
+      const row = edit.closest("[data-shopping-item]");
+      const sources = shoppingRowIds(row).map(id => shoppingItems.get(id)).filter(Boolean);
+      if (!sources.length) { renderShoppingList(); return; }
+      shoppingEditor = { id: sources[0].id, list, owner: shoppingOwner(), position: [...list.children].indexOf(row),
+        entries: sources.map(item => ({ id: item.id, text: shoppingText(item), note: item.note || "", initialText: shoppingText(item), initialNote: item.note || "" })) };
+      renderShoppingList();
+      const input = list.querySelector('[data-shopping-edit] [name="text"]');
+      input.focus();
+      input.select();
+      return;
+    }
+    if (event.target.closest("[data-shopping-cancel]")) { finishShoppingEdit(list); return; }
+    const remove = event.target.closest(".shopping-remove");
+    if (!remove) return;
+    const row = remove.closest("[data-shopping-item]");
+    const index = [...list.children].indexOf(row);
+    shoppingItems = readShoppingItems() ?? shoppingItems;
+    const changes = shoppingRowIds(row).filter(id => shoppingItems.has(id)).map(id => {
+      shoppingItems.delete(id);
+      return { kind: "remove", id };
+    });
+    if (changes.length) saveShoppingItems(changes);
+    renderShoppingList();
+    const buttons = list.querySelectorAll(".shopping-remove");
+    (
+      buttons[Math.min(index, buttons.length - 1)] ??
+      shoppingListFocus(list.closest("[data-shopping-list]"))
+    ).focus();
+  });
+});
+
+document.querySelectorAll("[data-shopping-add]").forEach((form) => {
+  form.addEventListener("input", () => form.elements.text.setCustomValidity(""));
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const text = form.elements.text.value.trim();
+    if (!text) {
+      form.elements.text.setCustomValidity("Skriv en vara.");
+      form.elements.text.reportValidity();
+      return;
+    }
+    shoppingItems = readShoppingItems() ?? shoppingItems;
+    const id = `manual:${crypto.randomUUID()}`;
+    const item = { id, text, recipe: "", checked: false, note: form.elements.note.value.trim() };
+    shoppingRecipeFilter = null;
+    shoppingItems.set(id, item);
+    saveShoppingItems([{ kind: "add", id, item }]);
+    renderShoppingList();
+    form.reset();
+    form.querySelector("details").open = false;
+    form.elements.text.focus();
+    showToast("Varan är tillagd i inköpslistan.");
+  });
 });
 
 // The "Recept" menus in the header and footer (layouts/base.njk) are <details>, so they open and
@@ -1414,3 +1799,4 @@ if (pageRecipe) enhanceRecipe(pageRecipe);
 
 refreshSavedViews();
 updateShoppingButtons();
+renderShoppingList();

@@ -64,8 +64,12 @@
   {%- endif %}
   {%- endif %}
   <link rel="icon" href="{{ base }}assets/favicon.png" type="image/png">
-  <link rel="preload" href="{{ base }}assets/fonts/GTMaru-VF.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="{{ base }}assets/fonts/GTMaruMono-VF.woff2" as="font" type="font/woff2" crossorigin>
+  {#- One file per role, plus the Medium that every header button uses. The other weights load when a page needs them. #}
+  <link rel="preload" href="{{ base }}assets/fonts/TrioGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ base }}assets/fonts/SpotGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ base }}assets/fonts/SpotGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ base }}assets/fonts/SpotSemi-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ base }}css/fonts.css">
   <link rel="stylesheet" href="{{ base }}css/styles.css">
   <link rel="stylesheet" href="{{ base }}css/icons.css">
   <link rel="stylesheet" href="{{ base }}css/kitchen.css">
@@ -99,10 +103,14 @@
           {%- endif %}
           <span id="saved-count" class="count">0</span>
         </a>
+        {%- if ai.accounts %}
+        <a id="shopping-nav" class="saved-nav" href="{{ base }}inkopslista.html" aria-label="Visa inköpslistan" aria-haspopup="dialog">
+        {%- else %}
         <button id="shopping-nav" class="saved-nav" type="button" aria-label="Visa inköpslistan" aria-haspopup="dialog">
+        {%- endif %}
           <img src="{{ base }}assets/icons/shopping-basket-1.svg" alt="" width="24" height="24">
           <span class="shopping-nav-label">Inköpslista</span><span id="shopping-count" class="count" aria-hidden="true">0</span>
-        </button>
+        {%- if ai.accounts %}</a>{% else %}</button>{% endif %}
         {%- if ai.accounts %}
         <a class="saved-nav account-nav" href="{{ base }}logga-in.html" aria-label="Logga in" data-account-link>
           <img src="{{ base }}assets/icons/user-profile.svg" alt="" width="24" height="24">
@@ -141,11 +149,12 @@
   <dialog id="recipe-dialog" aria-labelledby="recipe-title"><button class="dialog-close" type="button" aria-label="Stäng recept"><i class="fas fa-xmark" aria-hidden="true"></i></button><div id="dialog-content"></div></dialog>
   {%- endif %}
   <dialog id="shopping-dialog" aria-labelledby="shopping-title">
-    <div class="dialog-main">
+    <div class="dialog-main" data-shopping-list>
       <button class="dialog-close" type="button" aria-label="Stäng inköpslistan" autofocus><i class="fas fa-xmark" aria-hidden="true"></i></button>
       <h2 id="shopping-title"><img src="{{ base }}assets/icons/shopping-basket-1.svg" alt="" width="30" height="30">Inköpslista</h2>
-      <p id="shopping-empty" class="dialog-intro">Listan är tom. Lägg till det du behöver köpa från ett recept.</p>
-      <ul id="shopping-items" class="ingredients"></ul>
+      {% include "shopping-controls.njk" %}
+      {% set shoppingListPrefix = 'shopping' %}
+      {% include "shopping-items.njk" %}
     </div>
   </dialog>
   <div id="toast" class="toast" role="status" hidden></div>

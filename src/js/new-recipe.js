@@ -132,7 +132,7 @@ function recipeHtml(recipe, data) {
   const promoted = data.promotedAs
     ? ` Det finns nu också <a href="${escapeHtml(assetUrl(`recept/${data.promotedAs}.html`))}">i receptarkivet</a>.`
     : "";
-  return `<article class="recipe-view" data-recipe="${recipeId}">
+  return `<article class="recipe-view" data-recipe="${recipeId}" data-shopping-source="generated:${escapeHtml(data.id)}">
     <div class="dialog-top cook-art has-photo" data-recipe-photo>${photoHtml(recipe, data.image)}</div>
     <div class="dialog-main">
       <p class="dialog-kicker"><span class="mini-badge">OFTA BRA EFTER · NYTT RECEPT</span><span>${recipe.categories
@@ -203,15 +203,18 @@ function recipeHtml(recipe, data) {
 }
 
 async function getRecipe() {
-  const response = await fetch(
-    `${api}/get-recipe?id=${encodeURIComponent(id)}`,
-  );
-  const result = await response.json().catch(() => ({}));
-  if (!response.ok)
-    throw Object.assign(new Error(result.error || "Något gick fel."), {
-      status: response.status,
-    });
-  return result;
+  try {
+    if (!navigator.onLine) throw new Error("Du är offline.");
+    const response = await fetch(`${api}/get-recipe?id=${encodeURIComponent(id)}`, { signal: AbortSignal.timeout(12000) });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) throw Object.assign(new Error(result.error || "Något gick fel."), { status: response.status });
+    account?.rememberRecipe(result);
+    return result;
+  } catch (error) {
+    const cached = account?.cachedRecipe(id);
+    if (cached && (!error.status || error.status >= 500)) return { ...cached, offline: true };
+    throw error;
+  }
 }
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -348,7 +351,8 @@ async function load() {
   document
     .querySelector('meta[name="description"]')
     ?.setAttribute("content", recipe.description);
-  message.remove();
+  if (data.offline) message.innerHTML = '<p>Visar en sparad kopia av receptet.</p>';
+  else message.remove();
   main.insertAdjacentHTML("beforeend", recipeHtml(recipe, data));
   main.removeAttribute("aria-busy");
   const article = $(".recipe-view", main);
@@ -364,7 +368,8 @@ async function load() {
     pageParams.delete("spara");
     history.replaceState(null, "", `${location.pathname}?${pageParams}`);
   }
-  if (data.image.status !== "done" || !data.image.url)
+  if ((!navigator.onLine || data.offline) && data.image.status !== "done") showNoPhoto(article);
+  else if (data.image.status !== "done" || !data.image.url)
     loadPhoto(article, recipe, data.image);
 }
 
