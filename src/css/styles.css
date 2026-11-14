@@ -200,10 +200,11 @@ a:focus-visible {
   gap: 24px;
   min-height: 73px;
 }
+/* The logo is the name on a yellow label, like the one on a box of leftovers. It is tilted, and
+   straightens when pointed at. */
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   white-space: nowrap;
   font-weight: var(--font-weight-bold);
   font-size: 24px;
@@ -212,11 +213,17 @@ a:focus-visible {
   font-family: var(--font-display);
   font-feature-settings: var(--display-features);
 }
-.brand > img {
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
-  transform: rotate(6deg);
+.brand > span {
+  display: block;
+  padding: 8px 13px 9px;
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  border-radius: 6px 10px 7px 11px;
+  transform: rotate(-2deg);
+  transition: transform 0.15s ease;
+}
+.brand:is(:hover, :focus-visible) > span {
+  transform: none;
 }
 .sticker {
   display: inline-block;
@@ -233,9 +240,6 @@ a:focus-visible {
   transform: rotate(-3deg);
   white-space: nowrap;
   font-feature-settings: var(--caps-features);
-}
-.brand > .sticker {
-  margin-left: 2px;
 }
 .site-header nav {
   display: flex;
@@ -1312,15 +1316,6 @@ dialog::backdrop {
   }
   .brand {
     font-size: 22px;
-    gap: 9px;
-  }
-  .brand > img {
-    width: 34px;
-    height: 38px;
-  }
-  .brand > .sticker {
-    padding: 5px;
-    margin-left: 0;
   }
   .site-header nav {
     display: none;
@@ -1603,14 +1598,7 @@ dialog::backdrop {
     padding-inline: 18px;
   }
   .brand {
-    gap: 7px;
     font-size: 20px;
-  }
-  .brand > .sticker {
-    padding: 5px 4px;
-  }
-  .brand > img {
-    width: 31px;
   }
   .saved-nav {
     padding-inline: 6px;

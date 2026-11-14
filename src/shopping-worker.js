@@ -1,6 +1,6 @@
 // Offline account pages and visited public recipes. Private API responses stay in per-user browser
 // storage; this worker never caches authentication or API traffic.
-const cacheName = 'ofta-bra-efter-account-v8';
+const cacheName = 'ofta-bra-efter-account-v9';
 const base = self.registration.scope;
 const files = [
   'inkopslista.html', 'receptbok.html', 'nytt-recept.html', 'css/fonts.css', 'css/styles.css', 'css/kitchen.css', 'css/icons.css',
@@ -13,7 +13,7 @@ const files = [
   'assets/fonts/SpotGrotesk-Medium.woff2', 'assets/fonts/SpotGrotesk-Bold.woff2',
   'assets/fonts/SpotSemi-Regular.woff2', 'assets/fonts/SpotSemi-Medium.woff2',
   'assets/fonts/font-awesome-400.woff2', 'assets/fonts/font-awesome-700.woff2',
-  'assets/illustrations/ramen-bowl.svg', 'assets/icons/shopping-basket-1.svg',
+  'assets/icons/shopping-basket-1.svg',
   'assets/icons/heart.svg', 'assets/icons/user-profile.svg',
   'assets/illustrations/ramen.svg', 'assets/icons/cook-book.svg', 'assets/icons/magic-wand.svg', 'assets/icons/recipe-archive-box.svg',
 ];

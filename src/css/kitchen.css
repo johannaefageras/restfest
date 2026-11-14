@@ -998,6 +998,13 @@ details[open] > summary > .fa-chevron-down {
 .food-filter img {
   object-fit: contain;
 }
+#diet-filters .food-filter {
+  flex-direction: column;
+  justify-content: center;
+  min-width: 120px;
+  min-height: 88px;
+  padding: 10px 12px;
+}
 .food-filter:hover {
   border-color: var(--ink);
 }
@@ -1859,24 +1866,25 @@ body:has(#shopping-dialog[open]) {
   }
 }
 
-/* The three-word name is about 8.9em wide in Trio Bold, and the bowl, the buttons and the gaps take
-   about 250px, so below 450px it doesn't fit beside the two buttons at 22px. It first shrinks a
-   little (19px at 420px). On phones it would have to go down to 12–14px, so there it is stacked
-   instead, "Ofta bra" over "efter": the first line is 5.3em wide, which leaves room for 20px type
-   (17px at 320px), and the two lines are as tall as the bowl. The footer's name has its own row and
-   stays on one line. */
+/* The three-word name is about 8.9em wide in Trio Bold, and the label's padding and border, the
+   buttons and the gaps take about 240px, so below 450px it doesn't fit beside the two buttons at
+   22px. It first shrinks a little (20px at 420px). On phones it would have to go down to 12–14px, so
+   there the label is stacked instead, "Ofta bra" over "efter": the first line is 5.3em wide, which
+   leaves room for 20px type (17px at 320px). The footer's label has its own row and stays on one
+   line. */
 @media (max-width: 449px) {
   .site-header .brand {
-    font-size: clamp(19px, calc((100vw - 250px) / 8.9), 22px);
+    font-size: clamp(19px, calc((100vw - 240px) / 8.9), 22px);
   }
 }
 @media (max-width: 419px) {
   .site-header .brand {
-    font-size: clamp(17px, calc((100vw - 250px) / 5.4), 20px);
+    font-size: clamp(17px, calc((100vw - 232px) / 5.4), 20px);
     line-height: 0.95;
   }
   .site-header .brand > span {
-    max-width: 5.6em;
+    max-width: calc(5.6em + 24px);
+    padding: 6px 10px 7px;
     white-space: normal;
   }
 }
@@ -2760,6 +2768,11 @@ body:has(#shopping-dialog[open]) {
   column-gap: 20px;
   min-height: 73px;
 }
+/* The label is tilted, so its corners reach a few pixels past its box: keep the tagline clear of it
+   when the tagline wraps under it on phones. */
+.site-footer .brand {
+  margin-block: 4px;
+}
 .footer-tagline {
   color: var(--muted);
   font-family: var(--font-label);
@@ -3502,13 +3515,9 @@ a.dialog-save {
   align-items: center;
   gap: 12px 16px;
 }
-.profile-save,
-.profile-layout > .account-error {
-  grid-column: 1 / -1;
-}
-.profile-save {
-  padding-top: 20px;
-  border-top: 1px solid var(--rule);
+.profile-actions {
+  display: grid;
+  gap: 22px;
 }
 .profile-save .button {
   min-width: 180px;
@@ -3621,9 +3630,13 @@ a.dialog-save {
 @media (min-width: 800px) {
   .profile-layout {
     grid-template-columns: minmax(0, 1fr) minmax(300px, 0.52fr);
+    row-gap: 12px;
   }
   .profile-aside {
-    align-self: stretch;
+    /* Let the save row follow the main panels independently of the sidebar's height. */
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: start;
     grid-template-rows: auto minmax(min-content, 1fr) auto;
   }
   .account-settings-grid {

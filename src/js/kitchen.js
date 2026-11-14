@@ -1,13 +1,15 @@
 "use strict";
 
-const sampleItems = [
-  "Pasta",
-  "Ägg",
-  "Lagrad ost",
-  "Mjölk",
-  "Spenat",
-  "Krossade tomater",
-];
+// Use real dinners so every example leads to matching recipes.
+const pantryExamples = recipes
+  .filter((recipe) => recipe.meals.some((meal) => dinnerMeals.includes(meal)))
+  .map((recipe) =>
+    recipe.pantryKeys
+      .filter(
+        (key) => !stapleIngredientKeys.has(key) && !genericIngredientKeys.has(key),
+      )
+      .map((key) => foods[key].name),
+  );
 const pantryInput = $("#ingredient-input");
 const moreMatchCount = 3;
 
@@ -424,6 +426,19 @@ $("#clear-pantry").addEventListener("click", () => {
 });
 
 $("#try-example").addEventListener("click", () => {
+  if (pantry.items.length >= 60) {
+    updatePantry("Listan rymmer 60 råvaror. Ta bort en för att prova ett exempel.");
+    return;
+  }
+  // Skip examples already on the list, including the one just added.
+  const examples = pantryExamples.filter((items) =>
+    items.some((name) => !pantry.items.some((item) => sameIngredient(item, name))),
+  );
+  if (!examples.length) {
+    updatePantry("Exempelråvarorna finns redan i listan. Rensa listan för att prova igen.");
+    return;
+  }
+  const sampleItems = examples[Math.floor(Math.random() * examples.length)];
   const additions = sampleItems.filter(
     (name) => !pantry.items.some((item) => sameIngredient(item, name)),
   );

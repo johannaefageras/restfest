@@ -11,8 +11,8 @@ const foodGroups = {
   meat: { label: "Kött", icon: "steak-2" },
   mushrooms: { label: "Svamp", icon: "mushrooms" },
   fruit: { label: "Frukt & bär", icon: "fruit" },
-  nuts: { label: "Nötter & frön", icon: "almonds-1" },
-  herbs: { label: "Örter & kryddor", icon: "pepper" },
+  nuts: { label: "Nötter & frön", icon: "almonds-2" },
+  herbs: { label: "Örter & kryddor", icon: "spice-mills" },
   pantry: { label: "Olja & såser", icon: "olive-oil" },
 };
 

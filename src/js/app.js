@@ -1200,7 +1200,7 @@ if (archiveSearch) {
     available.has(key),
   );
   $("#food-filters").innerHTML =
-    foodFilterButton("all", { label: "Alla råvaror" }) +
+    foodFilterButton("all", { label: "Alla råvaror", icon: "grocery-bag" }) +
     groups.map(([key, group]) => foodFilterButton(key, group)).join("");
 
   document.querySelectorAll("[data-food-filter]").forEach((button) => {
@@ -1210,10 +1210,18 @@ if (archiveSearch) {
       renderArchive();
     });
   });
+  const dietFilterIcons = {
+    Vegetarian: "vegetarian",
+    Vegan: "vegan",
+    "Dairy free": "milk-free",
+    "Egg free": "egg-free",
+    "Gluten free": "gluten-free",
+    "Lactose free": "dairy-free",
+  };
   $("#diet-filters").innerHTML = dietTags
     .map(
       (tag) =>
-        `<button type="button" class="food-filter" data-diet-filter="${tag}" aria-pressed="false">${recipeTagLabels[tag]}</button>`,
+        `<button type="button" class="food-filter" data-diet-filter="${tag}" aria-pressed="false">${squareIcon(dietFilterIcons[tag], 48)}${recipeTagLabels[tag]}</button>`,
     )
     .join("");
   $("#diet-filters").addEventListener("click", (event) => {
