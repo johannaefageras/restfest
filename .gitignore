@@ -145,3 +145,8 @@ fa/
 # The Supabase CLI's local state (supabase link, supabase start)
 supabase/.temp/
 supabase/.branches/
+
+.DS_Store
+
+.claude/
+.superpowers/
