@@ -13,6 +13,7 @@ document
   .forEach((link) => link.setAttribute("href", link.href));
 const assetUrl = (path) => siteBase + path;
 const recipeUrl = (id) => `${siteBase}recept/${id}.html`;
+// Fitted SVG artwork is displayed in square UI slots, preserving its proportions.
 const squareIconPath = (name) => assetUrl(`assets/icons/${name}.svg`);
 const squareIcon = (name, size = 22) =>
   `<img src="${squareIconPath(name)}" alt="" width="${size}" height="${size}">`;
@@ -756,7 +757,7 @@ function setupMealPicker() {
     selectedOption.setAttribute("aria-pressed", "true");
     $("img", trigger).src = squareIconPath(meal.icon);
     $("#archive-category-icon").src = squareIconPath(
-      key === "all" ? "recipes" : meal.icon,
+      key === "all" ? "recipe-archive-box" : meal.icon,
     );
     $("#meal-filter-value").textContent = meal.label;
     mealFilter = key;

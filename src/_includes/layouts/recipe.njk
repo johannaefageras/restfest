@@ -24,11 +24,11 @@ layout: layouts/base.njk
             a new label shows without one. Mer än mat (not recipe.food) has its own icons for Förberedelse and Nivå.
             The icon is inside the dt, as a div in a dl may only hold dt and dd. #}
         {%- set factIcons = {
-          'Förberedelse': 'prep-time' if recipe.food else 'bubbles-and-sparkles',
-          'Tillagning': 'cook-time',
-          'Portioner': 'serves',
+          'Förberedelse': 'cutting-board' if recipe.food else 'bubbles',
+          'Tillagning': 'timer',
+          'Portioner': 'cutlery',
           'Nivå': 'difficulty-level' if recipe.food else 'difficulty-level-pink',
-          'Räcker till': 'glass-jar',
+          'Räcker till': 'jam-jar',
           'Verkningstid': 'kitchen-timer'
         } %}
         <dl class="recipe-facts">

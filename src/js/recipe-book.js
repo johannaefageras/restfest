@@ -11,6 +11,7 @@ const account = window.restfestAccount;
 const grid = $("[data-book-grid]");
 const status = $("[data-book-status]");
 const empty = $("[data-book-empty]");
+const toolbar = $("[data-book-toolbar]");
 const filters = [...document.querySelectorAll("[data-book-filter]")];
 const storage = `${document.querySelector('meta[name="restfest-account"]')?.content}/storage/v1/object/public/recipe-images`;
 
@@ -65,7 +66,7 @@ function render() {
     )
     .join("");
   empty.hidden = entries.length > 0;
-  $(".book-filter").hidden = entries.length === 0;
+  toolbar.hidden = entries.length === 0;
   if (!entries.length) status.textContent = "";
   else if (!visible.length)
     status.textContent =
@@ -124,7 +125,8 @@ async function load() {
 // After a card is taken out, the keyboard's place moves to the next card's heart, or to the filter.
 function focusAfterRemoval(index) {
   const hearts = [...grid.querySelectorAll(".favorite")];
-  (hearts[Math.min(index, hearts.length - 1)] ?? filters[0])?.focus({
+  const fallback = entries.length ? filters[0] : empty.querySelector("a");
+  (hearts[Math.min(index, hearts.length - 1)] ?? fallback)?.focus({
     preventScroll: true,
   });
 }

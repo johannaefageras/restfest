@@ -2,17 +2,17 @@
 
 const foodGroups = {
   vegetables: {label: 'Grönsaker', icon: 'broccoli'},
-  legumes: {label: 'Baljväxter', icon: 'beans-1'},
-  grains: {label: 'Pasta, ris & spannmål', icon: 'spaghetti-bundle'},
+  legumes: {label: 'Baljväxter', icon: 'beans'},
+  grains: {label: 'Pasta, ris & spannmål', icon: 'spagheti'},
   dairy: {label: 'Mejeri', icon: 'milk-carton-2'},
-  eggs: {label: 'Ägg', icon: 'egg-carton-1'},
-  poultry: {label: 'Fågel', icon: 'chicken-drumstick-1'},
-  fish: {label: 'Fisk & skaldjur', icon: 'fish-1'},
+  eggs: {label: 'Ägg', icon: 'egg-carton'},
+  poultry: {label: 'Fågel', icon: 'chicken-drumstick'},
+  fish: {label: 'Fisk & skaldjur', icon: 'fish'},
   meat: {label: 'Kött', icon: 'steak-2'},
-  mushrooms: {label: 'Svamp', icon: 'mushroom-1'},
-  fruit: {label: 'Frukt & bär', icon: 'mixed-fruit'},
+  mushrooms: {label: 'Svamp', icon: 'mushrooms'},
+  fruit: {label: 'Frukt & bär', icon: 'fruit'},
   nuts: {label: 'Nötter & frön', icon: 'almonds'},
-  herbs: {label: 'Örter & kryddor', icon: 'spice-mills'},
+  herbs: {label: 'Örter & kryddor', icon: 'pepper'},
   pantry: {label: 'Olja & såser', icon: 'olive-oil'}
 };
 
@@ -20,27 +20,27 @@ const foodGroups = {
 // `label` names the category in the filter, `name` is used for a single recipe when it differs.
 // Diet, cuisine, occasion and the like are tags, not categories. Quick is decided by `time`.
 const mealTypes = {
-  main: {label: 'Huvudrätter', name: 'Huvudrätt', icon: 'serving-cloche'},
+  main: {label: 'Huvudrätter', name: 'Huvudrätt', icon: 'serving-cloche-1'},
   soup: {label: 'Soppor', name: 'Soppa', icon: 'soup-bowl'},
-  salad: {label: 'Sallader', name: 'Sallad', icon: 'salad-bowl'},
-  sandwich: {label: 'Smörgåsar', name: 'Smörgås', icon: 'sandwich-halves'},
-  starter: {label: 'Förrätter', name: 'Förrätt', icon: 'shrimp-entree'},
+  salad: {label: 'Sallader', name: 'Sallad', icon: 'salad'},
+  sandwich: {label: 'Smörgåsar', name: 'Smörgås', icon: 'sandwiches'},
+  starter: {label: 'Förrätter', name: 'Förrätt', icon: 'shrimp-plate'},
   side: {label: 'Tillbehör', icon: 'potato-wedges'},
-  sauce: {label: 'Såser & röror', icon: 'ramekin-with-dip'},
-  breakfast: {label: 'Frukost & brunch', icon: 'sunny-side-up-egg'},
+  sauce: {label: 'Såser & röror', icon: 'dip'},
+  breakfast: {label: 'Frukost & brunch', icon: 'fried-egg'},
   snack: {label: 'Mellanmål', icon: 'bananas'},
-  party: {label: 'Mingelmat & tilltugg', icon: 'cocktail-picks'},
-  dessert: {label: 'Desserter', name: 'Dessert', icon: 'sundae-glass'},
+  party: {label: 'Mingelmat & tilltugg', icon: 'appetizer-picks'},
+  dessert: {label: 'Desserter', name: 'Dessert', icon: 'sundae'},
   baking: {label: 'Fika & bakning', icon: 'cinnamon-bun'},
   bread: {label: 'Bröd', icon: 'bread-loaf'},
   candy: {label: 'Godis & konfekt', icon: 'candy'},
-  drink: {label: 'Drycker', name: 'Dryck', icon: 'tumbler-drink'},
+  drink: {label: 'Drycker', name: 'Dryck', icon: 'drink'},
   preserves: {label: 'Sylt, saft & inlagt', icon: 'jam-jar'},
-  basics: {label: 'Grundrecept', icon: 'whisk-and-bowl'},
+  basics: {label: 'Grundrecept', icon: 'bowl-and-whisk'},
   // Not a dish type: food that children eat and help make. List it after a recipe's dish type,
   // so the card still shows what kind of dish it is.
   kids: {label: 'Barnvänligt', icon: 'teddy-bear'},
-  spa: {label: 'Hemmaspa & behandlingar', name: 'Hemmaspa', icon: 'towel-and-candle', badge: 'HEMMASPA', action: 'Visa behandling'},
+  spa: {label: 'Hemmaspa & behandlingar', name: 'Hemmaspa', icon: 'rolled-towels', badge: 'HEMMASPA', action: 'Visa behandling'},
   household: {label: 'Hushåll & rengöring', icon: 'spray-bottle', badge: 'HUSHÅLL & RENGÖRING', action: 'Visa instruktioner'},
   pets: {label: 'Husdjur', icon: 'dog-bone', badge: 'HUSDJUR'}
 };

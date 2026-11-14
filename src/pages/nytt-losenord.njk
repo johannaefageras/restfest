@@ -8,13 +8,20 @@ const noindex = true;
 const modules = ['auth-forms.js'];
 const permalink = 'nytt-losenord.html';
 ---
-  <main id="main" class="wrap account-page" data-auth-page="password">
-    <section class="account-card" aria-labelledby="auth-title">
-      <img class="account-art" src="assets/illustrations/pencil.svg" alt="" width="72" height="72">
-      <h1 id="auth-title"><span class="marker">Nytt lösenord.</span></h1>
+  <main id="main" class="wrap account-page account-auth" data-auth-page="password">
+    <section class="account-card auth-card" aria-labelledby="auth-title">
+      <header class="greeting archive-greeting">
+        <div>
+          <h1 id="auth-title"><span class="marker">Nytt lösenord.</span></h1>
+          <p class="greeting-intro">Välj ett nytt lösenord, så är du snart tillbaka bland dina sparade recept.</p>
+        </div>
+        <div class="greeting-aside" aria-hidden="true">
+          <div class="doodle-lineup"><img src="assets/icons/password.svg" alt="" width="60" height="60"></div>
+        </div>
+      </header>
       <p class="account-status" role="status" data-password-wait>Kontrollerar länken …</p>
 
-      <form class="account-form" data-password-form novalidate hidden>
+      <form class="account-form add-card" data-password-form novalidate hidden>
         <div class="account-field">
           <label for="new-password">Nytt lösenord</label>
           <input id="new-password" name="password" type="password" autocomplete="new-password" required aria-describedby="new-password-hint">
@@ -24,7 +31,7 @@ const permalink = 'nytt-losenord.html';
         <button class="button primary account-wide" type="submit">Spara lösenordet</button>
       </form>
 
-      <div data-password-expired hidden>
+      <div class="pantry-panel" data-password-expired hidden>
         <p class="account-intro">Länken har gått ut eller redan använts.</p>
         <p class="account-links"><a href="logga-in.html">Till inloggningen</a>, där du kan be om en ny.</p>
       </div>

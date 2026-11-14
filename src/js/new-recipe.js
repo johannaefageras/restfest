@@ -39,9 +39,9 @@ const tagLabel = (tag) => recipeTagLabels[tag] ?? tag;
 const tagPath = (tag) => `tagg/${slug(tagLabel(tag))}.html`;
 
 const factIcons = {
-  Förberedelse: "prep-time",
-  Tillagning: "cook-time",
-  Portioner: "serves",
+  Förberedelse: "cutting-board",
+  Tillagning: "timer",
+  Portioner: "cutlery",
   Nivå: "difficulty-level",
 };
 
@@ -113,7 +113,7 @@ function photoHtml(recipe, image) {
     return `<img src="${escapeHtml(image.url)}" alt="${escapeHtml(recipe.alt)}" width="1536" height="864">`;
   }
   return `<div class="new-recipe-photo-wait" role="status">
-    <img src="${squareIconPath("camera-2")}" alt="" width="48" height="48">
+    <img src="${squareIconPath("camera")}" alt="" width="48" height="48">
     <p>Fotot tas fram. Det brukar ta en minut.</p>
   </div>`;
 }

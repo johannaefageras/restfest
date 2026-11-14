@@ -9,14 +9,20 @@ const noindex = true;
 const modules = ['auth-forms.js'];
 const permalink = 'logga-in.html';
 ---
-  <main id="main" class="wrap account-page" data-auth-page="login">
-    <section class="account-card" aria-labelledby="auth-title">
-      <img class="account-art" src="assets/illustrations/cook-book.svg" alt="" width="72" height="72">
-      <h1 id="auth-title"><span class="marker" data-auth-title>Logga in.</span></h1>
-      <p class="account-intro" data-auth-intro>Med ett konto får du en egen receptbok, som följer med mellan mobilen och datorn.</p>
+  <main id="main" class="wrap account-page account-auth" data-auth-page="login">
+    <section class="account-card auth-card" aria-labelledby="auth-title">
+      <header class="greeting archive-greeting">
+        <div>
+          <h1 id="auth-title"><span class="marker" data-auth-title>Logga in.</span></h1>
+          <p class="greeting-intro" data-auth-intro>Med ett konto får du en egen receptbok, som följer med mellan mobilen och datorn.</p>
+        </div>
+        <div class="greeting-aside" aria-hidden="true">
+          <div class="doodle-lineup"><img src="assets/icons/padlock.svg" alt="" width="60" height="60"></div>
+        </div>
+      </header>
 
-      <div data-auth-main>
-        <button class="button account-wide" type="button" data-google>Fortsätt med Google</button>
+      <div class="add-card" data-auth-main>
+        <button class="button account-wide" type="button" data-google><img src="assets/icons/google.svg" alt="" width="20" height="20">Fortsätt med Google</button>
         <p class="account-or"><span>eller</span></p>
         <form class="account-form" data-auth-form novalidate>
           <div class="account-field" data-only="skapa" hidden>
@@ -41,7 +47,7 @@ const permalink = 'logga-in.html';
         <p class="account-hint" data-only="skapa" hidden>Vi sparar din e-postadress, ditt namn och det du lägger i receptboken. <a href="integritet.html">Så hanterar vi dina uppgifter</a>.</p>
       </div>
 
-      <form class="account-form" data-reset-form novalidate hidden>
+      <form class="account-form add-card" data-reset-form novalidate hidden>
         <p class="account-intro">Skriv din e-postadress, så skickar vi en länk där du väljer ett nytt lösenord.</p>
         <div class="account-field">
           <label for="reset-email">E-postadress</label>
@@ -53,7 +59,7 @@ const permalink = 'logga-in.html';
         <p class="account-links"><button class="text-button" type="button" data-reset-back><i class="fas fa-arrow-left" aria-hidden="true"></i> Till inloggningen</button></p>
       </form>
 
-      <div class="account-sent" data-auth-sent hidden>
+      <div class="account-sent photo-card" data-auth-sent hidden>
         <p role="status" data-sent-text></p>
         <p class="account-hint">Kom inget mejl? Titta i skräpposten, eller skicka länken igen.</p>
         <p class="account-error" role="alert" data-sent-error hidden></p>

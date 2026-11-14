@@ -9,22 +9,36 @@ const noindex = true;
 const modules = ['profile.js'];
 const permalink = 'konto.html';
 ---
-  <main id="main" class="wrap account-page" data-profile-page="konto">
+  <main id="main" class="wrap account-page account-dashboard" data-profile-page="konto">
     <section class="account-card" aria-labelledby="account-title">
-      <h1 id="account-title"><span class="marker">Konto.</span></h1>
+      <header class="greeting archive-greeting">
+        <div>
+          <h1 id="account-title"><span class="marker">Konto.</span></h1>
+          <p class="greeting-intro">Här tar du hand om din inloggning, byter lösenord och håller dina uppgifter uppdaterade.</p>
+        </div>
+        <div class="greeting-aside" aria-hidden="true">
+          <div class="doodle-lineup"><img src="assets/icons/gear.svg" alt="" width="60" height="60"></div>
+        </div>
+      </header>
       {%- set current = 'konto' %}
       {% include "account-nav.njk" %}
       <p class="account-status" role="status" data-account-wait>Hämtar ditt konto …</p>
 
-      <div data-account-sections hidden>
-        <section class="account-section" aria-labelledby="account-login-title">
-          <h2 id="account-login-title">Inloggning</h2>
-          <p class="account-email" data-account-email></p>
-          <p class="account-hint" data-account-methods></p>
+      <div class="account-settings-grid" data-account-sections hidden>
+        <section class="account-section pantry-panel account-login-summary" aria-labelledby="account-login-title">
+          <span class="account-login-icon"><img src="assets/icons/user-profile.svg" alt="" width="32" height="32"></span>
+          <div>
+            <h2 id="account-login-title">Inloggad som</h2>
+            <p class="account-email" data-account-email></p>
+            <p class="account-hint" data-account-methods></p>
+          </div>
         </section>
 
-        <section class="account-section" aria-labelledby="account-email-title">
+        <section class="account-section account-credentials add-card" aria-labelledby="account-email-title">
           <h2 id="account-email-title">Byt e-postadress</h2>
+          <div class="account-section-copy">
+            <p class="account-panel-intro">En ny adress? Vi skickar en länk så att du kan bekräfta bytet.</p>
+          </div>
           <form class="account-form" data-email-form novalidate>
             <div class="account-field">
               <label for="account-new-email">Ny e-postadress</label>
@@ -36,9 +50,12 @@ const permalink = 'konto.html';
           </form>
         </section>
 
-        <section class="account-section" aria-labelledby="account-password-title">
+        <section class="account-section account-credentials photo-card" aria-labelledby="account-password-title">
           <h2 id="account-password-title" data-password-title>Byt lösenord</h2>
-          <p class="account-hint" data-password-intro hidden>Med ett lösenord kan du också logga in utan Google.</p>
+          <div class="account-section-copy">
+            <p class="account-panel-intro">Välj ett lösenord som du bara använder här.</p>
+            <p class="account-hint" data-password-intro hidden>Med ett lösenord kan du också logga in utan Google.</p>
+          </div>
           <form class="account-form" data-password-change novalidate>
             <div class="account-field">
               <label for="account-new-password">Nytt lösenord</label>
@@ -51,16 +68,20 @@ const permalink = 'konto.html';
           </form>
         </section>
 
-        <section class="account-section" aria-labelledby="account-out-title">
-          <h2 id="account-out-title">Logga ut</h2>
-          <p class="account-hint">Du loggas ut på den här enheten. Receptboken finns kvar i ditt konto.</p>
+        <section class="account-section pantry-panel account-action-row" aria-labelledby="account-out-title">
+          <div>
+            <h2 id="account-out-title">Klar för den här gången?</h2>
+            <p class="account-hint">Logga ut på den här enheten. Din receptbok finns kvar till nästa gång.</p>
+          </div>
           <div class="account-submit"><button class="button" type="button" data-sign-out>Logga ut</button></div>
         </section>
 
-        <section class="account-section" aria-labelledby="account-delete-title">
-          <h2 id="account-delete-title">Ta bort kontot</h2>
-          <p class="account-hint">Kontot, din profil och din receptbok tas bort. Det går inte att ångra.</p>
-          <div class="account-submit"><button class="button" type="button" data-delete-open aria-haspopup="dialog">Ta bort kontot …</button></div>
+        <section class="account-section pantry-panel account-action-row" aria-labelledby="account-delete-title">
+          <div>
+            <h2 id="account-delete-title">Ta bort kontot</h2>
+            <p class="account-hint">Kontot, din profil och din receptbok tas bort. Det går inte att ångra.</p>
+          </div>
+          <div class="account-submit"><button class="button account-danger" type="button" data-delete-open aria-haspopup="dialog">Ta bort kontot …</button></div>
         </section>
       </div>
       <noscript><p class="account-error">Sidan behöver JavaScript.</p></noscript>
@@ -73,7 +94,7 @@ const permalink = 'konto.html';
         <p class="account-error" role="alert" data-delete-error hidden></p>
         <div class="account-dialog-buttons">
           <button class="button" type="button" data-delete-cancel autofocus>Avbryt</button>
-          <button class="button primary" type="button" data-delete-confirm>Ta bort kontot</button>
+          <button class="button primary account-danger" type="button" data-delete-confirm>Ta bort kontot</button>
         </div>
       </div>
     </dialog>

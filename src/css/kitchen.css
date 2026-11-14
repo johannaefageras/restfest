@@ -1875,6 +1875,11 @@ body:has(#shopping-dialog[open]) {
   margin: 0 auto 10px;
 }
 
+/* The wide cutting board needs more width to balance the taller fact icons. */
+.recipe-facts dt > img[src$="/cutting-board.svg"] {
+  width: 64px;
+}
+
 .recipe-facts dd {
   margin: 4px 0 0;
   font-size: 14px;
@@ -2091,6 +2096,9 @@ body:has(#shopping-dialog[open]) {
     width: 36px;
     height: 36px;
     margin-bottom: 8px;
+  }
+  .recipe-facts dt > img[src$="/cutting-board.svg"] {
+    width: 52px;
   }
 }
 
@@ -2733,21 +2741,31 @@ body:has(#shopping-dialog[open]) {
   }
 }
 
-/* The account pages (logga-in, nytt-losenord, receptbok, profil, konto, integritet; HANDOFF.md,
-   "Konton och receptbok"). Forms sit in one narrow column; fields are drawn like the fridge field
-   on the home page: a 2px ink line with the buttons' uneven corners. */
+/* Account pages use the same greeting, add-card, photo-card and pantry-panel as the
+   archive and kitchen. Only their form layout and controls are specific to accounts. */
 .wrap.account-page {
   max-width: calc(460px + 64px);
-  padding-block: clamp(28px, 6vw, 56px) 56px;
+  padding-block: clamp(24px, 4vw, 44px) clamp(48px, 6vw, 80px);
+}
+.wrap.account-dashboard {
+  max-width: 1216px;
+  padding-top: 0;
+}
+.wrap.account-auth {
+  max-width: 660px;
+  padding-top: 0;
+}
+.account-card {
+  min-width: 0;
 }
 .account-card > h1 {
   font-size: clamp(32px, 7vw, 40px);
 }
-.account-art {
-  width: 72px;
-  height: 72px;
-  margin-bottom: 14px;
-  transform: rotate(-4deg);
+.account-card .greeting > div:first-child {
+  min-width: 0;
+}
+.account-card .greeting-intro {
+  max-width: 51ch;
 }
 .account-intro {
   margin-top: 12px;
@@ -2758,7 +2776,7 @@ body:has(#shopping-dialog[open]) {
 .account-card > [data-auth-main],
 .account-card > form,
 .account-card > .account-sent {
-  margin-top: 26px;
+  margin-top: 0;
 }
 .account-form {
   display: flex;
@@ -2768,7 +2786,7 @@ body:has(#shopping-dialog[open]) {
 .account-field label {
   display: block;
   margin-bottom: 6px;
-  font: var(--font-weight-bold) 12px/1.4 var(--font-label);
+  font: var(--font-weight-bold) 13px/1.4 var(--font-label);
 }
 .account-optional {
   color: var(--muted);
@@ -2778,13 +2796,19 @@ body:has(#shopping-dialog[open]) {
 .account-field select {
   width: 100%;
   min-width: 0;
-  min-height: 46px;
+  min-height: 48px;
   border: 2px solid var(--ink);
   border-radius: var(--radius-button);
   padding: 9px 14px;
   background: var(--surface);
   /* 16px keeps iOS from zooming in when the field gets focus. */
+  font: inherit;
   font-size: 16px;
+  line-height: 1.5;
+}
+.account-field input::placeholder {
+  color: var(--muted);
+  opacity: 1;
 }
 .account-field input:focus-visible,
 .account-field select:focus-visible {
@@ -2792,10 +2816,10 @@ body:has(#shopping-dialog[open]) {
   outline-offset: 2px;
 }
 .account-hint {
-  margin-top: 6px;
+  margin-top: 8px;
   color: var(--muted);
   font-size: 13px;
-  line-height: 1.45;
+  line-height: 1.55;
 }
 .account-hint a,
 .account-links a,
@@ -2857,14 +2881,14 @@ body:has(#shopping-dialog[open]) {
   margin-top: 14px;
 }
 
-/* The menu on the signed-in pages (_includes/account-nav.njk): the header's label type, with the
-   current page underlined in yellow like the header's own menu, and "Logga ut" at the far end. */
+/* The menu follows the header's plain links and yellow underline. */
 .account-tabs {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  column-gap: 22px;
-  margin-bottom: 22px;
+  gap: 0 22px;
+  margin-block: 0 28px;
+  padding-bottom: 8px;
   border-bottom: 1px solid var(--rule);
   font-family: var(--font-label);
   font-size: 13px;
@@ -2873,6 +2897,7 @@ body:has(#shopping-dialog[open]) {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
+  font-weight: var(--font-weight-semibold);
 }
 .account-tabs > a:hover {
   text-decoration: underline;
@@ -2886,26 +2911,90 @@ body:has(#shopping-dialog[open]) {
 }
 .account-tabs > .text-button {
   margin-left: auto;
+  flex: none;
+}
+
+/* Keep text on the kitchen's green and yellow cards as dark as their body copy. */
+.account-card :is(.add-card, .photo-card) :is(.account-hint, .account-intro, .account-panel-intro) {
+  color: var(--ink);
+}
+.auth-card .account-links + .account-hint {
+  margin-top: 22px;
 }
 
 /* Min receptbok (pages/receptbok.njk). The cards and their grid are the archive's. */
-.book-page .book-filter {
-  margin-bottom: 12px;
+body:has(> .book-page) {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+.book-page {
+  flex: 1 0 auto;
+  width: 100%;
+}
+body:has(> .book-page) > :is(.site-header, .site-footer) {
+  flex-shrink: 0;
+}
+.book-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 16px;
+}
+.book-status {
+  margin-bottom: 16px;
+  color: var(--muted);
+}
+.book-status:empty {
+  display: none;
+}
+.book-page .recipe-grid {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 .book-page .archive-match {
   color: var(--muted);
 }
-.book-empty,
 .book-signed-out {
   max-width: 560px;
   padding-block: 8px 24px;
   font-size: 15px;
   line-height: 1.5;
 }
-.book-empty-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.book-empty {
+  margin-top: 6px;
+}
+.book-start-grid {
+  display: grid;
+  gap: 16px;
+}
+.book-start-card > img {
+  margin-bottom: 16px;
+}
+.book-start-card .card-intro {
+  margin-bottom: 22px;
+}
+.book-start-card .button {
+  align-self: flex-start;
+  margin-top: auto;
+}
+@media (min-width: 800px) {
+  .book-start-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 519px) {
+  .book-start-card .button {
+    align-self: stretch;
+  }
+  .book-toolbar > .text-button {
+    justify-content: flex-start;
+  }
+}
+.book-signed-out > p + p {
   margin-top: 16px;
 }
 .book-signed-out .meta {
@@ -2927,16 +3016,57 @@ a.dialog-save {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 14ch;
+  max-width: 18ch;
+  padding-left: 12px;
 }
 .account-who:not([hidden]) + .text-button {
   margin-left: 0;
 }
-.account-card > .account-tabs {
-  margin-top: 18px;
+.profile-layout {
+  display: grid;
+  align-items: start;
+  gap: 22px;
 }
-.account-card > .account-tabs + .account-intro {
-  margin-top: 0;
+.profile-main,
+.profile-aside {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.account-panel {
+  min-width: 0;
+}
+.account-panel > h2,
+.account-group legend {
+  margin-bottom: 18px;
+  font-size: 22px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+.account-panel-intro {
+  margin: -8px 0 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.account-panel-art {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 20px;
+  transform: rotate(-5deg);
+}
+.account-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 4px 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.account-note img {
+  flex: none;
 }
 .account-group {
   margin: 0;
@@ -2946,23 +3076,24 @@ a.dialog-save {
 }
 .account-group legend {
   padding: 0;
-  margin-bottom: 8px;
-  font: var(--font-weight-bold) 12px/1.4 var(--font-label);
 }
 .account-checks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-bottom: 14px;
 }
 /* Drawn like the archive's filter buttons, green when ticked. */
 .account-check {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 40px;
-  padding: 5px 12px 5px 10px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 12px;
   border: 1.5px solid var(--line);
   border-radius: var(--radius-button);
+  background: var(--surface);
   font-size: 14px;
   font-weight: var(--font-weight-bold);
   cursor: pointer;
@@ -2978,7 +3109,12 @@ a.dialog-save {
   cursor: default;
   opacity: 0.75;
 }
+.account-check:has(input:focus-visible) {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
 .account-check input {
+  flex: none;
   width: 18px;
   height: 18px;
   margin: 0;
@@ -3034,25 +3170,98 @@ a.dialog-save {
   align-items: center;
   gap: 12px 16px;
 }
-.account-section {
-  padding-block: 22px;
+.profile-save,
+.profile-layout > .account-error {
+  grid-column: 1 / -1;
+}
+.profile-save {
+  padding-top: 20px;
   border-top: 1px solid var(--rule);
 }
-.account-section:first-child {
+.profile-save .button {
+  min-width: 180px;
+}
+.profile-save .account-status {
+  font-weight: var(--font-weight-semibold);
+}
+.account-settings-grid {
+  display: grid;
+  gap: 16px;
+}
+.account-section {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.account-section > .account-form {
+  flex: 1;
+}
+.account-section > .account-form > .account-submit {
+  margin-top: auto;
   padding-top: 4px;
-  border-top: 0;
 }
 .account-section > h2 {
-  margin-bottom: 10px;
-  font-size: 20px;
+  margin-bottom: 18px;
+  font-size: 22px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
 }
 .account-section > .account-hint {
   margin: 0 0 14px;
 }
+.account-section-copy {
+  margin-bottom: 18px;
+}
+.account-section-copy > .account-panel-intro {
+  margin: -8px 0 0;
+}
 .account-email {
-  font-size: 16px;
+  font-size: clamp(16px, 2.5vw, 20px);
   font-weight: var(--font-weight-bold);
   overflow-wrap: anywhere;
+}
+.account-login-summary {
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+}
+.account-login-summary > div {
+  min-width: 0;
+}
+.account-login-summary h2 {
+  margin-bottom: 4px;
+  color: var(--muted);
+  font: var(--font-weight-medium) 12px/1.5 var(--font-label);
+}
+.account-login-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+}
+.account-action-row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 28px;
+}
+.account-action-row h2 {
+  font-size: 18px;
+}
+.account-action-row .account-hint {
+  max-width: 58ch;
+}
+.account-action-row .account-submit {
+  flex: none;
+}
+.button.account-danger {
+  background: #c43d32;
+  color: var(--surface);
+}
+.button.account-danger:hover {
+  background: #ac3027;
 }
 .account-dialog {
   max-width: 460px;
@@ -3074,6 +3283,71 @@ a.dialog-save {
   justify-content: flex-end;
   gap: 10px;
   margin-top: 22px;
+}
+
+@media (min-width: 800px) {
+  .profile-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.52fr);
+  }
+  .account-settings-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* Share heading, description and form rows, including the extra Google sign-in copy. */
+  .account-credentials {
+    display: grid;
+    container-type: normal;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    row-gap: 0;
+  }
+  .account-login-summary,
+  .account-action-row {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 699px) {
+  .account-action-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media (max-width: 519px) {
+  .account-tabs {
+    gap: 0 16px;
+    margin-bottom: 22px;
+    font-size: 12px;
+  }
+  .account-who {
+    display: none;
+  }
+  .account-tabs > .text-button,
+  .account-who:not([hidden]) + .text-button {
+    margin-left: auto;
+    font-size: 12px;
+  }
+  .account-checks {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .account-login-summary {
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .account-login-icon {
+    width: 42px;
+    height: 42px;
+  }
+  .account-login-icon img {
+    width: 26px;
+    height: 26px;
+  }
+  .profile-save .button {
+    flex: 1;
+  }
+}
+@media (max-width: 359px) {
+  .account-add {
+    flex-direction: column;
+  }
 }
 
 /* Integritet (pages/integritet.njk): running text, a little wider than the forms. */

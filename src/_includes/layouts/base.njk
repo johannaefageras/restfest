@@ -23,7 +23,7 @@
 {%- set inRecipes = page.url == '/receptarkiv.html' or page.url == '/mer-an-mat.html' or page.url.startsWith('/typ/') or page.url.startsWith('/kategori/') or page.url.startsWith('/tagg/') -%}
 {%- macro recipeMenu(types, base, url, current, icon) %}
         <details class="nav-menu">
-          <summary class="nav-link{% if current %} is-current{% endif %}">{% if icon %}<img src="{{ base }}assets/icons/recipes.svg" alt="" width="20" height="20">{% endif %}<span>Recept</span><i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+          <summary class="nav-link{% if current %} is-current{% endif %}">{% if icon %}<img src="{{ base }}assets/icons/cook-book.svg" alt="" width="20" height="20">{% endif %}<span>Recept</span><i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
           <ul class="nav-menu-panel">
             {%- for type in types %}
             <li><a href="{{ base }}{{ type.menu.path }}" data-type="{{ type.key }}"{% if url == '/' + type.menu.path %} aria-current="page"{% endif %}><img src="{{ base }}assets/icons/{{ type.icon }}.svg" alt="" width="32" height="32"><span><strong>{{ type.menu.label }}</strong><small>{{ type.menu.note }}</small></span></a></li>
@@ -83,7 +83,7 @@
       </a>
       <nav aria-label="Huvudmeny">
         {{- recipeMenu(collections.recipeTypes, base, page.url, inRecipes, true) }}
-        <a class="nav-link" href="{{ homeUrl }}#sa-funkar-det"><img src="{{ base }}assets/icons/information-symbol.svg" alt="" width="20" height="20">Så funkar det</a>
+        <a class="nav-link" href="{{ homeUrl }}#sa-funkar-det"><img src="{{ base }}assets/icons/info.svg" alt="" width="20" height="20">Så funkar det</a>
         {%- if ai.accounts %}
         {#- On phones the account link sits in the menu row; from 520px it is a button beside the others. #}
         <a class="nav-link account-menu-link" href="{{ base }}logga-in.html" data-account-link><span class="when-signed-out">Logga in</span><span class="when-signed-in">Konto</span></a>
@@ -105,7 +105,7 @@
         </button>
         {%- if ai.accounts %}
         <a class="saved-nav account-nav" href="{{ base }}logga-in.html" aria-label="Logga in" data-account-link>
-          <img src="{{ base }}assets/icons/account.svg" alt="" width="24" height="24">
+          <img src="{{ base }}assets/icons/user-profile.svg" alt="" width="24" height="24">
           <span class="account-label when-signed-out">Logga in</span><span class="account-label when-signed-in">Konto</span>
         </a>
         {%- endif %}

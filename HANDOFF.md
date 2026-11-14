@@ -197,7 +197,7 @@ Related behaviour:
 
 **Icons and illustrations:** the colourful pictures are SVG, used directly in `<img>` elements. They live in two folders under `src/assets/`, split by what they're for (paths below are as served):
 
-- `assets/icons/*.svg`: icons drawn on a square canvas, so a row of them lines up at the same size. Menu, buttons, categories, ingredient chips, recipe fact boxes, filters. Templates and the `squareIconPath(name)` helper in `app.js` load them by name, so a file name here is part of the code: rename one and grep for the old name first.
+- `assets/icons/*.svg`: icons with artboards fitted to the artwork. CSS and image dimensions keep them in consistent UI slots, with their proportions preserved. Menu, buttons, categories, ingredient chips, recipe fact boxes, filters and account pages. Templates and the `squareIconPath(name)` helper in `app.js` load them by name, so a file name here is part of the code: rename one and grep for the old name first. This is the active icon collection; the padded square versions in `assets/svgs/` are no longer referenced.
 - `assets/illustrations/*.svg`: pictures cropped to the drawing, for when the picture is the point. `noodles` (the hero), `fridge-closed` (the menu), `fridge-viewfinder` (Fota kylen), and `pencil`, `camera`, `light-bulb`, `grocery-basket` and `cook-book` ("Så funkar det": the four steps and the archive note under them). `fridge-opened`, `serving-cloche` and `recipe-archive` are unused since that section went from three steps to four. The bowl and the fridges exist in all nine palette colours; the site uses the blue ones everywhere, so they read as the same set. File names say what the picture is, not its colour, so changing colour means replacing the files.
 - `assets/favicon.png`.
 
@@ -206,9 +206,11 @@ Related behaviour:
 **Small UI icons** come from the Font Awesome font: arrows, chevrons, close and remove buttons, and the save heart. The colourful icons use SVG.
 
 - **Markup:** `<i class="fas fa-arrow-left" aria-hidden="true"></i>`. `fas` is bold, `far` regular. Arrows, chevrons and close buttons are bold, because it matches the label font's strokes. The save heart is `far` (outline) when not saved and `fas` (filled) when saved. In `app.js` and `kitchen.js`, use `faIcon(name, weight)`.
-- **Icons in use:** `arrow-left` (back links), `arrow-up-right` (the ↗ links), `arrow-up` (home page footer), `chevron-down` (`<details>` summaries; it turns over when open), `xmark`, `heart`, and on a recipe's ingredients `plus` (grey: add to the shopping list) and `check` (once it's on the list), both bold. On the home page, "Lägg till råvara" has a bold `plus` and "Fota eller välj bilder" a bold `camera` (`\ec36`, added to `icons.css` and to the list in `tools/icons.mjs`).
+- **Icons in use:** `arrow-left` (back links), `arrow-up-right` (the ↗ links), `arrow-up` (home page footer), `chevron-down` (`<details>` summaries; it turns over when open), `xmark`, `heart`, and on a recipe's ingredients `plus` (grey: add to the shopping list) and `check` (once it's on the list), both bold. On the home page, "Lägg till råvara" has a bold `plus`; "Fota eller välj bilder" uses the illustrated `assets/icons/camera.svg`.
 
-**Recipe fact boxes:** the boxes under a recipe's description (`recipe.njk`) show an illustrated icon from `assets/icons/`, then the label, then the value, all centered. Each label has one icon: Förberedelse `prep-time`, Tillagning `cook-time`, Portioner `serves`, Nivå `difficulty-level`, Räcker till `glass-jar`, Verkningstid `kitchen-timer`. Mer än mat recipes (`recipe.food` false) use `bubbles-and-sparkles` for Förberedelse and `difficulty-level-pink` for Nivå. A label not in that list shows without an icon.
+**Recipe fact boxes:** the boxes under a recipe's description (`recipe.njk`) show an illustrated icon from `assets/icons/`, then the label, then the value, all centered. Each label has one icon: Förberedelse `cutting-board`, Tillagning `timer`, Portioner `cutlery`, Nivå `difficulty-level`, Räcker till `jam-jar`, Verkningstid `kitchen-timer`. Mer än mat recipes (`recipe.food` false) use `bubbles` for Förberedelse and `difficulty-level-pink` for Nivå. A label not in that list shows without an icon. `new-recipe.js` uses the same food fact icons for generated recipes.
+
+**Additional illustrated icons:** the recipe menu and recipe book use `cook-book`, the archive uses `recipe-archive-box`, and tag listings use `hashtag`. The recipe book's filters add `cook-book`, `magic-wand` and `recipe-archive-box`; the new-recipe prompt uses `magic-wand`. Account page headings use `padlock` (sign-in), `password` (new password), `user-profile-purple` (profile) and `gear` (settings). The account button and sign-in summary use `user-profile`, and Google sign-in loads `assets/icons/google.svg`.
 
 - **`src/css/icons.css` is generated** by `node tools/icons.mjs`. The script cuts both fonts down to the listed icons (2.9 KB, inlined) from the full font in `fa/`, which is about 640 KB. To add an icon, add its name to the list in the script, run it and commit `src/css/icons.css`. It needs `fa/` and `pyftsubset` (`pip install fonttools brotli`).
 - **`fa/` is in `.gitignore`:** it's the full Font Awesome Pro font, and the repo is public.
@@ -316,7 +318,7 @@ The design and the plan it was built from are in `docs/superpowers/specs/2026-11
 | `supabase/functions/delete-account` | Deletes the caller's user; the database removes the rest |
 | `supabase/templates/` | The three mails in Swedish, pasted into the dashboard by hand (its README says how) |
 | `tools/standin/` | A stand-in backend and two checks that need no real project (see "Testing" below) |
-| `src/assets/icons/account.svg` | The account button's icon. Written for this, since the icon set has no person; swap the file for a better one |
+| `src/assets/icons/user-profile.svg` | The account button and sign-in summary icon from the active illustrated set |
 
 **How signing in works:**
 
