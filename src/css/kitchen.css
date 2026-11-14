@@ -535,6 +535,11 @@
 .archive-search {
   max-width: 650px;
 }
+.archive-search-field input:focus-visible {
+  border-color: var(--ink);
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
 
 .greeting-intro a,
 .archive-elsewhere a {
