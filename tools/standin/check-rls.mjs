@@ -60,6 +60,16 @@ r = await as('authenticated', A, `update profiles set diets = '{Vegan}', avoid =
 check('A updates only their own profile', Array.isArray(r) && r.length === 1 && r[0].id === A, r);
 r = await as('authenticated', A, `update profiles set servings = 3 where id = '${B}' returning id`);
 check("A's update of B's profile changes nothing", Array.isArray(r) && r.length === 0, r);
+for (const minutes of [15, 30, 45, null]) {
+  r = await as('authenticated', A, `update profiles set max_cooking_minutes = $1 where id = '${A}' returning max_cooking_minutes`, [minutes]);
+  check(`A can save the cooking-time preference ${minutes ?? 'no hurry'}`, Array.isArray(r) && r.length === 1 && r[0].max_cooking_minutes === minutes, r);
+}
+r = await as('authenticated', A, `update profiles set max_cooking_minutes = 15 where id = '${B}' returning id`);
+check("A cannot change B's cooking-time preference", Array.isArray(r) && r.length === 0, r);
+r = await as('authenticated', A, `update profiles set diets = '{Lactose free}' where id = '${A}' returning diets`);
+check('A can save lactose-free as their only diet', Array.isArray(r) && JSON.stringify(r[0]?.diets) === '["Lactose free"]', r);
+r = await as('authenticated', A, `update profiles set diets = '{Vegetarian,Vegan,Dairy free,Egg free,Gluten free,Lactose free}' where id = '${A}' returning diets`);
+check('A can save all six diets', Array.isArray(r) && r[0]?.diets.length === 6, r);
 r = await as('authenticated', A, `update profiles set id = '${B}' where id = '${A}'`);
 check('A cannot change the id column', denied(r), r);
 r = await as('authenticated', A, `insert into profiles (id) values ('33333333-3333-4333-8333-333333333333')`);
@@ -69,8 +79,9 @@ check('A cannot delete a profile', denied(r), r);
 for (const [name, sql] of [
   ['an unknown diet', `update profiles set diets = '{Keto}'`],
   ['31 foods', `update profiles set avoid = array(select 'f' || g from generate_series(1, 31) g)`],
-  ['the same diet many times over', `update profiles set diets = array(select 'Vegan' from generate_series(1, 6))`],
+  ['the same diet many times over', `update profiles set diets = array(select 'Vegan' from generate_series(1, 7))`],
   ['13 portions', `update profiles set servings = 13`],
+  ['an unsupported cooking time', `update profiles set max_cooking_minutes = 20`],
   ['a name of 81 characters', `update profiles set display_name = repeat('x', 81)`]
 ]) {
   r = await as('authenticated', A, sql);

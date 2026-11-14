@@ -2751,6 +2751,10 @@ body:has(#shopping-dialog[open]) {
   max-width: 1216px;
   padding-top: 0;
 }
+.account-dashboard .doodle-lineup img {
+  width: 64px;
+  height: 72px;
+}
 .wrap.account-auth {
   max-width: 660px;
   padding-top: 0;
@@ -2792,7 +2796,7 @@ body:has(#shopping-dialog[open]) {
   color: var(--muted);
   font-weight: var(--font-weight-body);
 }
-.account-field input,
+.account-field input:not(.recipe-servings-input),
 .account-field select {
   width: 100%;
   min-width: 0;
@@ -2810,8 +2814,9 @@ body:has(#shopping-dialog[open]) {
   color: var(--muted);
   opacity: 1;
 }
-.account-field input:focus-visible,
-.account-field select:focus-visible {
+.account-field input:not(.recipe-servings-input):focus-visible,
+.account-field select:focus-visible,
+.profile-servings-stepper:has(.recipe-servings-input:focus-visible) {
   outline: 2px solid var(--ink);
   outline-offset: 2px;
 }
@@ -2915,7 +2920,7 @@ body:has(#shopping-dialog[open]) {
 }
 
 /* Keep text on the kitchen's green and yellow cards as dark as their body copy. */
-.account-card :is(.add-card, .photo-card) :is(.account-hint, .account-intro, .account-panel-intro) {
+.account-card :is(.add-card, .photo-card, .profile-time-card) :is(.account-hint, .account-intro, .account-panel-intro) {
   color: var(--ink);
 }
 .auth-card .account-links + .account-hint {
@@ -2981,6 +2986,12 @@ body:has(> .book-page) > :is(.site-header, .site-footer) {
   align-self: flex-start;
   margin-top: auto;
 }
+@media (max-width: 1050px) {
+  .account-dashboard .doodle-lineup img {
+    width: 52px;
+    height: 58px;
+  }
+}
 @media (min-width: 800px) {
   .book-start-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3022,6 +3033,9 @@ a.dialog-save {
 .account-who:not([hidden]) + .text-button {
   margin-left: 0;
 }
+[data-profile-page="profil"] .doodle-lineup img {
+  transform: none;
+}
 .profile-layout {
   display: grid;
   align-items: start;
@@ -3032,6 +3046,48 @@ a.dialog-save {
   display: grid;
   gap: 20px;
   min-width: 0;
+}
+.profile-servings-stepper {
+  margin: 0;
+}
+.profile-time-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #b7a1e6;
+}
+.profile-time-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.profile-time-choice {
+  position: relative;
+  cursor: pointer;
+}
+.profile-time-choice > span {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  padding: 10px 8px;
+  border: 1.5px solid var(--control);
+  border-radius: var(--radius-button);
+  background: var(--surface);
+  font-size: 13px;
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+}
+.profile-time-choice:hover > span {
+  border-color: var(--ink);
+}
+.profile-time-choice > input:checked + span {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--surface);
+}
+.profile-time-choice > input:focus-visible + span {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 .account-panel {
   min-width: 0;
@@ -3288,6 +3344,10 @@ a.dialog-save {
 @media (min-width: 800px) {
   .profile-layout {
     grid-template-columns: minmax(0, 1fr) minmax(300px, 0.52fr);
+  }
+  .profile-aside {
+    align-self: stretch;
+    grid-template-rows: auto minmax(min-content, 1fr) auto;
   }
   .account-settings-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

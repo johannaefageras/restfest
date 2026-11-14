@@ -20,7 +20,7 @@ function reset() {
   state = {
     users: new Map(),        // email → {id, email, password, confirmed, data, providers}
     tokens: new Map(),       // access token → email
-    profiles: new Map(),     // user id → {display_name, diets, avoid, servings}
+    profiles: new Map(),     // user id → {display_name, diets, avoid, servings, max_cooking_minutes}
     saved: [],               // {user_id, recipe_id, created_at}
     savedGenerated: [],      // {user_id, recipe_id, created_at}
     generated: new Map(),    // id → {recipe, image_status, image_path, hidden, created_at}
@@ -38,7 +38,7 @@ const now = () => new Date(clock += 1000).toISOString();
 function addUser(email, password, { confirmed = true, name = '', providers = ['email'] } = {}) {
   const user = { id: randomUUID(), email, password, confirmed, data: { display_name: name }, providers };
   state.users.set(email, user);
-  state.profiles.set(user.id, { display_name: name || null, diets: [], avoid: [], servings: null });
+  state.profiles.set(user.id, { display_name: name || null, diets: [], avoid: [], servings: null, max_cooking_minutes: null });
   return user;
 }
 const publicUser = user => ({

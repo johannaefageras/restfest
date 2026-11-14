@@ -1131,6 +1131,10 @@ export const data = {
       "label": "Kolhydratsnålt"
     },
     {
+      "key": "Lactose free",
+      "label": "Laktosfritt"
+    },
+    {
       "key": "Lunch",
       "label": "Lunch"
     },

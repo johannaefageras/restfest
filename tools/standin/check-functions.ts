@@ -100,12 +100,18 @@ check('no sign-in: prompt has no preferences', !state.claudePrompts[0]?.includes
 check('no sign-in: nothing added to a book', state.savedInserts.length === 0);
 
 reset();
-state.profile = {diets: ['Vegetarian'], avoid: ['koriander'], servings: 2};
+state.profile = {diets: ['Vegetarian'], avoid: ['koriander'], servings: 2, max_cooking_minutes: 30};
 r = await call(generate, {token: 'good-token'});
 check('signed in: saved is true', r.status === 200 && r.body.saved === true, r);
 check('signed in: prompt has the diet line', state.claudePrompts[0]?.includes('- Kost: vegetariskt.'), state.claudePrompts[0]);
 check('signed in: prompt has the foods and portions', state.claudePrompts[0]?.includes('"koriander"') && state.claudePrompts[0]?.includes('- Portioner: 2.'));
+check('signed in: prompt includes the total cooking-time budget', state.claudePrompts[0]?.includes('högst 30 minuter totalt, inklusive förberedelser och tillagning'));
 check('signed in: recipe added to the caller\'s book', JSON.stringify(state.savedInserts) === JSON.stringify([{user_id: '11111111-1111-4111-8111-111111111111', recipe_id: '22222222-2222-4222-8222-222222222222'}]), state.savedInserts);
+
+reset();
+state.profile = {diets: ['Lactose free'], avoid: [], servings: null};
+r = await call(generate, {token: 'good-token'});
+check('signed in: lactose-free reaches the recipe prompt independently of dairy-free', r.status === 200 && state.claudePrompts[0]?.includes('- Kost: laktosfritt.') && !state.claudePrompts[0]?.includes('mjölkfritt'));
 
 reset();
 r = await call(generate, {token: 'good-token'});

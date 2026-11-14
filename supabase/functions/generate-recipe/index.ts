@@ -21,7 +21,7 @@ import {
 // The caller's preferences as lines for Claude, or '' when they have none or can't be read: a recipe
 // without them is better than no recipe.
 async function preferencesFor(userId: string): Promise<string> {
-  const {data, error} = await db.from('profiles').select('diets, avoid, servings').eq('id', userId).maybeSingle();
+  const {data, error} = await db.from('profiles').select('diets, avoid, servings, max_cooking_minutes').eq('id', userId).maybeSingle();
   if (error) console.warn('Could not read the preferences:', error.message);
   return preferencesPrompt(cleanPreferences(data));
 }

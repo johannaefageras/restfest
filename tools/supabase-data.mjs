@@ -38,9 +38,9 @@ function frontMatter(source) {
 const recipeFiles = fs.readdirSync(file('src/recept/')).filter(name => name.endsWith('.md'));
 const recipes = recipeFiles.map(name => ({id: name.replace(/\.md$/, ''), ...frontMatter(fs.readFileSync(file(`src/recept/${name}`), 'utf8'))}));
 
-// Tags that dinner recipes in the archive use, so a new recipe can't get a spa or cleaning tag.
+// Food diet tags and tags used by archive dinners, so a new recipe can't get a spa or cleaning tag.
 const dinnerRecipes = recipes.filter(recipe => (recipe.data.categories ?? []).some(key => dinnerMeals.includes(key)));
-const tagKeys = [...new Set(dinnerRecipes.flatMap(recipe => recipe.data.tags ?? []))]
+const tagKeys = [...new Set([...t.dietTags, ...dinnerRecipes.flatMap(recipe => recipe.data.tags ?? [])])]
   .sort((a, b) => t.tagLabel(a).localeCompare(t.tagLabel(b), 'sv'));
 
 // An archive recipe in the shape Claude answers in (RecipeDraft in _shared/recipe.ts).

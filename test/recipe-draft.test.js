@@ -22,3 +22,14 @@ test('the draft has a required unsuitable flag, and the instructions explain it'
 test('recipeDoc refuses a draft Claude marked unsuitable', () => {
   assert.throws(() => recipeDoc({unsuitable: true, title: 'x', description: 'y'}), UnsuitableError);
 });
+
+test('new recipes keep a lactose-free tag, with dairy-free and vegan covering it', () => {
+  const draft = {
+    title: 'Enkel soppa', description: 'En varm soppa.',
+    ingredientGroups: [{items: [{name: '2 dl vatten', key: ''}]}],
+    steps: ['Värm vattnet.']
+  };
+  assert.deepEqual(recipeDoc({...draft, tags: ['Lactose free']}).tags, ['Lactose free']);
+  assert.deepEqual(recipeDoc({...draft, tags: ['Dairy free', 'Lactose free']}).tags, ['Dairy free']);
+  assert.deepEqual(recipeDoc({...draft, tags: ['Vegan', 'Dairy free', 'Lactose free']}).tags, ['Vegan']);
+});

@@ -53,14 +53,12 @@ const permalink = 'konto.html';
         <section class="account-section account-credentials photo-card" aria-labelledby="account-password-title">
           <h2 id="account-password-title" data-password-title>Byt lösenord</h2>
           <div class="account-section-copy">
-            <p class="account-panel-intro">Välj ett lösenord som du bara använder här.</p>
-            <p class="account-hint" data-password-intro hidden>Med ett lösenord kan du också logga in utan Google.</p>
+            <p class="account-panel-intro" data-password-intro hidden>Med ett lösenord kan du också logga in utan Google.</p>
           </div>
           <form class="account-form" data-password-change novalidate>
             <div class="account-field">
-              <label for="account-new-password">Nytt lösenord</label>
-              <input id="account-new-password" name="password" type="password" autocomplete="new-password" required aria-describedby="account-new-password-hint">
-              <p id="account-new-password-hint" class="account-hint">Minst 8 tecken.</p>
+              <label for="account-new-password">Nytt lösenord <span class="account-optional">(minst 8 tecken)</span></label>
+              <input id="account-new-password" name="password" type="password" autocomplete="new-password" required>
             </div>
             <p class="account-error" role="alert" data-password-error hidden></p>
             <p class="account-status" role="status" data-password-status></p>

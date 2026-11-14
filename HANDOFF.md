@@ -311,6 +311,8 @@ The design and the plan it was built from are in `docs/superpowers/specs/2026-11
 | `src/pages/integritet.njk` | The privacy page. Indexed, unlike the other five. **Keep it true** when what the site stores or sends changes |
 | `src/js/new-recipe.js`, `src/js/fridge-ai.js` | The heart on a generated recipe; the sign-in sent along with "Hitta på ett recept" |
 | `supabase/migrations/…_accounts.sql` | Tables `profiles`, `saved_recipes`, `saved_generated_recipes`, their row level security, and `my_generated_recipes()` |
+| `supabase/migrations/…_profile_cooking_time.sql` | `profiles.max_cooking_minutes`: 15, 30, 45, or null for no time limit. Applied to the project on 2026-11-14 |
+| `supabase/migrations/…_lactose_free_diet.sql` | Adds `Lactose free` and allows all six profile diets. Applied to the project on 2026-11-14 |
 | `supabase/migrations/…_recipe_book_search_path.sql` | `my_generated_recipes()` again, with an empty search path. **Not on the project yet** (see "Waiting to go out" below) |
 | `supabase/functions/_shared/auth.ts` | `userFor(req)`: the signed-in visitor behind a request, or null |
 | `supabase/functions/_shared/preferences.ts` | Cleans a profile's preferences and writes them as lines for Claude. Tested by `npm test` |
@@ -346,6 +348,10 @@ The design and the plan it was built from are in `docs/superpowers/specs/2026-11
 
 **Preferences and Claude.** `generate-recipe` adds the caller's preferences to the request as a few Swedish lines (`preferencesPrompt`), and `recipeSystem` in `_shared/recipe.ts` has a PREFERENCES section saying how to follow them. Claude leaves out what doesn't fit. If nothing is left to cook from it answers `unsuitable: true`, and the visitor gets a message pointing to their profile. That attempt still counts against the day's cap, since it cost a Claude call. The recipe is not checked against the preferences afterwards. The foods a visitor "doesn't eat" are their own words: they are cleaned, quoted and named as a list of foods, and Claude is told to ignore instructions in them.
 
+The profile's "Hur lång tid får det ta?" card saves a total time budget of 15, 30 or 45 minutes, including preparation and cooking. "Ingen brådska" clears it. On desktop the card fills the remaining sidebar height; on phones it stacks below the portions card. The database column and `generate-recipe` were deployed on 2026-11-14. Like the accounts migration, the cooking-time migration was applied through the SQL API, so it is not in Supabase's migration history yet.
+
+"Laktosfritt" is the sixth diet option (`Lactose free`). It allows lactose-free dairy products. Vegan and dairy-free recipes include it automatically, and the profile checks and locks included choices using `impliedTags`. The database constraint and `generate-recipe` were updated on 2026-11-14; the diet migration was also applied through the SQL API. The generated recipe tag list includes all supported food diets, even before a diet has its own archive recipe.
+
 **Setup (once), the owner's part.** The code can't do these:
 
 1. **Publishable key:** Supabase dashboard → Project Settings → API keys → copy the publishable key (`sb_publishable_…`) into `publishableKey` in `src/_data/ai.js`. It is meant to be public. Never put a secret key there.
@@ -366,7 +372,7 @@ The design and the plan it was built from are in `docs/superpowers/specs/2026-11
 - **A changed email address** takes effect when the visitor clicks the link sent to the new address.
 - **The Google button has no Google logo.** Add the official one if you want it; don't redraw it.
 - **Restart `npm start` after adding the key:** which pages are built is decided when the server starts.
-- **The accounts migration was run by hand** in the dashboard's SQL editor on 2026-11-13, not with `supabase db push`, so Supabase's own list of applied migrations may not include it (or the first one). Before the next `db push`, run `npx supabase migration list` and, if they show as not applied, `npx supabase migration repair --status applied 20261110220000 20261113120000`. Otherwise the push tries to create the tables again and stops.
+- **The accounts migration was run by hand** in the dashboard's SQL editor on 2026-11-13, not with `supabase db push`; the cooking-time and lactose-free migrations were applied through the SQL API on 2026-11-14. Supabase's own list of applied migrations does not include these. Before the next `db push`, run `npx supabase migration list` and, if they show as not applied, `npx supabase migration repair --status applied 20261110220000 20261113120000 20261114120000 20261114130000`. Otherwise the push tries to create the tables and cooking-time column again and stops.
 - **The Supabase CLI is version 3 now.** It wants `--remote=yatffwoobcsrxcxplecd` instead of a linked folder, and for a change to production it stops and asks for `--yes`: `npx supabase functions deploy --remote=yatffwoobcsrxcxplecd --use-api --yes`. All five functions were deployed this way on 2026-11-13.
 - **Supabase refuses sign-ups from made-up domains** such as `example.com` ("E-postadressen ser inte rätt ut."), so test accounts with such addresses have to be made with the admin API.
 - **Not built:** syncing the fridge list, shopping list or week plan to the account; preferences affecting the archive matching; a higher daily cap for signed-in visitors; other sign-in methods; an admin page.
@@ -374,14 +380,13 @@ The design and the plan it was built from are in `docs/superpowers/specs/2026-11
 **Testing.** Four things in `tools/standin/` need no real project and touch nothing real:
 
 - **`server.mjs`:** a stand-in for the Supabase project (sign-in, the tables, the functions) in memory, to try the account features in a browser. Its header comment has the two commands: start it, then serve a build with `RESTFEST_SUPABASE_URL` and `RESTFEST_PUBLISHABLE_KEY` pointing at it. Every page and flow of the accounts was checked this way with the Playwright tools.
-- **`check-rls.mjs`:** runs the migrations in an in-memory Postgres and checks what each role can reach (36 checks). **Run it after any change to a migration**; it is the only test of the row level security.
-- **`check-functions.ts`:** runs `generate-recipe` and `delete-account` with Claude and Supabase replaced (21 checks).
+- **`check-rls.mjs`:** runs the migrations in an in-memory Postgres and checks what each role can reach (44 checks). **Run it after any change to a migration**; it is the only test of the row level security.
+- **`check-functions.ts`:** runs `generate-recipe` and `delete-account` with Claude and Supabase replaced (23 checks).
 - **`check-account-pages.js`:** 23 checks in a browser against `server.mjs`, run with the Playwright tool (its header says how): the first sign-in's hearts in one request, what `receptbok.html` fetches, the header's count, `?spara=1`, the lock between tabs, and problems tied to their fields.
 
-**Waiting to go out.** Two changes from 2026-11-13 are in the repo and not on the Supabase project. Neither is urgent, and the site works the same without them:
+**Waiting to go out.** One change from 2026-11-13 remains in the repo and not on the Supabase project. It is not urgent, and the site works the same without it:
 
 - **`…_recipe_book_search_path.sql`:** paste it into the dashboard's SQL editor, or use `db push` after the `migration repair` under "Things to know".
-- **`generate-recipe`** now checks the day's cap before the sign-in: `npx supabase functions deploy generate-recipe --remote=yatffwoobcsrxcxplecd --use-api --yes`.
 
 ## Testing setup that worked
 

@@ -52,10 +52,13 @@ const nonFoodMeals = ['spa', 'household', 'pets'];
 const isFood = recipe => !recipe.meals.some(meal => nonFoodMeals.includes(meal));
 
 // Only food recipes have diet tags. The archive shows these as their own filter group.
-const dietTags = ['Vegetarian', 'Vegan', 'Dairy free', 'Egg free', 'Gluten free'];
+const dietTags = ['Vegetarian', 'Vegan', 'Dairy free', 'Egg free', 'Gluten free', 'Lactose free'];
 
-// A vegan recipe is tagged only Vegan but also counts as these.
-const impliedTags = {Vegan: ['Vegetarian', 'Dairy free', 'Egg free']};
+// Vegan and dairy-free recipes also satisfy the diets they include.
+const impliedTags = {
+  Vegan: ['Vegetarian', 'Dairy free', 'Egg free', 'Lactose free'],
+  'Dairy free': ['Lactose free']
+};
 
 function allTags(recipe) {
   return [...new Set((recipe.tags ?? []).flatMap(tag => [tag, ...(impliedTags[tag] ?? [])]))];
@@ -72,7 +75,7 @@ const recipeTagLabels = {
   Dip: 'Dipp', Face: 'Ansikte',
   'Family friendly': 'Familjevänligt', Feet: 'Fötter', French: 'Franskt', Gift: 'Present',
   'Gluten free': 'Glutenfritt', Greek: 'Grekiskt', Hair: 'Hår', 'Hot drink': 'Varm dryck',
-  Indian: 'Indiskt', Italian: 'Italienskt', Leftovers: 'Rester', Lips: 'Läppar',
+  Indian: 'Indiskt', Italian: 'Italienskt', 'Lactose free': 'Laktosfritt', Leftovers: 'Rester', Lips: 'Läppar',
   'Low carb': 'Kolhydratsnålt', Lunch: 'Lunch', 'Make ahead': 'Kan förberedas',
   'Meal prep': 'Matlåda', Mexican: 'Mexikanskt', 'Middle Eastern': 'Mellanöstern',
   Natural: 'Naturligt', 'No bake': 'Utan ugn', 'One pot': 'Allt i en gryta',

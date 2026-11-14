@@ -23,6 +23,9 @@ async function profilePage(db, user) {
   const avoidList = $("[data-avoid-list]");
   const avoidError = $("[data-avoid-error]");
   const savedText = $("[data-profile-saved]");
+  const servingsInput = form.elements.namedItem("servings");
+  const servingsDown = $('[data-servings-step="down"]', form);
+  const servingsUp = $('[data-servings-step="up"]', form);
   let avoid = [];
 
   dietBox.innerHTML = dietTags
@@ -32,16 +35,16 @@ async function profilePage(db, user) {
     )
     .join("");
   const dietInputs = [...dietBox.querySelectorAll("input")];
-  const implied = impliedTags.Vegan ?? [];
-
-  // Veganskt covers the three diets it implies, so they follow it and can't be changed on their own.
-  function followVegan(changed) {
-    const vegan = dietInputs.find((input) => input.value === "Vegan").checked;
+  // Included diets follow their parent: Vegan covers Dairy free, which covers Lactose free.
+  // Parents come before their dependent diets in dietTags, so clearing them updates the chain.
+  function followDiets() {
     for (const input of dietInputs) {
-      if (!implied.includes(input.value)) continue;
-      if (vegan) input.checked = true;
-      else if (changed) input.checked = false;
-      input.disabled = vegan;
+      const included = dietInputs.some(
+        (parent) => parent.checked && (impliedTags[parent.value] ?? []).includes(input.value),
+      );
+      if (included) input.checked = true;
+      else if (input.disabled) input.checked = false;
+      input.disabled = included;
     }
   }
 
@@ -69,7 +72,7 @@ async function profilePage(db, user) {
     row = checked(
       await db
         .from("profiles")
-        .select("display_name, diets, avoid, servings")
+        .select("display_name, diets, avoid, servings, max_cooking_minutes")
         .eq("id", user.id)
         .maybeSingle(),
     );
@@ -80,16 +83,33 @@ async function profilePage(db, user) {
   form.elements.namedItem("display_name").value = row?.display_name ?? "";
   for (const input of dietInputs)
     input.checked = (row?.diets ?? []).includes(input.value);
-  followVegan(false);
+  followDiets();
   avoid = Array.isArray(row?.avoid) ? row.avoid.slice(0, 30) : [];
   drawAvoid();
-  form.elements.namedItem("servings").value = row?.servings ?? "";
+  servingsInput.value = row?.servings ?? "";
+  form.elements.namedItem("max_cooking_minutes").value = row?.max_cooking_minutes ?? "";
+  const minServings = Number(servingsInput.min);
+  const maxServings = Number(servingsInput.max);
+  function updateServingsSteps() {
+    const value = servingsInput.valueAsNumber;
+    servingsDown.setAttribute("aria-disabled", String(value <= minServings));
+    servingsUp.setAttribute("aria-disabled", String(value >= maxServings));
+  }
+  function stepServings(direction) {
+    const value = servingsInput.valueAsNumber;
+    const next = !Number.isFinite(value) ? minServings
+      : direction < 0 ? Math.ceil(value) - 1 : Math.floor(value) + 1;
+    servingsInput.value = String(Math.max(minServings, Math.min(maxServings, next)));
+    servingsInput.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+  servingsDown.addEventListener("click", () => stepServings(-1));
+  servingsUp.addEventListener("click", () => stepServings(1));
+  servingsInput.addEventListener("input", updateServingsSteps);
+  updateServingsSteps();
   wait.hidden = true;
   form.hidden = false;
 
-  dietBox.addEventListener("change", (event) => {
-    if (event.target.value === "Vegan") followVegan(true);
-  });
+  dietBox.addEventListener("change", followDiets);
   form.addEventListener("input", () => show(savedText, ""));
   $("[data-avoid-add]").addEventListener("click", () => {
     addFromField();
@@ -120,6 +140,8 @@ async function profilePage(db, user) {
     event.preventDefault();
     show(savedText, "");
     busy(form, $("[data-profile-error]"), async () => {
+      if (!servingsInput.validity.valid)
+        throw problem("Välj ett helt antal portioner mellan 1 och 12, eller lämna fältet tomt.", servingsInput);
       // Something typed but not added yet is meant to be in the list.
       if (avoidInput.value.trim()) {
         addFromField();
@@ -130,7 +152,8 @@ async function profilePage(db, user) {
         .namedItem("display_name")
         .value.trim()
         .slice(0, 80);
-      const servings = form.elements.namedItem("servings").value;
+      const servings = servingsInput.value;
+      const cookingMinutes = form.elements.namedItem("max_cooking_minutes").value;
       checked(
         await db
           .from("profiles")
@@ -141,6 +164,7 @@ async function profilePage(db, user) {
               .map((input) => input.value),
             avoid,
             servings: servings ? Number(servings) : null,
+            max_cooking_minutes: cookingMinutes ? Number(cookingMinutes) : null,
           })
           .eq("id", user.id),
       );
