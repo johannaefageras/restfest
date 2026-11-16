@@ -2164,6 +2164,11 @@ body:has(#shopping-dialog[open]) {
 .recipe-facts dt > img[src$="/cutting-board.svg"] {
   width: 64px;
 }
+/* So do the herb shelf and the dog bowl, a little. */
+.recipe-facts dt > img[src$="/windowsill-herbs.svg"],
+.recipe-facts dt > img[src$="/dog-food.svg"] {
+  width: 56px;
+}
 
 /* The values are Spot Grotesk Bold at text size: Trio isn't used below 20px, and at 20px it was too
    loud for a row of small facts. */
@@ -2386,6 +2391,10 @@ body:has(#shopping-dialog[open]) {
   }
   .recipe-facts dt > img[src$="/cutting-board.svg"] {
     width: 52px;
+  }
+  .recipe-facts dt > img[src$="/windowsill-herbs.svg"],
+  .recipe-facts dt > img[src$="/dog-food.svg"] {
+    width: 46px;
   }
 }
 

@@ -20,8 +20,9 @@ layout: layouts/base.njk
         <p class="dialog-kicker"><span class="mini-badge">OFTA BRA EFTER · {{ recipe.badge or 'RECEPT' }}</span>{% if not recipe.badge %}<span>{% for category in recipe.categoryLinks %}<a href="{{ base }}{{ category.path }}">{{ category.label }}</a>{{ ' · ' if not loop.last }}{% endfor %}</span>{% endif %}</p>
         <h1 id="recipe-title" class="recipe-heading">{{ recipe.title }}</h1>
         <p class="dialog-intro">{{ recipe.description }}</p>
-        {#- An illustrated icon per fact label, from assets/icons/. These six are every label the recipes use;
-            a new label shows without one. Mer än mat (not recipe.food) has its own icons for Förberedelse and Nivå.
+        {#- An illustrated icon per fact label, from assets/icons/. factIcons has the labels every type
+            shares, and typeFactIcons what a Mer än mat type shows instead or has of its own (Odlingstid,
+            Väntetid). A label in neither shows without an icon.
             The icon is inside the dt, as a div in a dl may only hold dt and dd. #}
         {%- set factIcons = {
           'Förberedelse': 'cutting-board' if recipe.food else 'bubbles',
@@ -31,11 +32,35 @@ layout: layouts/base.njk
           'Räcker till': 'jam-jar',
           'Verkningstid': 'kitchen-timer'
         } %}
+        {%- set typeFactIcons = {
+          spa: {
+            'Verkningstid': 'hourglass',
+            'Räcker till': 'face-mask-jar'
+          },
+          household: {
+            'Förberedelse': 'vinegar-and-baking-soda',
+            'Verkningstid': 'hourglass',
+            'Räcker till': 'bucket-with-suds'
+          },
+          pets: {
+            'Förberedelse': 'mixing-bowl-and-whisk',
+            'Räcker till': 'dog-food'
+          },
+          garden: {
+            'Förberedelse': 'gardening-gloves',
+            'Odlingstid': 'sprout',
+            'Väntetid': 'hourglass',
+            'Vattnar sig själv i': 'watering-can-1',
+            'Räcker till': 'windowsill-herbs'
+          }
+        } %}
+        {%- set ownFactIcons = typeFactIcons[recipe.type] or {} %}
         <dl class="recipe-facts">
           {%- for label, value in recipe.facts %}
           <div>
             {%- set scalable = label == recipe.servingsLabel and recipe.servings %}
-            <dt{% if scalable %} id="recipe-servings-label"{% endif %}>{% if factIcons[label] %}<img src="{{ base }}assets/icons/{{ factIcons[label] }}.svg" alt="" width="44" height="44">{% endif %}{{ label }}</dt>
+            {%- set factIcon = ownFactIcons[label] or factIcons[label] %}
+            <dt{% if scalable %} id="recipe-servings-label"{% endif %}>{% if factIcon %}<img src="{{ base }}assets/icons/{{ factIcon }}.svg" alt="" width="44" height="44">{% endif %}{{ label }}</dt>
             <dd>
               {%- if scalable %}
               {%- set stepNoun = 'portionerna' if label == 'Portioner' else 'mängden' %}

@@ -13,10 +13,10 @@ description: Hemmaspa, städning, godis till husdjuren och odling av sådant som
       </div>
       <div class="greeting-aside" aria-hidden="true">
         <div class="doodle-lineup">
-          <img src="assets/icons/rolled-towels.svg" alt="" width="60" height="60">
-          <img src="assets/icons/spray-bottle.svg" alt="" width="60" height="60">
-          <img src="assets/icons/dog-bone.svg" alt="" width="60" height="60">
-          <img src="assets/icons/sprout.svg" alt="" width="60" height="60">
+          {#- The same icons as the sections below. #}
+          {%- for type in collections.recipeTypes %}{% if type.key != 'food' %}
+          <img src="assets/icons/{{ type.icon }}.svg" alt="" width="60" height="60">
+          {%- endif %}{% endfor %}
         </div>
       </div>
     </section>

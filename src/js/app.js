@@ -1210,18 +1210,10 @@ if (archiveSearch) {
       renderArchive();
     });
   });
-  const dietFilterIcons = {
-    Vegetarian: "vegetarian",
-    Vegan: "vegan",
-    "Dairy free": "milk-free",
-    "Egg free": "egg-free",
-    "Gluten free": "gluten-free",
-    "Lactose free": "dairy-free",
-  };
   $("#diet-filters").innerHTML = dietTags
     .map(
       (tag) =>
-        `<button type="button" class="food-filter" data-diet-filter="${tag}" aria-pressed="false">${squareIcon(dietFilterIcons[tag], 48)}${recipeTagLabels[tag]}</button>`,
+        `<button type="button" class="food-filter" data-diet-filter="${tag}" aria-pressed="false">${squareIcon(tagIcons[tag], 48)}${recipeTagLabels[tag]}</button>`,
     )
     .join("");
   $("#diet-filters").addEventListener("click", (event) => {
