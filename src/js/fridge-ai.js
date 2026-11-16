@@ -7,8 +7,15 @@
   const api = document.querySelector('meta[name="restfest-ai"]')?.content;
   if (!api) return;
 
+  // "Välj bilder": up to three photos from the library.
   const photoButton = $("#fridge-photo");
   const photoInput = $("#fridge-photo-input");
+  // "Fota": one photo straight from a camera.
+  const cameraButton = $("#fridge-camera");
+  const cameraInput = $("#fridge-camera-input");
+  const cameraDialog = $("#fridge-camera-dialog");
+  const cameraVideo = $("#fridge-camera-video");
+  const cameraShoot = $("#fridge-camera-shoot");
   // Progress and results go under the list, where the foods appear.
   const photoStatus = $("#pantry-status");
   const inventBox = $("#invent-recipe");
@@ -43,6 +50,7 @@
   }
 
   // Preserve small labels for high-resolution vision. Keep each JPEG under the function's base64 cap.
+  // `file` is a photo from one of the inputs, or the canvas the webcam's picture was drawn on.
   async function shrink(file) {
     let bitmap;
     try {
@@ -108,21 +116,99 @@
     );
   }
 
-  function setPhotoBusy(busy) {
-    photoButton.disabled = busy;
-    photoButton.setAttribute("aria-busy", String(busy));
-    $("span", photoButton).textContent = busy
+  // The webcam, for browsers that ignore `capture`. The picture is taken with "Ta bilden" below.
+  async function openWebcam() {
+    cameraButton.disabled = true;
+    cameraShoot.disabled = true;
+    photoStatus.textContent = "";
+    try {
+      cameraVideo.srcObject = await window.navigator.mediaDevices.getUserMedia({
+        audio: false,
+        // The back camera where there is one, and as many pixels as it has, for the small labels.
+        video: {
+          facingMode: "environment",
+          width: { ideal: 2560 },
+          height: { ideal: 1440 },
+        },
+      });
+    } catch (error) {
+      photoStatus.textContent =
+        error.name === "NotAllowedError"
+          ? "Kameran är blockerad. Tillåt den i webbläsaren, eller välj bilder i stället."
+          : "Kunde inte öppna kameran. Välj bilder i stället.";
+      return;
+    } finally {
+      cameraButton.disabled = false;
+    }
+    cameraDialog.showModal();
+  }
+
+  // "Fota" opens a camera at once. A phone's browser knows `capture` and opens the phone's own camera.
+  // A computer's doesn't, and would show the file picker, so there the webcam opens in a dialog.
+  // With neither, "Välj bilder" is the only button.
+  const openCamera =
+    "capture" in cameraInput
+      ? () => cameraInput.click()
+      : window.navigator?.mediaDevices?.getUserMedia && cameraDialog?.showModal
+        ? openWebcam
+        : null;
+  cameraButton.hidden = !openCamera;
+
+  // While a scan runs, the button that started it says so and the other one steps aside.
+  const labels = new Map([
+    [cameraButton, "Fota"],
+    [photoButton, "Välj bilder"],
+  ]);
+  function setPhotoBusy(button, busy) {
+    const other = button === cameraButton ? photoButton : cameraButton;
+    button.disabled = busy;
+    button.setAttribute("aria-busy", String(busy));
+    $("span", button).textContent = busy
       ? "Tittar i kylen …"
-      : "Fota eller välj bilder";
+      : labels.get(button);
+    other.hidden = busy || (other === cameraButton && !openCamera);
   }
 
   photoButton.addEventListener("click", () => photoInput.click());
+  cameraButton.addEventListener("click", () => openCamera?.());
+  for (const [button, input] of [
+    [photoButton, photoInput],
+    [cameraButton, cameraInput],
+  ]) {
+    input.addEventListener("change", () => {
+      const files = [...input.files].slice(0, 3);
+      input.value = "";
+      return scan(files, button);
+    });
+  }
 
-  photoInput.addEventListener("change", async () => {
-    const files = [...photoInput.files].slice(0, 3);
-    photoInput.value = "";
+  if (openCamera === openWebcam) {
+    // The picture can be taken once the camera shows one.
+    cameraVideo.addEventListener("loadedmetadata", () => {
+      cameraShoot.disabled = false;
+    });
+    cameraShoot.addEventListener("click", () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = cameraVideo.videoWidth;
+      canvas.height = cameraVideo.videoHeight;
+      canvas.getContext("2d").drawImage(cameraVideo, 0, 0);
+      cameraDialog.close();
+      return scan([canvas], cameraButton);
+    });
+    $(".dialog-close", cameraDialog).addEventListener("click", () =>
+      cameraDialog.close(),
+    );
+    // However the dialog closes (the picture, the cross, Esc), the camera is turned off.
+    cameraDialog.addEventListener("close", () => {
+      for (const track of cameraVideo.srcObject?.getTracks() ?? []) track.stop();
+      cameraVideo.srcObject = null;
+    });
+  }
+
+  // Sends the photos, and puts the foods Claude sees in them on the list. `button` is the one that was used.
+  async function scan(files, button) {
     if (!files.length) return;
-    setPhotoBusy(true);
+    setPhotoBusy(button, true);
     photoStatus.textContent =
       files.length > 1
         ? "Tittar på bilderna. Det tar några sekunder …"
@@ -166,9 +252,9 @@
     } catch (error) {
       photoStatus.textContent = error.message;
     } finally {
-      setPhotoBusy(false);
+      setPhotoBusy(button, false);
     }
-  });
+  }
 
   // The list as the recipe function wants it: each name with the ingredient key it matches, or null.
   function listItems() {

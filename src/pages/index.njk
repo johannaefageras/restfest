@@ -42,8 +42,10 @@ allFoods: true
               </form>
             </div>
             {%- if ai.functionsUrl %}
-            {#- The fridge photo: Claude lists the foods it sees and they go into the list. Without `capture`,
-                phones offer both the camera and the photo library. src/js/fridge-ai.js #}
+            {#- The fridge photo: Claude lists the foods it sees and they go into the list. "Fota" opens a
+                camera at once: the phone's own through `capture`, or on a computer (where browsers ignore
+                `capture`) the webcam in #fridge-camera-dialog below. It stays hidden where there is neither.
+                "Välj bilder" opens the photo library. src/js/fridge-ai.js #}
             <div class="photo-card" id="fota">
               <div class="photo-card-body">
                 <div class="photo-card-copy">
@@ -54,7 +56,9 @@ allFoods: true
                   <img src="assets/illustrations/fridge-viewfinder.svg" width="1133" height="1123" alt="">
                 </div>
                 <div class="photo-actions">
-                  <button id="fridge-photo" class="button primary" type="button"><i class="fas fa-camera" aria-hidden="true"></i><span>Fota eller välj bilder</span></button>
+                  <button id="fridge-camera" class="button primary" type="button" hidden><i class="fas fa-camera" aria-hidden="true"></i><span>Fota</span></button>
+                  <input id="fridge-camera-input" type="file" accept="image/*" capture="environment" hidden>
+                  <button id="fridge-photo" class="button" type="button"><i class="fas fa-images" aria-hidden="true"></i><span>Välj bilder</span></button>
                   <input id="fridge-photo-input" type="file" accept="image/*" multiple hidden>
                 </div>
               </div>
@@ -152,4 +156,16 @@ allFoods: true
         <span>…eller <a href="receptarkiv.html">bläddra bland recepten</a></span>
       </p>
     </section>
+    {%- if ai.functionsUrl %}
+
+    {#- "Fota" on a computer: the webcam, and a button that takes the picture. src/js/fridge-ai.js #}
+    <dialog id="fridge-camera-dialog" class="camera-dialog" aria-labelledby="fridge-camera-title">
+      <button class="dialog-close" type="button" aria-label="Stäng kameran"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+      <div class="dialog-main">
+        <h2 id="fridge-camera-title">Fota kylen</h2>
+        <video id="fridge-camera-video" autoplay playsinline muted></video>
+        <button id="fridge-camera-shoot" class="button primary" type="button" disabled><i class="fas fa-camera" aria-hidden="true"></i>Ta bilden</button>
+      </div>
+    </dialog>
+    {%- endif %}
   </main>

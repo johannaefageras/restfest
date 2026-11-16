@@ -76,3 +76,6 @@
 .fa-hourglass-half::before {
   content: "\f15d";
 }
+.fa-images::before {
+  content: "\f1a2";
+}

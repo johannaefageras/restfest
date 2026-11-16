@@ -66,24 +66,40 @@ const fridge = readFileSync(new URL('../src/js/fridge-ai.js', import.meta.url), 
 
 // Exercise the actual change handler, matching helpers, upload preparation and response parsing.
 // The fake network returns detector output; no paid model calls or real photos are needed here.
-function page({result = {names: []}, initial = [], width = 4032, height = 3024, blobSizes = [500_000], fail = false} = {}) {
+// `camera` is what "Fota" has to open: 'capture' for a phone's browser, 'webcam' for a computer with a
+// camera, 'blocked' for one where the visitor said no, and nothing for a browser with neither.
+function page({result = {names: []}, initial = [], width = 4032, height = 3024, blobSizes = [500_000], fail = false, camera} = {}) {
   const elements = new Map();
-  const uploads = [], encodes = [], bitmaps = [];
-  const node = () => ({
+  const uploads = [], encodes = [], bitmaps = [], sources = [], clicks = [], tracks = [];
+  const node = selector => ({
     disabled: false, textContent: '', value: '', handlers: {}, attributes: {},
     addEventListener(type, handler) { this.handlers[type] = handler; },
     setAttribute(key, value) { this.attributes[key] = value; },
     removeAttribute(key) { delete this.attributes[key]; },
-    scrollIntoView() {}, click() {},
+    scrollIntoView() {}, click() { clicks.push(selector); },
   });
   const $ = selector => {
-    if (!elements.has(selector)) elements.set(selector, node());
+    if (!elements.has(selector)) elements.set(selector, node(selector));
     return elements.get(selector);
   };
   const pantry = {items: [...initial]};
+  if (camera === 'capture') $('#fridge-camera-input').capture = 'environment';
+  const dialog = Object.assign($('#fridge-camera-dialog'), {
+    open: false,
+    showModal() { this.open = true; },
+    close() { this.open = false; this.handlers.close(); },
+  });
+  Object.assign($('#fridge-camera-video'), {videoWidth: 1920, videoHeight: 1080});
+  const getUserMedia = async constraints => {
+    if (camera === 'blocked') throw Object.assign(new Error('denied'), {name: 'NotAllowedError'});
+    const track = {constraints, stopped: false, stop() { this.stopped = true; }};
+    tracks.push(track);
+    return {getTracks: () => [track]};
+  };
   const context = vm.createContext({
     foods, $, pantry, setTimeout, clearTimeout,
-    window: {addEventListener() {}}, matchMedia: () => ({matches: true}),
+    window: {addEventListener() {}, ...(camera === 'webcam' || camera === 'blocked' ? {navigator: {mediaDevices: {getUserMedia}}} : {})},
+    matchMedia: () => ({matches: true}),
     document: {
       querySelector: () => ({content: 'https://api.test/functions/v1'}), addEventListener() {},
       createElement() {
@@ -96,7 +112,8 @@ function page({result = {names: []}, initial = [], width = 4032, height = 3024, 
         };
       },
     },
-    createImageBitmap: async () => {
+    createImageBitmap: async source => {
+      sources.push(source);
       const bitmap = {width, height, closed: false, close() { this.closed = true; }};
       bitmaps.push(bitmap);
       return bitmap;
@@ -111,8 +128,10 @@ function page({result = {names: []}, initial = [], width = 4032, height = 3024, 
     updatePantry: message => { $('#pantry-status').textContent = message; },
   });
   vm.runInContext(helpers + capitalize + fridge, context);
-  return {pantry, $, uploads, encodes, bitmaps,
+  return {pantry, $, uploads, encodes, bitmaps, sources, clicks, tracks, dialog,
     async choose() { $('#fridge-photo-input').files = [{name: 'kyl.jpg'}]; await $('#fridge-photo-input').handlers.change(); },
+    // The phone's camera hands its one photo to the capture input.
+    async capture() { $('#fridge-camera-input').files = [{name: 'image.jpg'}]; await $('#fridge-camera-input').handlers.change(); },
     keys: () => pantry.items.map(name => context.keyForIngredient(name)),
   };
 }
@@ -181,4 +200,63 @@ test('an old detector still works during rollout and failed or empty scans leave
     assert.equal(p.$('#fridge-photo-input').value, '');
     assert.match(p.$('#pantry-status').textContent, fail ? /Prova igen/ : /Hittade inga råvaror/);
   }
+});
+
+test('"Fota" opens the phone camera at once, and steps aside where there is no camera', async () => {
+  const none = page();
+  assert.equal(none.$('#fridge-camera').hidden, true);
+  await none.choose();
+  assert.equal(none.$('#fridge-camera').hidden, true, 'a scan does not bring the button back');
+  assert.equal(none.$('#fridge-photo').hidden, undefined);
+
+  const p = page({camera: 'capture', result: detectedFoods({names: ['Mjölk', 'Ägg']})});
+  assert.equal(p.$('#fridge-camera').hidden, false);
+  await p.$('#fridge-camera').handlers.click();
+  assert.deepEqual(p.clicks, ['#fridge-camera-input'], 'the capture input, not the photo library');
+  assert.equal(p.dialog.open, false);
+  await p.capture();
+  assert.deepEqual(p.pantry.items, ['Mjölk', 'Ägg']);
+  assert.equal(p.uploads[0].body.images.length, 1);
+  assert.equal(p.$('#pantry-status').textContent, '2 råvaror från bilden lades till. Stämmer något inte, tryck på det för att ta bort det.');
+  assert.equal(p.$('#fridge-camera').disabled, false);
+  assert.equal(p.$('#fridge-photo').hidden, false, 'both buttons are back after the scan');
+  assert.equal(p.$('span').textContent, 'Fota');
+
+  await p.$('#fridge-photo').handlers.click();
+  assert.deepEqual(p.clicks, ['#fridge-camera-input', '#fridge-photo-input']);
+});
+
+test('on a computer "Fota" shows the webcam, sends its picture and turns the camera off', async () => {
+  const p = page({camera: 'webcam', result: detectedFoods({names: ['Gurka']})});
+  assert.equal(p.$('#fridge-camera').hidden, false);
+  await p.$('#fridge-camera').handlers.click();
+  assert.deepEqual(p.clicks, [], 'no file picker');
+  assert.equal(p.dialog.open, true);
+  assert.equal(p.tracks[0].constraints.audio, false);
+  assert.equal(p.$('#fridge-camera-shoot').disabled, true, 'no picture before the camera shows one');
+  p.$('#fridge-camera-video').handlers.loadedmetadata();
+  assert.equal(p.$('#fridge-camera-shoot').disabled, false);
+
+  await p.$('#fridge-camera-shoot').handlers.click();
+  assert.equal(p.dialog.open, false);
+  assert.equal(p.tracks[0].stopped, true);
+  assert.equal(p.$('#fridge-camera-video').srcObject, null);
+  assert.deepEqual([p.sources[0].width, p.sources[0].height], [1920, 1080], 'the frame at the camera\'s own size');
+  assert.equal(p.uploads.length, 1);
+  assert.deepEqual(p.pantry.items, ['Gurka']);
+
+  // Closing without a picture sends nothing, and turns the camera off too.
+  await p.$('#fridge-camera').handlers.click();
+  p.$('.dialog-close').handlers.click();
+  assert.equal(p.tracks[1].stopped, true);
+  assert.equal(p.uploads.length, 1);
+});
+
+test('a blocked camera says so and leaves the photo library to use', async () => {
+  const p = page({camera: 'blocked'});
+  await p.$('#fridge-camera').handlers.click();
+  assert.equal(p.dialog.open, false);
+  assert.equal(p.$('#pantry-status').textContent, 'Kameran är blockerad. Tillåt den i webbläsaren, eller välj bilder i stället.');
+  assert.equal(p.$('#fridge-camera').disabled, false);
+  assert.equal(p.uploads.length, 0);
 });
