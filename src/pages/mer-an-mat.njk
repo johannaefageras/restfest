@@ -2,25 +2,26 @@
 layout: layouts/base.njk
 permalink: mer-an-mat.html
 title: Mer än mat · Ofta bra efter
-description: Hemmaspa, städning och godis till husdjuren, gjort på kaffesump, citrusskal och annat som blev över.
+description: Hemmaspa, städning, godis till husdjuren och odling av sådant som blev över.
 ---
   <main id="main" class="wrap archive-page more-page">
     <section class="greeting archive-greeting" aria-labelledby="more-title">
       <div>
         <a class="text-button archive-back" href="receptarkiv.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Till receptarkivet</a>
         <h1 id="more-title"><span class="marker">Mer än mat.</span></h1>
-        <p class="greeting-intro">Kaffesump, citrusskal och den sista bananen räcker till mer än middag. Här finns hemmaspa, städning och godis till husdjuren.</p>
+        <p class="greeting-intro">Kaffesump, citrusskal och den sista bananen räcker till mer än middag. Här finns hemmaspa, städning, godis till husdjuren och odling.</p>
       </div>
       <div class="greeting-aside" aria-hidden="true">
         <div class="doodle-lineup">
           <img src="assets/icons/rolled-towels.svg" alt="" width="60" height="60">
           <img src="assets/icons/spray-bottle.svg" alt="" width="60" height="60">
           <img src="assets/icons/dog-bone.svg" alt="" width="60" height="60">
+          <img src="assets/icons/sprout.svg" alt="" width="60" height="60">
         </div>
       </div>
     </section>
 
-    {#- One section per non-food type (spa, household, pets) from collections.recipeTypes, so the label,
+    {#- One section per non-food type from collections.recipeTypes, so the label,
         icon and intro are the ones on the type page the heading links to. app.js fills each grid. #}
     {%- for type in collections.recipeTypes %}{% if type.key != 'food' %}
 

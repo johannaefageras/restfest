@@ -35,7 +35,8 @@ export const data = {
       "aliases": [
         "babyspenat",
         "bladspenat",
-        "fryst spenat"
+        "fryst spenat",
+        "spenat"
       ]
     },
     "pesto": {
@@ -50,7 +51,8 @@ export const data = {
       "aliases": [
         "olja",
         "rapsolja",
-        "matolja"
+        "matolja",
+        "olivolja"
       ]
     },
     "ost": {
@@ -61,14 +63,16 @@ export const data = {
         "parmesanalternativ",
         "parmigiano",
         "grana padano",
-        "pecorino"
+        "pecorino",
+        "parmesan"
       ]
     },
     "morot": {
       "name": "Morötter",
       "aliases": [
         "morot",
-        "morötterna"
+        "morötterna",
+        "morötter"
       ]
     },
     "kal": {
@@ -101,20 +105,23 @@ export const data = {
       "aliases": [
         "citroner",
         "citronsaft",
-        "citronskal"
+        "citronskal",
+        "citron"
       ]
     },
     "senap": {
       "name": "Dijonsenap",
       "aliases": [
         "senap",
-        "dijon"
+        "dijon",
+        "dijonsenap"
       ]
     },
     "broccoli": {
       "name": "Broccoli",
       "aliases": [
-        "broccolibuketter"
+        "broccolibuketter",
+        "broccoli"
       ]
     },
     "bonor": {
@@ -127,7 +134,9 @@ export const data = {
     },
     "agg": {
       "name": "Ägg",
-      "aliases": []
+      "aliases": [
+        "ägg"
+      ]
     },
     "cheddar": {
       "name": "Riven ost",
@@ -140,7 +149,8 @@ export const data = {
         "herrgårdsost",
         "grevé",
         "grevéost",
-        "mild ost"
+        "mild ost",
+        "riven ost"
       ]
     },
     "potatis": {
@@ -150,14 +160,16 @@ export const data = {
         "kokt potatis",
         "mandelpotatis",
         "fast potatis",
-        "mjölig potatis"
+        "mjölig potatis",
+        "potatis"
       ]
     },
     "lax": {
       "name": "Kallrökt lax",
       "aliases": [
         "rökt lax",
-        "varmrökt lax"
+        "varmrökt lax",
+        "kallrökt lax"
       ]
     },
     "yoghurt": {
@@ -166,12 +178,15 @@ export const data = {
         "yoghurt",
         "grekisk yoghurt",
         "turkisk yoghurt",
-        "matyoghurt"
+        "matyoghurt",
+        "naturell yoghurt"
       ]
     },
     "dill": {
       "name": "Dill",
-      "aliases": []
+      "aliases": [
+        "dill"
+      ]
     },
     "kyckling": {
       "name": "Tillagad kyckling",
@@ -199,14 +214,16 @@ export const data = {
     "gurka": {
       "name": "Gurka",
       "aliases": [
-        "slanggurka"
+        "slanggurka",
+        "gurka"
       ]
     },
     "soja": {
       "name": "Sojasås",
       "aliases": [
         "soja",
-        "japansk soja"
+        "japansk soja",
+        "sojasås"
       ]
     },
     "lok": {
@@ -222,7 +239,8 @@ export const data = {
       "aliases": [
         "linser",
         "röd lins",
-        "gröna linser"
+        "gröna linser",
+        "röda linser"
       ]
     },
     "buljong": {
@@ -233,14 +251,16 @@ export const data = {
         "hönsbuljong",
         "kycklingbuljong",
         "buljongtärningar",
-        "grönsaksfond"
+        "grönsaksfond",
+        "grönsaksbuljong"
       ]
     },
     "svamp": {
       "name": "Champinjoner",
       "aliases": [
         "champinjon",
-        "svamp"
+        "svamp",
+        "champinjoner"
       ]
     },
     "brod": {
@@ -261,7 +281,8 @@ export const data = {
       "name": "Vitlök",
       "aliases": [
         "vitlöksklyfta",
-        "vitlöksklyftor"
+        "vitlöksklyftor",
+        "vitlök"
       ]
     },
     "smor": {
@@ -290,38 +311,44 @@ export const data = {
       "name": "Majs",
       "aliases": [
         "majskorn",
-        "burkmajs"
+        "burkmajs",
+        "majs"
       ]
     },
     "havre": {
       "name": "Havregryn",
       "aliases": [
-        "havre"
+        "havre",
+        "havregryn"
       ]
     },
     "apple": {
       "name": "Äpple",
       "aliases": [
         "äpplet",
-        "äpplen"
+        "äpplen",
+        "äpple"
       ]
     },
     "valnot": {
       "name": "Valnötter",
       "aliases": [
-        "valnöt"
+        "valnöt",
+        "valnötter"
       ]
     },
     "kanel": {
       "name": "Kanel",
       "aliases": [
-        "malen kanel"
+        "malen kanel",
+        "kanel"
       ]
     },
     "kokosmjolk": {
       "name": "Kokosmjölk",
       "aliases": [
-        "kokosgrädde"
+        "kokosgrädde",
+        "kokosmjölk"
       ]
     },
     "curry": {
@@ -336,16 +363,17 @@ export const data = {
         "tomatkross",
         "krossad tomat",
         "passerade tomater",
-        "tomater på burk"
+        "tomater på burk",
+        "krossade tomater"
       ]
     },
     "rodbetor": {
       "name": "Inlagda rödbetor",
       "aliases": [
         "inlagda rödbetor",
-        "rödbetor",
+        "kokta rödbetor",
         "rödbeta",
-        "kokta rödbetor"
+        "rödbetor"
       ]
     },
     "rodlok": {
@@ -360,7 +388,8 @@ export const data = {
         "gröna ärter",
         "ärter",
         "ärtor",
-        "frysta ärter"
+        "frysta ärter",
+        "gröna ärtor"
       ]
     },
     "vita-bonor": {
@@ -407,9 +436,9 @@ export const data = {
       "name": "Mjölk",
       "aliases": [
         "mjölk",
+        "lättmjölk",
         "mellanmjölk",
         "standardmjölk",
-        "lättmjölk",
         "laktosfri mjölk"
       ]
     },
@@ -423,8 +452,8 @@ export const data = {
       "name": "Fetaost",
       "aliases": [
         "fetaost",
-        "feta",
-        "salladsost"
+        "salladsost",
+        "feta"
       ]
     },
     "kvarg": {
@@ -507,8 +536,8 @@ export const data = {
         "röd paprika",
         "röda paprikor",
         "paprika",
-        "gul paprika",
         "grön paprika",
+        "gul paprika",
         "paprikor"
       ]
     },
@@ -596,9 +625,9 @@ export const data = {
     "fron": {
       "name": "Frön",
       "aliases": [
-        "solrosfrön",
         "pumpafrön",
         "sesamfrön",
+        "solrosfrön",
         "sesam"
       ]
     },
@@ -714,24 +743,24 @@ export const data = {
       "name": "Kryddor",
       "aliases": [
         "chili",
+        "oregano",
         "chiliflakes",
         "paprikapulver",
-        "spiskummin",
-        "oregano"
+        "spiskummin"
       ]
     },
     "orter": {
       "name": "Färska örter",
       "aliases": [
-        "örter",
-        "persilja",
-        "bladpersilja",
         "basilika",
-        "koriander",
+        "bladpersilja",
         "gräslök",
+        "koriander",
         "mynta",
+        "rosmarin",
         "timjan",
-        "rosmarin"
+        "persilja",
+        "örter"
       ]
     },
     "selleri": {
@@ -803,17 +832,17 @@ export const data = {
       "name": "Julskinka",
       "aliases": [
         "julskinka",
-        "skinka",
         "kokt skinka",
-        "rökt skinka"
+        "rökt skinka",
+        "skinka"
       ]
     },
     "blandfars": {
       "name": "Blandfärs",
       "aliases": [
         "blandfärs",
-        "köttfärs",
         "nötfärs",
+        "köttfärs",
         "färs"
       ]
     },
@@ -869,11 +898,11 @@ export const data = {
         "sej",
         "torsk",
         "alaska pollock",
-        "fisk",
-        "fiskfilé",
+        "kolja",
         "torskfilé",
         "sejfilé",
-        "kolja"
+        "fisk",
+        "fiskfilé"
       ]
     },
     "fiskbullar": {
@@ -886,14 +915,15 @@ export const data = {
       "name": "Räkor",
       "aliases": [
         "räkor",
-        "räka",
-        "skalade räkor"
+        "skalade räkor",
+        "räka"
       ]
     },
     "janssons-frestelse": {
       "name": "Janssons frestelse",
       "aliases": [
-        "Janssons frestelse"
+        "Janssons frestelse",
+        "janssons frestelse"
       ]
     },
     "paron": {
@@ -950,7 +980,8 @@ export const data = {
     "sotpotatis": {
       "name": "Sötpotatis",
       "aliases": [
-        "sötpotatisar"
+        "sötpotatisar",
+        "sötpotatis"
       ]
     },
     "tofu": {
@@ -963,6 +994,7 @@ export const data = {
       "name": "Korngryn",
       "aliases": [
         "matkorn",
+        "korngryn",
         "korn"
       ]
     },
@@ -970,19 +1002,22 @@ export const data = {
       "name": "Rotfrukter",
       "aliases": [
         "palsternacka",
-        "palsternackor",
-        "rotselleri"
+        "rotselleri",
+        "palsternackor"
       ]
     },
     "keso": {
       "name": "Keso",
       "aliases": [
-        "cottage cheese"
+        "cottage cheese",
+        "keso"
       ]
     },
     "mozzarella": {
       "name": "Mozzarella",
-      "aliases": []
+      "aliases": [
+        "mozzarella"
+      ]
     },
     "nudlar": {
       "name": "Nudlar",
@@ -995,7 +1030,8 @@ export const data = {
     "svartvinbar": {
       "name": "Svarta vinbär",
       "aliases": [
-        "svartvinbär"
+        "svartvinbär",
+        "svarta vinbär"
       ]
     },
     "zucchini": {
@@ -1045,8 +1081,24245 @@ export const data = {
         "dadel",
         "torkade dadlar"
       ]
+    },
+    "flaskkotlett": {
+      "name": "Fläskkotletter",
+      "aliases": [
+        "fläskkotlett",
+        "fläskkotletter",
+        "kotlett",
+        "kotletter"
+      ]
+    },
+    "notkott": {
+      "name": "Nötkött",
+      "aliases": [
+        "nötkött",
+        "flankstek",
+        "högrev",
+        "oxinnanlår",
+        "lövbiff"
+      ]
+    },
+    "halloumi": {
+      "name": "Halloumi",
+      "aliases": [
+        "halloumi",
+        "grillost"
+      ]
+    },
+    "gronsaker": {
+      "name": "Blandade grönsaker",
+      "aliases": [
+        "grönsaker",
+        "blandade grönsaker",
+        "grönsaksrester"
+      ]
+    },
+    "kex": {
+      "name": "Kex",
+      "aliases": [
+        "kex",
+        "digestive",
+        "digestivekex"
+      ]
+    },
+    "flaskfars": {
+      "name": "Fläskfärs",
+      "aliases": [
+        "fläskfärs"
+      ]
+    },
+    "flaskkarre": {
+      "name": "Fläskkarré",
+      "aliases": [
+        "fläskkarré",
+        "karré"
+      ]
+    },
+    "flask": {
+      "name": "Rimmat fläsk",
+      "aliases": [
+        "fläsk",
+        "rimmat fläsk",
+        "rimmat sidfläsk",
+        "stekfläsk"
+      ]
+    },
+    "lamm": {
+      "name": "Lammkött",
+      "aliases": [
+        "lamm",
+        "lammkött",
+        "lammbog",
+        "lammstek"
+      ]
+    },
+    "aprikos": {
+      "name": "Torkade aprikoser",
+      "aliases": [
+        "torkad aprikos",
+        "torkade aprikoser",
+        "aprikoser"
+      ]
+    },
+    "lammfars": {
+      "name": "Lammfärs",
+      "aliases": [
+        "lammfärs"
+      ]
+    },
+    "renskav": {
+      "name": "Renskav",
+      "aliases": [
+        "renskav",
+        "renkött"
+      ]
+    },
+    "katrinplommon": {
+      "name": "Katrinplommon",
+      "aliases": [
+        "katrinplommon",
+        "torkade plommon"
+      ]
+    },
+    "oliver": {
+      "name": "Oliver",
+      "aliases": [
+        "oliver",
+        "svarta oliver",
+        "gröna oliver",
+        "kalamataoliver"
+      ]
+    },
+    "gronkal": {
+      "name": "Grönkål",
+      "aliases": [
+        "grönkål",
+        "grönkålsblad"
+      ]
+    },
+    "quinoa": {
+      "name": "Quinoa",
+      "aliases": [
+        "quinoa"
+      ]
+    },
+    "getost": {
+      "name": "Getost",
+      "aliases": [
+        "getost",
+        "chèvre",
+        "chevre"
+      ]
+    },
+    "miso": {
+      "name": "Miso",
+      "aliases": [
+        "miso",
+        "misopasta",
+        "vit miso",
+        "ljus miso"
+      ]
+    },
+    "artor": {
+      "name": "Torkade gula ärter",
+      "aliases": [
+        "gula ärter",
+        "gula ärtor",
+        "torkade gula ärter",
+        "torkade gula ärtor"
+      ]
+    },
+    "bovetemjol": {
+      "name": "Bovetemjöl",
+      "aliases": [
+        "bovetemjöl"
+      ]
+    },
+    "kikartsmjol": {
+      "name": "Kikärtsmjöl",
+      "aliases": [
+        "kikärtsmjöl",
+        "besan",
+        "grammjöl"
+      ]
+    },
+    "majsstarkelse": {
+      "name": "Majsstärkelse",
+      "aliases": [
+        "majsstärkelse",
+        "maizena"
+      ]
+    },
+    "majsflingor": {
+      "name": "Majsflingor",
+      "aliases": [
+        "majsflingor",
+        "cornflakes"
+      ]
+    },
+    "chips": {
+      "name": "Potatischips",
+      "aliases": [
+        "chips",
+        "potatischips"
+      ]
+    },
+    "kottfarssas": {
+      "name": "Köttfärssås",
+      "aliases": [
+        "köttfärssås",
+        "bolognese"
+      ]
+    },
+    "rismjol": {
+      "name": "Rismjöl",
+      "aliases": [
+        "rismjöl"
+      ]
+    },
+    "mandelmjol": {
+      "name": "Mandelmjöl",
+      "aliases": [
+        "mandelmjöl"
+      ]
+    },
+    "ananas": {
+      "name": "Ananas",
+      "aliases": [
+        "ananas"
+      ]
+    },
+    "aprikos-frukt": {
+      "name": "Aprikos",
+      "aliases": [
+        "aprikos"
+      ]
+    },
+    "babyananas": {
+      "name": "Babyananas",
+      "aliases": [
+        "babyananas"
+      ]
+    },
+    "bergamott": {
+      "name": "Bergamott",
+      "aliases": [
+        "bergamott"
+      ]
+    },
+    "bigarraer": {
+      "name": "Bigarråer",
+      "aliases": [
+        "bigarråer"
+      ]
+    },
+    "blodapelsin": {
+      "name": "Blodapelsin",
+      "aliases": [
+        "blodapelsin"
+      ]
+    },
+    "blodgrapefrukt": {
+      "name": "Blodgrapefrukt",
+      "aliases": [
+        "blodgrapefrukt"
+      ]
+    },
+    "cantaloupemelon": {
+      "name": "Cantaloupemelon",
+      "aliases": [
+        "cantaloupemelon"
+      ]
+    },
+    "carambola": {
+      "name": "Carambola",
+      "aliases": [
+        "carambola"
+      ]
+    },
+    "charentaismelon": {
+      "name": "Charentaismelon",
+      "aliases": [
+        "charentaismelon"
+      ]
+    },
+    "cherimoya": {
+      "name": "Cherimoya",
+      "aliases": [
+        "cherimoya"
+      ]
+    },
+    "clementin": {
+      "name": "Clementin",
+      "aliases": [
+        "clementin"
+      ]
+    },
+    "drakfrukt": {
+      "name": "Drakfrukt",
+      "aliases": [
+        "drakfrukt"
+      ]
+    },
+    "durian": {
+      "name": "Durian",
+      "aliases": [
+        "durian"
+      ]
+    },
+    "fikon": {
+      "name": "Fikon",
+      "aliases": [
+        "fikon"
+      ]
+    },
+    "fruktkorg": {
+      "name": "Fruktkorg",
+      "aliases": [
+        "fruktkorg"
+      ]
+    },
+    "fruktsallad": {
+      "name": "Fruktsallad",
+      "aliases": [
+        "fruktsallad"
+      ]
+    },
+    "farska-dadlar": {
+      "name": "Färska dadlar",
+      "aliases": [
+        "färska dadlar"
+      ]
+    },
+    "galiamelon": {
+      "name": "Galiamelon",
+      "aliases": [
+        "galiamelon"
+      ]
+    },
+    "granatapple": {
+      "name": "Granatäpple",
+      "aliases": [
+        "granatäpple"
+      ]
+    },
+    "grapefrukt": {
+      "name": "Grapefrukt",
+      "aliases": [
+        "grapefrukt"
+      ]
+    },
+    "grenadilla-sot-passionsfrukt": {
+      "name": "Grenadilla (söt passionsfrukt)",
+      "aliases": [
+        "grenadilla (söt passionsfrukt)",
+        "grenadilla"
+      ]
+    },
+    "grona-vindruvor": {
+      "name": "Gröna vindruvor",
+      "aliases": [
+        "gröna vindruvor"
+      ]
+    },
+    "grona-applen": {
+      "name": "Gröna äpplen",
+      "aliases": [
+        "gröna äpplen"
+      ]
+    },
+    "guava": {
+      "name": "Guava",
+      "aliases": [
+        "guava"
+      ]
+    },
+    "gul-kiwi": {
+      "name": "Gul kiwi",
+      "aliases": [
+        "gul kiwi"
+      ]
+    },
+    "gul-vattenmelon": {
+      "name": "Gul vattenmelon",
+      "aliases": [
+        "gul vattenmelon"
+      ]
+    },
+    "gula-plommon": {
+      "name": "Gula plommon",
+      "aliases": [
+        "gula plommon"
+      ]
+    },
+    "honungsmelon": {
+      "name": "Honungsmelon",
+      "aliases": [
+        "honungsmelon"
+      ]
+    },
+    "juiceapelsiner": {
+      "name": "Juiceapelsiner",
+      "aliases": [
+        "juiceapelsiner"
+      ]
+    },
+    "kaki-persimon": {
+      "name": "Kaki (persimon)",
+      "aliases": [
+        "kaki (persimon)",
+        "kaki"
+      ]
+    },
+    "kaktusfikon": {
+      "name": "Kaktusfikon",
+      "aliases": [
+        "kaktusfikon"
+      ]
+    },
+    "kiwano": {
+      "name": "Kiwano",
+      "aliases": [
+        "kiwano"
+      ]
+    },
+    "kiwi": {
+      "name": "Kiwi",
+      "aliases": [
+        "kiwi"
+      ]
+    },
+    "kiwibar": {
+      "name": "Kiwibär",
+      "aliases": [
+        "kiwibär"
+      ]
+    },
+    "kokosnot": {
+      "name": "Kokosnöt",
+      "aliases": [
+        "kokosnöt"
+      ]
+    },
+    "krikon": {
+      "name": "Krikon",
+      "aliases": [
+        "krikon"
+      ]
+    },
+    "kumquat": {
+      "name": "Kumquat",
+      "aliases": [
+        "kumquat"
+      ]
+    },
+    "kvitten": {
+      "name": "Kvitten",
+      "aliases": [
+        "kvitten"
+      ]
+    },
+    "karnfria-vindruvor": {
+      "name": "Kärnfria vindruvor",
+      "aliases": [
+        "kärnfria vindruvor"
+      ]
+    },
+    "korsbar": {
+      "name": "Körsbär",
+      "aliases": [
+        "körsbär"
+      ]
+    },
+    "litchi": {
+      "name": "Litchi",
+      "aliases": [
+        "litchi"
+      ]
+    },
+    "longan": {
+      "name": "Longan",
+      "aliases": [
+        "longan"
+      ]
+    },
+    "mandarin": {
+      "name": "Mandarin",
+      "aliases": [
+        "mandarin"
+      ]
+    },
+    "mangostan": {
+      "name": "Mangostan",
+      "aliases": [
+        "mangostan"
+      ]
+    },
+    "matbanan": {
+      "name": "Matbanan",
+      "aliases": [
+        "matbanan"
+      ]
+    },
+    "mineola": {
+      "name": "Mineola",
+      "aliases": [
+        "mineola"
+      ]
+    },
+    "minibanan": {
+      "name": "Minibanan",
+      "aliases": [
+        "minibanan"
+      ]
+    },
+    "minivattenmelon": {
+      "name": "Minivattenmelon",
+      "aliases": [
+        "minivattenmelon"
+      ]
+    },
+    "mirabeller": {
+      "name": "Mirabeller",
+      "aliases": [
+        "mirabeller"
+      ]
+    },
+    "nashiparon": {
+      "name": "Nashipäron",
+      "aliases": [
+        "nashipäron"
+      ]
+    },
+    "nektarin": {
+      "name": "Nektarin",
+      "aliases": [
+        "nektarin"
+      ]
+    },
+    "papaya": {
+      "name": "Papaya",
+      "aliases": [
+        "papaya"
+      ]
+    },
+    "passionsfrukt": {
+      "name": "Passionsfrukt",
+      "aliases": [
+        "passionsfrukt"
+      ]
+    },
+    "persika": {
+      "name": "Persika",
+      "aliases": [
+        "persika"
+      ]
+    },
+    "piel-de-sapo-melon": {
+      "name": "Piel de sapo-melon",
+      "aliases": [
+        "piel de sapo-melon"
+      ]
+    },
+    "plattpersika": {
+      "name": "Plattpersika",
+      "aliases": [
+        "plattpersika"
+      ]
+    },
+    "plommon": {
+      "name": "Plommon",
+      "aliases": [
+        "plommon"
+      ]
+    },
+    "pomelo": {
+      "name": "Pomelo",
+      "aliases": [
+        "pomelo"
+      ]
+    },
+    "rambutan": {
+      "name": "Rambutan",
+      "aliases": [
+        "rambutan"
+      ]
+    },
+    "roda-bananer": {
+      "name": "Röda bananer",
+      "aliases": [
+        "röda bananer"
+      ]
+    },
+    "roda-vindruvor": {
+      "name": "Röda vindruvor",
+      "aliases": [
+        "röda vindruvor"
+      ]
+    },
+    "roda-applen": {
+      "name": "Röda äpplen",
+      "aliases": [
+        "röda äpplen"
+      ]
+    },
+    "satsuma": {
+      "name": "Satsuma",
+      "aliases": [
+        "satsuma"
+      ]
+    },
+    "sharonfrukt": {
+      "name": "Sharonfrukt",
+      "aliases": [
+        "sharonfrukt"
+      ]
+    },
+    "svarta-vindruvor": {
+      "name": "Svarta vindruvor",
+      "aliases": [
+        "svarta vindruvor"
+      ]
+    },
+    "tamarillo": {
+      "name": "Tamarillo",
+      "aliases": [
+        "tamarillo"
+      ]
+    },
+    "tamarind": {
+      "name": "Tamarind",
+      "aliases": [
+        "tamarind"
+      ]
+    },
+    "vattenmelon": {
+      "name": "Vattenmelon",
+      "aliases": [
+        "vattenmelon"
+      ]
+    },
+    "yuzu": {
+      "name": "Yuzu",
+      "aliases": [
+        "yuzu"
+      ]
+    },
+    "appelklyftor-i-pase": {
+      "name": "Äppelklyftor i påse",
+      "aliases": [
+        "äppelklyftor i påse"
+      ]
+    },
+    "aronia": {
+      "name": "Aronia",
+      "aliases": [
+        "aronia"
+      ]
+    },
+    "bjornbar": {
+      "name": "Björnbär",
+      "aliases": [
+        "björnbär"
+      ]
+    },
+    "fladerbar": {
+      "name": "Fläderbär",
+      "aliases": [
+        "fläderbär"
+      ]
+    },
+    "farsk-barmix": {
+      "name": "Färsk bärmix",
+      "aliases": [
+        "färsk bärmix"
+      ]
+    },
+    "gula-hallon": {
+      "name": "Gula hallon",
+      "aliases": [
+        "gula hallon"
+      ]
+    },
+    "havtorn": {
+      "name": "Havtorn",
+      "aliases": [
+        "havtorn"
+      ]
+    },
+    "hjortron": {
+      "name": "Hjortron",
+      "aliases": [
+        "hjortron"
+      ]
+    },
+    "jordgubbar": {
+      "name": "Jordgubbar",
+      "aliases": [
+        "jordgubbar"
+      ]
+    },
+    "krusbar": {
+      "name": "Krusbär",
+      "aliases": [
+        "krusbär"
+      ]
+    },
+    "mullbar": {
+      "name": "Mullbär",
+      "aliases": [
+        "mullbär"
+      ]
+    },
+    "nypon": {
+      "name": "Nypon",
+      "aliases": [
+        "nypon"
+      ]
+    },
+    "physalis": {
+      "name": "Physalis",
+      "aliases": [
+        "physalis"
+      ]
+    },
+    "roda-vinbar": {
+      "name": "Röda vinbär",
+      "aliases": [
+        "röda vinbär"
+      ]
+    },
+    "ronnbar": {
+      "name": "Rönnbär",
+      "aliases": [
+        "rönnbär"
+      ]
+    },
+    "slanbar": {
+      "name": "Slånbär",
+      "aliases": [
+        "slånbär"
+      ]
+    },
+    "smultron": {
+      "name": "Smultron",
+      "aliases": [
+        "smultron"
+      ]
+    },
+    "tranbar": {
+      "name": "Tranbär",
+      "aliases": [
+        "tranbär"
+      ]
+    },
+    "vita-vinbar": {
+      "name": "Vita vinbär",
+      "aliases": [
+        "vita vinbär"
+      ]
+    },
+    "akerbar": {
+      "name": "Åkerbär",
+      "aliases": [
+        "åkerbär"
+      ]
+    },
+    "aubergine": {
+      "name": "Aubergine",
+      "aliases": [
+        "aubergine"
+      ]
+    },
+    "babyplommontomater": {
+      "name": "Babyplommontomater",
+      "aliases": [
+        "babyplommontomater"
+      ]
+    },
+    "bananschalottenlok": {
+      "name": "Bananschalottenlök",
+      "aliases": [
+        "bananschalottenlök"
+      ]
+    },
+    "bifftomater": {
+      "name": "Bifftomater",
+      "aliases": [
+        "bifftomater"
+      ]
+    },
+    "bittergurka-karela": {
+      "name": "Bittergurka (karela)",
+      "aliases": [
+        "bittergurka (karela)",
+        "bittergurka"
+      ]
+    },
+    "bondbonor": {
+      "name": "Bondbönor",
+      "aliases": [
+        "bondbönor"
+      ]
+    },
+    "broccolini": {
+      "name": "Broccolini",
+      "aliases": [
+        "broccolini"
+      ]
+    },
+    "brysselkal": {
+      "name": "Brysselkål",
+      "aliases": [
+        "brysselkål"
+      ]
+    },
+    "brysselkal-pa-stjalk": {
+      "name": "Brysselkål på stjälk",
+      "aliases": [
+        "brysselkål på stjälk"
+      ]
+    },
+    "brytbonor": {
+      "name": "Brytbönor",
+      "aliases": [
+        "brytbönor"
+      ]
+    },
+    "chayote": {
+      "name": "Chayote",
+      "aliases": [
+        "chayote"
+      ]
+    },
+    "choi-sum": {
+      "name": "Choi sum",
+      "aliases": [
+        "choi sum"
+      ]
+    },
+    "fankal": {
+      "name": "Fänkål",
+      "aliases": [
+        "fänkål"
+      ]
+    },
+    "farsk-silverlok": {
+      "name": "Färsk silverlök",
+      "aliases": [
+        "färsk silverlök"
+      ]
+    },
+    "farsk-vitlok": {
+      "name": "Färsk vitlök",
+      "aliases": [
+        "färsk vitlök"
+      ]
+    },
+    "farska-artor-i-balja": {
+      "name": "Färska ärtor i balja",
+      "aliases": [
+        "färska ärtor i balja"
+      ]
+    },
+    "gron-chili": {
+      "name": "Grön chili",
+      "aliases": [
+        "grön chili"
+      ]
+    },
+    "gron-sparris": {
+      "name": "Grön sparris",
+      "aliases": [
+        "grön sparris"
+      ]
+    },
+    "grona-tomater": {
+      "name": "Gröna tomater",
+      "aliases": [
+        "gröna tomater"
+      ]
+    },
+    "gul-squash": {
+      "name": "Gul squash",
+      "aliases": [
+        "gul squash"
+      ]
+    },
+    "gula-tomater": {
+      "name": "Gula tomater",
+      "aliases": [
+        "gula tomater"
+      ]
+    },
+    "habanero": {
+      "name": "Habanero",
+      "aliases": [
+        "habanero"
+      ]
+    },
+    "halloweenpumpa": {
+      "name": "Halloweenpumpa",
+      "aliases": [
+        "halloweenpumpa"
+      ]
+    },
+    "haricots-verts": {
+      "name": "Haricots verts",
+      "aliases": [
+        "haricots verts"
+      ]
+    },
+    "hokkaidopumpa": {
+      "name": "Hokkaidopumpa",
+      "aliases": [
+        "hokkaidopumpa"
+      ]
+    },
+    "jalapeno": {
+      "name": "Jalapeño",
+      "aliases": [
+        "jalapeño"
+      ]
+    },
+    "kronartskocka": {
+      "name": "Kronärtskocka",
+      "aliases": [
+        "kronärtskocka"
+      ]
+    },
+    "kalrabbi": {
+      "name": "Kålrabbi",
+      "aliases": [
+        "kålrabbi"
+      ]
+    },
+    "lila-blomkal": {
+      "name": "Lila blomkål",
+      "aliases": [
+        "lila blomkål"
+      ]
+    },
+    "langbonor": {
+      "name": "Långbönor",
+      "aliases": [
+        "långbönor"
+      ]
+    },
+    "majskolv": {
+      "name": "Majskolv",
+      "aliases": [
+        "majskolv"
+      ]
+    },
+    "miniaubergine": {
+      "name": "Miniaubergine",
+      "aliases": [
+        "miniaubergine"
+      ]
+    },
+    "minigurka": {
+      "name": "Minigurka",
+      "aliases": [
+        "minigurka"
+      ]
+    },
+    "minimajs": {
+      "name": "Minimajs",
+      "aliases": [
+        "minimajs"
+      ]
+    },
+    "minisparris": {
+      "name": "Minisparris",
+      "aliases": [
+        "minisparris"
+      ]
+    },
+    "muskotpumpa": {
+      "name": "Muskotpumpa",
+      "aliases": [
+        "muskotpumpa"
+      ]
+    },
+    "okra": {
+      "name": "Okra",
+      "aliases": [
+        "okra"
+      ]
+    },
+    "orange-paprika": {
+      "name": "Orange paprika",
+      "aliases": [
+        "orange paprika"
+      ]
+    },
+    "oxhjartatomat": {
+      "name": "Oxhjärtatomat",
+      "aliases": [
+        "oxhjärtatomat"
+      ]
+    },
+    "padronpaprika": {
+      "name": "Padrónpaprika",
+      "aliases": [
+        "padrónpaprika"
+      ]
+    },
+    "pak-choi": {
+      "name": "Pak choi",
+      "aliases": [
+        "pak choi"
+      ]
+    },
+    "paprikamix": {
+      "name": "Paprikamix",
+      "aliases": [
+        "paprikamix"
+      ]
+    },
+    "parllok": {
+      "name": "Pärllök",
+      "aliases": [
+        "pärllök"
+      ]
+    },
+    "rabarber": {
+      "name": "Rabarber",
+      "aliases": [
+        "rabarber"
+      ]
+    },
+    "romanesco": {
+      "name": "Romanesco",
+      "aliases": [
+        "romanesco"
+      ]
+    },
+    "rosenbonor": {
+      "name": "Rosenbönor",
+      "aliases": [
+        "rosenbönor"
+      ]
+    },
+    "rod-chili": {
+      "name": "Röd chili",
+      "aliases": [
+        "röd chili"
+      ]
+    },
+    "rod-spetskal": {
+      "name": "Röd spetskål",
+      "aliases": [
+        "röd spetskål"
+      ]
+    },
+    "salicornia-glasort": {
+      "name": "Salicornia (glasört)",
+      "aliases": [
+        "salicornia (glasört)",
+        "salicornia"
+      ]
+    },
+    "savojkal": {
+      "name": "Savojkål",
+      "aliases": [
+        "savojkål"
+      ]
+    },
+    "scotch-bonnet": {
+      "name": "Scotch bonnet",
+      "aliases": [
+        "scotch bonnet"
+      ]
+    },
+    "serranochili": {
+      "name": "Serranochili",
+      "aliases": [
+        "serranochili"
+      ]
+    },
+    "skarbonor": {
+      "name": "Skärbönor",
+      "aliases": [
+        "skärbönor"
+      ]
+    },
+    "snackpaprika": {
+      "name": "Snackpaprika",
+      "aliases": [
+        "snackpaprika"
+      ]
+    },
+    "sockerartor": {
+      "name": "Sockerärtor",
+      "aliases": [
+        "sockerärtor"
+      ]
+    },
+    "solovitlok": {
+      "name": "Solovitlök",
+      "aliases": [
+        "solovitlök"
+      ]
+    },
+    "spaghettipumpa": {
+      "name": "Spaghettipumpa",
+      "aliases": [
+        "spaghettipumpa"
+      ]
+    },
+    "sparris": {
+      "name": "Sparris",
+      "aliases": [
+        "sparris"
+      ]
+    },
+    "spetspaprika": {
+      "name": "Spetspaprika",
+      "aliases": [
+        "spetspaprika"
+      ]
+    },
+    "steklok": {
+      "name": "Steklök",
+      "aliases": [
+        "steklök"
+      ]
+    },
+    "sugarsnaps": {
+      "name": "Sugarsnaps",
+      "aliases": [
+        "sugarsnaps"
+      ]
+    },
+    "svart-vitlok": {
+      "name": "Svart vitlök",
+      "aliases": [
+        "svart vitlök"
+      ]
+    },
+    "svartkal": {
+      "name": "Svartkål",
+      "aliases": [
+        "svartkål"
+      ]
+    },
+    "thaiaubergine": {
+      "name": "Thaiaubergine",
+      "aliases": [
+        "thaiaubergine"
+      ]
+    },
+    "thaibroccoli-kailan": {
+      "name": "Thaibroccoli (kailan)",
+      "aliases": [
+        "thaibroccoli (kailan)",
+        "thaibroccoli"
+      ]
+    },
+    "thaichili": {
+      "name": "Thaichili",
+      "aliases": [
+        "thaichili"
+      ]
+    },
+    "tomatillo": {
+      "name": "Tomatillo",
+      "aliases": [
+        "tomatillo"
+      ]
+    },
+    "tomatmix": {
+      "name": "Tomatmix",
+      "aliases": [
+        "tomatmix"
+      ]
+    },
+    "vattenspenat": {
+      "name": "Vattenspenat",
+      "aliases": [
+        "vattenspenat"
+      ]
+    },
+    "vaxbonor": {
+      "name": "Vaxbönor",
+      "aliases": [
+        "vaxbönor"
+      ]
+    },
+    "vit-lok": {
+      "name": "Vit lök",
+      "aliases": [
+        "vit lök"
+      ]
+    },
+    "vit-sparris": {
+      "name": "Vit sparris",
+      "aliases": [
+        "vit sparris"
+      ]
+    },
+    "vitloksflata": {
+      "name": "Vitlöksfläta",
+      "aliases": [
+        "vitlöksfläta"
+      ]
+    },
+    "vasterasgurka": {
+      "name": "Västeråsgurka",
+      "aliases": [
+        "västeråsgurka"
+      ]
+    },
+    "wokmix": {
+      "name": "Wokmix",
+      "aliases": [
+        "wokmix"
+      ]
+    },
+    "bakpotatis": {
+      "name": "Bakpotatis",
+      "aliases": [
+        "bakpotatis"
+      ]
+    },
+    "bla-potatis": {
+      "name": "Blå potatis",
+      "aliases": [
+        "blå potatis"
+      ]
+    },
+    "delikatesspotatis": {
+      "name": "Delikatesspotatis",
+      "aliases": [
+        "delikatesspotatis"
+      ]
+    },
+    "galangal": {
+      "name": "Galangal",
+      "aliases": [
+        "galangal"
+      ]
+    },
+    "gulbeta": {
+      "name": "Gulbeta",
+      "aliases": [
+        "gulbeta"
+      ]
+    },
+    "gurkmeja": {
+      "name": "Gurkmeja",
+      "aliases": [
+        "gurkmeja"
+      ]
+    },
+    "jams": {
+      "name": "Jams",
+      "aliases": [
+        "jams"
+      ]
+    },
+    "jordartskocka": {
+      "name": "Jordärtskocka",
+      "aliases": [
+        "jordärtskocka"
+      ]
+    },
+    "kassava": {
+      "name": "Kassava",
+      "aliases": [
+        "kassava"
+      ]
+    },
+    "knippbetor": {
+      "name": "Knippbetor",
+      "aliases": [
+        "knippbetor"
+      ]
+    },
+    "knippmorotter": {
+      "name": "Knippmorötter",
+      "aliases": [
+        "knippmorötter"
+      ]
+    },
+    "lila-morotter": {
+      "name": "Lila morötter",
+      "aliases": [
+        "lila morötter"
+      ]
+    },
+    "lila-sotpotatis": {
+      "name": "Lila sötpotatis",
+      "aliases": [
+        "lila sötpotatis"
+      ]
+    },
+    "lotusrot": {
+      "name": "Lotusrot",
+      "aliases": [
+        "lotusrot"
+      ]
+    },
+    "majrova": {
+      "name": "Majrova",
+      "aliases": [
+        "majrova"
+      ]
+    },
+    "morotsmix-med-flera-farger": {
+      "name": "Morotsmix med flera färger",
+      "aliases": [
+        "morotsmix med flera färger"
+      ]
+    },
+    "persiljerot": {
+      "name": "Persiljerot",
+      "aliases": [
+        "persiljerot"
+      ]
+    },
+    "polkabeta": {
+      "name": "Polkabeta",
+      "aliases": [
+        "polkabeta"
+      ]
+    },
+    "rattika": {
+      "name": "Rättika",
+      "aliases": [
+        "rättika"
+      ]
+    },
+    "rod-potatis": {
+      "name": "Röd potatis",
+      "aliases": [
+        "röd potatis"
+      ]
+    },
+    "skalad-potatis": {
+      "name": "Skalad potatis",
+      "aliases": [
+        "skalad potatis"
+      ]
+    },
+    "smapotatis": {
+      "name": "Småpotatis",
+      "aliases": [
+        "småpotatis"
+      ]
+    },
+    "snackmorotter": {
+      "name": "Snackmorötter",
+      "aliases": [
+        "snackmorötter"
+      ]
+    },
+    "sparrispotatis": {
+      "name": "Sparrispotatis",
+      "aliases": [
+        "sparrispotatis"
+      ]
+    },
+    "svart-rattika": {
+      "name": "Svart rättika",
+      "aliases": [
+        "svart rättika"
+      ]
+    },
+    "svartrot": {
+      "name": "Svartrot",
+      "aliases": [
+        "svartrot"
+      ]
+    },
+    "taro": {
+      "name": "Taro",
+      "aliases": [
+        "taro"
+      ]
+    },
+    "alfalfagroddar": {
+      "name": "Alfalfagroddar",
+      "aliases": [
+        "alfalfagroddar"
+      ]
+    },
+    "babyleaf": {
+      "name": "Babyleaf",
+      "aliases": [
+        "babyleaf"
+      ]
+    },
+    "bataviasallad": {
+      "name": "Bataviasallad",
+      "aliases": [
+        "bataviasallad"
+      ]
+    },
+    "broccoligroddar": {
+      "name": "Broccoligroddar",
+      "aliases": [
+        "broccoligroddar"
+      ]
+    },
+    "bongroddar": {
+      "name": "Böngroddar",
+      "aliases": [
+        "böngroddar"
+      ]
+    },
+    "ekbladssallad": {
+      "name": "Ekbladssallad",
+      "aliases": [
+        "ekbladssallad"
+      ]
+    },
+    "endiv": {
+      "name": "Endiv",
+      "aliases": [
+        "endiv"
+      ]
+    },
+    "frisesallad": {
+      "name": "Frisésallad",
+      "aliases": [
+        "frisésallad"
+      ]
+    },
+    "hjartsallad": {
+      "name": "Hjärtsallad",
+      "aliases": [
+        "hjärtsallad"
+      ]
+    },
+    "huvudsallad": {
+      "name": "Huvudsallad",
+      "aliases": [
+        "huvudsallad"
+      ]
+    },
+    "krasse": {
+      "name": "Krasse",
+      "aliases": [
+        "krasse"
+      ]
+    },
+    "krispsallad": {
+      "name": "Krispsallad",
+      "aliases": [
+        "krispsallad"
+      ]
+    },
+    "kruksallad": {
+      "name": "Kruksallad",
+      "aliases": [
+        "kruksallad"
+      ]
+    },
+    "linsgroddar": {
+      "name": "Linsgroddar",
+      "aliases": [
+        "linsgroddar"
+      ]
+    },
+    "lollo-bianco": {
+      "name": "Lollo bianco",
+      "aliases": [
+        "lollo bianco"
+      ]
+    },
+    "lollo-rosso": {
+      "name": "Lollo rosso",
+      "aliases": [
+        "lollo rosso"
+      ]
+    },
+    "machesallad": {
+      "name": "Machesallad",
+      "aliases": [
+        "machesallad"
+      ]
+    },
+    "mangold": {
+      "name": "Mangold",
+      "aliases": [
+        "mangold"
+      ]
+    },
+    "mikrogront": {
+      "name": "Mikrogrönt",
+      "aliases": [
+        "mikrogrönt"
+      ]
+    },
+    "mizuna": {
+      "name": "Mizuna",
+      "aliases": [
+        "mizuna"
+      ]
+    },
+    "nasslor": {
+      "name": "Nässlor",
+      "aliases": [
+        "nässlor"
+      ]
+    },
+    "plocksallat": {
+      "name": "Plocksallat",
+      "aliases": [
+        "plocksallat"
+      ]
+    },
+    "purjoloksgroddar": {
+      "name": "Purjolöksgroddar",
+      "aliases": [
+        "purjolöksgroddar"
+      ]
+    },
+    "radicchio": {
+      "name": "Radicchio",
+      "aliases": [
+        "radicchio"
+      ]
+    },
+    "romansalladshjartan": {
+      "name": "Romansalladshjärtan",
+      "aliases": [
+        "romansalladshjärtan"
+      ]
+    },
+    "radisgroddar": {
+      "name": "Rädisgroddar",
+      "aliases": [
+        "rädisgroddar"
+      ]
+    },
+    "rod-endiv": {
+      "name": "Röd endiv",
+      "aliases": [
+        "röd endiv"
+      ]
+    },
+    "rodbetsgroddar": {
+      "name": "Rödbetsgroddar",
+      "aliases": [
+        "rödbetsgroddar"
+      ]
+    },
+    "salladskit": {
+      "name": "Salladskit",
+      "aliases": [
+        "salladskit"
+      ]
+    },
+    "salladsmix": {
+      "name": "Salladsmix",
+      "aliases": [
+        "salladsmix"
+      ]
+    },
+    "senapsblad": {
+      "name": "Senapsblad",
+      "aliases": [
+        "senapsblad"
+      ]
+    },
+    "solrosskott": {
+      "name": "Solrosskott",
+      "aliases": [
+        "solrosskott"
+      ]
+    },
+    "tatsoi": {
+      "name": "Tatsoi",
+      "aliases": [
+        "tatsoi"
+      ]
+    },
+    "vattenkrasse": {
+      "name": "Vattenkrasse",
+      "aliases": [
+        "vattenkrasse"
+      ]
+    },
+    "vinterportlak": {
+      "name": "Vinterportlak",
+      "aliases": [
+        "vinterportlak"
+      ]
+    },
+    "artskott": {
+      "name": "Ärtskott",
+      "aliases": [
+        "ärtskott"
+      ]
+    },
+    "bruna-champinjoner": {
+      "name": "Bruna champinjoner",
+      "aliases": [
+        "bruna champinjoner"
+      ]
+    },
+    "enoki": {
+      "name": "Enoki",
+      "aliases": [
+        "enoki"
+      ]
+    },
+    "igelkottstaggsvamp": {
+      "name": "Igelkottstaggsvamp",
+      "aliases": [
+        "igelkottstaggsvamp"
+      ]
+    },
+    "kantareller": {
+      "name": "Kantareller",
+      "aliases": [
+        "kantareller"
+      ]
+    },
+    "karljohansvamp": {
+      "name": "Karljohansvamp",
+      "aliases": [
+        "karljohansvamp"
+      ]
+    },
+    "kungsostronskivling": {
+      "name": "Kungsostronskivling",
+      "aliases": [
+        "kungsostronskivling"
+      ]
+    },
+    "maitake": {
+      "name": "Maitake",
+      "aliases": [
+        "maitake"
+      ]
+    },
+    "murklor": {
+      "name": "Murklor",
+      "aliases": [
+        "murklor"
+      ]
+    },
+    "ostronskivling": {
+      "name": "Ostronskivling",
+      "aliases": [
+        "ostronskivling"
+      ]
+    },
+    "pioppino": {
+      "name": "Pioppino",
+      "aliases": [
+        "pioppino"
+      ]
+    },
+    "portabello": {
+      "name": "Portabello",
+      "aliases": [
+        "portabello"
+      ]
+    },
+    "shiitake": {
+      "name": "Shiitake",
+      "aliases": [
+        "shiitake"
+      ]
+    },
+    "shimeji": {
+      "name": "Shimeji",
+      "aliases": [
+        "shimeji"
+      ]
+    },
+    "skivade-champinjoner": {
+      "name": "Skivade champinjoner",
+      "aliases": [
+        "skivade champinjoner"
+      ]
+    },
+    "svampmix": {
+      "name": "Svampmix",
+      "aliases": [
+        "svampmix"
+      ]
+    },
+    "svart-trumpetsvamp": {
+      "name": "Svart trumpetsvamp",
+      "aliases": [
+        "svart trumpetsvamp"
+      ]
+    },
+    "torkad-svamp": {
+      "name": "Torkad svamp",
+      "aliases": [
+        "torkad svamp"
+      ]
+    },
+    "torkade-trattkantareller": {
+      "name": "Torkade trattkantareller",
+      "aliases": [
+        "torkade trattkantareller"
+      ]
+    },
+    "trattkantareller": {
+      "name": "Trattkantareller",
+      "aliases": [
+        "trattkantareller"
+      ]
+    },
+    "tryffel": {
+      "name": "Tryffel",
+      "aliases": [
+        "tryffel"
+      ]
+    },
+    "citrongras": {
+      "name": "Citrongräs",
+      "aliases": [
+        "citrongräs"
+      ]
+    },
+    "citronmeliss": {
+      "name": "Citronmeliss",
+      "aliases": [
+        "citronmeliss"
+      ]
+    },
+    "citrontimjan": {
+      "name": "Citrontimjan",
+      "aliases": [
+        "citrontimjan"
+      ]
+    },
+    "citronverbena": {
+      "name": "Citronverbena",
+      "aliases": [
+        "citronverbena"
+      ]
+    },
+    "curryblad": {
+      "name": "Curryblad",
+      "aliases": [
+        "curryblad"
+      ]
+    },
+    "dragon": {
+      "name": "Dragon",
+      "aliases": [
+        "dragon"
+      ]
+    },
+    "gurkort": {
+      "name": "Gurkört",
+      "aliases": [
+        "gurkört"
+      ]
+    },
+    "kaffirlimeblad": {
+      "name": "Kaffirlimeblad",
+      "aliases": [
+        "kaffirlimeblad"
+      ]
+    },
+    "krondill": {
+      "name": "Krondill",
+      "aliases": [
+        "krondill"
+      ]
+    },
+    "kruspersilja": {
+      "name": "Kruspersilja",
+      "aliases": [
+        "kruspersilja"
+      ]
+    },
+    "kyndel": {
+      "name": "Kyndel",
+      "aliases": [
+        "kyndel"
+      ]
+    },
+    "korvel": {
+      "name": "Körvel",
+      "aliases": [
+        "körvel"
+      ]
+    },
+    "lagerblad": {
+      "name": "Lagerblad",
+      "aliases": [
+        "lagerblad"
+      ]
+    },
+    "lavendel": {
+      "name": "Lavendel",
+      "aliases": [
+        "lavendel"
+      ]
+    },
+    "libbsticka": {
+      "name": "Libbsticka",
+      "aliases": [
+        "libbsticka"
+      ]
+    },
+    "marockansk-mynta": {
+      "name": "Marockansk mynta",
+      "aliases": [
+        "marockansk mynta"
+      ]
+    },
+    "mejram": {
+      "name": "Mejram",
+      "aliases": [
+        "mejram"
+      ]
+    },
+    "pandanblad": {
+      "name": "Pandanblad",
+      "aliases": [
+        "pandanblad"
+      ]
+    },
+    "ramslok": {
+      "name": "Ramslök",
+      "aliases": [
+        "ramslök"
+      ]
+    },
+    "rod-basilika": {
+      "name": "Röd basilika",
+      "aliases": [
+        "röd basilika"
+      ]
+    },
+    "salvia": {
+      "name": "Salvia",
+      "aliases": [
+        "salvia"
+      ]
+    },
+    "shiso": {
+      "name": "Shiso",
+      "aliases": [
+        "shiso"
+      ]
+    },
+    "thaibasilika": {
+      "name": "Thaibasilika",
+      "aliases": [
+        "thaibasilika"
+      ]
+    },
+    "vietnamesisk-koriander": {
+      "name": "Vietnamesisk koriander",
+      "aliases": [
+        "vietnamesisk koriander"
+      ]
+    },
+    "atbara-blommor": {
+      "name": "Ätbara blommor",
+      "aliases": [
+        "ätbara blommor"
+      ]
+    },
+    "ortmix": {
+      "name": "Örtmix",
+      "aliases": [
+        "örtmix"
+      ]
+    },
+    "blomkalsris": {
+      "name": "Blomkålsris",
+      "aliases": [
+        "blomkålsris"
+      ]
+    },
+    "fruktbagare": {
+      "name": "Fruktbägare",
+      "aliases": [
+        "fruktbägare"
+      ]
+    },
+    "fardigkokta-majskolvar": {
+      "name": "Färdigkokta majskolvar",
+      "aliases": [
+        "färdigkokta majskolvar"
+      ]
+    },
+    "farsk-soppmix": {
+      "name": "Färsk soppmix",
+      "aliases": [
+        "färsk soppmix"
+      ]
+    },
+    "granatappelkarnor": {
+      "name": "Granatäppelkärnor",
+      "aliases": [
+        "granatäppelkärnor"
+      ]
+    },
+    "grillgronsaksmix": {
+      "name": "Grillgrönsaksmix",
+      "aliases": [
+        "grillgrönsaksmix"
+      ]
+    },
+    "gronsaksstavar-med-dipp": {
+      "name": "Grönsaksstavar med dipp",
+      "aliases": [
+        "grönsaksstavar med dipp"
+      ]
+    },
+    "kokosbitar": {
+      "name": "Kokosbitar",
+      "aliases": [
+        "kokosbitar"
+      ]
+    },
+    "morotsstavar": {
+      "name": "Morotsstavar",
+      "aliases": [
+        "morotsstavar"
+      ]
+    },
+    "riven-morot": {
+      "name": "Riven morot",
+      "aliases": [
+        "riven morot"
+      ]
+    },
+    "rotfruktsmix": {
+      "name": "Rotfruktsmix",
+      "aliases": [
+        "rotfruktsmix"
+      ]
+    },
+    "skalade-morotter": {
+      "name": "Skalade morötter",
+      "aliases": [
+        "skalade morötter"
+      ]
+    },
+    "skalade-vitloksklyftor": {
+      "name": "Skalade vitlöksklyftor",
+      "aliases": [
+        "skalade vitlöksklyftor"
+      ]
+    },
+    "skuren-ananas": {
+      "name": "Skuren ananas",
+      "aliases": [
+        "skuren ananas"
+      ]
+    },
+    "skuren-mango": {
+      "name": "Skuren mango",
+      "aliases": [
+        "skuren mango"
+      ]
+    },
+    "skuren-melon": {
+      "name": "Skuren melon",
+      "aliases": [
+        "skuren melon"
+      ]
+    },
+    "strimlad-isbergssallad": {
+      "name": "Strimlad isbergssallad",
+      "aliases": [
+        "strimlad isbergssallad"
+      ]
+    },
+    "strimlad-rodkal": {
+      "name": "Strimlad rödkål",
+      "aliases": [
+        "strimlad rödkål"
+      ]
+    },
+    "strimlad-vitkal-och-morot": {
+      "name": "Strimlad vitkål och morot",
+      "aliases": [
+        "strimlad vitkål och morot"
+      ]
+    },
+    "tarnad-butternutpumpa": {
+      "name": "Tärnad butternutpumpa",
+      "aliases": [
+        "tärnad butternutpumpa"
+      ]
+    },
+    "tarnad-sotpotatis": {
+      "name": "Tärnad sötpotatis",
+      "aliases": [
+        "tärnad sötpotatis"
+      ]
+    },
+    "ugnsgronsaksmix": {
+      "name": "Ugnsgrönsaksmix",
+      "aliases": [
+        "ugnsgrönsaksmix"
+      ]
+    },
+    "zucchininudlar": {
+      "name": "Zucchininudlar",
+      "aliases": [
+        "zucchininudlar"
+      ]
+    },
+    "barista-mjolk": {
+      "name": "Barista-mjölk",
+      "aliases": [
+        "barista-mjölk"
+      ]
+    },
+    "chokladmjolk": {
+      "name": "Chokladmjölk",
+      "aliases": [
+        "chokladmjölk"
+      ]
+    },
+    "ekologisk-mjolk": {
+      "name": "Ekologisk mjölk",
+      "aliases": [
+        "ekologisk mjölk"
+      ]
+    },
+    "farmjolk": {
+      "name": "Fårmjölk",
+      "aliases": [
+        "fårmjölk"
+      ]
+    },
+    "getmjolk": {
+      "name": "Getmjölk",
+      "aliases": [
+        "getmjölk"
+      ]
+    },
+    "jordgubbsmjolk": {
+      "name": "Jordgubbsmjölk",
+      "aliases": [
+        "jordgubbsmjölk"
+      ]
+    },
+    "kaffemjolk": {
+      "name": "Kaffemjölk",
+      "aliases": [
+        "kaffemjölk"
+      ]
+    },
+    "karnmjolk": {
+      "name": "Kärnmjölk",
+      "aliases": [
+        "kärnmjölk"
+      ]
+    },
+    "laktosfri-lattmjolk": {
+      "name": "Laktosfri lättmjölk",
+      "aliases": [
+        "laktosfri lättmjölk"
+      ]
+    },
+    "laktosfri-mellanmjolk": {
+      "name": "Laktosfri mellanmjölk",
+      "aliases": [
+        "laktosfri mellanmjölk"
+      ]
+    },
+    "laktosfri-minimjolk": {
+      "name": "Laktosfri minimjölk",
+      "aliases": [
+        "laktosfri minimjölk"
+      ]
+    },
+    "laktosfri-standardmjolk": {
+      "name": "Laktosfri standardmjölk",
+      "aliases": [
+        "laktosfri standardmjölk"
+      ]
+    },
+    "lantmjolk": {
+      "name": "Lantmjölk",
+      "aliases": [
+        "lantmjölk"
+      ]
+    },
+    "langtidshallbar-mjolk": {
+      "name": "Långtidshållbar mjölk",
+      "aliases": [
+        "långtidshållbar mjölk"
+      ]
+    },
+    "milkshake": {
+      "name": "Milkshake",
+      "aliases": [
+        "milkshake"
+      ]
+    },
+    "minimjolk": {
+      "name": "Minimjölk",
+      "aliases": [
+        "minimjölk"
+      ]
+    },
+    "mjolkpulver": {
+      "name": "Mjölkpulver",
+      "aliases": [
+        "mjölkpulver"
+      ]
+    },
+    "ohomogeniserad-mjolk": {
+      "name": "Ohomogeniserad mjölk",
+      "aliases": [
+        "ohomogeniserad mjölk"
+      ]
+    },
+    "proteinmjolk": {
+      "name": "Proteinmjölk",
+      "aliases": [
+        "proteinmjölk"
+      ]
+    },
+    "ramjolk": {
+      "name": "Råmjölk",
+      "aliases": [
+        "råmjölk"
+      ]
+    },
+    "a-fil": {
+      "name": "A-fil",
+      "aliases": [
+        "a-fil"
+      ]
+    },
+    "ayran": {
+      "name": "Ayran",
+      "aliases": [
+        "ayran"
+      ]
+    },
+    "barnyoghurt": {
+      "name": "Barnyoghurt",
+      "aliases": [
+        "barnyoghurt"
+      ]
+    },
+    "bulgarisk-yoghurt": {
+      "name": "Bulgarisk yoghurt",
+      "aliases": [
+        "bulgarisk yoghurt"
+      ]
+    },
+    "dessertyoghurt": {
+      "name": "Dessertyoghurt",
+      "aliases": [
+        "dessertyoghurt"
+      ]
+    },
+    "drickyoghurt": {
+      "name": "Drickyoghurt",
+      "aliases": [
+        "drickyoghurt"
+      ]
+    },
+    "ekologisk-filmjolk": {
+      "name": "Ekologisk filmjölk",
+      "aliases": [
+        "ekologisk filmjölk"
+      ]
+    },
+    "ekologisk-yoghurt": {
+      "name": "Ekologisk yoghurt",
+      "aliases": [
+        "ekologisk yoghurt"
+      ]
+    },
+    "filbunke": {
+      "name": "Filbunke",
+      "aliases": [
+        "filbunke"
+      ]
+    },
+    "fjallfil": {
+      "name": "Fjällfil",
+      "aliases": [
+        "fjällfil"
+      ]
+    },
+    "fruktyoghurt": {
+      "name": "Fruktyoghurt",
+      "aliases": [
+        "fruktyoghurt"
+      ]
+    },
+    "faryoghurt": {
+      "name": "Fåryoghurt",
+      "aliases": [
+        "fåryoghurt"
+      ]
+    },
+    "getyoghurt": {
+      "name": "Getyoghurt",
+      "aliases": [
+        "getyoghurt"
+      ]
+    },
+    "kefir": {
+      "name": "Kefir",
+      "aliases": [
+        "kefir"
+      ]
+    },
+    "laktosfri-filmjolk": {
+      "name": "Laktosfri filmjölk",
+      "aliases": [
+        "laktosfri filmjölk"
+      ]
+    },
+    "laktosfri-kefir": {
+      "name": "Laktosfri kefir",
+      "aliases": [
+        "laktosfri kefir"
+      ]
+    },
+    "laktosfri-yoghurt": {
+      "name": "Laktosfri yoghurt",
+      "aliases": [
+        "laktosfri yoghurt"
+      ]
+    },
+    "lassi": {
+      "name": "Lassi",
+      "aliases": [
+        "lassi"
+      ]
+    },
+    "langfil": {
+      "name": "Långfil",
+      "aliases": [
+        "långfil"
+      ]
+    },
+    "lattfil": {
+      "name": "Lättfil",
+      "aliases": [
+        "lättfil"
+      ]
+    },
+    "lattyoghurt": {
+      "name": "Lättyoghurt",
+      "aliases": [
+        "lättyoghurt"
+      ]
+    },
+    "mellanfil": {
+      "name": "Mellanfil",
+      "aliases": [
+        "mellanfil"
+      ]
+    },
+    "mild-yoghurt": {
+      "name": "Mild yoghurt",
+      "aliases": [
+        "mild yoghurt"
+      ]
+    },
+    "probiotisk-fil": {
+      "name": "Probiotisk fil",
+      "aliases": [
+        "probiotisk fil"
+      ]
+    },
+    "proteinyoghurt": {
+      "name": "Proteinyoghurt",
+      "aliases": [
+        "proteinyoghurt"
+      ]
+    },
+    "rysk-yoghurt": {
+      "name": "Rysk yoghurt",
+      "aliases": [
+        "rysk yoghurt"
+      ]
+    },
+    "skyr": {
+      "name": "Skyr",
+      "aliases": [
+        "skyr"
+      ]
+    },
+    "smaksatt-fil": {
+      "name": "Smaksatt fil",
+      "aliases": [
+        "smaksatt fil"
+      ]
+    },
+    "smaksatt-skyr": {
+      "name": "Smaksatt skyr",
+      "aliases": [
+        "smaksatt skyr"
+      ]
+    },
+    "vaniljyoghurt": {
+      "name": "Vaniljyoghurt",
+      "aliases": [
+        "vaniljyoghurt"
+      ]
+    },
+    "ymer": {
+      "name": "Ymer",
+      "aliases": [
+        "ymer"
+      ]
+    },
+    "yoghurt-med-topping": {
+      "name": "Yoghurt med topping",
+      "aliases": [
+        "yoghurt med topping"
+      ]
+    },
+    "yoghurt-utan-tillsatt-socker": {
+      "name": "Yoghurt utan tillsatt socker",
+      "aliases": [
+        "yoghurt utan tillsatt socker"
+      ]
+    },
+    "yoghurtkvarg": {
+      "name": "Yoghurtkvarg",
+      "aliases": [
+        "yoghurtkvarg"
+      ]
+    },
+    "buljonggradde": {
+      "name": "Buljonggrädde",
+      "aliases": [
+        "buljonggrädde"
+      ]
+    },
+    "clotted-cream": {
+      "name": "Clotted cream",
+      "aliases": [
+        "clotted cream"
+      ]
+    },
+    "dubbelgradde-creme-double": {
+      "name": "Dubbelgrädde (crème double)",
+      "aliases": [
+        "dubbelgrädde (crème double)",
+        "dubbelgrädde"
+      ]
+    },
+    "ekologisk-creme-fraiche": {
+      "name": "Ekologisk crème fraiche",
+      "aliases": [
+        "ekologisk crème fraiche"
+      ]
+    },
+    "ekologisk-gradde": {
+      "name": "Ekologisk grädde",
+      "aliases": [
+        "ekologisk grädde"
+      ]
+    },
+    "kaffegradde": {
+      "name": "Kaffegrädde",
+      "aliases": [
+        "kaffegrädde"
+      ]
+    },
+    "laktosfri-creme-fraiche": {
+      "name": "Laktosfri crème fraiche",
+      "aliases": [
+        "laktosfri crème fraiche"
+      ]
+    },
+    "laktosfri-matlagningsgradde": {
+      "name": "Laktosfri matlagningsgrädde",
+      "aliases": [
+        "laktosfri matlagningsgrädde"
+      ]
+    },
+    "laktosfri-vispgradde": {
+      "name": "Laktosfri vispgrädde",
+      "aliases": [
+        "laktosfri vispgrädde"
+      ]
+    },
+    "langtidshallbar-gradde": {
+      "name": "Långtidshållbar grädde",
+      "aliases": [
+        "långtidshållbar grädde"
+      ]
+    },
+    "latt-creme-fraiche": {
+      "name": "Lätt crème fraiche",
+      "aliases": [
+        "lätt crème fraiche"
+      ]
+    },
+    "latt-graddfil": {
+      "name": "Lätt gräddfil",
+      "aliases": [
+        "lätt gräddfil"
+      ]
+    },
+    "latt-matlagningsgradde": {
+      "name": "Lätt matlagningsgrädde",
+      "aliases": [
+        "lätt matlagningsgrädde"
+      ]
+    },
+    "mellangradde": {
+      "name": "Mellangrädde",
+      "aliases": [
+        "mellangrädde"
+      ]
+    },
+    "smaksatt-creme-fraiche": {
+      "name": "Smaksatt crème fraiche",
+      "aliases": [
+        "smaksatt crème fraiche"
+      ]
+    },
+    "smaksatt-matlagningsgradde": {
+      "name": "Smaksatt matlagningsgrädde",
+      "aliases": [
+        "smaksatt matlagningsgrädde"
+      ]
+    },
+    "smetana": {
+      "name": "Smetana",
+      "aliases": [
+        "smetana"
+      ]
+    },
+    "sprutgradde": {
+      "name": "Sprutgrädde",
+      "aliases": [
+        "sprutgrädde"
+      ]
+    },
+    "syrad-gradde": {
+      "name": "Syrad grädde",
+      "aliases": [
+        "syrad grädde"
+      ]
+    },
+    "drickkvarg": {
+      "name": "Drickkvarg",
+      "aliases": [
+        "drickkvarg"
+      ]
+    },
+    "fet-kvarg": {
+      "name": "Fet kvarg",
+      "aliases": [
+        "fet kvarg"
+      ]
+    },
+    "laktosfri-keso": {
+      "name": "Laktosfri keso",
+      "aliases": [
+        "laktosfri keso"
+      ]
+    },
+    "laktosfri-kvarg": {
+      "name": "Laktosfri kvarg",
+      "aliases": [
+        "laktosfri kvarg"
+      ]
+    },
+    "latt-keso": {
+      "name": "Lätt keso",
+      "aliases": [
+        "lätt keso"
+      ]
+    },
+    "latt-kvarg": {
+      "name": "Lätt kvarg",
+      "aliases": [
+        "lätt kvarg"
+      ]
+    },
+    "proteinkvarg": {
+      "name": "Proteinkvarg",
+      "aliases": [
+        "proteinkvarg"
+      ]
+    },
+    "smaksatt-keso": {
+      "name": "Smaksatt keso",
+      "aliases": [
+        "smaksatt keso"
+      ]
+    },
+    "smaksatt-kvarg": {
+      "name": "Smaksatt kvarg",
+      "aliases": [
+        "smaksatt kvarg"
+      ]
+    },
+    "vaniljkvarg": {
+      "name": "Vaniljkvarg",
+      "aliases": [
+        "vaniljkvarg"
+      ]
+    },
+    "bakmargarin": {
+      "name": "Bakmargarin",
+      "aliases": [
+        "bakmargarin"
+      ]
+    },
+    "bordsmargarin": {
+      "name": "Bordsmargarin",
+      "aliases": [
+        "bordsmargarin"
+      ]
+    },
+    "ekologiskt-smor": {
+      "name": "Ekologiskt smör",
+      "aliases": [
+        "ekologiskt smör"
+      ]
+    },
+    "extrasaltat-smor": {
+      "name": "Extrasaltat smör",
+      "aliases": [
+        "extrasaltat smör"
+      ]
+    },
+    "flytande-margarin": {
+      "name": "Flytande margarin",
+      "aliases": [
+        "flytande margarin"
+      ]
+    },
+    "flytande-smor-och-rapsolja": {
+      "name": "Flytande smör- och rapsolja",
+      "aliases": [
+        "flytande smör- och rapsolja"
+      ]
+    },
+    "ghee": {
+      "name": "Ghee",
+      "aliases": [
+        "ghee"
+      ]
+    },
+    "ister": {
+      "name": "Ister",
+      "aliases": [
+        "ister"
+      ]
+    },
+    "kokosfett": {
+      "name": "Kokosfett",
+      "aliases": [
+        "kokosfett"
+      ]
+    },
+    "kryddsmor": {
+      "name": "Kryddsmör",
+      "aliases": [
+        "kryddsmör"
+      ]
+    },
+    "laktosfritt-smor": {
+      "name": "Laktosfritt smör",
+      "aliases": [
+        "laktosfritt smör"
+      ]
+    },
+    "latt-smorblandning": {
+      "name": "Lätt smörblandning",
+      "aliases": [
+        "lätt smörblandning"
+      ]
+    },
+    "lattmargarin": {
+      "name": "Lättmargarin",
+      "aliases": [
+        "lättmargarin"
+      ]
+    },
+    "mjolkfritt-margarin": {
+      "name": "Mjölkfritt margarin",
+      "aliases": [
+        "mjölkfritt margarin"
+      ]
+    },
+    "nottalg": {
+      "name": "Nöttalg",
+      "aliases": [
+        "nöttalg"
+      ]
+    },
+    "portionssmor": {
+      "name": "Portionssmör",
+      "aliases": [
+        "portionssmör"
+      ]
+    },
+    "smor-med-havssalt": {
+      "name": "Smör med havssalt",
+      "aliases": [
+        "smör med havssalt"
+      ]
+    },
+    "smorblandning": {
+      "name": "Smörblandning",
+      "aliases": [
+        "smörblandning"
+      ]
+    },
+    "stekmargarin": {
+      "name": "Stekmargarin",
+      "aliases": [
+        "stekmargarin"
+      ]
+    },
+    "tryffelsmor": {
+      "name": "Tryffelsmör",
+      "aliases": [
+        "tryffelsmör"
+      ]
+    },
+    "vitlokssmor": {
+      "name": "Vitlökssmör",
+      "aliases": [
+        "vitlökssmör"
+      ]
+    },
+    "ortsmor": {
+      "name": "Örtsmör",
+      "aliases": [
+        "örtsmör"
+      ]
+    },
+    "ankagg": {
+      "name": "Ankägg",
+      "aliases": [
+        "ankägg"
+      ]
+    },
+    "ekologiska-agg": {
+      "name": "Ekologiska ägg",
+      "aliases": [
+        "ekologiska ägg"
+      ]
+    },
+    "extra-stora-agg": {
+      "name": "Extra stora ägg",
+      "aliases": [
+        "extra stora ägg"
+      ]
+    },
+    "flytande-agg": {
+      "name": "Flytande ägg",
+      "aliases": [
+        "flytande ägg"
+      ]
+    },
+    "flytande-aggula": {
+      "name": "Flytande äggula",
+      "aliases": [
+        "flytande äggula"
+      ]
+    },
+    "frigaende-agg": {
+      "name": "Frigående ägg",
+      "aliases": [
+        "frigående ägg"
+      ]
+    },
+    "gasagg": {
+      "name": "Gåsägg",
+      "aliases": [
+        "gåsägg"
+      ]
+    },
+    "kokta-agg": {
+      "name": "Kokta ägg",
+      "aliases": [
+        "kokta ägg"
+      ]
+    },
+    "medelstora-agg": {
+      "name": "Medelstora ägg",
+      "aliases": [
+        "medelstora ägg"
+      ]
+    },
+    "sma-agg": {
+      "name": "Små ägg",
+      "aliases": [
+        "små ägg"
+      ]
+    },
+    "stora-agg": {
+      "name": "Stora ägg",
+      "aliases": [
+        "stora ägg"
+      ]
+    },
+    "utomhusagg": {
+      "name": "Utomhusägg",
+      "aliases": [
+        "utomhusägg"
+      ]
+    },
+    "vaktelagg": {
+      "name": "Vaktelägg",
+      "aliases": [
+        "vaktelägg"
+      ]
+    },
+    "aggpulver": {
+      "name": "Äggpulver",
+      "aliases": [
+        "äggpulver"
+      ]
+    },
+    "aggvita": {
+      "name": "Äggvita",
+      "aliases": [
+        "äggvita"
+      ]
+    },
+    "barista-havredryck": {
+      "name": "Barista havredryck",
+      "aliases": [
+        "barista havredryck"
+      ]
+    },
+    "barista-sojadryck": {
+      "name": "Barista sojadryck",
+      "aliases": [
+        "barista sojadryck"
+      ]
+    },
+    "bovetedryck": {
+      "name": "Bovetedryck",
+      "aliases": [
+        "bovetedryck"
+      ]
+    },
+    "bredbart-havrepalagg": {
+      "name": "Bredbart havrepålägg",
+      "aliases": [
+        "bredbart havrepålägg"
+      ]
+    },
+    "cashewdryck": {
+      "name": "Cashewdryck",
+      "aliases": [
+        "cashewdryck"
+      ]
+    },
+    "chokladhavredryck": {
+      "name": "Chokladhavredryck",
+      "aliases": [
+        "chokladhavredryck"
+      ]
+    },
+    "chokladsojadryck": {
+      "name": "Chokladsojadryck",
+      "aliases": [
+        "chokladsojadryck"
+      ]
+    },
+    "ekologisk-havredryck": {
+      "name": "Ekologisk havredryck",
+      "aliases": [
+        "ekologisk havredryck"
+      ]
+    },
+    "glutenfri-havredryck": {
+      "name": "Glutenfri havredryck",
+      "aliases": [
+        "glutenfri havredryck"
+      ]
+    },
+    "hampadryck": {
+      "name": "Hampadryck",
+      "aliases": [
+        "hampadryck"
+      ]
+    },
+    "hasselnotsdryck": {
+      "name": "Hasselnötsdryck",
+      "aliases": [
+        "hasselnötsdryck"
+      ]
+    },
+    "havrefraiche": {
+      "name": "Havrefraiche",
+      "aliases": [
+        "havrefraiche"
+      ]
+    },
+    "havrevaniljsas": {
+      "name": "Havrevaniljsås",
+      "aliases": [
+        "havrevaniljsås"
+      ]
+    },
+    "kokosdryck": {
+      "name": "Kokosdryck",
+      "aliases": [
+        "kokosdryck"
+      ]
+    },
+    "kokosyoghurt": {
+      "name": "Kokosyoghurt",
+      "aliases": [
+        "kokosyoghurt"
+      ]
+    },
+    "mandeldryck": {
+      "name": "Mandeldryck",
+      "aliases": [
+        "mandeldryck"
+      ]
+    },
+    "mandelyoghurt": {
+      "name": "Mandelyoghurt",
+      "aliases": [
+        "mandelyoghurt"
+      ]
+    },
+    "osotad-mandeldryck": {
+      "name": "Osötad mandeldryck",
+      "aliases": [
+        "osötad mandeldryck"
+      ]
+    },
+    "osotad-sojadryck": {
+      "name": "Osötad sojadryck",
+      "aliases": [
+        "osötad sojadryck"
+      ]
+    },
+    "potatisdryck": {
+      "name": "Potatisdryck",
+      "aliases": [
+        "potatisdryck"
+      ]
+    },
+    "risdryck": {
+      "name": "Risdryck",
+      "aliases": [
+        "risdryck"
+      ]
+    },
+    "risgradde": {
+      "name": "Risgrädde",
+      "aliases": [
+        "risgrädde"
+      ]
+    },
+    "riven-vegansk-ost": {
+      "name": "Riven vegansk ost",
+      "aliases": [
+        "riven vegansk ost"
+      ]
+    },
+    "skivad-vegansk-ost": {
+      "name": "Skivad vegansk ost",
+      "aliases": [
+        "skivad vegansk ost"
+      ]
+    },
+    "smaksatt-havreyoghurt": {
+      "name": "Smaksatt havreyoghurt",
+      "aliases": [
+        "smaksatt havreyoghurt"
+      ]
+    },
+    "sojadryck": {
+      "name": "Sojadryck",
+      "aliases": [
+        "sojadryck"
+      ]
+    },
+    "sojafraiche": {
+      "name": "Sojafraiche",
+      "aliases": [
+        "sojafraiche"
+      ]
+    },
+    "sojagradde": {
+      "name": "Sojagrädde",
+      "aliases": [
+        "sojagrädde"
+      ]
+    },
+    "sojakvarg": {
+      "name": "Sojakvarg",
+      "aliases": [
+        "sojakvarg"
+      ]
+    },
+    "sojayoghurt": {
+      "name": "Sojayoghurt",
+      "aliases": [
+        "sojayoghurt"
+      ]
+    },
+    "vaniljsojadryck": {
+      "name": "Vaniljsojadryck",
+      "aliases": [
+        "vaniljsojadryck"
+      ]
+    },
+    "vegansk-grillost": {
+      "name": "Vegansk grillost",
+      "aliases": [
+        "vegansk grillost"
+      ]
+    },
+    "vegansk-mozzarella": {
+      "name": "Vegansk mozzarella",
+      "aliases": [
+        "vegansk mozzarella"
+      ]
+    },
+    "vegansk-ost": {
+      "name": "Vegansk ost",
+      "aliases": [
+        "vegansk ost"
+      ]
+    },
+    "vegansk-salladsost": {
+      "name": "Vegansk salladsost",
+      "aliases": [
+        "vegansk salladsost"
+      ]
+    },
+    "vispbar-havregradde": {
+      "name": "Vispbar havregrädde",
+      "aliases": [
+        "vispbar havregrädde"
+      ]
+    },
+    "vispbar-kokosgradde": {
+      "name": "Vispbar kokosgrädde",
+      "aliases": [
+        "vispbar kokosgrädde"
+      ]
+    },
+    "vaxtbaserad-graddfil": {
+      "name": "Växtbaserad gräddfil",
+      "aliases": [
+        "växtbaserad gräddfil"
+      ]
+    },
+    "vaxtbaserat-smor": {
+      "name": "Växtbaserat smör",
+      "aliases": [
+        "växtbaserat smör"
+      ]
+    },
+    "aggersattning": {
+      "name": "Äggersättning",
+      "aliases": [
+        "äggersättning"
+      ]
+    },
+    "artdryck": {
+      "name": "Ärtdryck",
+      "aliases": [
+        "ärtdryck"
+      ]
+    },
+    "chokladdessert-med-gradde": {
+      "name": "Chokladdessert med grädde",
+      "aliases": [
+        "chokladdessert med grädde"
+      ]
+    },
+    "citronfromage": {
+      "name": "Citronfromage",
+      "aliases": [
+        "citronfromage"
+      ]
+    },
+    "creme-brulee": {
+      "name": "Crème brûlée",
+      "aliases": [
+        "crème brûlée"
+      ]
+    },
+    "fruktgele-i-bagare": {
+      "name": "Fruktgelé i bägare",
+      "aliases": [
+        "fruktgelé i bägare"
+      ]
+    },
+    "havredessert": {
+      "name": "Havredessert",
+      "aliases": [
+        "havredessert"
+      ]
+    },
+    "kalvdans": {
+      "name": "Kalvdans",
+      "aliases": [
+        "kalvdans"
+      ]
+    },
+    "karamellpudding": {
+      "name": "Karamellpudding",
+      "aliases": [
+        "karamellpudding"
+      ]
+    },
+    "keso-med-sylt": {
+      "name": "Keso med sylt",
+      "aliases": [
+        "keso med sylt"
+      ]
+    },
+    "kvarg-i-klampase": {
+      "name": "Kvarg i klämpåse",
+      "aliases": [
+        "kvarg i klämpåse"
+      ]
+    },
+    "mannamal-med-sylt": {
+      "name": "Mannamål med sylt",
+      "aliases": [
+        "mannamål med sylt"
+      ]
+    },
+    "rismal-med-sylt": {
+      "name": "Rismål med sylt",
+      "aliases": [
+        "rismål med sylt"
+      ]
+    },
+    "sojapudding": {
+      "name": "Sojapudding",
+      "aliases": [
+        "sojapudding"
+      ]
+    },
+    "vaniljvisp": {
+      "name": "Vaniljvisp",
+      "aliases": [
+        "vaniljvisp"
+      ]
+    },
+    "aggost": {
+      "name": "Äggost",
+      "aliases": [
+        "äggost"
+      ]
+    },
+    "appenzeller": {
+      "name": "Appenzeller",
+      "aliases": [
+        "appenzeller"
+      ]
+    },
+    "asiago": {
+      "name": "Asiago",
+      "aliases": [
+        "asiago"
+      ]
+    },
+    "beaufort": {
+      "name": "Beaufort",
+      "aliases": [
+        "beaufort"
+      ]
+    },
+    "bondost": {
+      "name": "Bondost",
+      "aliases": [
+        "bondost"
+      ]
+    },
+    "comte": {
+      "name": "Comté",
+      "aliases": [
+        "comté"
+      ]
+    },
+    "danbo": {
+      "name": "Danbo",
+      "aliases": [
+        "danbo"
+      ]
+    },
+    "edamer": {
+      "name": "Edamer",
+      "aliases": [
+        "edamer"
+      ]
+    },
+    "ekologisk-hardost": {
+      "name": "Ekologisk hårdost",
+      "aliases": [
+        "ekologisk hårdost"
+      ]
+    },
+    "emmentaler": {
+      "name": "Emmentaler",
+      "aliases": [
+        "emmentaler"
+      ]
+    },
+    "fontina": {
+      "name": "Fontina",
+      "aliases": [
+        "fontina"
+      ]
+    },
+    "farost": {
+      "name": "Fårost",
+      "aliases": [
+        "fårost"
+      ]
+    },
+    "gouda": {
+      "name": "Gouda",
+      "aliases": [
+        "gouda"
+      ]
+    },
+    "gruyere": {
+      "name": "Gruyère",
+      "aliases": [
+        "gruyère"
+      ]
+    },
+    "graddost": {
+      "name": "Gräddost",
+      "aliases": [
+        "gräddost"
+      ]
+    },
+    "havarti": {
+      "name": "Havarti",
+      "aliases": [
+        "havarti"
+      ]
+    },
+    "hard-getost": {
+      "name": "Hård getost",
+      "aliases": [
+        "hård getost"
+      ]
+    },
+    "jarlsberg": {
+      "name": "Jarlsberg",
+      "aliases": [
+        "jarlsberg"
+      ]
+    },
+    "julost": {
+      "name": "Julost",
+      "aliases": [
+        "julost"
+      ]
+    },
+    "kashkaval": {
+      "name": "Kashkaval",
+      "aliases": [
+        "kashkaval"
+      ]
+    },
+    "kittost": {
+      "name": "Kittost",
+      "aliases": [
+        "kittost"
+      ]
+    },
+    "klosterost": {
+      "name": "Klosterost",
+      "aliases": [
+        "klosterost"
+      ]
+    },
+    "kryddost": {
+      "name": "Kryddost",
+      "aliases": [
+        "kryddost"
+      ]
+    },
+    "kumminost": {
+      "name": "Kumminost",
+      "aliases": [
+        "kumminost"
+      ]
+    },
+    "lagrad-cheddar": {
+      "name": "Lagrad cheddar",
+      "aliases": [
+        "lagrad cheddar"
+      ]
+    },
+    "lagrad-gouda": {
+      "name": "Lagrad gouda",
+      "aliases": [
+        "lagrad gouda"
+      ]
+    },
+    "lattost": {
+      "name": "Lättost",
+      "aliases": [
+        "lättost"
+      ]
+    },
+    "maasdam": {
+      "name": "Maasdam",
+      "aliases": [
+        "maasdam"
+      ]
+    },
+    "manchego": {
+      "name": "Manchego",
+      "aliases": [
+        "manchego"
+      ]
+    },
+    "mellanlagrad-ost": {
+      "name": "Mellanlagrad ost",
+      "aliases": [
+        "mellanlagrad ost"
+      ]
+    },
+    "mimolette": {
+      "name": "Mimolette",
+      "aliases": [
+        "mimolette"
+      ]
+    },
+    "morbier": {
+      "name": "Morbier",
+      "aliases": [
+        "morbier"
+      ]
+    },
+    "provolone": {
+      "name": "Provolone",
+      "aliases": [
+        "provolone"
+      ]
+    },
+    "raclette": {
+      "name": "Raclette",
+      "aliases": [
+        "raclette"
+      ]
+    },
+    "red-leicester": {
+      "name": "Red Leicester",
+      "aliases": [
+        "red leicester"
+      ]
+    },
+    "rokt-ost": {
+      "name": "Rökt ost",
+      "aliases": [
+        "rökt ost"
+      ]
+    },
+    "svecia": {
+      "name": "Svecia",
+      "aliases": [
+        "svecia"
+      ]
+    },
+    "tete-de-moine": {
+      "name": "Tête de Moine",
+      "aliases": [
+        "tête de moine"
+      ]
+    },
+    "tilsiter": {
+      "name": "Tilsiter",
+      "aliases": [
+        "tilsiter"
+      ]
+    },
+    "vallagrad-ost": {
+      "name": "Vällagrad ost",
+      "aliases": [
+        "vällagrad ost"
+      ]
+    },
+    "bleu-d-auvergne": {
+      "name": "Bleu d’Auvergne",
+      "aliases": [
+        "bleu d’auvergne"
+      ]
+    },
+    "brie": {
+      "name": "Brie",
+      "aliases": [
+        "brie"
+      ]
+    },
+    "brie-de-meaux": {
+      "name": "Brie de Meaux",
+      "aliases": [
+        "brie de meaux"
+      ]
+    },
+    "brillat-savarin": {
+      "name": "Brillat-Savarin",
+      "aliases": [
+        "brillat-savarin"
+      ]
+    },
+    "cambozola": {
+      "name": "Cambozola",
+      "aliases": [
+        "cambozola"
+      ]
+    },
+    "camembert": {
+      "name": "Camembert",
+      "aliases": [
+        "camembert"
+      ]
+    },
+    "camembert-for-ugn": {
+      "name": "Camembert för ugn",
+      "aliases": [
+        "camembert för ugn"
+      ]
+    },
+    "coulommiers": {
+      "name": "Coulommiers",
+      "aliases": [
+        "coulommiers"
+      ]
+    },
+    "danablu": {
+      "name": "Danablu",
+      "aliases": [
+        "danablu"
+      ]
+    },
+    "epoisses": {
+      "name": "Époisses",
+      "aliases": [
+        "époisses"
+      ]
+    },
+    "fourme-d-ambert": {
+      "name": "Fourme d’Ambert",
+      "aliases": [
+        "fourme d’ambert"
+      ]
+    },
+    "gorgonzola": {
+      "name": "Gorgonzola",
+      "aliases": [
+        "gorgonzola"
+      ]
+    },
+    "graddadelost": {
+      "name": "Gräddädelost",
+      "aliases": [
+        "gräddädelost"
+      ]
+    },
+    "mont-d-or": {
+      "name": "Mont d’Or",
+      "aliases": [
+        "mont d’or"
+      ]
+    },
+    "munster": {
+      "name": "Munster",
+      "aliases": [
+        "munster"
+      ]
+    },
+    "ostbricka": {
+      "name": "Ostbricka",
+      "aliases": [
+        "ostbricka"
+      ]
+    },
+    "pont-l-eveque": {
+      "name": "Pont-l’Évêque",
+      "aliases": [
+        "pont-l’évêque"
+      ]
+    },
+    "port-salut": {
+      "name": "Port Salut",
+      "aliases": [
+        "port salut"
+      ]
+    },
+    "reblochon": {
+      "name": "Reblochon",
+      "aliases": [
+        "reblochon"
+      ]
+    },
+    "roquefort": {
+      "name": "Roquefort",
+      "aliases": [
+        "roquefort"
+      ]
+    },
+    "stilton": {
+      "name": "Stilton",
+      "aliases": [
+        "stilton"
+      ]
+    },
+    "taleggio": {
+      "name": "Taleggio",
+      "aliases": [
+        "taleggio"
+      ]
+    },
+    "tomme-de-savoie": {
+      "name": "Tomme de Savoie",
+      "aliases": [
+        "tomme de savoie"
+      ]
+    },
+    "tryffelbrie": {
+      "name": "Tryffelbrie",
+      "aliases": [
+        "tryffelbrie"
+      ]
+    },
+    "vitmogelost": {
+      "name": "Vitmögelost",
+      "aliases": [
+        "vitmögelost"
+      ]
+    },
+    "bryndza": {
+      "name": "Bryndza",
+      "aliases": [
+        "bryndza"
+      ]
+    },
+    "ekologisk-farskost": {
+      "name": "Ekologisk färskost",
+      "aliases": [
+        "ekologisk färskost"
+      ]
+    },
+    "fromage-frais": {
+      "name": "Fromage frais",
+      "aliases": [
+        "fromage frais"
+      ]
+    },
+    "getfarskost": {
+      "name": "Getfärskost",
+      "aliases": [
+        "getfärskost"
+      ]
+    },
+    "grasloksfarskost": {
+      "name": "Gräslöksfärskost",
+      "aliases": [
+        "gräslöksfärskost"
+      ]
+    },
+    "labneh": {
+      "name": "Labneh",
+      "aliases": [
+        "labneh"
+      ]
+    },
+    "laktosfri-farskost": {
+      "name": "Laktosfri färskost",
+      "aliases": [
+        "laktosfri färskost"
+      ]
+    },
+    "latt-farskost": {
+      "name": "Lätt färskost",
+      "aliases": [
+        "lätt färskost"
+      ]
+    },
+    "paprikafarskost": {
+      "name": "Paprikafärskost",
+      "aliases": [
+        "paprikafärskost"
+      ]
+    },
+    "pepparrotsfarskost": {
+      "name": "Pepparrotsfärskost",
+      "aliases": [
+        "pepparrotsfärskost"
+      ]
+    },
+    "ricotta": {
+      "name": "Ricotta",
+      "aliases": [
+        "ricotta"
+      ]
+    },
+    "smaksatt-farskost": {
+      "name": "Smaksatt färskost",
+      "aliases": [
+        "smaksatt färskost"
+      ]
+    },
+    "stracchino": {
+      "name": "Stracchino",
+      "aliases": [
+        "stracchino"
+      ]
+    },
+    "twarog-tvorog": {
+      "name": "Twaróg (tvorog)",
+      "aliases": [
+        "twaróg (tvorog)",
+        "twaróg"
+      ]
+    },
+    "vitloksfarskost": {
+      "name": "Vitlöksfärskost",
+      "aliases": [
+        "vitlöksfärskost"
+      ]
+    },
+    "ortfarskost": {
+      "name": "Örtfärskost",
+      "aliases": [
+        "örtfärskost"
+      ]
+    },
+    "akkawi": {
+      "name": "Akkawi",
+      "aliases": [
+        "akkawi"
+      ]
+    },
+    "buffelmozzarella": {
+      "name": "Buffelmozzarella",
+      "aliases": [
+        "buffelmozzarella"
+      ]
+    },
+    "burrata": {
+      "name": "Burrata",
+      "aliases": [
+        "burrata"
+      ]
+    },
+    "chilihalloumi": {
+      "name": "Chilihalloumi",
+      "aliases": [
+        "chilihalloumi"
+      ]
+    },
+    "kaffeost": {
+      "name": "Kaffeost",
+      "aliases": [
+        "kaffeost"
+      ]
+    },
+    "manouri": {
+      "name": "Manouri",
+      "aliases": [
+        "manouri"
+      ]
+    },
+    "minimozzarella": {
+      "name": "Minimozzarella",
+      "aliases": [
+        "minimozzarella"
+      ]
+    },
+    "paneer": {
+      "name": "Paneer",
+      "aliases": [
+        "paneer"
+      ]
+    },
+    "queso-fresco": {
+      "name": "Queso fresco",
+      "aliases": [
+        "queso fresco"
+      ]
+    },
+    "ricotta-salata": {
+      "name": "Ricotta salata",
+      "aliases": [
+        "ricotta salata"
+      ]
+    },
+    "salladsost-i-olja": {
+      "name": "Salladsost i olja",
+      "aliases": [
+        "salladsost i olja"
+      ]
+    },
+    "scamorza": {
+      "name": "Scamorza",
+      "aliases": [
+        "scamorza"
+      ]
+    },
+    "stracciatella": {
+      "name": "Stracciatella",
+      "aliases": [
+        "stracciatella"
+      ]
+    },
+    "tarnad-salladsost": {
+      "name": "Tärnad salladsost",
+      "aliases": [
+        "tärnad salladsost"
+      ]
+    },
+    "vit-ost-beyaz-peynir": {
+      "name": "Vit ost (beyaz peynir)",
+      "aliases": [
+        "vit ost (beyaz peynir)",
+        "vit ost"
+      ]
+    },
+    "hamburgerost": {
+      "name": "Hamburgerost",
+      "aliases": [
+        "hamburgerost"
+      ]
+    },
+    "hyvlad-parmesan": {
+      "name": "Hyvlad parmesan",
+      "aliases": [
+        "hyvlad parmesan"
+      ]
+    },
+    "laktosfri-skivad-ost": {
+      "name": "Laktosfri skivad ost",
+      "aliases": [
+        "laktosfri skivad ost"
+      ]
+    },
+    "parmesanflarn": {
+      "name": "Parmesanflarn",
+      "aliases": [
+        "parmesanflarn"
+      ]
+    },
+    "pizzaost": {
+      "name": "Pizzaost",
+      "aliases": [
+        "pizzaost"
+      ]
+    },
+    "riven-grana-padano": {
+      "name": "Riven grana padano",
+      "aliases": [
+        "riven grana padano"
+      ]
+    },
+    "riven-greve": {
+      "name": "Riven grevé",
+      "aliases": [
+        "riven grevé"
+      ]
+    },
+    "riven-lagrad-ost": {
+      "name": "Riven lagrad ost",
+      "aliases": [
+        "riven lagrad ost"
+      ]
+    },
+    "riven-lattost": {
+      "name": "Riven lättost",
+      "aliases": [
+        "riven lättost"
+      ]
+    },
+    "riven-mozzarella": {
+      "name": "Riven mozzarella",
+      "aliases": [
+        "riven mozzarella"
+      ]
+    },
+    "riven-parmesan": {
+      "name": "Riven parmesan",
+      "aliases": [
+        "riven parmesan"
+      ]
+    },
+    "riven-prastost": {
+      "name": "Riven prästost",
+      "aliases": [
+        "riven prästost"
+      ]
+    },
+    "riven-vasterbottensost": {
+      "name": "Riven västerbottensost",
+      "aliases": [
+        "riven västerbottensost"
+      ]
+    },
+    "skivad-cheddar": {
+      "name": "Skivad cheddar",
+      "aliases": [
+        "skivad cheddar"
+      ]
+    },
+    "skivad-edamer": {
+      "name": "Skivad edamer",
+      "aliases": [
+        "skivad edamer"
+      ]
+    },
+    "skivad-emmentaler": {
+      "name": "Skivad emmentaler",
+      "aliases": [
+        "skivad emmentaler"
+      ]
+    },
+    "skivad-gouda": {
+      "name": "Skivad gouda",
+      "aliases": [
+        "skivad gouda"
+      ]
+    },
+    "skivad-greve": {
+      "name": "Skivad grevé",
+      "aliases": [
+        "skivad grevé"
+      ]
+    },
+    "skivad-havarti": {
+      "name": "Skivad havarti",
+      "aliases": [
+        "skivad havarti"
+      ]
+    },
+    "skivad-herrgardsost": {
+      "name": "Skivad herrgårdsost",
+      "aliases": [
+        "skivad herrgårdsost"
+      ]
+    },
+    "skivad-hushallsost": {
+      "name": "Skivad hushållsost",
+      "aliases": [
+        "skivad hushållsost"
+      ]
+    },
+    "skivad-lagrad-ost": {
+      "name": "Skivad lagrad ost",
+      "aliases": [
+        "skivad lagrad ost"
+      ]
+    },
+    "skivad-lattost": {
+      "name": "Skivad lättost",
+      "aliases": [
+        "skivad lättost"
+      ]
+    },
+    "skivad-maasdam": {
+      "name": "Skivad maasdam",
+      "aliases": [
+        "skivad maasdam"
+      ]
+    },
+    "skivad-prastost": {
+      "name": "Skivad prästost",
+      "aliases": [
+        "skivad prästost"
+      ]
+    },
+    "snackost": {
+      "name": "Snackost",
+      "aliases": [
+        "snackost"
+      ]
+    },
+    "tex-mex-ost": {
+      "name": "Tex-Mex-ost",
+      "aliases": [
+        "tex-mex-ost"
+      ]
+    },
+    "tarnad-ost": {
+      "name": "Tärnad ost",
+      "aliases": [
+        "tärnad ost"
+      ]
+    },
+    "baconost-pa-tub": {
+      "name": "Baconost på tub",
+      "aliases": [
+        "baconost på tub"
+      ]
+    },
+    "brunost": {
+      "name": "Brunost",
+      "aliases": [
+        "brunost"
+      ]
+    },
+    "cheddarost-pa-tub": {
+      "name": "Cheddarost på tub",
+      "aliases": [
+        "cheddarost på tub"
+      ]
+    },
+    "getmesost": {
+      "name": "Getmesost",
+      "aliases": [
+        "getmesost"
+      ]
+    },
+    "getmessmor": {
+      "name": "Getmessmör",
+      "aliases": [
+        "getmessmör"
+      ]
+    },
+    "graddost-pa-tub": {
+      "name": "Gräddost på tub",
+      "aliases": [
+        "gräddost på tub"
+      ]
+    },
+    "kraftost-pa-tub": {
+      "name": "Kräftost på tub",
+      "aliases": [
+        "kräftost på tub"
+      ]
+    },
+    "latt-messmor": {
+      "name": "Lätt messmör",
+      "aliases": [
+        "lätt messmör"
+      ]
+    },
+    "latt-mjukost": {
+      "name": "Lätt mjukost",
+      "aliases": [
+        "lätt mjukost"
+      ]
+    },
+    "mesost": {
+      "name": "Mesost",
+      "aliases": [
+        "mesost"
+      ]
+    },
+    "messmor": {
+      "name": "Messmör",
+      "aliases": [
+        "messmör"
+      ]
+    },
+    "mjukost": {
+      "name": "Mjukost",
+      "aliases": [
+        "mjukost"
+      ]
+    },
+    "mjukost-med-smak": {
+      "name": "Mjukost med smak",
+      "aliases": [
+        "mjukost med smak"
+      ]
+    },
+    "renost-pa-tub": {
+      "name": "Renost på tub",
+      "aliases": [
+        "renost på tub"
+      ]
+    },
+    "rakost-pa-tub": {
+      "name": "Räkost på tub",
+      "aliases": [
+        "räkost på tub"
+      ]
+    },
+    "skinkost-pa-tub": {
+      "name": "Skinkost på tub",
+      "aliases": [
+        "skinkost på tub"
+      ]
+    },
+    "smaltost": {
+      "name": "Smältost",
+      "aliases": [
+        "smältost"
+      ]
+    },
+    "smaltostbitar": {
+      "name": "Smältostbitar",
+      "aliases": [
+        "smältostbitar"
+      ]
+    },
+    "adelost-pa-tub": {
+      "name": "Ädelost på tub",
+      "aliases": [
+        "ädelost på tub"
+      ]
+    },
+    "fardig-ostblandning-till-fondue": {
+      "name": "Färdig ostblandning till fondue",
+      "aliases": [
+        "färdig ostblandning till fondue"
+      ]
+    },
+    "raclette-i-skivor": {
+      "name": "Raclette i skivor",
+      "aliases": [
+        "raclette i skivor"
+      ]
+    },
+    "bavette": {
+      "name": "Bavette",
+      "aliases": [
+        "bavette"
+      ]
+    },
+    "bringa": {
+      "name": "Bringa",
+      "aliases": [
+        "bringa"
+      ]
+    },
+    "carpaccio": {
+      "name": "Carpaccio",
+      "aliases": [
+        "carpaccio"
+      ]
+    },
+    "cote-de-boeuf": {
+      "name": "Côte de boeuf",
+      "aliases": [
+        "côte de boeuf"
+      ]
+    },
+    "entrecote": {
+      "name": "Entrecôte",
+      "aliases": [
+        "entrecôte"
+      ]
+    },
+    "flat-iron": {
+      "name": "Flat iron",
+      "aliases": [
+        "flat iron"
+      ]
+    },
+    "fransyska": {
+      "name": "Fransyska",
+      "aliases": [
+        "fransyska"
+      ]
+    },
+    "grytbitar": {
+      "name": "Grytbitar",
+      "aliases": [
+        "grytbitar"
+      ]
+    },
+    "hangmorad-entrecote": {
+      "name": "Hängmörad entrecôte",
+      "aliases": [
+        "hängmörad entrecôte"
+      ]
+    },
+    "innanlar": {
+      "name": "Innanlår",
+      "aliases": [
+        "innanlår"
+      ]
+    },
+    "minutbiff": {
+      "name": "Minutbiff",
+      "aliases": [
+        "minutbiff"
+      ]
+    },
+    "margben": {
+      "name": "Märgben",
+      "aliases": [
+        "märgben"
+      ]
+    },
+    "notbog": {
+      "name": "Nötbog",
+      "aliases": [
+        "nötbog"
+      ]
+    },
+    "nothjarta": {
+      "name": "Nöthjärta",
+      "aliases": [
+        "nöthjärta"
+      ]
+    },
+    "notlever": {
+      "name": "Nötlever",
+      "aliases": [
+        "nötlever"
+      ]
+    },
+    "notrulle": {
+      "name": "Nötrulle",
+      "aliases": [
+        "nötrulle"
+      ]
+    },
+    "notstek": {
+      "name": "Nötstek",
+      "aliases": [
+        "nötstek"
+      ]
+    },
+    "oxfile": {
+      "name": "Oxfilé",
+      "aliases": [
+        "oxfilé"
+      ]
+    },
+    "oxkind": {
+      "name": "Oxkind",
+      "aliases": [
+        "oxkind"
+      ]
+    },
+    "oxlagg": {
+      "name": "Oxlägg",
+      "aliases": [
+        "oxlägg"
+      ]
+    },
+    "oxsvans": {
+      "name": "Oxsvans",
+      "aliases": [
+        "oxsvans"
+      ]
+    },
+    "oxtunga": {
+      "name": "Oxtunga",
+      "aliases": [
+        "oxtunga"
+      ]
+    },
+    "picanha": {
+      "name": "Picanha",
+      "aliases": [
+        "picanha"
+      ]
+    },
+    "rimmad-oxbringa": {
+      "name": "Rimmad oxbringa",
+      "aliases": [
+        "rimmad oxbringa"
+      ]
+    },
+    "rumpstek": {
+      "name": "Rumpstek",
+      "aliases": [
+        "rumpstek"
+      ]
+    },
+    "ryggbiff": {
+      "name": "Ryggbiff",
+      "aliases": [
+        "ryggbiff"
+      ]
+    },
+    "short-ribs": {
+      "name": "Short ribs",
+      "aliases": [
+        "short ribs"
+      ]
+    },
+    "slaktarbiff": {
+      "name": "Slaktarbiff",
+      "aliases": [
+        "slaktarbiff"
+      ]
+    },
+    "soppkott": {
+      "name": "Soppkött",
+      "aliases": [
+        "soppkött"
+      ]
+    },
+    "strimlat-notkott": {
+      "name": "Strimlat nötkött",
+      "aliases": [
+        "strimlat nötkött"
+      ]
+    },
+    "t-benstek": {
+      "name": "T-benstek",
+      "aliases": [
+        "t-benstek"
+      ]
+    },
+    "tomahawkstek": {
+      "name": "Tomahawkstek",
+      "aliases": [
+        "tomahawkstek"
+      ]
+    },
+    "wagyu": {
+      "name": "Wagyu",
+      "aliases": [
+        "wagyu"
+      ]
+    },
+    "ytterlar": {
+      "name": "Ytterlår",
+      "aliases": [
+        "ytterlår"
+      ]
+    },
+    "kalvbog": {
+      "name": "Kalvbog",
+      "aliases": [
+        "kalvbog"
+      ]
+    },
+    "kalvbringa": {
+      "name": "Kalvbringa",
+      "aliases": [
+        "kalvbringa"
+      ]
+    },
+    "kalvbrass": {
+      "name": "Kalvbräss",
+      "aliases": [
+        "kalvbräss"
+      ]
+    },
+    "kalventrecote": {
+      "name": "Kalventrecôte",
+      "aliases": [
+        "kalventrecôte"
+      ]
+    },
+    "kalvfile": {
+      "name": "Kalvfilé",
+      "aliases": [
+        "kalvfilé"
+      ]
+    },
+    "kalvfransyska": {
+      "name": "Kalvfransyska",
+      "aliases": [
+        "kalvfransyska"
+      ]
+    },
+    "kalvgrytbitar": {
+      "name": "Kalvgrytbitar",
+      "aliases": [
+        "kalvgrytbitar"
+      ]
+    },
+    "kalvinnanlar": {
+      "name": "Kalvinnanlår",
+      "aliases": [
+        "kalvinnanlår"
+      ]
+    },
+    "kalvkind": {
+      "name": "Kalvkind",
+      "aliases": [
+        "kalvkind"
+      ]
+    },
+    "kalvkotlett": {
+      "name": "Kalvkotlett",
+      "aliases": [
+        "kalvkotlett"
+      ]
+    },
+    "kalvlever": {
+      "name": "Kalvlever",
+      "aliases": [
+        "kalvlever"
+      ]
+    },
+    "kalvlagg": {
+      "name": "Kalvlägg",
+      "aliases": [
+        "kalvlägg"
+      ]
+    },
+    "kalvnjure": {
+      "name": "Kalvnjure",
+      "aliases": [
+        "kalvnjure"
+      ]
+    },
+    "kalvrostbiff": {
+      "name": "Kalvrostbiff",
+      "aliases": [
+        "kalvrostbiff"
+      ]
+    },
+    "kalvschnitzel": {
+      "name": "Kalvschnitzel",
+      "aliases": [
+        "kalvschnitzel"
+      ]
+    },
+    "kalvstek": {
+      "name": "Kalvstek",
+      "aliases": [
+        "kalvstek"
+      ]
+    },
+    "kalvtunga": {
+      "name": "Kalvtunga",
+      "aliases": [
+        "kalvtunga"
+      ]
+    },
+    "kalvytterfile": {
+      "name": "Kalvytterfilé",
+      "aliases": [
+        "kalvytterfilé"
+      ]
+    },
+    "ossobuco": {
+      "name": "Ossobuco",
+      "aliases": [
+        "ossobuco"
+      ]
+    },
+    "benfri-flaskkotlett": {
+      "name": "Benfri fläskkotlett",
+      "aliases": [
+        "benfri fläskkotlett"
+      ]
+    },
+    "bogbladsstek": {
+      "name": "Bogbladsstek",
+      "aliases": [
+        "bogbladsstek"
+      ]
+    },
+    "flaskben": {
+      "name": "Fläskben",
+      "aliases": [
+        "fläskben"
+      ]
+    },
+    "flaskbog": {
+      "name": "Fläskbog",
+      "aliases": [
+        "fläskbog"
+      ]
+    },
+    "flaskfile": {
+      "name": "Fläskfilé",
+      "aliases": [
+        "fläskfilé"
+      ]
+    },
+    "flaskgrytbitar": {
+      "name": "Fläskgrytbitar",
+      "aliases": [
+        "fläskgrytbitar"
+      ]
+    },
+    "flaskkind": {
+      "name": "Fläskkind",
+      "aliases": [
+        "fläskkind"
+      ]
+    },
+    "flasklever": {
+      "name": "Fläsklever",
+      "aliases": [
+        "fläsklever"
+      ]
+    },
+    "flasklagg": {
+      "name": "Fläsklägg",
+      "aliases": [
+        "fläsklägg"
+      ]
+    },
+    "flasknoisette": {
+      "name": "Fläsknoisette",
+      "aliases": [
+        "fläsknoisette"
+      ]
+    },
+    "flaskschnitzel": {
+      "name": "Fläskschnitzel",
+      "aliases": [
+        "fläskschnitzel"
+      ]
+    },
+    "flasksida-med-sval": {
+      "name": "Fläsksida med svål",
+      "aliases": [
+        "fläsksida med svål"
+      ]
+    },
+    "flaskytterfile": {
+      "name": "Fläskytterfilé",
+      "aliases": [
+        "fläskytterfilé"
+      ]
+    },
+    "kamben": {
+      "name": "Kamben",
+      "aliases": [
+        "kamben"
+      ]
+    },
+    "kassler": {
+      "name": "Kassler",
+      "aliases": [
+        "kassler"
+      ]
+    },
+    "kotlettrad": {
+      "name": "Kotlettrad",
+      "aliases": [
+        "kotlettrad"
+      ]
+    },
+    "pluma": {
+      "name": "Pluma",
+      "aliases": [
+        "pluma"
+      ]
+    },
+    "porchetta": {
+      "name": "Porchetta",
+      "aliases": [
+        "porchetta"
+      ]
+    },
+    "revbensspjall": {
+      "name": "Revbensspjäll",
+      "aliases": [
+        "revbensspjäll"
+      ]
+    },
+    "rimmad-flasklagg": {
+      "name": "Rimmad fläsklägg",
+      "aliases": [
+        "rimmad fläsklägg"
+      ]
+    },
+    "rimmad-julskinka-okokt": {
+      "name": "Rimmad julskinka (okokt)",
+      "aliases": [
+        "rimmad julskinka (okokt)",
+        "rimmad julskinka"
+      ]
+    },
+    "rokt-sidflask": {
+      "name": "Rökt sidfläsk",
+      "aliases": [
+        "rökt sidfläsk"
+      ]
+    },
+    "secreto": {
+      "name": "Secreto",
+      "aliases": [
+        "secreto"
+      ]
+    },
+    "skinkschnitzel": {
+      "name": "Skinkschnitzel",
+      "aliases": [
+        "skinkschnitzel"
+      ]
+    },
+    "skinkstek": {
+      "name": "Skinkstek",
+      "aliases": [
+        "skinkstek"
+      ]
+    },
+    "spareribs": {
+      "name": "Spareribs",
+      "aliases": [
+        "spareribs"
+      ]
+    },
+    "strimlat-flask": {
+      "name": "Strimlat fläsk",
+      "aliases": [
+        "strimlat fläsk"
+      ]
+    },
+    "tjocka-revben": {
+      "name": "Tjocka revben",
+      "aliases": [
+        "tjocka revben"
+      ]
+    },
+    "farkott": {
+      "name": "Fårkött",
+      "aliases": [
+        "fårkött"
+      ]
+    },
+    "getkott": {
+      "name": "Getkött",
+      "aliases": [
+        "getkött"
+      ]
+    },
+    "lammbringa": {
+      "name": "Lammbringa",
+      "aliases": [
+        "lammbringa"
+      ]
+    },
+    "lammentrecote": {
+      "name": "Lammentrecôte",
+      "aliases": [
+        "lammentrecôte"
+      ]
+    },
+    "lammfile": {
+      "name": "Lammfilé",
+      "aliases": [
+        "lammfilé"
+      ]
+    },
+    "lammfiol": {
+      "name": "Lammfiol",
+      "aliases": [
+        "lammfiol"
+      ]
+    },
+    "lammgrytbitar": {
+      "name": "Lammgrytbitar",
+      "aliases": [
+        "lammgrytbitar"
+      ]
+    },
+    "lammkotletter": {
+      "name": "Lammkotletter",
+      "aliases": [
+        "lammkotletter"
+      ]
+    },
+    "lammlever": {
+      "name": "Lammlever",
+      "aliases": [
+        "lammlever"
+      ]
+    },
+    "lammlagg": {
+      "name": "Lammlägg",
+      "aliases": [
+        "lammlägg"
+      ]
+    },
+    "lammnacke": {
+      "name": "Lammnacke",
+      "aliases": [
+        "lammnacke"
+      ]
+    },
+    "lammnjure": {
+      "name": "Lammnjure",
+      "aliases": [
+        "lammnjure"
+      ]
+    },
+    "lammrack": {
+      "name": "Lammrack",
+      "aliases": [
+        "lammrack"
+      ]
+    },
+    "lammrostbiff": {
+      "name": "Lammrostbiff",
+      "aliases": [
+        "lammrostbiff"
+      ]
+    },
+    "lammsadel": {
+      "name": "Lammsadel",
+      "aliases": [
+        "lammsadel"
+      ]
+    },
+    "lammytterfile": {
+      "name": "Lammytterfilé",
+      "aliases": [
+        "lammytterfilé"
+      ]
+    },
+    "hare": {
+      "name": "Hare",
+      "aliases": [
+        "hare"
+      ]
+    },
+    "hjortfile": {
+      "name": "Hjortfilé",
+      "aliases": [
+        "hjortfilé"
+      ]
+    },
+    "hjortgrytbitar": {
+      "name": "Hjortgrytbitar",
+      "aliases": [
+        "hjortgrytbitar"
+      ]
+    },
+    "hjortskav": {
+      "name": "Hjortskav",
+      "aliases": [
+        "hjortskav"
+      ]
+    },
+    "hjortstek": {
+      "name": "Hjortstek",
+      "aliases": [
+        "hjortstek"
+      ]
+    },
+    "hjortytterfile": {
+      "name": "Hjortytterfilé",
+      "aliases": [
+        "hjortytterfilé"
+      ]
+    },
+    "kanin": {
+      "name": "Kanin",
+      "aliases": [
+        "kanin"
+      ]
+    },
+    "renfile": {
+      "name": "Renfilé",
+      "aliases": [
+        "renfilé"
+      ]
+    },
+    "rengrytbitar": {
+      "name": "Rengrytbitar",
+      "aliases": [
+        "rengrytbitar"
+      ]
+    },
+    "renstek": {
+      "name": "Renstek",
+      "aliases": [
+        "renstek"
+      ]
+    },
+    "renytterfile": {
+      "name": "Renytterfilé",
+      "aliases": [
+        "renytterfilé"
+      ]
+    },
+    "radjursfile": {
+      "name": "Rådjursfilé",
+      "aliases": [
+        "rådjursfilé"
+      ]
+    },
+    "radjurssadel": {
+      "name": "Rådjurssadel",
+      "aliases": [
+        "rådjurssadel"
+      ]
+    },
+    "radjursstek": {
+      "name": "Rådjursstek",
+      "aliases": [
+        "rådjursstek"
+      ]
+    },
+    "suovas": {
+      "name": "Suovas",
+      "aliases": [
+        "suovas"
+      ]
+    },
+    "torkat-renkott": {
+      "name": "Torkat renkött",
+      "aliases": [
+        "torkat renkött"
+      ]
+    },
+    "vildsvinsbog": {
+      "name": "Vildsvinsbog",
+      "aliases": [
+        "vildsvinsbog"
+      ]
+    },
+    "vildsvinsfile": {
+      "name": "Vildsvinsfilé",
+      "aliases": [
+        "vildsvinsfilé"
+      ]
+    },
+    "vildsvinsgrytbitar": {
+      "name": "Vildsvinsgrytbitar",
+      "aliases": [
+        "vildsvinsgrytbitar"
+      ]
+    },
+    "vildsvinskotlett": {
+      "name": "Vildsvinskotlett",
+      "aliases": [
+        "vildsvinskotlett"
+      ]
+    },
+    "vildsvinsstek": {
+      "name": "Vildsvinsstek",
+      "aliases": [
+        "vildsvinsstek"
+      ]
+    },
+    "viltgrytbitar": {
+      "name": "Viltgrytbitar",
+      "aliases": [
+        "viltgrytbitar"
+      ]
+    },
+    "viltskav": {
+      "name": "Viltskav",
+      "aliases": [
+        "viltskav"
+      ]
+    },
+    "algfile": {
+      "name": "Älgfilé",
+      "aliases": [
+        "älgfilé"
+      ]
+    },
+    "alggrytbitar": {
+      "name": "Älggrytbitar",
+      "aliases": [
+        "älggrytbitar"
+      ]
+    },
+    "algrostbiff": {
+      "name": "Älgrostbiff",
+      "aliases": [
+        "älgrostbiff"
+      ]
+    },
+    "algskav": {
+      "name": "Älgskav",
+      "aliases": [
+        "älgskav"
+      ]
+    },
+    "algstek": {
+      "name": "Älgstek",
+      "aliases": [
+        "älgstek"
+      ]
+    },
+    "algytterfile": {
+      "name": "Älgytterfilé",
+      "aliases": [
+        "älgytterfilé"
+      ]
+    },
+    "ekologisk-notfars": {
+      "name": "Ekologisk nötfärs",
+      "aliases": [
+        "ekologisk nötfärs"
+      ]
+    },
+    "farsbiffar": {
+      "name": "Färsbiffar",
+      "aliases": [
+        "färsbiffar"
+      ]
+    },
+    "hamburgare": {
+      "name": "Hamburgare",
+      "aliases": [
+        "hamburgare"
+      ]
+    },
+    "hamburgerfars": {
+      "name": "Hamburgerfärs",
+      "aliases": [
+        "hamburgerfärs"
+      ]
+    },
+    "hjortfars": {
+      "name": "Hjortfärs",
+      "aliases": [
+        "hjortfärs"
+      ]
+    },
+    "hogrevsfars": {
+      "name": "Högrevsfärs",
+      "aliases": [
+        "högrevsfärs"
+      ]
+    },
+    "kalvfars": {
+      "name": "Kalvfärs",
+      "aliases": [
+        "kalvfärs"
+      ]
+    },
+    "kryddad-tacofars": {
+      "name": "Kryddad tacofärs",
+      "aliases": [
+        "kryddad tacofärs"
+      ]
+    },
+    "kottbullssmet": {
+      "name": "Köttbullssmet",
+      "aliases": [
+        "köttbullssmet"
+      ]
+    },
+    "lammburgare": {
+      "name": "Lammburgare",
+      "aliases": [
+        "lammburgare"
+      ]
+    },
+    "latt-notfars": {
+      "name": "Lätt nötfärs",
+      "aliases": [
+        "lätt nötfärs"
+      ]
+    },
+    "renfars": {
+      "name": "Renfärs",
+      "aliases": [
+        "renfärs"
+      ]
+    },
+    "raa-kottbullar": {
+      "name": "Råa köttbullar",
+      "aliases": [
+        "råa köttbullar"
+      ]
+    },
+    "salsicciafars": {
+      "name": "Salsicciafärs",
+      "aliases": [
+        "salsicciafärs"
+      ]
+    },
+    "vildsvinsfars": {
+      "name": "Vildsvinsfärs",
+      "aliases": [
+        "vildsvinsfärs"
+      ]
+    },
+    "viltfars": {
+      "name": "Viltfärs",
+      "aliases": [
+        "viltfärs"
+      ]
+    },
+    "algfars": {
+      "name": "Älgfärs",
+      "aliases": [
+        "älgfärs"
+      ]
+    },
+    "bbq-revben": {
+      "name": "BBQ-revben",
+      "aliases": [
+        "bbq-revben"
+      ]
+    },
+    "brisket": {
+      "name": "Brisket",
+      "aliases": [
+        "brisket"
+      ]
+    },
+    "cevapcici": {
+      "name": "Cevapcici",
+      "aliases": [
+        "cevapcici"
+      ]
+    },
+    "fajitaskott": {
+      "name": "Fajitaskött",
+      "aliases": [
+        "fajitaskött"
+      ]
+    },
+    "flaskspett": {
+      "name": "Fläskspett",
+      "aliases": [
+        "fläskspett"
+      ]
+    },
+    "grillskivor": {
+      "name": "Grillskivor",
+      "aliases": [
+        "grillskivor"
+      ]
+    },
+    "grillspett": {
+      "name": "Grillspett",
+      "aliases": [
+        "grillspett"
+      ]
+    },
+    "gyros": {
+      "name": "Gyros",
+      "aliases": [
+        "gyros"
+      ]
+    },
+    "kebabkott": {
+      "name": "Kebabkött",
+      "aliases": [
+        "kebabkött"
+      ]
+    },
+    "kofte": {
+      "name": "Köfte",
+      "aliases": [
+        "köfte"
+      ]
+    },
+    "lammspett": {
+      "name": "Lammspett",
+      "aliases": [
+        "lammspett"
+      ]
+    },
+    "marinerad-entrecote": {
+      "name": "Marinerad entrecôte",
+      "aliases": [
+        "marinerad entrecôte"
+      ]
+    },
+    "marinerad-flankstek": {
+      "name": "Marinerad flankstek",
+      "aliases": [
+        "marinerad flankstek"
+      ]
+    },
+    "marinerad-flaskfile": {
+      "name": "Marinerad fläskfilé",
+      "aliases": [
+        "marinerad fläskfilé"
+      ]
+    },
+    "marinerad-flaskkarre": {
+      "name": "Marinerad fläskkarré",
+      "aliases": [
+        "marinerad fläskkarré"
+      ]
+    },
+    "marinerad-flaskytterfile": {
+      "name": "Marinerad fläskytterfilé",
+      "aliases": [
+        "marinerad fläskytterfilé"
+      ]
+    },
+    "marinerad-lovbiff": {
+      "name": "Marinerad lövbiff",
+      "aliases": [
+        "marinerad lövbiff"
+      ]
+    },
+    "marinerad-ryggbiff": {
+      "name": "Marinerad ryggbiff",
+      "aliases": [
+        "marinerad ryggbiff"
+      ]
+    },
+    "marinerade-kotletter": {
+      "name": "Marinerade kotletter",
+      "aliases": [
+        "marinerade kotletter"
+      ]
+    },
+    "marinerade-lammkotletter": {
+      "name": "Marinerade lammkotletter",
+      "aliases": [
+        "marinerade lammkotletter"
+      ]
+    },
+    "marinerade-revbensspjall": {
+      "name": "Marinerade revbensspjäll",
+      "aliases": [
+        "marinerade revbensspjäll"
+      ]
+    },
+    "marinerade-wokstrimlor": {
+      "name": "Marinerade wokstrimlor",
+      "aliases": [
+        "marinerade wokstrimlor"
+      ]
+    },
+    "notspett": {
+      "name": "Nötspett",
+      "aliases": [
+        "nötspett"
+      ]
+    },
+    "pulled-beef": {
+      "name": "Pulled beef",
+      "aliases": [
+        "pulled beef"
+      ]
+    },
+    "pulled-pork": {
+      "name": "Pulled pork",
+      "aliases": [
+        "pulled pork"
+      ]
+    },
+    "shish-kebab": {
+      "name": "Shish kebab",
+      "aliases": [
+        "shish kebab"
+      ]
+    },
+    "smashburgare": {
+      "name": "Smashburgare",
+      "aliases": [
+        "smashburgare"
+      ]
+    },
+    "sous-vide-hogrev": {
+      "name": "Sous vide-högrev",
+      "aliases": [
+        "sous vide-högrev"
+      ]
+    },
+    "souvlaki": {
+      "name": "Souvlaki",
+      "aliases": [
+        "souvlaki"
+      ]
+    },
+    "ekologisk-kyckling": {
+      "name": "Ekologisk kyckling",
+      "aliases": [
+        "ekologisk kyckling"
+      ]
+    },
+    "gardskyckling": {
+      "name": "Gårdskyckling",
+      "aliases": [
+        "gårdskyckling"
+      ]
+    },
+    "halalkyckling": {
+      "name": "Halalkyckling",
+      "aliases": [
+        "halalkyckling"
+      ]
+    },
+    "kycklingben-drumsticks": {
+      "name": "Kycklingben (drumsticks)",
+      "aliases": [
+        "kycklingben (drumsticks)",
+        "kycklingben"
+      ]
+    },
+    "kycklingdelar": {
+      "name": "Kycklingdelar",
+      "aliases": [
+        "kycklingdelar"
+      ]
+    },
+    "kycklingfars": {
+      "name": "Kycklingfärs",
+      "aliases": [
+        "kycklingfärs"
+      ]
+    },
+    "kycklingfotter": {
+      "name": "Kycklingfötter",
+      "aliases": [
+        "kycklingfötter"
+      ]
+    },
+    "kycklinghjartan": {
+      "name": "Kycklinghjärtan",
+      "aliases": [
+        "kycklinghjärtan"
+      ]
+    },
+    "kycklinginnerfile": {
+      "name": "Kycklinginnerfilé",
+      "aliases": [
+        "kycklinginnerfilé"
+      ]
+    },
+    "kycklingkras": {
+      "name": "Kycklingkrås",
+      "aliases": [
+        "kycklingkrås"
+      ]
+    },
+    "kycklinglever": {
+      "name": "Kycklinglever",
+      "aliases": [
+        "kycklinglever"
+      ]
+    },
+    "kycklinglar": {
+      "name": "Kycklinglår",
+      "aliases": [
+        "kycklinglår"
+      ]
+    },
+    "kycklingminutfile": {
+      "name": "Kycklingminutfilé",
+      "aliases": [
+        "kycklingminutfilé"
+      ]
+    },
+    "kycklingschnitzel": {
+      "name": "Kycklingschnitzel",
+      "aliases": [
+        "kycklingschnitzel"
+      ]
+    },
+    "kycklingskrov": {
+      "name": "Kycklingskrov",
+      "aliases": [
+        "kycklingskrov"
+      ]
+    },
+    "kycklingvingar": {
+      "name": "Kycklingvingar",
+      "aliases": [
+        "kycklingvingar"
+      ]
+    },
+    "majskyckling": {
+      "name": "Majskyckling",
+      "aliases": [
+        "majskyckling"
+      ]
+    },
+    "strimlad-kyckling": {
+      "name": "Strimlad kyckling",
+      "aliases": [
+        "strimlad kyckling"
+      ]
+    },
+    "tarnad-kycklingfile": {
+      "name": "Tärnad kycklingfilé",
+      "aliases": [
+        "tärnad kycklingfilé"
+      ]
+    },
+    "hel-kalkon": {
+      "name": "Hel kalkon",
+      "aliases": [
+        "hel kalkon"
+      ]
+    },
+    "kalkonbrost": {
+      "name": "Kalkonbröst",
+      "aliases": [
+        "kalkonbröst"
+      ]
+    },
+    "kalkonbroststek": {
+      "name": "Kalkonbröststek",
+      "aliases": [
+        "kalkonbröststek"
+      ]
+    },
+    "kalkonburgare": {
+      "name": "Kalkonburgare",
+      "aliases": [
+        "kalkonburgare"
+      ]
+    },
+    "kalkonfile": {
+      "name": "Kalkonfilé",
+      "aliases": [
+        "kalkonfilé"
+      ]
+    },
+    "kalkonfars": {
+      "name": "Kalkonfärs",
+      "aliases": [
+        "kalkonfärs"
+      ]
+    },
+    "kalkoninnerfile": {
+      "name": "Kalkoninnerfilé",
+      "aliases": [
+        "kalkoninnerfilé"
+      ]
+    },
+    "kalkonklubbor": {
+      "name": "Kalkonklubbor",
+      "aliases": [
+        "kalkonklubbor"
+      ]
+    },
+    "kalkonlar": {
+      "name": "Kalkonlår",
+      "aliases": [
+        "kalkonlår"
+      ]
+    },
+    "kalkonrulle": {
+      "name": "Kalkonrulle",
+      "aliases": [
+        "kalkonrulle"
+      ]
+    },
+    "kalkonschnitzel": {
+      "name": "Kalkonschnitzel",
+      "aliases": [
+        "kalkonschnitzel"
+      ]
+    },
+    "kalkonvingar": {
+      "name": "Kalkonvingar",
+      "aliases": [
+        "kalkonvingar"
+      ]
+    },
+    "strimlad-kalkon": {
+      "name": "Strimlad kalkon",
+      "aliases": [
+        "strimlad kalkon"
+      ]
+    },
+    "ankbrost": {
+      "name": "Ankbröst",
+      "aliases": [
+        "ankbröst"
+      ]
+    },
+    "ankconfit": {
+      "name": "Ankconfit",
+      "aliases": [
+        "ankconfit"
+      ]
+    },
+    "ankfett": {
+      "name": "Ankfett",
+      "aliases": [
+        "ankfett"
+      ]
+    },
+    "anklever": {
+      "name": "Anklever",
+      "aliases": [
+        "anklever"
+      ]
+    },
+    "anklar": {
+      "name": "Anklår",
+      "aliases": [
+        "anklår"
+      ]
+    },
+    "gasbrost": {
+      "name": "Gåsbröst",
+      "aliases": [
+        "gåsbröst"
+      ]
+    },
+    "gasfett": {
+      "name": "Gåsfett",
+      "aliases": [
+        "gåsfett"
+      ]
+    },
+    "gaslar": {
+      "name": "Gåslår",
+      "aliases": [
+        "gåslår"
+      ]
+    },
+    "hel-anka": {
+      "name": "Hel anka",
+      "aliases": [
+        "hel anka"
+      ]
+    },
+    "hel-gas": {
+      "name": "Hel gås",
+      "aliases": [
+        "hel gås"
+      ]
+    },
+    "duva": {
+      "name": "Duva",
+      "aliases": [
+        "duva"
+      ]
+    },
+    "fasan": {
+      "name": "Fasan",
+      "aliases": [
+        "fasan"
+      ]
+    },
+    "kokhona": {
+      "name": "Kokhöna",
+      "aliases": [
+        "kokhöna"
+      ]
+    },
+    "poussin": {
+      "name": "Poussin",
+      "aliases": [
+        "poussin"
+      ]
+    },
+    "parlhona": {
+      "name": "Pärlhöna",
+      "aliases": [
+        "pärlhöna"
+      ]
+    },
+    "rapphona": {
+      "name": "Rapphöna",
+      "aliases": [
+        "rapphöna"
+      ]
+    },
+    "ripa": {
+      "name": "Ripa",
+      "aliases": [
+        "ripa"
+      ]
+    },
+    "strutsfile": {
+      "name": "Strutsfilé",
+      "aliases": [
+        "strutsfilé"
+      ]
+    },
+    "vaktel": {
+      "name": "Vaktel",
+      "aliases": [
+        "vaktel"
+      ]
+    },
+    "vildand": {
+      "name": "Vildand",
+      "aliases": [
+        "vildand"
+      ]
+    },
+    "bbq-vingar": {
+      "name": "BBQ-vingar",
+      "aliases": [
+        "bbq-vingar"
+      ]
+    },
+    "buffalo-wings": {
+      "name": "Buffalo wings",
+      "aliases": [
+        "buffalo wings"
+      ]
+    },
+    "grillade-kycklingklubbor": {
+      "name": "Grillade kycklingklubbor",
+      "aliases": [
+        "grillade kycklingklubbor"
+      ]
+    },
+    "grillade-kycklinglar": {
+      "name": "Grillade kycklinglår",
+      "aliases": [
+        "grillade kycklinglår"
+      ]
+    },
+    "kalkonspett": {
+      "name": "Kalkonspett",
+      "aliases": [
+        "kalkonspett"
+      ]
+    },
+    "kycklingburgare": {
+      "name": "Kycklingburgare",
+      "aliases": [
+        "kycklingburgare"
+      ]
+    },
+    "kycklinggyros": {
+      "name": "Kycklinggyros",
+      "aliases": [
+        "kycklinggyros"
+      ]
+    },
+    "kycklingkebab": {
+      "name": "Kycklingkebab",
+      "aliases": [
+        "kycklingkebab"
+      ]
+    },
+    "kycklingkottbullar": {
+      "name": "Kycklingköttbullar",
+      "aliases": [
+        "kycklingköttbullar"
+      ]
+    },
+    "kycklingnuggets": {
+      "name": "Kycklingnuggets",
+      "aliases": [
+        "kycklingnuggets"
+      ]
+    },
+    "kycklingshawarma": {
+      "name": "Kycklingshawarma",
+      "aliases": [
+        "kycklingshawarma"
+      ]
+    },
+    "kycklingspett": {
+      "name": "Kycklingspett",
+      "aliases": [
+        "kycklingspett"
+      ]
+    },
+    "marinerad-kycklingfile": {
+      "name": "Marinerad kycklingfilé",
+      "aliases": [
+        "marinerad kycklingfilé"
+      ]
+    },
+    "marinerad-kycklinglarfile": {
+      "name": "Marinerad kycklinglårfilé",
+      "aliases": [
+        "marinerad kycklinglårfilé"
+      ]
+    },
+    "marinerade-kycklingklubbor": {
+      "name": "Marinerade kycklingklubbor",
+      "aliases": [
+        "marinerade kycklingklubbor"
+      ]
+    },
+    "marinerade-kycklingvingar": {
+      "name": "Marinerade kycklingvingar",
+      "aliases": [
+        "marinerade kycklingvingar"
+      ]
+    },
+    "pulled-chicken": {
+      "name": "Pulled chicken",
+      "aliases": [
+        "pulled chicken"
+      ]
+    },
+    "rokt-kycklingfile": {
+      "name": "Rökt kycklingfilé",
+      "aliases": [
+        "rökt kycklingfilé"
+      ]
+    },
+    "sous-vide-kycklingfile": {
+      "name": "Sous vide-kycklingfilé",
+      "aliases": [
+        "sous vide-kycklingfilé"
+      ]
+    },
+    "stekta-kycklingstrimlor": {
+      "name": "Stekta kycklingstrimlor",
+      "aliases": [
+        "stekta kycklingstrimlor"
+      ]
+    },
+    "stekta-kycklingtarningar": {
+      "name": "Stekta kycklingtärningar",
+      "aliases": [
+        "stekta kycklingtärningar"
+      ]
+    },
+    "tandoorikyckling": {
+      "name": "Tandoorikyckling",
+      "aliases": [
+        "tandoorikyckling"
+      ]
+    },
+    "bockwurst": {
+      "name": "Bockwurst",
+      "aliases": [
+        "bockwurst"
+      ]
+    },
+    "bratwurst": {
+      "name": "Bratwurst",
+      "aliases": [
+        "bratwurst"
+      ]
+    },
+    "brackkorv": {
+      "name": "Bräckkorv",
+      "aliases": [
+        "bräckkorv"
+      ]
+    },
+    "chilikorv": {
+      "name": "Chilikorv",
+      "aliases": [
+        "chilikorv"
+      ]
+    },
+    "chipolata": {
+      "name": "Chipolata",
+      "aliases": [
+        "chipolata"
+      ]
+    },
+    "chorizo": {
+      "name": "Chorizo",
+      "aliases": [
+        "chorizo"
+      ]
+    },
+    "cocktailkorv": {
+      "name": "Cocktailkorv",
+      "aliases": [
+        "cocktailkorv"
+      ]
+    },
+    "flaskkorv": {
+      "name": "Fläskkorv",
+      "aliases": [
+        "fläskkorv"
+      ]
+    },
+    "frankfurter": {
+      "name": "Frankfurter",
+      "aliases": [
+        "frankfurter"
+      ]
+    },
+    "frukostkorv": {
+      "name": "Frukostkorv",
+      "aliases": [
+        "frukostkorv"
+      ]
+    },
+    "grillkorv": {
+      "name": "Grillkorv",
+      "aliases": [
+        "grillkorv"
+      ]
+    },
+    "grynkorv": {
+      "name": "Grynkorv",
+      "aliases": [
+        "grynkorv"
+      ]
+    },
+    "isterband": {
+      "name": "Isterband",
+      "aliases": [
+        "isterband"
+      ]
+    },
+    "julkorv": {
+      "name": "Julkorv",
+      "aliases": [
+        "julkorv"
+      ]
+    },
+    "kabanoss": {
+      "name": "Kabanoss",
+      "aliases": [
+        "kabanoss"
+      ]
+    },
+    "kalkonkorv": {
+      "name": "Kalkonkorv",
+      "aliases": [
+        "kalkonkorv"
+      ]
+    },
+    "kielbasa": {
+      "name": "Kielbasa",
+      "aliases": [
+        "kielbasa"
+      ]
+    },
+    "kokt-kottkorv": {
+      "name": "Kokt köttkorv",
+      "aliases": [
+        "kokt köttkorv"
+      ]
+    },
+    "kokt-medvurst": {
+      "name": "Kokt medvurst",
+      "aliases": [
+        "kokt medvurst"
+      ]
+    },
+    "kryddig-grillkorv": {
+      "name": "Kryddig grillkorv",
+      "aliases": [
+        "kryddig grillkorv"
+      ]
+    },
+    "kycklingkorv": {
+      "name": "Kycklingkorv",
+      "aliases": [
+        "kycklingkorv"
+      ]
+    },
+    "kasekrainer": {
+      "name": "Käsekrainer",
+      "aliases": [
+        "käsekrainer"
+      ]
+    },
+    "lammkorv": {
+      "name": "Lammkorv",
+      "aliases": [
+        "lammkorv"
+      ]
+    },
+    "lantkorv": {
+      "name": "Lantkorv",
+      "aliases": [
+        "lantkorv"
+      ]
+    },
+    "medisterkorv": {
+      "name": "Medisterkorv",
+      "aliases": [
+        "medisterkorv"
+      ]
+    },
+    "merguez": {
+      "name": "Merguez",
+      "aliases": [
+        "merguez"
+      ]
+    },
+    "nurnbergerkorv": {
+      "name": "Nürnbergerkorv",
+      "aliases": [
+        "nürnbergerkorv"
+      ]
+    },
+    "ostkorv": {
+      "name": "Ostkorv",
+      "aliases": [
+        "ostkorv"
+      ]
+    },
+    "oxgrillare-grillkorv-av-notkott": {
+      "name": "Oxgrillare (grillkorv av nötkött)",
+      "aliases": [
+        "oxgrillare (grillkorv av nötkött)",
+        "oxgrillare"
+      ]
+    },
+    "pilsnerkorv-pa-burk": {
+      "name": "Pilsnerkorv på burk",
+      "aliases": [
+        "pilsnerkorv på burk"
+      ]
+    },
+    "potatiskorv": {
+      "name": "Potatiskorv",
+      "aliases": [
+        "potatiskorv"
+      ]
+    },
+    "prinskorv": {
+      "name": "Prinskorv",
+      "aliases": [
+        "prinskorv"
+      ]
+    },
+    "renkorv": {
+      "name": "Renkorv",
+      "aliases": [
+        "renkorv"
+      ]
+    },
+    "rakorv": {
+      "name": "Råkorv",
+      "aliases": [
+        "råkorv"
+      ]
+    },
+    "salsiccia": {
+      "name": "Salsiccia",
+      "aliases": [
+        "salsiccia"
+      ]
+    },
+    "stangkorv": {
+      "name": "Stångkorv",
+      "aliases": [
+        "stångkorv"
+      ]
+    },
+    "sucuk": {
+      "name": "Sucuk",
+      "aliases": [
+        "sucuk"
+      ]
+    },
+    "tjock-grillkorv": {
+      "name": "Tjock grillkorv",
+      "aliases": [
+        "tjock grillkorv"
+      ]
+    },
+    "varmkorv": {
+      "name": "Varmkorv",
+      "aliases": [
+        "varmkorv"
+      ]
+    },
+    "vildsvinskorv": {
+      "name": "Vildsvinskorv",
+      "aliases": [
+        "vildsvinskorv"
+      ]
+    },
+    "viltkorv": {
+      "name": "Viltkorv",
+      "aliases": [
+        "viltkorv"
+      ]
+    },
+    "varmlandskorv": {
+      "name": "Värmlandskorv",
+      "aliases": [
+        "värmlandskorv"
+      ]
+    },
+    "weisswurst": {
+      "name": "Weisswurst",
+      "aliases": [
+        "weisswurst"
+      ]
+    },
+    "wienerkorv": {
+      "name": "Wienerkorv",
+      "aliases": [
+        "wienerkorv"
+      ]
+    },
+    "algkorv": {
+      "name": "Älgkorv",
+      "aliases": [
+        "älgkorv"
+      ]
+    },
+    "basturokt-skinka": {
+      "name": "Basturökt skinka",
+      "aliases": [
+        "basturökt skinka"
+      ]
+    },
+    "hamburgerbringa": {
+      "name": "Hamburgerbringa",
+      "aliases": [
+        "hamburgerbringa"
+      ]
+    },
+    "hamburgerkott-rokt-hastkott": {
+      "name": "Hamburgerkött (rökt hästkött)",
+      "aliases": [
+        "hamburgerkött (rökt hästkött)",
+        "hamburgerkött"
+      ]
+    },
+    "honungsskinka": {
+      "name": "Honungsskinka",
+      "aliases": [
+        "honungsskinka"
+      ]
+    },
+    "jaktkorv": {
+      "name": "Jaktkorv",
+      "aliases": [
+        "jaktkorv"
+      ]
+    },
+    "kalkonpalagg": {
+      "name": "Kalkonpålägg",
+      "aliases": [
+        "kalkonpålägg"
+      ]
+    },
+    "kycklingpalagg": {
+      "name": "Kycklingpålägg",
+      "aliases": [
+        "kycklingpålägg"
+      ]
+    },
+    "lantskinka": {
+      "name": "Lantskinka",
+      "aliases": [
+        "lantskinka"
+      ]
+    },
+    "mortadella": {
+      "name": "Mortadella",
+      "aliases": [
+        "mortadella"
+      ]
+    },
+    "pastrami": {
+      "name": "Pastrami",
+      "aliases": [
+        "pastrami"
+      ]
+    },
+    "pepparskinka": {
+      "name": "Pepparskinka",
+      "aliases": [
+        "pepparskinka"
+      ]
+    },
+    "rokt-ankbrost": {
+      "name": "Rökt ankbröst",
+      "aliases": [
+        "rökt ankbröst"
+      ]
+    },
+    "rokt-bog": {
+      "name": "Rökt bog",
+      "aliases": [
+        "rökt bog"
+      ]
+    },
+    "rokt-hjortstek": {
+      "name": "Rökt hjortstek",
+      "aliases": [
+        "rökt hjortstek"
+      ]
+    },
+    "rokt-kalkonbrost": {
+      "name": "Rökt kalkonbröst",
+      "aliases": [
+        "rökt kalkonbröst"
+      ]
+    },
+    "rokt-renstek": {
+      "name": "Rökt renstek",
+      "aliases": [
+        "rökt renstek"
+      ]
+    },
+    "rokt-algstek": {
+      "name": "Rökt älgstek",
+      "aliases": [
+        "rökt älgstek"
+      ]
+    },
+    "saltrulle": {
+      "name": "Saltrulle",
+      "aliases": [
+        "saltrulle"
+      ]
+    },
+    "skinkstrimlor": {
+      "name": "Skinkstrimlor",
+      "aliases": [
+        "skinkstrimlor"
+      ]
+    },
+    "skivad-julskinka": {
+      "name": "Skivad julskinka",
+      "aliases": [
+        "skivad julskinka"
+      ]
+    },
+    "skivad-kassler": {
+      "name": "Skivad kassler",
+      "aliases": [
+        "skivad kassler"
+      ]
+    },
+    "skivad-oxbringa": {
+      "name": "Skivad oxbringa",
+      "aliases": [
+        "skivad oxbringa"
+      ]
+    },
+    "skivad-rostbiff": {
+      "name": "Skivad rostbiff",
+      "aliases": [
+        "skivad rostbiff"
+      ]
+    },
+    "skivad-tjalknol": {
+      "name": "Skivad tjälknöl",
+      "aliases": [
+        "skivad tjälknöl"
+      ]
+    },
+    "tarnad-skinka": {
+      "name": "Tärnad skinka",
+      "aliases": [
+        "tärnad skinka"
+      ]
+    },
+    "olskinka": {
+      "name": "Ölskinka",
+      "aliases": [
+        "ölskinka"
+      ]
+    },
+    "baconbit": {
+      "name": "Baconbit",
+      "aliases": [
+        "baconbit"
+      ]
+    },
+    "baconstrossel": {
+      "name": "Baconströssel",
+      "aliases": [
+        "baconströssel"
+      ]
+    },
+    "bacontarningar": {
+      "name": "Bacontärningar",
+      "aliases": [
+        "bacontärningar"
+      ]
+    },
+    "ekologiskt-bacon": {
+      "name": "Ekologiskt bacon",
+      "aliases": [
+        "ekologiskt bacon"
+      ]
+    },
+    "frukostbacon": {
+      "name": "Frukostbacon",
+      "aliases": [
+        "frukostbacon"
+      ]
+    },
+    "forstekt-bacon": {
+      "name": "Förstekt bacon",
+      "aliases": [
+        "förstekt bacon"
+      ]
+    },
+    "guanciale": {
+      "name": "Guanciale",
+      "aliases": [
+        "guanciale"
+      ]
+    },
+    "kalkonbacon": {
+      "name": "Kalkonbacon",
+      "aliases": [
+        "kalkonbacon"
+      ]
+    },
+    "kycklingbacon": {
+      "name": "Kycklingbacon",
+      "aliases": [
+        "kycklingbacon"
+      ]
+    },
+    "pancetta": {
+      "name": "Pancetta",
+      "aliases": [
+        "pancetta"
+      ]
+    },
+    "rokt-notbacon": {
+      "name": "Rökt nötbacon",
+      "aliases": [
+        "rökt nötbacon"
+      ]
+    },
+    "rokt-stekflask": {
+      "name": "Rökt stekfläsk",
+      "aliases": [
+        "rökt stekfläsk"
+      ]
+    },
+    "strimlat-bacon": {
+      "name": "Strimlat bacon",
+      "aliases": [
+        "strimlat bacon"
+      ]
+    },
+    "tjockskivat-bacon": {
+      "name": "Tjockskivat bacon",
+      "aliases": [
+        "tjockskivat bacon"
+      ]
+    },
+    "bresaola": {
+      "name": "Bresaola",
+      "aliases": [
+        "bresaola"
+      ]
+    },
+    "cecina": {
+      "name": "Cecina",
+      "aliases": [
+        "cecina"
+      ]
+    },
+    "charkbricka": {
+      "name": "Charkbricka",
+      "aliases": [
+        "charkbricka"
+      ]
+    },
+    "coppa": {
+      "name": "Coppa",
+      "aliases": [
+        "coppa"
+      ]
+    },
+    "culatello": {
+      "name": "Culatello",
+      "aliases": [
+        "culatello"
+      ]
+    },
+    "dansk-salami": {
+      "name": "Dansk salami",
+      "aliases": [
+        "dansk salami"
+      ]
+    },
+    "fenalar": {
+      "name": "Fenalår",
+      "aliases": [
+        "fenalår"
+      ]
+    },
+    "finocchiona": {
+      "name": "Finocchiona",
+      "aliases": [
+        "finocchiona"
+      ]
+    },
+    "fuet": {
+      "name": "Fuet",
+      "aliases": [
+        "fuet"
+      ]
+    },
+    "jamon-iberico": {
+      "name": "Jamón ibérico",
+      "aliases": [
+        "jamón ibérico"
+      ]
+    },
+    "kabanosy": {
+      "name": "Kabanosy",
+      "aliases": [
+        "kabanosy"
+      ]
+    },
+    "lardo": {
+      "name": "Lardo",
+      "aliases": [
+        "lardo"
+      ]
+    },
+    "lomo": {
+      "name": "Lomo",
+      "aliases": [
+        "lomo"
+      ]
+    },
+    "lufttorkad-skinka": {
+      "name": "Lufttorkad skinka",
+      "aliases": [
+        "lufttorkad skinka"
+      ]
+    },
+    "medvurst": {
+      "name": "Medvurst",
+      "aliases": [
+        "medvurst"
+      ]
+    },
+    "milanosalami": {
+      "name": "Milanosalami",
+      "aliases": [
+        "milanosalami"
+      ]
+    },
+    "nduja": {
+      "name": "Nduja",
+      "aliases": [
+        "nduja"
+      ]
+    },
+    "parmaskinka": {
+      "name": "Parmaskinka",
+      "aliases": [
+        "parmaskinka"
+      ]
+    },
+    "pepparsalami": {
+      "name": "Pepparsalami",
+      "aliases": [
+        "pepparsalami"
+      ]
+    },
+    "pepperoni": {
+      "name": "Pepperoni",
+      "aliases": [
+        "pepperoni"
+      ]
+    },
+    "prosciutto": {
+      "name": "Prosciutto",
+      "aliases": [
+        "prosciutto"
+      ]
+    },
+    "salami": {
+      "name": "Salami",
+      "aliases": [
+        "salami"
+      ]
+    },
+    "salamipinnar": {
+      "name": "Salamipinnar",
+      "aliases": [
+        "salamipinnar"
+      ]
+    },
+    "salchichon": {
+      "name": "Salchichón",
+      "aliases": [
+        "salchichón"
+      ]
+    },
+    "serranoskinka": {
+      "name": "Serranoskinka",
+      "aliases": [
+        "serranoskinka"
+      ]
+    },
+    "skivad-chorizo": {
+      "name": "Skivad chorizo",
+      "aliases": [
+        "skivad chorizo"
+      ]
+    },
+    "sobrasada": {
+      "name": "Sobrasada",
+      "aliases": [
+        "sobrasada"
+      ]
+    },
+    "soppressata": {
+      "name": "Soppressata",
+      "aliases": [
+        "soppressata"
+      ]
+    },
+    "speck": {
+      "name": "Speck",
+      "aliases": [
+        "speck"
+      ]
+    },
+    "spianata": {
+      "name": "Spianata",
+      "aliases": [
+        "spianata"
+      ]
+    },
+    "spickekorv": {
+      "name": "Spickekorv",
+      "aliases": [
+        "spickekorv"
+      ]
+    },
+    "spickeskinka": {
+      "name": "Spickeskinka",
+      "aliases": [
+        "spickeskinka"
+      ]
+    },
+    "tapasbricka": {
+      "name": "Tapasbricka",
+      "aliases": [
+        "tapasbricka"
+      ]
+    },
+    "tryffelsalami": {
+      "name": "Tryffelsalami",
+      "aliases": [
+        "tryffelsalami"
+      ]
+    },
+    "ungersk-salami": {
+      "name": "Ungersk salami",
+      "aliases": [
+        "ungersk salami"
+      ]
+    },
+    "viltsalami": {
+      "name": "Viltsalami",
+      "aliases": [
+        "viltsalami"
+      ]
+    },
+    "vitlokssalami": {
+      "name": "Vitlökssalami",
+      "aliases": [
+        "vitlökssalami"
+      ]
+    },
+    "olkorv": {
+      "name": "Ölkorv",
+      "aliases": [
+        "ölkorv"
+      ]
+    },
+    "ankleverpate": {
+      "name": "Ankleverpaté",
+      "aliases": [
+        "ankleverpaté"
+      ]
+    },
+    "ankpate": {
+      "name": "Ankpaté",
+      "aliases": [
+        "ankpaté"
+      ]
+    },
+    "bredbar-leverpastej": {
+      "name": "Bredbar leverpastej",
+      "aliases": [
+        "bredbar leverpastej"
+      ]
+    },
+    "foie-gras": {
+      "name": "Foie gras",
+      "aliases": [
+        "foie gras"
+      ]
+    },
+    "grovhackad-leverpastej": {
+      "name": "Grovhackad leverpastej",
+      "aliases": [
+        "grovhackad leverpastej"
+      ]
+    },
+    "gasleverpate": {
+      "name": "Gåsleverpaté",
+      "aliases": [
+        "gåsleverpaté"
+      ]
+    },
+    "kalvleverpastej": {
+      "name": "Kalvleverpastej",
+      "aliases": [
+        "kalvleverpastej"
+      ]
+    },
+    "kycklingleverpate": {
+      "name": "Kycklingleverpaté",
+      "aliases": [
+        "kycklingleverpaté"
+      ]
+    },
+    "lantpate": {
+      "name": "Lantpaté",
+      "aliases": [
+        "lantpaté"
+      ]
+    },
+    "leverkorv": {
+      "name": "Leverkorv",
+      "aliases": [
+        "leverkorv"
+      ]
+    },
+    "latt-leverpastej": {
+      "name": "Lätt leverpastej",
+      "aliases": [
+        "lätt leverpastej"
+      ]
+    },
+    "pepparpate": {
+      "name": "Pepparpaté",
+      "aliases": [
+        "pepparpaté"
+      ]
+    },
+    "rillettes": {
+      "name": "Rillettes",
+      "aliases": [
+        "rillettes"
+      ]
+    },
+    "skivbar-leverpastej": {
+      "name": "Skivbar leverpastej",
+      "aliases": [
+        "skivbar leverpastej"
+      ]
+    },
+    "smaksatt-leverpastej": {
+      "name": "Smaksatt leverpastej",
+      "aliases": [
+        "smaksatt leverpastej"
+      ]
+    },
+    "terrin": {
+      "name": "Terrin",
+      "aliases": [
+        "terrin"
+      ]
+    },
+    "ugnsbakad-leverpastej": {
+      "name": "Ugnsbakad leverpastej",
+      "aliases": [
+        "ugnsbakad leverpastej"
+      ]
+    },
+    "viltpate": {
+      "name": "Viltpaté",
+      "aliases": [
+        "viltpaté"
+      ]
+    },
+    "aladab": {
+      "name": "Aladåb",
+      "aliases": [
+        "aladåb"
+      ]
+    },
+    "blodbrod": {
+      "name": "Blodbröd",
+      "aliases": [
+        "blodbröd"
+      ]
+    },
+    "blodkorv": {
+      "name": "Blodkorv",
+      "aliases": [
+        "blodkorv"
+      ]
+    },
+    "blodpalt": {
+      "name": "Blodpalt",
+      "aliases": [
+        "blodpalt"
+      ]
+    },
+    "blodplattar": {
+      "name": "Blodplättar",
+      "aliases": [
+        "blodplättar"
+      ]
+    },
+    "blodpudding": {
+      "name": "Blodpudding",
+      "aliases": [
+        "blodpudding"
+      ]
+    },
+    "grisfotter": {
+      "name": "Grisfötter",
+      "aliases": [
+        "grisfötter"
+      ]
+    },
+    "kalvsylta": {
+      "name": "Kalvsylta",
+      "aliases": [
+        "kalvsylta"
+      ]
+    },
+    "korvkaka": {
+      "name": "Korvkaka",
+      "aliases": [
+        "korvkaka"
+      ]
+    },
+    "lungmos": {
+      "name": "Lungmos",
+      "aliases": [
+        "lungmos"
+      ]
+    },
+    "latt-blodpudding": {
+      "name": "Lätt blodpudding",
+      "aliases": [
+        "lätt blodpudding"
+      ]
+    },
+    "paltbrod": {
+      "name": "Paltbröd",
+      "aliases": [
+        "paltbröd"
+      ]
+    },
+    "pressylta": {
+      "name": "Pressylta",
+      "aliases": [
+        "pressylta"
+      ]
+    },
+    "polsa": {
+      "name": "Pölsa",
+      "aliases": [
+        "pölsa"
+      ]
+    },
+    "rullsylta": {
+      "name": "Rullsylta",
+      "aliases": [
+        "rullsylta"
+      ]
+    },
+    "skivad-blodpudding": {
+      "name": "Skivad blodpudding",
+      "aliases": [
+        "skivad blodpudding"
+      ]
+    },
+    "smalandsk-sylta": {
+      "name": "Småländsk sylta",
+      "aliases": [
+        "småländsk sylta"
+      ]
+    },
+    "svartsoppa": {
+      "name": "Svartsoppa",
+      "aliases": [
+        "svartsoppa"
+      ]
+    },
+    "abborre": {
+      "name": "Abborre",
+      "aliases": [
+        "abborre"
+      ]
+    },
+    "abborrfile": {
+      "name": "Abborrfilé",
+      "aliases": [
+        "abborrfilé"
+      ]
+    },
+    "bergtunga": {
+      "name": "Bergtunga",
+      "aliases": [
+        "bergtunga"
+      ]
+    },
+    "clarias": {
+      "name": "Clarias",
+      "aliases": [
+        "clarias"
+      ]
+    },
+    "dorade": {
+      "name": "Dorade",
+      "aliases": [
+        "dorade"
+      ]
+    },
+    "fiskfars": {
+      "name": "Fiskfärs",
+      "aliases": [
+        "fiskfärs"
+      ]
+    },
+    "fiskmix-till-soppa": {
+      "name": "Fiskmix till soppa",
+      "aliases": [
+        "fiskmix till soppa"
+      ]
+    },
+    "farsk-sill": {
+      "name": "Färsk sill",
+      "aliases": [
+        "färsk sill"
+      ]
+    },
+    "farska-sardiner": {
+      "name": "Färska sardiner",
+      "aliases": [
+        "färska sardiner"
+      ]
+    },
+    "gadda": {
+      "name": "Gädda",
+      "aliases": [
+        "gädda"
+      ]
+    },
+    "gos": {
+      "name": "Gös",
+      "aliases": [
+        "gös"
+      ]
+    },
+    "gosfile": {
+      "name": "Gösfilé",
+      "aliases": [
+        "gösfilé"
+      ]
+    },
+    "havsabborre": {
+      "name": "Havsabborre",
+      "aliases": [
+        "havsabborre"
+      ]
+    },
+    "havskatt": {
+      "name": "Havskatt",
+      "aliases": [
+        "havskatt"
+      ]
+    },
+    "hel-lax": {
+      "name": "Hel lax",
+      "aliases": [
+        "hel lax"
+      ]
+    },
+    "horngadda": {
+      "name": "Horngädda",
+      "aliases": [
+        "horngädda"
+      ]
+    },
+    "halleflundra": {
+      "name": "Hälleflundra",
+      "aliases": [
+        "hälleflundra"
+      ]
+    },
+    "karp": {
+      "name": "Karp",
+      "aliases": [
+        "karp"
+      ]
+    },
+    "kummel": {
+      "name": "Kummel",
+      "aliases": [
+        "kummel"
+      ]
+    },
+    "kungsfisk": {
+      "name": "Kungsfisk",
+      "aliases": [
+        "kungsfisk"
+      ]
+    },
+    "lake": {
+      "name": "Lake",
+      "aliases": [
+        "lake"
+      ]
+    },
+    "laxfile": {
+      "name": "Laxfilé",
+      "aliases": [
+        "laxfilé"
+      ]
+    },
+    "laxkotletter": {
+      "name": "Laxkotletter",
+      "aliases": [
+        "laxkotletter"
+      ]
+    },
+    "laxsida": {
+      "name": "Laxsida",
+      "aliases": [
+        "laxsida"
+      ]
+    },
+    "lubb": {
+      "name": "Lubb",
+      "aliases": [
+        "lubb"
+      ]
+    },
+    "lutfisk": {
+      "name": "Lutfisk",
+      "aliases": [
+        "lutfisk"
+      ]
+    },
+    "lyrtorsk": {
+      "name": "Lyrtorsk",
+      "aliases": [
+        "lyrtorsk"
+      ]
+    },
+    "langa": {
+      "name": "Långa",
+      "aliases": [
+        "långa"
+      ]
+    },
+    "marinerad-laxfile": {
+      "name": "Marinerad laxfilé",
+      "aliases": [
+        "marinerad laxfilé"
+      ]
+    },
+    "marulk": {
+      "name": "Marulk",
+      "aliases": [
+        "marulk"
+      ]
+    },
+    "pangasius": {
+      "name": "Pangasius",
+      "aliases": [
+        "pangasius"
+      ]
+    },
+    "piggvar": {
+      "name": "Piggvar",
+      "aliases": [
+        "piggvar"
+      ]
+    },
+    "regnbage": {
+      "name": "Regnbåge",
+      "aliases": [
+        "regnbåge"
+      ]
+    },
+    "rocka": {
+      "name": "Rocka",
+      "aliases": [
+        "rocka"
+      ]
+    },
+    "roding": {
+      "name": "Röding",
+      "aliases": [
+        "röding"
+      ]
+    },
+    "rodspatta": {
+      "name": "Rödspätta",
+      "aliases": [
+        "rödspätta"
+      ]
+    },
+    "rodtunga": {
+      "name": "Rödtunga",
+      "aliases": [
+        "rödtunga"
+      ]
+    },
+    "sanktpersfisk": {
+      "name": "Sanktpersfisk",
+      "aliases": [
+        "sanktpersfisk"
+      ]
+    },
+    "sashimilax": {
+      "name": "Sashimilax",
+      "aliases": [
+        "sashimilax"
+      ]
+    },
+    "sik": {
+      "name": "Sik",
+      "aliases": [
+        "sik"
+      ]
+    },
+    "sillfile": {
+      "name": "Sillfilé",
+      "aliases": [
+        "sillfilé"
+      ]
+    },
+    "sjotunga": {
+      "name": "Sjötunga",
+      "aliases": [
+        "sjötunga"
+      ]
+    },
+    "skrei": {
+      "name": "Skrei",
+      "aliases": [
+        "skrei"
+      ]
+    },
+    "skrubbskadda": {
+      "name": "Skrubbskädda",
+      "aliases": [
+        "skrubbskädda"
+      ]
+    },
+    "slatvar": {
+      "name": "Slätvar",
+      "aliases": [
+        "slätvar"
+      ]
+    },
+    "stromming": {
+      "name": "Strömming",
+      "aliases": [
+        "strömming"
+      ]
+    },
+    "strommingsfile": {
+      "name": "Strömmingsfilé",
+      "aliases": [
+        "strömmingsfilé"
+      ]
+    },
+    "svardfisk": {
+      "name": "Svärdfisk",
+      "aliases": [
+        "svärdfisk"
+      ]
+    },
+    "tilapia": {
+      "name": "Tilapia",
+      "aliases": [
+        "tilapia"
+      ]
+    },
+    "tonfisk-farsk-fisk": {
+      "name": "Tonfisk",
+      "aliases": [
+        "tonfisk"
+      ]
+    },
+    "torskkinder": {
+      "name": "Torskkinder",
+      "aliases": [
+        "torskkinder"
+      ]
+    },
+    "torskrygg": {
+      "name": "Torskrygg",
+      "aliases": [
+        "torskrygg"
+      ]
+    },
+    "vitling": {
+      "name": "Vitling",
+      "aliases": [
+        "vitling"
+      ]
+    },
+    "al": {
+      "name": "Ål",
+      "aliases": [
+        "ål"
+      ]
+    },
+    "oring": {
+      "name": "Öring",
+      "aliases": [
+        "öring"
+      ]
+    },
+    "bockling": {
+      "name": "Böckling",
+      "aliases": [
+        "böckling"
+      ]
+    },
+    "gravad-lax": {
+      "name": "Gravad lax",
+      "aliases": [
+        "gravad lax"
+      ]
+    },
+    "gravad-regnbage": {
+      "name": "Gravad regnbåge",
+      "aliases": [
+        "gravad regnbåge"
+      ]
+    },
+    "gravad-roding": {
+      "name": "Gravad röding",
+      "aliases": [
+        "gravad röding"
+      ]
+    },
+    "gravad-sik": {
+      "name": "Gravad sik",
+      "aliases": [
+        "gravad sik"
+      ]
+    },
+    "kallrokt-regnbage": {
+      "name": "Kallrökt regnbåge",
+      "aliases": [
+        "kallrökt regnbåge"
+      ]
+    },
+    "kallrokta-laxbitar": {
+      "name": "Kallrökta laxbitar",
+      "aliases": [
+        "kallrökta laxbitar"
+      ]
+    },
+    "pepparrokt-makrill": {
+      "name": "Pepparrökt makrill",
+      "aliases": [
+        "pepparrökt makrill"
+      ]
+    },
+    "rokt-flundra": {
+      "name": "Rökt flundra",
+      "aliases": [
+        "rökt flundra"
+      ]
+    },
+    "rokt-halleflundra": {
+      "name": "Rökt hälleflundra",
+      "aliases": [
+        "rökt hälleflundra"
+      ]
+    },
+    "rokt-laxsida": {
+      "name": "Rökt laxsida",
+      "aliases": [
+        "rökt laxsida"
+      ]
+    },
+    "rokt-makrill": {
+      "name": "Rökt makrill",
+      "aliases": [
+        "rökt makrill"
+      ]
+    },
+    "rokt-regnbage": {
+      "name": "Rökt regnbåge",
+      "aliases": [
+        "rökt regnbåge"
+      ]
+    },
+    "rokt-roding": {
+      "name": "Rökt röding",
+      "aliases": [
+        "rökt röding"
+      ]
+    },
+    "rokt-sik": {
+      "name": "Rökt sik",
+      "aliases": [
+        "rökt sik"
+      ]
+    },
+    "rokt-sill": {
+      "name": "Rökt sill",
+      "aliases": [
+        "rökt sill"
+      ]
+    },
+    "rokt-al": {
+      "name": "Rökt ål",
+      "aliases": [
+        "rökt ål"
+      ]
+    },
+    "rokta-rakor": {
+      "name": "Rökta räkor",
+      "aliases": [
+        "rökta räkor"
+      ]
+    },
+    "varmrokt-pepparlax": {
+      "name": "Varmrökt pepparlax",
+      "aliases": [
+        "varmrökt pepparlax"
+      ]
+    },
+    "blamusslor": {
+      "name": "Blåmusslor",
+      "aliases": [
+        "blåmusslor"
+      ]
+    },
+    "blackfisk": {
+      "name": "Bläckfisk",
+      "aliases": [
+        "bläckfisk"
+      ]
+    },
+    "blackfiskblack": {
+      "name": "Bläckfiskbläck",
+      "aliases": [
+        "bläckfiskbläck"
+      ]
+    },
+    "escargots-vinbergssnackor": {
+      "name": "Escargots (vinbergssnäckor)",
+      "aliases": [
+        "escargots (vinbergssnäckor)",
+        "escargots"
+      ]
+    },
+    "fylld-krabba": {
+      "name": "Fylld krabba",
+      "aliases": [
+        "fylld krabba"
+      ]
+    },
+    "gronlappade-musslor": {
+      "name": "Grönläppade musslor",
+      "aliases": [
+        "grönläppade musslor"
+      ]
+    },
+    "handskalade-rakor": {
+      "name": "Handskalade räkor",
+      "aliases": [
+        "handskalade räkor"
+      ]
+    },
+    "havskraftor": {
+      "name": "Havskräftor",
+      "aliases": [
+        "havskräftor"
+      ]
+    },
+    "hjartmusslor": {
+      "name": "Hjärtmusslor",
+      "aliases": [
+        "hjärtmusslor"
+      ]
+    },
+    "hummer": {
+      "name": "Hummer",
+      "aliases": [
+        "hummer"
+      ]
+    },
+    "hummerstjartar": {
+      "name": "Hummerstjärtar",
+      "aliases": [
+        "hummerstjärtar"
+      ]
+    },
+    "jatterakor": {
+      "name": "Jätteräkor",
+      "aliases": [
+        "jätteräkor"
+      ]
+    },
+    "kalmar": {
+      "name": "Kalmar",
+      "aliases": [
+        "kalmar"
+      ]
+    },
+    "knivmusslor": {
+      "name": "Knivmusslor",
+      "aliases": [
+        "knivmusslor"
+      ]
+    },
+    "kokta-blamusslor": {
+      "name": "Kokta blåmusslor",
+      "aliases": [
+        "kokta blåmusslor"
+      ]
+    },
+    "krabba": {
+      "name": "Krabba",
+      "aliases": [
+        "krabba"
+      ]
+    },
+    "krabbklor": {
+      "name": "Krabbklor",
+      "aliases": [
+        "krabbklor"
+      ]
+    },
+    "krabbsticks": {
+      "name": "Krabbsticks",
+      "aliases": [
+        "krabbsticks"
+      ]
+    },
+    "kraftor": {
+      "name": "Kräftor",
+      "aliases": [
+        "kräftor"
+      ]
+    },
+    "kraftstjartar": {
+      "name": "Kräftstjärtar",
+      "aliases": [
+        "kräftstjärtar"
+      ]
+    },
+    "kungskrabba": {
+      "name": "Kungskrabba",
+      "aliases": [
+        "kungskrabba"
+      ]
+    },
+    "languster": {
+      "name": "Languster",
+      "aliases": [
+        "languster"
+      ]
+    },
+    "oskalade-rakor": {
+      "name": "Oskalade räkor",
+      "aliases": [
+        "oskalade räkor"
+      ]
+    },
+    "ostron": {
+      "name": "Ostron",
+      "aliases": [
+        "ostron"
+      ]
+    },
+    "pilgrimsmusslor": {
+      "name": "Pilgrimsmusslor",
+      "aliases": [
+        "pilgrimsmusslor"
+      ]
+    },
+    "rakor-i-lake": {
+      "name": "Räkor i lake",
+      "aliases": [
+        "räkor i lake"
+      ]
+    },
+    "scampi": {
+      "name": "Scampi",
+      "aliases": [
+        "scampi"
+      ]
+    },
+    "sepia": {
+      "name": "Sepia",
+      "aliases": [
+        "sepia"
+      ]
+    },
+    "signalkraftor": {
+      "name": "Signalkräftor",
+      "aliases": [
+        "signalkräftor"
+      ]
+    },
+    "sjoborre": {
+      "name": "Sjöborre",
+      "aliases": [
+        "sjöborre"
+      ]
+    },
+    "skaldjursplata": {
+      "name": "Skaldjursplatå",
+      "aliases": [
+        "skaldjursplatå"
+      ]
+    },
+    "snokrabba": {
+      "name": "Snökrabba",
+      "aliases": [
+        "snökrabba"
+      ]
+    },
+    "tigerrakor": {
+      "name": "Tigerräkor",
+      "aliases": [
+        "tigerräkor"
+      ]
+    },
+    "vitloksmarinerade-rakor": {
+      "name": "Vitlöksmarinerade räkor",
+      "aliases": [
+        "vitlöksmarinerade räkor"
+      ]
+    },
+    "vongole": {
+      "name": "Vongole",
+      "aliases": [
+        "vongole"
+      ]
+    },
+    "attaarmad-blackfisk": {
+      "name": "Åttaarmad bläckfisk",
+      "aliases": [
+        "åttaarmad bläckfisk"
+      ]
+    },
+    "5-minuterssill": {
+      "name": "5-minuterssill",
+      "aliases": [
+        "5-minuterssill"
+      ]
+    },
+    "bismarcksill": {
+      "name": "Bismarcksill",
+      "aliases": [
+        "bismarcksill"
+      ]
+    },
+    "brantevikssill": {
+      "name": "Brantevikssill",
+      "aliases": [
+        "brantevikssill"
+      ]
+    },
+    "citronsill": {
+      "name": "Citronsill",
+      "aliases": [
+        "citronsill"
+      ]
+    },
+    "currysill": {
+      "name": "Currysill",
+      "aliases": [
+        "currysill"
+      ]
+    },
+    "dillsill": {
+      "name": "Dillsill",
+      "aliases": [
+        "dillsill"
+      ]
+    },
+    "gaffelbitar": {
+      "name": "Gaffelbitar",
+      "aliases": [
+        "gaffelbitar"
+      ]
+    },
+    "glasmastarsill": {
+      "name": "Glasmästarsill",
+      "aliases": [
+        "glasmästarsill"
+      ]
+    },
+    "gravad-stromming": {
+      "name": "Gravad strömming",
+      "aliases": [
+        "gravad strömming"
+      ]
+    },
+    "inlagd-sill": {
+      "name": "Inlagd sill",
+      "aliases": [
+        "inlagd sill"
+      ]
+    },
+    "inlagd-stromming": {
+      "name": "Inlagd strömming",
+      "aliases": [
+        "inlagd strömming"
+      ]
+    },
+    "inlaggningssill": {
+      "name": "Inläggningssill",
+      "aliases": [
+        "inläggningssill"
+      ]
+    },
+    "julsill": {
+      "name": "Julsill",
+      "aliases": [
+        "julsill"
+      ]
+    },
+    "kronsardiner": {
+      "name": "Kronsardiner",
+      "aliases": [
+        "kronsardiner"
+      ]
+    },
+    "kryddsill": {
+      "name": "Kryddsill",
+      "aliases": [
+        "kryddsill"
+      ]
+    },
+    "kraftsill": {
+      "name": "Kräftsill",
+      "aliases": [
+        "kräftsill"
+      ]
+    },
+    "loksill": {
+      "name": "Löksill",
+      "aliases": [
+        "löksill"
+      ]
+    },
+    "matjessill": {
+      "name": "Matjessill",
+      "aliases": [
+        "matjessill"
+      ]
+    },
+    "pasksill": {
+      "name": "Påsksill",
+      "aliases": [
+        "påsksill"
+      ]
+    },
+    "rollmops": {
+      "name": "Rollmops",
+      "aliases": [
+        "rollmops"
+      ]
+    },
+    "saltsill": {
+      "name": "Saltsill",
+      "aliases": [
+        "saltsill"
+      ]
+    },
+    "senapssill": {
+      "name": "Senapssill",
+      "aliases": [
+        "senapssill"
+      ]
+    },
+    "sherrysill": {
+      "name": "Sherrysill",
+      "aliases": [
+        "sherrysill"
+      ]
+    },
+    "sillsallad": {
+      "name": "Sillsallad",
+      "aliases": [
+        "sillsallad"
+      ]
+    },
+    "skargardssill": {
+      "name": "Skärgårdssill",
+      "aliases": [
+        "skärgårdssill"
+      ]
+    },
+    "steksill-rimmad-sill": {
+      "name": "Steksill (rimmad sill)",
+      "aliases": [
+        "steksill (rimmad sill)",
+        "steksill"
+      ]
+    },
+    "stekt-inlagd-stromming": {
+      "name": "Stekt inlagd strömming",
+      "aliases": [
+        "stekt inlagd strömming"
+      ]
+    },
+    "surstromming": {
+      "name": "Surströmming",
+      "aliases": [
+        "surströmming"
+      ]
+    },
+    "tomatsill": {
+      "name": "Tomatsill",
+      "aliases": [
+        "tomatsill"
+      ]
+    },
+    "vitlokssill": {
+      "name": "Vitlökssill",
+      "aliases": [
+        "vitlökssill"
+      ]
+    },
+    "bottarga": {
+      "name": "Bottarga",
+      "aliases": [
+        "bottarga"
+      ]
+    },
+    "forellrom": {
+      "name": "Forellrom",
+      "aliases": [
+        "forellrom"
+      ]
+    },
+    "gaddrom": {
+      "name": "Gäddrom",
+      "aliases": [
+        "gäddrom"
+      ]
+    },
+    "ishavsrom": {
+      "name": "Ishavsrom",
+      "aliases": [
+        "ishavsrom"
+      ]
+    },
+    "kalix-lojrom": {
+      "name": "Kalix löjrom",
+      "aliases": [
+        "kalix löjrom"
+      ]
+    },
+    "laxrom": {
+      "name": "Laxrom",
+      "aliases": [
+        "laxrom"
+      ]
+    },
+    "latt-tubkaviar": {
+      "name": "Lätt tubkaviar",
+      "aliases": [
+        "lätt tubkaviar"
+      ]
+    },
+    "lojrom": {
+      "name": "Löjrom",
+      "aliases": [
+        "löjrom"
+      ]
+    },
+    "mild-tubkaviar": {
+      "name": "Mild tubkaviar",
+      "aliases": [
+        "mild tubkaviar"
+      ]
+    },
+    "sikrom": {
+      "name": "Sikrom",
+      "aliases": [
+        "sikrom"
+      ]
+    },
+    "smorgaskaviar-pa-burk": {
+      "name": "Smörgåskaviar på burk",
+      "aliases": [
+        "smörgåskaviar på burk"
+      ]
+    },
+    "storkaviar": {
+      "name": "Störkaviar",
+      "aliases": [
+        "störkaviar"
+      ]
+    },
+    "tobiko": {
+      "name": "Tobiko",
+      "aliases": [
+        "tobiko"
+      ]
+    },
+    "torskrom": {
+      "name": "Torskrom",
+      "aliases": [
+        "torskrom"
+      ]
+    },
+    "tubkaviar": {
+      "name": "Tubkaviar",
+      "aliases": [
+        "tubkaviar"
+      ]
+    },
+    "tubkaviar-med-dill": {
+      "name": "Tubkaviar med dill",
+      "aliases": [
+        "tubkaviar med dill"
+      ]
+    },
+    "tangkaviar-tangrom": {
+      "name": "Tångkaviar (tångrom)",
+      "aliases": [
+        "tångkaviar (tångrom)",
+        "tångkaviar"
+      ]
+    },
+    "vegansk-tubkaviar": {
+      "name": "Vegansk tubkaviar",
+      "aliases": [
+        "vegansk tubkaviar"
+      ]
+    },
+    "blackfisk-pa-burk": {
+      "name": "Bläckfisk på burk",
+      "aliases": [
+        "bläckfisk på burk"
+      ]
+    },
+    "brisling-i-tomatsas": {
+      "name": "Brisling i tomatsås",
+      "aliases": [
+        "brisling i tomatsås"
+      ]
+    },
+    "fiskbullar-i-dillsas": {
+      "name": "Fiskbullar i dillsås",
+      "aliases": [
+        "fiskbullar i dillsås"
+      ]
+    },
+    "fiskbullar-i-hummersas": {
+      "name": "Fiskbullar i hummersås",
+      "aliases": [
+        "fiskbullar i hummersås"
+      ]
+    },
+    "kippers": {
+      "name": "Kippers",
+      "aliases": [
+        "kippers"
+      ]
+    },
+    "krabbkott": {
+      "name": "Krabbkött",
+      "aliases": [
+        "krabbkött"
+      ]
+    },
+    "lax-pa-burk": {
+      "name": "Lax på burk",
+      "aliases": [
+        "lax på burk"
+      ]
+    },
+    "makrillfile-i-olja": {
+      "name": "Makrillfilé i olja",
+      "aliases": [
+        "makrillfilé i olja"
+      ]
+    },
+    "musslor-pa-burk": {
+      "name": "Musslor på burk",
+      "aliases": [
+        "musslor på burk"
+      ]
+    },
+    "rokta-musslor-pa-burk": {
+      "name": "Rökta musslor på burk",
+      "aliases": [
+        "rökta musslor på burk"
+      ]
+    },
+    "sardellkram": {
+      "name": "Sardellkräm",
+      "aliases": [
+        "sardellkräm"
+      ]
+    },
+    "sardiner-i-tomatsas": {
+      "name": "Sardiner i tomatsås",
+      "aliases": [
+        "sardiner i tomatsås"
+      ]
+    },
+    "sprats-rokt-skarpsill-i-olja": {
+      "name": "Sprats (rökt skarpsill i olja)",
+      "aliases": [
+        "sprats (rökt skarpsill i olja)",
+        "sprats"
+      ]
+    },
+    "tonfisk-i-vatten": {
+      "name": "Tonfisk i vatten",
+      "aliases": [
+        "tonfisk i vatten"
+      ]
+    },
+    "tonfiskfile-i-olivolja": {
+      "name": "Tonfiskfilé i olivolja",
+      "aliases": [
+        "tonfiskfilé i olivolja"
+      ]
+    },
+    "tonfisksallad-pa-burk": {
+      "name": "Tonfisksallad på burk",
+      "aliases": [
+        "tonfisksallad på burk"
+      ]
+    },
+    "torsklever": {
+      "name": "Torsklever",
+      "aliases": [
+        "torsklever"
+      ]
+    },
+    "torskrom-pa-burk": {
+      "name": "Torskrom på burk",
+      "aliases": [
+        "torskrom på burk"
+      ]
+    },
+    "ceviche": {
+      "name": "Ceviche",
+      "aliases": [
+        "ceviche"
+      ]
+    },
+    "fiskbiffar": {
+      "name": "Fiskbiffar",
+      "aliases": [
+        "fiskbiffar"
+      ]
+    },
+    "fiskterrin": {
+      "name": "Fiskterrin",
+      "aliases": [
+        "fiskterrin"
+      ]
+    },
+    "inkokt-lax": {
+      "name": "Inkokt lax",
+      "aliases": [
+        "inkokt lax"
+      ]
+    },
+    "laxbiffar": {
+      "name": "Laxbiffar",
+      "aliases": [
+        "laxbiffar"
+      ]
+    },
+    "laxmousse": {
+      "name": "Laxmousse",
+      "aliases": [
+        "laxmousse"
+      ]
+    },
+    "laxpate": {
+      "name": "Laxpaté",
+      "aliases": [
+        "laxpaté"
+      ]
+    },
+    "laxtartar": {
+      "name": "Laxtartar",
+      "aliases": [
+        "laxtartar"
+      ]
+    },
+    "rimmad-lax": {
+      "name": "Rimmad lax",
+      "aliases": [
+        "rimmad lax"
+      ]
+    },
+    "rakcocktail": {
+      "name": "Räkcocktail",
+      "aliases": [
+        "räkcocktail"
+      ]
+    },
+    "sotad-lax": {
+      "name": "Sotad lax",
+      "aliases": [
+        "sotad lax"
+      ]
+    },
+    "friterad-tofu": {
+      "name": "Friterad tofu",
+      "aliases": [
+        "friterad tofu"
+      ]
+    },
+    "kikartstofu": {
+      "name": "Kikärtstofu",
+      "aliases": [
+        "kikärtstofu"
+      ]
+    },
+    "lupintempeh": {
+      "name": "Lupintempeh",
+      "aliases": [
+        "lupintempeh"
+      ]
+    },
+    "marinerad-tempeh": {
+      "name": "Marinerad tempeh",
+      "aliases": [
+        "marinerad tempeh"
+      ]
+    },
+    "marinerad-tofu": {
+      "name": "Marinerad tofu",
+      "aliases": [
+        "marinerad tofu"
+      ]
+    },
+    "mjuk-tofu": {
+      "name": "Mjuk tofu",
+      "aliases": [
+        "mjuk tofu"
+      ]
+    },
+    "naturell-tofu": {
+      "name": "Naturell tofu",
+      "aliases": [
+        "naturell tofu"
+      ]
+    },
+    "rokt-tofu": {
+      "name": "Rökt tofu",
+      "aliases": [
+        "rökt tofu"
+      ]
+    },
+    "seitan": {
+      "name": "Seitan",
+      "aliases": [
+        "seitan"
+      ]
+    },
+    "silkestofu": {
+      "name": "Silkestofu",
+      "aliases": [
+        "silkestofu"
+      ]
+    },
+    "sojabitar": {
+      "name": "Sojabitar",
+      "aliases": [
+        "sojabitar"
+      ]
+    },
+    "tempeh": {
+      "name": "Tempeh",
+      "aliases": [
+        "tempeh"
+      ]
+    },
+    "tofufars": {
+      "name": "Tofufärs",
+      "aliases": [
+        "tofufärs"
+      ]
+    },
+    "torkad-sojafars": {
+      "name": "Torkad sojafärs",
+      "aliases": [
+        "torkad sojafärs"
+      ]
+    },
+    "torkade-sojafileer": {
+      "name": "Torkade sojafiléer",
+      "aliases": [
+        "torkade sojafiléer"
+      ]
+    },
+    "yuba": {
+      "name": "Yuba",
+      "aliases": [
+        "yuba"
+      ]
+    },
+    "bonfars": {
+      "name": "Bönfärs",
+      "aliases": [
+        "bönfärs"
+      ]
+    },
+    "formbar-vegofars": {
+      "name": "Formbar vegofärs",
+      "aliases": [
+        "formbar vegofärs"
+      ]
+    },
+    "havrebitar": {
+      "name": "Havrebitar",
+      "aliases": [
+        "havrebitar"
+      ]
+    },
+    "jackfrukt": {
+      "name": "Jackfrukt",
+      "aliases": [
+        "jackfrukt"
+      ]
+    },
+    "mykoproteinbitar": {
+      "name": "Mykoproteinbitar",
+      "aliases": [
+        "mykoproteinbitar"
+      ]
+    },
+    "mykoproteinfile": {
+      "name": "Mykoproteinfilé",
+      "aliases": [
+        "mykoproteinfilé"
+      ]
+    },
+    "mykoproteinfars": {
+      "name": "Mykoproteinfärs",
+      "aliases": [
+        "mykoproteinfärs"
+      ]
+    },
+    "sojafars": {
+      "name": "Sojafärs",
+      "aliases": [
+        "sojafärs"
+      ]
+    },
+    "torkade-sojastrimlor": {
+      "name": "Torkade sojastrimlor",
+      "aliases": [
+        "torkade sojastrimlor"
+      ]
+    },
+    "vegobitar": {
+      "name": "Vegobitar",
+      "aliases": [
+        "vegobitar"
+      ]
+    },
+    "vegofile": {
+      "name": "Vegofilé",
+      "aliases": [
+        "vegofilé"
+      ]
+    },
+    "vegofars": {
+      "name": "Vegofärs",
+      "aliases": [
+        "vegofärs"
+      ]
+    },
+    "vegogyros": {
+      "name": "Vegogyros",
+      "aliases": [
+        "vegogyros"
+      ]
+    },
+    "vegokebab": {
+      "name": "Vegokebab",
+      "aliases": [
+        "vegokebab"
+      ]
+    },
+    "vegokycklingbitar": {
+      "name": "Vegokycklingbitar",
+      "aliases": [
+        "vegokycklingbitar"
+      ]
+    },
+    "vegolax": {
+      "name": "Vegolax",
+      "aliases": [
+        "vegolax"
+      ]
+    },
+    "vegopulled": {
+      "name": "Vegopulled",
+      "aliases": [
+        "vegopulled"
+      ]
+    },
+    "vegorakor": {
+      "name": "Vegoräkor",
+      "aliases": [
+        "vegoräkor"
+      ]
+    },
+    "vegoskav": {
+      "name": "Vegoskav",
+      "aliases": [
+        "vegoskav"
+      ]
+    },
+    "vegostrimlor": {
+      "name": "Vegostrimlor",
+      "aliases": [
+        "vegostrimlor"
+      ]
+    },
+    "vegotonfisk": {
+      "name": "Vegotonfisk",
+      "aliases": [
+        "vegotonfisk"
+      ]
+    },
+    "artfars": {
+      "name": "Ärtfärs",
+      "aliases": [
+        "ärtfärs"
+      ]
+    },
+    "broccolibiffar": {
+      "name": "Broccolibiffar",
+      "aliases": [
+        "broccolibiffar"
+      ]
+    },
+    "bonbiffar": {
+      "name": "Bönbiffar",
+      "aliases": [
+        "bönbiffar"
+      ]
+    },
+    "bonburgare": {
+      "name": "Bönburgare",
+      "aliases": [
+        "bönburgare"
+      ]
+    },
+    "falafel": {
+      "name": "Falafel",
+      "aliases": [
+        "falafel"
+      ]
+    },
+    "friterad-camembert": {
+      "name": "Friterad camembert",
+      "aliases": [
+        "friterad camembert"
+      ]
+    },
+    "gronsaksbiffar": {
+      "name": "Grönsaksbiffar",
+      "aliases": [
+        "grönsaksbiffar"
+      ]
+    },
+    "gronsaksbullar": {
+      "name": "Grönsaksbullar",
+      "aliases": [
+        "grönsaksbullar"
+      ]
+    },
+    "halloumibiffar": {
+      "name": "Halloumibiffar",
+      "aliases": [
+        "halloumibiffar"
+      ]
+    },
+    "halloumiburgare": {
+      "name": "Halloumiburgare",
+      "aliases": [
+        "halloumiburgare"
+      ]
+    },
+    "kikartsbiffar": {
+      "name": "Kikärtsbiffar",
+      "aliases": [
+        "kikärtsbiffar"
+      ]
+    },
+    "linsbiffar": {
+      "name": "Linsbiffar",
+      "aliases": [
+        "linsbiffar"
+      ]
+    },
+    "morotsbiffar": {
+      "name": "Morotsbiffar",
+      "aliases": [
+        "morotsbiffar"
+      ]
+    },
+    "quinoabiffar": {
+      "name": "Quinoabiffar",
+      "aliases": [
+        "quinoabiffar"
+      ]
+    },
+    "rodbetsbiffar": {
+      "name": "Rödbetsbiffar",
+      "aliases": [
+        "rödbetsbiffar"
+      ]
+    },
+    "sojaburgare": {
+      "name": "Sojaburgare",
+      "aliases": [
+        "sojaburgare"
+      ]
+    },
+    "spenatbiffar": {
+      "name": "Spenatbiffar",
+      "aliases": [
+        "spenatbiffar"
+      ]
+    },
+    "svampburgare": {
+      "name": "Svampburgare",
+      "aliases": [
+        "svampburgare"
+      ]
+    },
+    "sotpotatisbiffar": {
+      "name": "Sötpotatisbiffar",
+      "aliases": [
+        "sötpotatisbiffar"
+      ]
+    },
+    "vegobiffar": {
+      "name": "Vegobiffar",
+      "aliases": [
+        "vegobiffar"
+      ]
+    },
+    "vegobullar": {
+      "name": "Vegobullar",
+      "aliases": [
+        "vegobullar"
+      ]
+    },
+    "vegoburgare": {
+      "name": "Vegoburgare",
+      "aliases": [
+        "vegoburgare"
+      ]
+    },
+    "vegocordon-bleu": {
+      "name": "Vegocordon bleu",
+      "aliases": [
+        "vegocordon bleu"
+      ]
+    },
+    "vegofiskpinnar": {
+      "name": "Vegofiskpinnar",
+      "aliases": [
+        "vegofiskpinnar"
+      ]
+    },
+    "vegonuggets": {
+      "name": "Vegonuggets",
+      "aliases": [
+        "vegonuggets"
+      ]
+    },
+    "vegoschnitzel": {
+      "name": "Vegoschnitzel",
+      "aliases": [
+        "vegoschnitzel"
+      ]
+    },
+    "artbiffar": {
+      "name": "Ärtbiffar",
+      "aliases": [
+        "ärtbiffar"
+      ]
+    },
+    "bonpastej": {
+      "name": "Bönpastej",
+      "aliases": [
+        "bönpastej"
+      ]
+    },
+    "tofukorv": {
+      "name": "Tofukorv",
+      "aliases": [
+        "tofukorv"
+      ]
+    },
+    "vegobacon": {
+      "name": "Vegobacon",
+      "aliases": [
+        "vegobacon"
+      ]
+    },
+    "vegobratwurst": {
+      "name": "Vegobratwurst",
+      "aliases": [
+        "vegobratwurst"
+      ]
+    },
+    "vegochorizo": {
+      "name": "Vegochorizo",
+      "aliases": [
+        "vegochorizo"
+      ]
+    },
+    "vegofalukorv": {
+      "name": "Vegofalukorv",
+      "aliases": [
+        "vegofalukorv"
+      ]
+    },
+    "vegogrillkorv": {
+      "name": "Vegogrillkorv",
+      "aliases": [
+        "vegogrillkorv"
+      ]
+    },
+    "vegokabanoss": {
+      "name": "Vegokabanoss",
+      "aliases": [
+        "vegokabanoss"
+      ]
+    },
+    "vegokorv": {
+      "name": "Vegokorv",
+      "aliases": [
+        "vegokorv"
+      ]
+    },
+    "vegopastej": {
+      "name": "Vegopastej",
+      "aliases": [
+        "vegopastej"
+      ]
+    },
+    "vegopepperoni": {
+      "name": "Vegopepperoni",
+      "aliases": [
+        "vegopepperoni"
+      ]
+    },
+    "vegoprinskorv": {
+      "name": "Vegoprinskorv",
+      "aliases": [
+        "vegoprinskorv"
+      ]
+    },
+    "vegopalagg": {
+      "name": "Vegopålägg",
+      "aliases": [
+        "vegopålägg"
+      ]
+    },
+    "vegosalami": {
+      "name": "Vegosalami",
+      "aliases": [
+        "vegosalami"
+      ]
+    },
+    "vegoskinka": {
+      "name": "Vegoskinka",
+      "aliases": [
+        "vegoskinka"
+      ]
+    },
+    "vegovarmkorv": {
+      "name": "Vegovarmkorv",
+      "aliases": [
+        "vegovarmkorv"
+      ]
+    },
+    "bibimbap": {
+      "name": "Bibimbap",
+      "aliases": [
+        "bibimbap"
+      ]
+    },
+    "biff-a-la-lindstrom": {
+      "name": "Biff à la Lindström",
+      "aliases": [
+        "biff à la lindström"
+      ]
+    },
+    "biff-med-bambuskott": {
+      "name": "Biff med bambuskott",
+      "aliases": [
+        "biff med bambuskott"
+      ]
+    },
+    "biff-rydberg": {
+      "name": "Biff Rydberg",
+      "aliases": [
+        "biff rydberg"
+      ]
+    },
+    "biff-stroganoff": {
+      "name": "Biff stroganoff",
+      "aliases": [
+        "biff stroganoff"
+      ]
+    },
+    "biryani": {
+      "name": "Biryani",
+      "aliases": [
+        "biryani"
+      ]
+    },
+    "boeuf-bourguignon": {
+      "name": "Boeuf bourguignon",
+      "aliases": [
+        "boeuf bourguignon"
+      ]
+    },
+    "bruna-bonor-med-flask": {
+      "name": "Bruna bönor med fläsk",
+      "aliases": [
+        "bruna bönor med fläsk"
+      ]
+    },
+    "butter-chicken": {
+      "name": "Butter chicken",
+      "aliases": [
+        "butter chicken"
+      ]
+    },
+    "cannelloni": {
+      "name": "Cannelloni",
+      "aliases": [
+        "cannelloni"
+      ]
+    },
+    "chili-con-carne": {
+      "name": "Chili con carne",
+      "aliases": [
+        "chili con carne"
+      ]
+    },
+    "chili-sin-carne": {
+      "name": "Chili sin carne",
+      "aliases": [
+        "chili sin carne"
+      ]
+    },
+    "crepes": {
+      "name": "Crêpes",
+      "aliases": [
+        "crêpes"
+      ]
+    },
+    "dillkott": {
+      "name": "Dillkött",
+      "aliases": [
+        "dillkött"
+      ]
+    },
+    "enchiladas": {
+      "name": "Enchiladas",
+      "aliases": [
+        "enchiladas"
+      ]
+    },
+    "fisk-och-skaldjursgryta": {
+      "name": "Fisk- och skaldjursgryta",
+      "aliases": [
+        "fisk- och skaldjursgryta"
+      ]
+    },
+    "fiskgratang": {
+      "name": "Fiskgratäng",
+      "aliases": [
+        "fiskgratäng"
+      ]
+    },
+    "fiskpinnar-med-mos": {
+      "name": "Fiskpinnar med mos",
+      "aliases": [
+        "fiskpinnar med mos"
+      ]
+    },
+    "flygande-jakob": {
+      "name": "Flygande Jakob",
+      "aliases": [
+        "flygande jakob"
+      ]
+    },
+    "flaskfilegryta": {
+      "name": "Fläskfilégryta",
+      "aliases": [
+        "fläskfilégryta"
+      ]
+    },
+    "flaskpannkaka": {
+      "name": "Fläskpannkaka",
+      "aliases": [
+        "fläskpannkaka"
+      ]
+    },
+    "fylld-paprika": {
+      "name": "Fylld paprika",
+      "aliases": [
+        "fylld paprika"
+      ]
+    },
+    "gron-curry": {
+      "name": "Grön curry",
+      "aliases": [
+        "grön curry"
+      ]
+    },
+    "gulasch": {
+      "name": "Gulasch",
+      "aliases": [
+        "gulasch"
+      ]
+    },
+    "isterband-med-stuvad-potatis": {
+      "name": "Isterband med stuvad potatis",
+      "aliases": [
+        "isterband med stuvad potatis"
+      ]
+    },
+    "jarpar": {
+      "name": "Järpar",
+      "aliases": [
+        "järpar"
+      ]
+    },
+    "kalops": {
+      "name": "Kalops",
+      "aliases": [
+        "kalops"
+      ]
+    },
+    "kebabgryta": {
+      "name": "Kebabgryta",
+      "aliases": [
+        "kebabgryta"
+      ]
+    },
+    "kikartsgryta": {
+      "name": "Kikärtsgryta",
+      "aliases": [
+        "kikärtsgryta"
+      ]
+    },
+    "kokt-torsk-med-aggsas": {
+      "name": "Kokt torsk med äggsås",
+      "aliases": [
+        "kokt torsk med äggsås"
+      ]
+    },
+    "korv-stroganoff": {
+      "name": "Korv stroganoff",
+      "aliases": [
+        "korv stroganoff"
+      ]
+    },
+    "kroppkakor": {
+      "name": "Kroppkakor",
+      "aliases": [
+        "kroppkakor"
+      ]
+    },
+    "kyckling-korma": {
+      "name": "Kyckling korma",
+      "aliases": [
+        "kyckling korma"
+      ]
+    },
+    "kycklingcurry": {
+      "name": "Kycklingcurry",
+      "aliases": [
+        "kycklingcurry"
+      ]
+    },
+    "kycklinggryta": {
+      "name": "Kycklinggryta",
+      "aliases": [
+        "kycklinggryta"
+      ]
+    },
+    "kylda-pannkakor": {
+      "name": "Kylda pannkakor",
+      "aliases": [
+        "kylda pannkakor"
+      ]
+    },
+    "kaldolmar": {
+      "name": "Kåldolmar",
+      "aliases": [
+        "kåldolmar"
+      ]
+    },
+    "kalpudding": {
+      "name": "Kålpudding",
+      "aliases": [
+        "kålpudding"
+      ]
+    },
+    "kottbullar-med-graddsas": {
+      "name": "Köttbullar med gräddsås",
+      "aliases": [
+        "köttbullar med gräddsås"
+      ]
+    },
+    "kottbullar-med-mos": {
+      "name": "Köttbullar med mos",
+      "aliases": [
+        "köttbullar med mos"
+      ]
+    },
+    "kottfarslimpa": {
+      "name": "Köttfärslimpa",
+      "aliases": [
+        "köttfärslimpa"
+      ]
+    },
+    "kottgryta": {
+      "name": "Köttgryta",
+      "aliases": [
+        "köttgryta"
+      ]
+    },
+    "lappskojs": {
+      "name": "Lappskojs",
+      "aliases": [
+        "lappskojs"
+      ]
+    },
+    "lasagne": {
+      "name": "Lasagne",
+      "aliases": [
+        "lasagne"
+      ]
+    },
+    "laxpasta": {
+      "name": "Laxpasta",
+      "aliases": [
+        "laxpasta"
+      ]
+    },
+    "laxpudding": {
+      "name": "Laxpudding",
+      "aliases": [
+        "laxpudding"
+      ]
+    },
+    "linsgryta": {
+      "name": "Linsgryta",
+      "aliases": [
+        "linsgryta"
+      ]
+    },
+    "mac-and-cheese": {
+      "name": "Mac and cheese",
+      "aliases": [
+        "mac and cheese"
+      ]
+    },
+    "makaronilada": {
+      "name": "Makaronilåda",
+      "aliases": [
+        "makaronilåda"
+      ]
+    },
+    "moussaka": {
+      "name": "Moussaka",
+      "aliases": [
+        "moussaka"
+      ]
+    },
+    "nasi-goreng": {
+      "name": "Nasi goreng",
+      "aliases": [
+        "nasi goreng"
+      ]
+    },
+    "omelett": {
+      "name": "Omelett",
+      "aliases": [
+        "omelett"
+      ]
+    },
+    "pad-thai": {
+      "name": "Pad thai",
+      "aliases": [
+        "pad thai"
+      ]
+    },
+    "paella": {
+      "name": "Paella",
+      "aliases": [
+        "paella"
+      ]
+    },
+    "palak-paneer": {
+      "name": "Palak paneer",
+      "aliases": [
+        "palak paneer"
+      ]
+    },
+    "pannbiff": {
+      "name": "Pannbiff",
+      "aliases": [
+        "pannbiff"
+      ]
+    },
+    "pasta-alfredo": {
+      "name": "Pasta Alfredo",
+      "aliases": [
+        "pasta alfredo"
+      ]
+    },
+    "pasta-carbonara": {
+      "name": "Pasta carbonara",
+      "aliases": [
+        "pasta carbonara"
+      ]
+    },
+    "pastagratang": {
+      "name": "Pastagratäng",
+      "aliases": [
+        "pastagratäng"
+      ]
+    },
+    "pitepalt": {
+      "name": "Pitepalt",
+      "aliases": [
+        "pitepalt"
+      ]
+    },
+    "potatisgratang": {
+      "name": "Potatisgratäng",
+      "aliases": [
+        "potatisgratäng"
+      ]
+    },
+    "potatismos": {
+      "name": "Potatismos",
+      "aliases": [
+        "potatismos"
+      ]
+    },
+    "pytt-i-panna": {
+      "name": "Pytt i panna",
+      "aliases": [
+        "pytt i panna"
+      ]
+    },
+    "quesadilla": {
+      "name": "Quesadilla",
+      "aliases": [
+        "quesadilla"
+      ]
+    },
+    "raggmunk": {
+      "name": "Raggmunk",
+      "aliases": [
+        "raggmunk"
+      ]
+    },
+    "raggmunk-med-flask": {
+      "name": "Raggmunk med fläsk",
+      "aliases": [
+        "raggmunk med fläsk"
+      ]
+    },
+    "ramen": {
+      "name": "Ramen",
+      "aliases": [
+        "ramen"
+      ]
+    },
+    "ratatouille": {
+      "name": "Ratatouille",
+      "aliases": [
+        "ratatouille"
+      ]
+    },
+    "renskavsgryta": {
+      "name": "Renskavsgryta",
+      "aliases": [
+        "renskavsgryta"
+      ]
+    },
+    "risotto": {
+      "name": "Risotto",
+      "aliases": [
+        "risotto"
+      ]
+    },
+    "rotmos": {
+      "name": "Rotmos",
+      "aliases": [
+        "rotmos"
+      ]
+    },
+    "rotmos-med-flaskkorv": {
+      "name": "Rotmos med fläskkorv",
+      "aliases": [
+        "rotmos med fläskkorv"
+      ]
+    },
+    "rod-curry": {
+      "name": "Röd curry",
+      "aliases": [
+        "röd curry"
+      ]
+    },
+    "schnitzel-med-potatis": {
+      "name": "Schnitzel med potatis",
+      "aliases": [
+        "schnitzel med potatis"
+      ]
+    },
+    "shepherd-s-pie": {
+      "name": "Shepherd’s pie",
+      "aliases": [
+        "shepherd’s pie"
+      ]
+    },
+    "sjomansbiff": {
+      "name": "Sjömansbiff",
+      "aliases": [
+        "sjömansbiff"
+      ]
+    },
+    "skomakarlada": {
+      "name": "Skomakarlåda",
+      "aliases": [
+        "skomakarlåda"
+      ]
+    },
+    "spaghetti-och-kottfarssas": {
+      "name": "Spaghetti och köttfärssås",
+      "aliases": [
+        "spaghetti och köttfärssås"
+      ]
+    },
+    "stekt-flask-med-loksas": {
+      "name": "Stekt fläsk med löksås",
+      "aliases": [
+        "stekt fläsk med löksås"
+      ]
+    },
+    "stekt-potatis": {
+      "name": "Stekt potatis",
+      "aliases": [
+        "stekt potatis"
+      ]
+    },
+    "stekt-ris-med-gronsaker": {
+      "name": "Stekt ris med grönsaker",
+      "aliases": [
+        "stekt ris med grönsaker"
+      ]
+    },
+    "stekt-stromming-med-mos": {
+      "name": "Stekt strömming med mos",
+      "aliases": [
+        "stekt strömming med mos"
+      ]
+    },
+    "stuvade-makaroner": {
+      "name": "Stuvade makaroner",
+      "aliases": [
+        "stuvade makaroner"
+      ]
+    },
+    "sotsur-kyckling": {
+      "name": "Sötsur kyckling",
+      "aliases": [
+        "sötsur kyckling"
+      ]
+    },
+    "tacogratang": {
+      "name": "Tacogratäng",
+      "aliases": [
+        "tacogratäng"
+      ]
+    },
+    "teriyakikyckling-med-ris": {
+      "name": "Teriyakikyckling med ris",
+      "aliases": [
+        "teriyakikyckling med ris"
+      ]
+    },
+    "tikka-masala": {
+      "name": "Tikka masala",
+      "aliases": [
+        "tikka masala"
+      ]
+    },
+    "ugnsbakad-lax-med-potatis": {
+      "name": "Ugnsbakad lax med potatis",
+      "aliases": [
+        "ugnsbakad lax med potatis"
+      ]
+    },
+    "ugnspannkaka": {
+      "name": "Ugnspannkaka",
+      "aliases": [
+        "ugnspannkaka"
+      ]
+    },
+    "viltgryta": {
+      "name": "Viltgryta",
+      "aliases": [
+        "viltgryta"
+      ]
+    },
+    "wallenbergare": {
+      "name": "Wallenbergare",
+      "aliases": [
+        "wallenbergare"
+      ]
+    },
+    "wokratt": {
+      "name": "Wokrätt",
+      "aliases": [
+        "wokrätt"
+      ]
+    },
+    "aggakaka": {
+      "name": "Äggakaka",
+      "aliases": [
+        "äggakaka"
+      ]
+    },
+    "blomkalssoppa": {
+      "name": "Blomkålssoppa",
+      "aliases": [
+        "blomkålssoppa"
+      ]
+    },
+    "borsjtj": {
+      "name": "Borsjtj",
+      "aliases": [
+        "borsjtj"
+      ]
+    },
+    "bouillabaisse": {
+      "name": "Bouillabaisse",
+      "aliases": [
+        "bouillabaisse"
+      ]
+    },
+    "broccolisoppa": {
+      "name": "Broccolisoppa",
+      "aliases": [
+        "broccolisoppa"
+      ]
+    },
+    "bonsoppa": {
+      "name": "Bönsoppa",
+      "aliases": [
+        "bönsoppa"
+      ]
+    },
+    "fisksoppa": {
+      "name": "Fisksoppa",
+      "aliases": [
+        "fisksoppa"
+      ]
+    },
+    "fransk-loksoppa": {
+      "name": "Fransk löksoppa",
+      "aliases": [
+        "fransk löksoppa"
+      ]
+    },
+    "gazpacho": {
+      "name": "Gazpacho",
+      "aliases": [
+        "gazpacho"
+      ]
+    },
+    "gron-artsoppa": {
+      "name": "Grön ärtsoppa",
+      "aliases": [
+        "grön ärtsoppa"
+      ]
+    },
+    "gronsakssoppa": {
+      "name": "Grönsakssoppa",
+      "aliases": [
+        "grönsakssoppa"
+      ]
+    },
+    "gulaschsoppa": {
+      "name": "Gulaschsoppa",
+      "aliases": [
+        "gulaschsoppa"
+      ]
+    },
+    "harira": {
+      "name": "Harira",
+      "aliases": [
+        "harira"
+      ]
+    },
+    "hummersoppa": {
+      "name": "Hummersoppa",
+      "aliases": [
+        "hummersoppa"
+      ]
+    },
+    "jordartskockssoppa": {
+      "name": "Jordärtskockssoppa",
+      "aliases": [
+        "jordärtskockssoppa"
+      ]
+    },
+    "kantarellsoppa": {
+      "name": "Kantarellsoppa",
+      "aliases": [
+        "kantarellsoppa"
+      ]
+    },
+    "kikartssoppa": {
+      "name": "Kikärtssoppa",
+      "aliases": [
+        "kikärtssoppa"
+      ]
+    },
+    "korvsoppa": {
+      "name": "Korvsoppa",
+      "aliases": [
+        "korvsoppa"
+      ]
+    },
+    "kycklingsoppa": {
+      "name": "Kycklingsoppa",
+      "aliases": [
+        "kycklingsoppa"
+      ]
+    },
+    "kalsoppa": {
+      "name": "Kålsoppa",
+      "aliases": [
+        "kålsoppa"
+      ]
+    },
+    "kottfarssoppa": {
+      "name": "Köttfärssoppa",
+      "aliases": [
+        "köttfärssoppa"
+      ]
+    },
+    "kottsoppa": {
+      "name": "Köttsoppa",
+      "aliases": [
+        "köttsoppa"
+      ]
+    },
+    "laxsoppa": {
+      "name": "Laxsoppa",
+      "aliases": [
+        "laxsoppa"
+      ]
+    },
+    "linssoppa": {
+      "name": "Linssoppa",
+      "aliases": [
+        "linssoppa"
+      ]
+    },
+    "majssoppa": {
+      "name": "Majssoppa",
+      "aliases": [
+        "majssoppa"
+      ]
+    },
+    "minestrone": {
+      "name": "Minestrone",
+      "aliases": [
+        "minestrone"
+      ]
+    },
+    "morotssoppa": {
+      "name": "Morotssoppa",
+      "aliases": [
+        "morotssoppa"
+      ]
+    },
+    "nudelsoppa": {
+      "name": "Nudelsoppa",
+      "aliases": [
+        "nudelsoppa"
+      ]
+    },
+    "nasselsoppa": {
+      "name": "Nässelsoppa",
+      "aliases": [
+        "nässelsoppa"
+      ]
+    },
+    "oxsvanssoppa": {
+      "name": "Oxsvanssoppa",
+      "aliases": [
+        "oxsvanssoppa"
+      ]
+    },
+    "palsternackssoppa": {
+      "name": "Palsternackssoppa",
+      "aliases": [
+        "palsternackssoppa"
+      ]
+    },
+    "paprikasoppa": {
+      "name": "Paprikasoppa",
+      "aliases": [
+        "paprikasoppa"
+      ]
+    },
+    "pho": {
+      "name": "Pho",
+      "aliases": [
+        "pho"
+      ]
+    },
+    "potatis-och-purjolokssoppa": {
+      "name": "Potatis- och purjolökssoppa",
+      "aliases": [
+        "potatis- och purjolökssoppa"
+      ]
+    },
+    "pumpasoppa": {
+      "name": "Pumpasoppa",
+      "aliases": [
+        "pumpasoppa"
+      ]
+    },
+    "rotfruktssoppa": {
+      "name": "Rotfruktssoppa",
+      "aliases": [
+        "rotfruktssoppa"
+      ]
+    },
+    "skaldjurssoppa": {
+      "name": "Skaldjurssoppa",
+      "aliases": [
+        "skaldjurssoppa"
+      ]
+    },
+    "soljanka": {
+      "name": "Soljanka",
+      "aliases": [
+        "soljanka"
+      ]
+    },
+    "sparrissoppa": {
+      "name": "Sparrissoppa",
+      "aliases": [
+        "sparrissoppa"
+      ]
+    },
+    "spenatsoppa": {
+      "name": "Spenatsoppa",
+      "aliases": [
+        "spenatsoppa"
+      ]
+    },
+    "svampsoppa": {
+      "name": "Svampsoppa",
+      "aliases": [
+        "svampsoppa"
+      ]
+    },
+    "sotpotatissoppa": {
+      "name": "Sötpotatissoppa",
+      "aliases": [
+        "sötpotatissoppa"
+      ]
+    },
+    "tacosoppa": {
+      "name": "Tacosoppa",
+      "aliases": [
+        "tacosoppa"
+      ]
+    },
+    "thailandsk-kycklingsoppa": {
+      "name": "Thailändsk kycklingsoppa",
+      "aliases": [
+        "thailändsk kycklingsoppa"
+      ]
+    },
+    "tom-kha": {
+      "name": "Tom kha",
+      "aliases": [
+        "tom kha"
+      ]
+    },
+    "tom-yum": {
+      "name": "Tom yum",
+      "aliases": [
+        "tom yum"
+      ]
+    },
+    "tomatsoppa": {
+      "name": "Tomatsoppa",
+      "aliases": [
+        "tomatsoppa"
+      ]
+    },
+    "zucchinisoppa": {
+      "name": "Zucchinisoppa",
+      "aliases": [
+        "zucchinisoppa"
+      ]
+    },
+    "angamat": {
+      "name": "Ängamat",
+      "aliases": [
+        "ängamat"
+      ]
+    },
+    "artsoppa": {
+      "name": "Ärtsoppa",
+      "aliases": [
+        "ärtsoppa"
+      ]
+    },
+    "broccolisallad": {
+      "name": "Broccolisallad",
+      "aliases": [
+        "broccolisallad"
+      ]
+    },
+    "bulgursallad": {
+      "name": "Bulgursallad",
+      "aliases": [
+        "bulgursallad"
+      ]
+    },
+    "bonsallad": {
+      "name": "Bönsallad",
+      "aliases": [
+        "bönsallad"
+      ]
+    },
+    "caesarsallad": {
+      "name": "Caesarsallad",
+      "aliases": [
+        "caesarsallad"
+      ]
+    },
+    "caprese": {
+      "name": "Caprese",
+      "aliases": [
+        "caprese"
+      ]
+    },
+    "chevresallad": {
+      "name": "Chèvresallad",
+      "aliases": [
+        "chèvresallad"
+      ]
+    },
+    "coleslaw": {
+      "name": "Coleslaw",
+      "aliases": [
+        "coleslaw"
+      ]
+    },
+    "couscoussallad": {
+      "name": "Couscoussallad",
+      "aliases": [
+        "couscoussallad"
+      ]
+    },
+    "falafelsallad": {
+      "name": "Falafelsallad",
+      "aliases": [
+        "falafelsallad"
+      ]
+    },
+    "fetaostsallad": {
+      "name": "Fetaostsallad",
+      "aliases": [
+        "fetaostsallad"
+      ]
+    },
+    "fransk-potatissallad": {
+      "name": "Fransk potatissallad",
+      "aliases": [
+        "fransk potatissallad"
+      ]
+    },
+    "glasnudelsallad": {
+      "name": "Glasnudelsallad",
+      "aliases": [
+        "glasnudelsallad"
+      ]
+    },
+    "grekisk-sallad": {
+      "name": "Grekisk sallad",
+      "aliases": [
+        "grekisk sallad"
+      ]
+    },
+    "gurksallad": {
+      "name": "Gurksallad",
+      "aliases": [
+        "gurksallad"
+      ]
+    },
+    "halloumisallad": {
+      "name": "Halloumisallad",
+      "aliases": [
+        "halloumisallad"
+      ]
+    },
+    "italiensk-sallad": {
+      "name": "Italiensk sallad",
+      "aliases": [
+        "italiensk sallad"
+      ]
+    },
+    "kikartssallad": {
+      "name": "Kikärtssallad",
+      "aliases": [
+        "kikärtssallad"
+      ]
+    },
+    "krabbsallad": {
+      "name": "Krabbsallad",
+      "aliases": [
+        "krabbsallad"
+      ]
+    },
+    "kycklingcurrysallad": {
+      "name": "Kycklingcurrysallad",
+      "aliases": [
+        "kycklingcurrysallad"
+      ]
+    },
+    "kycklingsallad": {
+      "name": "Kycklingsallad",
+      "aliases": [
+        "kycklingsallad"
+      ]
+    },
+    "laxsallad": {
+      "name": "Laxsallad",
+      "aliases": [
+        "laxsallad"
+      ]
+    },
+    "legymsallad": {
+      "name": "Legymsallad",
+      "aliases": [
+        "legymsallad"
+      ]
+    },
+    "linssallad": {
+      "name": "Linssallad",
+      "aliases": [
+        "linssallad"
+      ]
+    },
+    "matvetesallad": {
+      "name": "Matvetesallad",
+      "aliases": [
+        "matvetesallad"
+      ]
+    },
+    "mimosasallad": {
+      "name": "Mimosasallad",
+      "aliases": [
+        "mimosasallad"
+      ]
+    },
+    "morotssallad": {
+      "name": "Morotssallad",
+      "aliases": [
+        "morotssallad"
+      ]
+    },
+    "nubbesallad": {
+      "name": "Nubbesallad",
+      "aliases": [
+        "nubbesallad"
+      ]
+    },
+    "nudelsallad": {
+      "name": "Nudelsallad",
+      "aliases": [
+        "nudelsallad"
+      ]
+    },
+    "ost-och-skinksallad": {
+      "name": "Ost- och skinksallad",
+      "aliases": [
+        "ost- och skinksallad"
+      ]
+    },
+    "pastasallad": {
+      "name": "Pastasallad",
+      "aliases": [
+        "pastasallad"
+      ]
+    },
+    "pizzasallad": {
+      "name": "Pizzasallad",
+      "aliases": [
+        "pizzasallad"
+      ]
+    },
+    "plocksallad-fran-salladsbar": {
+      "name": "Plocksallad från salladsbar",
+      "aliases": [
+        "plocksallad från salladsbar"
+      ]
+    },
+    "potatissallad": {
+      "name": "Potatissallad",
+      "aliases": [
+        "potatissallad"
+      ]
+    },
+    "quinoasallad": {
+      "name": "Quinoasallad",
+      "aliases": [
+        "quinoasallad"
+      ]
+    },
+    "rostbiffsallad": {
+      "name": "Rostbiffsallad",
+      "aliases": [
+        "rostbiffsallad"
+      ]
+    },
+    "raksallad": {
+      "name": "Räksallad",
+      "aliases": [
+        "räksallad"
+      ]
+    },
+    "rodbetssallad": {
+      "name": "Rödbetssallad",
+      "aliases": [
+        "rödbetssallad"
+      ]
+    },
+    "rodkalssallad": {
+      "name": "Rödkålssallad",
+      "aliases": [
+        "rödkålssallad"
+      ]
+    },
+    "sallad-nicoise": {
+      "name": "Sallad Niçoise",
+      "aliases": [
+        "sallad niçoise"
+      ]
+    },
+    "sjograssallad": {
+      "name": "Sjögrässallad",
+      "aliases": [
+        "sjögrässallad"
+      ]
+    },
+    "skinksallad": {
+      "name": "Skinksallad",
+      "aliases": [
+        "skinksallad"
+      ]
+    },
+    "tabbouleh": {
+      "name": "Tabbouleh",
+      "aliases": [
+        "tabbouleh"
+      ]
+    },
+    "tacosallad": {
+      "name": "Tacosallad",
+      "aliases": [
+        "tacosallad"
+      ]
+    },
+    "tonfisksallad": {
+      "name": "Tonfisksallad",
+      "aliases": [
+        "tonfisksallad"
+      ]
+    },
+    "vitkalssallad": {
+      "name": "Vitkålssallad",
+      "aliases": [
+        "vitkålssallad"
+      ]
+    },
+    "vastkustsallad": {
+      "name": "Västkustsallad",
+      "aliases": [
+        "västkustsallad"
+      ]
+    },
+    "waldorfsallad": {
+      "name": "Waldorfsallad",
+      "aliases": [
+        "waldorfsallad"
+      ]
+    },
+    "aggsallad": {
+      "name": "Äggsallad",
+      "aliases": [
+        "äggsallad"
+      ]
+    },
+    "aioli": {
+      "name": "Aioli",
+      "aliases": [
+        "aioli"
+      ]
+    },
+    "baba-ganoush": {
+      "name": "Baba ganoush",
+      "aliases": [
+        "baba ganoush"
+      ]
+    },
+    "bearnaisesas": {
+      "name": "Bearnaisesås",
+      "aliases": [
+        "bearnaisesås"
+      ]
+    },
+    "bonrora": {
+      "name": "Bönröra",
+      "aliases": [
+        "bönröra"
+      ]
+    },
+    "chevrerora": {
+      "name": "Chèvreröra",
+      "aliases": [
+        "chèvreröra"
+      ]
+    },
+    "dippsas": {
+      "name": "Dippsås",
+      "aliases": [
+        "dippsås"
+      ]
+    },
+    "fetaostkram": {
+      "name": "Fetaostkräm",
+      "aliases": [
+        "fetaostkräm"
+      ]
+    },
+    "graddfilsdipp": {
+      "name": "Gräddfilsdipp",
+      "aliases": [
+        "gräddfilsdipp"
+      ]
+    },
+    "guacamole": {
+      "name": "Guacamole",
+      "aliases": [
+        "guacamole"
+      ]
+    },
+    "gubbrora": {
+      "name": "Gubbröra",
+      "aliases": [
+        "gubbröra"
+      ]
+    },
+    "gurkmajonnas": {
+      "name": "Gurkmajonnäs",
+      "aliases": [
+        "gurkmajonnäs"
+      ]
+    },
+    "hovmastarsas": {
+      "name": "Hovmästarsås",
+      "aliases": [
+        "hovmästarsås"
+      ]
+    },
+    "hummus": {
+      "name": "Hummus",
+      "aliases": [
+        "hummus"
+      ]
+    },
+    "kall-sas": {
+      "name": "Kall sås",
+      "aliases": [
+        "kall sås"
+      ]
+    },
+    "kaviarrora": {
+      "name": "Kaviarröra",
+      "aliases": [
+        "kaviarröra"
+      ]
+    },
+    "kebabsas": {
+      "name": "Kebabsås",
+      "aliases": [
+        "kebabsås"
+      ]
+    },
+    "krabbrora": {
+      "name": "Krabbröra",
+      "aliases": [
+        "krabbröra"
+      ]
+    },
+    "kronartskockskram": {
+      "name": "Kronärtskockskräm",
+      "aliases": [
+        "kronärtskockskräm"
+      ]
+    },
+    "kraftrora": {
+      "name": "Kräftröra",
+      "aliases": [
+        "kräftröra"
+      ]
+    },
+    "kycklingrora": {
+      "name": "Kycklingröra",
+      "aliases": [
+        "kycklingröra"
+      ]
+    },
+    "laxrora": {
+      "name": "Laxröra",
+      "aliases": [
+        "laxröra"
+      ]
+    },
+    "lojromsrora": {
+      "name": "Löjromsröra",
+      "aliases": [
+        "löjromsröra"
+      ]
+    },
+    "mango-och-currysas": {
+      "name": "Mango- och currysås",
+      "aliases": [
+        "mango- och currysås"
+      ]
+    },
+    "muhammara": {
+      "name": "Muhammara",
+      "aliases": [
+        "muhammara"
+      ]
+    },
+    "ostdipp": {
+      "name": "Ostdipp",
+      "aliases": [
+        "ostdipp"
+      ]
+    },
+    "raita": {
+      "name": "Raita",
+      "aliases": [
+        "raita"
+      ]
+    },
+    "remouladsas": {
+      "name": "Remouladsås",
+      "aliases": [
+        "remouladsås"
+      ]
+    },
+    "romsas": {
+      "name": "Romsås",
+      "aliases": [
+        "romsås"
+      ]
+    },
+    "rouille": {
+      "name": "Rouille",
+      "aliases": [
+        "rouille"
+      ]
+    },
+    "rakrora": {
+      "name": "Räkröra",
+      "aliases": [
+        "räkröra"
+      ]
+    },
+    "rodbetshummus": {
+      "name": "Rödbetshummus",
+      "aliases": [
+        "rödbetshummus"
+      ]
+    },
+    "skagenrora": {
+      "name": "Skagenröra",
+      "aliases": [
+        "skagenröra"
+      ]
+    },
+    "skinkrora": {
+      "name": "Skinkröra",
+      "aliases": [
+        "skinkröra"
+      ]
+    },
+    "smaksatt-hummus": {
+      "name": "Smaksatt hummus",
+      "aliases": [
+        "smaksatt hummus"
+      ]
+    },
+    "taramasalata": {
+      "name": "Taramasalata",
+      "aliases": [
+        "taramasalata"
+      ]
+    },
+    "tirokafteri": {
+      "name": "Tirokafteri",
+      "aliases": [
+        "tirokafteri"
+      ]
+    },
+    "tonfiskrora": {
+      "name": "Tonfiskröra",
+      "aliases": [
+        "tonfiskröra"
+      ]
+    },
+    "tzatziki": {
+      "name": "Tzatziki",
+      "aliases": [
+        "tzatziki"
+      ]
+    },
+    "vitloksdipp": {
+      "name": "Vitlöksdipp",
+      "aliases": [
+        "vitlöksdipp"
+      ]
+    },
+    "vitlokssas": {
+      "name": "Vitlökssås",
+      "aliases": [
+        "vitlökssås"
+      ]
+    },
+    "vasterbottensostrora": {
+      "name": "Västerbottensoströra",
+      "aliases": [
+        "västerbottensoströra"
+      ]
+    },
+    "ortdipp": {
+      "name": "Örtdipp",
+      "aliases": [
+        "örtdipp"
+      ]
+    },
+    "broccolipaj": {
+      "name": "Broccolipaj",
+      "aliases": [
+        "broccolipaj"
+      ]
+    },
+    "borek": {
+      "name": "Börek",
+      "aliases": [
+        "börek"
+      ]
+    },
+    "calzone": {
+      "name": "Calzone",
+      "aliases": [
+        "calzone"
+      ]
+    },
+    "empanadas": {
+      "name": "Empanadas",
+      "aliases": [
+        "empanadas"
+      ]
+    },
+    "flammkuchen": {
+      "name": "Flammkuchen",
+      "aliases": [
+        "flammkuchen"
+      ]
+    },
+    "getostpaj": {
+      "name": "Getostpaj",
+      "aliases": [
+        "getostpaj"
+      ]
+    },
+    "gronsakspaj": {
+      "name": "Grönsakspaj",
+      "aliases": [
+        "grönsakspaj"
+      ]
+    },
+    "gozleme": {
+      "name": "Gözleme",
+      "aliases": [
+        "gözleme"
+      ]
+    },
+    "kantarellpaj": {
+      "name": "Kantarellpaj",
+      "aliases": [
+        "kantarellpaj"
+      ]
+    },
+    "kycklingpaj": {
+      "name": "Kycklingpaj",
+      "aliases": [
+        "kycklingpaj"
+      ]
+    },
+    "kottfarspaj": {
+      "name": "Köttfärspaj",
+      "aliases": [
+        "köttfärspaj"
+      ]
+    },
+    "lahmacun": {
+      "name": "Lahmacun",
+      "aliases": [
+        "lahmacun"
+      ]
+    },
+    "laxpaj": {
+      "name": "Laxpaj",
+      "aliases": [
+        "laxpaj"
+      ]
+    },
+    "minipizza": {
+      "name": "Minipizza",
+      "aliases": [
+        "minipizza"
+      ]
+    },
+    "pide": {
+      "name": "Pide",
+      "aliases": [
+        "pide"
+      ]
+    },
+    "pinsa": {
+      "name": "Pinsa",
+      "aliases": [
+        "pinsa"
+      ]
+    },
+    "piroger": {
+      "name": "Piroger",
+      "aliases": [
+        "piroger"
+      ]
+    },
+    "pizza": {
+      "name": "Pizza",
+      "aliases": [
+        "pizza"
+      ]
+    },
+    "pizzabullar": {
+      "name": "Pizzabullar",
+      "aliases": [
+        "pizzabullar"
+      ]
+    },
+    "pizzaslice": {
+      "name": "Pizzaslice",
+      "aliases": [
+        "pizzaslice"
+      ]
+    },
+    "purjolokspaj": {
+      "name": "Purjolökspaj",
+      "aliases": [
+        "purjolökspaj"
+      ]
+    },
+    "quiche-lorraine": {
+      "name": "Quiche Lorraine",
+      "aliases": [
+        "quiche lorraine"
+      ]
+    },
+    "rakpaj": {
+      "name": "Räkpaj",
+      "aliases": [
+        "räkpaj"
+      ]
+    },
+    "samosa": {
+      "name": "Samosa",
+      "aliases": [
+        "samosa"
+      ]
+    },
+    "skinkpaj": {
+      "name": "Skinkpaj",
+      "aliases": [
+        "skinkpaj"
+      ]
+    },
+    "spanakopita": {
+      "name": "Spanakopita",
+      "aliases": [
+        "spanakopita"
+      ]
+    },
+    "spenat-och-fetaostpaj": {
+      "name": "Spenat- och fetaostpaj",
+      "aliases": [
+        "spenat- och fetaostpaj"
+      ]
+    },
+    "svamppaj": {
+      "name": "Svamppaj",
+      "aliases": [
+        "svamppaj"
+      ]
+    },
+    "tacopaj": {
+      "name": "Tacopaj",
+      "aliases": [
+        "tacopaj"
+      ]
+    },
+    "vasterbottenpaj": {
+      "name": "Västerbottenpaj",
+      "aliases": [
+        "västerbottenpaj"
+      ]
+    },
+    "bagel": {
+      "name": "Bagel",
+      "aliases": [
+        "bagel"
+      ]
+    },
+    "banh-mi": {
+      "name": "Bánh mì",
+      "aliases": [
+        "bánh mì"
+      ]
+    },
+    "california-roll": {
+      "name": "California roll",
+      "aliases": [
+        "california roll"
+      ]
+    },
+    "club-sandwich": {
+      "name": "Club sandwich",
+      "aliases": [
+        "club sandwich"
+      ]
+    },
+    "falafelrulle": {
+      "name": "Falafelrulle",
+      "aliases": [
+        "falafelrulle"
+      ]
+    },
+    "fylld-ciabatta": {
+      "name": "Fylld ciabatta",
+      "aliases": [
+        "fylld ciabatta"
+      ]
+    },
+    "fylld-croissant": {
+      "name": "Fylld croissant",
+      "aliases": [
+        "fylld croissant"
+      ]
+    },
+    "fardig-hamburgare": {
+      "name": "Färdig hamburgare",
+      "aliases": [
+        "färdig hamburgare"
+      ]
+    },
+    "gimbap": {
+      "name": "Gimbap",
+      "aliases": [
+        "gimbap"
+      ]
+    },
+    "kebabrulle": {
+      "name": "Kebabrulle",
+      "aliases": [
+        "kebabrulle"
+      ]
+    },
+    "kottbullsmacka": {
+      "name": "Köttbullsmacka",
+      "aliases": [
+        "köttbullsmacka"
+      ]
+    },
+    "landgang": {
+      "name": "Landgång",
+      "aliases": [
+        "landgång"
+      ]
+    },
+    "maki": {
+      "name": "Maki",
+      "aliases": [
+        "maki"
+      ]
+    },
+    "nigiri": {
+      "name": "Nigiri",
+      "aliases": [
+        "nigiri"
+      ]
+    },
+    "onigiri": {
+      "name": "Onigiri",
+      "aliases": [
+        "onigiri"
+      ]
+    },
+    "ost-och-skinkfralla": {
+      "name": "Ost- och skinkfralla",
+      "aliases": [
+        "ost- och skinkfralla"
+      ]
+    },
+    "panini": {
+      "name": "Panini",
+      "aliases": [
+        "panini"
+      ]
+    },
+    "poke-bowl": {
+      "name": "Poké bowl",
+      "aliases": [
+        "poké bowl"
+      ]
+    },
+    "raksmorgas": {
+      "name": "Räksmörgås",
+      "aliases": [
+        "räksmörgås"
+      ]
+    },
+    "salladsbowl": {
+      "name": "Salladsbowl",
+      "aliases": [
+        "salladsbowl"
+      ]
+    },
+    "sashimi": {
+      "name": "Sashimi",
+      "aliases": [
+        "sashimi"
+      ]
+    },
+    "smorgasbakelse": {
+      "name": "Smörgåsbakelse",
+      "aliases": [
+        "smörgåsbakelse"
+      ]
+    },
+    "smorgastarta": {
+      "name": "Smörgåstårta",
+      "aliases": [
+        "smörgåstårta"
+      ]
+    },
+    "smorrebrod": {
+      "name": "Smörrebröd",
+      "aliases": [
+        "smörrebröd"
+      ]
+    },
+    "sushi": {
+      "name": "Sushi",
+      "aliases": [
+        "sushi"
+      ]
+    },
+    "toast-skagen": {
+      "name": "Toast Skagen",
+      "aliases": [
+        "toast skagen"
+      ]
+    },
+    "trekantsmacka": {
+      "name": "Trekantsmacka",
+      "aliases": [
+        "trekantsmacka"
+      ]
+    },
+    "tunnbrodsrulle": {
+      "name": "Tunnbrödsrulle",
+      "aliases": [
+        "tunnbrödsrulle"
+      ]
+    },
+    "vegetarisk-sushi": {
+      "name": "Vegetarisk sushi",
+      "aliases": [
+        "vegetarisk sushi"
+      ]
+    },
+    "wrap": {
+      "name": "Wrap",
+      "aliases": [
+        "wrap"
+      ]
+    },
+    "aggmacka": {
+      "name": "Äggmacka",
+      "aliases": [
+        "äggmacka"
+      ]
+    },
+    "antipastibricka": {
+      "name": "Antipastibricka",
+      "aliases": [
+        "antipastibricka"
+      ]
+    },
+    "boquerones-marinerad-ansjovis": {
+      "name": "Boquerones (marinerad ansjovis)",
+      "aliases": [
+        "boquerones (marinerad ansjovis)",
+        "boquerones"
+      ]
+    },
+    "borettanelok-i-balsamico": {
+      "name": "Borettanelök i balsamico",
+      "aliases": [
+        "borettanelök i balsamico"
+      ]
+    },
+    "bruschettarora": {
+      "name": "Bruschettaröra",
+      "aliases": [
+        "bruschettaröra"
+      ]
+    },
+    "castelvetrano-oliver": {
+      "name": "Castelvetrano-oliver",
+      "aliases": [
+        "castelvetrano-oliver"
+      ]
+    },
+    "dolmades": {
+      "name": "Dolmades",
+      "aliases": [
+        "dolmades"
+      ]
+    },
+    "fyllda-minipaprikor": {
+      "name": "Fyllda minipaprikor",
+      "aliases": [
+        "fyllda minipaprikor"
+      ]
+    },
+    "fyllda-oliver": {
+      "name": "Fyllda oliver",
+      "aliases": [
+        "fyllda oliver"
+      ]
+    },
+    "gigantes-jattebonor-i-tomatsas": {
+      "name": "Gigantes (jättebönor i tomatsås)",
+      "aliases": [
+        "gigantes (jättebönor i tomatsås)",
+        "gigantes"
+      ]
+    },
+    "grillad-aubergine": {
+      "name": "Grillad aubergine",
+      "aliases": [
+        "grillad aubergine"
+      ]
+    },
+    "grillad-paprika": {
+      "name": "Grillad paprika",
+      "aliases": [
+        "grillad paprika"
+      ]
+    },
+    "grillad-squash": {
+      "name": "Grillad squash",
+      "aliases": [
+        "grillad squash"
+      ]
+    },
+    "halvtorkade-tomater": {
+      "name": "Halvtorkade tomater",
+      "aliases": [
+        "halvtorkade tomater"
+      ]
+    },
+    "inlagd-chili": {
+      "name": "Inlagd chili",
+      "aliases": [
+        "inlagd chili"
+      ]
+    },
+    "inlagda-kronartskocksbottnar": {
+      "name": "Inlagda kronärtskocksbottnar",
+      "aliases": [
+        "inlagda kronärtskocksbottnar"
+      ]
+    },
+    "kaprisbar": {
+      "name": "Kaprisbär",
+      "aliases": [
+        "kaprisbär"
+      ]
+    },
+    "kronartskockshjartan": {
+      "name": "Kronärtskockshjärtan",
+      "aliases": [
+        "kronärtskockshjärtan"
+      ]
+    },
+    "lupinbonor": {
+      "name": "Lupinbönor",
+      "aliases": [
+        "lupinbönor"
+      ]
+    },
+    "mandelfyllda-oliver": {
+      "name": "Mandelfyllda oliver",
+      "aliases": [
+        "mandelfyllda oliver"
+      ]
+    },
+    "marinerad-blackfisk": {
+      "name": "Marinerad bläckfisk",
+      "aliases": [
+        "marinerad bläckfisk"
+      ]
+    },
+    "marinerad-feta": {
+      "name": "Marinerad feta",
+      "aliases": [
+        "marinerad feta"
+      ]
+    },
+    "marinerad-svampmix": {
+      "name": "Marinerad svampmix",
+      "aliases": [
+        "marinerad svampmix"
+      ]
+    },
+    "marinerad-vitlok": {
+      "name": "Marinerad vitlök",
+      "aliases": [
+        "marinerad vitlök"
+      ]
+    },
+    "marinerade-champinjoner": {
+      "name": "Marinerade champinjoner",
+      "aliases": [
+        "marinerade champinjoner"
+      ]
+    },
+    "marinerade-kronartskockor": {
+      "name": "Marinerade kronärtskockor",
+      "aliases": [
+        "marinerade kronärtskockor"
+      ]
+    },
+    "marinerade-mozzarellakulor": {
+      "name": "Marinerade mozzarellakulor",
+      "aliases": [
+        "marinerade mozzarellakulor"
+      ]
+    },
+    "marinerade-oliver": {
+      "name": "Marinerade oliver",
+      "aliases": [
+        "marinerade oliver"
+      ]
+    },
+    "olivmix": {
+      "name": "Olivmix",
+      "aliases": [
+        "olivmix"
+      ]
+    },
+    "soltorkade-tomater": {
+      "name": "Soltorkade tomater",
+      "aliases": [
+        "soltorkade tomater"
+      ]
+    },
+    "tapenade": {
+      "name": "Tapenade",
+      "aliases": [
+        "tapenade"
+      ]
+    },
+    "urkarnade-oliver": {
+      "name": "Urkärnade oliver",
+      "aliases": [
+        "urkärnade oliver"
+      ]
+    },
+    "vitloksfyllda-oliver": {
+      "name": "Vitlöksfyllda oliver",
+      "aliases": [
+        "vitlöksfyllda oliver"
+      ]
+    },
+    "broddeg-pa-rulle": {
+      "name": "Bröddeg på rulle",
+      "aliases": [
+        "bröddeg på rulle"
+      ]
+    },
+    "croissantdeg": {
+      "name": "Croissantdeg",
+      "aliases": [
+        "croissantdeg"
+      ]
+    },
+    "filodeg": {
+      "name": "Filodeg",
+      "aliases": [
+        "filodeg"
+      ]
+    },
+    "fylld-gnocchi": {
+      "name": "Fylld gnocchi",
+      "aliases": [
+        "fylld gnocchi"
+      ]
+    },
+    "farsk-pasta": {
+      "name": "Färsk pasta",
+      "aliases": [
+        "färsk pasta"
+      ]
+    },
+    "farsk-pizzabotten": {
+      "name": "Färsk pizzabotten",
+      "aliases": [
+        "färsk pizzabotten"
+      ]
+    },
+    "farsk-ravioli": {
+      "name": "Färsk ravioli",
+      "aliases": [
+        "färsk ravioli"
+      ]
+    },
+    "farsk-tagliatelle": {
+      "name": "Färsk tagliatelle",
+      "aliases": [
+        "färsk tagliatelle"
+      ]
+    },
+    "farsk-tortellini": {
+      "name": "Färsk tortellini",
+      "aliases": [
+        "färsk tortellini"
+      ]
+    },
+    "farska-lasagneplattor": {
+      "name": "Färska lasagneplattor",
+      "aliases": [
+        "färska lasagneplattor"
+      ]
+    },
+    "farska-nudlar": {
+      "name": "Färska nudlar",
+      "aliases": [
+        "färska nudlar"
+      ]
+    },
+    "farska-risnudlar": {
+      "name": "Färska risnudlar",
+      "aliases": [
+        "färska risnudlar"
+      ]
+    },
+    "farska-tortelloni": {
+      "name": "Färska tortelloni",
+      "aliases": [
+        "färska tortelloni"
+      ]
+    },
+    "farska-udonnudlar": {
+      "name": "Färska udonnudlar",
+      "aliases": [
+        "färska udonnudlar"
+      ]
+    },
+    "gnocchi": {
+      "name": "Gnocchi",
+      "aliases": [
+        "gnocchi"
+      ]
+    },
+    "kakdeg": {
+      "name": "Kakdeg",
+      "aliases": [
+        "kakdeg"
+      ]
+    },
+    "kanelbullsdeg": {
+      "name": "Kanelbullsdeg",
+      "aliases": [
+        "kanelbullsdeg"
+      ]
+    },
+    "kataifi": {
+      "name": "Kataifi",
+      "aliases": [
+        "kataifi"
+      ]
+    },
+    "lussekattsdeg": {
+      "name": "Lussekattsdeg",
+      "aliases": [
+        "lussekattsdeg"
+      ]
+    },
+    "pajdeg": {
+      "name": "Pajdeg",
+      "aliases": [
+        "pajdeg"
+      ]
+    },
+    "pepparkaksdeg": {
+      "name": "Pepparkaksdeg",
+      "aliases": [
+        "pepparkaksdeg"
+      ]
+    },
+    "pizzadeg": {
+      "name": "Pizzadeg",
+      "aliases": [
+        "pizzadeg"
+      ]
+    },
+    "pizzakit-med-deg-och-sas": {
+      "name": "Pizzakit med deg och sås",
+      "aliases": [
+        "pizzakit med deg och sås"
+      ]
+    },
+    "saffranskakdeg": {
+      "name": "Saffranskakdeg",
+      "aliases": [
+        "saffranskakdeg"
+      ]
+    },
+    "spatzle": {
+      "name": "Spätzle",
+      "aliases": [
+        "spätzle"
+      ]
+    },
+    "yufka": {
+      "name": "Yufka",
+      "aliases": [
+        "yufka"
+      ]
+    },
+    "bruna-bonor-i-sas": {
+      "name": "Bruna bönor i sås",
+      "aliases": [
+        "bruna bönor i sås"
+      ]
+    },
+    "brunkal": {
+      "name": "Brunkål",
+      "aliases": [
+        "brunkål"
+      ]
+    },
+    "fardigkokt-bulgur": {
+      "name": "Färdigkokt bulgur",
+      "aliases": [
+        "färdigkokt bulgur"
+      ]
+    },
+    "fardigkokt-grynblandning": {
+      "name": "Färdigkokt grynblandning",
+      "aliases": [
+        "färdigkokt grynblandning"
+      ]
+    },
+    "fardigkokt-potatis": {
+      "name": "Färdigkokt potatis",
+      "aliases": [
+        "färdigkokt potatis"
+      ]
+    },
+    "fardigkokt-quinoa": {
+      "name": "Färdigkokt quinoa",
+      "aliases": [
+        "färdigkokt quinoa"
+      ]
+    },
+    "fardigkokta-linser": {
+      "name": "Färdigkokta linser",
+      "aliases": [
+        "färdigkokta linser"
+      ]
+    },
+    "fardigkokta-woknudlar": {
+      "name": "Färdigkokta woknudlar",
+      "aliases": [
+        "färdigkokta woknudlar"
+      ]
+    },
+    "karamelliserad-lok": {
+      "name": "Karamelliserad lök",
+      "aliases": [
+        "karamelliserad lök"
+      ]
+    },
+    "kokt-rodkal": {
+      "name": "Kokt rödkål",
+      "aliases": [
+        "kokt rödkål"
+      ]
+    },
+    "langkal": {
+      "name": "Långkål",
+      "aliases": [
+        "långkål"
+      ]
+    },
+    "polenta-pa-rulle": {
+      "name": "Polenta på rulle",
+      "aliases": [
+        "polenta på rulle"
+      ]
+    },
+    "stekt-lok": {
+      "name": "Stekt lök",
+      "aliases": [
+        "stekt lök"
+      ]
+    },
+    "stuvad-potatis": {
+      "name": "Stuvad potatis",
+      "aliases": [
+        "stuvad potatis"
+      ]
+    },
+    "stuvad-vitkal": {
+      "name": "Stuvad vitkål",
+      "aliases": [
+        "stuvad vitkål"
+      ]
+    },
+    "ugnsrostad-potatis": {
+      "name": "Ugnsrostad potatis",
+      "aliases": [
+        "ugnsrostad potatis"
+      ]
+    },
+    "ugnsrostade-gronsaker": {
+      "name": "Ugnsrostade grönsaker",
+      "aliases": [
+        "ugnsrostade grönsaker"
+      ]
+    },
+    "ankarstock": {
+      "name": "Ankarstock",
+      "aliases": [
+        "ankarstock"
+      ]
+    },
+    "barkis-bergis": {
+      "name": "Barkis (bergis)",
+      "aliases": [
+        "barkis (bergis)",
+        "barkis"
+      ]
+    },
+    "bondbrod": {
+      "name": "Bondbröd",
+      "aliases": [
+        "bondbröd"
+      ]
+    },
+    "brioche": {
+      "name": "Brioche",
+      "aliases": [
+        "brioche"
+      ]
+    },
+    "danskt-ragbrod": {
+      "name": "Danskt rågbröd",
+      "aliases": [
+        "danskt rågbröd"
+      ]
+    },
+    "finskt-ragbrod": {
+      "name": "Finskt rågbröd",
+      "aliases": [
+        "finskt rågbröd"
+      ]
+    },
+    "focaccia": {
+      "name": "Focaccia",
+      "aliases": [
+        "focaccia"
+      ]
+    },
+    "formfranska": {
+      "name": "Formfranska",
+      "aliases": [
+        "formfranska"
+      ]
+    },
+    "franskbrod": {
+      "name": "Franskbröd",
+      "aliases": [
+        "franskbröd"
+      ]
+    },
+    "fruktbrod": {
+      "name": "Fruktbröd",
+      "aliases": [
+        "fruktbröd"
+      ]
+    },
+    "frobrod": {
+      "name": "Fröbröd",
+      "aliases": [
+        "fröbröd"
+      ]
+    },
+    "fullkornsbrod": {
+      "name": "Fullkornsbröd",
+      "aliases": [
+        "fullkornsbröd"
+      ]
+    },
+    "fullkornsrostbrod": {
+      "name": "Fullkornsrostbröd",
+      "aliases": [
+        "fullkornsrostbröd"
+      ]
+    },
+    "grovbrod": {
+      "name": "Grovbröd",
+      "aliases": [
+        "grovbröd"
+      ]
+    },
+    "havrebrod": {
+      "name": "Havrebröd",
+      "aliases": [
+        "havrebröd"
+      ]
+    },
+    "halkaka": {
+      "name": "Hålkaka",
+      "aliases": [
+        "hålkaka"
+      ]
+    },
+    "jullimpa": {
+      "name": "Jullimpa",
+      "aliases": [
+        "jullimpa"
+      ]
+    },
+    "kavring": {
+      "name": "Kavring",
+      "aliases": [
+        "kavring"
+      ]
+    },
+    "kumminbrod": {
+      "name": "Kumminbröd",
+      "aliases": [
+        "kumminbröd"
+      ]
+    },
+    "karnbrod": {
+      "name": "Kärnbröd",
+      "aliases": [
+        "kärnbröd"
+      ]
+    },
+    "lantbrod": {
+      "name": "Lantbröd",
+      "aliases": [
+        "lantbröd"
+      ]
+    },
+    "levain": {
+      "name": "Levain",
+      "aliases": [
+        "levain"
+      ]
+    },
+    "lingonlimpa": {
+      "name": "Lingonlimpa",
+      "aliases": [
+        "lingonlimpa"
+      ]
+    },
+    "morotsbrod": {
+      "name": "Morotsbröd",
+      "aliases": [
+        "morotsbröd"
+      ]
+    },
+    "olivbrod": {
+      "name": "Olivbröd",
+      "aliases": [
+        "olivbröd"
+      ]
+    },
+    "potatisbrod": {
+      "name": "Potatisbröd",
+      "aliases": [
+        "potatisbröd"
+      ]
+    },
+    "pumpernickel": {
+      "name": "Pumpernickel",
+      "aliases": [
+        "pumpernickel"
+      ]
+    },
+    "ragbrod": {
+      "name": "Rågbröd",
+      "aliases": [
+        "rågbröd"
+      ]
+    },
+    "ragkaka": {
+      "name": "Rågkaka",
+      "aliases": [
+        "rågkaka"
+      ]
+    },
+    "ragsiktsbrod": {
+      "name": "Rågsiktsbröd",
+      "aliases": [
+        "rågsiktsbröd"
+      ]
+    },
+    "schwarzbrot": {
+      "name": "Schwarzbrot",
+      "aliases": [
+        "schwarzbrot"
+      ]
+    },
+    "sirapslimpa": {
+      "name": "Sirapslimpa",
+      "aliases": [
+        "sirapslimpa"
+      ]
+    },
+    "skargardsbrod": {
+      "name": "Skärgårdsbröd",
+      "aliases": [
+        "skärgårdsbröd"
+      ]
+    },
+    "solrosbrod": {
+      "name": "Solrosbröd",
+      "aliases": [
+        "solrosbröd"
+      ]
+    },
+    "speltbrod": {
+      "name": "Speltbröd",
+      "aliases": [
+        "speltbröd"
+      ]
+    },
+    "stenugnsbakat-brod": {
+      "name": "Stenugnsbakat bröd",
+      "aliases": [
+        "stenugnsbakat bröd"
+      ]
+    },
+    "valnotsbrod": {
+      "name": "Valnötsbröd",
+      "aliases": [
+        "valnötsbröd"
+      ]
+    },
+    "vortbrod": {
+      "name": "Vörtbröd",
+      "aliases": [
+        "vörtbröd"
+      ]
+    },
+    "bagels": {
+      "name": "Bagels",
+      "aliases": [
+        "bagels"
+      ]
+    },
+    "bake-off-frallor": {
+      "name": "Bake off-frallor",
+      "aliases": [
+        "bake off-frallor"
+      ]
+    },
+    "brezel-mjuk-kringla": {
+      "name": "Brezel (mjuk kringla)",
+      "aliases": [
+        "brezel (mjuk kringla)",
+        "brezel"
+      ]
+    },
+    "briochehamburgerbrod": {
+      "name": "Briochehamburgerbröd",
+      "aliases": [
+        "briochehamburgerbröd"
+      ]
+    },
+    "briochekorvbrod": {
+      "name": "Briochekorvbröd",
+      "aliases": [
+        "briochekorvbröd"
+      ]
+    },
+    "ciabatta": {
+      "name": "Ciabatta",
+      "aliases": [
+        "ciabatta"
+      ]
+    },
+    "crumpets": {
+      "name": "Crumpets",
+      "aliases": [
+        "crumpets"
+      ]
+    },
+    "engelska-muffins": {
+      "name": "Engelska muffins",
+      "aliases": [
+        "engelska muffins"
+      ]
+    },
+    "frallor": {
+      "name": "Frallor",
+      "aliases": [
+        "frallor"
+      ]
+    },
+    "frofrallor": {
+      "name": "Fröfrallor",
+      "aliases": [
+        "fröfrallor"
+      ]
+    },
+    "fullkornsbaguette": {
+      "name": "Fullkornsbaguette",
+      "aliases": [
+        "fullkornsbaguette"
+      ]
+    },
+    "grahamsfrallor": {
+      "name": "Grahamsfrallor",
+      "aliases": [
+        "grahamsfrallor"
+      ]
+    },
+    "grova-frallor": {
+      "name": "Grova frallor",
+      "aliases": [
+        "grova frallor"
+      ]
+    },
+    "hamburgerbrod": {
+      "name": "Hamburgerbröd",
+      "aliases": [
+        "hamburgerbröd"
+      ]
+    },
+    "havrefrallor": {
+      "name": "Havrefrallor",
+      "aliases": [
+        "havrefrallor"
+      ]
+    },
+    "korvbrod": {
+      "name": "Korvbröd",
+      "aliases": [
+        "korvbröd"
+      ]
+    },
+    "kuvertbrod": {
+      "name": "Kuvertbröd",
+      "aliases": [
+        "kuvertbröd"
+      ]
+    },
+    "kallarfranska": {
+      "name": "Källarfranska",
+      "aliases": [
+        "källarfranska"
+      ]
+    },
+    "minibaguetter": {
+      "name": "Minibaguetter",
+      "aliases": [
+        "minibaguetter"
+      ]
+    },
+    "minihamburgerbrod": {
+      "name": "Minihamburgerbröd",
+      "aliases": [
+        "minihamburgerbröd"
+      ]
+    },
+    "ostfrallor": {
+      "name": "Ostfrallor",
+      "aliases": [
+        "ostfrallor"
+      ]
+    },
+    "paninibrod": {
+      "name": "Paninibröd",
+      "aliases": [
+        "paninibröd"
+      ]
+    },
+    "ragfrallor": {
+      "name": "Rågfrallor",
+      "aliases": [
+        "rågfrallor"
+      ]
+    },
+    "surdegsbaguette": {
+      "name": "Surdegsbaguette",
+      "aliases": [
+        "surdegsbaguette"
+      ]
+    },
+    "surdegsfrallor": {
+      "name": "Surdegsfrallor",
+      "aliases": [
+        "surdegsfrallor"
+      ]
+    },
+    "tekakor": {
+      "name": "Tekakor",
+      "aliases": [
+        "tekakor"
+      ]
+    },
+    "vallmofrallor": {
+      "name": "Vallmofrallor",
+      "aliases": [
+        "vallmofrallor"
+      ]
+    },
+    "bovetekakor": {
+      "name": "Bovetekakor",
+      "aliases": [
+        "bovetekakor"
+      ]
+    },
+    "brungraddat-knackebrod": {
+      "name": "Brungräddat knäckebröd",
+      "aliases": [
+        "brungräddat knäckebröd"
+      ]
+    },
+    "crostini": {
+      "name": "Crostini",
+      "aliases": [
+        "crostini"
+      ]
+    },
+    "dinkelknacke": {
+      "name": "Dinkelknäcke",
+      "aliases": [
+        "dinkelknäcke"
+      ]
+    },
+    "frukostknacke": {
+      "name": "Frukostknäcke",
+      "aliases": [
+        "frukostknäcke"
+      ]
+    },
+    "froknacke": {
+      "name": "Fröknäcke",
+      "aliases": [
+        "fröknäcke"
+      ]
+    },
+    "fullkornsknacke": {
+      "name": "Fullkornsknäcke",
+      "aliases": [
+        "fullkornsknäcke"
+      ]
+    },
+    "fullkornsskorpor": {
+      "name": "Fullkornsskorpor",
+      "aliases": [
+        "fullkornsskorpor"
+      ]
+    },
+    "fyllda-knackebrodssnacks": {
+      "name": "Fyllda knäckebrödssnacks",
+      "aliases": [
+        "fyllda knäckebrödssnacks"
+      ]
+    },
+    "grissini": {
+      "name": "Grissini",
+      "aliases": [
+        "grissini"
+      ]
+    },
+    "havreknacke": {
+      "name": "Havreknäcke",
+      "aliases": [
+        "havreknäcke"
+      ]
+    },
+    "kanelskorpor": {
+      "name": "Kanelskorpor",
+      "aliases": [
+        "kanelskorpor"
+      ]
+    },
+    "kardemummaskorpor": {
+      "name": "Kardemummaskorpor",
+      "aliases": [
+        "kardemummaskorpor"
+      ]
+    },
+    "knackebrod": {
+      "name": "Knäckebröd",
+      "aliases": [
+        "knäckebröd"
+      ]
+    },
+    "linskakor": {
+      "name": "Linskakor",
+      "aliases": [
+        "linskakor"
+      ]
+    },
+    "majskakor": {
+      "name": "Majskakor",
+      "aliases": [
+        "majskakor"
+      ]
+    },
+    "melba-toast": {
+      "name": "Melba toast",
+      "aliases": [
+        "melba toast"
+      ]
+    },
+    "miniknacke": {
+      "name": "Miniknäcke",
+      "aliases": [
+        "miniknäcke"
+      ]
+    },
+    "norskt-flatbrod": {
+      "name": "Norskt flatbröd",
+      "aliases": [
+        "norskt flatbröd"
+      ]
+    },
+    "riskakor": {
+      "name": "Riskakor",
+      "aliases": [
+        "riskakor"
+      ]
+    },
+    "riskakor-med-choklad": {
+      "name": "Riskakor med choklad",
+      "aliases": [
+        "riskakor med choklad"
+      ]
+    },
+    "riskakor-med-yoghurt": {
+      "name": "Riskakor med yoghurt",
+      "aliases": [
+        "riskakor med yoghurt"
+      ]
+    },
+    "runda-knackebrod": {
+      "name": "Runda knäckebröd",
+      "aliases": [
+        "runda knäckebröd"
+      ]
+    },
+    "ragknacke": {
+      "name": "Rågknäcke",
+      "aliases": [
+        "rågknäcke"
+      ]
+    },
+    "ragskorpor": {
+      "name": "Rågskorpor",
+      "aliases": [
+        "rågskorpor"
+      ]
+    },
+    "sesamknacke": {
+      "name": "Sesamknäcke",
+      "aliases": [
+        "sesamknäcke"
+      ]
+    },
+    "skorpor": {
+      "name": "Skorpor",
+      "aliases": [
+        "skorpor"
+      ]
+    },
+    "sockerskorpor": {
+      "name": "Sockerskorpor",
+      "aliases": [
+        "sockerskorpor"
+      ]
+    },
+    "spisbrod": {
+      "name": "Spisbröd",
+      "aliases": [
+        "spisbröd"
+      ]
+    },
+    "sprott-majsbrod": {
+      "name": "Sprött majsbröd",
+      "aliases": [
+        "sprött majsbröd"
+      ]
+    },
+    "surdegsknacke": {
+      "name": "Surdegsknäcke",
+      "aliases": [
+        "surdegsknäcke"
+      ]
+    },
+    "tunt-knackebrod": {
+      "name": "Tunt knäckebröd",
+      "aliases": [
+        "tunt knäckebröd"
+      ]
+    },
+    "arabiskt-brod": {
+      "name": "Arabiskt bröd",
+      "aliases": [
+        "arabiskt bröd"
+      ]
+    },
+    "chapati": {
+      "name": "Chapati",
+      "aliases": [
+        "chapati"
+      ]
+    },
+    "fullkornstortillas": {
+      "name": "Fullkornstortillas",
+      "aliases": [
+        "fullkornstortillas"
+      ]
+    },
+    "gahkku": {
+      "name": "Gáhkku",
+      "aliases": [
+        "gáhkku"
+      ]
+    },
+    "grekiskt-pitabrod": {
+      "name": "Grekiskt pitabröd",
+      "aliases": [
+        "grekiskt pitabröd"
+      ]
+    },
+    "hart-tunnbrod": {
+      "name": "Hårt tunnbröd",
+      "aliases": [
+        "hårt tunnbröd"
+      ]
+    },
+    "honokaka": {
+      "name": "Hönökaka",
+      "aliases": [
+        "hönökaka"
+      ]
+    },
+    "lavash": {
+      "name": "Lavash",
+      "aliases": [
+        "lavash"
+      ]
+    },
+    "lefse": {
+      "name": "Lefse",
+      "aliases": [
+        "lefse"
+      ]
+    },
+    "libabrod": {
+      "name": "Libabröd",
+      "aliases": [
+        "libabröd"
+      ]
+    },
+    "majstortillas": {
+      "name": "Majstortillas",
+      "aliases": [
+        "majstortillas"
+      ]
+    },
+    "minitortillas": {
+      "name": "Minitortillas",
+      "aliases": [
+        "minitortillas"
+      ]
+    },
+    "mjukkaka": {
+      "name": "Mjukkaka",
+      "aliases": [
+        "mjukkaka"
+      ]
+    },
+    "mjukt-tunnbrod": {
+      "name": "Mjukt tunnbröd",
+      "aliases": [
+        "mjukt tunnbröd"
+      ]
+    },
+    "naanbrod": {
+      "name": "Naanbröd",
+      "aliases": [
+        "naanbröd"
+      ]
+    },
+    "paratha": {
+      "name": "Paratha",
+      "aliases": [
+        "paratha"
+      ]
+    },
+    "piadina": {
+      "name": "Piadina",
+      "aliases": [
+        "piadina"
+      ]
+    },
+    "pinsabottnar": {
+      "name": "Pinsabottnar",
+      "aliases": [
+        "pinsabottnar"
+      ]
+    },
+    "pitabrod": {
+      "name": "Pitabröd",
+      "aliases": [
+        "pitabröd"
+      ]
+    },
+    "pizzabottnar": {
+      "name": "Pizzabottnar",
+      "aliases": [
+        "pizzabottnar"
+      ]
+    },
+    "polarkaka": {
+      "name": "Polarkaka",
+      "aliases": [
+        "polarkaka"
+      ]
+    },
+    "rieska": {
+      "name": "Rieska",
+      "aliases": [
+        "rieska"
+      ]
+    },
+    "roti": {
+      "name": "Roti",
+      "aliases": [
+        "roti"
+      ]
+    },
+    "tacoskal": {
+      "name": "Tacoskal",
+      "aliases": [
+        "tacoskal"
+      ]
+    },
+    "tortillabatar": {
+      "name": "Tortillabåtar",
+      "aliases": [
+        "tortillabåtar"
+      ]
+    },
+    "vetekaka": {
+      "name": "Vetekaka",
+      "aliases": [
+        "vetekaka"
+      ]
+    },
+    "wraps": {
+      "name": "Wraps",
+      "aliases": [
+        "wraps"
+      ]
+    },
+    "arraksbollar": {
+      "name": "Arraksbollar",
+      "aliases": [
+        "arraksbollar"
+      ]
+    },
+    "berlinermunkar": {
+      "name": "Berlinermunkar",
+      "aliases": [
+        "berlinermunkar"
+      ]
+    },
+    "biskvier": {
+      "name": "Biskvier",
+      "aliases": [
+        "biskvier"
+      ]
+    },
+    "blabarsbullar": {
+      "name": "Blåbärsbullar",
+      "aliases": [
+        "blåbärsbullar"
+      ]
+    },
+    "blabarsmuffins": {
+      "name": "Blåbärsmuffins",
+      "aliases": [
+        "blåbärsmuffins"
+      ]
+    },
+    "butterkaka": {
+      "name": "Butterkaka",
+      "aliases": [
+        "butterkaka"
+      ]
+    },
+    "chokladbollar": {
+      "name": "Chokladbollar",
+      "aliases": [
+        "chokladbollar"
+      ]
+    },
+    "chokladmuffins": {
+      "name": "Chokladmuffins",
+      "aliases": [
+        "chokladmuffins"
+      ]
+    },
+    "croissanter": {
+      "name": "Croissanter",
+      "aliases": [
+        "croissanter"
+      ]
+    },
+    "dadelbollar": {
+      "name": "Dadelbollar",
+      "aliases": [
+        "dadelbollar"
+      ]
+    },
+    "dammsugare": {
+      "name": "Dammsugare",
+      "aliases": [
+        "dammsugare"
+      ]
+    },
+    "franska-vafflor": {
+      "name": "Franska våfflor",
+      "aliases": [
+        "franska våfflor"
+      ]
+    },
+    "gifflar": {
+      "name": "Gifflar",
+      "aliases": [
+        "gifflar"
+      ]
+    },
+    "havrebollar": {
+      "name": "Havrebollar",
+      "aliases": [
+        "havrebollar"
+      ]
+    },
+    "kanelknutar": {
+      "name": "Kanelknutar",
+      "aliases": [
+        "kanelknutar"
+      ]
+    },
+    "kanellangd": {
+      "name": "Kanellängd",
+      "aliases": [
+        "kanellängd"
+      ]
+    },
+    "kardemummabullar": {
+      "name": "Kardemummabullar",
+      "aliases": [
+        "kardemummabullar"
+      ]
+    },
+    "klenater": {
+      "name": "Klenäter",
+      "aliases": [
+        "klenäter"
+      ]
+    },
+    "kokostoppar": {
+      "name": "Kokostoppar",
+      "aliases": [
+        "kokostoppar"
+      ]
+    },
+    "karleksmums": {
+      "name": "Kärleksmums",
+      "aliases": [
+        "kärleksmums"
+      ]
+    },
+    "lussekatter": {
+      "name": "Lussekatter",
+      "aliases": [
+        "lussekatter"
+      ]
+    },
+    "mandelcroissant": {
+      "name": "Mandelcroissant",
+      "aliases": [
+        "mandelcroissant"
+      ]
+    },
+    "mandelkubb": {
+      "name": "Mandelkubb",
+      "aliases": [
+        "mandelkubb"
+      ]
+    },
+    "mandelmusslor": {
+      "name": "Mandelmusslor",
+      "aliases": [
+        "mandelmusslor"
+      ]
+    },
+    "mazariner": {
+      "name": "Mazariner",
+      "aliases": [
+        "mazariner"
+      ]
+    },
+    "minisemlor": {
+      "name": "Minisemlor",
+      "aliases": [
+        "minisemlor"
+      ]
+    },
+    "muffins": {
+      "name": "Muffins",
+      "aliases": [
+        "muffins"
+      ]
+    },
+    "munkar": {
+      "name": "Munkar",
+      "aliases": [
+        "munkar"
+      ]
+    },
+    "pain-au-chocolat": {
+      "name": "Pain au chocolat",
+      "aliases": [
+        "pain au chocolat"
+      ]
+    },
+    "pasteis-de-nata": {
+      "name": "Pastéis de nata",
+      "aliases": [
+        "pastéis de nata"
+      ]
+    },
+    "pekanwienerbrod": {
+      "name": "Pekanwienerbröd",
+      "aliases": [
+        "pekanwienerbröd"
+      ]
+    },
+    "pistagebullar": {
+      "name": "Pistagebullar",
+      "aliases": [
+        "pistagebullar"
+      ]
+    },
+    "rawbollar": {
+      "name": "Rawbollar",
+      "aliases": [
+        "rawbollar"
+      ]
+    },
+    "saffransbullar": {
+      "name": "Saffransbullar",
+      "aliases": [
+        "saffransbullar"
+      ]
+    },
+    "saffranslangd": {
+      "name": "Saffranslängd",
+      "aliases": [
+        "saffranslängd"
+      ]
+    },
+    "saffranssnackor": {
+      "name": "Saffranssnäckor",
+      "aliases": [
+        "saffranssnäckor"
+      ]
+    },
+    "scones": {
+      "name": "Scones",
+      "aliases": [
+        "scones"
+      ]
+    },
+    "semlor": {
+      "name": "Semlor",
+      "aliases": [
+        "semlor"
+      ]
+    },
+    "semmelbullar": {
+      "name": "Semmelbullar",
+      "aliases": [
+        "semmelbullar"
+      ]
+    },
+    "skumbollar-med-kokos": {
+      "name": "Skumbollar med kokos",
+      "aliases": [
+        "skumbollar med kokos"
+      ]
+    },
+    "smorbullar": {
+      "name": "Smörbullar",
+      "aliases": [
+        "smörbullar"
+      ]
+    },
+    "sockerkringlor": {
+      "name": "Sockerkringlor",
+      "aliases": [
+        "sockerkringlor"
+      ]
+    },
+    "syltmunkar": {
+      "name": "Syltmunkar",
+      "aliases": [
+        "syltmunkar"
+      ]
+    },
+    "vaniljbullar": {
+      "name": "Vaniljbullar",
+      "aliases": [
+        "vaniljbullar"
+      ]
+    },
+    "vaniljhjartan": {
+      "name": "Vaniljhjärtan",
+      "aliases": [
+        "vaniljhjärtan"
+      ]
+    },
+    "vetekrans": {
+      "name": "Vetekrans",
+      "aliases": [
+        "vetekrans"
+      ]
+    },
+    "vetelangd": {
+      "name": "Vetelängd",
+      "aliases": [
+        "vetelängd"
+      ]
+    },
+    "wienerbrod": {
+      "name": "Wienerbröd",
+      "aliases": [
+        "wienerbröd"
+      ]
+    },
+    "wienerlangd": {
+      "name": "Wienerlängd",
+      "aliases": [
+        "wienerlängd"
+      ]
+    },
+    "appelknyten": {
+      "name": "Äppelknyten",
+      "aliases": [
+        "äppelknyten"
+      ]
+    },
+    "appelmunkar": {
+      "name": "Äppelmunkar",
+      "aliases": [
+        "äppelmunkar"
+      ]
+    },
+    "bakelser": {
+      "name": "Bakelser",
+      "aliases": [
+        "bakelser"
+      ]
+    },
+    "banankaka": {
+      "name": "Banankaka",
+      "aliases": [
+        "banankaka"
+      ]
+    },
+    "blandade-smakakor": {
+      "name": "Blandade småkakor",
+      "aliases": [
+        "blandade småkakor"
+      ]
+    },
+    "bondkakor": {
+      "name": "Bondkakor",
+      "aliases": [
+        "bondkakor"
+      ]
+    },
+    "brownies": {
+      "name": "Brownies",
+      "aliases": [
+        "brownies"
+      ]
+    },
+    "budapestbakelse": {
+      "name": "Budapestbakelse",
+      "aliases": [
+        "budapestbakelse"
+      ]
+    },
+    "cheesecake": {
+      "name": "Cheesecake",
+      "aliases": [
+        "cheesecake"
+      ]
+    },
+    "chokladflarn": {
+      "name": "Chokladflarn",
+      "aliases": [
+        "chokladflarn"
+      ]
+    },
+    "chokladtarta": {
+      "name": "Chokladtårta",
+      "aliases": [
+        "chokladtårta"
+      ]
+    },
+    "citronkaka": {
+      "name": "Citronkaka",
+      "aliases": [
+        "citronkaka"
+      ]
+    },
+    "cookies": {
+      "name": "Cookies",
+      "aliases": [
+        "cookies"
+      ]
+    },
+    "cupcakes": {
+      "name": "Cupcakes",
+      "aliases": [
+        "cupcakes"
+      ]
+    },
+    "drommar": {
+      "name": "Drömmar",
+      "aliases": [
+        "drömmar"
+      ]
+    },
+    "dromrulltarta": {
+      "name": "Drömrulltårta",
+      "aliases": [
+        "drömrulltårta"
+      ]
+    },
+    "eclairs": {
+      "name": "Éclairs",
+      "aliases": [
+        "éclairs"
+      ]
+    },
+    "engelsk-fruktkaka": {
+      "name": "Engelsk fruktkaka",
+      "aliases": [
+        "engelsk fruktkaka"
+      ]
+    },
+    "frukttarta": {
+      "name": "Frukttårta",
+      "aliases": [
+        "frukttårta"
+      ]
+    },
+    "graddtarta": {
+      "name": "Gräddtårta",
+      "aliases": [
+        "gräddtårta"
+      ]
+    },
+    "hallongrottor": {
+      "name": "Hallongrottor",
+      "aliases": [
+        "hallongrottor"
+      ]
+    },
+    "havreflarn": {
+      "name": "Havreflarn",
+      "aliases": [
+        "havreflarn"
+      ]
+    },
+    "jitterbuggar": {
+      "name": "Jitterbuggar",
+      "aliases": [
+        "jitterbuggar"
+      ]
+    },
+    "jordgubbstarta": {
+      "name": "Jordgubbstårta",
+      "aliases": [
+        "jordgubbstårta"
+      ]
+    },
+    "kladdkaka": {
+      "name": "Kladdkaka",
+      "aliases": [
+        "kladdkaka"
+      ]
+    },
+    "kokoskakor": {
+      "name": "Kokoskakor",
+      "aliases": [
+        "kokoskakor"
+      ]
+    },
+    "kolakakor": {
+      "name": "Kolakakor",
+      "aliases": [
+        "kolakakor"
+      ]
+    },
+    "kransekake": {
+      "name": "Kransekake",
+      "aliases": [
+        "kransekake"
+      ]
+    },
+    "lebkuchen": {
+      "name": "Lebkuchen",
+      "aliases": [
+        "lebkuchen"
+      ]
+    },
+    "macarons": {
+      "name": "Macarons",
+      "aliases": [
+        "macarons"
+      ]
+    },
+    "madeleinekakor": {
+      "name": "Madeleinekakor",
+      "aliases": [
+        "madeleinekakor"
+      ]
+    },
+    "mandeltarta": {
+      "name": "Mandeltårta",
+      "aliases": [
+        "mandeltårta"
+      ]
+    },
+    "marangbottnar": {
+      "name": "Marängbottnar",
+      "aliases": [
+        "marängbottnar"
+      ]
+    },
+    "maranger": {
+      "name": "Maränger",
+      "aliases": [
+        "maränger"
+      ]
+    },
+    "marangtarta": {
+      "name": "Marängtårta",
+      "aliases": [
+        "marängtårta"
+      ]
+    },
+    "mazarintarta": {
+      "name": "Mazarintårta",
+      "aliases": [
+        "mazarintårta"
+      ]
+    },
+    "mjuk-pepparkaka": {
+      "name": "Mjuk pepparkaka",
+      "aliases": [
+        "mjuk pepparkaka"
+      ]
+    },
+    "morotskaka": {
+      "name": "Morotskaka",
+      "aliases": [
+        "morotskaka"
+      ]
+    },
+    "moussetarta": {
+      "name": "Moussetårta",
+      "aliases": [
+        "moussetårta"
+      ]
+    },
+    "napoleonbakelse": {
+      "name": "Napoleonbakelse",
+      "aliases": [
+        "napoleonbakelse"
+      ]
+    },
+    "notkakor": {
+      "name": "Nötkakor",
+      "aliases": [
+        "nötkakor"
+      ]
+    },
+    "ostkaka": {
+      "name": "Ostkaka",
+      "aliases": [
+        "ostkaka"
+      ]
+    },
+    "pavlova": {
+      "name": "Pavlova",
+      "aliases": [
+        "pavlova"
+      ]
+    },
+    "pepparkakshus": {
+      "name": "Pepparkakshus",
+      "aliases": [
+        "pepparkakshus"
+      ]
+    },
+    "petits-choux": {
+      "name": "Petits choux",
+      "aliases": [
+        "petits choux"
+      ]
+    },
+    "princessbakelse": {
+      "name": "Princessbakelse",
+      "aliases": [
+        "princessbakelse"
+      ]
+    },
+    "prinsesstarta": {
+      "name": "Prinsesstårta",
+      "aliases": [
+        "prinsesstårta"
+      ]
+    },
+    "rulltarta": {
+      "name": "Rulltårta",
+      "aliases": [
+        "rulltårta"
+      ]
+    },
+    "saffranskaka": {
+      "name": "Saffranskaka",
+      "aliases": [
+        "saffranskaka"
+      ]
+    },
+    "schackrutor": {
+      "name": "Schackrutor",
+      "aliases": [
+        "schackrutor"
+      ]
+    },
+    "schwarzwaldtarta": {
+      "name": "Schwarzwaldtårta",
+      "aliases": [
+        "schwarzwaldtårta"
+      ]
+    },
+    "silviakaka": {
+      "name": "Silviakaka",
+      "aliases": [
+        "silviakaka"
+      ]
+    },
+    "sockerkaka": {
+      "name": "Sockerkaka",
+      "aliases": [
+        "sockerkaka"
+      ]
+    },
+    "spettekaka": {
+      "name": "Spettekaka",
+      "aliases": [
+        "spettekaka"
+      ]
+    },
+    "stollen": {
+      "name": "Stollen",
+      "aliases": [
+        "stollen"
+      ]
+    },
+    "struvor": {
+      "name": "Struvor",
+      "aliases": [
+        "struvor"
+      ]
+    },
+    "tigerkaka": {
+      "name": "Tigerkaka",
+      "aliases": [
+        "tigerkaka"
+      ]
+    },
+    "toscakaka": {
+      "name": "Toscakaka",
+      "aliases": [
+        "toscakaka"
+      ]
+    },
+    "tartbottnar": {
+      "name": "Tårtbottnar",
+      "aliases": [
+        "tårtbottnar"
+      ]
+    },
+    "appelkaka": {
+      "name": "Äppelkaka",
+      "aliases": [
+        "äppelkaka"
+      ]
+    },
+    "amarantpuffar": {
+      "name": "Amarantpuffar",
+      "aliases": [
+        "amarantpuffar"
+      ]
+    },
+    "chokladflingor": {
+      "name": "Chokladflingor",
+      "aliases": [
+        "chokladflingor"
+      ]
+    },
+    "chokladkuddar": {
+      "name": "Chokladkuddar",
+      "aliases": [
+        "chokladkuddar"
+      ]
+    },
+    "dinkelpuffar": {
+      "name": "Dinkelpuffar",
+      "aliases": [
+        "dinkelpuffar"
+      ]
+    },
+    "fiberflingor": {
+      "name": "Fiberflingor",
+      "aliases": [
+        "fiberflingor"
+      ]
+    },
+    "flerkornsringar": {
+      "name": "Flerkornsringar",
+      "aliases": [
+        "flerkornsringar"
+      ]
+    },
+    "fruktringar": {
+      "name": "Fruktringar",
+      "aliases": [
+        "fruktringar"
+      ]
+    },
+    "fullkornsflingor": {
+      "name": "Fullkornsflingor",
+      "aliases": [
+        "fullkornsflingor"
+      ]
+    },
+    "havreringar": {
+      "name": "Havreringar",
+      "aliases": [
+        "havreringar"
+      ]
+    },
+    "honungsflingor": {
+      "name": "Honungsflingor",
+      "aliases": [
+        "honungsflingor"
+      ]
+    },
+    "honungspuffar": {
+      "name": "Honungspuffar",
+      "aliases": [
+        "honungspuffar"
+      ]
+    },
+    "kanelflingor": {
+      "name": "Kanelflingor",
+      "aliases": [
+        "kanelflingor"
+      ]
+    },
+    "kliflingor": {
+      "name": "Kliflingor",
+      "aliases": [
+        "kliflingor"
+      ]
+    },
+    "proteinflingor": {
+      "name": "Proteinflingor",
+      "aliases": [
+        "proteinflingor"
+      ]
+    },
+    "puffad-hirs": {
+      "name": "Puffad hirs",
+      "aliases": [
+        "puffad hirs"
+      ]
+    },
+    "puffat-ris": {
+      "name": "Puffat ris",
+      "aliases": [
+        "puffat ris"
+      ]
+    },
+    "puffat-vete": {
+      "name": "Puffat vete",
+      "aliases": [
+        "puffat vete"
+      ]
+    },
+    "quinoapuffar": {
+      "name": "Quinoapuffar",
+      "aliases": [
+        "quinoapuffar"
+      ]
+    },
+    "ris-och-veteflingor": {
+      "name": "Ris- och veteflingor",
+      "aliases": [
+        "ris- och veteflingor"
+      ]
+    },
+    "sockrade-cornflakes": {
+      "name": "Sockrade cornflakes",
+      "aliases": [
+        "sockrade cornflakes"
+      ]
+    },
+    "speltflingor": {
+      "name": "Speltflingor",
+      "aliases": [
+        "speltflingor"
+      ]
+    },
+    "sproda-havrekuddar": {
+      "name": "Spröda havrekuddar",
+      "aliases": [
+        "spröda havrekuddar"
+      ]
+    },
+    "sproda-ragkuddar": {
+      "name": "Spröda rågkuddar",
+      "aliases": [
+        "spröda rågkuddar"
+      ]
+    },
+    "vetebitar": {
+      "name": "Vetebitar",
+      "aliases": [
+        "vetebitar"
+      ]
+    },
+    "veteflingor": {
+      "name": "Veteflingor",
+      "aliases": [
+        "veteflingor"
+      ]
+    },
+    "birchermusli": {
+      "name": "Birchermüsli",
+      "aliases": [
+        "birchermüsli"
+      ]
+    },
+    "bargranola": {
+      "name": "Bärgranola",
+      "aliases": [
+        "bärgranola"
+      ]
+    },
+    "barmusli": {
+      "name": "Bärmüsli",
+      "aliases": [
+        "bärmüsli"
+      ]
+    },
+    "chiapudding": {
+      "name": "Chiapudding",
+      "aliases": [
+        "chiapudding"
+      ]
+    },
+    "chokladgranola": {
+      "name": "Chokladgranola",
+      "aliases": [
+        "chokladgranola"
+      ]
+    },
+    "chokladmusli": {
+      "name": "Chokladmüsli",
+      "aliases": [
+        "chokladmüsli"
+      ]
+    },
+    "crunchmusli": {
+      "name": "Crunchmüsli",
+      "aliases": [
+        "crunchmüsli"
+      ]
+    },
+    "dadelbars": {
+      "name": "Dadelbars",
+      "aliases": [
+        "dadelbars"
+      ]
+    },
+    "flapjacks": {
+      "name": "Flapjacks",
+      "aliases": [
+        "flapjacks"
+      ]
+    },
+    "frukt-och-notbars": {
+      "name": "Frukt- och nötbars",
+      "aliases": [
+        "frukt- och nötbars"
+      ]
+    },
+    "fruktmusli": {
+      "name": "Fruktmüsli",
+      "aliases": [
+        "fruktmüsli"
+      ]
+    },
+    "fullkornsmusli": {
+      "name": "Fullkornsmüsli",
+      "aliases": [
+        "fullkornsmüsli"
+      ]
+    },
+    "granola-utan-tillsatt-socker": {
+      "name": "Granola utan tillsatt socker",
+      "aliases": [
+        "granola utan tillsatt socker"
+      ]
+    },
+    "granolabars": {
+      "name": "Granolabars",
+      "aliases": [
+        "granolabars"
+      ]
+    },
+    "havrebars": {
+      "name": "Havrebars",
+      "aliases": [
+        "havrebars"
+      ]
+    },
+    "musli": {
+      "name": "Müsli",
+      "aliases": [
+        "müsli"
+      ]
+    },
+    "muslibars": {
+      "name": "Müslibars",
+      "aliases": [
+        "müslibars"
+      ]
+    },
+    "notgranola": {
+      "name": "Nötgranola",
+      "aliases": [
+        "nötgranola"
+      ]
+    },
+    "notmusli": {
+      "name": "Nötmüsli",
+      "aliases": [
+        "nötmüsli"
+      ]
+    },
+    "osotad-musli": {
+      "name": "Osötad müsli",
+      "aliases": [
+        "osötad müsli"
+      ]
+    },
+    "overnight-oats": {
+      "name": "Overnight oats",
+      "aliases": [
+        "overnight oats"
+      ]
+    },
+    "proteingranola": {
+      "name": "Proteingranola",
+      "aliases": [
+        "proteingranola"
+      ]
+    },
+    "rawbars": {
+      "name": "Rawbars",
+      "aliases": [
+        "rawbars"
+      ]
+    },
+    "tropisk-musli": {
+      "name": "Tropisk müsli",
+      "aliases": [
+        "tropisk müsli"
+      ]
+    },
+    "appel-och-kanelgranola": {
+      "name": "Äppel- och kanelgranola",
+      "aliases": [
+        "äppel- och kanelgranola"
+      ]
+    },
+    "boveteflingor": {
+      "name": "Boveteflingor",
+      "aliases": [
+        "boveteflingor"
+      ]
+    },
+    "bovetegryn": {
+      "name": "Bovetegryn",
+      "aliases": [
+        "bovetegryn"
+      ]
+    },
+    "dinkelflingor": {
+      "name": "Dinkelflingor",
+      "aliases": [
+        "dinkelflingor"
+      ]
+    },
+    "fiberhavregryn": {
+      "name": "Fiberhavregryn",
+      "aliases": [
+        "fiberhavregryn"
+      ]
+    },
+    "fyrkornsflingor": {
+      "name": "Fyrkornsflingor",
+      "aliases": [
+        "fyrkornsflingor"
+      ]
+    },
+    "fardig-havregrynsgrot": {
+      "name": "Färdig havregrynsgröt",
+      "aliases": [
+        "färdig havregrynsgröt"
+      ]
+    },
+    "grahamsgryn": {
+      "name": "Grahamsgryn",
+      "aliases": [
+        "grahamsgryn"
+      ]
+    },
+    "grova-havregryn": {
+      "name": "Grova havregryn",
+      "aliases": [
+        "grova havregryn"
+      ]
+    },
+    "grotmix": {
+      "name": "Grötmix",
+      "aliases": [
+        "grötmix"
+      ]
+    },
+    "havrekli": {
+      "name": "Havrekli",
+      "aliases": [
+        "havrekli"
+      ]
+    },
+    "havrekross": {
+      "name": "Havrekross",
+      "aliases": [
+        "havrekross"
+      ]
+    },
+    "hirsflingor": {
+      "name": "Hirsflingor",
+      "aliases": [
+        "hirsflingor"
+      ]
+    },
+    "hirsgryn": {
+      "name": "Hirsgryn",
+      "aliases": [
+        "hirsgryn"
+      ]
+    },
+    "kornflingor": {
+      "name": "Kornflingor",
+      "aliases": [
+        "kornflingor"
+      ]
+    },
+    "mannagryn": {
+      "name": "Mannagryn",
+      "aliases": [
+        "mannagryn"
+      ]
+    },
+    "mannagrynsgrot": {
+      "name": "Mannagrynsgröt",
+      "aliases": [
+        "mannagrynsgröt"
+      ]
+    },
+    "portionsgrot": {
+      "name": "Portionsgröt",
+      "aliases": [
+        "portionsgröt"
+      ]
+    },
+    "proteingrot": {
+      "name": "Proteingröt",
+      "aliases": [
+        "proteingröt"
+      ]
+    },
+    "quinoaflingor": {
+      "name": "Quinoaflingor",
+      "aliases": [
+        "quinoaflingor"
+      ]
+    },
+    "ragflingor": {
+      "name": "Rågflingor",
+      "aliases": [
+        "rågflingor"
+      ]
+    },
+    "ragkross": {
+      "name": "Rågkross",
+      "aliases": [
+        "rågkross"
+      ]
+    },
+    "skuren-havre-steel-cut": {
+      "name": "Skuren havre (steel cut)",
+      "aliases": [
+        "skuren havre (steel cut)",
+        "skuren havre"
+      ]
+    },
+    "snabbhavregryn": {
+      "name": "Snabbhavregryn",
+      "aliases": [
+        "snabbhavregryn"
+      ]
+    },
+    "vetegroddar": {
+      "name": "Vetegroddar",
+      "aliases": [
+        "vetegroddar"
+      ]
+    },
+    "vetekli": {
+      "name": "Vetekli",
+      "aliases": [
+        "vetekli"
+      ]
+    },
+    "vetekross": {
+      "name": "Vetekross",
+      "aliases": [
+        "vetekross"
+      ]
+    },
+    "apelsinmarmelad": {
+      "name": "Apelsinmarmelad",
+      "aliases": [
+        "apelsinmarmelad"
+      ]
+    },
+    "aprikosmarmelad": {
+      "name": "Aprikosmarmelad",
+      "aliases": [
+        "aprikosmarmelad"
+      ]
+    },
+    "bjornbarssylt": {
+      "name": "Björnbärssylt",
+      "aliases": [
+        "björnbärssylt"
+      ]
+    },
+    "blandbarssylt": {
+      "name": "Blandbärssylt",
+      "aliases": [
+        "blandbärssylt"
+      ]
+    },
+    "blabarsmarmelad": {
+      "name": "Blåbärsmarmelad",
+      "aliases": [
+        "blåbärsmarmelad"
+      ]
+    },
+    "blabarssylt": {
+      "name": "Blåbärssylt",
+      "aliases": [
+        "blåbärssylt"
+      ]
+    },
+    "chilimarmelad": {
+      "name": "Chilimarmelad",
+      "aliases": [
+        "chilimarmelad"
+      ]
+    },
+    "citronmarmelad": {
+      "name": "Citronmarmelad",
+      "aliases": [
+        "citronmarmelad"
+      ]
+    },
+    "drottningsylt": {
+      "name": "Drottningsylt",
+      "aliases": [
+        "drottningsylt"
+      ]
+    },
+    "fikonmarmelad": {
+      "name": "Fikonmarmelad",
+      "aliases": [
+        "fikonmarmelad"
+      ]
+    },
+    "hallonmarmelad": {
+      "name": "Hallonmarmelad",
+      "aliases": [
+        "hallonmarmelad"
+      ]
+    },
+    "hallonsylt": {
+      "name": "Hallonsylt",
+      "aliases": [
+        "hallonsylt"
+      ]
+    },
+    "havtornsmarmelad": {
+      "name": "Havtornsmarmelad",
+      "aliases": [
+        "havtornsmarmelad"
+      ]
+    },
+    "hjortronsylt": {
+      "name": "Hjortronsylt",
+      "aliases": [
+        "hjortronsylt"
+      ]
+    },
+    "ingefarsmarmelad": {
+      "name": "Ingefärsmarmelad",
+      "aliases": [
+        "ingefärsmarmelad"
+      ]
+    },
+    "jordgubbsmarmelad": {
+      "name": "Jordgubbsmarmelad",
+      "aliases": [
+        "jordgubbsmarmelad"
+      ]
+    },
+    "jordgubbssylt": {
+      "name": "Jordgubbssylt",
+      "aliases": [
+        "jordgubbssylt"
+      ]
+    },
+    "krusbarssylt": {
+      "name": "Krusbärssylt",
+      "aliases": [
+        "krusbärssylt"
+      ]
+    },
+    "kvittenmarmelad-membrillo": {
+      "name": "Kvittenmarmelad (membrillo)",
+      "aliases": [
+        "kvittenmarmelad (membrillo)",
+        "kvittenmarmelad"
+      ]
+    },
+    "kylsylt": {
+      "name": "Kylsylt",
+      "aliases": [
+        "kylsylt"
+      ]
+    },
+    "korsbarsmarmelad": {
+      "name": "Körsbärsmarmelad",
+      "aliases": [
+        "körsbärsmarmelad"
+      ]
+    },
+    "korsbarssylt": {
+      "name": "Körsbärssylt",
+      "aliases": [
+        "körsbärssylt"
+      ]
+    },
+    "lingonsylt": {
+      "name": "Lingonsylt",
+      "aliases": [
+        "lingonsylt"
+      ]
+    },
+    "lattsylt": {
+      "name": "Lättsylt",
+      "aliases": [
+        "lättsylt"
+      ]
+    },
+    "nyponmarmelad": {
+      "name": "Nyponmarmelad",
+      "aliases": [
+        "nyponmarmelad"
+      ]
+    },
+    "osotat-appelmos": {
+      "name": "Osötat äppelmos",
+      "aliases": [
+        "osötat äppelmos"
+      ]
+    },
+    "plommonmarmelad": {
+      "name": "Plommonmarmelad",
+      "aliases": [
+        "plommonmarmelad"
+      ]
+    },
+    "plommonsylt": {
+      "name": "Plommonsylt",
+      "aliases": [
+        "plommonsylt"
+      ]
+    },
+    "paronmarmelad": {
+      "name": "Päronmarmelad",
+      "aliases": [
+        "päronmarmelad"
+      ]
+    },
+    "rabarbermarmelad": {
+      "name": "Rabarbermarmelad",
+      "aliases": [
+        "rabarbermarmelad"
+      ]
+    },
+    "rabarbersylt": {
+      "name": "Rabarbersylt",
+      "aliases": [
+        "rabarbersylt"
+      ]
+    },
+    "rodloksmarmelad": {
+      "name": "Rödlöksmarmelad",
+      "aliases": [
+        "rödlöksmarmelad"
+      ]
+    },
+    "ronnbarsgele": {
+      "name": "Rönnbärsgelé",
+      "aliases": [
+        "rönnbärsgelé"
+      ]
+    },
+    "salmbarssylt": {
+      "name": "Salmbärssylt",
+      "aliases": [
+        "salmbärssylt"
+      ]
+    },
+    "svartvinbarsgele": {
+      "name": "Svartvinbärsgelé",
+      "aliases": [
+        "svartvinbärsgelé"
+      ]
+    },
+    "svartvinbarssylt": {
+      "name": "Svartvinbärssylt",
+      "aliases": [
+        "svartvinbärssylt"
+      ]
+    },
+    "sylt-utan-tillsatt-socker": {
+      "name": "Sylt utan tillsatt socker",
+      "aliases": [
+        "sylt utan tillsatt socker"
+      ]
+    },
+    "tranbarssylt": {
+      "name": "Tranbärssylt",
+      "aliases": [
+        "tranbärssylt"
+      ]
+    },
+    "vinbarsgele": {
+      "name": "Vinbärsgelé",
+      "aliases": [
+        "vinbärsgelé"
+      ]
+    },
+    "akerbarssylt": {
+      "name": "Åkerbärssylt",
+      "aliases": [
+        "åkerbärssylt"
+      ]
+    },
+    "appelgele": {
+      "name": "Äppelgelé",
+      "aliases": [
+        "äppelgelé"
+      ]
+    },
+    "appelmos": {
+      "name": "Äppelmos",
+      "aliases": [
+        "äppelmos"
+      ]
+    },
+    "akaciahonung": {
+      "name": "Akaciahonung",
+      "aliases": [
+        "akaciahonung"
+      ]
+    },
+    "blandat-notsmor": {
+      "name": "Blandat nötsmör",
+      "aliases": [
+        "blandat nötsmör"
+      ]
+    },
+    "bredbar-kokoskram": {
+      "name": "Bredbar kokoskräm",
+      "aliases": [
+        "bredbar kokoskräm"
+      ]
+    },
+    "cashewsmor": {
+      "name": "Cashewsmör",
+      "aliases": [
+        "cashewsmör"
+      ]
+    },
+    "chokladkram": {
+      "name": "Chokladkräm",
+      "aliases": [
+        "chokladkräm"
+      ]
+    },
+    "dulce-de-leche": {
+      "name": "Dulce de leche",
+      "aliases": [
+        "dulce de leche"
+      ]
+    },
+    "fast-honung": {
+      "name": "Fast honung",
+      "aliases": [
+        "fast honung"
+      ]
+    },
+    "flytande-honung": {
+      "name": "Flytande honung",
+      "aliases": [
+        "flytande honung"
+      ]
+    },
+    "hasselnotssmor": {
+      "name": "Hasselnötssmör",
+      "aliases": [
+        "hasselnötssmör"
+      ]
+    },
+    "honung-i-vaxkaka": {
+      "name": "Honung i vaxkaka",
+      "aliases": [
+        "honung i vaxkaka"
+      ]
+    },
+    "jordnotssmor-utan-tillsatt-socker": {
+      "name": "Jordnötssmör utan tillsatt socker",
+      "aliases": [
+        "jordnötssmör utan tillsatt socker"
+      ]
+    },
+    "kakkram": {
+      "name": "Kakkräm",
+      "aliases": [
+        "kakkräm"
+      ]
+    },
+    "kolakram": {
+      "name": "Kolakräm",
+      "aliases": [
+        "kolakräm"
+      ]
+    },
+    "krispigt-jordnotssmor": {
+      "name": "Krispigt jordnötssmör",
+      "aliases": [
+        "krispigt jordnötssmör"
+      ]
+    },
+    "lemon-curd": {
+      "name": "Lemon curd",
+      "aliases": [
+        "lemon curd"
+      ]
+    },
+    "ljunghonung": {
+      "name": "Ljunghonung",
+      "aliases": [
+        "ljunghonung"
+      ]
+    },
+    "mandelsmor": {
+      "name": "Mandelsmör",
+      "aliases": [
+        "mandelsmör"
+      ]
+    },
+    "manukahonung": {
+      "name": "Manukahonung",
+      "aliases": [
+        "manukahonung"
+      ]
+    },
+    "notkram": {
+      "name": "Nötkräm",
+      "aliases": [
+        "nötkräm"
+      ]
+    },
+    "pistagekram": {
+      "name": "Pistagekräm",
+      "aliases": [
+        "pistagekräm"
+      ]
+    },
+    "solrosfrosmor": {
+      "name": "Solrosfrösmör",
+      "aliases": [
+        "solrosfrösmör"
+      ]
+    },
+    "vit-chokladkram": {
+      "name": "Vit chokladkräm",
+      "aliases": [
+        "vit chokladkräm"
+      ]
+    },
+    "blackfiskpasta": {
+      "name": "Bläckfiskpasta",
+      "aliases": [
+        "bläckfiskpasta"
+      ]
+    },
+    "bokstavspasta": {
+      "name": "Bokstavspasta",
+      "aliases": [
+        "bokstavspasta"
+      ]
+    },
+    "breda-risnudlar": {
+      "name": "Breda risnudlar",
+      "aliases": [
+        "breda risnudlar"
+      ]
+    },
+    "bucatini": {
+      "name": "Bucatini",
+      "aliases": [
+        "bucatini"
+      ]
+    },
+    "bonpasta": {
+      "name": "Bönpasta",
+      "aliases": [
+        "bönpasta"
+      ]
+    },
+    "capellini": {
+      "name": "Capellini",
+      "aliases": [
+        "capellini"
+      ]
+    },
+    "casarecce": {
+      "name": "Casarecce",
+      "aliases": [
+        "casarecce"
+      ]
+    },
+    "cavatappi": {
+      "name": "Cavatappi",
+      "aliases": [
+        "cavatappi"
+      ]
+    },
+    "conchiglie": {
+      "name": "Conchiglie",
+      "aliases": [
+        "conchiglie"
+      ]
+    },
+    "conchiglioni": {
+      "name": "Conchiglioni",
+      "aliases": [
+        "conchiglioni"
+      ]
+    },
+    "dinkelpasta": {
+      "name": "Dinkelpasta",
+      "aliases": [
+        "dinkelpasta"
+      ]
+    },
+    "ditalini": {
+      "name": "Ditalini",
+      "aliases": [
+        "ditalini"
+      ]
+    },
+    "fettuccine": {
+      "name": "Fettuccine",
+      "aliases": [
+        "fettuccine"
+      ]
+    },
+    "figurpasta": {
+      "name": "Figurpasta",
+      "aliases": [
+        "figurpasta"
+      ]
+    },
+    "fregola-rostade-pastaparlor": {
+      "name": "Fregola (rostade pastapärlor)",
+      "aliases": [
+        "fregola (rostade pastapärlor)",
+        "fregola"
+      ]
+    },
+    "fullkornsmakaroner": {
+      "name": "Fullkornsmakaroner",
+      "aliases": [
+        "fullkornsmakaroner"
+      ]
+    },
+    "fullkornspasta": {
+      "name": "Fullkornspasta",
+      "aliases": [
+        "fullkornspasta"
+      ]
+    },
+    "fullkornsspaghetti": {
+      "name": "Fullkornsspaghetti",
+      "aliases": [
+        "fullkornsspaghetti"
+      ]
+    },
+    "gemelli": {
+      "name": "Gemelli",
+      "aliases": [
+        "gemelli"
+      ]
+    },
+    "glasnudlar": {
+      "name": "Glasnudlar",
+      "aliases": [
+        "glasnudlar"
+      ]
+    },
+    "idealmakaroner": {
+      "name": "Idealmakaroner",
+      "aliases": [
+        "idealmakaroner"
+      ]
+    },
+    "kikartspasta": {
+      "name": "Kikärtspasta",
+      "aliases": [
+        "kikärtspasta"
+      ]
+    },
+    "linguine": {
+      "name": "Linguine",
+      "aliases": [
+        "linguine"
+      ]
+    },
+    "linspasta": {
+      "name": "Linspasta",
+      "aliases": [
+        "linspasta"
+      ]
+    },
+    "mafaldine": {
+      "name": "Mafaldine",
+      "aliases": [
+        "mafaldine"
+      ]
+    },
+    "majspasta": {
+      "name": "Majspasta",
+      "aliases": [
+        "majspasta"
+      ]
+    },
+    "mienudlar": {
+      "name": "Mienudlar",
+      "aliases": [
+        "mienudlar"
+      ]
+    },
+    "nudlar-i-kopp": {
+      "name": "Nudlar i kopp",
+      "aliases": [
+        "nudlar i kopp"
+      ]
+    },
+    "orecchiette": {
+      "name": "Orecchiette",
+      "aliases": [
+        "orecchiette"
+      ]
+    },
+    "orzo": {
+      "name": "Orzo",
+      "aliases": [
+        "orzo"
+      ]
+    },
+    "paccheri": {
+      "name": "Paccheri",
+      "aliases": [
+        "paccheri"
+      ]
+    },
+    "pappardelle": {
+      "name": "Pappardelle",
+      "aliases": [
+        "pappardelle"
+      ]
+    },
+    "pasta-av-sojabonor": {
+      "name": "Pasta av sojabönor",
+      "aliases": [
+        "pasta av sojabönor"
+      ]
+    },
+    "radiatori": {
+      "name": "Radiatori",
+      "aliases": [
+        "radiatori"
+      ]
+    },
+    "ramennudlar": {
+      "name": "Ramennudlar",
+      "aliases": [
+        "ramennudlar"
+      ]
+    },
+    "risvermicelli": {
+      "name": "Risvermicelli",
+      "aliases": [
+        "risvermicelli"
+      ]
+    },
+    "rotelle-hjulpasta": {
+      "name": "Rotelle (hjulpasta)",
+      "aliases": [
+        "rotelle (hjulpasta)",
+        "rotelle"
+      ]
+    },
+    "snabbmakaroner": {
+      "name": "Snabbmakaroner",
+      "aliases": [
+        "snabbmakaroner"
+      ]
+    },
+    "snabbnudlar": {
+      "name": "Snabbnudlar",
+      "aliases": [
+        "snabbnudlar"
+      ]
+    },
+    "sobanudlar": {
+      "name": "Sobanudlar",
+      "aliases": [
+        "sobanudlar",
+        "soba"
+      ]
+    },
+    "somennudlar": {
+      "name": "Somennudlar",
+      "aliases": [
+        "somennudlar",
+        "somen"
+      ]
+    },
+    "soppasta": {
+      "name": "Soppasta",
+      "aliases": [
+        "soppasta"
+      ]
+    },
+    "spaghettini": {
+      "name": "Spaghettini",
+      "aliases": [
+        "spaghettini"
+      ]
+    },
+    "spenatpasta": {
+      "name": "Spenatpasta",
+      "aliases": [
+        "spenatpasta"
+      ]
+    },
+    "strozzapreti": {
+      "name": "Strozzapreti",
+      "aliases": [
+        "strozzapreti"
+      ]
+    },
+    "sotpotatisnudlar-dangmyeon": {
+      "name": "Sötpotatisnudlar (dangmyeon)",
+      "aliases": [
+        "sötpotatisnudlar (dangmyeon)",
+        "sötpotatisnudlar"
+      ]
+    },
+    "tagliolini": {
+      "name": "Tagliolini",
+      "aliases": [
+        "tagliolini"
+      ]
+    },
+    "tortellini": {
+      "name": "Tortellini",
+      "aliases": [
+        "tortellini"
+      ]
+    },
+    "tortiglioni": {
+      "name": "Tortiglioni",
+      "aliases": [
+        "tortiglioni"
+      ]
+    },
+    "tricolorepasta": {
+      "name": "Tricolorepasta",
+      "aliases": [
+        "tricolorepasta"
+      ]
+    },
+    "trofie": {
+      "name": "Trofie",
+      "aliases": [
+        "trofie"
+      ]
+    },
+    "udonnudlar": {
+      "name": "Udonnudlar",
+      "aliases": [
+        "udonnudlar"
+      ]
+    },
+    "vermicelli": {
+      "name": "Vermicelli",
+      "aliases": [
+        "vermicelli"
+      ]
+    },
+    "aggpasta": {
+      "name": "Äggpasta",
+      "aliases": [
+        "äggpasta"
+      ]
+    },
+    "amarant": {
+      "name": "Amarant",
+      "aliases": [
+        "amarant"
+      ]
+    },
+    "arborioris": {
+      "name": "Arborioris",
+      "aliases": [
+        "arborioris"
+      ]
+    },
+    "bombaris": {
+      "name": "Bombaris",
+      "aliases": [
+        "bombaris"
+      ]
+    },
+    "bovete": {
+      "name": "Bovete",
+      "aliases": [
+        "bovete"
+      ]
+    },
+    "bulgur": {
+      "name": "Bulgur",
+      "aliases": [
+        "bulgur"
+      ]
+    },
+    "carnaroliris": {
+      "name": "Carnaroliris",
+      "aliases": [
+        "carnaroliris"
+      ]
+    },
+    "couscous": {
+      "name": "Couscous",
+      "aliases": [
+        "couscous"
+      ]
+    },
+    "farro": {
+      "name": "Farro",
+      "aliases": [
+        "farro"
+      ]
+    },
+    "fin-bulgur": {
+      "name": "Fin bulgur",
+      "aliases": [
+        "fin bulgur"
+      ]
+    },
+    "fullkornsbasmatiris": {
+      "name": "Fullkornsbasmatiris",
+      "aliases": [
+        "fullkornsbasmatiris"
+      ]
+    },
+    "fullkornscouscous": {
+      "name": "Fullkornscouscous",
+      "aliases": [
+        "fullkornscouscous"
+      ]
+    },
+    "fullkornsris": {
+      "name": "Fullkornsris",
+      "aliases": [
+        "fullkornsris"
+      ]
+    },
+    "grov-bulgur": {
+      "name": "Grov bulgur",
+      "aliases": [
+        "grov bulgur"
+      ]
+    },
+    "grynblandning-for-matlagning": {
+      "name": "Grynblandning för matlagning",
+      "aliases": [
+        "grynblandning för matlagning"
+      ]
+    },
+    "grotris": {
+      "name": "Grötris",
+      "aliases": [
+        "grötris"
+      ]
+    },
+    "havreris": {
+      "name": "Havreris",
+      "aliases": [
+        "havreris"
+      ]
+    },
+    "hela-vetekorn": {
+      "name": "Hela vetekorn",
+      "aliases": [
+        "hela vetekorn"
+      ]
+    },
+    "hirs": {
+      "name": "Hirs",
+      "aliases": [
+        "hirs"
+      ]
+    },
+    "klibbris": {
+      "name": "Klibbris",
+      "aliases": [
+        "klibbris"
+      ]
+    },
+    "kokpasris": {
+      "name": "Kokpåsris",
+      "aliases": [
+        "kokpåsris"
+      ]
+    },
+    "langkornigt-ris": {
+      "name": "Långkornigt ris",
+      "aliases": [
+        "långkornigt ris"
+      ]
+    },
+    "mathavre": {
+      "name": "Mathavre",
+      "aliases": [
+        "mathavre"
+      ]
+    },
+    "matvete": {
+      "name": "Matvete",
+      "aliases": [
+        "matvete"
+      ]
+    },
+    "mikroris": {
+      "name": "Mikroris",
+      "aliases": [
+        "mikroris"
+      ]
+    },
+    "paellaris": {
+      "name": "Paellaris",
+      "aliases": [
+        "paellaris"
+      ]
+    },
+    "parboiled-ris": {
+      "name": "Parboiled ris",
+      "aliases": [
+        "parboiled ris"
+      ]
+    },
+    "polenta": {
+      "name": "Polenta",
+      "aliases": [
+        "polenta"
+      ]
+    },
+    "parlcouscous": {
+      "name": "Pärlcouscous",
+      "aliases": [
+        "pärlcouscous"
+      ]
+    },
+    "parlgryn": {
+      "name": "Pärlgryn",
+      "aliases": [
+        "pärlgryn"
+      ]
+    },
+    "risgryn": {
+      "name": "Risgryn",
+      "aliases": [
+        "risgryn"
+      ]
+    },
+    "rostat-bovete-kasha": {
+      "name": "Rostat bovete (kasha)",
+      "aliases": [
+        "rostat bovete (kasha)",
+        "rostat bovete"
+      ]
+    },
+    "rundkornigt-ris": {
+      "name": "Rundkornigt ris",
+      "aliases": [
+        "rundkornigt ris"
+      ]
+    },
+    "raris": {
+      "name": "Råris",
+      "aliases": [
+        "råris"
+      ]
+    },
+    "rod-quinoa": {
+      "name": "Röd quinoa",
+      "aliases": [
+        "röd quinoa"
+      ]
+    },
+    "rott-ris": {
+      "name": "Rött ris",
+      "aliases": [
+        "rött ris"
+      ]
+    },
+    "sagogryn": {
+      "name": "Sagogryn",
+      "aliases": [
+        "sagogryn"
+      ]
+    },
+    "smaksatt-ris": {
+      "name": "Smaksatt ris",
+      "aliases": [
+        "smaksatt ris"
+      ]
+    },
+    "snabbris": {
+      "name": "Snabbris",
+      "aliases": [
+        "snabbris"
+      ]
+    },
+    "speltkarnor": {
+      "name": "Speltkärnor",
+      "aliases": [
+        "speltkärnor"
+      ]
+    },
+    "sushiris": {
+      "name": "Sushiris",
+      "aliases": [
+        "sushiris"
+      ]
+    },
+    "svart-quinoa": {
+      "name": "Svart quinoa",
+      "aliases": [
+        "svart quinoa"
+      ]
+    },
+    "svart-ris": {
+      "name": "Svart ris",
+      "aliases": [
+        "svart ris"
+      ]
+    },
+    "trefargad-quinoa": {
+      "name": "Trefärgad quinoa",
+      "aliases": [
+        "trefärgad quinoa"
+      ]
+    },
+    "vialone-nano-ris": {
+      "name": "Vialone nano-ris",
+      "aliases": [
+        "vialone nano-ris"
+      ]
+    },
+    "vildris": {
+      "name": "Vildris",
+      "aliases": [
+        "vildris"
+      ]
+    },
+    "vildrismix": {
+      "name": "Vildrismix",
+      "aliases": [
+        "vildrismix"
+      ]
+    },
+    "adukibonor": {
+      "name": "Adukibönor",
+      "aliases": [
+        "adukibönor"
+      ]
+    },
+    "bakade-bonor": {
+      "name": "Bakade bönor",
+      "aliases": [
+        "bakade bönor"
+      ]
+    },
+    "belugalinser": {
+      "name": "Belugalinser",
+      "aliases": [
+        "belugalinser"
+      ]
+    },
+    "borlottibonor": {
+      "name": "Borlottibönor",
+      "aliases": [
+        "borlottibönor"
+      ]
+    },
+    "bruna-bonor": {
+      "name": "Bruna bönor",
+      "aliases": [
+        "bruna bönor"
+      ]
+    },
+    "bruna-linser": {
+      "name": "Bruna linser",
+      "aliases": [
+        "bruna linser"
+      ]
+    },
+    "butterbonor": {
+      "name": "Butterbönor",
+      "aliases": [
+        "butterbönor"
+      ]
+    },
+    "bonmix": {
+      "name": "Bönmix",
+      "aliases": [
+        "bönmix"
+      ]
+    },
+    "cannellinibonor": {
+      "name": "Cannellinibönor",
+      "aliases": [
+        "cannellinibönor"
+      ]
+    },
+    "chana-dal-delade-kikartor": {
+      "name": "Chana dal (delade kikärtor)",
+      "aliases": [
+        "chana dal (delade kikärtor)",
+        "chana dal"
+      ]
+    },
+    "chilibonor": {
+      "name": "Chilibönor",
+      "aliases": [
+        "chilibönor"
+      ]
+    },
+    "flageoletbonor": {
+      "name": "Flageoletbönor",
+      "aliases": [
+        "flageoletbönor"
+      ]
+    },
+    "franska-grona-linser": {
+      "name": "Franska gröna linser",
+      "aliases": [
+        "franska gröna linser"
+      ]
+    },
+    "graartor": {
+      "name": "Gråärtor",
+      "aliases": [
+        "gråärtor"
+      ]
+    },
+    "grona-torkade-artor": {
+      "name": "Gröna torkade ärtor",
+      "aliases": [
+        "gröna torkade ärtor"
+      ]
+    },
+    "gula-linser": {
+      "name": "Gula linser",
+      "aliases": [
+        "gula linser"
+      ]
+    },
+    "limabonor": {
+      "name": "Limabönor",
+      "aliases": [
+        "limabönor"
+      ]
+    },
+    "linser-pa-burk": {
+      "name": "Linser på burk",
+      "aliases": [
+        "linser på burk"
+      ]
+    },
+    "mung-dal": {
+      "name": "Mung dal",
+      "aliases": [
+        "mung dal"
+      ]
+    },
+    "mungbonor": {
+      "name": "Mungbönor",
+      "aliases": [
+        "mungbönor"
+      ]
+    },
+    "pintobonor": {
+      "name": "Pintobönor",
+      "aliases": [
+        "pintobönor"
+      ]
+    },
+    "roda-bonor": {
+      "name": "Röda bönor",
+      "aliases": [
+        "röda bönor"
+      ]
+    },
+    "sojabonor": {
+      "name": "Sojabönor",
+      "aliases": [
+        "sojabönor"
+      ]
+    },
+    "stora-vita-bonor": {
+      "name": "Stora vita bönor",
+      "aliases": [
+        "stora vita bönor"
+      ]
+    },
+    "svartogda-bonor": {
+      "name": "Svartögda bönor",
+      "aliases": [
+        "svartögda bönor"
+      ]
+    },
+    "toor-dal": {
+      "name": "Toor dal",
+      "aliases": [
+        "toor dal"
+      ]
+    },
+    "torkade-bondbonor": {
+      "name": "Torkade bondbönor",
+      "aliases": [
+        "torkade bondbönor"
+      ]
+    },
+    "uridbonor-urad-dal": {
+      "name": "Uridbönor (urad dal)",
+      "aliases": [
+        "uridbönor (urad dal)",
+        "uridbönor"
+      ]
+    },
+    "vita-bonor-i-tomatsas": {
+      "name": "Vita bönor i tomatsås",
+      "aliases": [
+        "vita bönor i tomatsås"
+      ]
+    },
+    "akerbonor": {
+      "name": "Åkerbönor",
+      "aliases": [
+        "åkerbönor"
+      ]
+    },
+    "ananas-pa-burk": {
+      "name": "Ananas på burk",
+      "aliases": [
+        "ananas på burk"
+      ]
+    },
+    "aprikoser-pa-burk": {
+      "name": "Aprikoser på burk",
+      "aliases": [
+        "aprikoser på burk"
+      ]
+    },
+    "bostongurka": {
+      "name": "Bostongurka",
+      "aliases": [
+        "bostongurka"
+      ]
+    },
+    "champinjoner-pa-burk": {
+      "name": "Champinjoner på burk",
+      "aliases": [
+        "champinjoner på burk"
+      ]
+    },
+    "chili-con-carne-pa-burk": {
+      "name": "Chili con carne på burk",
+      "aliases": [
+        "chili con carne på burk"
+      ]
+    },
+    "corned-beef": {
+      "name": "Corned beef",
+      "aliases": [
+        "corned beef"
+      ]
+    },
+    "cornichons": {
+      "name": "Cornichons",
+      "aliases": [
+        "cornichons"
+      ]
+    },
+    "finkrossade-tomater": {
+      "name": "Finkrossade tomater",
+      "aliases": [
+        "finkrossade tomater"
+      ]
+    },
+    "fruktcocktail": {
+      "name": "Fruktcocktail",
+      "aliases": [
+        "fruktcocktail"
+      ]
+    },
+    "giardiniera": {
+      "name": "Giardiniera",
+      "aliases": [
+        "giardiniera"
+      ]
+    },
+    "grapefrukt-pa-burk": {
+      "name": "Grapefrukt på burk",
+      "aliases": [
+        "grapefrukt på burk"
+      ]
+    },
+    "grona-bonor-pa-burk": {
+      "name": "Gröna bönor på burk",
+      "aliases": [
+        "gröna bönor på burk"
+      ]
+    },
+    "hela-tomater": {
+      "name": "Hela tomater",
+      "aliases": [
+        "hela tomater"
+      ]
+    },
+    "inlagd-gurka": {
+      "name": "Inlagd gurka",
+      "aliases": [
+        "inlagd gurka"
+      ]
+    },
+    "inlagd-pumpa": {
+      "name": "Inlagd pumpa",
+      "aliases": [
+        "inlagd pumpa"
+      ]
+    },
+    "inlagd-rodkal": {
+      "name": "Inlagd rödkål",
+      "aliases": [
+        "inlagd rödkål"
+      ]
+    },
+    "inlagd-rodlok": {
+      "name": "Inlagd rödlök",
+      "aliases": [
+        "inlagd rödlök"
+      ]
+    },
+    "jalapenos": {
+      "name": "Jalapeños",
+      "aliases": [
+        "jalapeños"
+      ]
+    },
+    "jordgubbar-pa-burk": {
+      "name": "Jordgubbar på burk",
+      "aliases": [
+        "jordgubbar på burk"
+      ]
+    },
+    "kastanjepure": {
+      "name": "Kastanjepuré",
+      "aliases": [
+        "kastanjepuré"
+      ]
+    },
+    "kikartor-i-tomatsas": {
+      "name": "Kikärtor i tomatsås",
+      "aliases": [
+        "kikärtor i tomatsås"
+      ]
+    },
+    "krossad-ananas": {
+      "name": "Krossad ananas",
+      "aliases": [
+        "krossad ananas"
+      ]
+    },
+    "korsbar-pa-burk": {
+      "name": "Körsbär på burk",
+      "aliases": [
+        "körsbär på burk"
+      ]
+    },
+    "korsbarstomater-pa-burk": {
+      "name": "Körsbärstomater på burk",
+      "aliases": [
+        "körsbärstomater på burk"
+      ]
+    },
+    "kottbullar-pa-burk": {
+      "name": "Köttbullar på burk",
+      "aliases": [
+        "köttbullar på burk"
+      ]
+    },
+    "kottgryta-pa-burk": {
+      "name": "Köttgryta på burk",
+      "aliases": [
+        "köttgryta på burk"
+      ]
+    },
+    "litchi-pa-burk": {
+      "name": "Litchi på burk",
+      "aliases": [
+        "litchi på burk"
+      ]
+    },
+    "luncheon-meat": {
+      "name": "Luncheon meat",
+      "aliases": [
+        "luncheon meat"
+      ]
+    },
+    "majskram": {
+      "name": "Majskräm",
+      "aliases": [
+        "majskräm"
+      ]
+    },
+    "mandariner-pa-burk": {
+      "name": "Mandariner på burk",
+      "aliases": [
+        "mandariner på burk"
+      ]
+    },
+    "mango-pa-burk": {
+      "name": "Mango på burk",
+      "aliases": [
+        "mango på burk"
+      ]
+    },
+    "mixed-pickles": {
+      "name": "Mixed pickles",
+      "aliases": [
+        "mixed pickles"
+      ]
+    },
+    "morotter-pa-burk": {
+      "name": "Morötter på burk",
+      "aliases": [
+        "morötter på burk"
+      ]
+    },
+    "palmhjartan": {
+      "name": "Palmhjärtan",
+      "aliases": [
+        "palmhjärtan"
+      ]
+    },
+    "pepperoncini": {
+      "name": "Pepperoncini",
+      "aliases": [
+        "pepperoncini"
+      ]
+    },
+    "persikor-pa-burk": {
+      "name": "Persikor på burk",
+      "aliases": [
+        "persikor på burk"
+      ]
+    },
+    "pressgurka": {
+      "name": "Pressgurka",
+      "aliases": [
+        "pressgurka"
+      ]
+    },
+    "paron-pa-burk": {
+      "name": "Päron på burk",
+      "aliases": [
+        "päron på burk"
+      ]
+    },
+    "ravioli-pa-burk": {
+      "name": "Ravioli på burk",
+      "aliases": [
+        "ravioli på burk"
+      ]
+    },
+    "relish": {
+      "name": "Relish",
+      "aliases": [
+        "relish"
+      ]
+    },
+    "senapsgurka": {
+      "name": "Senapsgurka",
+      "aliases": [
+        "senapsgurka"
+      ]
+    },
+    "silverlok": {
+      "name": "Silverlök",
+      "aliases": [
+        "silverlök"
+      ]
+    },
+    "skinkkonserv": {
+      "name": "Skinkkonserv",
+      "aliases": [
+        "skinkkonserv"
+      ]
+    },
+    "skivade-rodbetor": {
+      "name": "Skivade rödbetor",
+      "aliases": [
+        "skivade rödbetor"
+      ]
+    },
+    "smaksatta-krossade-tomater": {
+      "name": "Smaksatta krossade tomater",
+      "aliases": [
+        "smaksatta krossade tomater"
+      ]
+    },
+    "smorgasgurka": {
+      "name": "Smörgåsgurka",
+      "aliases": [
+        "smörgåsgurka"
+      ]
+    },
+    "spaghetti-i-tomatsas-pa-burk": {
+      "name": "Spaghetti i tomatsås på burk",
+      "aliases": [
+        "spaghetti i tomatsås på burk"
+      ]
+    },
+    "sparris-pa-burk": {
+      "name": "Sparris på burk",
+      "aliases": [
+        "sparris på burk"
+      ]
+    },
+    "surkal": {
+      "name": "Surkål",
+      "aliases": [
+        "surkål"
+      ]
+    },
+    "tarnade-tomater": {
+      "name": "Tärnade tomater",
+      "aliases": [
+        "tärnade tomater"
+      ]
+    },
+    "vakuumforpackade-kastanjer": {
+      "name": "Vakuumförpackade kastanjer",
+      "aliases": [
+        "vakuumförpackade kastanjer"
+      ]
+    },
+    "vaxbonor-pa-burk": {
+      "name": "Vaxbönor på burk",
+      "aliases": [
+        "vaxbönor på burk"
+      ]
+    },
+    "artor-och-morotter-pa-burk": {
+      "name": "Ärtor och morötter på burk",
+      "aliases": [
+        "ärtor och morötter på burk"
+      ]
+    },
+    "artor-pa-burk": {
+      "name": "Ärtor på burk",
+      "aliases": [
+        "ärtor på burk"
+      ]
+    },
+    "arganolja": {
+      "name": "Arganolja",
+      "aliases": [
+        "arganolja"
+      ]
+    },
+    "avokadoolja": {
+      "name": "Avokadoolja",
+      "aliases": [
+        "avokadoolja"
+      ]
+    },
+    "balsamicokram": {
+      "name": "Balsamicokräm",
+      "aliases": [
+        "balsamicokräm"
+      ]
+    },
+    "balsamvinager": {
+      "name": "Balsamvinäger",
+      "aliases": [
+        "balsamvinäger"
+      ]
+    },
+    "basilikaolja": {
+      "name": "Basilikaolja",
+      "aliases": [
+        "basilikaolja"
+      ]
+    },
+    "champagnevinager": {
+      "name": "Champagnevinäger",
+      "aliases": [
+        "champagnevinäger"
+      ]
+    },
+    "chiliolja": {
+      "name": "Chiliolja",
+      "aliases": [
+        "chiliolja"
+      ]
+    },
+    "citronolja": {
+      "name": "Citronolja",
+      "aliases": [
+        "citronolja"
+      ]
+    },
+    "dragonvinager": {
+      "name": "Dragonvinäger",
+      "aliases": [
+        "dragonvinäger"
+      ]
+    },
+    "druvkarnolja": {
+      "name": "Druvkärnolja",
+      "aliases": [
+        "druvkärnolja"
+      ]
+    },
+    "extra-virgin-olivolja": {
+      "name": "Extra virgin olivolja",
+      "aliases": [
+        "extra virgin olivolja"
+      ]
+    },
+    "frityrolja": {
+      "name": "Frityrolja",
+      "aliases": [
+        "frityrolja"
+      ]
+    },
+    "hallonvinager": {
+      "name": "Hallonvinäger",
+      "aliases": [
+        "hallonvinäger"
+      ]
+    },
+    "hampfroolja": {
+      "name": "Hampfröolja",
+      "aliases": [
+        "hampfröolja"
+      ]
+    },
+    "hasselnotsolja": {
+      "name": "Hasselnötsolja",
+      "aliases": [
+        "hasselnötsolja"
+      ]
+    },
+    "jordnotsolja": {
+      "name": "Jordnötsolja",
+      "aliases": [
+        "jordnötsolja"
+      ]
+    },
+    "kallpressad-rapsolja": {
+      "name": "Kallpressad rapsolja",
+      "aliases": [
+        "kallpressad rapsolja"
+      ]
+    },
+    "kokosolja": {
+      "name": "Kokosolja",
+      "aliases": [
+        "kokosolja"
+      ]
+    },
+    "lagrad-balsamvinager": {
+      "name": "Lagrad balsamvinäger",
+      "aliases": [
+        "lagrad balsamvinäger"
+      ]
+    },
+    "linfroolja": {
+      "name": "Linfröolja",
+      "aliases": [
+        "linfröolja"
+      ]
+    },
+    "majsolja": {
+      "name": "Majsolja",
+      "aliases": [
+        "majsolja"
+      ]
+    },
+    "matlagningsvin": {
+      "name": "Matlagningsvin",
+      "aliases": [
+        "matlagningsvin"
+      ]
+    },
+    "mild-olivolja": {
+      "name": "Mild olivolja",
+      "aliases": [
+        "mild olivolja"
+      ]
+    },
+    "neutral-matolja-oljeblandning": {
+      "name": "Neutral matolja (oljeblandning)",
+      "aliases": [
+        "neutral matolja (oljeblandning)",
+        "neutral matolja"
+      ]
+    },
+    "pumpakarnolja": {
+      "name": "Pumpakärnolja",
+      "aliases": [
+        "pumpakärnolja"
+      ]
+    },
+    "rapsolja-med-smorsmak": {
+      "name": "Rapsolja med smörsmak",
+      "aliases": [
+        "rapsolja med smörsmak"
+      ]
+    },
+    "risolja": {
+      "name": "Risolja",
+      "aliases": [
+        "risolja"
+      ]
+    },
+    "risvinager": {
+      "name": "Risvinäger",
+      "aliases": [
+        "risvinäger"
+      ]
+    },
+    "rodvinsvinager": {
+      "name": "Rödvinsvinäger",
+      "aliases": [
+        "rödvinsvinäger"
+      ]
+    },
+    "sesamolja": {
+      "name": "Sesamolja",
+      "aliases": [
+        "sesamolja"
+      ]
+    },
+    "sherryvinager": {
+      "name": "Sherryvinäger",
+      "aliases": [
+        "sherryvinäger"
+      ]
+    },
+    "solrosolja": {
+      "name": "Solrosolja",
+      "aliases": [
+        "solrosolja"
+      ]
+    },
+    "stekspray": {
+      "name": "Stekspray",
+      "aliases": [
+        "stekspray"
+      ]
+    },
+    "tryffelolja": {
+      "name": "Tryffelolja",
+      "aliases": [
+        "tryffelolja"
+      ]
+    },
+    "valnotsolja": {
+      "name": "Valnötsolja",
+      "aliases": [
+        "valnötsolja"
+      ]
+    },
+    "vit-balsamvinager": {
+      "name": "Vit balsamvinäger",
+      "aliases": [
+        "vit balsamvinäger"
+      ]
+    },
+    "vitloksolja": {
+      "name": "Vitlöksolja",
+      "aliases": [
+        "vitlöksolja"
+      ]
+    },
+    "vitvinsvinager": {
+      "name": "Vitvinsvinäger",
+      "aliases": [
+        "vitvinsvinäger"
+      ]
+    },
+    "wokolja": {
+      "name": "Wokolja",
+      "aliases": [
+        "wokolja"
+      ]
+    },
+    "appelcidervinager": {
+      "name": "Äppelcidervinäger",
+      "aliases": [
+        "äppelcidervinäger"
+      ]
+    },
+    "attiksprit": {
+      "name": "Ättiksprit",
+      "aliases": [
+        "ättiksprit"
+      ]
+    },
+    "balsamicodressing": {
+      "name": "Balsamicodressing",
+      "aliases": [
+        "balsamicodressing"
+      ]
+    },
+    "bbq-sas": {
+      "name": "BBQ-sås",
+      "aliases": [
+        "bbq-sås"
+      ]
+    },
+    "brown-sauce": {
+      "name": "Brown sauce",
+      "aliases": [
+        "brown sauce"
+      ]
+    },
+    "brunsas": {
+      "name": "Brunsås",
+      "aliases": [
+        "brunsås"
+      ]
+    },
+    "buffalosas": {
+      "name": "Buffalosås",
+      "aliases": [
+        "buffalosås"
+      ]
+    },
+    "caesardressing": {
+      "name": "Caesardressing",
+      "aliases": [
+        "caesardressing"
+      ]
+    },
+    "carbonarasas": {
+      "name": "Carbonarasås",
+      "aliases": [
+        "carbonarasås"
+      ]
+    },
+    "cheddarsas": {
+      "name": "Cheddarsås",
+      "aliases": [
+        "cheddarsås"
+      ]
+    },
+    "chiliketchup": {
+      "name": "Chiliketchup",
+      "aliases": [
+        "chiliketchup"
+      ]
+    },
+    "chilimajonnas": {
+      "name": "Chilimajonnäs",
+      "aliases": [
+        "chilimajonnäs"
+      ]
+    },
+    "chilisas": {
+      "name": "Chilisås",
+      "aliases": [
+        "chilisås"
+      ]
+    },
+    "chimichurrisas": {
+      "name": "Chimichurrisås",
+      "aliases": [
+        "chimichurrisås"
+      ]
+    },
+    "chipotlesas": {
+      "name": "Chipotlesås",
+      "aliases": [
+        "chipotlesås"
+      ]
+    },
+    "citronsas-till-fisk": {
+      "name": "Citronsås till fisk",
+      "aliases": [
+        "citronsås till fisk"
+      ]
+    },
+    "cumberlandsas": {
+      "name": "Cumberlandsås",
+      "aliases": [
+        "cumberlandsås"
+      ]
+    },
+    "curryketchup": {
+      "name": "Curryketchup",
+      "aliases": [
+        "curryketchup"
+      ]
+    },
+    "currysas": {
+      "name": "Currysås",
+      "aliases": [
+        "currysås"
+      ]
+    },
+    "demi-glace": {
+      "name": "Demi-glace",
+      "aliases": [
+        "demi-glace"
+      ]
+    },
+    "dillsas": {
+      "name": "Dillsås",
+      "aliases": [
+        "dillsås"
+      ]
+    },
+    "fransk-dressing": {
+      "name": "Fransk dressing",
+      "aliases": [
+        "fransk dressing"
+      ]
+    },
+    "fransk-senap": {
+      "name": "Fransk senap",
+      "aliases": [
+        "fransk senap"
+      ]
+    },
+    "grillglaze": {
+      "name": "Grillglaze",
+      "aliases": [
+        "grillglaze"
+      ]
+    },
+    "grillmarinad": {
+      "name": "Grillmarinad",
+      "aliases": [
+        "grillmarinad"
+      ]
+    },
+    "grillolja": {
+      "name": "Grillolja",
+      "aliases": [
+        "grillolja"
+      ]
+    },
+    "grovkornig-senap": {
+      "name": "Grovkornig senap",
+      "aliases": [
+        "grovkornig senap"
+      ]
+    },
+    "graddsas": {
+      "name": "Gräddsås",
+      "aliases": [
+        "gräddsås"
+      ]
+    },
+    "gronpepparsas": {
+      "name": "Grönpepparsås",
+      "aliases": [
+        "grönpepparsås"
+      ]
+    },
+    "hamburgerdressing": {
+      "name": "Hamburgerdressing",
+      "aliases": [
+        "hamburgerdressing"
+      ]
+    },
+    "hollandaisesas": {
+      "name": "Hollandaisesås",
+      "aliases": [
+        "hollandaisesås"
+      ]
+    },
+    "honungs-och-senapsdressing": {
+      "name": "Honungs- och senapsdressing",
+      "aliases": [
+        "honungs- och senapsdressing"
+      ]
+    },
+    "honungssenap": {
+      "name": "Honungssenap",
+      "aliases": [
+        "honungssenap"
+      ]
+    },
+    "hot-sauce": {
+      "name": "Hot sauce",
+      "aliases": [
+        "hot sauce"
+      ]
+    },
+    "hummersas": {
+      "name": "Hummersås",
+      "aliases": [
+        "hummersås"
+      ]
+    },
+    "italiensk-dressing": {
+      "name": "Italiensk dressing",
+      "aliases": [
+        "italiensk dressing"
+      ]
+    },
+    "julsenap": {
+      "name": "Julsenap",
+      "aliases": [
+        "julsenap"
+      ]
+    },
+    "kall-ortsas": {
+      "name": "Kall örtsås",
+      "aliases": [
+        "kall örtsås"
+      ]
+    },
+    "kantarellsas": {
+      "name": "Kantarellsås",
+      "aliases": [
+        "kantarellsås"
+      ]
+    },
+    "ketchup": {
+      "name": "Ketchup",
+      "aliases": [
+        "ketchup"
+      ]
+    },
+    "latt-majonnas": {
+      "name": "Lätt majonnäs",
+      "aliases": [
+        "lätt majonnäs"
+      ]
+    },
+    "loksas": {
+      "name": "Löksås",
+      "aliases": [
+        "löksås"
+      ]
+    },
+    "mintsas": {
+      "name": "Mintsås",
+      "aliases": [
+        "mintsås"
+      ]
+    },
+    "ostsas": {
+      "name": "Ostsås",
+      "aliases": [
+        "ostsås"
+      ]
+    },
+    "pastasas": {
+      "name": "Pastasås",
+      "aliases": [
+        "pastasås"
+      ]
+    },
+    "pepparrotsvisp": {
+      "name": "Pepparrotsvisp",
+      "aliases": [
+        "pepparrotsvisp"
+      ]
+    },
+    "pepparsas": {
+      "name": "Pepparsås",
+      "aliases": [
+        "pepparsås"
+      ]
+    },
+    "pizzasas": {
+      "name": "Pizzasås",
+      "aliases": [
+        "pizzasås"
+      ]
+    },
+    "ranchdressing": {
+      "name": "Ranchdressing",
+      "aliases": [
+        "ranchdressing"
+      ]
+    },
+    "rhode-island-dressing": {
+      "name": "Rhode Island-dressing",
+      "aliases": [
+        "rhode island-dressing"
+      ]
+    },
+    "riven-pepparrot-pa-burk": {
+      "name": "Riven pepparrot på burk",
+      "aliases": [
+        "riven pepparrot på burk"
+      ]
+    },
+    "rostad-lok": {
+      "name": "Rostad lök",
+      "aliases": [
+        "rostad lök"
+      ]
+    },
+    "rodvinssas": {
+      "name": "Rödvinssås",
+      "aliases": [
+        "rödvinssås"
+      ]
+    },
+    "salladsdressing": {
+      "name": "Salladsdressing",
+      "aliases": [
+        "salladsdressing"
+      ]
+    },
+    "sandefjordsas": {
+      "name": "Sandefjordsås",
+      "aliases": [
+        "sandefjordsås"
+      ]
+    },
+    "senapssas": {
+      "name": "Senapssås",
+      "aliases": [
+        "senapssås"
+      ]
+    },
+    "skaldjurssas": {
+      "name": "Skaldjurssås",
+      "aliases": [
+        "skaldjurssås"
+      ]
+    },
+    "skysas": {
+      "name": "Skysås",
+      "aliases": [
+        "skysås"
+      ]
+    },
+    "skansk-senap": {
+      "name": "Skånsk senap",
+      "aliases": [
+        "skånsk senap"
+      ]
+    },
+    "srirachamajonnas": {
+      "name": "Srirachamajonnäs",
+      "aliases": [
+        "srirachamajonnäs"
+      ]
+    },
+    "stark-senap": {
+      "name": "Stark senap",
+      "aliases": [
+        "stark senap"
+      ]
+    },
+    "steksas": {
+      "name": "Steksås",
+      "aliases": [
+        "steksås"
+      ]
+    },
+    "svampsas": {
+      "name": "Svampsås",
+      "aliases": [
+        "svampsås"
+      ]
+    },
+    "sot-senap": {
+      "name": "Söt senap",
+      "aliases": [
+        "söt senap"
+      ]
+    },
+    "teriyakimarinad": {
+      "name": "Teriyakimarinad",
+      "aliases": [
+        "teriyakimarinad"
+      ]
+    },
+    "thousand-island-dressing": {
+      "name": "Thousand island-dressing",
+      "aliases": [
+        "thousand island-dressing"
+      ]
+    },
+    "tomatsas": {
+      "name": "Tomatsås",
+      "aliases": [
+        "tomatsås"
+      ]
+    },
+    "tryffelmajonnas": {
+      "name": "Tryffelmajonnäs",
+      "aliases": [
+        "tryffelmajonnäs"
+      ]
+    },
+    "vegansk-majonnas": {
+      "name": "Vegansk majonnäs",
+      "aliases": [
+        "vegansk majonnäs"
+      ]
+    },
+    "vinagrett": {
+      "name": "Vinägrett",
+      "aliases": [
+        "vinägrett"
+      ]
+    },
+    "vit-sas-bechamel": {
+      "name": "Vit sås (béchamel)",
+      "aliases": [
+        "vit sås (béchamel)",
+        "vit sås"
+      ]
+    },
+    "vitloksmarinad": {
+      "name": "Vitlöksmarinad",
+      "aliases": [
+        "vitlöksmarinad"
+      ]
+    },
+    "vitvinssas": {
+      "name": "Vitvinssås",
+      "aliases": [
+        "vitvinssås"
+      ]
+    },
+    "worcestershiresas": {
+      "name": "Worcestershiresås",
+      "aliases": [
+        "worcestershiresås"
+      ]
+    },
+    "yoghurtdressing": {
+      "name": "Yoghurtdressing",
+      "aliases": [
+        "yoghurtdressing"
+      ]
+    },
+    "adelostdressing": {
+      "name": "Ädelostdressing",
+      "aliases": [
+        "ädelostdressing"
+      ]
+    },
+    "ortdressing": {
+      "name": "Örtdressing",
+      "aliases": [
+        "örtdressing"
+      ]
+    },
+    "ortmarinad": {
+      "name": "Örtmarinad",
+      "aliases": [
+        "örtmarinad"
+      ]
+    },
+    "bananchips": {
+      "name": "Bananchips",
+      "aliases": [
+        "bananchips"
+      ]
+    },
+    "basilikafron": {
+      "name": "Basilikafrön",
+      "aliases": [
+        "basilikafrön"
+      ]
+    },
+    "berberis": {
+      "name": "Berberis",
+      "aliases": [
+        "berberis"
+      ]
+    },
+    "bittermandel": {
+      "name": "Bittermandel",
+      "aliases": [
+        "bittermandel"
+      ]
+    },
+    "blandad-torkad-frukt": {
+      "name": "Blandad torkad frukt",
+      "aliases": [
+        "blandad torkad frukt"
+      ]
+    },
+    "cashewnotter": {
+      "name": "Cashewnötter",
+      "aliases": [
+        "cashewnötter"
+      ]
+    },
+    "chiafron": {
+      "name": "Chiafrön",
+      "aliases": [
+        "chiafrön"
+      ]
+    },
+    "froblandning": {
+      "name": "Fröblandning",
+      "aliases": [
+        "fröblandning"
+      ]
+    },
+    "gojibar": {
+      "name": "Gojibär",
+      "aliases": [
+        "gojibär"
+      ]
+    },
+    "gula-russin": {
+      "name": "Gula russin",
+      "aliases": [
+        "gula russin"
+      ]
+    },
+    "hackad-mandel": {
+      "name": "Hackad mandel",
+      "aliases": [
+        "hackad mandel"
+      ]
+    },
+    "hackade-hasselnotter": {
+      "name": "Hackade hasselnötter",
+      "aliases": [
+        "hackade hasselnötter"
+      ]
+    },
+    "hampafron": {
+      "name": "Hampafrön",
+      "aliases": [
+        "hampafrön"
+      ]
+    },
+    "inkabar": {
+      "name": "Inkabär",
+      "aliases": [
+        "inkabär"
+      ]
+    },
+    "jordmandlar-tigernotter": {
+      "name": "Jordmandlar (tigernötter)",
+      "aliases": [
+        "jordmandlar (tigernötter)",
+        "jordmandlar"
+      ]
+    },
+    "jordnotter-i-skal": {
+      "name": "Jordnötter i skal",
+      "aliases": [
+        "jordnötter i skal"
+      ]
+    },
+    "kanderad-ingefara": {
+      "name": "Kanderad ingefära",
+      "aliases": [
+        "kanderad ingefära"
+      ]
+    },
+    "kastanjer": {
+      "name": "Kastanjer",
+      "aliases": [
+        "kastanjer"
+      ]
+    },
+    "kokoschips": {
+      "name": "Kokoschips",
+      "aliases": [
+        "kokoschips"
+      ]
+    },
+    "kokosflingor": {
+      "name": "Kokosflingor",
+      "aliases": [
+        "kokosflingor"
+      ]
+    },
+    "korinter": {
+      "name": "Korinter",
+      "aliases": [
+        "korinter"
+      ]
+    },
+    "krispiga-appelchips": {
+      "name": "Krispiga äppelchips",
+      "aliases": [
+        "krispiga äppelchips"
+      ]
+    },
+    "krossat-linfro": {
+      "name": "Krossat linfrö",
+      "aliases": [
+        "krossat linfrö"
+      ]
+    },
+    "linfron": {
+      "name": "Linfrön",
+      "aliases": [
+        "linfrön"
+      ]
+    },
+    "macadamianotter": {
+      "name": "Macadamianötter",
+      "aliases": [
+        "macadamianötter"
+      ]
+    },
+    "marconamandlar": {
+      "name": "Marconamandlar",
+      "aliases": [
+        "marconamandlar"
+      ]
+    },
+    "medjooldadlar": {
+      "name": "Medjooldadlar",
+      "aliases": [
+        "medjooldadlar"
+      ]
+    },
+    "melonkarnor": {
+      "name": "Melonkärnor",
+      "aliases": [
+        "melonkärnor"
+      ]
+    },
+    "notmix": {
+      "name": "Nötmix",
+      "aliases": [
+        "nötmix"
+      ]
+    },
+    "notter-med-skal": {
+      "name": "Nötter med skal",
+      "aliases": [
+        "nötter med skal"
+      ]
+    },
+    "osaltade-jordnotter": {
+      "name": "Osaltade jordnötter",
+      "aliases": [
+        "osaltade jordnötter"
+      ]
+    },
+    "paranotter": {
+      "name": "Paranötter",
+      "aliases": [
+        "paranötter"
+      ]
+    },
+    "pekannotter": {
+      "name": "Pekannötter",
+      "aliases": [
+        "pekannötter"
+      ]
+    },
+    "pinjenotter": {
+      "name": "Pinjenötter",
+      "aliases": [
+        "pinjenötter"
+      ]
+    },
+    "pistagenotter": {
+      "name": "Pistagenötter",
+      "aliases": [
+        "pistagenötter"
+      ]
+    },
+    "psylliumfron": {
+      "name": "Psylliumfrön",
+      "aliases": [
+        "psylliumfrön"
+      ]
+    },
+    "russin": {
+      "name": "Russin",
+      "aliases": [
+        "russin"
+      ]
+    },
+    "skalade-pistagenotter": {
+      "name": "Skalade pistagenötter",
+      "aliases": [
+        "skalade pistagenötter"
+      ]
+    },
+    "skallad-mandel": {
+      "name": "Skållad mandel",
+      "aliases": [
+        "skållad mandel"
+      ]
+    },
+    "solroskarnor": {
+      "name": "Solroskärnor",
+      "aliases": [
+        "solroskärnor"
+      ]
+    },
+    "sultanrussin": {
+      "name": "Sultanrussin",
+      "aliases": [
+        "sultanrussin"
+      ]
+    },
+    "svarta-sesamfron": {
+      "name": "Svarta sesamfrön",
+      "aliases": [
+        "svarta sesamfrön"
+      ]
+    },
+    "torkad-ananas": {
+      "name": "Torkad ananas",
+      "aliases": [
+        "torkad ananas"
+      ]
+    },
+    "torkad-mango": {
+      "name": "Torkad mango",
+      "aliases": [
+        "torkad mango"
+      ]
+    },
+    "torkad-papaya": {
+      "name": "Torkad papaya",
+      "aliases": [
+        "torkad papaya"
+      ]
+    },
+    "torkade-blabar": {
+      "name": "Torkade blåbär",
+      "aliases": [
+        "torkade blåbär"
+      ]
+    },
+    "torkade-fikon": {
+      "name": "Torkade fikon",
+      "aliases": [
+        "torkade fikon"
+      ]
+    },
+    "torkade-korsbar": {
+      "name": "Torkade körsbär",
+      "aliases": [
+        "torkade körsbär"
+      ]
+    },
+    "torkade-mullbar": {
+      "name": "Torkade mullbär",
+      "aliases": [
+        "torkade mullbär"
+      ]
+    },
+    "torkade-paron": {
+      "name": "Torkade päron",
+      "aliases": [
+        "torkade päron"
+      ]
+    },
+    "torkade-tranbar": {
+      "name": "Torkade tranbär",
+      "aliases": [
+        "torkade tranbär"
+      ]
+    },
+    "urkarnade-dadlar": {
+      "name": "Urkärnade dadlar",
+      "aliases": [
+        "urkärnade dadlar"
+      ]
+    },
+    "vallmofron": {
+      "name": "Vallmofrön",
+      "aliases": [
+        "vallmofrön"
+      ]
+    },
+    "appelringar": {
+      "name": "Äppelringar",
+      "aliases": [
+        "äppelringar"
+      ]
+    },
+    "bearnaisemix": {
+      "name": "Bearnaisemix",
+      "aliases": [
+        "bearnaisemix"
+      ]
+    },
+    "chili-con-carne-mix": {
+      "name": "Chili con carne-mix",
+      "aliases": [
+        "chili con carne-mix"
+      ]
+    },
+    "frystorkade-maltider": {
+      "name": "Frystorkade måltider",
+      "aliases": [
+        "frystorkade måltider"
+      ]
+    },
+    "gratangmix": {
+      "name": "Gratängmix",
+      "aliases": [
+        "gratängmix"
+      ]
+    },
+    "grytbas": {
+      "name": "Grytbas",
+      "aliases": [
+        "grytbas"
+      ]
+    },
+    "korvstroganoffmix": {
+      "name": "Korvstroganoffmix",
+      "aliases": [
+        "korvstroganoffmix"
+      ]
+    },
+    "lasagnekit": {
+      "name": "Lasagnekit",
+      "aliases": [
+        "lasagnekit"
+      ]
+    },
+    "lasagnettekit": {
+      "name": "Lasagnettekit",
+      "aliases": [
+        "lasagnettekit"
+      ]
+    },
+    "mac-and-cheese-mix": {
+      "name": "Mac and cheese-mix",
+      "aliases": [
+        "mac and cheese-mix"
+      ]
+    },
+    "middagskit": {
+      "name": "Middagskit",
+      "aliases": [
+        "middagskit"
+      ]
+    },
+    "paellamix": {
+      "name": "Paellamix",
+      "aliases": [
+        "paellamix"
+      ]
+    },
+    "pastaratt-i-kopp": {
+      "name": "Pastarätt i kopp",
+      "aliases": [
+        "pastarätt i kopp"
+      ]
+    },
+    "pastaratt-i-pase": {
+      "name": "Pastarätt i påse",
+      "aliases": [
+        "pastarätt i påse"
+      ]
+    },
+    "potatismospulver": {
+      "name": "Potatismospulver",
+      "aliases": [
+        "potatismospulver"
+      ]
+    },
+    "passoppa": {
+      "name": "Påssoppa",
+      "aliases": [
+        "påssoppa"
+      ]
+    },
+    "risottomix": {
+      "name": "Risottomix",
+      "aliases": [
+        "risottomix"
+      ]
+    },
+    "risratt-i-pase": {
+      "name": "Risrätt i påse",
+      "aliases": [
+        "risrätt i påse"
+      ]
+    },
+    "snabbsoppa": {
+      "name": "Snabbsoppa",
+      "aliases": [
+        "snabbsoppa"
+      ]
+    },
+    "stroganoffmix": {
+      "name": "Stroganoffmix",
+      "aliases": [
+        "stroganoffmix"
+      ]
+    },
+    "sasmix": {
+      "name": "Såsmix",
+      "aliases": [
+        "såsmix"
+      ]
+    },
+    "vegobiffmix": {
+      "name": "Vegobiffmix",
+      "aliases": [
+        "vegobiffmix"
+      ]
+    },
+    "krutonger": {
+      "name": "Krutonger",
+      "aliases": [
+        "krutonger"
+      ]
+    },
+    "rostad-frotopping": {
+      "name": "Rostad frötopping",
+      "aliases": [
+        "rostad frötopping"
+      ]
+    },
+    "salladstopping-med-notter": {
+      "name": "Salladstopping med nötter",
+      "aliases": [
+        "salladstopping med nötter"
+      ]
+    },
+    "vitlokskrutonger": {
+      "name": "Vitlökskrutonger",
+      "aliases": [
+        "vitlökskrutonger"
+      ]
+    },
+    "aprikoskram": {
+      "name": "Aprikoskräm",
+      "aliases": [
+        "aprikoskräm"
+      ]
+    },
+    "blandad-fruktsoppa": {
+      "name": "Blandad fruktsoppa",
+      "aliases": [
+        "blandad fruktsoppa"
+      ]
+    },
+    "blandfruktskram": {
+      "name": "Blandfruktskräm",
+      "aliases": [
+        "blandfruktskräm"
+      ]
+    },
+    "blabarssoppspulver": {
+      "name": "Blåbärssoppspulver",
+      "aliases": [
+        "blåbärssoppspulver"
+      ]
+    },
+    "hallonkram": {
+      "name": "Hallonkräm",
+      "aliases": [
+        "hallonkräm"
+      ]
+    },
+    "jordgubbskram": {
+      "name": "Jordgubbskräm",
+      "aliases": [
+        "jordgubbskräm"
+      ]
+    },
+    "katrinplommonkram": {
+      "name": "Katrinplommonkräm",
+      "aliases": [
+        "katrinplommonkräm"
+      ]
+    },
+    "krusbarskram": {
+      "name": "Krusbärskräm",
+      "aliases": [
+        "krusbärskräm"
+      ]
+    },
+    "krampulver": {
+      "name": "Krämpulver",
+      "aliases": [
+        "krämpulver"
+      ]
+    },
+    "nyponsoppspulver": {
+      "name": "Nyponsoppspulver",
+      "aliases": [
+        "nyponsoppspulver"
+      ]
+    },
+    "rabarberkram": {
+      "name": "Rabarberkräm",
+      "aliases": [
+        "rabarberkräm"
+      ]
+    },
+    "saftkram": {
+      "name": "Saftkräm",
+      "aliases": [
+        "saftkräm"
+      ]
+    },
+    "appelkram": {
+      "name": "Äppelkräm",
+      "aliases": [
+        "äppelkräm"
+      ]
+    },
+    "bockhornskloverblad-kasuri-methi": {
+      "name": "Bockhornsklöverblad (kasuri methi)",
+      "aliases": [
+        "bockhornsklöverblad (kasuri methi)",
+        "bockhornsklöverblad"
+      ]
+    },
+    "bouquet-garni": {
+      "name": "Bouquet garni",
+      "aliases": [
+        "bouquet garni"
+      ]
+    },
+    "ajowan": {
+      "name": "Ajowan",
+      "aliases": [
+        "ajowan",
+        "ajwain"
+      ]
+    },
+    "amchur-mangopulver": {
+      "name": "Amchur (mangopulver)",
+      "aliases": [
+        "amchur (mangopulver)",
+        "amchur"
+      ]
+    },
+    "anchochili": {
+      "name": "Anchochili",
+      "aliases": [
+        "anchochili"
+      ]
+    },
+    "anis": {
+      "name": "Anis",
+      "aliases": [
+        "anis"
+      ]
+    },
+    "asafoetida-hing": {
+      "name": "Asafoetida (hing)",
+      "aliases": [
+        "asafoetida (hing)",
+        "asafoetida"
+      ]
+    },
+    "bockhornsklover": {
+      "name": "Bockhornsklöver",
+      "aliases": [
+        "bockhornsklöver"
+      ]
+    },
+    "cayennepeppar": {
+      "name": "Cayennepeppar",
+      "aliases": [
+        "cayennepeppar"
+      ]
+    },
+    "ceylonkanel": {
+      "name": "Ceylonkanel",
+      "aliases": [
+        "ceylonkanel"
+      ]
+    },
+    "chilipulver": {
+      "name": "Chilipulver",
+      "aliases": [
+        "chilipulver"
+      ]
+    },
+    "chipotlepulver": {
+      "name": "Chipotlepulver",
+      "aliases": [
+        "chipotlepulver"
+      ]
+    },
+    "dillfro": {
+      "name": "Dillfrö",
+      "aliases": [
+        "dillfrö"
+      ]
+    },
+    "enbar": {
+      "name": "Enbär",
+      "aliases": [
+        "enbär"
+      ]
+    },
+    "fankalsfro": {
+      "name": "Fänkålsfrö",
+      "aliases": [
+        "fänkålsfrö"
+      ]
+    },
+    "hela-kardemummakapslar": {
+      "name": "Hela kardemummakapslar",
+      "aliases": [
+        "hela kardemummakapslar"
+      ]
+    },
+    "kanelstanger": {
+      "name": "Kanelstänger",
+      "aliases": [
+        "kanelstänger"
+      ]
+    },
+    "kardemumma": {
+      "name": "Kardemumma",
+      "aliases": [
+        "kardemumma"
+      ]
+    },
+    "kardemummakarnor": {
+      "name": "Kardemummakärnor",
+      "aliases": [
+        "kardemummakärnor"
+      ]
+    },
+    "korianderfro": {
+      "name": "Korianderfrö",
+      "aliases": [
+        "korianderfrö"
+      ]
+    },
+    "kryddnejlika": {
+      "name": "Kryddnejlika",
+      "aliases": [
+        "kryddnejlika"
+      ]
+    },
+    "kryddpeppar": {
+      "name": "Kryddpeppar",
+      "aliases": [
+        "kryddpeppar"
+      ]
+    },
+    "kummin": {
+      "name": "Kummin",
+      "aliases": [
+        "kummin"
+      ]
+    },
+    "lakritspulver": {
+      "name": "Lakritspulver",
+      "aliases": [
+        "lakritspulver"
+      ]
+    },
+    "lokpulver": {
+      "name": "Lökpulver",
+      "aliases": [
+        "lökpulver"
+      ]
+    },
+    "mahleb": {
+      "name": "Mahleb",
+      "aliases": [
+        "mahleb"
+      ]
+    },
+    "malen-ingefara": {
+      "name": "Malen ingefära",
+      "aliases": [
+        "malen ingefära"
+      ]
+    },
+    "malen-koriander": {
+      "name": "Malen koriander",
+      "aliases": [
+        "malen koriander"
+      ]
+    },
+    "mastix": {
+      "name": "Mastix",
+      "aliases": [
+        "mastix"
+      ]
+    },
+    "muskotblomma": {
+      "name": "Muskotblomma",
+      "aliases": [
+        "muskotblomma"
+      ]
+    },
+    "muskotnot": {
+      "name": "Muskotnöt",
+      "aliases": [
+        "muskotnöt"
+      ]
+    },
+    "paradiskorn": {
+      "name": "Paradiskorn",
+      "aliases": [
+        "paradiskorn"
+      ]
+    },
+    "rosenknoppar": {
+      "name": "Rosenknoppar",
+      "aliases": [
+        "rosenknoppar"
+      ]
+    },
+    "rokt-paprikapulver": {
+      "name": "Rökt paprikapulver",
+      "aliases": [
+        "rökt paprikapulver"
+      ]
+    },
+    "saffran": {
+      "name": "Saffran",
+      "aliases": [
+        "saffran"
+      ]
+    },
+    "sellerifro": {
+      "name": "Sellerifrö",
+      "aliases": [
+        "sellerifrö"
+      ]
+    },
+    "senapsfro": {
+      "name": "Senapsfrö",
+      "aliases": [
+        "senapsfrö"
+      ]
+    },
+    "senapspulver": {
+      "name": "Senapspulver",
+      "aliases": [
+        "senapspulver"
+      ]
+    },
+    "starkt-paprikapulver": {
+      "name": "Starkt paprikapulver",
+      "aliases": [
+        "starkt paprikapulver"
+      ]
+    },
+    "stjarnanis": {
+      "name": "Stjärnanis",
+      "aliases": [
+        "stjärnanis"
+      ]
+    },
+    "sumak": {
+      "name": "Sumak",
+      "aliases": [
+        "sumak"
+      ]
+    },
+    "svamppulver": {
+      "name": "Svamppulver",
+      "aliases": [
+        "svamppulver"
+      ]
+    },
+    "svart-kardemumma": {
+      "name": "Svart kardemumma",
+      "aliases": [
+        "svart kardemumma"
+      ]
+    },
+    "svartkummin": {
+      "name": "Svartkummin",
+      "aliases": [
+        "svartkummin"
+      ]
+    },
+    "tonkabonor": {
+      "name": "Tonkabönor",
+      "aliases": [
+        "tonkabönor"
+      ]
+    },
+    "torkad-chili": {
+      "name": "Torkad chili",
+      "aliases": [
+        "torkad chili"
+      ]
+    },
+    "torkad-lime-loomi": {
+      "name": "Torkad lime (loomi)",
+      "aliases": [
+        "torkad lime (loomi)",
+        "torkad lime"
+      ]
+    },
+    "torkat-apelsinskal": {
+      "name": "Torkat apelsinskal",
+      "aliases": [
+        "torkat apelsinskal"
+      ]
+    },
+    "torkat-citronskal": {
+      "name": "Torkat citronskal",
+      "aliases": [
+        "torkat citronskal"
+      ]
+    },
+    "vitloksgranulat": {
+      "name": "Vitlöksgranulat",
+      "aliases": [
+        "vitlöksgranulat"
+      ]
+    },
+    "vitlokspulver": {
+      "name": "Vitlökspulver",
+      "aliases": [
+        "vitlökspulver"
+      ]
+    },
+    "allkrydda": {
+      "name": "Allkrydda",
+      "aliases": [
+        "allkrydda"
+      ]
+    },
+    "baharat": {
+      "name": "Baharat",
+      "aliases": [
+        "baharat"
+      ]
+    },
+    "bbq-rub": {
+      "name": "BBQ-rub",
+      "aliases": [
+        "bbq-rub"
+      ]
+    },
+    "berbere": {
+      "name": "Berbere",
+      "aliases": [
+        "berbere"
+      ]
+    },
+    "brannvinskryddor": {
+      "name": "Brännvinskryddor",
+      "aliases": [
+        "brännvinskryddor"
+      ]
+    },
+    "brodkrydda": {
+      "name": "Brödkrydda",
+      "aliases": [
+        "brödkrydda"
+      ]
+    },
+    "burritokrydda": {
+      "name": "Burritokrydda",
+      "aliases": [
+        "burritokrydda"
+      ]
+    },
+    "cajunkrydda": {
+      "name": "Cajunkrydda",
+      "aliases": [
+        "cajunkrydda"
+      ]
+    },
+    "chaat-masala": {
+      "name": "Chaat masala",
+      "aliases": [
+        "chaat masala"
+      ]
+    },
+    "chili-con-carne-krydda": {
+      "name": "Chili con carne-krydda",
+      "aliases": [
+        "chili con carne-krydda"
+      ]
+    },
+    "chili-och-limekrydda": {
+      "name": "Chili- och limekrydda",
+      "aliases": [
+        "chili- och limekrydda"
+      ]
+    },
+    "dukkah": {
+      "name": "Dukkah",
+      "aliases": [
+        "dukkah"
+      ]
+    },
+    "fajitaskrydda": {
+      "name": "Fajitaskrydda",
+      "aliases": [
+        "fajitaskrydda"
+      ]
+    },
+    "femkrydda": {
+      "name": "Femkrydda",
+      "aliases": [
+        "femkrydda"
+      ]
+    },
+    "fiskkrydda": {
+      "name": "Fiskkrydda",
+      "aliases": [
+        "fiskkrydda"
+      ]
+    },
+    "garam-masala": {
+      "name": "Garam masala",
+      "aliases": [
+        "garam masala"
+      ]
+    },
+    "gloggkrydda": {
+      "name": "Glöggkrydda",
+      "aliases": [
+        "glöggkrydda"
+      ]
+    },
+    "grillkrydda": {
+      "name": "Grillkrydda",
+      "aliases": [
+        "grillkrydda"
+      ]
+    },
+    "guacamolekrydda": {
+      "name": "Guacamolekrydda",
+      "aliases": [
+        "guacamolekrydda"
+      ]
+    },
+    "gulaschkrydda": {
+      "name": "Gulaschkrydda",
+      "aliases": [
+        "gulaschkrydda"
+      ]
+    },
+    "gyroskrydda": {
+      "name": "Gyroskrydda",
+      "aliases": [
+        "gyroskrydda"
+      ]
+    },
+    "hamburgerkrydda": {
+      "name": "Hamburgerkrydda",
+      "aliases": [
+        "hamburgerkrydda"
+      ]
+    },
+    "inlaggningskrydda": {
+      "name": "Inläggningskrydda",
+      "aliases": [
+        "inläggningskrydda"
+      ]
+    },
+    "italienska-orter": {
+      "name": "Italienska örter",
+      "aliases": [
+        "italienska örter"
+      ]
+    },
+    "jerkkrydda": {
+      "name": "Jerkkrydda",
+      "aliases": [
+        "jerkkrydda"
+      ]
+    },
+    "kanelsocker": {
+      "name": "Kanelsocker",
+      "aliases": [
+        "kanelsocker"
+      ]
+    },
+    "kebabkrydda": {
+      "name": "Kebabkrydda",
+      "aliases": [
+        "kebabkrydda"
+      ]
+    },
+    "kryddmix-till-kottfarssas": {
+      "name": "Kryddmix till köttfärssås",
+      "aliases": [
+        "kryddmix till köttfärssås"
+      ]
+    },
+    "kycklingkrydda": {
+      "name": "Kycklingkrydda",
+      "aliases": [
+        "kycklingkrydda"
+      ]
+    },
+    "kottfarskrydda": {
+      "name": "Köttfärskrydda",
+      "aliases": [
+        "köttfärskrydda"
+      ]
+    },
+    "lammkrydda": {
+      "name": "Lammkrydda",
+      "aliases": [
+        "lammkrydda"
+      ]
+    },
+    "paellakrydda": {
+      "name": "Paellakrydda",
+      "aliases": [
+        "paellakrydda"
+      ]
+    },
+    "panch-phoron": {
+      "name": "Panch phoron",
+      "aliases": [
+        "panch phoron"
+      ]
+    },
+    "pepparkakskrydda": {
+      "name": "Pepparkakskrydda",
+      "aliases": [
+        "pepparkakskrydda"
+      ]
+    },
+    "persillade": {
+      "name": "Persillade",
+      "aliases": [
+        "persillade"
+      ]
+    },
+    "pizzakrydda": {
+      "name": "Pizzakrydda",
+      "aliases": [
+        "pizzakrydda"
+      ]
+    },
+    "pommeskrydda": {
+      "name": "Pommeskrydda",
+      "aliases": [
+        "pommeskrydda"
+      ]
+    },
+    "popcornkrydda": {
+      "name": "Popcornkrydda",
+      "aliases": [
+        "popcornkrydda"
+      ]
+    },
+    "potatiskrydda": {
+      "name": "Potatiskrydda",
+      "aliases": [
+        "potatiskrydda"
+      ]
+    },
+    "provencekryddor": {
+      "name": "Provencekryddor",
+      "aliases": [
+        "provencekryddor"
+      ]
+    },
+    "pumpkin-spice": {
+      "name": "Pumpkin spice",
+      "aliases": [
+        "pumpkin spice"
+      ]
+    },
+    "quatre-epices": {
+      "name": "Quatre épices",
+      "aliases": [
+        "quatre épices"
+      ]
+    },
+    "ras-el-hanout": {
+      "name": "Ras el hanout",
+      "aliases": [
+        "ras el hanout"
+      ]
+    },
+    "salladskrydda": {
+      "name": "Salladskrydda",
+      "aliases": [
+        "salladskrydda"
+      ]
+    },
+    "shawarmakrydda": {
+      "name": "Shawarmakrydda",
+      "aliases": [
+        "shawarmakrydda"
+      ]
+    },
+    "stark-curry": {
+      "name": "Stark curry",
+      "aliases": [
+        "stark curry"
+      ]
+    },
+    "steakkrydda": {
+      "name": "Steakkrydda",
+      "aliases": [
+        "steakkrydda"
+      ]
+    },
+    "stekkrydda": {
+      "name": "Stekkrydda",
+      "aliases": [
+        "stekkrydda"
+      ]
+    },
+    "tacokrydda": {
+      "name": "Tacokrydda",
+      "aliases": [
+        "tacokrydda"
+      ]
+    },
+    "tandoori-masala": {
+      "name": "Tandoori masala",
+      "aliases": [
+        "tandoori masala"
+      ]
+    },
+    "tikka-masala-krydda": {
+      "name": "Tikka masala-krydda",
+      "aliases": [
+        "tikka masala-krydda"
+      ]
+    },
+    "tzatzikikrydda": {
+      "name": "Tzatzikikrydda",
+      "aliases": [
+        "tzatzikikrydda"
+      ]
+    },
+    "viltkrydda": {
+      "name": "Viltkrydda",
+      "aliases": [
+        "viltkrydda"
+      ]
+    },
+    "vortmix-till-brodbak": {
+      "name": "Vörtmix till brödbak",
+      "aliases": [
+        "vörtmix till brödbak"
+      ]
+    },
+    "wokkrydda": {
+      "name": "Wokkrydda",
+      "aliases": [
+        "wokkrydda"
+      ]
+    },
+    "za-atar": {
+      "name": "Za'atar",
+      "aliases": [
+        "za'atar"
+      ]
+    },
+    "ort-och-vitlokskrydda": {
+      "name": "Ört- och vitlökskrydda",
+      "aliases": [
+        "ört- och vitlökskrydda"
+      ]
+    },
+    "ortagardskrydda": {
+      "name": "Örtagårdskrydda",
+      "aliases": [
+        "örtagårdskrydda"
+      ]
+    },
+    "bergsalt": {
+      "name": "Bergsalt",
+      "aliases": [
+        "bergsalt"
+      ]
+    },
+    "chilisalt": {
+      "name": "Chilisalt",
+      "aliases": [
+        "chilisalt"
+      ]
+    },
+    "citronpeppar": {
+      "name": "Citronpeppar",
+      "aliases": [
+        "citronpeppar"
+      ]
+    },
+    "fint-havssalt": {
+      "name": "Fint havssalt",
+      "aliases": [
+        "fint havssalt"
+      ]
+    },
+    "fleur-de-sel": {
+      "name": "Fleur de sel",
+      "aliases": [
+        "fleur de sel"
+      ]
+    },
+    "flingsalt": {
+      "name": "Flingsalt",
+      "aliases": [
+        "flingsalt"
+      ]
+    },
+    "grovmalen-svartpeppar": {
+      "name": "Grovmalen svartpeppar",
+      "aliases": [
+        "grovmalen svartpeppar"
+      ]
+    },
+    "grovsalt": {
+      "name": "Grovsalt",
+      "aliases": [
+        "grovsalt"
+      ]
+    },
+    "gronpeppar": {
+      "name": "Grönpeppar",
+      "aliases": [
+        "grönpeppar"
+      ]
+    },
+    "havssalt": {
+      "name": "Havssalt",
+      "aliases": [
+        "havssalt"
+      ]
+    },
+    "hel-svartpeppar": {
+      "name": "Hel svartpeppar",
+      "aliases": [
+        "hel svartpeppar"
+      ]
+    },
+    "himalayasalt": {
+      "name": "Himalayasalt",
+      "aliases": [
+        "himalayasalt"
+      ]
+    },
+    "joderat-bordssalt": {
+      "name": "Joderat bordssalt",
+      "aliases": [
+        "joderat bordssalt"
+      ]
+    },
+    "kala-namak-svartsalt": {
+      "name": "Kala namak (svartsalt)",
+      "aliases": [
+        "kala namak (svartsalt)",
+        "kala namak"
+      ]
+    },
+    "kryddsalt": {
+      "name": "Kryddsalt",
+      "aliases": [
+        "kryddsalt"
+      ]
+    },
+    "langpeppar": {
+      "name": "Långpeppar",
+      "aliases": [
+        "långpeppar"
+      ]
+    },
+    "lattsalt": {
+      "name": "Lättsalt",
+      "aliases": [
+        "lättsalt"
+      ]
+    },
+    "malen-svartpeppar": {
+      "name": "Malen svartpeppar",
+      "aliases": [
+        "malen svartpeppar"
+      ]
+    },
+    "malen-vitpeppar": {
+      "name": "Malen vitpeppar",
+      "aliases": [
+        "malen vitpeppar"
+      ]
+    },
+    "mineralsalt": {
+      "name": "Mineralsalt",
+      "aliases": [
+        "mineralsalt"
+      ]
+    },
+    "nitritsalt": {
+      "name": "Nitritsalt",
+      "aliases": [
+        "nitritsalt"
+      ]
+    },
+    "pepparblandning": {
+      "name": "Pepparblandning",
+      "aliases": [
+        "pepparblandning"
+      ]
+    },
+    "pepparkvarn": {
+      "name": "Pepparkvarn",
+      "aliases": [
+        "pepparkvarn"
+      ]
+    },
+    "rosepeppar": {
+      "name": "Rosépeppar",
+      "aliases": [
+        "rosépeppar"
+      ]
+    },
+    "rokt-salt": {
+      "name": "Rökt salt",
+      "aliases": [
+        "rökt salt"
+      ]
+    },
+    "salt": {
+      "name": "Salt",
+      "aliases": [
+        "salt"
+      ]
+    },
+    "salt-utan-jod": {
+      "name": "Salt utan jod",
+      "aliases": [
+        "salt utan jod"
+      ]
+    },
+    "saltkvarn": {
+      "name": "Saltkvarn",
+      "aliases": [
+        "saltkvarn"
+      ]
+    },
+    "sellerisalt": {
+      "name": "Sellerisalt",
+      "aliases": [
+        "sellerisalt"
+      ]
+    },
+    "svartpeppar": {
+      "name": "Svartpeppar",
+      "aliases": [
+        "svartpeppar"
+      ]
+    },
+    "szechuanpeppar": {
+      "name": "Szechuanpeppar",
+      "aliases": [
+        "szechuanpeppar",
+        "sichuanpeppar"
+      ]
+    },
+    "tryffelsalt": {
+      "name": "Tryffelsalt",
+      "aliases": [
+        "tryffelsalt"
+      ]
+    },
+    "vitlokssalt": {
+      "name": "Vitlökssalt",
+      "aliases": [
+        "vitlökssalt"
+      ]
+    },
+    "vitpeppar": {
+      "name": "Vitpeppar",
+      "aliases": [
+        "vitpeppar"
+      ]
+    },
+    "ortsalt": {
+      "name": "Örtsalt",
+      "aliases": [
+        "örtsalt"
+      ]
+    },
+    "ankfond": {
+      "name": "Ankfond",
+      "aliases": [
+        "ankfond"
+      ]
+    },
+    "benbuljong": {
+      "name": "Benbuljong",
+      "aliases": [
+        "benbuljong"
+      ]
+    },
+    "buljongpulver": {
+      "name": "Buljongpulver",
+      "aliases": [
+        "buljongpulver"
+      ]
+    },
+    "ekologisk-buljong": {
+      "name": "Ekologisk buljong",
+      "aliases": [
+        "ekologisk buljong"
+      ]
+    },
+    "fiskfond": {
+      "name": "Fiskfond",
+      "aliases": [
+        "fiskfond"
+      ]
+    },
+    "flytande-buljong": {
+      "name": "Flytande buljong",
+      "aliases": [
+        "flytande buljong"
+      ]
+    },
+    "fardig-buljong-i-tetra": {
+      "name": "Färdig buljong i tetra",
+      "aliases": [
+        "färdig buljong i tetra"
+      ]
+    },
+    "hummerfond": {
+      "name": "Hummerfond",
+      "aliases": [
+        "hummerfond"
+      ]
+    },
+    "kalvbuljong": {
+      "name": "Kalvbuljong",
+      "aliases": [
+        "kalvbuljong"
+      ]
+    },
+    "kalvfond": {
+      "name": "Kalvfond",
+      "aliases": [
+        "kalvfond"
+      ]
+    },
+    "kantarellfond": {
+      "name": "Kantarellfond",
+      "aliases": [
+        "kantarellfond"
+      ]
+    },
+    "kycklingfond": {
+      "name": "Kycklingfond",
+      "aliases": [
+        "kycklingfond"
+      ]
+    },
+    "kottbuljong": {
+      "name": "Köttbuljong",
+      "aliases": [
+        "köttbuljong"
+      ]
+    },
+    "lammfond": {
+      "name": "Lammfond",
+      "aliases": [
+        "lammfond"
+      ]
+    },
+    "oxbuljong": {
+      "name": "Oxbuljong",
+      "aliases": [
+        "oxbuljong"
+      ]
+    },
+    "oxfond": {
+      "name": "Oxfond",
+      "aliases": [
+        "oxfond"
+      ]
+    },
+    "ramenbuljong": {
+      "name": "Ramenbuljong",
+      "aliases": [
+        "ramenbuljong"
+      ]
+    },
+    "saltreducerad-buljong": {
+      "name": "Saltreducerad buljong",
+      "aliases": [
+        "saltreducerad buljong"
+      ]
+    },
+    "skaldjursbuljong": {
+      "name": "Skaldjursbuljong",
+      "aliases": [
+        "skaldjursbuljong"
+      ]
+    },
+    "skaldjursfond": {
+      "name": "Skaldjursfond",
+      "aliases": [
+        "skaldjursfond"
+      ]
+    },
+    "svampbuljong": {
+      "name": "Svampbuljong",
+      "aliases": [
+        "svampbuljong"
+      ]
+    },
+    "svampfond": {
+      "name": "Svampfond",
+      "aliases": [
+        "svampfond"
+      ]
+    },
+    "viltfond": {
+      "name": "Viltfond",
+      "aliases": [
+        "viltfond"
+      ]
+    },
+    "chilipasta-pa-tub": {
+      "name": "Chilipasta på tub",
+      "aliases": [
+        "chilipasta på tub"
+      ]
+    },
+    "citrongraspasta-pa-tub": {
+      "name": "Citrongräspasta på tub",
+      "aliases": [
+        "citrongräspasta på tub"
+      ]
+    },
+    "finriven-ingefara-pa-tub": {
+      "name": "Finriven ingefära på tub",
+      "aliases": [
+        "finriven ingefära på tub"
+      ]
+    },
+    "flytande-rok": {
+      "name": "Flytande rök",
+      "aliases": [
+        "flytande rök"
+      ]
+    },
+    "glutamat-msg": {
+      "name": "Glutamat (MSG)",
+      "aliases": [
+        "glutamat (msg)",
+        "glutamat"
+      ]
+    },
+    "kinesisk-soja": {
+      "name": "Kinesisk soja",
+      "aliases": [
+        "kinesisk soja"
+      ]
+    },
+    "kokosaminos": {
+      "name": "Kokosaminos",
+      "aliases": [
+        "kokosaminos",
+        "coconut aminos"
+      ]
+    },
+    "naringsjast": {
+      "name": "Näringsjäst",
+      "aliases": [
+        "näringsjäst"
+      ]
+    },
+    "pepparrot-pa-tub": {
+      "name": "Pepparrot på tub",
+      "aliases": [
+        "pepparrot på tub"
+      ]
+    },
+    "pressad-vitlok-pa-tub": {
+      "name": "Pressad vitlök på tub",
+      "aliases": [
+        "pressad vitlök på tub"
+      ]
+    },
+    "sockerkulor": {
+      "name": "Sockerkulör",
+      "aliases": [
+        "sockerkulör"
+      ]
+    },
+    "svampsoja": {
+      "name": "Svampsoja",
+      "aliases": [
+        "svampsoja"
+      ]
+    },
+    "umamipasta": {
+      "name": "Umamipasta",
+      "aliases": [
+        "umamipasta"
+      ]
+    },
+    "ortpasta-pa-tub": {
+      "name": "Örtpasta på tub",
+      "aliases": [
+        "örtpasta på tub"
+      ]
+    },
+    "babymajs": {
+      "name": "Babymajs",
+      "aliases": [
+        "babymajs"
+      ]
+    },
+    "bambuskott": {
+      "name": "Bambuskott",
+      "aliases": [
+        "bambuskott"
+      ]
+    },
+    "bubble-tea-kit": {
+      "name": "Bubble tea-kit",
+      "aliases": [
+        "bubble tea-kit"
+      ]
+    },
+    "bongroddar-pa-burk": {
+      "name": "Böngroddar på burk",
+      "aliases": [
+        "böngroddar på burk"
+      ]
+    },
+    "char-siu-sas": {
+      "name": "Char siu-sås",
+      "aliases": [
+        "char siu-sås"
+      ]
+    },
+    "chili-crisp": {
+      "name": "Chili crisp",
+      "aliases": [
+        "chili crisp"
+      ]
+    },
+    "chili-och-vitlokssas": {
+      "name": "Chili- och vitlökssås",
+      "aliases": [
+        "chili- och vitlökssås"
+      ]
+    },
+    "chilibonpasta-doubanjiang": {
+      "name": "Chilibönpasta (doubanjiang)",
+      "aliases": [
+        "chilibönpasta (doubanjiang)",
+        "chilibönpasta"
+      ]
+    },
+    "fermenterade-svarta-bonor": {
+      "name": "Fermenterade svarta bönor",
+      "aliases": [
+        "fermenterade svarta bönor"
+      ]
+    },
+    "fisksas": {
+      "name": "Fisksås",
+      "aliases": [
+        "fisksås"
+      ]
+    },
+    "friterad-schalottenlok": {
+      "name": "Friterad schalottenlök",
+      "aliases": [
+        "friterad schalottenlök"
+      ]
+    },
+    "fardig-panaengsas": {
+      "name": "Färdig panaengsås",
+      "aliases": [
+        "färdig panaengsås"
+      ]
+    },
+    "gron-currypasta": {
+      "name": "Grön currypasta",
+      "aliases": [
+        "grön currypasta"
+      ]
+    },
+    "gul-currypasta": {
+      "name": "Gul currypasta",
+      "aliases": [
+        "gul currypasta"
+      ]
+    },
+    "halmsvamp-pa-burk": {
+      "name": "Halmsvamp på burk",
+      "aliases": [
+        "halmsvamp på burk"
+      ]
+    },
+    "hoisinsas": {
+      "name": "Hoisinsås",
+      "aliases": [
+        "hoisinsås"
+      ]
+    },
+    "hot-pot-bas": {
+      "name": "Hot pot-bas",
+      "aliases": [
+        "hot pot-bas"
+      ]
+    },
+    "kecap-manis": {
+      "name": "Kecap manis",
+      "aliases": [
+        "kecap manis"
+      ]
+    },
+    "klibbrismjol": {
+      "name": "Klibbrismjöl",
+      "aliases": [
+        "klibbrismjöl"
+      ]
+    },
+    "kokosmjolkspulver": {
+      "name": "Kokosmjölkspulver",
+      "aliases": [
+        "kokosmjölkspulver"
+      ]
+    },
+    "laksapasta": {
+      "name": "Laksapasta",
+      "aliases": [
+        "laksapasta"
+      ]
+    },
+    "ljus-soja": {
+      "name": "Ljus soja",
+      "aliases": [
+        "ljus soja"
+      ]
+    },
+    "latt-kokosmjolk": {
+      "name": "Lätt kokosmjölk",
+      "aliases": [
+        "lätt kokosmjölk"
+      ]
+    },
+    "massamancurrypasta": {
+      "name": "Massamancurrypasta",
+      "aliases": [
+        "massamancurrypasta"
+      ]
+    },
+    "mork-soja": {
+      "name": "Mörk soja",
+      "aliases": [
+        "mörk soja"
+      ]
+    },
+    "nam-prik-pao-chilipasta": {
+      "name": "Nam prik pao (chilipasta)",
+      "aliases": [
+        "nam prik pao (chilipasta)",
+        "nam prik pao"
+      ]
+    },
+    "nasi-goreng-krydda": {
+      "name": "Nasi goreng-krydda",
+      "aliases": [
+        "nasi goreng-krydda"
+      ]
+    },
+    "ostronsas": {
+      "name": "Ostronsås",
+      "aliases": [
+        "ostronsås"
+      ]
+    },
+    "pad-thai-sas": {
+      "name": "Pad thai-sås",
+      "aliases": [
+        "pad thai-sås"
+      ]
+    },
+    "palmsocker": {
+      "name": "Palmsocker",
+      "aliases": [
+        "palmsocker"
+      ]
+    },
+    "panaengcurrypasta": {
+      "name": "Panaengcurrypasta",
+      "aliases": [
+        "panaengcurrypasta"
+      ]
+    },
+    "pho-buljongbas": {
+      "name": "Pho-buljongbas",
+      "aliases": [
+        "pho-buljongbas"
+      ]
+    },
+    "plommonsas": {
+      "name": "Plommonsås",
+      "aliases": [
+        "plommonsås"
+      ]
+    },
+    "rambutan-pa-burk": {
+      "name": "Rambutan på burk",
+      "aliases": [
+        "rambutan på burk"
+      ]
+    },
+    "rendangpasta": {
+      "name": "Rendangpasta",
+      "aliases": [
+        "rendangpasta"
+      ]
+    },
+    "rispapper": {
+      "name": "Rispapper",
+      "aliases": [
+        "rispapper"
+      ]
+    },
+    "rakchips": {
+      "name": "Räkchips",
+      "aliases": [
+        "räkchips"
+      ]
+    },
+    "rakpasta": {
+      "name": "Räkpasta",
+      "aliases": [
+        "räkpasta"
+      ]
+    },
+    "rod-currypasta": {
+      "name": "Röd currypasta",
+      "aliases": [
+        "röd currypasta"
+      ]
+    },
+    "sambal-badjak": {
+      "name": "Sambal badjak",
+      "aliases": [
+        "sambal badjak"
+      ]
+    },
+    "sambal-oelek": {
+      "name": "Sambal oelek",
+      "aliases": [
+        "sambal oelek"
+      ]
+    },
+    "satesas": {
+      "name": "Satésås",
+      "aliases": [
+        "satésås"
+      ]
+    },
+    "shaoxingvin": {
+      "name": "Shaoxingvin",
+      "aliases": [
+        "shaoxingvin"
+      ]
+    },
+    "sriracha": {
+      "name": "Sriracha",
+      "aliases": [
+        "sriracha"
+      ]
+    },
+    "svart-risvinager-chinkiang": {
+      "name": "Svart risvinäger (Chinkiang)",
+      "aliases": [
+        "svart risvinäger (chinkiang)",
+        "svart risvinäger"
+      ]
+    },
+    "svartbonsas": {
+      "name": "Svartbönsås",
+      "aliases": [
+        "svartbönsås"
+      ]
+    },
+    "sweet-chili-sas": {
+      "name": "Sweet chili-sås",
+      "aliases": [
+        "sweet chili-sås"
+      ]
+    },
+    "szechuansas": {
+      "name": "Szechuansås",
+      "aliases": [
+        "szechuansås"
+      ]
+    },
+    "sotsur-sas": {
+      "name": "Sötsur sås",
+      "aliases": [
+        "sötsur sås"
+      ]
+    },
+    "tamarindpasta": {
+      "name": "Tamarindpasta",
+      "aliases": [
+        "tamarindpasta"
+      ]
+    },
+    "tom-yum-pasta": {
+      "name": "Tom yum-pasta",
+      "aliases": [
+        "tom yum-pasta"
+      ]
+    },
+    "torkad-black-fungus-mu-err": {
+      "name": "Torkad black fungus (mu-err)",
+      "aliases": [
+        "torkad black fungus (mu-err)",
+        "torkad black fungus"
+      ]
+    },
+    "torkad-shiitake": {
+      "name": "Torkad shiitake",
+      "aliases": [
+        "torkad shiitake"
+      ]
+    },
+    "torkade-rakor": {
+      "name": "Torkade räkor",
+      "aliases": [
+        "torkade räkor"
+      ]
+    },
+    "vattenkastanjer": {
+      "name": "Vattenkastanjer",
+      "aliases": [
+        "vattenkastanjer"
+      ]
+    },
+    "vegetarisk-ostronsas": {
+      "name": "Vegetarisk ostronsås",
+      "aliases": [
+        "vegetarisk ostronsås"
+      ]
+    },
+    "woksas": {
+      "name": "Woksås",
+      "aliases": [
+        "woksås"
+      ]
+    },
+    "xo-sas": {
+      "name": "XO-sås",
+      "aliases": [
+        "xo-sås"
+      ]
+    },
+    "bonitoflingor": {
+      "name": "Bonitoflingor",
+      "aliases": [
+        "bonitoflingor"
+      ]
+    },
+    "bulgogisas": {
+      "name": "Bulgogisås",
+      "aliases": [
+        "bulgogisås"
+      ]
+    },
+    "dashi": {
+      "name": "Dashi",
+      "aliases": [
+        "dashi"
+      ]
+    },
+    "doenjang": {
+      "name": "Doenjang",
+      "aliases": [
+        "doenjang"
+      ]
+    },
+    "dumplingsas": {
+      "name": "Dumplingsås",
+      "aliases": [
+        "dumplingsås"
+      ]
+    },
+    "furikake": {
+      "name": "Furikake",
+      "aliases": [
+        "furikake"
+      ]
+    },
+    "gochugaru": {
+      "name": "Gochugaru",
+      "aliases": [
+        "gochugaru"
+      ]
+    },
+    "gochujang": {
+      "name": "Gochujang",
+      "aliases": [
+        "gochujang"
+      ]
+    },
+    "inlagd-ingefara": {
+      "name": "Inlagd ingefära",
+      "aliases": [
+        "inlagd ingefära"
+      ]
+    },
+    "japansk-currymix-i-block": {
+      "name": "Japansk currymix i block",
+      "aliases": [
+        "japansk currymix i block"
+      ]
+    },
+    "japansk-majonnas": {
+      "name": "Japansk majonnäs",
+      "aliases": [
+        "japansk majonnäs"
+      ]
+    },
+    "kimchi": {
+      "name": "Kimchi",
+      "aliases": [
+        "kimchi"
+      ]
+    },
+    "kombu": {
+      "name": "Kombu",
+      "aliases": [
+        "kombu"
+      ]
+    },
+    "koreanska-snabbnudlar": {
+      "name": "Koreanska snabbnudlar",
+      "aliases": [
+        "koreanska snabbnudlar"
+      ]
+    },
+    "mirin": {
+      "name": "Mirin",
+      "aliases": [
+        "mirin"
+      ]
+    },
+    "misosoppa": {
+      "name": "Misosoppa",
+      "aliases": [
+        "misosoppa"
+      ]
+    },
+    "mochi": {
+      "name": "Mochi",
+      "aliases": [
+        "mochi"
+      ]
+    },
+    "noriark": {
+      "name": "Noriark",
+      "aliases": [
+        "noriark"
+      ]
+    },
+    "okonomiyakisas": {
+      "name": "Okonomiyakisås",
+      "aliases": [
+        "okonomiyakisås"
+      ]
+    },
+    "panko": {
+      "name": "Panko",
+      "aliases": [
+        "panko"
+      ]
+    },
+    "ponzu": {
+      "name": "Ponzu",
+      "aliases": [
+        "ponzu"
+      ]
+    },
+    "ramenkit": {
+      "name": "Ramenkit",
+      "aliases": [
+        "ramenkit"
+      ]
+    },
+    "rostad-sesamdressing": {
+      "name": "Rostad sesamdressing",
+      "aliases": [
+        "rostad sesamdressing"
+      ]
+    },
+    "rod-miso": {
+      "name": "Röd miso",
+      "aliases": [
+        "röd miso"
+      ]
+    },
+    "sake": {
+      "name": "Sake",
+      "aliases": [
+        "sake"
+      ]
+    },
+    "shichimi-togarashi": {
+      "name": "Shichimi togarashi",
+      "aliases": [
+        "shichimi togarashi"
+      ]
+    },
+    "soja-med-reducerad-salthalt": {
+      "name": "Soja med reducerad salthalt",
+      "aliases": [
+        "soja med reducerad salthalt"
+      ]
+    },
+    "ssamjang": {
+      "name": "Ssamjang",
+      "aliases": [
+        "ssamjang"
+      ]
+    },
+    "sushikit": {
+      "name": "Sushikit",
+      "aliases": [
+        "sushikit"
+      ]
+    },
+    "sushivinager": {
+      "name": "Sushivinäger",
+      "aliases": [
+        "sushivinäger"
+      ]
+    },
+    "takuan-inlagd-rattika": {
+      "name": "Takuan (inlagd rättika)",
+      "aliases": [
+        "takuan (inlagd rättika)",
+        "takuan"
+      ]
+    },
+    "tamari": {
+      "name": "Tamari",
+      "aliases": [
+        "tamari"
+      ]
+    },
+    "tempuramjol": {
+      "name": "Tempuramjöl",
+      "aliases": [
+        "tempuramjöl"
+      ]
+    },
+    "teriyakisas": {
+      "name": "Teriyakisås",
+      "aliases": [
+        "teriyakisås"
+      ]
+    },
+    "tonkatsusas": {
+      "name": "Tonkatsusås",
+      "aliases": [
+        "tonkatsusås"
+      ]
+    },
+    "tteokbokki": {
+      "name": "Tteokbokki",
+      "aliases": [
+        "tteokbokki"
+      ]
+    },
+    "umeboshi": {
+      "name": "Umeboshi",
+      "aliases": [
+        "umeboshi"
+      ]
+    },
+    "unagisas": {
+      "name": "Unagisås",
+      "aliases": [
+        "unagisås"
+      ]
+    },
+    "wakame": {
+      "name": "Wakame",
+      "aliases": [
+        "wakame"
+      ]
+    },
+    "wasabi": {
+      "name": "Wasabi",
+      "aliases": [
+        "wasabi"
+      ]
+    },
+    "yakisobasas": {
+      "name": "Yakisobasås",
+      "aliases": [
+        "yakisobasås"
+      ]
+    },
+    "yakitorisas": {
+      "name": "Yakitorisås",
+      "aliases": [
+        "yakitorisås"
+      ]
+    },
+    "yuzujuice": {
+      "name": "Yuzujuice",
+      "aliases": [
+        "yuzujuice"
+      ]
+    },
+    "yuzukosho": {
+      "name": "Yuzukosho",
+      "aliases": [
+        "yuzukosho"
+      ]
+    },
+    "burritokit": {
+      "name": "Burritokit",
+      "aliases": [
+        "burritokit"
+      ]
+    },
+    "chipotle-i-adobo": {
+      "name": "Chipotle i adobo",
+      "aliases": [
+        "chipotle i adobo"
+      ]
+    },
+    "chipotlepasta": {
+      "name": "Chipotlepasta",
+      "aliases": [
+        "chipotlepasta"
+      ]
+    },
+    "chunky-salsa": {
+      "name": "Chunky salsa",
+      "aliases": [
+        "chunky salsa"
+      ]
+    },
+    "enchiladakit": {
+      "name": "Enchiladakit",
+      "aliases": [
+        "enchiladakit"
+      ]
+    },
+    "enchiladakrydda": {
+      "name": "Enchiladakrydda",
+      "aliases": [
+        "enchiladakrydda"
+      ]
+    },
+    "enchiladasas": {
+      "name": "Enchiladasås",
+      "aliases": [
+        "enchiladasås"
+      ]
+    },
+    "fajitakit": {
+      "name": "Fajitakit",
+      "aliases": [
+        "fajitakit"
+      ]
+    },
+    "guacamole-pa-burk": {
+      "name": "Guacamole på burk",
+      "aliases": [
+        "guacamole på burk"
+      ]
+    },
+    "habanerosas": {
+      "name": "Habanerosås",
+      "aliases": [
+        "habanerosås"
+      ]
+    },
+    "mangosalsa": {
+      "name": "Mangosalsa",
+      "aliases": [
+        "mangosalsa"
+      ]
+    },
+    "masa-harina": {
+      "name": "Masa harina",
+      "aliases": [
+        "masa harina"
+      ]
+    },
+    "mild-tacosas": {
+      "name": "Mild tacosås",
+      "aliases": [
+        "mild tacosås"
+      ]
+    },
+    "molesas": {
+      "name": "Molesås",
+      "aliases": [
+        "molesås"
+      ]
+    },
+    "nachokit": {
+      "name": "Nachokit",
+      "aliases": [
+        "nachokit"
+      ]
+    },
+    "nachoostsas": {
+      "name": "Nachoostsås",
+      "aliases": [
+        "nachoostsås"
+      ]
+    },
+    "pico-de-gallo": {
+      "name": "Pico de gallo",
+      "aliases": [
+        "pico de gallo"
+      ]
+    },
+    "quesadillakit": {
+      "name": "Quesadillakit",
+      "aliases": [
+        "quesadillakit"
+      ]
+    },
+    "refried-beans": {
+      "name": "Refried beans",
+      "aliases": [
+        "refried beans"
+      ]
+    },
+    "salsa": {
+      "name": "Salsa",
+      "aliases": [
+        "salsa"
+      ]
+    },
+    "salsa-verde": {
+      "name": "Salsa verde",
+      "aliases": [
+        "salsa verde"
+      ]
+    },
+    "stark-tacosas": {
+      "name": "Stark tacosås",
+      "aliases": [
+        "stark tacosås"
+      ]
+    },
+    "tacobowls": {
+      "name": "Tacobowls",
+      "aliases": [
+        "tacobowls"
+      ]
+    },
+    "tacokit": {
+      "name": "Tacokit",
+      "aliases": [
+        "tacokit"
+      ]
+    },
+    "tacosas": {
+      "name": "Tacosås",
+      "aliases": [
+        "tacosås"
+      ]
+    },
+    "tortillachips": {
+      "name": "Tortillachips",
+      "aliases": [
+        "tortillachips"
+      ]
+    },
+    "tortillachips-med-ostsmak": {
+      "name": "Tortillachips med ostsmak",
+      "aliases": [
+        "tortillachips med ostsmak"
+      ]
+    },
+    "tostadas": {
+      "name": "Tostadas",
+      "aliases": [
+        "tostadas"
+      ]
+    },
+    "baltisas": {
+      "name": "Baltisås",
+      "aliases": [
+        "baltisås"
+      ]
+    },
+    "biryanipasta": {
+      "name": "Biryanipasta",
+      "aliases": [
+        "biryanipasta"
+      ]
+    },
+    "bombay-mix": {
+      "name": "Bombay mix",
+      "aliases": [
+        "bombay mix"
+      ]
+    },
+    "butter-chicken-sas": {
+      "name": "Butter chicken-sås",
+      "aliases": [
+        "butter chicken-sås"
+      ]
+    },
+    "chana-masala": {
+      "name": "Chana masala",
+      "aliases": [
+        "chana masala"
+      ]
+    },
+    "chapatimjol": {
+      "name": "Chapatimjöl",
+      "aliases": [
+        "chapatimjöl"
+      ]
+    },
+    "chilipickle": {
+      "name": "Chilipickle",
+      "aliases": [
+        "chilipickle"
+      ]
+    },
+    "dal-makhani": {
+      "name": "Dal makhani",
+      "aliases": [
+        "dal makhani"
+      ]
+    },
+    "dal-tadka": {
+      "name": "Dal tadka",
+      "aliases": [
+        "dal tadka"
+      ]
+    },
+    "dosamix": {
+      "name": "Dosamix",
+      "aliases": [
+        "dosamix"
+      ]
+    },
+    "gulab-jamun": {
+      "name": "Gulab jamun",
+      "aliases": [
+        "gulab jamun"
+      ]
+    },
+    "indiskt-middagskit": {
+      "name": "Indiskt middagskit",
+      "aliases": [
+        "indiskt middagskit"
+      ]
+    },
+    "jaggery": {
+      "name": "Jaggery",
+      "aliases": [
+        "jaggery"
+      ]
+    },
+    "jalfrezisas": {
+      "name": "Jalfrezisås",
+      "aliases": [
+        "jalfrezisås"
+      ]
+    },
+    "kashmiri-chili": {
+      "name": "Kashmiri-chili",
+      "aliases": [
+        "kashmiri-chili"
+      ]
+    },
+    "kormapasta": {
+      "name": "Kormapasta",
+      "aliases": [
+        "kormapasta"
+      ]
+    },
+    "kormasas": {
+      "name": "Kormasås",
+      "aliases": [
+        "kormasås"
+      ]
+    },
+    "limepickle": {
+      "name": "Limepickle",
+      "aliases": [
+        "limepickle"
+      ]
+    },
+    "madrascurrypulver": {
+      "name": "Madrascurrypulver",
+      "aliases": [
+        "madrascurrypulver"
+      ]
+    },
+    "madraspasta": {
+      "name": "Madraspasta",
+      "aliases": [
+        "madraspasta"
+      ]
+    },
+    "mangochutney": {
+      "name": "Mangochutney",
+      "aliases": [
+        "mangochutney"
+      ]
+    },
+    "mangopickle": {
+      "name": "Mangopickle",
+      "aliases": [
+        "mangopickle"
+      ]
+    },
+    "mangopure": {
+      "name": "Mangopuré",
+      "aliases": [
+        "mangopuré"
+      ]
+    },
+    "myntachutney": {
+      "name": "Myntachutney",
+      "aliases": [
+        "myntachutney"
+      ]
+    },
+    "onion-bhaji": {
+      "name": "Onion bhaji",
+      "aliases": [
+        "onion bhaji"
+      ]
+    },
+    "pakoramix": {
+      "name": "Pakoramix",
+      "aliases": [
+        "pakoramix"
+      ]
+    },
+    "papadums": {
+      "name": "Papadums",
+      "aliases": [
+        "papadums"
+      ]
+    },
+    "rogan-josh-sas": {
+      "name": "Rogan josh-sås",
+      "aliases": [
+        "rogan josh-sås"
+      ]
+    },
+    "senapsolja": {
+      "name": "Senapsolja",
+      "aliases": [
+        "senapsolja"
+      ]
+    },
+    "tamarindchutney": {
+      "name": "Tamarindchutney",
+      "aliases": [
+        "tamarindchutney"
+      ]
+    },
+    "tandooripasta": {
+      "name": "Tandooripasta",
+      "aliases": [
+        "tandooripasta"
+      ]
+    },
+    "tandoorisas": {
+      "name": "Tandoorisås",
+      "aliases": [
+        "tandoorisås"
+      ]
+    },
+    "tikka-masala-pasta": {
+      "name": "Tikka masala-pasta",
+      "aliases": [
+        "tikka masala-pasta"
+      ]
+    },
+    "tikka-masala-sas": {
+      "name": "Tikka masala-sås",
+      "aliases": [
+        "tikka masala-sås"
+      ]
+    },
+    "tomatchutney": {
+      "name": "Tomatchutney",
+      "aliases": [
+        "tomatchutney"
+      ]
+    },
+    "vindaloopasta": {
+      "name": "Vindaloopasta",
+      "aliases": [
+        "vindaloopasta"
+      ]
+    },
+    "alfredosas": {
+      "name": "Alfredosås",
+      "aliases": [
+        "alfredosås"
+      ]
+    },
+    "amarenakorsbar": {
+      "name": "Amarenakörsbär",
+      "aliases": [
+        "amarenakörsbär"
+      ]
+    },
+    "amaretti": {
+      "name": "Amaretti",
+      "aliases": [
+        "amaretti"
+      ]
+    },
+    "arrabbiatasas": {
+      "name": "Arrabbiatasås",
+      "aliases": [
+        "arrabbiatasås"
+      ]
+    },
+    "bolognesesas": {
+      "name": "Bolognesesås",
+      "aliases": [
+        "bolognesesås"
+      ]
+    },
+    "cantuccini": {
+      "name": "Cantuccini",
+      "aliases": [
+        "cantuccini"
+      ]
+    },
+    "colomba": {
+      "name": "Colomba",
+      "aliases": [
+        "colomba"
+      ]
+    },
+    "datterinitomater": {
+      "name": "Datterinitomater",
+      "aliases": [
+        "datterinitomater"
+      ]
+    },
+    "kalabrisk-chilipasta": {
+      "name": "Kalabrisk chilipasta",
+      "aliases": [
+        "kalabrisk chilipasta"
+      ]
+    },
+    "kapris-i-salt": {
+      "name": "Kapris i salt",
+      "aliases": [
+        "kapris i salt"
+      ]
+    },
+    "mostarda": {
+      "name": "Mostarda",
+      "aliases": [
+        "mostarda"
+      ]
+    },
+    "pandoro": {
+      "name": "Pandoro",
+      "aliases": [
+        "pandoro"
+      ]
+    },
+    "panettone": {
+      "name": "Panettone",
+      "aliases": [
+        "panettone"
+      ]
+    },
+    "panforte": {
+      "name": "Panforte",
+      "aliases": [
+        "panforte"
+      ]
+    },
+    "pesto-rosso": {
+      "name": "Pesto rosso",
+      "aliases": [
+        "pesto rosso"
+      ]
+    },
+    "pizzamjol": {
+      "name": "Pizzamjöl",
+      "aliases": [
+        "pizzamjöl"
+      ]
+    },
+    "puttanescasas": {
+      "name": "Puttanescasås",
+      "aliases": [
+        "puttanescasås"
+      ]
+    },
+    "san-marzano-tomater": {
+      "name": "San Marzano-tomater",
+      "aliases": [
+        "san marzano-tomater"
+      ]
+    },
+    "savoiardi": {
+      "name": "Savoiardi",
+      "aliases": [
+        "savoiardi"
+      ]
+    },
+    "semola-rimacinata": {
+      "name": "Semola rimacinata",
+      "aliases": [
+        "semola rimacinata"
+      ]
+    },
+    "taralli": {
+      "name": "Taralli",
+      "aliases": [
+        "taralli"
+      ]
+    },
+    "torkad-karljohan": {
+      "name": "Torkad karljohan",
+      "aliases": [
+        "torkad karljohan"
+      ]
+    },
+    "torrone": {
+      "name": "Torrone",
+      "aliases": [
+        "torrone"
+      ]
+    },
+    "tryffelkram": {
+      "name": "Tryffelkräm",
+      "aliases": [
+        "tryffelkräm"
+      ]
+    },
+    "aleppopeppar": {
+      "name": "Aleppopeppar",
+      "aliases": [
+        "aleppopeppar"
+      ]
+    },
+    "apelsinblomvatten": {
+      "name": "Apelsinblomvatten",
+      "aliases": [
+        "apelsinblomvatten"
+      ]
+    },
+    "baklava": {
+      "name": "Baklava",
+      "aliases": [
+        "baklava"
+      ]
+    },
+    "falafelmix": {
+      "name": "Falafelmix",
+      "aliases": [
+        "falafelmix"
+      ]
+    },
+    "favabonor": {
+      "name": "Favabönor",
+      "aliases": [
+        "favabönor"
+      ]
+    },
+    "foul-medames-kokta-favabonor": {
+      "name": "Foul medames (kokta favabönor)",
+      "aliases": [
+        "foul medames (kokta favabönor)",
+        "foul medames"
+      ]
+    },
+    "freekeh": {
+      "name": "Freekeh",
+      "aliases": [
+        "freekeh"
+      ]
+    },
+    "granatappelsirap": {
+      "name": "Granatäppelsirap",
+      "aliases": [
+        "granatäppelsirap"
+      ]
+    },
+    "halva": {
+      "name": "Halva",
+      "aliases": [
+        "halva"
+      ]
+    },
+    "harissa": {
+      "name": "Harissa",
+      "aliases": [
+        "harissa"
+      ]
+    },
+    "inlagd-rova": {
+      "name": "Inlagd rova",
+      "aliases": [
+        "inlagd rova"
+      ]
+    },
+    "inlagd-vildgurka": {
+      "name": "Inlagd vildgurka",
+      "aliases": [
+        "inlagd vildgurka"
+      ]
+    },
+    "inlagda-citroner": {
+      "name": "Inlagda citroner",
+      "aliases": [
+        "inlagda citroner"
+      ]
+    },
+    "johannesbrodsirap": {
+      "name": "Johannesbrödsirap",
+      "aliases": [
+        "johannesbrödsirap"
+      ]
+    },
+    "kashk": {
+      "name": "Kashk",
+      "aliases": [
+        "kashk"
+      ]
+    },
+    "kibbeh": {
+      "name": "Kibbeh",
+      "aliases": [
+        "kibbeh"
+      ]
+    },
+    "lokum": {
+      "name": "Lokum",
+      "aliases": [
+        "lokum"
+      ]
+    },
+    "maamoul-fyllda-smakakor": {
+      "name": "Maamoul (fyllda småkakor)",
+      "aliases": [
+        "maamoul (fyllda småkakor)",
+        "maamoul"
+      ]
+    },
+    "maftoul": {
+      "name": "Maftoul",
+      "aliases": [
+        "maftoul"
+      ]
+    },
+    "makdous-inlagda-auberginer": {
+      "name": "Makdous (inlagda auberginer)",
+      "aliases": [
+        "makdous (inlagda auberginer)",
+        "makdous"
+      ]
+    },
+    "molokhia": {
+      "name": "Molokhia",
+      "aliases": [
+        "molokhia"
+      ]
+    },
+    "okra-pa-burk": {
+      "name": "Okra på burk",
+      "aliases": [
+        "okra på burk"
+      ]
+    },
+    "paprikapasta-biber-salcasi": {
+      "name": "Paprikapasta (biber salçası)",
+      "aliases": [
+        "paprikapasta (biber salçası)",
+        "paprikapasta"
+      ]
+    },
+    "pastirma": {
+      "name": "Pastırma",
+      "aliases": [
+        "pastırma"
+      ]
+    },
+    "pekmez": {
+      "name": "Pekmez",
+      "aliases": [
+        "pekmez"
+      ]
+    },
+    "rosenvatten": {
+      "name": "Rosenvatten",
+      "aliases": [
+        "rosenvatten"
+      ]
+    },
+    "simit": {
+      "name": "Simit",
+      "aliases": [
+        "simit"
+      ]
+    },
+    "torshi-inlagda-gronsaker": {
+      "name": "Torshi (inlagda grönsaker)",
+      "aliases": [
+        "torshi (inlagda grönsaker)",
+        "torshi"
+      ]
+    },
+    "turkiskt-kaffe": {
+      "name": "Turkiskt kaffe",
+      "aliases": [
+        "turkiskt kaffe"
+      ]
+    },
+    "urfa-biber": {
+      "name": "Urfa biber",
+      "aliases": [
+        "urfa biber"
+      ]
+    },
+    "vinblad": {
+      "name": "Vinblad",
+      "aliases": [
+        "vinblad"
+      ]
+    },
+    "adobokrydda": {
+      "name": "Adobokrydda",
+      "aliases": [
+        "adobokrydda"
+      ]
+    },
+    "aji-amarillo-pasta": {
+      "name": "Aji amarillo-pasta",
+      "aliases": [
+        "aji amarillo-pasta"
+      ]
+    },
+    "alfajores": {
+      "name": "Alfajores",
+      "aliases": [
+        "alfajores"
+      ]
+    },
+    "arepamjol-forkokt-majsmjol": {
+      "name": "Arepamjöl (förkokt majsmjöl)",
+      "aliases": [
+        "arepamjöl (förkokt majsmjöl)",
+        "arepamjöl"
+      ]
+    },
+    "empanadadeg": {
+      "name": "Empanadadeg",
+      "aliases": [
+        "empanadadeg"
+      ]
+    },
+    "guavapasta": {
+      "name": "Guavapasta",
+      "aliases": [
+        "guavapasta"
+      ]
+    },
+    "horchata": {
+      "name": "Horchata",
+      "aliases": [
+        "horchata"
+      ]
+    },
+    "mojosas": {
+      "name": "Mojosås",
+      "aliases": [
+        "mojosås"
+      ]
+    },
+    "piquillopaprika": {
+      "name": "Piquillopaprika",
+      "aliases": [
+        "piquillopaprika"
+      ]
+    },
+    "sofrito": {
+      "name": "Sofrito",
+      "aliases": [
+        "sofrito"
+      ]
+    },
+    "tostones-friterad-matbanan": {
+      "name": "Tostones (friterad matbanan)",
+      "aliases": [
+        "tostones (friterad matbanan)",
+        "tostones"
+      ]
+    },
+    "turron": {
+      "name": "Turrón",
+      "aliases": [
+        "turrón"
+      ]
+    },
+    "yerba-mate": {
+      "name": "Yerba mate",
+      "aliases": [
+        "yerba mate"
+      ]
+    },
+    "attieke": {
+      "name": "Attiéké",
+      "aliases": [
+        "attiéké"
+      ]
+    },
+    "baobabpulver": {
+      "name": "Baobabpulver",
+      "aliases": [
+        "baobabpulver"
+      ]
+    },
+    "biltong": {
+      "name": "Biltong",
+      "aliases": [
+        "biltong"
+      ]
+    },
+    "chakalaka": {
+      "name": "Chakalaka",
+      "aliases": [
+        "chakalaka"
+      ]
+    },
+    "chin-chin": {
+      "name": "Chin chin",
+      "aliases": [
+        "chin chin"
+      ]
+    },
+    "egusifron": {
+      "name": "Egusifrön",
+      "aliases": [
+        "egusifrön"
+      ]
+    },
+    "fufumjol": {
+      "name": "Fufumjöl",
+      "aliases": [
+        "fufumjöl"
+      ]
+    },
+    "gari": {
+      "name": "Gari",
+      "aliases": [
+        "gari"
+      ]
+    },
+    "injera": {
+      "name": "Injera",
+      "aliases": [
+        "injera"
+      ]
+    },
+    "jollofkrydda": {
+      "name": "Jollofkrydda",
+      "aliases": [
+        "jollofkrydda"
+      ]
+    },
+    "kassavamjol": {
+      "name": "Kassavamjöl",
+      "aliases": [
+        "kassavamjöl"
+      ]
+    },
+    "mitmita": {
+      "name": "Mitmita",
+      "aliases": [
+        "mitmita"
+      ]
+    },
+    "ogbonofron": {
+      "name": "Ogbonofrön",
+      "aliases": [
+        "ogbonofrön"
+      ]
+    },
+    "palmolja": {
+      "name": "Palmolja",
+      "aliases": [
+        "palmolja"
+      ]
+    },
+    "piri-piri-sas": {
+      "name": "Piri piri-sås",
+      "aliases": [
+        "piri piri-sås"
+      ]
+    },
+    "plantainchips": {
+      "name": "Plantainchips",
+      "aliases": [
+        "plantainchips"
+      ]
+    },
+    "shito": {
+      "name": "Shito",
+      "aliases": [
+        "shito"
+      ]
+    },
+    "sorghum": {
+      "name": "Sorghum",
+      "aliases": [
+        "sorghum"
+      ]
+    },
+    "stockfisk-torkad-fisk": {
+      "name": "Stockfisk (torkad fisk)",
+      "aliases": [
+        "stockfisk (torkad fisk)",
+        "stockfisk"
+      ]
+    },
+    "suyakrydda": {
+      "name": "Suyakrydda",
+      "aliases": [
+        "suyakrydda"
+      ]
+    },
+    "sydafrikansk-chutney": {
+      "name": "Sydafrikansk chutney",
+      "aliases": [
+        "sydafrikansk chutney"
+      ]
+    },
+    "teffmjol": {
+      "name": "Teffmjöl",
+      "aliases": [
+        "teffmjöl"
+      ]
+    },
+    "torkad-hibiskus": {
+      "name": "Torkad hibiskus",
+      "aliases": [
+        "torkad hibiskus"
+      ]
+    },
+    "vitt-majsmjol": {
+      "name": "Vitt majsmjöl",
+      "aliases": [
+        "vitt majsmjöl"
+      ]
+    },
+    "yamsmjol": {
+      "name": "Yamsmjöl",
+      "aliases": [
+        "yamsmjöl"
+      ]
+    },
+    "adzjika": {
+      "name": "Adzjika",
+      "aliases": [
+        "adzjika"
+      ]
+    },
+    "ajvar": {
+      "name": "Ajvar",
+      "aliases": [
+        "ajvar"
+      ]
+    },
+    "bigos": {
+      "name": "Bigos",
+      "aliases": [
+        "bigos"
+      ]
+    },
+    "hel-surkal-surkalshuvud": {
+      "name": "Hel surkål (surkålshuvud)",
+      "aliases": [
+        "hel surkål (surkålshuvud)",
+        "hel surkål"
+      ]
+    },
+    "inlagd-svamp": {
+      "name": "Inlagd svamp",
+      "aliases": [
+        "inlagd svamp"
+      ]
+    },
+    "inlagda-tomater": {
+      "name": "Inlagda tomater",
+      "aliases": [
+        "inlagda tomater"
+      ]
+    },
+    "kajmak": {
+      "name": "Kajmak",
+      "aliases": [
+        "kajmak"
+      ]
+    },
+    "kompott": {
+      "name": "Kompott",
+      "aliases": [
+        "kompott"
+      ]
+    },
+    "krowki-polsk-kola": {
+      "name": "Krówki (polsk kola)",
+      "aliases": [
+        "krówki (polsk kola)",
+        "krówki"
+      ]
+    },
+    "kulen": {
+      "name": "Kulen",
+      "aliases": [
+        "kulen"
+      ]
+    },
+    "lecso-paprikagryta": {
+      "name": "Lecsó (paprikagryta)",
+      "aliases": [
+        "lecsó (paprikagryta)",
+        "lecsó"
+      ]
+    },
+    "lutenica-lutenitsa": {
+      "name": "Lutenica (lutenitsa)",
+      "aliases": [
+        "lutenica (lutenitsa)",
+        "lutenica"
+      ]
+    },
+    "pierogi-fyllda-polska-piroger": {
+      "name": "Pierogi (fyllda polska piroger)",
+      "aliases": [
+        "pierogi (fyllda polska piroger)",
+        "pierogi"
+      ]
+    },
+    "pindjur": {
+      "name": "Pindjur",
+      "aliases": [
+        "pindjur"
+      ]
+    },
+    "polsk-pepparrot-chrzan": {
+      "name": "Polsk pepparrot (chrzan)",
+      "aliases": [
+        "polsk pepparrot (chrzan)",
+        "polsk pepparrot"
+      ]
+    },
+    "sarma": {
+      "name": "Sarma",
+      "aliases": [
+        "sarma"
+      ]
+    },
+    "suho-meso-rokt-notkott": {
+      "name": "Suho meso (rökt nötkött)",
+      "aliases": [
+        "suho meso (rökt nötkött)",
+        "suho meso"
+      ]
+    },
+    "sushki": {
+      "name": "Sushki",
+      "aliases": [
+        "sushki"
+      ]
+    },
+    "ungersk-paprikakram": {
+      "name": "Ungersk paprikakräm",
+      "aliases": [
+        "ungersk paprikakräm"
+      ]
+    },
+    "vareniki": {
+      "name": "Vareniki",
+      "aliases": [
+        "vareniki"
+      ]
+    },
+    "zacusca": {
+      "name": "Zacuscă",
+      "aliases": [
+        "zacuscă"
+      ]
+    },
+    "zurek": {
+      "name": "Żurek",
+      "aliases": [
+        "żurek"
+      ]
+    },
+    "dansk-leverpastej": {
+      "name": "Dansk leverpastej",
+      "aliases": [
+        "dansk leverpastej"
+      ]
+    },
+    "frikadeller": {
+      "name": "Frikadeller",
+      "aliases": [
+        "frikadeller"
+      ]
+    },
+    "kalakukko": {
+      "name": "Kalakukko",
+      "aliases": [
+        "kalakukko"
+      ]
+    },
+    "karelska-piroger": {
+      "name": "Karelska piroger",
+      "aliases": [
+        "karelska piroger"
+      ]
+    },
+    "klippfisk": {
+      "name": "Klippfisk",
+      "aliases": [
+        "klippfisk"
+      ]
+    },
+    "koldskal": {
+      "name": "Koldskål",
+      "aliases": [
+        "koldskål"
+      ]
+    },
+    "memma-mammi": {
+      "name": "Memma (mämmi)",
+      "aliases": [
+        "memma (mämmi)",
+        "memma"
+      ]
+    },
+    "pinnekjott": {
+      "name": "Pinnekjøtt",
+      "aliases": [
+        "pinnekjøtt"
+      ]
+    },
+    "rakfisk": {
+      "name": "Rakfisk",
+      "aliases": [
+        "rakfisk"
+      ]
+    },
+    "rullepolse": {
+      "name": "Rullepølse",
+      "aliases": [
+        "rullepølse"
+      ]
+    },
+    "runebergstarta": {
+      "name": "Runebergstårta",
+      "aliases": [
+        "runebergstårta"
+      ]
+    },
+    "rode-polser-roda-danska-korvar": {
+      "name": "Røde pølser (röda danska korvar)",
+      "aliases": [
+        "røde pølser (röda danska korvar)",
+        "røde pølser"
+      ]
+    },
+    "romme": {
+      "name": "Rømme",
+      "aliases": [
+        "rømme"
+      ]
+    },
+    "viili-finsk-langfil": {
+      "name": "Viili (finsk långfil)",
+      "aliases": [
+        "viili (finsk långfil)",
+        "viili"
+      ]
+    },
+    "aebleskiver": {
+      "name": "Æbleskiver",
+      "aliases": [
+        "æbleskiver"
+      ]
+    },
+    "amerikansk-dillgurka": {
+      "name": "Amerikansk dillgurka",
+      "aliases": [
+        "amerikansk dillgurka"
+      ]
+    },
+    "christmas-pudding": {
+      "name": "Christmas pudding",
+      "aliases": [
+        "christmas pudding"
+      ]
+    },
+    "cornbread-mix": {
+      "name": "Cornbread-mix",
+      "aliases": [
+        "cornbread-mix"
+      ]
+    },
+    "custardpulver": {
+      "name": "Custardpulver",
+      "aliases": [
+        "custardpulver"
+      ]
+    },
+    "golden-syrup": {
+      "name": "Golden syrup",
+      "aliases": [
+        "golden syrup"
+      ]
+    },
+    "grits": {
+      "name": "Grits",
+      "aliases": [
+        "grits"
+      ]
+    },
+    "majssirap": {
+      "name": "Majssirap",
+      "aliases": [
+        "majssirap"
+      ]
+    },
+    "maltvinager": {
+      "name": "Maltvinäger",
+      "aliases": [
+        "maltvinäger"
+      ]
+    },
+    "marmite-jastextrakt": {
+      "name": "Marmite (jästextrakt)",
+      "aliases": [
+        "marmite (jästextrakt)",
+        "marmite"
+      ]
+    },
+    "marshmallowkram": {
+      "name": "Marshmallowkräm",
+      "aliases": [
+        "marshmallowkräm"
+      ]
+    },
+    "mincemeat": {
+      "name": "Mincemeat",
+      "aliases": [
+        "mincemeat"
+      ]
+    },
+    "pannkakssirap": {
+      "name": "Pannkakssirap",
+      "aliases": [
+        "pannkakssirap"
+      ]
+    },
+    "piccalilli": {
+      "name": "Piccalilli",
+      "aliases": [
+        "piccalilli"
+      ]
+    },
+    "shortbread": {
+      "name": "Shortbread",
+      "aliases": [
+        "shortbread"
+      ]
+    },
+    "skypulver-gravy": {
+      "name": "Skypulver (gravy)",
+      "aliases": [
+        "skypulver (gravy)",
+        "skypulver"
+      ]
+    },
+    "stuffingmix": {
+      "name": "Stuffingmix",
+      "aliases": [
+        "stuffingmix"
+      ]
+    },
+    "tranbarssas": {
+      "name": "Tranbärssås",
+      "aliases": [
+        "tranbärssås"
+      ]
+    },
+    "yorkshire-pudding": {
+      "name": "Yorkshire pudding",
+      "aliases": [
+        "yorkshire pudding"
+      ]
+    },
+    "arrowrot": {
+      "name": "Arrowrot",
+      "aliases": [
+        "arrowrot"
+      ]
+    },
+    "durumvetemjol": {
+      "name": "Durumvetemjöl",
+      "aliases": [
+        "durumvetemjöl"
+      ]
+    },
+    "ekologiskt-vetemjol": {
+      "name": "Ekologiskt vetemjöl",
+      "aliases": [
+        "ekologiskt vetemjöl"
+      ]
+    },
+    "emmermjol": {
+      "name": "Emmermjöl",
+      "aliases": [
+        "emmermjöl"
+      ]
+    },
+    "fiberhusk": {
+      "name": "Fiberhusk",
+      "aliases": [
+        "fiberhusk"
+      ]
+    },
+    "fint-ragmjol": {
+      "name": "Fint rågmjöl",
+      "aliases": [
+        "fint rågmjöl"
+      ]
+    },
+    "fullkornsdinkelmjol": {
+      "name": "Fullkornsdinkelmjöl",
+      "aliases": [
+        "fullkornsdinkelmjöl"
+      ]
+    },
+    "fullkornsragmjol": {
+      "name": "Fullkornsrågmjöl",
+      "aliases": [
+        "fullkornsrågmjöl"
+      ]
+    },
+    "fullkornsvetemjol": {
+      "name": "Fullkornsvetemjöl",
+      "aliases": [
+        "fullkornsvetemjöl"
+      ]
+    },
+    "grahamsmjol": {
+      "name": "Grahamsmjöl",
+      "aliases": [
+        "grahamsmjöl"
+      ]
+    },
+    "grovt-ragmjol": {
+      "name": "Grovt rågmjöl",
+      "aliases": [
+        "grovt rågmjöl"
+      ]
+    },
+    "havremjol": {
+      "name": "Havremjöl",
+      "aliases": [
+        "havremjöl"
+      ]
+    },
+    "johannesbrodkarnmjol": {
+      "name": "Johannesbrödkärnmjöl",
+      "aliases": [
+        "johannesbrödkärnmjöl"
+      ]
+    },
+    "kastanjemjol": {
+      "name": "Kastanjemjöl",
+      "aliases": [
+        "kastanjemjöl"
+      ]
+    },
+    "kokosmjol": {
+      "name": "Kokosmjöl",
+      "aliases": [
+        "kokosmjöl"
+      ]
+    },
+    "kornmjol": {
+      "name": "Kornmjöl",
+      "aliases": [
+        "kornmjöl"
+      ]
+    },
+    "manitobamjol": {
+      "name": "Manitobamjöl",
+      "aliases": [
+        "manitobamjöl"
+      ]
+    },
+    "quinoamjol": {
+      "name": "Quinoamjöl",
+      "aliases": [
+        "quinoamjöl"
+      ]
+    },
+    "ragmjol": {
+      "name": "Rågmjöl",
+      "aliases": [
+        "rågmjöl"
+      ]
+    },
+    "ragsikt": {
+      "name": "Rågsikt",
+      "aliases": [
+        "rågsikt"
+      ]
+    },
+    "siktat-dinkelmjol": {
+      "name": "Siktat dinkelmjöl",
+      "aliases": [
+        "siktat dinkelmjöl"
+      ]
+    },
+    "sjalvjasande-mjol": {
+      "name": "Självjäsande mjöl",
+      "aliases": [
+        "självjäsande mjöl"
+      ]
+    },
+    "skradmjol": {
+      "name": "Skrädmjöl",
+      "aliases": [
+        "skrädmjöl"
+      ]
+    },
+    "sojamjol": {
+      "name": "Sojamjöl",
+      "aliases": [
+        "sojamjöl"
+      ]
+    },
+    "speltmjol": {
+      "name": "Speltmjöl",
+      "aliases": [
+        "speltmjöl"
+      ]
+    },
+    "stenmalet-vetemjol": {
+      "name": "Stenmalet vetemjöl",
+      "aliases": [
+        "stenmalet vetemjöl"
+      ]
+    },
+    "tapiokamjol": {
+      "name": "Tapiokamjöl",
+      "aliases": [
+        "tapiokamjöl"
+      ]
+    },
+    "tipo-00-mjol": {
+      "name": "Tipo 00-mjöl",
+      "aliases": [
+        "tipo 00-mjöl"
+      ]
+    },
+    "vetemjol-special": {
+      "name": "Vetemjöl special",
+      "aliases": [
+        "vetemjöl special"
+      ]
+    },
+    "olandsvetemjol": {
+      "name": "Ölandsvetemjöl",
+      "aliases": [
+        "ölandsvetemjöl"
+      ]
+    },
+    "agavesirap": {
+      "name": "Agavesirap",
+      "aliases": [
+        "agavesirap"
+      ]
+    },
+    "bitsocker": {
+      "name": "Bitsocker",
+      "aliases": [
+        "bitsocker"
+      ]
+    },
+    "brodsirap": {
+      "name": "Brödsirap",
+      "aliases": [
+        "brödsirap"
+      ]
+    },
+    "dadelsirap": {
+      "name": "Dadelsirap",
+      "aliases": [
+        "dadelsirap"
+      ]
+    },
+    "demerarasocker": {
+      "name": "Demerarasocker",
+      "aliases": [
+        "demerarasocker"
+      ]
+    },
+    "druvsocker": {
+      "name": "Druvsocker",
+      "aliases": [
+        "druvsocker"
+      ]
+    },
+    "ekologiskt-strosocker": {
+      "name": "Ekologiskt strösocker",
+      "aliases": [
+        "ekologiskt strösocker"
+      ]
+    },
+    "erytritol": {
+      "name": "Erytritol",
+      "aliases": [
+        "erytritol"
+      ]
+    },
+    "farinsocker": {
+      "name": "Farinsocker",
+      "aliases": [
+        "farinsocker"
+      ]
+    },
+    "florsocker": {
+      "name": "Florsocker",
+      "aliases": [
+        "florsocker"
+      ]
+    },
+    "flytande-sotningsmedel": {
+      "name": "Flytande sötningsmedel",
+      "aliases": [
+        "flytande sötningsmedel"
+      ]
+    },
+    "glukossirap": {
+      "name": "Glukossirap",
+      "aliases": [
+        "glukossirap"
+      ]
+    },
+    "kandisocker": {
+      "name": "Kandisocker",
+      "aliases": [
+        "kandisocker"
+      ]
+    },
+    "kokossocker": {
+      "name": "Kokossocker",
+      "aliases": [
+        "kokossocker"
+      ]
+    },
+    "ljust-muscovadosocker": {
+      "name": "Ljust muscovadosocker",
+      "aliases": [
+        "ljust muscovadosocker"
+      ]
+    },
+    "lonnsirap": {
+      "name": "Lönnsirap",
+      "aliases": [
+        "lönnsirap"
+      ]
+    },
+    "maltextrakt": {
+      "name": "Maltextrakt",
+      "aliases": [
+        "maltextrakt"
+      ]
+    },
+    "melass": {
+      "name": "Melass",
+      "aliases": [
+        "melass"
+      ]
+    },
+    "muscovadosocker": {
+      "name": "Muscovadosocker",
+      "aliases": [
+        "muscovadosocker"
+      ]
+    },
+    "mork-sirap": {
+      "name": "Mörk sirap",
+      "aliases": [
+        "mörk sirap"
+      ]
+    },
+    "morkt-farinsocker": {
+      "name": "Mörkt farinsocker",
+      "aliases": [
+        "mörkt farinsocker"
+      ]
+    },
+    "parlsocker": {
+      "name": "Pärlsocker",
+      "aliases": [
+        "pärlsocker"
+      ]
+    },
+    "rissirap": {
+      "name": "Rissirap",
+      "aliases": [
+        "rissirap"
+      ]
+    },
+    "rasocker": {
+      "name": "Råsocker",
+      "aliases": [
+        "råsocker"
+      ]
+    },
+    "rorsocker": {
+      "name": "Rörsocker",
+      "aliases": [
+        "rörsocker"
+      ]
+    },
+    "stevia": {
+      "name": "Stevia",
+      "aliases": [
+        "stevia"
+      ]
+    },
+    "strosotning": {
+      "name": "Strösötning",
+      "aliases": [
+        "strösötning"
+      ]
+    },
+    "syltsocker": {
+      "name": "Syltsocker",
+      "aliases": [
+        "syltsocker"
+      ]
+    },
+    "sotningsmedel": {
+      "name": "Sötningsmedel",
+      "aliases": [
+        "sötningsmedel"
+      ]
+    },
+    "sotningstabletter": {
+      "name": "Sötningstabletter",
+      "aliases": [
+        "sötningstabletter"
+      ]
+    },
+    "vit-sirap": {
+      "name": "Vit sirap",
+      "aliases": [
+        "vit sirap"
+      ]
+    },
+    "xylitol": {
+      "name": "Xylitol",
+      "aliases": [
+        "xylitol"
+      ]
+    },
+    "bakpulver": {
+      "name": "Bakpulver",
+      "aliases": [
+        "bakpulver"
+      ]
+    },
+    "bikarbonat": {
+      "name": "Bikarbonat",
+      "aliases": [
+        "bikarbonat"
+      ]
+    },
+    "ekologisk-jast": {
+      "name": "Ekologisk jäst",
+      "aliases": [
+        "ekologisk jäst"
+      ]
+    },
+    "farsk-jast": {
+      "name": "Färsk jäst",
+      "aliases": [
+        "färsk jäst"
+      ]
+    },
+    "hjorthornssalt": {
+      "name": "Hjorthornssalt",
+      "aliases": [
+        "hjorthornssalt"
+      ]
+    },
+    "jast-for-sota-degar": {
+      "name": "Jäst för söta degar",
+      "aliases": [
+        "jäst för söta degar"
+      ]
+    },
+    "pottaska": {
+      "name": "Pottaska",
+      "aliases": [
+        "pottaska"
+      ]
+    },
+    "surdegsgrund": {
+      "name": "Surdegsgrund",
+      "aliases": [
+        "surdegsgrund"
+      ]
+    },
+    "torkad-surdeg": {
+      "name": "Torkad surdeg",
+      "aliases": [
+        "torkad surdeg"
+      ]
+    },
+    "torrjast": {
+      "name": "Torrjäst",
+      "aliases": [
+        "torrjäst"
+      ]
+    },
+    "vetegluten": {
+      "name": "Vetegluten",
+      "aliases": [
+        "vetegluten"
+      ]
+    },
+    "vinsten": {
+      "name": "Vinsten",
+      "aliases": [
+        "vinsten"
+      ]
+    },
+    "carobpulver": {
+      "name": "Carobpulver",
+      "aliases": [
+        "carobpulver"
+      ]
+    },
+    "chokladdroppar": {
+      "name": "Chokladdroppar",
+      "aliases": [
+        "chokladdroppar"
+      ]
+    },
+    "chokladglasyr": {
+      "name": "Chokladglasyr",
+      "aliases": [
+        "chokladglasyr"
+      ]
+    },
+    "chokladknappar": {
+      "name": "Chokladknappar",
+      "aliases": [
+        "chokladknappar"
+      ]
+    },
+    "chokladspan": {
+      "name": "Chokladspån",
+      "aliases": [
+        "chokladspån"
+      ]
+    },
+    "gianduja": {
+      "name": "Gianduja",
+      "aliases": [
+        "gianduja"
+      ]
+    },
+    "hackad-choklad": {
+      "name": "Hackad choklad",
+      "aliases": [
+        "hackad choklad"
+      ]
+    },
+    "hushallsblock": {
+      "name": "Hushållsblock",
+      "aliases": [
+        "hushållsblock"
+      ]
+    },
+    "kakaomassa": {
+      "name": "Kakaomassa",
+      "aliases": [
+        "kakaomassa"
+      ]
+    },
+    "kakaonibs": {
+      "name": "Kakaonibs",
+      "aliases": [
+        "kakaonibs"
+      ]
+    },
+    "kakaosmor": {
+      "name": "Kakaosmör",
+      "aliases": [
+        "kakaosmör"
+      ]
+    },
+    "ljus-blockchoklad": {
+      "name": "Ljus blockchoklad",
+      "aliases": [
+        "ljus blockchoklad"
+      ]
+    },
+    "mork-blockchoklad": {
+      "name": "Mörk blockchoklad",
+      "aliases": [
+        "mörk blockchoklad"
+      ]
+    },
+    "nougat": {
+      "name": "Nougat",
+      "aliases": [
+        "nougat"
+      ]
+    },
+    "rubychoklad": {
+      "name": "Rubychoklad",
+      "aliases": [
+        "rubychoklad"
+      ]
+    },
+    "sockerfri-bakchoklad": {
+      "name": "Sockerfri bakchoklad",
+      "aliases": [
+        "sockerfri bakchoklad"
+      ]
+    },
+    "vegansk-bakchoklad": {
+      "name": "Vegansk bakchoklad",
+      "aliases": [
+        "vegansk bakchoklad"
+      ]
+    },
+    "vit-blockchoklad": {
+      "name": "Vit blockchoklad",
+      "aliases": [
+        "vit blockchoklad"
+      ]
+    },
+    "vita-chokladdroppar": {
+      "name": "Vita chokladdroppar",
+      "aliases": [
+        "vita chokladdroppar"
+      ]
+    },
+    "overdragschoklad": {
+      "name": "Överdragschoklad",
+      "aliases": [
+        "överdragschoklad"
+      ]
+    },
+    "apelsinarom": {
+      "name": "Apelsinarom",
+      "aliases": [
+        "apelsinarom"
+      ]
+    },
+    "arraksarom": {
+      "name": "Arraksarom",
+      "aliases": [
+        "arraksarom"
+      ]
+    },
+    "bittermandelarom": {
+      "name": "Bittermandelarom",
+      "aliases": [
+        "bittermandelarom"
+      ]
+    },
+    "citronarom": {
+      "name": "Citronarom",
+      "aliases": [
+        "citronarom"
+      ]
+    },
+    "hasselnotspasta": {
+      "name": "Hasselnötspasta",
+      "aliases": [
+        "hasselnötspasta"
+      ]
+    },
+    "kaffeextrakt": {
+      "name": "Kaffeextrakt",
+      "aliases": [
+        "kaffeextrakt"
+      ]
+    },
+    "kokosarom": {
+      "name": "Kokosarom",
+      "aliases": [
+        "kokosarom"
+      ]
+    },
+    "lakritsgranulat": {
+      "name": "Lakritsgranulat",
+      "aliases": [
+        "lakritsgranulat"
+      ]
+    },
+    "mandelmassa": {
+      "name": "Mandelmassa",
+      "aliases": [
+        "mandelmassa"
+      ]
+    },
+    "marsipan": {
+      "name": "Marsipan",
+      "aliases": [
+        "marsipan"
+      ]
+    },
+    "pepparmyntsarom": {
+      "name": "Pepparmyntsarom",
+      "aliases": [
+        "pepparmyntsarom"
+      ]
+    },
+    "pistagepasta": {
+      "name": "Pistagepasta",
+      "aliases": [
+        "pistagepasta"
+      ]
+    },
+    "polkakross": {
+      "name": "Polkakross",
+      "aliases": [
+        "polkakross"
+      ]
+    },
+    "pomeransskal": {
+      "name": "Pomeransskal",
+      "aliases": [
+        "pomeransskal"
+      ]
+    },
+    "riven-mandelmassa": {
+      "name": "Riven mandelmassa",
+      "aliases": [
+        "riven mandelmassa"
+      ]
+    },
+    "romarom": {
+      "name": "Romarom",
+      "aliases": [
+        "romarom"
+      ]
+    },
+    "salmiakpulver": {
+      "name": "Salmiakpulver",
+      "aliases": [
+        "salmiakpulver"
+      ]
+    },
+    "smorarom": {
+      "name": "Smörarom",
+      "aliases": [
+        "smörarom"
+      ]
+    },
+    "suckat": {
+      "name": "Suckat",
+      "aliases": [
+        "suckat"
+      ]
+    },
+    "syltade-apelsinskal": {
+      "name": "Syltade apelsinskal",
+      "aliases": [
+        "syltade apelsinskal"
+      ]
+    },
+    "vaniljarom": {
+      "name": "Vaniljarom",
+      "aliases": [
+        "vaniljarom"
+      ]
+    },
+    "vaniljextrakt": {
+      "name": "Vaniljextrakt",
+      "aliases": [
+        "vaniljextrakt"
+      ]
+    },
+    "vaniljpasta": {
+      "name": "Vaniljpasta",
+      "aliases": [
+        "vaniljpasta"
+      ]
+    },
+    "vaniljpulver": {
+      "name": "Vaniljpulver",
+      "aliases": [
+        "vaniljpulver"
+      ]
+    },
+    "vaniljsocker": {
+      "name": "Vaniljsocker",
+      "aliases": [
+        "vaniljsocker"
+      ]
+    },
+    "vaniljstang": {
+      "name": "Vaniljstång",
+      "aliases": [
+        "vaniljstång"
+      ]
+    },
+    "vanillinsocker": {
+      "name": "Vanillinsocker",
+      "aliases": [
+        "vanillinsocker"
+      ]
+    },
+    "chokladdekorationer": {
+      "name": "Chokladdekorationer",
+      "aliases": [
+        "chokladdekorationer"
+      ]
+    },
+    "chokladstrossel": {
+      "name": "Chokladströssel",
+      "aliases": [
+        "chokladströssel"
+      ]
+    },
+    "cocktailbar": {
+      "name": "Cocktailbär",
+      "aliases": [
+        "cocktailbär"
+      ]
+    },
+    "fondant": {
+      "name": "Fondant",
+      "aliases": [
+        "fondant"
+      ]
+    },
+    "frosting": {
+      "name": "Frosting",
+      "aliases": [
+        "frosting"
+      ]
+    },
+    "frystorkade-hallon": {
+      "name": "Frystorkade hallon",
+      "aliases": [
+        "frystorkade hallon"
+      ]
+    },
+    "fardig-glasyr": {
+      "name": "Färdig glasyr",
+      "aliases": [
+        "färdig glasyr"
+      ]
+    },
+    "fargat-socker": {
+      "name": "Färgat socker",
+      "aliases": [
+        "färgat socker"
+      ]
+    },
+    "gelfarg": {
+      "name": "Gelfärg",
+      "aliases": [
+        "gelfärg"
+      ]
+    },
+    "glasyrpennor": {
+      "name": "Glasyrpennor",
+      "aliases": [
+        "glasyrpennor"
+      ]
+    },
+    "graddstabilisator": {
+      "name": "Gräddstabilisator",
+      "aliases": [
+        "gräddstabilisator"
+      ]
+    },
+    "hackade-pistagenotter": {
+      "name": "Hackade pistagenötter",
+      "aliases": [
+        "hackade pistagenötter"
+      ]
+    },
+    "hundratusentals": {
+      "name": "Hundratusentals",
+      "aliases": [
+        "hundratusentals"
+      ]
+    },
+    "julstrossel": {
+      "name": "Julströssel",
+      "aliases": [
+        "julströssel"
+      ]
+    },
+    "kanderade-violer": {
+      "name": "Kanderade violer",
+      "aliases": [
+        "kanderade violer"
+      ]
+    },
+    "karamellfarg": {
+      "name": "Karamellfärg",
+      "aliases": [
+        "karamellfärg"
+      ]
+    },
+    "kristyr": {
+      "name": "Kristyr",
+      "aliases": [
+        "kristyr"
+      ]
+    },
+    "krokant": {
+      "name": "Krokant",
+      "aliases": [
+        "krokant"
+      ]
+    },
+    "marsipanfigurer": {
+      "name": "Marsipanfigurer",
+      "aliases": [
+        "marsipanfigurer"
+      ]
+    },
+    "marsipanlock": {
+      "name": "Marsipanlock",
+      "aliases": [
+        "marsipanlock"
+      ]
+    },
+    "marsipanrosor": {
+      "name": "Marsipanrosor",
+      "aliases": [
+        "marsipanrosor"
+      ]
+    },
+    "silverparlor": {
+      "name": "Silverpärlor",
+      "aliases": [
+        "silverpärlor"
+      ]
+    },
+    "sockerdekorationer": {
+      "name": "Sockerdekorationer",
+      "aliases": [
+        "sockerdekorationer"
+      ]
+    },
+    "sockerparlor": {
+      "name": "Sockerpärlor",
+      "aliases": [
+        "sockerpärlor"
+      ]
+    },
+    "sockerogon": {
+      "name": "Sockerögon",
+      "aliases": [
+        "sockerögon"
+      ]
+    },
+    "strossel": {
+      "name": "Strössel",
+      "aliases": [
+        "strössel"
+      ]
+    },
+    "tartelettskal": {
+      "name": "Tartelettskal",
+      "aliases": [
+        "tartelettskal"
+      ]
+    },
+    "tartgele": {
+      "name": "Tårtgelé",
+      "aliases": [
+        "tårtgelé"
+      ]
+    },
+    "atbara-tartbilder": {
+      "name": "Ätbara tårtbilder",
+      "aliases": [
+        "ätbara tårtbilder"
+      ]
+    },
+    "atbart-glitter": {
+      "name": "Ätbart glitter",
+      "aliases": [
+        "ätbart glitter"
+      ]
+    },
+    "bakmix-till-mjuk-pepparkaka": {
+      "name": "Bakmix till mjuk pepparkaka",
+      "aliases": [
+        "bakmix till mjuk pepparkaka"
+      ]
+    },
+    "browniemix": {
+      "name": "Browniemix",
+      "aliases": [
+        "browniemix"
+      ]
+    },
+    "brodmix": {
+      "name": "Brödmix",
+      "aliases": [
+        "brödmix"
+      ]
+    },
+    "bullmix": {
+      "name": "Bullmix",
+      "aliases": [
+        "bullmix"
+      ]
+    },
+    "cheesecakemix": {
+      "name": "Cheesecakemix",
+      "aliases": [
+        "cheesecakemix"
+      ]
+    },
+    "chokladkaksmix": {
+      "name": "Chokladkaksmix",
+      "aliases": [
+        "chokladkaksmix"
+      ]
+    },
+    "citronkaksmix": {
+      "name": "Citronkaksmix",
+      "aliases": [
+        "citronkaksmix"
+      ]
+    },
+    "cookiemix": {
+      "name": "Cookiemix",
+      "aliases": [
+        "cookiemix"
+      ]
+    },
+    "crepesmix": {
+      "name": "Crêpesmix",
+      "aliases": [
+        "crêpesmix"
+      ]
+    },
+    "cupcakemix": {
+      "name": "Cupcakemix",
+      "aliases": [
+        "cupcakemix"
+      ]
+    },
+    "frobrodsmix": {
+      "name": "Fröbrödsmix",
+      "aliases": [
+        "fröbrödsmix"
+      ]
+    },
+    "kladdkakemix": {
+      "name": "Kladdkakemix",
+      "aliases": [
+        "kladdkakemix"
+      ]
+    },
+    "karleksmumsmix": {
+      "name": "Kärleksmumsmix",
+      "aliases": [
+        "kärleksmumsmix"
+      ]
+    },
+    "lussekattsmix": {
+      "name": "Lussekattsmix",
+      "aliases": [
+        "lussekattsmix"
+      ]
+    },
+    "morotskaksmix": {
+      "name": "Morotskaksmix",
+      "aliases": [
+        "morotskaksmix"
+      ]
+    },
+    "muffinsmix": {
+      "name": "Muffinsmix",
+      "aliases": [
+        "muffinsmix"
+      ]
+    },
+    "mugcake-mix": {
+      "name": "Mugcake-mix",
+      "aliases": [
+        "mugcake-mix"
+      ]
+    },
+    "pancakemix": {
+      "name": "Pancakemix",
+      "aliases": [
+        "pancakemix"
+      ]
+    },
+    "pannkaksmix": {
+      "name": "Pannkaksmix",
+      "aliases": [
+        "pannkaksmix"
+      ]
+    },
+    "pizzadegmix": {
+      "name": "Pizzadegmix",
+      "aliases": [
+        "pizzadegmix"
+      ]
+    },
+    "ragbrodsmix": {
+      "name": "Rågbrödsmix",
+      "aliases": [
+        "rågbrödsmix"
+      ]
+    },
+    "sconesmix": {
+      "name": "Sconesmix",
+      "aliases": [
+        "sconesmix"
+      ]
+    },
+    "smulpajsmix": {
+      "name": "Smulpajsmix",
+      "aliases": [
+        "smulpajsmix"
+      ]
+    },
+    "sockerkaksmix": {
+      "name": "Sockerkaksmix",
+      "aliases": [
+        "sockerkaksmix"
+      ]
+    },
+    "tartbottenmix": {
+      "name": "Tårtbottenmix",
+      "aliases": [
+        "tårtbottenmix"
+      ]
+    },
+    "vaffelmix": {
+      "name": "Våffelmix",
+      "aliases": [
+        "våffelmix"
+      ]
+    },
+    "agar-agar": {
+      "name": "Agar agar",
+      "aliases": [
+        "agar agar"
+      ]
+    },
+    "blabarssoppa": {
+      "name": "Blåbärssoppa",
+      "aliases": [
+        "blåbärssoppa"
+      ]
+    },
+    "brylepudding": {
+      "name": "Brylépudding",
+      "aliases": [
+        "brylépudding"
+      ]
+    },
+    "barsas": {
+      "name": "Bärsås",
+      "aliases": [
+        "bärsås"
+      ]
+    },
+    "chokladmousse": {
+      "name": "Chokladmousse",
+      "aliases": [
+        "chokladmousse"
+      ]
+    },
+    "chokladmoussepulver": {
+      "name": "Chokladmoussepulver",
+      "aliases": [
+        "chokladmoussepulver"
+      ]
+    },
+    "chokladpudding": {
+      "name": "Chokladpudding",
+      "aliases": [
+        "chokladpudding"
+      ]
+    },
+    "chokladpuddingpulver": {
+      "name": "Chokladpuddingpulver",
+      "aliases": [
+        "chokladpuddingpulver"
+      ]
+    },
+    "chokladsas": {
+      "name": "Chokladsås",
+      "aliases": [
+        "chokladsås"
+      ]
+    },
+    "citronfromagepulver": {
+      "name": "Citronfromagepulver",
+      "aliases": [
+        "citronfromagepulver"
+      ]
+    },
+    "creme-brulee-mix": {
+      "name": "Crème brûlée-mix",
+      "aliases": [
+        "crème brûlée-mix"
+      ]
+    },
+    "creme-caramel": {
+      "name": "Crème caramel",
+      "aliases": [
+        "crème caramel"
+      ]
+    },
+    "fruktkompott": {
+      "name": "Fruktkompott",
+      "aliases": [
+        "fruktkompott"
+      ]
+    },
+    "gelatinblad": {
+      "name": "Gelatinblad",
+      "aliases": [
+        "gelatinblad"
+      ]
+    },
+    "gelatinpulver": {
+      "name": "Gelatinpulver",
+      "aliases": [
+        "gelatinpulver"
+      ]
+    },
+    "gelepulver": {
+      "name": "Gelépulver",
+      "aliases": [
+        "gelépulver"
+      ]
+    },
+    "glasspulver": {
+      "name": "Glasspulver",
+      "aliases": [
+        "glasspulver"
+      ]
+    },
+    "glasstrossel": {
+      "name": "Glasströssel",
+      "aliases": [
+        "glasströssel"
+      ]
+    },
+    "hallonmoussepulver": {
+      "name": "Hallonmoussepulver",
+      "aliases": [
+        "hallonmoussepulver"
+      ]
+    },
+    "hallonsas": {
+      "name": "Hallonsås",
+      "aliases": [
+        "hallonsås"
+      ]
+    },
+    "jordgubbssas-till-glass": {
+      "name": "Jordgubbssås till glass",
+      "aliases": [
+        "jordgubbssås till glass"
+      ]
+    },
+    "knacksas": {
+      "name": "Knäcksås",
+      "aliases": [
+        "knäcksås"
+      ]
+    },
+    "kolasas": {
+      "name": "Kolasås",
+      "aliases": [
+        "kolasås"
+      ]
+    },
+    "kondenserad-mjolk": {
+      "name": "Kondenserad mjölk",
+      "aliases": [
+        "kondenserad mjölk"
+      ]
+    },
+    "lakritssas-till-glass": {
+      "name": "Lakritssås till glass",
+      "aliases": [
+        "lakritssås till glass"
+      ]
+    },
+    "mandelbiskvier": {
+      "name": "Mandelbiskvier",
+      "aliases": [
+        "mandelbiskvier"
+      ]
+    },
+    "nyponsoppa": {
+      "name": "Nyponsoppa",
+      "aliases": [
+        "nyponsoppa"
+      ]
+    },
+    "osotad-kondenserad-mjolk": {
+      "name": "Osötad kondenserad mjölk",
+      "aliases": [
+        "osötad kondenserad mjölk",
+        "evaporerad mjölk"
+      ]
+    },
+    "pannacotta": {
+      "name": "Pannacotta",
+      "aliases": [
+        "pannacotta"
+      ]
+    },
+    "pannacottamix": {
+      "name": "Pannacottamix",
+      "aliases": [
+        "pannacottamix"
+      ]
+    },
+    "ris-a-la-malta": {
+      "name": "Ris à la Malta",
+      "aliases": [
+        "ris à la malta"
+      ]
+    },
+    "saffranspannkaka": {
+      "name": "Saffranspannkaka",
+      "aliases": [
+        "saffranspannkaka"
+      ]
+    },
+    "saftsas": {
+      "name": "Saftsås",
+      "aliases": [
+        "saftsås"
+      ]
+    },
+    "tapiokaparlor": {
+      "name": "Tapiokapärlor",
+      "aliases": [
+        "tapiokapärlor"
+      ]
+    },
+    "tiramisu": {
+      "name": "Tiramisu",
+      "aliases": [
+        "tiramisu"
+      ]
+    },
+    "vaniljkram": {
+      "name": "Vaniljkräm",
+      "aliases": [
+        "vaniljkräm"
+      ]
+    },
+    "vaniljpudding": {
+      "name": "Vaniljpudding",
+      "aliases": [
+        "vaniljpudding"
+      ]
+    },
+    "vaniljpuddingpulver": {
+      "name": "Vaniljpuddingpulver",
+      "aliases": [
+        "vaniljpuddingpulver"
+      ]
+    },
+    "vaniljsas": {
+      "name": "Vaniljsås",
+      "aliases": [
+        "vaniljsås"
+      ]
+    },
+    "vaniljsaspulver": {
+      "name": "Vaniljsåspulver",
+      "aliases": [
+        "vaniljsåspulver"
+      ]
+    },
+    "askorbinsyra": {
+      "name": "Askorbinsyra",
+      "aliases": [
+        "askorbinsyra"
+      ]
+    },
+    "burketiketter": {
+      "name": "Burketiketter",
+      "aliases": [
+        "burketiketter"
+      ]
+    },
+    "citronsyra": {
+      "name": "Citronsyra",
+      "aliases": [
+        "citronsyra"
+      ]
+    },
+    "gummiringar-till-konserveringsburkar": {
+      "name": "Gummiringar till konserveringsburkar",
+      "aliases": [
+        "gummiringar till konserveringsburkar"
+      ]
+    },
+    "konserveringsburkar": {
+      "name": "Konserveringsburkar",
+      "aliases": [
+        "konserveringsburkar"
+      ]
+    },
+    "konserveringsmedel": {
+      "name": "Konserveringsmedel",
+      "aliases": [
+        "konserveringsmedel"
+      ]
+    },
+    "pektin": {
+      "name": "Pektin",
+      "aliases": [
+        "pektin"
+      ]
+    },
+    "saftflaskor": {
+      "name": "Saftflaskor",
+      "aliases": [
+        "saftflaskor"
+      ]
+    },
+    "silduk": {
+      "name": "Silduk",
+      "aliases": [
+        "silduk"
+      ]
+    },
+    "syltburkar": {
+      "name": "Syltburkar",
+      "aliases": [
+        "syltburkar"
+      ]
+    },
+    "vinsyra": {
+      "name": "Vinsyra",
+      "aliases": [
+        "vinsyra"
+      ]
+    },
+    "guarkarnmjol": {
+      "name": "Guarkärnmjöl",
+      "aliases": [
+        "guarkärnmjöl"
+      ]
+    },
+    "idealmjol": {
+      "name": "Idealmjöl",
+      "aliases": [
+        "idealmjöl"
+      ]
+    },
+    "ljus-snabbredning": {
+      "name": "Ljus snabbredning",
+      "aliases": [
+        "ljus snabbredning"
+      ]
+    },
+    "mork-snabbredning": {
+      "name": "Mörk snabbredning",
+      "aliases": [
+        "mörk snabbredning"
+      ]
+    },
+    "potatisfiber": {
+      "name": "Potatisfiber",
+      "aliases": [
+        "potatisfiber"
+      ]
+    },
+    "xantangummi": {
+      "name": "Xantangummi",
+      "aliases": [
+        "xantangummi"
+      ]
+    },
+    "blomkalsbuketter": {
+      "name": "Blomkålsbuketter",
+      "aliases": [
+        "blomkålsbuketter"
+      ]
+    },
+    "edamame": {
+      "name": "Edamame",
+      "aliases": [
+        "edamame"
+      ]
+    },
+    "fryst-basilika": {
+      "name": "Fryst basilika",
+      "aliases": [
+        "fryst basilika"
+      ]
+    },
+    "fryst-champinjon-i-skivor": {
+      "name": "Fryst champinjon i skivor",
+      "aliases": [
+        "fryst champinjon i skivor"
+      ]
+    },
+    "fryst-citrongras": {
+      "name": "Fryst citrongräs",
+      "aliases": [
+        "fryst citrongräs"
+      ]
+    },
+    "fryst-graslok": {
+      "name": "Fryst gräslök",
+      "aliases": [
+        "fryst gräslök"
+      ]
+    },
+    "fryst-hackad-chili": {
+      "name": "Fryst hackad chili",
+      "aliases": [
+        "fryst hackad chili"
+      ]
+    },
+    "fryst-hackad-koriander": {
+      "name": "Fryst hackad koriander",
+      "aliases": [
+        "fryst hackad koriander"
+      ]
+    },
+    "fryst-ingefara": {
+      "name": "Fryst ingefära",
+      "aliases": [
+        "fryst ingefära"
+      ]
+    },
+    "fryst-karljohansvamp": {
+      "name": "Fryst karljohansvamp",
+      "aliases": [
+        "fryst karljohansvamp"
+      ]
+    },
+    "fryst-tarnad-sotpotatis": {
+      "name": "Fryst tärnad sötpotatis",
+      "aliases": [
+        "fryst tärnad sötpotatis"
+      ]
+    },
+    "frysta-limeblad": {
+      "name": "Frysta limeblad",
+      "aliases": [
+        "frysta limeblad"
+      ]
+    },
+    "grillade-gronsaker": {
+      "name": "Grillade grönsaker",
+      "aliases": [
+        "grillade grönsaker"
+      ]
+    },
+    "gronsaksblandning": {
+      "name": "Grönsaksblandning",
+      "aliases": [
+        "grönsaksblandning"
+      ]
+    },
+    "hackad-dill": {
+      "name": "Hackad dill",
+      "aliases": [
+        "hackad dill"
+      ]
+    },
+    "hackad-lok": {
+      "name": "Hackad lök",
+      "aliases": [
+        "hackad lök"
+      ]
+    },
+    "hackad-persilja": {
+      "name": "Hackad persilja",
+      "aliases": [
+        "hackad persilja"
+      ]
+    },
+    "hackad-spenat": {
+      "name": "Hackad spenat",
+      "aliases": [
+        "hackad spenat"
+      ]
+    },
+    "hackad-vitlok": {
+      "name": "Hackad vitlök",
+      "aliases": [
+        "hackad vitlök"
+      ]
+    },
+    "kronartskocksbottnar": {
+      "name": "Kronärtskocksbottnar",
+      "aliases": [
+        "kronärtskocksbottnar"
+      ]
+    },
+    "majskolvar": {
+      "name": "Majskolvar",
+      "aliases": [
+        "majskolvar"
+      ]
+    },
+    "minimorotter": {
+      "name": "Minimorötter",
+      "aliases": [
+        "minimorötter"
+      ]
+    },
+    "skalade-edamamebonor": {
+      "name": "Skalade edamamebönor",
+      "aliases": [
+        "skalade edamamebönor"
+      ]
+    },
+    "skivade-morotter": {
+      "name": "Skivade morötter",
+      "aliases": [
+        "skivade morötter"
+      ]
+    },
+    "soppgront": {
+      "name": "Soppgrönt",
+      "aliases": [
+        "soppgrönt"
+      ]
+    },
+    "strimlad-paprika": {
+      "name": "Strimlad paprika",
+      "aliases": [
+        "strimlad paprika"
+      ]
+    },
+    "stuvad-spenat": {
+      "name": "Stuvad spenat",
+      "aliases": [
+        "stuvad spenat"
+      ]
+    },
+    "wokgronsaker": {
+      "name": "Wokgrönsaker",
+      "aliases": [
+        "wokgrönsaker"
+      ]
+    },
+    "art-majs-paprika": {
+      "name": "Ärt-majs-paprika",
+      "aliases": [
+        "ärt-majs-paprika"
+      ]
+    },
+    "artor-och-morotter": {
+      "name": "Ärtor och morötter",
+      "aliases": [
+        "ärtor och morötter"
+      ]
+    },
+    "acaipure": {
+      "name": "Acaipuré",
+      "aliases": [
+        "acaipuré"
+      ]
+    },
+    "ananasbitar": {
+      "name": "Ananasbitar",
+      "aliases": [
+        "ananasbitar"
+      ]
+    },
+    "bananskivor": {
+      "name": "Bananskivor",
+      "aliases": [
+        "bananskivor"
+      ]
+    },
+    "barmix": {
+      "name": "Bärmix",
+      "aliases": [
+        "bärmix"
+      ]
+    },
+    "fryst-avokado-i-bitar": {
+      "name": "Fryst avokado i bitar",
+      "aliases": [
+        "fryst avokado i bitar"
+      ]
+    },
+    "frysta-granatappelkarnor": {
+      "name": "Frysta granatäppelkärnor",
+      "aliases": [
+        "frysta granatäppelkärnor"
+      ]
+    },
+    "frysta-persikobitar": {
+      "name": "Frysta persikobitar",
+      "aliases": [
+        "frysta persikobitar"
+      ]
+    },
+    "passionsfruktpure": {
+      "name": "Passionsfruktpuré",
+      "aliases": [
+        "passionsfruktpuré"
+      ]
+    },
+    "skogsbarsmix": {
+      "name": "Skogsbärsmix",
+      "aliases": [
+        "skogsbärsmix"
+      ]
+    },
+    "smoothiemix": {
+      "name": "Smoothiemix",
+      "aliases": [
+        "smoothiemix"
+      ]
+    },
+    "surkorsbar": {
+      "name": "Surkörsbär",
+      "aliases": [
+        "surkörsbär"
+      ]
+    },
+    "tropisk-fruktmix": {
+      "name": "Tropisk fruktmix",
+      "aliases": [
+        "tropisk fruktmix"
+      ]
+    },
+    "vilda-blabar": {
+      "name": "Vilda blåbär",
+      "aliases": [
+        "vilda blåbär"
+      ]
+    },
+    "blackfiskringar": {
+      "name": "Bläckfiskringar",
+      "aliases": [
+        "bläckfiskringar"
+      ]
+    },
+    "fish-and-chips": {
+      "name": "Fish and chips",
+      "aliases": [
+        "fish and chips"
+      ]
+    },
+    "fiskblock": {
+      "name": "Fiskblock",
+      "aliases": [
+        "fiskblock"
+      ]
+    },
+    "fiskburgare": {
+      "name": "Fiskburgare",
+      "aliases": [
+        "fiskburgare"
+      ]
+    },
+    "fiskfile-i-sas": {
+      "name": "Fiskfilé i sås",
+      "aliases": [
+        "fiskfilé i sås"
+      ]
+    },
+    "fryst-fiskgratang": {
+      "name": "Fryst fiskgratäng",
+      "aliases": [
+        "fryst fiskgratäng"
+      ]
+    },
+    "frysta-laxkuber": {
+      "name": "Frysta laxkuber",
+      "aliases": [
+        "frysta laxkuber"
+      ]
+    },
+    "frysta-rakor": {
+      "name": "Frysta räkor",
+      "aliases": [
+        "frysta räkor"
+      ]
+    },
+    "hokifile": {
+      "name": "Hokifilé",
+      "aliases": [
+        "hokifilé"
+      ]
+    },
+    "kammusslor": {
+      "name": "Kammusslor",
+      "aliases": [
+        "kammusslor"
+      ]
+    },
+    "koljafile": {
+      "name": "Koljafilé",
+      "aliases": [
+        "koljafilé"
+      ]
+    },
+    "kummelfile": {
+      "name": "Kummelfilé",
+      "aliases": [
+        "kummelfilé"
+      ]
+    },
+    "laxburgare": {
+      "name": "Laxburgare",
+      "aliases": [
+        "laxburgare"
+      ]
+    },
+    "laxportioner": {
+      "name": "Laxportioner",
+      "aliases": [
+        "laxportioner"
+      ]
+    },
+    "makrillfile": {
+      "name": "Makrillfilé",
+      "aliases": [
+        "makrillfilé"
+      ]
+    },
+    "musslor": {
+      "name": "Musslor",
+      "aliases": [
+        "musslor"
+      ]
+    },
+    "panerad-fisk": {
+      "name": "Panerad fisk",
+      "aliases": [
+        "panerad fisk"
+      ]
+    },
+    "pangasiusfile": {
+      "name": "Pangasiusfilé",
+      "aliases": [
+        "pangasiusfilé"
+      ]
+    },
+    "raa-rakor": {
+      "name": "Råa räkor",
+      "aliases": [
+        "råa räkor"
+      ]
+    },
+    "rodspattafile": {
+      "name": "Rödspättafilé",
+      "aliases": [
+        "rödspättafilé"
+      ]
+    },
+    "skaldjursmix": {
+      "name": "Skaldjursmix",
+      "aliases": [
+        "skaldjursmix"
+      ]
+    },
+    "sprodbakad-torsk": {
+      "name": "Sprödbakad torsk",
+      "aliases": [
+        "sprödbakad torsk"
+      ]
+    },
+    "stillahavsflundra": {
+      "name": "Stillahavsflundra",
+      "aliases": [
+        "stillahavsflundra"
+      ]
+    },
+    "tempurarakor": {
+      "name": "Tempuraräkor",
+      "aliases": [
+        "tempuraräkor"
+      ]
+    },
+    "tilapiafile": {
+      "name": "Tilapiafilé",
+      "aliases": [
+        "tilapiafilé"
+      ]
+    },
+    "tonfiskstek": {
+      "name": "Tonfiskstek",
+      "aliases": [
+        "tonfiskstek"
+      ]
+    },
+    "ugnsfisk": {
+      "name": "Ugnsfisk",
+      "aliases": [
+        "ugnsfisk"
+      ]
+    },
+    "vildfangad-lax": {
+      "name": "Vildfångad lax",
+      "aliases": [
+        "vildfångad lax"
+      ]
+    },
+    "cordon-bleu": {
+      "name": "Cordon bleu",
+      "aliases": [
+        "cordon bleu"
+      ]
+    },
+    "fryst-kebabkott": {
+      "name": "Fryst kebabkött",
+      "aliases": [
+        "fryst kebabkött"
+      ]
+    },
+    "fryst-kycklingkebab": {
+      "name": "Fryst kycklingkebab",
+      "aliases": [
+        "fryst kycklingkebab"
+      ]
+    },
+    "fryst-skav-av-hjort": {
+      "name": "Fryst skav av hjort",
+      "aliases": [
+        "fryst skav av hjort"
+      ]
+    },
+    "kycklingpopcorn": {
+      "name": "Kycklingpopcorn",
+      "aliases": [
+        "kycklingpopcorn"
+      ]
+    },
+    "kangurufile": {
+      "name": "Kängurufilé",
+      "aliases": [
+        "kängurufilé"
+      ]
+    },
+    "lammracks": {
+      "name": "Lammracks",
+      "aliases": [
+        "lammracks"
+      ]
+    },
+    "minihamburgare": {
+      "name": "Minihamburgare",
+      "aliases": [
+        "minihamburgare"
+      ]
+    },
+    "panerad-kycklingfile": {
+      "name": "Panerad kycklingfilé",
+      "aliases": [
+        "panerad kycklingfilé"
+      ]
+    },
+    "panerade-kycklingstrimlor": {
+      "name": "Panerade kycklingstrimlor",
+      "aliases": [
+        "panerade kycklingstrimlor"
+      ]
+    },
+    "schnitzel": {
+      "name": "Schnitzel",
+      "aliases": [
+        "schnitzel"
+      ]
+    },
+    "tjalknol": {
+      "name": "Tjälknöl",
+      "aliases": [
+        "tjälknöl"
+      ]
+    },
+    "baobullar": {
+      "name": "Baobullar",
+      "aliases": [
+        "baobullar"
+      ]
+    },
+    "blomkalsvingar": {
+      "name": "Blomkålsvingar",
+      "aliases": [
+        "blomkålsvingar"
+      ]
+    },
+    "burritos": {
+      "name": "Burritos",
+      "aliases": [
+        "burritos"
+      ]
+    },
+    "chili-cheese-bitar": {
+      "name": "Chili cheese-bitar",
+      "aliases": [
+        "chili cheese-bitar"
+      ]
+    },
+    "corn-dogs": {
+      "name": "Corn dogs",
+      "aliases": [
+        "corn dogs"
+      ]
+    },
+    "dim-sum": {
+      "name": "Dim sum",
+      "aliases": [
+        "dim sum"
+      ]
+    },
+    "dumplings": {
+      "name": "Dumplings",
+      "aliases": [
+        "dumplings"
+      ]
+    },
+    "fryspizza": {
+      "name": "Fryspizza",
+      "aliases": [
+        "fryspizza"
+      ]
+    },
+    "fryst-falafel": {
+      "name": "Fryst falafel",
+      "aliases": [
+        "fryst falafel"
+      ]
+    },
+    "fryst-fylld-pasta": {
+      "name": "Fryst fylld pasta",
+      "aliases": [
+        "fryst fylld pasta"
+      ]
+    },
+    "fryst-lasagne": {
+      "name": "Fryst lasagne",
+      "aliases": [
+        "fryst lasagne"
+      ]
+    },
+    "fryst-paella": {
+      "name": "Fryst paella",
+      "aliases": [
+        "fryst paella"
+      ]
+    },
+    "fryst-paj": {
+      "name": "Fryst paj",
+      "aliases": [
+        "fryst paj"
+      ]
+    },
+    "fryst-pytt-i-panna": {
+      "name": "Fryst pytt i panna",
+      "aliases": [
+        "fryst pytt i panna"
+      ]
+    },
+    "frysta-piroger": {
+      "name": "Frysta piroger",
+      "aliases": [
+        "frysta piroger"
+      ]
+    },
+    "fyllda-crepes": {
+      "name": "Fyllda crêpes",
+      "aliases": [
+        "fyllda crêpes"
+      ]
+    },
+    "gyoza": {
+      "name": "Gyoza",
+      "aliases": [
+        "gyoza"
+      ]
+    },
+    "halloumi-fries": {
+      "name": "Halloumi fries",
+      "aliases": [
+        "halloumi fries"
+      ]
+    },
+    "jalapeno-poppers": {
+      "name": "Jalapeño poppers",
+      "aliases": [
+        "jalapeño poppers"
+      ]
+    },
+    "kottpiroger": {
+      "name": "Köttpiroger",
+      "aliases": [
+        "köttpiroger"
+      ]
+    },
+    "lokringar": {
+      "name": "Lökringar",
+      "aliases": [
+        "lökringar"
+      ]
+    },
+    "mikroburgare": {
+      "name": "Mikroburgare",
+      "aliases": [
+        "mikroburgare"
+      ]
+    },
+    "mikroratter": {
+      "name": "Mikrorätter",
+      "aliases": [
+        "mikrorätter"
+      ]
+    },
+    "minipizzor": {
+      "name": "Minipizzor",
+      "aliases": [
+        "minipizzor"
+      ]
+    },
+    "minivarrullar": {
+      "name": "Minivårrullar",
+      "aliases": [
+        "minivårrullar"
+      ]
+    },
+    "mozzarellasticks": {
+      "name": "Mozzarellasticks",
+      "aliases": [
+        "mozzarellasticks"
+      ]
+    },
+    "oxpytt": {
+      "name": "Oxpytt",
+      "aliases": [
+        "oxpytt"
+      ]
+    },
+    "palt": {
+      "name": "Palt",
+      "aliases": [
+        "palt"
+      ]
+    },
+    "pannkakor": {
+      "name": "Pannkakor",
+      "aliases": [
+        "pannkakor"
+      ]
+    },
+    "panpizza": {
+      "name": "Panpizza",
+      "aliases": [
+        "panpizza"
+      ]
+    },
+    "pelmeni": {
+      "name": "Pelmeni",
+      "aliases": [
+        "pelmeni"
+      ]
+    },
+    "plattar": {
+      "name": "Plättar",
+      "aliases": [
+        "plättar"
+      ]
+    },
+    "stekt-ris": {
+      "name": "Stekt ris",
+      "aliases": [
+        "stekt ris"
+      ]
+    },
+    "takoyaki": {
+      "name": "Takoyaki",
+      "aliases": [
+        "takoyaki"
+      ]
+    },
+    "vegansk-pizza": {
+      "name": "Vegansk pizza",
+      "aliases": [
+        "vegansk pizza"
+      ]
+    },
+    "vegetarisk-lasagne": {
+      "name": "Vegetarisk lasagne",
+      "aliases": [
+        "vegetarisk lasagne"
+      ]
+    },
+    "vegetarisk-pytt-i-panna": {
+      "name": "Vegetarisk pytt i panna",
+      "aliases": [
+        "vegetarisk pytt i panna"
+      ]
+    },
+    "vafflor": {
+      "name": "Våfflor",
+      "aliases": [
+        "våfflor"
+      ]
+    },
+    "varrullar": {
+      "name": "Vårrullar",
+      "aliases": [
+        "vårrullar"
+      ]
+    },
+    "wokmix-med-nudlar": {
+      "name": "Wokmix med nudlar",
+      "aliases": [
+        "wokmix med nudlar"
+      ]
+    },
+    "wonton": {
+      "name": "Wonton",
+      "aliases": [
+        "wonton"
+      ]
+    },
+    "curly-fries": {
+      "name": "Curly fries",
+      "aliases": [
+        "curly fries"
+      ]
+    },
+    "fryst-potatisgratang": {
+      "name": "Fryst potatisgratäng",
+      "aliases": [
+        "fryst potatisgratäng"
+      ]
+    },
+    "fryst-potatismos": {
+      "name": "Fryst potatismos",
+      "aliases": [
+        "fryst potatismos"
+      ]
+    },
+    "gallerpommes": {
+      "name": "Gallerpommes",
+      "aliases": [
+        "gallerpommes"
+      ]
+    },
+    "hash-browns": {
+      "name": "Hash browns",
+      "aliases": [
+        "hash browns"
+      ]
+    },
+    "hasselbackspotatis": {
+      "name": "Hasselbackspotatis",
+      "aliases": [
+        "hasselbackspotatis"
+      ]
+    },
+    "klyftpotatis": {
+      "name": "Klyftpotatis",
+      "aliases": [
+        "klyftpotatis"
+      ]
+    },
+    "pommes-chateau": {
+      "name": "Pommes château",
+      "aliases": [
+        "pommes château"
+      ]
+    },
+    "pommes-frites": {
+      "name": "Pommes frites",
+      "aliases": [
+        "pommes frites"
+      ]
+    },
+    "pommes-noisettes": {
+      "name": "Pommes noisettes",
+      "aliases": [
+        "pommes noisettes"
+      ]
+    },
+    "potatisbakelser": {
+      "name": "Potatisbakelser",
+      "aliases": [
+        "potatisbakelser"
+      ]
+    },
+    "potatisbullar": {
+      "name": "Potatisbullar",
+      "aliases": [
+        "potatisbullar"
+      ]
+    },
+    "potatiskroketter": {
+      "name": "Potatiskroketter",
+      "aliases": [
+        "potatiskroketter"
+      ]
+    },
+    "potatisplattar": {
+      "name": "Potatisplättar",
+      "aliases": [
+        "potatisplättar"
+      ]
+    },
+    "potatisstrips": {
+      "name": "Potatisstrips",
+      "aliases": [
+        "potatisstrips"
+      ]
+    },
+    "potatistarningar": {
+      "name": "Potatistärningar",
+      "aliases": [
+        "potatistärningar"
+      ]
+    },
+    "rostad-potatis": {
+      "name": "Rostad potatis",
+      "aliases": [
+        "rostad potatis"
+      ]
+    },
+    "rotfruktspommes": {
+      "name": "Rotfruktspommes",
+      "aliases": [
+        "rotfruktspommes"
+      ]
+    },
+    "rastekt-potatis": {
+      "name": "Råstekt potatis",
+      "aliases": [
+        "råstekt potatis"
+      ]
+    },
+    "rafflade-pommes": {
+      "name": "Räfflade pommes",
+      "aliases": [
+        "räfflade pommes"
+      ]
+    },
+    "rosti": {
+      "name": "Rösti",
+      "aliases": [
+        "rösti"
+      ]
+    },
+    "skivad-fryst-potatis": {
+      "name": "Skivad fryst potatis",
+      "aliases": [
+        "skivad fryst potatis"
+      ]
+    },
+    "sotpotatispommes": {
+      "name": "Sötpotatispommes",
+      "aliases": [
+        "sötpotatispommes"
+      ]
+    },
+    "tjocka-steakhousepommes": {
+      "name": "Tjocka steakhousepommes",
+      "aliases": [
+        "tjocka steakhousepommes"
+      ]
+    },
+    "ugnspommes": {
+      "name": "Ugnspommes",
+      "aliases": [
+        "ugnspommes"
+      ]
+    },
+    "bake-off-baguetter": {
+      "name": "Bake off-baguetter",
+      "aliases": [
+        "bake off-baguetter"
+      ]
+    },
+    "baobrod": {
+      "name": "Baobröd",
+      "aliases": [
+        "baobröd"
+      ]
+    },
+    "belgiska-vafflor": {
+      "name": "Belgiska våfflor",
+      "aliases": [
+        "belgiska våfflor"
+      ]
+    },
+    "blinier": {
+      "name": "Blinier",
+      "aliases": [
+        "blinier"
+      ]
+    },
+    "blabarspaj": {
+      "name": "Blåbärspaj",
+      "aliases": [
+        "blåbärspaj"
+      ]
+    },
+    "chokladfondant": {
+      "name": "Chokladfondant",
+      "aliases": [
+        "chokladfondant"
+      ]
+    },
+    "churros": {
+      "name": "Churros",
+      "aliases": [
+        "churros"
+      ]
+    },
+    "citronpaj": {
+      "name": "Citronpaj",
+      "aliases": [
+        "citronpaj"
+      ]
+    },
+    "fryst-bulldeg": {
+      "name": "Fryst bulldeg",
+      "aliases": [
+        "fryst bulldeg"
+      ]
+    },
+    "fryst-smordeg": {
+      "name": "Fryst smördeg",
+      "aliases": [
+        "fryst smördeg"
+      ]
+    },
+    "fryst-tarta": {
+      "name": "Fryst tårta",
+      "aliases": [
+        "fryst tårta"
+      ]
+    },
+    "frysta-croissanter": {
+      "name": "Frysta croissanter",
+      "aliases": [
+        "frysta croissanter"
+      ]
+    },
+    "frysta-frallor": {
+      "name": "Frysta frallor",
+      "aliases": [
+        "frysta frallor"
+      ]
+    },
+    "frysta-kanelbullar": {
+      "name": "Frysta kanelbullar",
+      "aliases": [
+        "frysta kanelbullar"
+      ]
+    },
+    "frysta-semlor": {
+      "name": "Frysta semlor",
+      "aliases": [
+        "frysta semlor"
+      ]
+    },
+    "gyozaplattor": {
+      "name": "Gyozaplattor",
+      "aliases": [
+        "gyozaplattor"
+      ]
+    },
+    "hallonpaj": {
+      "name": "Hallonpaj",
+      "aliases": [
+        "hallonpaj"
+      ]
+    },
+    "pajskal": {
+      "name": "Pajskal",
+      "aliases": [
+        "pajskal"
+      ]
+    },
+    "profiteroles": {
+      "name": "Profiteroles",
+      "aliases": [
+        "profiteroles"
+      ]
+    },
+    "rabarberpaj": {
+      "name": "Rabarberpaj",
+      "aliases": [
+        "rabarberpaj"
+      ]
+    },
+    "smulpaj": {
+      "name": "Smulpaj",
+      "aliases": [
+        "smulpaj"
+      ]
+    },
+    "vitloksbaguette": {
+      "name": "Vitlöksbaguette",
+      "aliases": [
+        "vitlöksbaguette"
+      ]
+    },
+    "vitloksbrod": {
+      "name": "Vitlöksbröd",
+      "aliases": [
+        "vitlöksbröd"
+      ]
+    },
+    "varrulleplattor": {
+      "name": "Vårrulleplattor",
+      "aliases": [
+        "vårrulleplattor"
+      ]
+    },
+    "wontonplattor": {
+      "name": "Wontonplattor",
+      "aliases": [
+        "wontonplattor"
+      ]
+    },
+    "appelpaj": {
+      "name": "Äppelpaj",
+      "aliases": [
+        "äppelpaj"
+      ]
+    },
+    "blabarsglass": {
+      "name": "Blåbärsglass",
+      "aliases": [
+        "blåbärsglass"
+      ]
+    },
+    "chokladglass": {
+      "name": "Chokladglass",
+      "aliases": [
+        "chokladglass"
+      ]
+    },
+    "citronsorbet": {
+      "name": "Citronsorbet",
+      "aliases": [
+        "citronsorbet"
+      ]
+    },
+    "cookie-dough-glass": {
+      "name": "Cookie dough-glass",
+      "aliases": [
+        "cookie dough-glass"
+      ]
+    },
+    "flerpack-glass": {
+      "name": "Flerpack glass",
+      "aliases": [
+        "flerpack glass"
+      ]
+    },
+    "frozen-yoghurt": {
+      "name": "Frozen yoghurt",
+      "aliases": [
+        "frozen yoghurt"
+      ]
+    },
+    "gelato": {
+      "name": "Gelato",
+      "aliases": [
+        "gelato"
+      ]
+    },
+    "glass-utan-tillsatt-socker": {
+      "name": "Glass utan tillsatt socker",
+      "aliases": [
+        "glass utan tillsatt socker"
+      ]
+    },
+    "glassandwich": {
+      "name": "Glassandwich",
+      "aliases": [
+        "glassandwich"
+      ]
+    },
+    "glassbat": {
+      "name": "Glassbåt",
+      "aliases": [
+        "glassbåt"
+      ]
+    },
+    "glassbagare": {
+      "name": "Glassbägare",
+      "aliases": [
+        "glassbägare"
+      ]
+    },
+    "glasspinnar": {
+      "name": "Glasspinnar",
+      "aliases": [
+        "glasspinnar"
+      ]
+    },
+    "glasspraliner": {
+      "name": "Glasspraliner",
+      "aliases": [
+        "glasspraliner"
+      ]
+    },
+    "glassran": {
+      "name": "Glassrån",
+      "aliases": [
+        "glassrån"
+      ]
+    },
+    "glasstrut": {
+      "name": "Glasstrut",
+      "aliases": [
+        "glasstrut"
+      ]
+    },
+    "glasstarta": {
+      "name": "Glasstårta",
+      "aliases": [
+        "glasstårta"
+      ]
+    },
+    "graddglass": {
+      "name": "Gräddglass",
+      "aliases": [
+        "gräddglass"
+      ]
+    },
+    "hallonsorbet": {
+      "name": "Hallonsorbet",
+      "aliases": [
+        "hallonsorbet"
+      ]
+    },
+    "havreglass": {
+      "name": "Havreglass",
+      "aliases": [
+        "havreglass"
+      ]
+    },
+    "hjortronglass": {
+      "name": "Hjortronglass",
+      "aliases": [
+        "hjortronglass"
+      ]
+    },
+    "isglass": {
+      "name": "Isglass",
+      "aliases": [
+        "isglass"
+      ]
+    },
+    "isglass-att-frysa-hemma": {
+      "name": "Isglass att frysa hemma",
+      "aliases": [
+        "isglass att frysa hemma"
+      ]
+    },
+    "jordgubbsglass": {
+      "name": "Jordgubbsglass",
+      "aliases": [
+        "jordgubbsglass"
+      ]
+    },
+    "kaffeglass": {
+      "name": "Kaffeglass",
+      "aliases": [
+        "kaffeglass"
+      ]
+    },
+    "kokosglass": {
+      "name": "Kokosglass",
+      "aliases": [
+        "kokosglass"
+      ]
+    },
+    "kolaglass": {
+      "name": "Kolaglass",
+      "aliases": [
+        "kolaglass"
+      ]
+    },
+    "kulfi": {
+      "name": "Kulfi",
+      "aliases": [
+        "kulfi"
+      ]
+    },
+    "lakritsglass": {
+      "name": "Lakritsglass",
+      "aliases": [
+        "lakritsglass"
+      ]
+    },
+    "laktosfri-glass": {
+      "name": "Laktosfri glass",
+      "aliases": [
+        "laktosfri glass"
+      ]
+    },
+    "mangosorbet": {
+      "name": "Mangosorbet",
+      "aliases": [
+        "mangosorbet"
+      ]
+    },
+    "miniglassar": {
+      "name": "Miniglassar",
+      "aliases": [
+        "miniglassar"
+      ]
+    },
+    "mintchokladglass": {
+      "name": "Mintchokladglass",
+      "aliases": [
+        "mintchokladglass"
+      ]
+    },
+    "mochiglass": {
+      "name": "Mochiglass",
+      "aliases": [
+        "mochiglass"
+      ]
+    },
+    "nougatglass": {
+      "name": "Nougatglass",
+      "aliases": [
+        "nougatglass"
+      ]
+    },
+    "pistageglass": {
+      "name": "Pistageglass",
+      "aliases": [
+        "pistageglass"
+      ]
+    },
+    "proteinglass": {
+      "name": "Proteinglass",
+      "aliases": [
+        "proteinglass"
+      ]
+    },
+    "paronglass": {
+      "name": "Päronglass",
+      "aliases": [
+        "päronglass"
+      ]
+    },
+    "romrussinglass": {
+      "name": "Romrussinglass",
+      "aliases": [
+        "romrussinglass"
+      ]
+    },
+    "semifreddo": {
+      "name": "Semifreddo",
+      "aliases": [
+        "semifreddo"
+      ]
+    },
+    "sorbet": {
+      "name": "Sorbet",
+      "aliases": [
+        "sorbet"
+      ]
+    },
+    "stracciatellaglass": {
+      "name": "Stracciatellaglass",
+      "aliases": [
+        "stracciatellaglass"
+      ]
+    },
+    "vaniljglass": {
+      "name": "Vaniljglass",
+      "aliases": [
+        "vaniljglass"
+      ]
+    },
+    "vaxtbaserad-glass": {
+      "name": "Växtbaserad glass",
+      "aliases": [
+        "växtbaserad glass"
+      ]
+    },
+    "isbollar": {
+      "name": "Isbollar",
+      "aliases": [
+        "isbollar"
+      ]
+    },
+    "krossad-is": {
+      "name": "Krossad is",
+      "aliases": [
+        "krossad is"
+      ]
+    },
+    "aloe-vera-dryck": {
+      "name": "Aloe vera-dryck",
+      "aliases": [
+        "aloe vera-dryck"
+      ]
+    },
+    "bjorksav": {
+      "name": "Björksav",
+      "aliases": [
+        "björksav"
+      ]
+    },
+    "isbitar": {
+      "name": "Isbitar",
+      "aliases": [
+        "isbitar"
+      ]
+    },
+    "kokosvatten": {
+      "name": "Kokosvatten",
+      "aliases": [
+        "kokosvatten"
+      ]
+    },
+    "kolsyrat-vatten": {
+      "name": "Kolsyrat vatten",
+      "aliases": [
+        "kolsyrat vatten"
+      ]
+    },
+    "kolsyrepatron": {
+      "name": "Kolsyrepatron",
+      "aliases": [
+        "kolsyrepatron"
+      ]
+    },
+    "kallvatten": {
+      "name": "Källvatten",
+      "aliases": [
+        "källvatten"
+      ]
+    },
+    "mineralvatten": {
+      "name": "Mineralvatten",
+      "aliases": [
+        "mineralvatten"
+      ]
+    },
+    "smakdroppar-for-vatten": {
+      "name": "Smakdroppar för vatten",
+      "aliases": [
+        "smakdroppar för vatten"
+      ]
+    },
+    "smaksatt-kolsyrat-vatten": {
+      "name": "Smaksatt kolsyrat vatten",
+      "aliases": [
+        "smaksatt kolsyrat vatten"
+      ]
+    },
+    "smaksatt-stilla-vatten": {
+      "name": "Smaksatt stilla vatten",
+      "aliases": [
+        "smaksatt stilla vatten"
+      ]
+    },
+    "smaksatt-vatten": {
+      "name": "Smaksatt vatten",
+      "aliases": [
+        "smaksatt vatten"
+      ]
+    },
+    "sodavatten": {
+      "name": "Sodavatten",
+      "aliases": [
+        "sodavatten"
+      ]
+    },
+    "stilla-vatten": {
+      "name": "Stilla vatten",
+      "aliases": [
+        "stilla vatten"
+      ]
+    },
+    "vattendunk": {
+      "name": "Vattendunk",
+      "aliases": [
+        "vattendunk"
+      ]
+    },
+    "vitaminvatten": {
+      "name": "Vitaminvatten",
+      "aliases": [
+        "vitaminvatten"
+      ]
+    },
+    "apelsinlask": {
+      "name": "Apelsinläsk",
+      "aliases": [
+        "apelsinläsk"
+      ]
+    },
+    "bitter-lemon": {
+      "name": "Bitter lemon",
+      "aliases": [
+        "bitter lemon"
+      ]
+    },
+    "champagnelask": {
+      "name": "Champagneläsk",
+      "aliases": [
+        "champagneläsk"
+      ]
+    },
+    "citron-och-limelask": {
+      "name": "Citron- och limeläsk",
+      "aliases": [
+        "citron- och limeläsk"
+      ]
+    },
+    "citronlask": {
+      "name": "Citronläsk",
+      "aliases": [
+        "citronläsk"
+      ]
+    },
+    "cola": {
+      "name": "Cola",
+      "aliases": [
+        "cola"
+      ]
+    },
+    "cream-soda": {
+      "name": "Cream soda",
+      "aliases": [
+        "cream soda"
+      ]
+    },
+    "enbarsdricka": {
+      "name": "Enbärsdricka",
+      "aliases": [
+        "enbärsdricka"
+      ]
+    },
+    "fladerblomslask": {
+      "name": "Fläderblomsläsk",
+      "aliases": [
+        "fläderblomsläsk"
+      ]
+    },
+    "fruktsoda": {
+      "name": "Fruktsoda",
+      "aliases": [
+        "fruktsoda"
+      ]
+    },
+    "ginger-ale": {
+      "name": "Ginger ale",
+      "aliases": [
+        "ginger ale"
+      ]
+    },
+    "grapefruktlask": {
+      "name": "Grapefruktläsk",
+      "aliases": [
+        "grapefruktläsk"
+      ]
+    },
+    "hallonsoda": {
+      "name": "Hallonsoda",
+      "aliases": [
+        "hallonsoda"
+      ]
+    },
+    "hantverkslask": {
+      "name": "Hantverksläsk",
+      "aliases": [
+        "hantverksläsk"
+      ]
+    },
+    "ingefarsol": {
+      "name": "Ingefärsöl",
+      "aliases": [
+        "ingefärsöl"
+      ]
+    },
+    "iste": {
+      "name": "Iste",
+      "aliases": [
+        "iste"
+      ]
+    },
+    "jordgubbslask": {
+      "name": "Jordgubbsläsk",
+      "aliases": [
+        "jordgubbsläsk"
+      ]
+    },
+    "julmust": {
+      "name": "Julmust",
+      "aliases": [
+        "julmust"
+      ]
+    },
+    "koffeinfri-cola": {
+      "name": "Koffeinfri cola",
+      "aliases": [
+        "koffeinfri cola"
+      ]
+    },
+    "korsbarscola": {
+      "name": "Körsbärscola",
+      "aliases": [
+        "körsbärscola"
+      ]
+    },
+    "lemonad": {
+      "name": "Lemonad",
+      "aliases": [
+        "lemonad"
+      ]
+    },
+    "laskkoncentrat": {
+      "name": "Läskkoncentrat",
+      "aliases": [
+        "läskkoncentrat"
+      ]
+    },
+    "passionsfruktlask": {
+      "name": "Passionsfruktläsk",
+      "aliases": [
+        "passionsfruktläsk"
+      ]
+    },
+    "paskmust": {
+      "name": "Påskmust",
+      "aliases": [
+        "påskmust"
+      ]
+    },
+    "paronsoda": {
+      "name": "Päronsoda",
+      "aliases": [
+        "päronsoda"
+      ]
+    },
+    "rabarberlask": {
+      "name": "Rabarberläsk",
+      "aliases": [
+        "rabarberläsk"
+      ]
+    },
+    "root-beer": {
+      "name": "Root beer",
+      "aliases": [
+        "root beer"
+      ]
+    },
+    "rosa-lemonad": {
+      "name": "Rosa lemonad",
+      "aliases": [
+        "rosa lemonad"
+      ]
+    },
+    "slush": {
+      "name": "Slush",
+      "aliases": [
+        "slush"
+      ]
+    },
+    "sockerdricka": {
+      "name": "Sockerdricka",
+      "aliases": [
+        "sockerdricka"
+      ]
+    },
+    "sockerfri-cola": {
+      "name": "Sockerfri cola",
+      "aliases": [
+        "sockerfri cola"
+      ]
+    },
+    "sockerfri-julmust": {
+      "name": "Sockerfri julmust",
+      "aliases": [
+        "sockerfri julmust"
+      ]
+    },
+    "sockerfri-lask": {
+      "name": "Sockerfri läsk",
+      "aliases": [
+        "sockerfri läsk"
+      ]
+    },
+    "svagdricka": {
+      "name": "Svagdricka",
+      "aliases": [
+        "svagdricka"
+      ]
+    },
+    "tonic": {
+      "name": "Tonic",
+      "aliases": [
+        "tonic"
+      ]
+    },
+    "appellask": {
+      "name": "Äppelläsk",
+      "aliases": [
+        "äppelläsk"
+      ]
+    },
+    "ananasjuice": {
+      "name": "Ananasjuice",
+      "aliases": [
+        "ananasjuice"
+      ]
+    },
+    "apelsinjuice": {
+      "name": "Apelsinjuice",
+      "aliases": [
+        "apelsinjuice"
+      ]
+    },
+    "apelsinjuice-med-fruktkott": {
+      "name": "Apelsinjuice med fruktkött",
+      "aliases": [
+        "apelsinjuice med fruktkött"
+      ]
+    },
+    "aprikosnektar": {
+      "name": "Aprikosnektar",
+      "aliases": [
+        "aprikosnektar"
+      ]
+    },
+    "aroniajuice": {
+      "name": "Aroniajuice",
+      "aliases": [
+        "aroniajuice"
+      ]
+    },
+    "blodapelsinjuice": {
+      "name": "Blodapelsinjuice",
+      "aliases": [
+        "blodapelsinjuice"
+      ]
+    },
+    "citronjuice": {
+      "name": "Citronjuice",
+      "aliases": [
+        "citronjuice"
+      ]
+    },
+    "clementinjuice": {
+      "name": "Clementinjuice",
+      "aliases": [
+        "clementinjuice"
+      ]
+    },
+    "druvjuice": {
+      "name": "Druvjuice",
+      "aliases": [
+        "druvjuice"
+      ]
+    },
+    "farskpressad-apelsinjuice": {
+      "name": "Färskpressad apelsinjuice",
+      "aliases": [
+        "färskpressad apelsinjuice"
+      ]
+    },
+    "granatapplejuice": {
+      "name": "Granatäpplejuice",
+      "aliases": [
+        "granatäpplejuice"
+      ]
+    },
+    "grapefruktjuice": {
+      "name": "Grapefruktjuice",
+      "aliases": [
+        "grapefruktjuice"
+      ]
+    },
+    "gron-smoothie": {
+      "name": "Grön smoothie",
+      "aliases": [
+        "grön smoothie"
+      ]
+    },
+    "gronsaksjuice": {
+      "name": "Grönsaksjuice",
+      "aliases": [
+        "grönsaksjuice"
+      ]
+    },
+    "guavanektar": {
+      "name": "Guavanektar",
+      "aliases": [
+        "guavanektar"
+      ]
+    },
+    "gurkmejashot": {
+      "name": "Gurkmejashot",
+      "aliases": [
+        "gurkmejashot"
+      ]
+    },
+    "havtornsjuice": {
+      "name": "Havtornsjuice",
+      "aliases": [
+        "havtornsjuice"
+      ]
+    },
+    "ingefarsshot": {
+      "name": "Ingefärsshot",
+      "aliases": [
+        "ingefärsshot"
+      ]
+    },
+    "juice-i-portionstetra": {
+      "name": "Juice i portionstetra",
+      "aliases": [
+        "juice i portionstetra"
+      ]
+    },
+    "kallpressad-juice": {
+      "name": "Kallpressad juice",
+      "aliases": [
+        "kallpressad juice"
+      ]
+    },
+    "katrinplommonjuice": {
+      "name": "Katrinplommonjuice",
+      "aliases": [
+        "katrinplommonjuice"
+      ]
+    },
+    "korsbarsjuice": {
+      "name": "Körsbärsjuice",
+      "aliases": [
+        "körsbärsjuice"
+      ]
+    },
+    "limejuice": {
+      "name": "Limejuice",
+      "aliases": [
+        "limejuice"
+      ]
+    },
+    "mangonektar": {
+      "name": "Mangonektar",
+      "aliases": [
+        "mangonektar"
+      ]
+    },
+    "morotsjuice": {
+      "name": "Morotsjuice",
+      "aliases": [
+        "morotsjuice"
+      ]
+    },
+    "multijuice": {
+      "name": "Multijuice",
+      "aliases": [
+        "multijuice"
+      ]
+    },
+    "passionsfruktnektar": {
+      "name": "Passionsfruktnektar",
+      "aliases": [
+        "passionsfruktnektar"
+      ]
+    },
+    "persikonektar": {
+      "name": "Persikonektar",
+      "aliases": [
+        "persikonektar"
+      ]
+    },
+    "paronjuice": {
+      "name": "Päronjuice",
+      "aliases": [
+        "päronjuice"
+      ]
+    },
+    "rodbetsjuice": {
+      "name": "Rödbetsjuice",
+      "aliases": [
+        "rödbetsjuice"
+      ]
+    },
+    "sellerijuice": {
+      "name": "Sellerijuice",
+      "aliases": [
+        "sellerijuice"
+      ]
+    },
+    "smoothie": {
+      "name": "Smoothie",
+      "aliases": [
+        "smoothie"
+      ]
+    },
+    "tomatjuice": {
+      "name": "Tomatjuice",
+      "aliases": [
+        "tomatjuice"
+      ]
+    },
+    "tranbarsjuice": {
+      "name": "Tranbärsjuice",
+      "aliases": [
+        "tranbärsjuice"
+      ]
+    },
+    "tropisk-juice": {
+      "name": "Tropisk juice",
+      "aliases": [
+        "tropisk juice"
+      ]
+    },
+    "appeljuice": {
+      "name": "Äppeljuice",
+      "aliases": [
+        "äppeljuice"
+      ]
+    },
+    "appelmust": {
+      "name": "Äppelmust",
+      "aliases": [
+        "äppelmust"
+      ]
+    },
+    "alkoholfri-glogg": {
+      "name": "Alkoholfri glögg",
+      "aliases": [
+        "alkoholfri glögg"
+      ]
+    },
+    "apelsinsaft": {
+      "name": "Apelsinsaft",
+      "aliases": [
+        "apelsinsaft"
+      ]
+    },
+    "blandsaft": {
+      "name": "Blandsaft",
+      "aliases": [
+        "blandsaft"
+      ]
+    },
+    "blabarsdricka": {
+      "name": "Blåbärsdricka",
+      "aliases": [
+        "blåbärsdricka"
+      ]
+    },
+    "blabarssaft": {
+      "name": "Blåbärssaft",
+      "aliases": [
+        "blåbärssaft"
+      ]
+    },
+    "drickfardig-saft": {
+      "name": "Drickfärdig saft",
+      "aliases": [
+        "drickfärdig saft"
+      ]
+    },
+    "fladerblomssaft": {
+      "name": "Fläderblomssaft",
+      "aliases": [
+        "fläderblomssaft"
+      ]
+    },
+    "fruktdryck": {
+      "name": "Fruktdryck",
+      "aliases": [
+        "fruktdryck"
+      ]
+    },
+    "glogg": {
+      "name": "Glögg",
+      "aliases": [
+        "glögg"
+      ]
+    },
+    "hallonsaft": {
+      "name": "Hallonsaft",
+      "aliases": [
+        "hallonsaft"
+      ]
+    },
+    "havtornssaft": {
+      "name": "Havtornssaft",
+      "aliases": [
+        "havtornssaft"
+      ]
+    },
+    "jordgubbssaft": {
+      "name": "Jordgubbssaft",
+      "aliases": [
+        "jordgubbssaft"
+      ]
+    },
+    "korsbarssaft": {
+      "name": "Körsbärssaft",
+      "aliases": [
+        "körsbärssaft"
+      ]
+    },
+    "lingondricka": {
+      "name": "Lingondricka",
+      "aliases": [
+        "lingondricka"
+      ]
+    },
+    "lingonsaft": {
+      "name": "Lingonsaft",
+      "aliases": [
+        "lingonsaft"
+      ]
+    },
+    "maltidsdryck-pa-koncentrat": {
+      "name": "Måltidsdryck på koncentrat",
+      "aliases": [
+        "måltidsdryck på koncentrat"
+      ]
+    },
+    "paronsaft": {
+      "name": "Päronsaft",
+      "aliases": [
+        "päronsaft"
+      ]
+    },
+    "rabarbersaft": {
+      "name": "Rabarbersaft",
+      "aliases": [
+        "rabarbersaft"
+      ]
+    },
+    "saft-utan-tillsatt-socker": {
+      "name": "Saft utan tillsatt socker",
+      "aliases": [
+        "saft utan tillsatt socker"
+      ]
+    },
+    "sockerfri-saft": {
+      "name": "Sockerfri saft",
+      "aliases": [
+        "sockerfri saft"
+      ]
+    },
+    "svartvinbarssaft": {
+      "name": "Svartvinbärssaft",
+      "aliases": [
+        "svartvinbärssaft"
+      ]
+    },
+    "tranbarsdricka": {
+      "name": "Tranbärsdricka",
+      "aliases": [
+        "tranbärsdricka"
+      ]
+    },
+    "vit-glogg": {
+      "name": "Vit glögg",
+      "aliases": [
+        "vit glögg"
+      ]
+    },
+    "appelglogg": {
+      "name": "Äppelglögg",
+      "aliases": [
+        "äppelglögg"
+      ]
+    },
+    "appelsaft": {
+      "name": "Äppelsaft",
+      "aliases": [
+        "äppelsaft"
+      ]
+    },
+    "assamte": {
+      "name": "Assamte",
+      "aliases": [
+        "assamte"
+      ]
+    },
+    "cappuccinopulver": {
+      "name": "Cappuccinopulver",
+      "aliases": [
+        "cappuccinopulver"
+      ]
+    },
+    "ceylonte": {
+      "name": "Ceylonte",
+      "aliases": [
+        "ceylonte"
+      ]
+    },
+    "chai": {
+      "name": "Chai",
+      "aliases": [
+        "chai"
+      ]
+    },
+    "chai-latte-pulver": {
+      "name": "Chai latte-pulver",
+      "aliases": [
+        "chai latte-pulver"
+      ]
+    },
+    "chokladpulver": {
+      "name": "Chokladpulver",
+      "aliases": [
+        "chokladpulver"
+      ]
+    },
+    "cold-brew": {
+      "name": "Cold brew",
+      "aliases": [
+        "cold brew"
+      ]
+    },
+    "darjeelingte": {
+      "name": "Darjeelingte",
+      "aliases": [
+        "darjeelingte"
+      ]
+    },
+    "drickchoklad": {
+      "name": "Drickchoklad",
+      "aliases": [
+        "drickchoklad"
+      ]
+    },
+    "earl-grey": {
+      "name": "Earl Grey",
+      "aliases": [
+        "earl grey"
+      ]
+    },
+    "ekologiskt-kaffe": {
+      "name": "Ekologiskt kaffe",
+      "aliases": [
+        "ekologiskt kaffe"
+      ]
+    },
+    "english-breakfast-te": {
+      "name": "English breakfast-te",
+      "aliases": [
+        "english breakfast-te"
+      ]
+    },
+    "espressobonor": {
+      "name": "Espressobönor",
+      "aliases": [
+        "espressobönor"
+      ]
+    },
+    "espressomalet-kaffe": {
+      "name": "Espressomalet kaffe",
+      "aliases": [
+        "espressomalet kaffe"
+      ]
+    },
+    "extra-morkrost": {
+      "name": "Extra mörkrost",
+      "aliases": [
+        "extra mörkrost"
+      ]
+    },
+    "fruktte": {
+      "name": "Fruktte",
+      "aliases": [
+        "fruktte"
+      ]
+    },
+    "gront-te": {
+      "name": "Grönt te",
+      "aliases": [
+        "grönt te"
+      ]
+    },
+    "gurkmejalatte-mix": {
+      "name": "Gurkmejalatte-mix",
+      "aliases": [
+        "gurkmejalatte-mix"
+      ]
+    },
+    "ingefarste": {
+      "name": "Ingefärste",
+      "aliases": [
+        "ingefärste"
+      ]
+    },
+    "iskaffe": {
+      "name": "Iskaffe",
+      "aliases": [
+        "iskaffe"
+      ]
+    },
+    "istepulver": {
+      "name": "Istepulver",
+      "aliases": [
+        "istepulver"
+      ]
+    },
+    "jasminte": {
+      "name": "Jasminte",
+      "aliases": [
+        "jasminte"
+      ]
+    },
+    "kaffebonor": {
+      "name": "Kaffebönor",
+      "aliases": [
+        "kaffebönor"
+      ]
+    },
+    "kaffeersattning-cikoria": {
+      "name": "Kaffeersättning (cikoria)",
+      "aliases": [
+        "kaffeersättning (cikoria)",
+        "kaffeersättning"
+      ]
+    },
+    "kaffefilter": {
+      "name": "Kaffefilter",
+      "aliases": [
+        "kaffefilter"
+      ]
+    },
+    "kaffekapslar": {
+      "name": "Kaffekapslar",
+      "aliases": [
+        "kaffekapslar"
+      ]
+    },
+    "kaffepads": {
+      "name": "Kaffepads",
+      "aliases": [
+        "kaffepads"
+      ]
+    },
+    "kaffesirap": {
+      "name": "Kaffesirap",
+      "aliases": [
+        "kaffesirap"
+      ]
+    },
+    "kaffevitare": {
+      "name": "Kaffevitare",
+      "aliases": [
+        "kaffevitare"
+      ]
+    },
+    "kamomillte": {
+      "name": "Kamomillte",
+      "aliases": [
+        "kamomillte"
+      ]
+    },
+    "koffeinfritt-kaffe": {
+      "name": "Koffeinfritt kaffe",
+      "aliases": [
+        "koffeinfritt kaffe"
+      ]
+    },
+    "kokkaffe": {
+      "name": "Kokkaffe",
+      "aliases": [
+        "kokkaffe"
+      ]
+    },
+    "kvallste": {
+      "name": "Kvällste",
+      "aliases": [
+        "kvällste"
+      ]
+    },
+    "lakritste": {
+      "name": "Lakritste",
+      "aliases": [
+        "lakritste"
+      ]
+    },
+    "lapsang-souchong": {
+      "name": "Lapsang souchong",
+      "aliases": [
+        "lapsang souchong"
+      ]
+    },
+    "lattepulver": {
+      "name": "Lattepulver",
+      "aliases": [
+        "lattepulver"
+      ]
+    },
+    "ljusrost": {
+      "name": "Ljusrost",
+      "aliases": [
+        "ljusrost"
+      ]
+    },
+    "loste": {
+      "name": "Löste",
+      "aliases": [
+        "löste"
+      ]
+    },
+    "matcha": {
+      "name": "Matcha",
+      "aliases": [
+        "matcha"
+      ]
+    },
+    "mellanrost": {
+      "name": "Mellanrost",
+      "aliases": [
+        "mellanrost"
+      ]
+    },
+    "morkrost": {
+      "name": "Mörkrost",
+      "aliases": [
+        "mörkrost"
+      ]
+    },
+    "nyponte": {
+      "name": "Nyponte",
+      "aliases": [
+        "nyponte"
+      ]
+    },
+    "oolongte": {
+      "name": "Oolongte",
+      "aliases": [
+        "oolongte"
+      ]
+    },
+    "pepparmyntste": {
+      "name": "Pepparmyntste",
+      "aliases": [
+        "pepparmyntste"
+      ]
+    },
+    "presskaffe": {
+      "name": "Presskaffe",
+      "aliases": [
+        "presskaffe"
+      ]
+    },
+    "pu-erh-te": {
+      "name": "Pu-erh-te",
+      "aliases": [
+        "pu-erh-te"
+      ]
+    },
+    "rooibos": {
+      "name": "Rooibos",
+      "aliases": [
+        "rooibos"
+      ]
+    },
+    "sencha": {
+      "name": "Sencha",
+      "aliases": [
+        "sencha"
+      ]
+    },
+    "smaksatt-svart-te": {
+      "name": "Smaksatt svart te",
+      "aliases": [
+        "smaksatt svart te"
+      ]
+    },
+    "snabbkaffe": {
+      "name": "Snabbkaffe",
+      "aliases": [
+        "snabbkaffe"
+      ]
+    },
+    "svart-te": {
+      "name": "Svart te",
+      "aliases": [
+        "svart te"
+      ]
+    },
+    "soderblandning": {
+      "name": "Söderblandning",
+      "aliases": [
+        "söderblandning"
+      ]
+    },
+    "tefilter": {
+      "name": "Tefilter",
+      "aliases": [
+        "tefilter"
+      ]
+    },
+    "tepasar": {
+      "name": "Tepåsar",
+      "aliases": [
+        "tepåsar"
+      ]
+    },
+    "vitt-te": {
+      "name": "Vitt te",
+      "aliases": [
+        "vitt te"
+      ]
+    },
+    "ortte": {
+      "name": "Örtte",
+      "aliases": [
+        "örtte"
+      ]
+    },
+    "bcaa-dryck": {
+      "name": "BCAA-dryck",
+      "aliases": [
+        "bcaa-dryck"
+      ]
+    },
+    "elektrolytdryck": {
+      "name": "Elektrolytdryck",
+      "aliases": [
+        "elektrolytdryck"
+      ]
+    },
+    "energidryck": {
+      "name": "Energidryck",
+      "aliases": [
+        "energidryck"
+      ]
+    },
+    "energigel": {
+      "name": "Energigel",
+      "aliases": [
+        "energigel"
+      ]
+    },
+    "koffeinshot": {
+      "name": "Koffeinshot",
+      "aliases": [
+        "koffeinshot"
+      ]
+    },
+    "kollagendryck": {
+      "name": "Kollagendryck",
+      "aliases": [
+        "kollagendryck"
+      ]
+    },
+    "kombucha": {
+      "name": "Kombucha",
+      "aliases": [
+        "kombucha"
+      ]
+    },
+    "naringsdryck": {
+      "name": "Näringsdryck",
+      "aliases": [
+        "näringsdryck"
+      ]
+    },
+    "probiotisk-fruktdryck": {
+      "name": "Probiotisk fruktdryck",
+      "aliases": [
+        "probiotisk fruktdryck"
+      ]
+    },
+    "proteindryck": {
+      "name": "Proteindryck",
+      "aliases": [
+        "proteindryck"
+      ]
+    },
+    "proteinmilkshake": {
+      "name": "Proteinmilkshake",
+      "aliases": [
+        "proteinmilkshake"
+      ]
+    },
+    "proteinvatten": {
+      "name": "Proteinvatten",
+      "aliases": [
+        "proteinvatten"
+      ]
+    },
+    "sockerfri-energidryck": {
+      "name": "Sockerfri energidryck",
+      "aliases": [
+        "sockerfri energidryck"
+      ]
+    },
+    "sportdryck": {
+      "name": "Sportdryck",
+      "aliases": [
+        "sportdryck"
+      ]
+    },
+    "sportdryckspulver": {
+      "name": "Sportdryckspulver",
+      "aliases": [
+        "sportdryckspulver"
+      ]
+    },
+    "vattenkefir": {
+      "name": "Vattenkefir",
+      "aliases": [
+        "vattenkefir"
+      ]
+    },
+    "vaxtbaserad-proteindryck": {
+      "name": "Växtbaserad proteindryck",
+      "aliases": [
+        "växtbaserad proteindryck"
+      ]
+    },
+    "aterhamtningsdryck": {
+      "name": "Återhämtningsdryck",
+      "aliases": [
+        "återhämtningsdryck"
+      ]
+    },
+    "alkoholfri-aperitif": {
+      "name": "Alkoholfri aperitif",
+      "aliases": [
+        "alkoholfri aperitif"
+      ]
+    },
+    "alkoholfri-cider": {
+      "name": "Alkoholfri cider",
+      "aliases": [
+        "alkoholfri cider"
+      ]
+    },
+    "alkoholfri-gin": {
+      "name": "Alkoholfri gin",
+      "aliases": [
+        "alkoholfri gin"
+      ]
+    },
+    "alkoholfri-gin-och-tonic": {
+      "name": "Alkoholfri gin & tonic",
+      "aliases": [
+        "alkoholfri gin & tonic"
+      ]
+    },
+    "alkoholfri-ipa": {
+      "name": "Alkoholfri IPA",
+      "aliases": [
+        "alkoholfri ipa"
+      ]
+    },
+    "alkoholfri-lager": {
+      "name": "Alkoholfri lager",
+      "aliases": [
+        "alkoholfri lager"
+      ]
+    },
+    "alkoholfri-radler": {
+      "name": "Alkoholfri radler",
+      "aliases": [
+        "alkoholfri radler"
+      ]
+    },
+    "alkoholfri-rom": {
+      "name": "Alkoholfri rom",
+      "aliases": [
+        "alkoholfri rom"
+      ]
+    },
+    "alkoholfri-sangria": {
+      "name": "Alkoholfri sangria",
+      "aliases": [
+        "alkoholfri sangria"
+      ]
+    },
+    "alkoholfri-spritz": {
+      "name": "Alkoholfri spritz",
+      "aliases": [
+        "alkoholfri spritz"
+      ]
+    },
+    "alkoholfri-stout": {
+      "name": "Alkoholfri stout",
+      "aliases": [
+        "alkoholfri stout"
+      ]
+    },
+    "alkoholfri-veteol": {
+      "name": "Alkoholfri veteöl",
+      "aliases": [
+        "alkoholfri veteöl"
+      ]
+    },
+    "alkoholfri-whisky": {
+      "name": "Alkoholfri whisky",
+      "aliases": [
+        "alkoholfri whisky"
+      ]
+    },
+    "alkoholfri-ol": {
+      "name": "Alkoholfri öl",
+      "aliases": [
+        "alkoholfri öl"
+      ]
+    },
+    "alkoholfritt-bubbel": {
+      "name": "Alkoholfritt bubbel",
+      "aliases": [
+        "alkoholfritt bubbel"
+      ]
+    },
+    "alkoholfritt-rosevin": {
+      "name": "Alkoholfritt rosévin",
+      "aliases": [
+        "alkoholfritt rosévin"
+      ]
+    },
+    "alkoholfritt-rott-vin": {
+      "name": "Alkoholfritt rött vin",
+      "aliases": [
+        "alkoholfritt rött vin"
+      ]
+    },
+    "alkoholfritt-vitt-vin": {
+      "name": "Alkoholfritt vitt vin",
+      "aliases": [
+        "alkoholfritt vitt vin"
+      ]
+    },
+    "cider": {
+      "name": "Cider",
+      "aliases": [
+        "cider"
+      ]
+    },
+    "fladercider": {
+      "name": "Flädercider",
+      "aliases": [
+        "flädercider"
+      ]
+    },
+    "folkol": {
+      "name": "Folköl",
+      "aliases": [
+        "folköl"
+      ]
+    },
+    "jordgubbscider": {
+      "name": "Jordgubbscider",
+      "aliases": [
+        "jordgubbscider"
+      ]
+    },
+    "julol": {
+      "name": "Julöl",
+      "aliases": [
+        "julöl"
+      ]
+    },
+    "kvass": {
+      "name": "Kvass",
+      "aliases": [
+        "kvass"
+      ]
+    },
+    "lattcider": {
+      "name": "Lättcider",
+      "aliases": [
+        "lättcider"
+      ]
+    },
+    "lattol": {
+      "name": "Lättöl",
+      "aliases": [
+        "lättöl"
+      ]
+    },
+    "mocktail": {
+      "name": "Mocktail",
+      "aliases": [
+        "mocktail"
+      ]
+    },
+    "paskol": {
+      "name": "Påsköl",
+      "aliases": [
+        "påsköl"
+      ]
+    },
+    "paroncider": {
+      "name": "Päroncider",
+      "aliases": [
+        "päroncider"
+      ]
+    },
+    "skogsbarscider": {
+      "name": "Skogsbärscider",
+      "aliases": [
+        "skogsbärscider"
+      ]
+    },
+    "appelcider": {
+      "name": "Äppelcider",
+      "aliases": [
+        "äppelcider"
+      ]
+    },
+    "bloody-mary-mix": {
+      "name": "Bloody Mary-mix",
+      "aliases": [
+        "bloody mary-mix"
+      ]
+    },
+    "drinksirap": {
+      "name": "Drinksirap",
+      "aliases": [
+        "drinksirap"
+      ]
+    },
+    "espresso-martini-mix": {
+      "name": "Espresso martini-mix",
+      "aliases": [
+        "espresso martini-mix"
+      ]
+    },
+    "grenadin": {
+      "name": "Grenadin",
+      "aliases": [
+        "grenadin"
+      ]
+    },
+    "kokoskram-for-drinkar": {
+      "name": "Kokoskräm för drinkar",
+      "aliases": [
+        "kokoskräm för drinkar"
+      ]
+    },
+    "limecordial": {
+      "name": "Limecordial",
+      "aliases": [
+        "limecordial"
+      ]
+    },
+    "margaritamix": {
+      "name": "Margaritamix",
+      "aliases": [
+        "margaritamix"
+      ]
+    },
+    "margaritasalt": {
+      "name": "Margaritasalt",
+      "aliases": [
+        "margaritasalt"
+      ]
+    },
+    "mojitomix": {
+      "name": "Mojitomix",
+      "aliases": [
+        "mojitomix"
+      ]
+    },
+    "pina-colada-mix": {
+      "name": "Piña colada-mix",
+      "aliases": [
+        "piña colada-mix"
+      ]
+    },
+    "sockerlag": {
+      "name": "Sockerlag",
+      "aliases": [
+        "sockerlag"
+      ]
+    },
+    "baconsnacks": {
+      "name": "Baconsnacks",
+      "aliases": [
+        "baconsnacks"
+      ]
+    },
+    "brodchips": {
+      "name": "Brödchips",
+      "aliases": [
+        "brödchips"
+      ]
+    },
+    "chilichips": {
+      "name": "Chilichips",
+      "aliases": [
+        "chilichips"
+      ]
+    },
+    "chokladpopcorn": {
+      "name": "Chokladpopcorn",
+      "aliases": [
+        "chokladpopcorn"
+      ]
+    },
+    "dillchips": {
+      "name": "Dillchips",
+      "aliases": [
+        "dillchips"
+      ]
+    },
+    "dippmix": {
+      "name": "Dippmix",
+      "aliases": [
+        "dippmix"
+      ]
+    },
+    "grillchips": {
+      "name": "Grillchips",
+      "aliases": [
+        "grillchips"
+      ]
+    },
+    "graddfilschips": {
+      "name": "Gräddfilschips",
+      "aliases": [
+        "gräddfilschips"
+      ]
+    },
+    "gronsakschips": {
+      "name": "Grönsakschips",
+      "aliases": [
+        "grönsakschips"
+      ]
+    },
+    "kettlechips": {
+      "name": "Kettlechips",
+      "aliases": [
+        "kettlechips"
+      ]
+    },
+    "kikartschips": {
+      "name": "Kikärtschips",
+      "aliases": [
+        "kikärtschips"
+      ]
+    },
+    "kikartspuffar": {
+      "name": "Kikärtspuffar",
+      "aliases": [
+        "kikärtspuffar"
+      ]
+    },
+    "kolapopcorn": {
+      "name": "Kolapopcorn",
+      "aliases": [
+        "kolapopcorn"
+      ]
+    },
+    "linsbagar": {
+      "name": "Linsbågar",
+      "aliases": [
+        "linsbågar"
+      ]
+    },
+    "linschips": {
+      "name": "Linschips",
+      "aliases": [
+        "linschips"
+      ]
+    },
+    "lattchips": {
+      "name": "Lättchips",
+      "aliases": [
+        "lättchips"
+      ]
+    },
+    "majschips": {
+      "name": "Majschips",
+      "aliases": [
+        "majschips"
+      ]
+    },
+    "majsstrutar": {
+      "name": "Majsstrutar",
+      "aliases": [
+        "majsstrutar"
+      ]
+    },
+    "micropopcorn": {
+      "name": "Micropopcorn",
+      "aliases": [
+        "micropopcorn"
+      ]
+    },
+    "ost-och-lokchips": {
+      "name": "Ost- och lökchips",
+      "aliases": [
+        "ost- och lökchips"
+      ]
+    },
+    "ostchips": {
+      "name": "Ostchips",
+      "aliases": [
+        "ostchips"
+      ]
+    },
+    "ostpopcorn": {
+      "name": "Ostpopcorn",
+      "aliases": [
+        "ostpopcorn"
+      ]
+    },
+    "paprikachips": {
+      "name": "Paprikachips",
+      "aliases": [
+        "paprikachips"
+      ]
+    },
+    "popcorn": {
+      "name": "Popcorn",
+      "aliases": [
+        "popcorn"
+      ]
+    },
+    "popcornmajs": {
+      "name": "Popcornmajs",
+      "aliases": [
+        "popcornmajs"
+      ]
+    },
+    "potatispinnar": {
+      "name": "Potatispinnar",
+      "aliases": [
+        "potatispinnar"
+      ]
+    },
+    "potatisringar": {
+      "name": "Potatisringar",
+      "aliases": [
+        "potatisringar"
+      ]
+    },
+    "potatisskruvar": {
+      "name": "Potatisskruvar",
+      "aliases": [
+        "potatisskruvar"
+      ]
+    },
+    "rotfruktschips": {
+      "name": "Rotfruktschips",
+      "aliases": [
+        "rotfruktschips"
+      ]
+    },
+    "rafflade-chips": {
+      "name": "Räfflade chips",
+      "aliases": [
+        "räfflade chips"
+      ]
+    },
+    "saltade-chips": {
+      "name": "Saltade chips",
+      "aliases": [
+        "saltade chips"
+      ]
+    },
+    "saltvinagerchips": {
+      "name": "Saltvinägerchips",
+      "aliases": [
+        "saltvinägerchips"
+      ]
+    },
+    "smorpopcorn": {
+      "name": "Smörpopcorn",
+      "aliases": [
+        "smörpopcorn"
+      ]
+    },
+    "stapelchips": {
+      "name": "Stapelchips",
+      "aliases": [
+        "stapelchips"
+      ]
+    },
+    "sweet-chili-chips": {
+      "name": "Sweet chili-chips",
+      "aliases": [
+        "sweet chili-chips"
+      ]
+    },
+    "sota-popcorn": {
+      "name": "Söta popcorn",
+      "aliases": [
+        "söta popcorn"
+      ]
+    },
+    "sotpotatischips": {
+      "name": "Sötpotatischips",
+      "aliases": [
+        "sötpotatischips"
+      ]
+    },
+    "tryffelchips": {
+      "name": "Tryffelchips",
+      "aliases": [
+        "tryffelchips"
+      ]
+    },
+    "tunnbrodschips": {
+      "name": "Tunnbrödschips",
+      "aliases": [
+        "tunnbrödschips"
+      ]
+    },
+    "ugnsbakade-chips": {
+      "name": "Ugnsbakade chips",
+      "aliases": [
+        "ugnsbakade chips"
+      ]
+    },
+    "beef-jerky": {
+      "name": "Beef jerky",
+      "aliases": [
+        "beef jerky"
+      ]
+    },
+    "chilicashewnotter": {
+      "name": "Chilicashewnötter",
+      "aliases": [
+        "chilicashewnötter"
+      ]
+    },
+    "chilinotter": {
+      "name": "Chilinötter",
+      "aliases": [
+        "chilinötter"
+      ]
+    },
+    "flasksval": {
+      "name": "Fläsksvål",
+      "aliases": [
+        "fläsksvål"
+      ]
+    },
+    "gronkalschips": {
+      "name": "Grönkålschips",
+      "aliases": [
+        "grönkålschips"
+      ]
+    },
+    "honungsrostade-jordnotter": {
+      "name": "Honungsrostade jordnötter",
+      "aliases": [
+        "honungsrostade jordnötter"
+      ]
+    },
+    "japansk-snacksmix": {
+      "name": "Japansk snacksmix",
+      "aliases": [
+        "japansk snacksmix"
+      ]
+    },
+    "jordnotsbagar": {
+      "name": "Jordnötsbågar",
+      "aliases": [
+        "jordnötsbågar"
+      ]
+    },
+    "jordnotsringar": {
+      "name": "Jordnötsringar",
+      "aliases": [
+        "jordnötsringar"
+      ]
+    },
+    "majskrokar": {
+      "name": "Majskrokar",
+      "aliases": [
+        "majskrokar"
+      ]
+    },
+    "notbar": {
+      "name": "Nötbar",
+      "aliases": [
+        "nötbar"
+      ]
+    },
+    "ostbollar": {
+      "name": "Ostbollar",
+      "aliases": [
+        "ostbollar"
+      ]
+    },
+    "ostbagar": {
+      "name": "Ostbågar",
+      "aliases": [
+        "ostbågar"
+      ]
+    },
+    "ostkrisp": {
+      "name": "Ostkrisp",
+      "aliases": [
+        "ostkrisp"
+      ]
+    },
+    "ostpuffar": {
+      "name": "Ostpuffar",
+      "aliases": [
+        "ostpuffar"
+      ]
+    },
+    "partymix": {
+      "name": "Partymix",
+      "aliases": [
+        "partymix"
+      ]
+    },
+    "pretzels": {
+      "name": "Pretzels",
+      "aliases": [
+        "pretzels"
+      ]
+    },
+    "riscrackers": {
+      "name": "Riscrackers",
+      "aliases": [
+        "riscrackers"
+      ]
+    },
+    "rostad-majs": {
+      "name": "Rostad majs",
+      "aliases": [
+        "rostad majs"
+      ]
+    },
+    "rostade-bondbonor": {
+      "name": "Rostade bondbönor",
+      "aliases": [
+        "rostade bondbönor"
+      ]
+    },
+    "rostade-kikartor": {
+      "name": "Rostade kikärtor",
+      "aliases": [
+        "rostade kikärtor"
+      ]
+    },
+    "rostade-och-saltade-solrosfron": {
+      "name": "Rostade och saltade solrosfrön",
+      "aliases": [
+        "rostade och saltade solrosfrön"
+      ]
+    },
+    "rostade-sojabonor": {
+      "name": "Rostade sojabönor",
+      "aliases": [
+        "rostade sojabönor"
+      ]
+    },
+    "rokta-mandlar": {
+      "name": "Rökta mandlar",
+      "aliases": [
+        "rökta mandlar"
+      ]
+    },
+    "salta-cashewnotter": {
+      "name": "Salta cashewnötter",
+      "aliases": [
+        "salta cashewnötter"
+      ]
+    },
+    "salta-jordnotter": {
+      "name": "Salta jordnötter",
+      "aliases": [
+        "salta jordnötter"
+      ]
+    },
+    "salta-mandlar": {
+      "name": "Salta mandlar",
+      "aliases": [
+        "salta mandlar"
+      ]
+    },
+    "salta-pinnar": {
+      "name": "Salta pinnar",
+      "aliases": [
+        "salta pinnar"
+      ]
+    },
+    "salta-pistagenotter": {
+      "name": "Salta pistagenötter",
+      "aliases": [
+        "salta pistagenötter"
+      ]
+    },
+    "saltad-notmix": {
+      "name": "Saltad nötmix",
+      "aliases": [
+        "saltad nötmix"
+      ]
+    },
+    "sjograssnacks": {
+      "name": "Sjögrässnacks",
+      "aliases": [
+        "sjögrässnacks"
+      ]
+    },
+    "smordegsstanger-med-ost": {
+      "name": "Smördegsstänger med ost",
+      "aliases": [
+        "smördegsstänger med ost"
+      ]
+    },
+    "snackmix-med-fron": {
+      "name": "Snackmix med frön",
+      "aliases": [
+        "snackmix med frön"
+      ]
+    },
+    "studentmix": {
+      "name": "Studentmix",
+      "aliases": [
+        "studentmix"
+      ]
+    },
+    "wasabinotter": {
+      "name": "Wasabinötter",
+      "aliases": [
+        "wasabinötter"
+      ]
+    },
+    "wasabiartor": {
+      "name": "Wasabiärtor",
+      "aliases": [
+        "wasabiärtor"
+      ]
+    },
+    "olnotter": {
+      "name": "Ölnötter",
+      "aliases": [
+        "ölnötter"
+      ]
+    },
+    "adventskalender": {
+      "name": "Adventskalender",
+      "aliases": [
+        "adventskalender"
+      ]
+    },
+    "chokladbar": {
+      "name": "Chokladbar",
+      "aliases": [
+        "chokladbar"
+      ]
+    },
+    "chokladdrageer": {
+      "name": "Chokladdragéer",
+      "aliases": [
+        "chokladdragéer"
+      ]
+    },
+    "chokladhare": {
+      "name": "Chokladhare",
+      "aliases": [
+        "chokladhare"
+      ]
+    },
+    "chokladkola": {
+      "name": "Chokladkola",
+      "aliases": [
+        "chokladkola"
+      ]
+    },
+    "chokladlakrits": {
+      "name": "Chokladlakrits",
+      "aliases": [
+        "chokladlakrits"
+      ]
+    },
+    "chokladlinser": {
+      "name": "Chokladlinser",
+      "aliases": [
+        "chokladlinser"
+      ]
+    },
+    "chokladmandlar": {
+      "name": "Chokladmandlar",
+      "aliases": [
+        "chokladmandlar"
+      ]
+    },
+    "chokladnotter": {
+      "name": "Chokladnötter",
+      "aliases": [
+        "chokladnötter"
+      ]
+    },
+    "chokladpengar": {
+      "name": "Chokladpengar",
+      "aliases": [
+        "chokladpengar"
+      ]
+    },
+    "chokladrussin": {
+      "name": "Chokladrussin",
+      "aliases": [
+        "chokladrussin"
+      ]
+    },
+    "chokladtomtar": {
+      "name": "Chokladtomtar",
+      "aliases": [
+        "chokladtomtar"
+      ]
+    },
+    "chokladtackta-bar": {
+      "name": "Chokladtäckta bär",
+      "aliases": [
+        "chokladtäckta bär"
+      ]
+    },
+    "chokladwafers": {
+      "name": "Chokladwafers",
+      "aliases": [
+        "chokladwafers"
+      ]
+    },
+    "chokladagg": {
+      "name": "Chokladägg",
+      "aliases": [
+        "chokladägg"
+      ]
+    },
+    "chokladoverdragen-marsipan": {
+      "name": "Chokladöverdragen marsipan",
+      "aliases": [
+        "chokladöverdragen marsipan"
+      ]
+    },
+    "ekologisk-choklad": {
+      "name": "Ekologisk choklad",
+      "aliases": [
+        "ekologisk choklad"
+      ]
+    },
+    "fylld-chokladkaka": {
+      "name": "Fylld chokladkaka",
+      "aliases": [
+        "fylld chokladkaka"
+      ]
+    },
+    "ischoklad": {
+      "name": "Ischoklad",
+      "aliases": [
+        "ischoklad"
+      ]
+    },
+    "minichoklad": {
+      "name": "Minichoklad",
+      "aliases": [
+        "minichoklad"
+      ]
+    },
+    "mintchoklad": {
+      "name": "Mintchoklad",
+      "aliases": [
+        "mintchoklad"
+      ]
+    },
+    "mjolkchoklad": {
+      "name": "Mjölkchoklad",
+      "aliases": [
+        "mjölkchoklad"
+      ]
+    },
+    "nougatchoklad": {
+      "name": "Nougatchoklad",
+      "aliases": [
+        "nougatchoklad"
+      ]
+    },
+    "notchoklad": {
+      "name": "Nötchoklad",
+      "aliases": [
+        "nötchoklad"
+      ]
+    },
+    "pralinask": {
+      "name": "Pralinask",
+      "aliases": [
+        "pralinask"
+      ]
+    },
+    "praliner": {
+      "name": "Praliner",
+      "aliases": [
+        "praliner"
+      ]
+    },
+    "paskagg": {
+      "name": "Påskägg",
+      "aliases": [
+        "påskägg"
+      ]
+    },
+    "sockerfri-choklad": {
+      "name": "Sockerfri choklad",
+      "aliases": [
+        "sockerfri choklad"
+      ]
+    },
+    "tryfflar": {
+      "name": "Tryfflar",
+      "aliases": [
+        "tryfflar"
+      ]
+    },
+    "vegansk-choklad": {
+      "name": "Vegansk choklad",
+      "aliases": [
+        "vegansk choklad"
+      ]
+    },
+    "vit-choklad": {
+      "name": "Vit choklad",
+      "aliases": [
+        "vit choklad"
+      ]
+    },
+    "overraskningsagg": {
+      "name": "Överraskningsägg",
+      "aliases": [
+        "överraskningsägg"
+      ]
+    },
+    "brack": {
+      "name": "Bräck",
+      "aliases": [
+        "bräck"
+      ]
+    },
+    "branda-mandlar": {
+      "name": "Brända mandlar",
+      "aliases": [
+        "brända mandlar"
+      ]
+    },
+    "brostkarameller": {
+      "name": "Bröstkarameller",
+      "aliases": [
+        "bröstkarameller"
+      ]
+    },
+    "colaflaskor": {
+      "name": "Colaflaskor",
+      "aliases": [
+        "colaflaskor"
+      ]
+    },
+    "fransk-nougat": {
+      "name": "Fransk nougat",
+      "aliases": [
+        "fransk nougat"
+      ]
+    },
+    "fruktkolor": {
+      "name": "Fruktkolor",
+      "aliases": [
+        "fruktkolor"
+      ]
+    },
+    "frystorkat-godis": {
+      "name": "Frystorkat godis",
+      "aliases": [
+        "frystorkat godis"
+      ]
+    },
+    "fudge": {
+      "name": "Fudge",
+      "aliases": [
+        "fudge"
+      ]
+    },
+    "gelebjornar": {
+      "name": "Gelébjörnar",
+      "aliases": [
+        "gelébjörnar"
+      ]
+    },
+    "gelegodis": {
+      "name": "Gelégodis",
+      "aliases": [
+        "gelégodis"
+      ]
+    },
+    "gelehallon": {
+      "name": "Gelehallon",
+      "aliases": [
+        "gelehallon"
+      ]
+    },
+    "gelehjartan": {
+      "name": "Geléhjärtan",
+      "aliases": [
+        "geléhjärtan"
+      ]
+    },
+    "gelerattor": {
+      "name": "Geléråttor",
+      "aliases": [
+        "geléråttor"
+      ]
+    },
+    "godisremmar": {
+      "name": "Godisremmar",
+      "aliases": [
+        "godisremmar"
+      ]
+    },
+    "graddkola": {
+      "name": "Gräddkola",
+      "aliases": [
+        "gräddkola"
+      ]
+    },
+    "hallonbatar": {
+      "name": "Hallonbåtar",
+      "aliases": [
+        "hallonbåtar"
+      ]
+    },
+    "kanderad-frukt": {
+      "name": "Kanderad frukt",
+      "aliases": [
+        "kanderad frukt"
+      ]
+    },
+    "karameller": {
+      "name": "Karameller",
+      "aliases": [
+        "karameller"
+      ]
+    },
+    "klubbor": {
+      "name": "Klubbor",
+      "aliases": [
+        "klubbor"
+      ]
+    },
+    "knack": {
+      "name": "Knäck",
+      "aliases": [
+        "knäck"
+      ]
+    },
+    "kolor": {
+      "name": "Kolor",
+      "aliases": [
+        "kolor"
+      ]
+    },
+    "lakrits": {
+      "name": "Lakrits",
+      "aliases": [
+        "lakrits"
+      ]
+    },
+    "lakritsbatar": {
+      "name": "Lakritsbåtar",
+      "aliases": [
+        "lakritsbåtar"
+      ]
+    },
+    "lakritskola": {
+      "name": "Lakritskola",
+      "aliases": [
+        "lakritskola"
+      ]
+    },
+    "lakritskonfekt": {
+      "name": "Lakritskonfekt",
+      "aliases": [
+        "lakritskonfekt"
+      ]
+    },
+    "lakritspipor": {
+      "name": "Lakritspipor",
+      "aliases": [
+        "lakritspipor"
+      ]
+    },
+    "lakritsremmar": {
+      "name": "Lakritsremmar",
+      "aliases": [
+        "lakritsremmar"
+      ]
+    },
+    "lakritsrot": {
+      "name": "Lakritsrot",
+      "aliases": [
+        "lakritsrot"
+      ]
+    },
+    "losgodis": {
+      "name": "Lösgodis",
+      "aliases": [
+        "lösgodis"
+      ]
+    },
+    "marmeladgodis": {
+      "name": "Marmeladgodis",
+      "aliases": [
+        "marmeladgodis"
+      ]
+    },
+    "marshmallows": {
+      "name": "Marshmallows",
+      "aliases": [
+        "marshmallows"
+      ]
+    },
+    "marsipanbrod": {
+      "name": "Marsipanbröd",
+      "aliases": [
+        "marsipanbröd"
+      ]
+    },
+    "marsipangris": {
+      "name": "Marsipangris",
+      "aliases": [
+        "marsipangris"
+      ]
+    },
+    "mintkarameller": {
+      "name": "Mintkarameller",
+      "aliases": [
+        "mintkarameller"
+      ]
+    },
+    "naturgodis": {
+      "name": "Naturgodis",
+      "aliases": [
+        "naturgodis"
+      ]
+    },
+    "polkagrisar": {
+      "name": "Polkagrisar",
+      "aliases": [
+        "polkagrisar"
+      ]
+    },
+    "pasgodis": {
+      "name": "Påsgodis",
+      "aliases": [
+        "påsgodis"
+      ]
+    },
+    "paskmarsipan": {
+      "name": "Påskmarsipan",
+      "aliases": [
+        "påskmarsipan"
+      ]
+    },
+    "salmiakgodis": {
+      "name": "Salmiakgodis",
+      "aliases": [
+        "salmiakgodis"
+      ]
+    },
+    "saltlakrits": {
+      "name": "Saltlakrits",
+      "aliases": [
+        "saltlakrits"
+      ]
+    },
+    "skumbananer": {
+      "name": "Skumbananer",
+      "aliases": [
+        "skumbananer"
+      ]
+    },
+    "skumgodis": {
+      "name": "Skumgodis",
+      "aliases": [
+        "skumgodis"
+      ]
+    },
+    "skumsvampar": {
+      "name": "Skumsvampar",
+      "aliases": [
+        "skumsvampar"
+      ]
+    },
+    "skumtomtar": {
+      "name": "Skumtomtar",
+      "aliases": [
+        "skumtomtar"
+      ]
+    },
+    "sockerfritt-godis": {
+      "name": "Sockerfritt godis",
+      "aliases": [
+        "sockerfritt godis"
+      ]
+    },
+    "sockervadd": {
+      "name": "Sockervadd",
+      "aliases": [
+        "sockervadd"
+      ]
+    },
+    "surt-godis": {
+      "name": "Surt godis",
+      "aliases": [
+        "surt godis"
+      ]
+    },
+    "sotlakrits": {
+      "name": "Sötlakrits",
+      "aliases": [
+        "sötlakrits"
+      ]
+    },
+    "toffee": {
+      "name": "Toffee",
+      "aliases": [
+        "toffee"
+      ]
+    },
+    "veganskt-godis": {
+      "name": "Veganskt godis",
+      "aliases": [
+        "veganskt godis"
+      ]
+    },
+    "vingummi": {
+      "name": "Vingummi",
+      "aliases": [
+        "vingummi"
+      ]
+    },
+    "yoghurtrussin": {
+      "name": "Yoghurtrussin",
+      "aliases": [
+        "yoghurtrussin"
+      ]
+    },
+    "bubbelgum": {
+      "name": "Bubbelgum",
+      "aliases": [
+        "bubbelgum"
+      ]
+    },
+    "druvsockertabletter": {
+      "name": "Druvsockertabletter",
+      "aliases": [
+        "druvsockertabletter"
+      ]
+    },
+    "eukalyptuspastiller": {
+      "name": "Eukalyptuspastiller",
+      "aliases": [
+        "eukalyptuspastiller"
+      ]
+    },
+    "fruktpastiller": {
+      "name": "Fruktpastiller",
+      "aliases": [
+        "fruktpastiller"
+      ]
+    },
+    "frukttuggummi": {
+      "name": "Frukttuggummi",
+      "aliases": [
+        "frukttuggummi"
+      ]
+    },
+    "halspastiller": {
+      "name": "Halspastiller",
+      "aliases": [
+        "halspastiller"
+      ]
+    },
+    "ingefarspastiller": {
+      "name": "Ingefärspastiller",
+      "aliases": [
+        "ingefärspastiller"
+      ]
+    },
+    "lakritsdrageer": {
+      "name": "Lakritsdragéer",
+      "aliases": [
+        "lakritsdragéer"
+      ]
+    },
+    "lakritspastiller": {
+      "name": "Lakritspastiller",
+      "aliases": [
+        "lakritspastiller"
+      ]
+    },
+    "mentolpastiller": {
+      "name": "Mentolpastiller",
+      "aliases": [
+        "mentolpastiller"
+      ]
+    },
+    "mintpastiller": {
+      "name": "Mintpastiller",
+      "aliases": [
+        "mintpastiller"
+      ]
+    },
+    "minttuggummi": {
+      "name": "Minttuggummi",
+      "aliases": [
+        "minttuggummi"
+      ]
+    },
+    "salmiakpastiller": {
+      "name": "Salmiakpastiller",
+      "aliases": [
+        "salmiakpastiller"
+      ]
+    },
+    "sockerfria-pastiller": {
+      "name": "Sockerfria pastiller",
+      "aliases": [
+        "sockerfria pastiller"
+      ]
+    },
+    "sockerfritt-tuggummi": {
+      "name": "Sockerfritt tuggummi",
+      "aliases": [
+        "sockerfritt tuggummi"
+      ]
+    },
+    "tjarpastiller": {
+      "name": "Tjärpastiller",
+      "aliases": [
+        "tjärpastiller"
+      ]
+    },
+    "tuggummi": {
+      "name": "Tuggummi",
+      "aliases": [
+        "tuggummi"
+      ]
+    },
+    "violpastiller": {
+      "name": "Violpastiller",
+      "aliases": [
+        "violpastiller"
+      ]
+    },
+    "xylitoltuggummi": {
+      "name": "Xylitoltuggummi",
+      "aliases": [
+        "xylitoltuggummi"
+      ]
+    },
+    "apelsinkakor-med-choklad": {
+      "name": "Apelsinkakor med choklad",
+      "aliases": [
+        "apelsinkakor med choklad"
+      ]
+    },
+    "bokstavskex": {
+      "name": "Bokstavskex",
+      "aliases": [
+        "bokstavskex"
+      ]
+    },
+    "brysselkex": {
+      "name": "Brysselkex",
+      "aliases": [
+        "brysselkex"
+      ]
+    },
+    "chokladdoppade-digestivekex": {
+      "name": "Chokladdoppade digestivekex",
+      "aliases": [
+        "chokladdoppade digestivekex"
+      ]
+    },
+    "chokladkex": {
+      "name": "Chokladkex",
+      "aliases": [
+        "chokladkex"
+      ]
+    },
+    "chokladran": {
+      "name": "Chokladrån",
+      "aliases": [
+        "chokladrån"
+      ]
+    },
+    "chokladsnittar": {
+      "name": "Chokladsnittar",
+      "aliases": [
+        "chokladsnittar"
+      ]
+    },
+    "cream-crackers": {
+      "name": "Cream crackers",
+      "aliases": [
+        "cream crackers"
+      ]
+    },
+    "finska-pinnar": {
+      "name": "Finska pinnar",
+      "aliases": [
+        "finska pinnar"
+      ]
+    },
+    "frukostkex": {
+      "name": "Frukostkex",
+      "aliases": [
+        "frukostkex"
+      ]
+    },
+    "frokex": {
+      "name": "Frökex",
+      "aliases": [
+        "frökex"
+      ]
+    },
+    "fullkornskex": {
+      "name": "Fullkornskex",
+      "aliases": [
+        "fullkornskex"
+      ]
+    },
+    "fyllda-kex": {
+      "name": "Fyllda kex",
+      "aliases": [
+        "fyllda kex"
+      ]
+    },
+    "grahamskex": {
+      "name": "Grahamskex",
+      "aliases": [
+        "grahamskex"
+      ]
+    },
+    "havrekakor": {
+      "name": "Havrekakor",
+      "aliases": [
+        "havrekakor"
+      ]
+    },
+    "havrekex": {
+      "name": "Havrekex",
+      "aliases": [
+        "havrekex"
+      ]
+    },
+    "kexsortiment-till-ost": {
+      "name": "Kexsortiment till ost",
+      "aliases": [
+        "kexsortiment till ost"
+      ]
+    },
+    "kolasnittar": {
+      "name": "Kolasnittar",
+      "aliases": [
+        "kolasnittar"
+      ]
+    },
+    "krustader": {
+      "name": "Krustader",
+      "aliases": [
+        "krustader"
+      ]
+    },
+    "mariekex": {
+      "name": "Mariekex",
+      "aliases": [
+        "mariekex"
+      ]
+    },
+    "nougatran": {
+      "name": "Nougatrån",
+      "aliases": [
+        "nougatrån"
+      ]
+    },
+    "ostkex": {
+      "name": "Ostkex",
+      "aliases": [
+        "ostkex"
+      ]
+    },
+    "ragkex": {
+      "name": "Rågkex",
+      "aliases": [
+        "rågkex"
+      ]
+    },
+    "ran": {
+      "name": "Rån",
+      "aliases": [
+        "rån"
+      ]
+    },
+    "saltkex": {
+      "name": "Saltkex",
+      "aliases": [
+        "saltkex"
+      ]
+    },
+    "sesamkex": {
+      "name": "Sesamkex",
+      "aliases": [
+        "sesamkex"
+      ]
+    },
+    "smorgasran": {
+      "name": "Smörgåsrån",
+      "aliases": [
+        "smörgåsrån"
+      ]
+    },
+    "smorkex": {
+      "name": "Smörkex",
+      "aliases": [
+        "smörkex"
+      ]
+    },
+    "speculoos": {
+      "name": "Speculoos",
+      "aliases": [
+        "speculoos"
+      ]
+    },
+    "stroopwafels": {
+      "name": "Stroopwafels",
+      "aliases": [
+        "stroopwafels"
+      ]
+    },
+    "vaniljran": {
+      "name": "Vaniljrån",
+      "aliases": [
+        "vaniljrån"
+      ]
+    },
+    "vattenkex": {
+      "name": "Vattenkex",
+      "aliases": [
+        "vattenkex"
+      ]
+    },
+    "glutenfri-bakmix": {
+      "name": "Glutenfri bakmix",
+      "aliases": [
+        "glutenfri bakmix"
+      ]
+    },
+    "glutenfri-brodmix": {
+      "name": "Glutenfri brödmix",
+      "aliases": [
+        "glutenfri brödmix"
+      ]
+    },
+    "glutenfri-fylld-pasta": {
+      "name": "Glutenfri fylld pasta",
+      "aliases": [
+        "glutenfri fylld pasta"
+      ]
+    },
+    "glutenfri-fardigpizza": {
+      "name": "Glutenfri färdigpizza",
+      "aliases": [
+        "glutenfri färdigpizza"
+      ]
+    },
+    "glutenfri-granola": {
+      "name": "Glutenfri granola",
+      "aliases": [
+        "glutenfri granola"
+      ]
+    },
+    "glutenfri-kladdkaka": {
+      "name": "Glutenfri kladdkaka",
+      "aliases": [
+        "glutenfri kladdkaka"
+      ]
+    },
+    "glutenfri-lakrits": {
+      "name": "Glutenfri lakrits",
+      "aliases": [
+        "glutenfri lakrits"
+      ]
+    },
+    "glutenfri-mjolmix": {
+      "name": "Glutenfri mjölmix",
+      "aliases": [
+        "glutenfri mjölmix"
+      ]
+    },
+    "glutenfri-musli": {
+      "name": "Glutenfri müsli",
+      "aliases": [
+        "glutenfri müsli"
+      ]
+    },
+    "glutenfri-pasta": {
+      "name": "Glutenfri pasta",
+      "aliases": [
+        "glutenfri pasta"
+      ]
+    },
+    "glutenfri-pepparkaksdeg": {
+      "name": "Glutenfri pepparkaksdeg",
+      "aliases": [
+        "glutenfri pepparkaksdeg"
+      ]
+    },
+    "glutenfri-pizzabotten": {
+      "name": "Glutenfri pizzabotten",
+      "aliases": [
+        "glutenfri pizzabotten"
+      ]
+    },
+    "glutenfri-pizzadeg": {
+      "name": "Glutenfri pizzadeg",
+      "aliases": [
+        "glutenfri pizzadeg"
+      ]
+    },
+    "glutenfri-smordeg": {
+      "name": "Glutenfri smördeg",
+      "aliases": [
+        "glutenfri smördeg"
+      ]
+    },
+    "glutenfri-tartbotten": {
+      "name": "Glutenfri tårtbotten",
+      "aliases": [
+        "glutenfri tårtbotten"
+      ]
+    },
+    "glutenfria-bullar": {
+      "name": "Glutenfria bullar",
+      "aliases": [
+        "glutenfria bullar"
+      ]
+    },
+    "glutenfria-fiskpinnar": {
+      "name": "Glutenfria fiskpinnar",
+      "aliases": [
+        "glutenfria fiskpinnar"
+      ]
+    },
+    "glutenfria-flingor": {
+      "name": "Glutenfria flingor",
+      "aliases": [
+        "glutenfria flingor"
+      ]
+    },
+    "glutenfria-frallor": {
+      "name": "Glutenfria frallor",
+      "aliases": [
+        "glutenfria frallor"
+      ]
+    },
+    "glutenfria-glassran": {
+      "name": "Glutenfria glassrån",
+      "aliases": [
+        "glutenfria glassrån"
+      ]
+    },
+    "glutenfria-hamburgerbrod": {
+      "name": "Glutenfria hamburgerbröd",
+      "aliases": [
+        "glutenfria hamburgerbröd"
+      ]
+    },
+    "glutenfria-havregryn": {
+      "name": "Glutenfria havregryn",
+      "aliases": [
+        "glutenfria havregryn"
+      ]
+    },
+    "glutenfria-kakor": {
+      "name": "Glutenfria kakor",
+      "aliases": [
+        "glutenfria kakor"
+      ]
+    },
+    "glutenfria-kex": {
+      "name": "Glutenfria kex",
+      "aliases": [
+        "glutenfria kex"
+      ]
+    },
+    "glutenfria-korvbrod": {
+      "name": "Glutenfria korvbröd",
+      "aliases": [
+        "glutenfria korvbröd"
+      ]
+    },
+    "glutenfria-kycklingnuggets": {
+      "name": "Glutenfria kycklingnuggets",
+      "aliases": [
+        "glutenfria kycklingnuggets"
+      ]
+    },
+    "glutenfria-kottbullar": {
+      "name": "Glutenfria köttbullar",
+      "aliases": [
+        "glutenfria köttbullar"
+      ]
+    },
+    "glutenfria-lasagneplattor": {
+      "name": "Glutenfria lasagneplattor",
+      "aliases": [
+        "glutenfria lasagneplattor"
+      ]
+    },
+    "glutenfria-matpajer": {
+      "name": "Glutenfria matpajer",
+      "aliases": [
+        "glutenfria matpajer"
+      ]
+    },
+    "glutenfria-nudlar": {
+      "name": "Glutenfria nudlar",
+      "aliases": [
+        "glutenfria nudlar"
+      ]
+    },
+    "glutenfria-pannkakor": {
+      "name": "Glutenfria pannkakor",
+      "aliases": [
+        "glutenfria pannkakor"
+      ]
+    },
+    "glutenfria-pepparkakor": {
+      "name": "Glutenfria pepparkakor",
+      "aliases": [
+        "glutenfria pepparkakor"
+      ]
+    },
+    "glutenfria-skorpor": {
+      "name": "Glutenfria skorpor",
+      "aliases": [
+        "glutenfria skorpor"
+      ]
+    },
+    "glutenfria-tortillas": {
+      "name": "Glutenfria tortillas",
+      "aliases": [
+        "glutenfria tortillas"
+      ]
+    },
+    "glutenfria-vafflor": {
+      "name": "Glutenfria våfflor",
+      "aliases": [
+        "glutenfria våfflor"
+      ]
+    },
+    "glutenfritt-brod": {
+      "name": "Glutenfritt bröd",
+      "aliases": [
+        "glutenfritt bröd"
+      ]
+    },
+    "glutenfritt-knackebrod": {
+      "name": "Glutenfritt knäckebröd",
+      "aliases": [
+        "glutenfritt knäckebröd"
+      ]
+    },
+    "glutenfritt-strobrod": {
+      "name": "Glutenfritt ströbröd",
+      "aliases": [
+        "glutenfritt ströbröd"
+      ]
+    },
+    "glutenfritt-tunnbrod": {
+      "name": "Glutenfritt tunnbröd",
+      "aliases": [
+        "glutenfritt tunnbröd"
+      ]
+    },
+    "glutenfritt-ol": {
+      "name": "Glutenfritt öl",
+      "aliases": [
+        "glutenfritt öl"
+      ]
+    },
+    "laktosfri-chokladmjolk": {
+      "name": "Laktosfri chokladmjölk",
+      "aliases": [
+        "laktosfri chokladmjölk"
+      ]
+    },
+    "laktosfri-drickyoghurt": {
+      "name": "Laktosfri drickyoghurt",
+      "aliases": [
+        "laktosfri drickyoghurt"
+      ]
+    },
+    "laktosfri-fetaost": {
+      "name": "Laktosfri fetaost",
+      "aliases": [
+        "laktosfri fetaost"
+      ]
+    },
+    "laktosfri-grekisk-yoghurt": {
+      "name": "Laktosfri grekisk yoghurt",
+      "aliases": [
+        "laktosfri grekisk yoghurt"
+      ]
+    },
+    "laktosfri-graddfil": {
+      "name": "Laktosfri gräddfil",
+      "aliases": [
+        "laktosfri gräddfil"
+      ]
+    },
+    "laktosfri-halloumi": {
+      "name": "Laktosfri halloumi",
+      "aliases": [
+        "laktosfri halloumi"
+      ]
+    },
+    "laktosfri-hardost": {
+      "name": "Laktosfri hårdost",
+      "aliases": [
+        "laktosfri hårdost"
+      ]
+    },
+    "laktosfri-mascarpone": {
+      "name": "Laktosfri mascarpone",
+      "aliases": [
+        "laktosfri mascarpone"
+      ]
+    },
+    "laktosfri-mjukost": {
+      "name": "Laktosfri mjukost",
+      "aliases": [
+        "laktosfri mjukost"
+      ]
+    },
+    "laktosfri-mjolkchoklad": {
+      "name": "Laktosfri mjölkchoklad",
+      "aliases": [
+        "laktosfri mjölkchoklad"
+      ]
+    },
+    "laktosfri-mozzarella": {
+      "name": "Laktosfri mozzarella",
+      "aliases": [
+        "laktosfri mozzarella"
+      ]
+    },
+    "laktosfri-pudding": {
+      "name": "Laktosfri pudding",
+      "aliases": [
+        "laktosfri pudding"
+      ]
+    },
+    "laktosfri-riven-ost": {
+      "name": "Laktosfri riven ost",
+      "aliases": [
+        "laktosfri riven ost"
+      ]
+    },
+    "laktosfri-rakost": {
+      "name": "Laktosfri räkost",
+      "aliases": [
+        "laktosfri räkost"
+      ]
+    },
+    "laktosfri-smetana": {
+      "name": "Laktosfri smetana",
+      "aliases": [
+        "laktosfri smetana"
+      ]
+    },
+    "laktosfri-sprutgradde": {
+      "name": "Laktosfri sprutgrädde",
+      "aliases": [
+        "laktosfri sprutgrädde"
+      ]
+    },
+    "laktosfri-vaniljsas": {
+      "name": "Laktosfri vaniljsås",
+      "aliases": [
+        "laktosfri vaniljsås"
+      ]
+    },
+    "gainer": {
+      "name": "Gainer",
+      "aliases": [
+        "gainer"
+      ]
+    },
+    "kaseinpulver": {
+      "name": "Kaseinpulver",
+      "aliases": [
+        "kaseinpulver"
+      ]
+    },
+    "proteinbar": {
+      "name": "Proteinbar",
+      "aliases": [
+        "proteinbar"
+      ]
+    },
+    "proteinbollar": {
+      "name": "Proteinbollar",
+      "aliases": [
+        "proteinbollar"
+      ]
+    },
+    "proteinbrod": {
+      "name": "Proteinbröd",
+      "aliases": [
+        "proteinbröd"
+      ]
+    },
+    "proteinchips": {
+      "name": "Proteinchips",
+      "aliases": [
+        "proteinchips"
+      ]
+    },
+    "proteinchoklad": {
+      "name": "Proteinchoklad",
+      "aliases": [
+        "proteinchoklad"
+      ]
+    },
+    "proteincookies": {
+      "name": "Proteincookies",
+      "aliases": [
+        "proteincookies"
+      ]
+    },
+    "proteinmusli": {
+      "name": "Proteinmüsli",
+      "aliases": [
+        "proteinmüsli"
+      ]
+    },
+    "proteinpannkaksmix": {
+      "name": "Proteinpannkaksmix",
+      "aliases": [
+        "proteinpannkaksmix"
+      ]
+    },
+    "proteinpasta": {
+      "name": "Proteinpasta",
+      "aliases": [
+        "proteinpasta"
+      ]
+    },
+    "proteinpudding": {
+      "name": "Proteinpudding",
+      "aliases": [
+        "proteinpudding"
+      ]
+    },
+    "proteinpulver": {
+      "name": "Proteinpulver",
+      "aliases": [
+        "proteinpulver"
+      ]
+    },
+    "proteinwafers": {
+      "name": "Proteinwafers",
+      "aliases": [
+        "proteinwafers"
+      ]
+    },
+    "proteinwraps": {
+      "name": "Proteinwraps",
+      "aliases": [
+        "proteinwraps"
+      ]
+    },
+    "vaxtproteinpulver": {
+      "name": "Växtproteinpulver",
+      "aliases": [
+        "växtproteinpulver"
+      ]
+    },
+    "ketobar": {
+      "name": "Ketobar",
+      "aliases": [
+        "ketobar"
+      ]
+    },
+    "ketogranola": {
+      "name": "Ketogranola",
+      "aliases": [
+        "ketogranola"
+      ]
+    },
+    "konjacnudlar": {
+      "name": "Konjacnudlar",
+      "aliases": [
+        "konjacnudlar"
+      ]
+    },
+    "konjacris": {
+      "name": "Konjacris",
+      "aliases": [
+        "konjacris"
+      ]
+    },
+    "lagkolhydratbrod": {
+      "name": "Lågkolhydratbröd",
+      "aliases": [
+        "lågkolhydratbröd"
+      ]
+    },
+    "lagkolhydratknacke": {
+      "name": "Lågkolhydratknäcke",
+      "aliases": [
+        "lågkolhydratknäcke"
+      ]
+    },
+    "lagkolhydratpasta": {
+      "name": "Lågkolhydratpasta",
+      "aliases": [
+        "lågkolhydratpasta"
+      ]
+    },
+    "lagkolhydrattortillas": {
+      "name": "Lågkolhydrattortillas",
+      "aliases": [
+        "lågkolhydrattortillas"
+      ]
+    },
+    "mct-olja": {
+      "name": "MCT-olja",
+      "aliases": [
+        "mct-olja"
+      ]
+    },
+    "sockerfri-bbq-sas": {
+      "name": "Sockerfri BBQ-sås",
+      "aliases": [
+        "sockerfri bbq-sås"
+      ]
+    },
+    "sockerfri-chokladkram": {
+      "name": "Sockerfri chokladkräm",
+      "aliases": [
+        "sockerfri chokladkräm"
+      ]
+    },
+    "sockerfri-glassas": {
+      "name": "Sockerfri glassås",
+      "aliases": [
+        "sockerfri glassås"
+      ]
+    },
+    "sockerfri-ketchup": {
+      "name": "Sockerfri ketchup",
+      "aliases": [
+        "sockerfri ketchup"
+      ]
+    },
+    "sockerfri-sirap": {
+      "name": "Sockerfri sirap",
+      "aliases": [
+        "sockerfri sirap"
+      ]
+    },
+    "sockerfri-sylt": {
+      "name": "Sockerfri sylt",
+      "aliases": [
+        "sockerfri sylt"
+      ]
+    },
+    "sockerfria-kakor": {
+      "name": "Sockerfria kakor",
+      "aliases": [
+        "sockerfria kakor"
+      ]
+    },
+    "squashnudlar": {
+      "name": "Squashnudlar",
+      "aliases": [
+        "squashnudlar"
+      ]
+    },
+    "komplett-maltidsdryck": {
+      "name": "Komplett måltidsdryck",
+      "aliases": [
+        "komplett måltidsdryck"
+      ]
+    },
+    "maltidsersattningsbar": {
+      "name": "Måltidsersättningsbar",
+      "aliases": [
+        "måltidsersättningsbar"
+      ]
+    },
+    "maltidsersattningsdryck": {
+      "name": "Måltidsersättningsdryck",
+      "aliases": [
+        "måltidsersättningsdryck"
+      ]
+    },
+    "maltidsersattningspulver": {
+      "name": "Måltidsersättningspulver",
+      "aliases": [
+        "måltidsersättningspulver"
+      ]
+    },
+    "maltidsersattningssoppa": {
+      "name": "Måltidsersättningssoppa",
+      "aliases": [
+        "måltidsersättningssoppa"
+      ]
+    },
+    "mjolkfri-choklad": {
+      "name": "Mjölkfri choklad",
+      "aliases": [
+        "mjölkfri choklad"
+      ]
+    },
+    "mjolkfri-chokladkram": {
+      "name": "Mjölkfri chokladkräm",
+      "aliases": [
+        "mjölkfri chokladkräm"
+      ]
+    },
+    "mjolkfri-glass": {
+      "name": "Mjölkfri glass",
+      "aliases": [
+        "mjölkfri glass"
+      ]
+    },
+    "mjolkfri-pesto": {
+      "name": "Mjölkfri pesto",
+      "aliases": [
+        "mjölkfri pesto"
+      ]
+    },
+    "mjolkfria-kakor": {
+      "name": "Mjölkfria kakor",
+      "aliases": [
+        "mjölkfria kakor"
+      ]
+    },
+    "mjolkfria-kex": {
+      "name": "Mjölkfria kex",
+      "aliases": [
+        "mjölkfria kex"
+      ]
+    },
+    "drickfardig-ersattning": {
+      "name": "Drickfärdig ersättning",
+      "aliases": [
+        "drickfärdig ersättning"
+      ]
+    },
+    "drickfardig-valling": {
+      "name": "Drickfärdig välling",
+      "aliases": [
+        "drickfärdig välling"
+      ]
+    },
+    "ekologisk-ersattning": {
+      "name": "Ekologisk ersättning",
+      "aliases": [
+        "ekologisk ersättning"
+      ]
+    },
+    "ekologisk-valling": {
+      "name": "Ekologisk välling",
+      "aliases": [
+        "ekologisk välling"
+      ]
+    },
+    "fortsattningsersattning": {
+      "name": "Fortsättningsersättning",
+      "aliases": [
+        "fortsättningsersättning"
+      ]
+    },
+    "fullkornsvalling": {
+      "name": "Fullkornsvälling",
+      "aliases": [
+        "fullkornsvälling"
+      ]
+    },
+    "getmjolksbaserad-ersattning": {
+      "name": "Getmjölksbaserad ersättning",
+      "aliases": [
+        "getmjölksbaserad ersättning"
+      ]
+    },
+    "god-natt-valling": {
+      "name": "God natt-välling",
+      "aliases": [
+        "god natt-välling"
+      ]
+    },
+    "havrevalling": {
+      "name": "Havrevälling",
+      "aliases": [
+        "havrevälling"
+      ]
+    },
+    "hypoallergen-ersattning": {
+      "name": "Hypoallergen ersättning",
+      "aliases": [
+        "hypoallergen ersättning"
+      ]
+    },
+    "majsvalling": {
+      "name": "Majsvälling",
+      "aliases": [
+        "majsvälling"
+      ]
+    },
+    "mjolkfri-valling": {
+      "name": "Mjölkfri välling",
+      "aliases": [
+        "mjölkfri välling"
+      ]
+    },
+    "modersmjolksersattning": {
+      "name": "Modersmjölksersättning",
+      "aliases": [
+        "modersmjölksersättning"
+      ]
+    },
+    "tillskottsnaring": {
+      "name": "Tillskottsnäring",
+      "aliases": [
+        "tillskottsnäring"
+      ]
+    },
+    "valling": {
+      "name": "Välling",
+      "aliases": [
+        "välling"
+      ]
+    },
+    "barngrot": {
+      "name": "Barngröt",
+      "aliases": [
+        "barngröt"
+      ]
+    },
+    "barnmat-pa-burk": {
+      "name": "Barnmat på burk",
+      "aliases": [
+        "barnmat på burk"
+      ]
+    },
+    "ekologisk-barnmat": {
+      "name": "Ekologisk barnmat",
+      "aliases": [
+        "ekologisk barnmat"
+      ]
+    },
+    "fruktgrot-for-barn": {
+      "name": "Fruktgröt för barn",
+      "aliases": [
+        "fruktgröt för barn"
+      ]
+    },
+    "fruktpure": {
+      "name": "Fruktpuré",
+      "aliases": [
+        "fruktpuré"
+      ]
+    },
+    "fullkornsgrot-for-barn": {
+      "name": "Fullkornsgröt för barn",
+      "aliases": [
+        "fullkornsgröt för barn"
+      ]
+    },
+    "gronsakspure": {
+      "name": "Grönsakspuré",
+      "aliases": [
+        "grönsakspuré"
+      ]
+    },
+    "grotklammis": {
+      "name": "Grötklämmis",
+      "aliases": [
+        "grötklämmis"
+      ]
+    },
+    "havregrot-for-barn": {
+      "name": "Havregröt för barn",
+      "aliases": [
+        "havregröt för barn"
+      ]
+    },
+    "klampase": {
+      "name": "Klämpåse",
+      "aliases": [
+        "klämpåse"
+      ]
+    },
+    "middagsburk": {
+      "name": "Middagsburk",
+      "aliases": [
+        "middagsburk"
+      ]
+    },
+    "mjolkfri-barngrot": {
+      "name": "Mjölkfri barngröt",
+      "aliases": [
+        "mjölkfri barngröt"
+      ]
+    },
+    "risgrot-for-barn": {
+      "name": "Risgröt för barn",
+      "aliases": [
+        "risgröt för barn"
+      ]
+    },
+    "smakportioner": {
+      "name": "Smakportioner",
+      "aliases": [
+        "smakportioner"
+      ]
+    },
+    "smabarnsmaltid": {
+      "name": "Småbarnsmåltid",
+      "aliases": [
+        "småbarnsmåltid"
+      ]
+    },
+    "vegetarisk-barnmat": {
+      "name": "Vegetarisk barnmat",
+      "aliases": [
+        "vegetarisk barnmat"
+      ]
+    },
+    "yoghurtklammis": {
+      "name": "Yoghurtklämmis",
+      "aliases": [
+        "yoghurtklämmis"
+      ]
+    },
+    "barnkex": {
+      "name": "Barnkex",
+      "aliases": [
+        "barnkex"
+      ]
+    },
+    "barnsmoothie": {
+      "name": "Barnsmoothie",
+      "aliases": [
+        "barnsmoothie"
+      ]
+    },
+    "fruktbars": {
+      "name": "Fruktbars",
+      "aliases": [
+        "fruktbars"
+      ]
+    },
+    "fruktrullar": {
+      "name": "Fruktrullar",
+      "aliases": [
+        "fruktrullar"
+      ]
+    },
+    "frystorkad-frukt-for-barn": {
+      "name": "Frystorkad frukt för barn",
+      "aliases": [
+        "frystorkad frukt för barn"
+      ]
+    },
+    "majskrokar-for-barn": {
+      "name": "Majskrokar för barn",
+      "aliases": [
+        "majskrokar för barn"
+      ]
+    },
+    "majspuffar": {
+      "name": "Majspuffar",
+      "aliases": [
+        "majspuffar"
+      ]
+    },
+    "majsran-for-barn": {
+      "name": "Majsrån för barn",
+      "aliases": [
+        "majsrån för barn"
+      ]
+    },
+    "miniriskakor": {
+      "name": "Miniriskakor",
+      "aliases": [
+        "miniriskakor"
+      ]
+    },
+    "tandningskex": {
+      "name": "Tandningskex",
+      "aliases": [
+        "tandningskex"
+      ]
+    },
+    "yoghurtdroppar": {
+      "name": "Yoghurtdroppar",
+      "aliases": [
+        "yoghurtdroppar"
+      ]
+    },
+    "durramjol": {
+      "name": "Durramjöl",
+      "aliases": [
+        "durramjöl"
+      ]
+    },
+    "hasselnotsmjol": {
+      "name": "Hasselnötsmjöl",
+      "aliases": [
+        "hasselnötsmjöl"
+      ]
+    },
+    "lupinmjol": {
+      "name": "Lupinmjöl",
+      "aliases": [
+        "lupinmjöl"
+      ]
+    },
+    "bananmjol": {
+      "name": "Bananmjöl",
+      "aliases": [
+        "bananmjöl"
+      ]
+    },
+    "kondenserad-kokosmjolk": {
+      "name": "Kondenserad kokosmjölk",
+      "aliases": [
+        "kondenserad kokosmjölk"
+      ]
+    },
+    "invertsocker": {
+      "name": "Invertsocker",
+      "aliases": [
+        "invertsocker"
+      ]
+    },
+    "fonio": {
+      "name": "Fonio",
+      "aliases": [
+        "fonio"
+      ]
+    },
+    "natto": {
+      "name": "Natto",
+      "aliases": [
+        "natto"
+      ]
+    },
+    "verjus": {
+      "name": "Verjus",
+      "aliases": [
+        "verjus"
+      ]
     }
   },
+  "commonFoods": [
+    "pasta",
+    "tomat",
+    "spenat",
+    "olja",
+    "ost",
+    "morot",
+    "kal",
+    "sallad",
+    "kikarter",
+    "citron",
+    "senap",
+    "broccoli",
+    "bonor",
+    "agg",
+    "cheddar",
+    "potatis",
+    "lax",
+    "yoghurt",
+    "dill",
+    "kyckling",
+    "ris",
+    "gurka",
+    "soja",
+    "lok",
+    "linser",
+    "buljong",
+    "svamp",
+    "brod",
+    "vitlok",
+    "smor",
+    "tortilla",
+    "majs",
+    "havre",
+    "apple",
+    "valnot",
+    "kanel",
+    "kokosmjolk",
+    "curry",
+    "kross",
+    "rodbetor",
+    "rodlok",
+    "arter",
+    "vita-bonor",
+    "havregradde",
+    "creme-fraiche",
+    "gradde",
+    "farskost",
+    "vegansk-farskost",
+    "mjolk",
+    "filmjolk",
+    "fetaost",
+    "kvarg",
+    "ost-lagrad",
+    "bacon",
+    "makrill",
+    "tonfisk",
+    "rom",
+    "fiskpinnar",
+    "sardeller",
+    "leverpastej",
+    "kottbullar",
+    "radisa",
+    "paprika",
+    "saltgurka",
+    "salladslok",
+    "kalrot",
+    "pepparrot",
+    "apelsin",
+    "lime",
+    "banan",
+    "lingon",
+    "blabar",
+    "hallon",
+    "mandel",
+    "hasselnot",
+    "fron",
+    "tahini",
+    "majo",
+    "havredryck",
+    "havreyoghurt",
+    "sirap",
+    "socker",
+    "honung",
+    "choklad",
+    "kapris",
+    "attika",
+    "vinager",
+    "tomatpure",
+    "potatismjol",
+    "vetemjol",
+    "smordeg",
+    "kanelbullar",
+    "grot",
+    "strobrod",
+    "kryddor",
+    "orter",
+    "selleri",
+    "vindruvor",
+    "stek",
+    "kinakal",
+    "jordnotter",
+    "schalottenlok",
+    "purjolok",
+    "blomkal",
+    "falukorv",
+    "julskinka",
+    "blandfars",
+    "matlagningsgradde",
+    "fiskbuljong",
+    "graddfil",
+    "adelost",
+    "mascarpone",
+    "ansjovis",
+    "sardiner",
+    "vit-fisk",
+    "fiskbullar",
+    "rakor",
+    "janssons-frestelse",
+    "paron",
+    "bar",
+    "majsmjol",
+    "pepparkakor",
+    "granola",
+    "kakao",
+    "jordnotssmor",
+    "kaffe",
+    "sotpotatis",
+    "tofu",
+    "korngryn",
+    "rotfrukter",
+    "keso",
+    "mozzarella",
+    "nudlar",
+    "svartvinbar",
+    "zucchini",
+    "avokado",
+    "pumpa",
+    "ingefara",
+    "mango",
+    "dadlar",
+    "flaskkotlett",
+    "notkott",
+    "halloumi",
+    "gronsaker",
+    "kex",
+    "flaskfars",
+    "flaskkarre",
+    "flask",
+    "lamm",
+    "aprikos",
+    "lammfars",
+    "renskav",
+    "katrinplommon",
+    "oliver",
+    "gronkal",
+    "quinoa",
+    "getost",
+    "miso",
+    "artor",
+    "bovetemjol",
+    "kikartsmjol",
+    "majsstarkelse",
+    "majsflingor",
+    "chips",
+    "kottfarssas",
+    "rismjol",
+    "mandelmjol"
+  ],
   "dinnerMeals": [
     {
       "key": "main",
@@ -1071,16 +25344,44 @@ export const data = {
       "label": "Allt i en gryta"
     },
     {
+      "key": "One pan",
+      "label": "Allt i en panna"
+    },
+    {
       "key": "American",
       "label": "Amerikanskt"
+    },
+    {
+      "key": "Argentinian",
+      "label": "Argentinskt"
     },
     {
       "key": "Asian",
       "label": "Asiatiskt"
     },
     {
+      "key": "Bistro",
+      "label": "Bistro"
+    },
+    {
+      "key": "British",
+      "label": "Brittiskt"
+    },
+    {
+      "key": "Brunch",
+      "label": "Brunch"
+    },
+    {
       "key": "Budget",
       "label": "Budget"
+    },
+    {
+      "key": "Burger",
+      "label": "Burgare"
+    },
+    {
+      "key": "Crêpes",
+      "label": "Crêpes"
     },
     {
       "key": "Danish",
@@ -1091,8 +25392,40 @@ export const data = {
       "label": "Familjevänligt"
     },
     {
+      "key": "Party",
+      "label": "Fest"
+    },
+    {
+      "key": "Fish",
+      "label": "Fisk"
+    },
+    {
+      "key": "Pork",
+      "label": "Fläskkött"
+    },
+    {
       "key": "French",
       "label": "Franskt"
+    },
+    {
+      "key": "Breakfast",
+      "label": "Frukost"
+    },
+    {
+      "key": "Fresh",
+      "label": "Fräscht"
+    },
+    {
+      "key": "Kids",
+      "label": "För barn"
+    },
+    {
+      "key": "Starter",
+      "label": "Förrätt"
+    },
+    {
+      "key": "Street food",
+      "label": "Gatumat"
     },
     {
       "key": "Gluten free",
@@ -1103,8 +25436,24 @@ export const data = {
       "label": "Grekiskt"
     },
     {
+      "key": "BBQ",
+      "label": "Grillat"
+    },
+    {
       "key": "Stew",
       "label": "Gryta"
+    },
+    {
+      "key": "Freezer friendly",
+      "label": "Går att frysa"
+    },
+    {
+      "key": "Halloween",
+      "label": "Halloween"
+    },
+    {
+      "key": "Main course",
+      "label": "Huvudrätt"
     },
     {
       "key": "Autumn",
@@ -1119,6 +25468,10 @@ export const data = {
       "label": "Italienskt"
     },
     {
+      "key": "Japanese",
+      "label": "Japanskt"
+    },
+    {
       "key": "Christmas",
       "label": "Jul"
     },
@@ -1127,20 +25480,60 @@ export const data = {
       "label": "Kan förberedas"
     },
     {
+      "key": "Chinese",
+      "label": "Kinesiskt"
+    },
+    {
+      "key": "Classic",
+      "label": "Klassiker"
+    },
+    {
       "key": "Low carb",
       "label": "Kolhydratsnålt"
+    },
+    {
+      "key": "Korean",
+      "label": "Koreanskt"
+    },
+    {
+      "key": "Crispy",
+      "label": "Krispigt"
+    },
+    {
+      "key": "Chicken",
+      "label": "Kyckling"
     },
     {
       "key": "Lactose free",
       "label": "Laktosfritt"
     },
     {
+      "key": "Lamb",
+      "label": "Lamm"
+    },
+    {
       "key": "Lunch",
       "label": "Lunch"
     },
     {
+      "key": "Lunch box",
+      "label": "Lunchlåda"
+    },
+    {
+      "key": "Slow cooking",
+      "label": "Långkok"
+    },
+    {
+      "key": "Moroccan",
+      "label": "Marockanskt"
+    },
+    {
       "key": "Meal prep",
       "label": "Matlåda"
+    },
+    {
+      "key": "Mediterranean",
+      "label": "Medelhavsmat"
     },
     {
       "key": "Middle Eastern",
@@ -1163,8 +25556,20 @@ export const data = {
       "label": "Mysig mat"
     },
     {
+      "key": "Nordic",
+      "label": "Nordiskt"
+    },
+    {
+      "key": "Noodles",
+      "label": "Nudlar"
+    },
+    {
       "key": "Beginner friendly",
       "label": "Nybörjarvänligt"
+    },
+    {
+      "key": "Beef",
+      "label": "Nötkött"
     },
     {
       "key": "Pasta",
@@ -1175,12 +25580,56 @@ export const data = {
       "label": "Pescetariskt"
     },
     {
+      "key": "Sheet pan",
+      "label": "Plåtmat"
+    },
+    {
+      "key": "Reindeer",
+      "label": "Ren"
+    },
+    {
       "key": "Leftovers",
       "label": "Rester"
     },
     {
+      "key": "Rice bowl",
+      "label": "Risskål"
+    },
+    {
+      "key": "Salad",
+      "label": "Sallad"
+    },
+    {
+      "key": "Seafood",
+      "label": "Skaldjur"
+    },
+    {
+      "key": "Sandwich",
+      "label": "Smörgås"
+    },
+    {
+      "key": "Smørrebrød",
+      "label": "Smörrebröd"
+    },
+    {
+      "key": "Quick",
+      "label": "Snabblagat"
+    },
+    {
+      "key": "Summer",
+      "label": "Sommar"
+    },
+    {
+      "key": "Soup",
+      "label": "Soppa"
+    },
+    {
       "key": "Spanish",
       "label": "Spanskt"
+    },
+    {
+      "key": "Spicy",
+      "label": "Starkt"
     },
     {
       "key": "Swedish",
@@ -1191,8 +25640,36 @@ export const data = {
       "label": "Söndagsmiddag"
     },
     {
+      "key": "Sunday roast",
+      "label": "Söndagsstek"
+    },
+    {
+      "key": "Tacos",
+      "label": "Tacos"
+    },
+    {
       "key": "Thai",
       "label": "Thailändskt"
+    },
+    {
+      "key": "German",
+      "label": "Tyskt"
+    },
+    {
+      "key": "Oven baked",
+      "label": "Ugnsbakat"
+    },
+    {
+      "key": "Roast",
+      "label": "Ugnsstekt"
+    },
+    {
+      "key": "Hungarian",
+      "label": "Ungerskt"
+    },
+    {
+      "key": "Weeknight",
+      "label": "Vardagsmat"
     },
     {
       "key": "Vegan",
@@ -1201,6 +25678,18 @@ export const data = {
     {
       "key": "Vegetarian",
       "label": "Vegetariskt"
+    },
+    {
+      "key": "Vietnamese",
+      "label": "Vietnamesiskt"
+    },
+    {
+      "key": "Game",
+      "label": "Vilt"
+    },
+    {
+      "key": "Winter",
+      "label": "Vinter"
     },
     {
       "key": "Egg free",

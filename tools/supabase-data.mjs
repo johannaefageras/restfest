@@ -1,16 +1,18 @@
 // Writes the data the Edge Functions in supabase/functions/ need from the site, so Claude works from the
 // same ingredient keys, categories and tags as the build:
 //
-//   supabase/functions/_shared/data.ts               ingredient keys, dinner categories, tags, example recipes
+//   supabase/functions/_shared/data.ts               ingredient keys, the ones the recipes use, dinner categories, tags, example recipes
 //   supabase/functions/_shared/style-references.ts   the photos in supabase/style/, as data URLs for the image model
 //
 //   npm run supabase-data
 //
-// Run it after changing src/_data/foods.json, the tags or categories in src/js/recipes.js, the example
-// recipes below or the photos in supabase/style/, then deploy the functions again (HANDOFF.md).
+// Run it after changing src/_data/foods.json, the tags or categories in src/js/recipes.js, the recipes in
+// src/recept/ (their ingredient keys, and the examples below) or the photos in supabase/style/, then
+// deploy the functions again (HANDOFF.md).
 
 import fs from 'node:fs';
 import yaml from 'js-yaml';
+import {recipeFoodKeys} from '../lib/foods.js';
 import {taxonomy} from '../lib/taxonomy.js';
 import {parseRecipeBody} from '../lib/recipe-body.js';
 
@@ -76,8 +78,14 @@ function draft(id, imagePrompt) {
   };
 }
 
+// The ingredient keys the archive's recipes use, in the order of the ingredient list. Claude is sent
+// these by name instead of every food the site knows: foods.json is a whole grocery list, and with all
+// of it each fridge photo and each new recipe would cost tens of thousands of tokens more.
+const usedKeys = recipeFoodKeys(recipes.map(recipe => recipe.data));
+
 const data = {
   foods: Object.fromEntries(Object.entries(t.foods).map(([key, food]) => [key, {name: food.name, aliases: food.aliases ?? []}])),
+  commonFoods: Object.keys(t.foods).filter(key => usedKeys.has(key)),
   dinnerMeals: dinnerMeals.map(key => ({key, name: t.mealName(key)})),
   tags: tagKeys.map(key => ({key, label: t.tagLabel(key)})),
   examples: Object.entries(examples).map(([id, imagePrompt]) => draft(id, imagePrompt))
@@ -97,5 +105,5 @@ fs.writeFileSync(file('supabase/functions/_shared/style-references.ts'),
   `// The image model gets these with every new recipe, to copy the archive's look.\n` +
   `export const styleReferences: string[] = ${JSON.stringify(styleReferences)};\n`);
 
-console.log(`supabase/functions/_shared/data.ts: ${Object.keys(data.foods).length} ingredient keys, ${data.tags.length} tags, ${data.examples.length} examples`);
+console.log(`supabase/functions/_shared/data.ts: ${Object.keys(data.foods).length} ingredient keys (${data.commonFoods.length} used by recipes), ${data.tags.length} tags, ${data.examples.length} examples`);
 console.log(`supabase/functions/_shared/style-references.ts: ${styleFiles.length} photos`);

@@ -42,7 +42,7 @@
     return result;
   }
 
-  // About 1500 px on the longest side is plenty for reading labels, and keeps the upload small.
+  // Preserve small labels for high-resolution vision. Keep each JPEG under the function's base64 cap.
   async function shrink(file) {
     let bitmap;
     try {
@@ -54,18 +54,28 @@
         `${file.name || "Bilden"} gick inte att läsa. Prova en JPEG- eller PNG-bild.`,
       );
     }
-    const scale = Math.min(1, 1568 / Math.max(bitmap.width, bitmap.height));
+    const scale = Math.min(1, 2560 / Math.max(bitmap.width, bitmap.height));
     const canvas = document.createElement("canvas");
     canvas.width = Math.round(bitmap.width * scale);
     canvas.height = Math.round(bitmap.height * scale);
-    canvas
-      .getContext("2d")
-      .drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-    bitmap.close();
-    const blob = await new Promise((resolve) =>
-      canvas.toBlob(resolve, "image/jpeg", 0.82),
-    );
-    if (!blob) throw new Error(generalError);
+    let blob;
+    try {
+      do {
+        const context = canvas.getContext("2d");
+        context.fillStyle = "#fff";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+        blob = await new Promise((resolve) =>
+          canvas.toBlob(resolve, "image/jpeg", 0.9),
+        );
+        if (!blob) throw new Error(generalError);
+        if (blob.size <= 2_250_000) break;
+        canvas.width = Math.max(1, Math.round(canvas.width * 0.8));
+        canvas.height = Math.max(1, Math.round(canvas.height * 0.8));
+      } while (true);
+    } finally {
+      bitmap.close();
+    }
     const dataUrl = await new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result);
@@ -75,8 +85,15 @@
     return dataUrl.slice(dataUrl.indexOf(",") + 1);
   }
 
-  // The names to add: the site's own name for a recognised food, the photo's name for the rest.
-  function foundNames({ keys = [], other = [] }) {
+  // Preserve observed product names. Recipe aliases are for matching, not for renaming a photo's foods.
+  // Fall back to the previous response while an older Edge Function is still deployed.
+  function foundNames({ names, keys = [], other = [] }) {
+    if (Array.isArray(names)) {
+      return names
+        .filter((name) => typeof name === "string" && name.trim())
+        .map((name) => capitalize(cleanIngredient(name)))
+        .filter((name) => !basicIngredientWords.has(normalizeIngredient(name)));
+    }
     const known = keys
       .filter((key) => foods[key])
       .map((key) => foods[key].name);
@@ -114,18 +131,29 @@
       const images = await Promise.all(files.map(shrink));
       const names = foundNames(await post("detect-ingredients", { images }));
       const added = [];
+      // New foods the list had no room for (it holds 60, like the typed ones).
+      let leftOut = 0;
       for (const name of names) {
-        if (pantry.items.length >= 60) break;
-        if (pantry.items.some((item) => sameIngredient(item, name))) continue;
+        if (pantry.items.some((item) => normalizeIngredient(item) === normalizeIngredient(name))) continue;
+        if (pantry.items.length >= 60) {
+          leftOut++;
+          continue;
+        }
         pantry.items.push(name);
         added.push(name);
       }
+      const where = files.length > 1 ? "bilderna" : "bilden";
       let message =
         "Hittade inga råvaror. Prova med kylen öppen och bra ljus, eller skriv in dem.";
-      if (added.length) {
-        message = `${added.length === 1 ? "1 råvara" : `${added.length} råvaror`} från ${files.length > 1 ? "bilderna" : "bilden"} lades till. Stämmer något inte, tryck på det för att ta bort det.`;
+      const count = `${added.length === 1 ? "1 råvara" : `${added.length} råvaror`} från ${where} lades till.`;
+      if (leftOut) {
+        message = added.length
+          ? `${count} Listan rymmer 60 råvaror, så ${leftOut} fick inte plats. Ta bort några och fota igen.`
+          : `Listan rymmer 60 råvaror, så ${leftOut} från ${where} fick inte plats. Ta bort några och fota igen.`;
+      } else if (added.length) {
+        message = `${count} Stämmer något inte, tryck på det för att ta bort det.`;
       } else if (names.length) {
-        message = `Allt på ${files.length > 1 ? "bilderna" : "bilden"} fanns redan i listan.`;
+        message = `Allt på ${where} fanns redan i listan.`;
       }
       updatePantry(message);
       if (added.length) {

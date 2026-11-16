@@ -78,14 +78,16 @@ export const draftSchema = object({
   servings: text,
   level: {type: 'string', enum: levels},
   beforeYouStart: text,
-  pantryKeys: {type: 'array', items: {type: 'string', enum: foodKeys}},
+  // Ingredient keys are plain strings, checked in recipeDoc. As enums, the thousands of keys in
+  // foods.json make a schema too large to compile.
+  pantryKeys: {type: 'array', items: text},
   ingredientGroups: {
     type: 'array',
     items: object({
       title: text,
       items: {
         type: 'array',
-        items: object({name: text, key: {type: 'string', enum: ['', ...foodKeys]}, basic: {type: 'boolean'}})
+        items: object({name: text, key: text, basic: {type: 'boolean'}})
       }
     })
   },
@@ -96,19 +98,27 @@ export const draftSchema = object({
   unsuitable: {type: 'boolean'}
 });
 
-const foodList = Object.entries(data.foods)
-  .map(([key, food]) => `${key}: ${food.name}${food.aliases.length ? ` (${food.aliases.slice(0, 5).join(', ')})` : ''}`)
+// The keys the archive's recipes use (data.commonFoods), not all of foods.json: that is a whole grocery
+// list, and listing it would make every request some 80,000 tokens. The keys of the visitor's own
+// foods come with the fridge list (recipePrompt), and recipeDoc accepts any key the site knows.
+const foods: Record<string, {name: string; aliases: readonly string[]}> = data.foods;
+const foodList = data.commonFoods
+  .map(key => {
+    const {name, aliases} = foods[key];
+    const others = aliases.filter(alias => alias.toLowerCase() !== name.toLowerCase()).slice(0, 5);
+    return `${key}: ${name}${others.length ? ` (${others.join(', ')})` : ''}`;
+  })
   .join('\n');
 
 export const recipeSystem = `You write recipes for Ofta bra efter, a Swedish website about making dinner from what is already in the fridge. Its motto is "Rädda resterna." The visitors are Swedish home cooks, and everything you write except imagePrompt is in Swedish.
 
-You get one visitor's fridge list. Write one new dinner recipe built on it.
+You get one visitor's fridge list. Write one new dinner recipe built on it. A food the website knows has its ingredient key in brackets after the name.
 
 INGREDIENTS
 - Build the dish around the list. Choose what goes well together; you don't have to use everything.
 - Salt, pepper, water, cooking oil and dried spices are always at home. Beyond those, add at most three ingredients that aren't on the list, and prefer everyday ones (gul lök, vitlök, vetemjöl, buljong, citron).
 - Write each ingredient as amount, unit, ingredient, with Swedish measures: g, kg, dl, l, msk, tsk, krm, st. Packages like "1 burk krossade tomater (400 g)". Fractions as ½, ¼, ¾. Examples: "2 dl matlagningsgrädde", "1 gul lök", "½ tsk salt", "Salt och svartpeppar".
-- key: the key from INGREDIENT KEYS for that ingredient, or the closest one (any pasta → pasta, grated cheese → cheddar, fresh herbs → orter, ground spices → kryddor). "" when nothing fits.
+- key: for a food from the fridge list, the key in brackets after it. Otherwise the key from INGREDIENT KEYS for that ingredient, or the closest one (any pasta → pasta, grated cheese → cheddar, fresh herbs → orter, ground spices → kryddor). "" when nothing fits; never make up a key.
 - basic: true only for salt, pepper and water.
 - pantryKeys: the keys of the three to six main ingredients, the ones the dish can't do without.
 - One ingredient group with title "" is usual. Use titled groups ("Till servering", "Sås") only when they help.
@@ -143,7 +153,7 @@ ${data.dinnerMeals.map(meal => `${meal.key}: ${meal.name}`).join('\n')}
 TAGS
 ${data.tags.map(tag => `${tag.key}: ${tag.label}`).join('\n')}
 
-INGREDIENT KEYS (key: name (other words for it))
+INGREDIENT KEYS (key: name (other words for it)), the common ones
 ${foodList}
 
 EXAMPLES FROM THE ARCHIVE, in the answer format
@@ -172,7 +182,8 @@ export function isFoodKey(key: unknown): key is string {
   return typeof key === 'string' && Object.hasOwn(data.foods, key);
 }
 
-// Structured outputs keep to the enums, but not to their capitalisation.
+// Structured outputs keep to the enums, but not to their capitalisation. Ingredient keys have no enum,
+// so toFood is also what drops a key Claude made up.
 function matcher(keys: readonly string[]) {
   const byLower = new Map(keys.map(key => [key.toLowerCase(), key]));
   return (value: unknown) => typeof value === 'string' ? byLower.get(value.trim().toLowerCase()) ?? null : null;

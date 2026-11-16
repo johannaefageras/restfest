@@ -1,10 +1,10 @@
 // Offline account pages and visited public recipes. Private API responses stay in per-user browser
 // storage; this worker never caches authentication or API traffic.
-const cacheName = 'ofta-bra-efter-account-v9';
+const cacheName = 'ofta-bra-efter-account-v10';
 const base = self.registration.scope;
 const files = [
   'inkopslista.html', 'receptbok.html', 'nytt-recept.html', 'css/fonts.css', 'css/styles.css', 'css/kitchen.css', 'css/icons.css',
-  'data/recipe-index.js', 'js/recipes.js', 'js/app.js', 'js/account.js', 'js/account-helpers.js',
+  'data/recipe-index.js', 'data/foods.js', 'js/recipes.js', 'js/app.js', 'js/account.js', 'js/account-helpers.js',
   'js/shopping-account.js', 'js/shopping-sync.js', 'js/shopping-list.js', 'js/vendor/supabase.js',
   'js/account-sync.js', 'js/recipe-book-sync.js', 'js/recipe-book-account.js', 'js/recipe-book.js',
   'js/new-recipe.js', 'js/recipe-amounts.js', 'js/shopping-groups.js',

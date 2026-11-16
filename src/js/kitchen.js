@@ -17,6 +17,22 @@ function capitalize(value) {
   return value.charAt(0).toLocaleUpperCase("sv-SE") + value.slice(1);
 }
 
+// The names that match what's typed in the field: those that start with it first, then those with
+// a word that starts with it, then the rest. `names` are in alphabetical order.
+function matchingFoodNames(typed, names, limit = 20) {
+  const text = normalizeIngredient(typed);
+  if (!text) return [];
+  const starts = [];
+  const words = [];
+  const inside = [];
+  for (const name of names) {
+    const at = normalizeIngredient(name).indexOf(text);
+    if (at === 0) starts.push(name);
+    else if (at > 0) (name[at - 1] === " " ? words : inside).push(name);
+  }
+  return [...starts, ...words, ...inside].slice(0, limit);
+}
+
 function isUnknownIngredient(name) {
   return keyForIngredient(name).startsWith("custom:");
 }
@@ -354,13 +370,34 @@ function renderFeaturedRecipe() {
   renderWeek();
 }
 
-Object.values(foods)
-  .sort((a, b) => a.name.localeCompare(b.name, "sv-SE"))
-  .forEach((food) => {
-    const option = document.createElement("option");
-    option.value = food.name;
-    $("#ingredient-options").append(option);
-  });
+// The field's suggestions. The food list has thousands of names, so the datalist holds a few at a
+// time: the foods the recipes use while the field is empty, then the best matches for what's typed.
+const byName = (a, b) => a.localeCompare(b, "sv-SE");
+const foodNames = Object.values(foods)
+  .map((food) => food.name)
+  .sort(byName);
+const recipeFoodNames = [
+  ...new Set(recipes.flatMap((recipe) => recipe.foodKeys)),
+]
+  .filter((key) => !genericIngredientKeys.has(key))
+  .map((key) => foods[key].name)
+  .sort(byName);
+
+function updateIngredientOptions() {
+  const names = pantryInput.value.trim()
+    ? matchingFoodNames(pantryInput.value, foodNames)
+    : recipeFoodNames;
+  $("#ingredient-options").replaceChildren(
+    ...names.map((name) => {
+      const option = document.createElement("option");
+      option.value = name;
+      return option;
+    }),
+  );
+}
+
+pantryInput.addEventListener("input", updateIngredientOptions);
+updateIngredientOptions();
 
 $("#pantry-form").addEventListener("submit", (event) => {
   event.preventDefault();
@@ -392,6 +429,7 @@ $("#pantry-form").addEventListener("submit", (event) => {
   }
   pantry.items.push(displayName);
   pantryInput.value = "";
+  updateIngredientOptions();
   updatePantry(
     food
       ? `${displayName} lades till.`

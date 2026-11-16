@@ -18,7 +18,7 @@ const foodGroups = {
 
 // Categories say what kind of dish it is. The first one in a recipe's `meals` is shown on its card.
 // `label` names the category in the filter, `name` is used for a single recipe when it differs.
-// Diet, cuisine, occasion and the like are tags, not categories. Quick is decided by `time`.
+// Diet, cuisine, occasion and the like are tags, not categories. The quick filter uses `time`.
 const mealTypes = {
   main: { label: "Huvudrätter", name: "Huvudrätt", icon: "serving-cloche-1" },
   soup: { label: "Soppor", name: "Soppa", icon: "soup-bowl" },
@@ -54,12 +54,18 @@ const mealTypes = {
     action: "Visa instruktioner",
   },
   pets: { label: "Husdjur", icon: "dog-bone", badge: "HUSDJUR" },
+  garden: {
+    label: "Odling",
+    icon: "sprout",
+    badge: "ODLING",
+    action: "Visa instruktioner",
+  },
 };
 
 const mealName = (meal) => mealTypes[meal].name ?? mealTypes[meal].label;
 
-// Spa, cleaning and pet recipes live on their own page (mer-an-mat.html), not in the food archive.
-const nonFoodMeals = ["spa", "household", "pets"];
+// Spa, cleaning, pet and gardening recipes live on mer-an-mat.html, not in the food archive.
+const nonFoodMeals = ["spa", "household", "pets", "garden"];
 const isFood = (recipe) =>
   !recipe.meals.some((meal) => nonFoodMeals.includes(meal));
 
@@ -176,6 +182,78 @@ const recipeTagLabels = {
   Laundry: "Tvätt",
   Nose: "Nos",
   Toy: "Leksak",
+  Argentinian: "Argentinskt",
+  Balcony: "Balkong",
+  Baking: "Bakning",
+  BBQ: "Grillat",
+  Beef: "Nötkött",
+  Bistro: "Bistro",
+  Bread: "Bröd",
+  Breakfast: "Frukost",
+  Brunch: "Brunch",
+  Burger: "Burgare",
+  Chicken: "Kyckling",
+  Chinese: "Kinesiskt",
+  Coffee: "Kaffe",
+  Compost: "Kompost",
+  Crêpes: "Crêpes",
+  Crispy: "Krispigt",
+  Dessert: "Dessert",
+  DIY: "Gör det själv",
+  Fertilizer: "Gödsling",
+  Fika: "Fika",
+  Fish: "Fisk",
+  "Freezer friendly": "Går att frysa",
+  Fresh: "Fräscht",
+  Fried: "Friterat",
+  Game: "Vilt",
+  Gardening: "Odling",
+  Halloween: "Halloween",
+  Herbs: "Örter",
+  Houseplants: "Krukväxter",
+  Hungarian: "Ungerskt",
+  Indoor: "Inomhus",
+  Japanese: "Japanskt",
+  Kids: "För barn",
+  "Kitchen garden": "Köksodling",
+  Korean: "Koreanskt",
+  Lamb: "Lamm",
+  "Long project": "Längre projekt",
+  "Lunch box": "Lunchlåda",
+  "Main course": "Huvudrätt",
+  Mediterranean: "Medelhavsmat",
+  Moroccan: "Marockanskt",
+  Noodles: "Nudlar",
+  Nordic: "Nordiskt",
+  "One pan": "Allt i en panna",
+  "Oven baked": "Ugnsbakat",
+  Party: "Fest",
+  Pork: "Fläskkött",
+  Propagation: "Sticklingsförökning",
+  Quick: "Snabblagat",
+  Reindeer: "Ren",
+  "Rice bowl": "Risskål",
+  Roast: "Ugnsstekt",
+  Salad: "Sallad",
+  Sandwich: "Smörgås",
+  Seafood: "Skaldjur",
+  Seeds: "Frön",
+  "Sheet pan": "Plåtmat",
+  "Side dish": "Tillbehör",
+  "Slow cooking": "Långkok",
+  Smørrebrød: "Smörrebröd",
+  Soil: "Jord",
+  Soup: "Soppa",
+  Spicy: "Starkt",
+  Spring: "Vår",
+  Starter: "Förrätt",
+  "Street food": "Gatumat",
+  Summer: "Sommar",
+  "Sunday roast": "Söndagsstek",
+  Tacos: "Tacos",
+  Upcycling: "Återbruk",
+  Vietnamese: "Vietnamesiskt",
+  Weeknight: "Vardagsmat",
 };
 
 const foods = {
@@ -322,7 +400,23 @@ const foods = {
   kross: { name: "Krossade tomater", group: "pantry", aliases: ["tomatkross"] },
 };
 
+// From src/_data/foods.json, which is a whole grocery list (lib/foods.js). collectionFoods, in
+// data/recipe-index.js, are the foods the recipes use. The rest come in data/foods.js as moreFoods,
+// {group: {key: [name, …other words]}}, which only the pages that match typed or photographed foods
+// load: the home page and the new-recipe page. The build loads all of foods.json as collectionFoods.
 Object.assign(foods, collectionFoods);
+if (typeof moreFoods !== "undefined") {
+  for (const [group, entries] of Object.entries(moreFoods)) {
+    for (const [key, [name, ...aliases]] of Object.entries(entries)) {
+      foods[key] = { name, group, aliases };
+    }
+  }
+}
+// Only the food groups above are ingredients. Blöjor and schampo are on the grocery list too, but
+// a fridge list or a recipe has no use for them.
+for (const [key, food] of Object.entries(foods)) {
+  if (!Object.hasOwn(foodGroups, food.group)) delete foods[key];
+}
 
 // Everyday words people type for ingredients the recipes already use.
 const extraAliases = {

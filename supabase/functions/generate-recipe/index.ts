@@ -8,9 +8,9 @@
 // follows the preferences in their profile, and the recipe goes into their recipe book: `saved` says
 // whether it did. Anyone else gets the recipe as before, with `saved` false.
 import {userFor} from '../_shared/auth.ts';
-import {askClaude, models} from '../_shared/claude.ts';
+import {askClaude, efforts, models} from '../_shared/claude.ts';
 import {db} from '../_shared/db.ts';
-import {checkCap} from '../_shared/limits.ts';
+import {checkCap, unanswered} from '../_shared/limits.ts';
 import {readJson, serve, VisitorError} from '../_shared/http.ts';
 import {cleanPreferences, preferencesPrompt} from '../_shared/preferences.ts';
 import {
@@ -47,13 +47,16 @@ serve(['POST'], async req => {
   // still misses a title or steps.
   let recipe: RecipeDoc | null = null;
   for (let attempt = 1; !recipe; attempt++) {
+    // No answer on the first try costs nothing, so the visitor gets the try back. By the second, the
+    // first answer has been paid for and the try stays counted.
     const draft = await askClaude<RecipeDraft>({
+      label: 'recipe',
       model: models.recipe(),
+      effort: efforts.recipe(),
       system: recipeSystem,
       content: [{type: 'text', text: recipePrompt(items, preferences)}],
-      schema: draftSchema,
-      maxTokens: 6000
-    });
+      schema: draftSchema
+    }).catch(error => attempt === 1 ? unanswered(req, 'recipe', error) : Promise.reject(error));
     try {
       // Only preferences can make a fridge list unsuitable. Without them the flag is a slip.
       if (!preferences) draft.unsuitable = false;

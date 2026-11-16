@@ -2967,6 +2967,9 @@ body:has(#shopping-dialog[open]) {
 .nav-menu-panel [data-type="pets"] {
   --menu-tint: #c9b6ee;
 }
+.nav-menu-panel [data-type="garden"] {
+  --menu-tint: #cce8b5;
+}
 
 /* The footer's menu opens upwards, so its chevron points up until then. On wide screens the menu
    is at the right edge, and the panel lines up with that edge. */

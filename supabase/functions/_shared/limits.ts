@@ -2,6 +2,7 @@
 // so an open page can't run up the Anthropic and OpenAI bills. The numbers can be changed with secrets
 // (DETECT_PER_VISITOR, DETECT_PER_DAY, RECIPE_PER_VISITOR, RECIPE_PER_DAY) without deploying again.
 // A new recipe also gets one photo, so RECIPE_PER_DAY caps the photos too.
+import {ClaudeUnavailable} from './claude.ts';
 import {db} from './db.ts';
 import {envNumber, VisitorError} from './http.ts';
 
@@ -43,4 +44,25 @@ export async function checkCap(req: Request, kind: keyof typeof caps): Promise<v
   });
   if (error) throw error;
   if (data !== true) throw new VisitorError(429, cap.message);
+}
+
+// Gives back the try checkCap counted, for a request Claude never answered: nothing was made and
+// nothing paid for (ClaudeUnavailable in claude.ts). An answer that was paid for stays counted, whatever
+// became of it, so the caps keep bounding the bill. Failing to give it back only costs the visitor a try.
+export async function refundCap(req: Request, kind: keyof typeof caps): Promise<void> {
+  try {
+    const {error} = await db.rpc('ai_refund', {p_kind: kind, p_ip_hash: await visitor(req)});
+    if (error) throw error;
+  } catch (error) {
+    console.warn('Could not give the try back:', error instanceof Error ? error.message : error);
+  }
+}
+
+// For a failed askClaude: when Claude never answered, the visitor gets the try back and is told so.
+// Any other failure is passed on as it is.
+export async function unanswered(req: Request, kind: keyof typeof caps, error: unknown): Promise<never> {
+  if (!(error instanceof ClaudeUnavailable)) throw error;
+  console.error(error);
+  await refundCap(req, kind);
+  throw new VisitorError(503, 'Vi får inget svar just nu. Prova igen om en stund. Försöket räknas inte.');
 }

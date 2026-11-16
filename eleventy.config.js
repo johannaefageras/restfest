@@ -9,7 +9,7 @@
 //   recept/            the recipes, one Markdown file each
 //   _includes/layouts/ base.njk (every page shares it), recipe.njk and listing.njk
 //   _includes/         snippets the layouts include, e.g. recipe-card.njk
-//   _data/             foods.json (the ingredient list), site.js (the site's address) and ai.js (the
+//   _data/             foods.json (the ingredient list, divided between two files: lib/foods.js), site.js (the site's address) and ai.js (the
 //                      Supabase project behind the fridge photo and the new recipes)
 //   css/, js/          stylesheets and browser scripts, copied as they are to css/ and js/
 //   assets/            fonts, icons and photos, copied as they are
@@ -24,7 +24,9 @@
 //   recipeTags         every tag, for tagg/<slug>.html (src/pages/tagg.njk)
 // Eleventy also makes a collection per tag from the recipes' `tags`, e.g. collections.Vegan.
 
+import {otherFoods, recipeFoods} from './lib/foods.js';
 import {recipeListings} from './lib/recipes.js';
+import {taxonomy} from './lib/taxonomy.js';
 import ai from './src/_data/ai.js';
 
 const recipes = api => api.getFilteredByGlob('src/recept/*.md')
@@ -69,6 +71,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection('recipeCategories', api => recipeListings(recipes(api)).categories);
   eleventyConfig.addCollection('recipeTypes', api => recipeListings(recipes(api)).types);
   eleventyConfig.addCollection('recipeTags', api => recipeListings(recipes(api)).tags);
+
+  // foods.json divided between data/recipe-index.js (the foods the recipes use, on every page) and
+  // data/foods.js (the rest of the food list, on the pages that need it). `items` is collections.recipes.
+  const frontMatter = items => items.map(item => item.data);
+  eleventyConfig.addFilter('recipeFoods', (foods, items) => recipeFoods(foods, frontMatter(items), taxonomy()));
+  eleventyConfig.addFilter('otherFoods', (foods, items) => otherFoods(foods, frontMatter(items), taxonomy()));
 
   // Keeps a range like "1–3" or "15–20" on one line: a word joiner (U+2060) either side of the dash
   // stops the browser breaking there. For the narrow boxes under a recipe's description (recipe.njk).

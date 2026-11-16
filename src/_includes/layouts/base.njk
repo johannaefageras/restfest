@@ -6,6 +6,9 @@
       base                 "../" for pages one folder down (recept/, kategori/, …), so paths resolve from the site root
       scripts              extra scripts from js/ after app.js, e.g. [kitchen.js] on the home page
       modules              extra scripts from js/ loaded as modules, after the others, e.g. [new-recipe.js]
+      allFoods             true also loads data/foods.js, the whole food list, where typed or photographed
+                           foods are matched: the home page and nytt-recept.html. Other pages get only
+                           the foods the recipes use, in data/recipe-index.js
       noindex              true keeps search engines away, e.g. on nytt-recept.html
       recipe               set on recipe pages, which get share tags and recipe structured data
     The address of the AI functions (_data/ai.js) goes in <meta name="restfest-ai"> once it's set.
@@ -157,6 +160,10 @@
   </dialog>
   <div id="toast" class="toast" role="status" hidden></div>
   <script src="{{ base }}data/recipe-index.js"></script>
+  {%- if allFoods %}
+  {#- The whole food list, for pages that match typed or photographed foods (lib/foods.js). #}
+  <script src="{{ base }}data/foods.js"></script>
+  {%- endif %}
   <script src="{{ base }}js/recipes.js"></script>
   <script src="{{ base }}js/app.js"></script>
   {%- for script in scripts %}
