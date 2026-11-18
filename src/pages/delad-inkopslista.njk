@@ -4,7 +4,14 @@ const title = 'En inköpslista till dig';
 const description = 'Någon har delat en inköpslista med dig. Öppna kopian och bocka av medan du handlar, utan konto.';
 const noindex = true;
 const modules = ['shopping-copy-view.js'];
-const permalink = 'delad-inkopslista.html';
+// Both URLs render the same checklist. The original address keeps older links working.
+const copyPages = [
+  { path: 'delad-inkopslista.html', base: '' },
+  { path: 'lista/index.html', base: '../' }
+];
+const pagination = { data: 'copyPages', size: 1, alias: 'copyPage' };
+const permalink = '{{ copyPage.path }}';
+const eleventyComputed = { base: data => data.copyPage.base };
 ---
 <main id="main" class="wrap shopping-copy-page">
   <p class="meta" role="status" data-copy-loading>Öppnar inköpslistan …</p>
@@ -15,14 +22,14 @@ const permalink = 'delad-inkopslista.html';
         <h1 id="copy-title" tabindex="-1"><span class="marker" data-copy-title></span></h1>
         <p class="shopping-copy-intro">Bocka av medan du handlar.</p>
       </div>
-      <img src="assets/icons/shopping-basket-1.svg" width="100" height="100" alt="" aria-hidden="true">
+      <img src="{{ base }}assets/icons/shopping-basket-1.svg" width="100" height="100" alt="" aria-hidden="true">
     </header>
     <div class="shopping-copy-progress">
       <div role="status"><strong data-copy-remaining></strong><span class="meta" data-copy-count></span></div>
       <progress data-copy-progress aria-label="Köpta varor" value="0" max="1"></progress>
     </div>
     <ul class="ingredients shopping-copy-items" data-copy-items></ul>
-    <div class="shopping-copy-complete" data-copy-complete hidden><img src="assets/icons/check-mark.svg" alt="" width="32" height="32"><p><strong>Allt är i kassen!</strong><br>Nu är du redo för köket.</p></div>
+    <div class="shopping-copy-complete" data-copy-complete hidden><img src="{{ base }}assets/icons/check-mark.svg" alt="" width="32" height="32"><p><strong>Allt är i kassen!</strong><br>Nu är du redo för köket.</p></div>
     <footer class="shopping-copy-note">
       <p>Det här är en kopia av listan när den delades. Dina avbockningar sparas bara på den här enheten.</p>
       <button class="text-button" type="button" data-copy-reset disabled>Avmarkera alla</button>
@@ -30,10 +37,10 @@ const permalink = 'delad-inkopslista.html';
     <p class="meta shopping-copy-storage" role="status" data-copy-storage hidden>Avbockningarna kan inte sparas på den här enheten. Låt sidan vara öppen medan du handlar.</p>
   </article>
   <section class="shopping-copy-error" data-copy-error hidden aria-labelledby="copy-error-title">
-    <img src="assets/icons/shopping-basket-1.svg" alt="" width="80" height="80">
+    <img src="{{ base }}assets/icons/shopping-basket-1.svg" alt="" width="80" height="80">
     <h1 id="copy-error-title">Här saknas en inköpslista.</h1>
     <p data-copy-error-message></p>
-    <a class="button" href="./">Till startsidan</a>
+    <a class="button" href="{{ base or './' }}">Till startsidan</a>
   </section>
   <noscript><p>Du behöver aktivera JavaScript för att öppna den delade inköpslistan.</p></noscript>
 </main>

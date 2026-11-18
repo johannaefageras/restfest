@@ -11,8 +11,9 @@
 // GET /__state shows what it holds, including every request it has received.
 // "Fortsätt med Google" signs in google@example.se at once.
 import { createServer } from 'node:http';
-import { randomUUID } from 'node:crypto';
+import { randomUUID, randomBytes } from 'node:crypto';
 import { applyShoppingChanges } from '../../lib/shopping-sync.js';
+import { validateShoppingCopy } from '../../lib/shopping-copy.js';
 
 const port = Number(process.argv[2] ?? 54399);
 const b64 = value => Buffer.from(JSON.stringify(value)).toString('base64url');
@@ -28,6 +29,7 @@ function reset() {
     bookOps: new Map(),      // user id → operation ids
     bookRemoved: new Map(),  // user id → removed recipe keys
     generated: new Map(),    // id → {recipe, image_status, image_path, hidden, created_at}
+    shoppingCopies: new Map(), // random sharing code → detached display snapshot
     fail: false,             // true → every /rest and /functions call answers 503
     unsuitable: false,       // true → generate-recipe answers 422
     log: [],                 // [{method, path, auth, body}]
@@ -211,6 +213,18 @@ async function handle(req, url, body) {
   }
 
   // Edge Functions
+  if (path === '/functions/v1/shopping-copy') {
+    if (req.method === 'POST') {
+      try {
+        const code = randomBytes(16).toString('base64url');
+        state.shoppingCopies.set(code, validateShoppingCopy(body));
+        return [200, { code }];
+      } catch { return [400, { error: 'Listan är felaktig.' }]; }
+    }
+    if (req.method !== 'GET') return [405, { error: 'Fel sorts anrop.' }];
+    const copy = state.shoppingCopies.get(q.get('code'));
+    return copy ? [200, copy] : [404, { error: 'Listan finns inte. Be om en ny länk.' }];
+  }
   if (path === '/functions/v1/generate-recipe') {
     if (state.unsuitable) return [422, { error: 'Det som finns i kyllistan passar inte dina preferenser. Lägg till fler råvaror, eller ändra preferenserna på din profil.' }];
     const id = randomUUID();

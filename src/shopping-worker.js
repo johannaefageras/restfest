@@ -1,14 +1,14 @@
 // Offline account pages and visited public recipes. Private API responses stay in per-user browser
 // storage; this worker never caches authentication or API traffic.
-const cacheName = 'ofta-bra-efter-account-v20';
+const cacheName = 'ofta-bra-efter-account-v21';
 const base = self.registration.scope;
 const files = [
-  'inkopslista.html', 'delad-inkopslista.html', 'receptbok.html', 'nytt-recept.html', 'css/fonts.css', 'css/styles.css', 'css/dark.css', 'css/kitchen.css', 'css/shopping-share.css', 'css/icons.css',
+  'inkopslista.html', 'delad-inkopslista.html', 'lista/', 'receptbok.html', 'nytt-recept.html', 'css/fonts.css', 'css/styles.css', 'css/dark.css', 'css/kitchen.css', 'css/shopping-share.css', 'css/icons.css',
   'data/recipe-index.js', 'data/foods.js', 'data/shopping-departments.js', 'js/shopping-departments.js', 'js/recipes.js', 'js/app.js', 'js/account.js', 'js/account-helpers.js',
   'js/shopping-account.js', 'js/shopping-sync.js', 'js/shopping-list.js', 'js/vendor/supabase.js',
   'js/account-sync.js', 'js/recipe-book-sync.js', 'js/recipe-book-account.js', 'js/recipe-book.js',
   'js/new-recipe.js', 'js/recipe-amounts.js', 'js/shopping-groups.js',
-  'js/shopping-copy.js', 'js/shopping-share.js', 'js/shopping-copy-view.js',
+  'js/shopping-copy.js', 'js/shopping-copy-links.js', 'js/shopping-share.js', 'js/shopping-copy-view.js',
   // The weights the account pages use: Trio for headings, Spot Grotesk for text, Spot Semi for labels.
   'assets/fonts/TrioGrotesk-Bold.woff2', 'assets/fonts/SpotGrotesk-Regular.woff2',
   'assets/fonts/SpotGrotesk-Medium.woff2', 'assets/fonts/SpotGrotesk-Bold.woff2',

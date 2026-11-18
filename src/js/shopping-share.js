@@ -1,4 +1,5 @@
-import { createShoppingCopy, encodeShoppingCopy } from './shopping-copy.js';
+import { createShoppingCopy } from './shopping-copy.js';
+import { createShoppingCopyLink } from './shopping-copy-links.js';
 
 let dialog;
 let generation = 0;
@@ -25,7 +26,7 @@ export function openShoppingShare({ items, base }) {
             <ul data-share-preview></ul><p class="meta" data-share-more hidden></p>
           </section>
           <div class="shopping-share-footer">
-            <p class="shopping-share-note">Öppnas utan konto. Avbockningar i kopian ändrar inte din lista.</p>
+            <p class="shopping-share-note">Kopian sparas för delning och öppnas utan konto. Avbockningar i kopian ändrar inte din lista.</p>
             <button class="button primary" type="submit">Skapa länk <i class="fas fa-arrow-up-right" aria-hidden="true"></i></button>
           </div>
         </form>
@@ -92,12 +93,12 @@ export function openShoppingShare({ items, base }) {
     title.readOnly = true;
     status.textContent = 'Skapar din kopia …';
     try {
-      const fragment = await encodeShoppingCopy({ ...snapshot, t: name });
+      const url = await createShoppingCopyLink({ ...snapshot, t: name }, {
+        base, api: document.querySelector('meta[name="restfest-ai"]')?.content,
+      });
       if (current !== generation || !dialog.open) return;
-      const url = new URL('delad-inkopslista.html', base);
-      url.hash = fragment;
-      link.value = url.href;
-      dialog.querySelector('[data-share-open]').href = url.href;
+      link.value = url;
+      dialog.querySelector('[data-share-open]').href = url;
       dialog.querySelector('[data-share-result-title]').textContent = name;
       dialog.querySelector('[data-share-result-count]').textContent = `${snapshot.i.length} ${snapshot.i.length === 1 ? 'vara' : 'varor'} att köpa`;
       form.hidden = true;

@@ -15,6 +15,10 @@ verify_jwt = false
 [functions.get-recipe]
 verify_jwt = false
 
+# Public, immutable shopping copies. Creation is validated and capped by the function.
+[functions.shopping-copy]
+verify_jwt = false
+
 # Needs a sign-in, which the function checks itself (_shared/auth.ts), like generate-recipe does for
 # its optional one.
 [functions.delete-account]

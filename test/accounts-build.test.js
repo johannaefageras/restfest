@@ -43,6 +43,12 @@ test('without a publishable key the pages have no trace of accounts', t => {
   assert.match(copy, /js\/shopping-copy-view.js/);
   assert.doesNotMatch(copy, /js\/shopping-list.js|class="when-signed-in"[^>]*data-shopping-copy/);
   assert.ok(site.has('js/shopping-copy.js'));
+  assert.ok(site.has('js/shopping-copy-links.js'));
+  const shortCopy = site.read('lista/index.html');
+  assert.match(shortCopy, /<html[^>]*data-base="\.\.\/"/);
+  assert.match(shortCopy, /<meta name="robots" content="noindex">/);
+  assert.match(shortCopy, /src="\.\.\/js\/shopping-copy-view.js"/);
+  assert.match(shortCopy, /src="\.\.\/assets\/icons\/shopping-basket-1.svg"/);
   assert.match(site.read('index.html'), /data-shopping-share/);
   const shopping = site.read('inkopslista.html');
   assert.match(shopping, /class="shopping-panel" data-shopping-list/);
@@ -52,6 +58,7 @@ test('without a publishable key the pages have no trace of accounts', t => {
   assert.doesNotMatch(shopping, /class="when-signed-in"/);
   assert.doesNotMatch(site.read('sitemap.xml'), /delad-inkopslista/);
   assert.doesNotMatch(site.read('sitemap.xml'), /inkopslista/);
+  assert.doesNotMatch(site.read('sitemap.xml'), /<loc>[^<]*\/lista\//);
 });
 
 test('with a publishable key every page gets the account button and the account script', t => {
@@ -103,6 +110,7 @@ test('with a publishable key every page gets the account button and the account 
   assert.ok(site.has('js/shopping-account.js'));
   assert.equal((shopping.match(/data-shopping-share/g) ?? []).length, 2, 'account and modal can both share a copy');
   assert.ok(site.has('delad-inkopslista.html'));
+  assert.ok(site.has('lista/index.html'));
   const worker = site.read('shopping-worker.js');
   for (const path of [...worker.matchAll(/'([^']+\.(?:js|html|css|woff2|svg))'/g)].map(match => match[1]))
     assert.ok(site.has(path), `the shopping worker's offline asset ${path} exists`);

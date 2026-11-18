@@ -1,8 +1,8 @@
 # Fridge food and icon pairings
 
-Reviewed 2026-11-18 against all 302 SVGs in `src/assets/icons/` and the foods actually recognised by the home page.
+Reviewed 2026-11-18, including the 31 newly added food illustrations, against the foods actually recognised by the home page. The icon folder now contains 335 SVGs.
 
-The catalogue already contains these groceries. 1,477 food entries now have explicit pairings, using 151 different illustrations including the name-specific choices. Aliases and plural forms inherit their food’s picture. Other recognised foods retain the category illustration.
+The catalogue already contains these groceries. 1,674 food entries now have explicit pairings, using 185 different illustrations including the name-specific choices. Aliases and plural forms inherit their food’s picture. Other recognised foods retain the category illustration.
 
 `src/js/food-icons.js` contains the complete mapping and loads only on the home page. No food keys or recipe matching rules changed. Specific names such as Farfalle, Baguette, Ruccola and Rödkål survive the add form so their artwork can be shown. Unknown items remain unillustrated.
 
@@ -17,6 +17,7 @@ Each row lists up to six examples; the count is the number of explicit catalogue
 | [bell-peppers.svg](../src/assets/icons/bell-peppers.svg) | Paprika, Orange paprika, Paprikamix, Snackpaprika, Spetspaprika, Strimlad paprika | 7 |
 | [bok-choy.svg](../src/assets/icons/bok-choy.svg) | Pak choi, Choi sum, Tatsoi | 3 |
 | [broccoli.svg](../src/assets/icons/broccoli.svg) | Broccoli, Broccolini, Thaibroccoli (kailan) | 3 |
+| [brussel-sprouts.svg](../src/assets/icons/brussel-sprouts.svg) | Brysselkål, Brysselkål på stjälk | 2 |
 | [carrot.svg](../src/assets/icons/carrot.svg) | Morötter, Knippmorötter, Lila morötter, Morotsmix med flera färger, Snackmorötter, Morotsstavar | 10 |
 | [cauliflower.svg](../src/assets/icons/cauliflower.svg) | Blomkål, Lila blomkål, Blomkålsbuketter, Blomkålsris, Romanesco | 5 |
 | [celery.svg](../src/assets/icons/celery.svg) | Blekselleri | 1 |
@@ -25,7 +26,8 @@ Each row lists up to six examples; the count is the number of explicit catalogue
 | [eggplant.svg](../src/assets/icons/eggplant.svg) | Aubergine, Miniaubergine, Thaiaubergine, Grillad aubergine | 4 |
 | [fennel.svg](../src/assets/icons/fennel.svg) | Fänkål | 1 |
 | [garlic.svg](../src/assets/icons/garlic.svg) | Vitlök, Färsk vitlök, Solovitlök, Svart vitlök, Vitlöksfläta, Skalade vitlöksklyftor | 8 |
-| [ginger.svg](../src/assets/icons/ginger.svg) | Färsk ingefära, Fryst ingefära | 2 |
+| [ginger.svg](../src/assets/icons/ginger.svg) | Färsk ingefära, Fryst ingefära, Gurkmeja, Galangal | 4 |
+| [jalapenos.svg](../src/assets/icons/jalapenos.svg) | Jalapeño, Jalapeños | 2 |
 | [green-cabbage.svg](../src/assets/icons/green-cabbage.svg) | vitkål, Kål, Savojkål, Kinakål, Strimlad vitkål och morot, Stuvad vitkål | 5 |
 | [kale.svg](../src/assets/icons/kale.svg) | Grönkål, Svartkål | 2 |
 | [leeks.svg](../src/assets/icons/leeks.svg) | Purjolök | 1 |
@@ -33,6 +35,7 @@ Each row lists up to six examples; the count is the number of explicit catalogue
 | [radishes.svg](../src/assets/icons/radishes.svg) | Rädisor, Rättika, Svart rättika | 3 |
 | [red-cabbage.svg](../src/assets/icons/red-cabbage.svg) | rödkål, Röd spetskål, Strimlad rödkål, Kokt rödkål, Inlagd rödkål | 4 |
 | [red-onion.svg](../src/assets/icons/red-onion.svg) | Rödlök | 1 |
+| [rhubarb.svg](../src/assets/icons/rhubarb.svg) | Rabarber | 1 |
 | [root-vegetables.svg](../src/assets/icons/root-vegetables.svg) | Rotfrukter, Potatis, Bakpotatis, Blå potatis, Delikatesspotatis, Röd potatis | 20 |
 | [salad.svg](../src/assets/icons/salad.svg) | Bladsallad, Bataviasallad, Ekbladssallad, Endiv, Frisésallad, Hjärtsallad | 15 |
 | [bagged-salad.svg](../src/assets/icons/bagged-salad.svg) | Babyleaf, Salladskit, Salladsmix | 3 |
@@ -41,12 +44,14 @@ Each row lists up to six examples; the count is the number of explicit catalogue
 | [spring-onions.svg](../src/assets/icons/spring-onions.svg) | Salladslök | 1 |
 | [sprout.svg](../src/assets/icons/sprout.svg) | Alfalfagroddar, Broccoligroddar, Böngroddar, Linsgroddar, Purjolöksgroddar, Rädisgroddar | 11 |
 | [sweet-potatoes.svg](../src/assets/icons/sweet-potatoes.svg) | Sötpotatis, Lila sötpotatis, Tärnad sötpotatis, Fryst tärnad sötpotatis | 4 |
-| [butternut-squash.svg](../src/assets/icons/butternut-squash.svg) | Pumpa, Tärnad butternutpumpa, Muskotpumpa | 3 |
+| [butternut-squash.svg](../src/assets/icons/butternut-squash.svg) | Pumpa, Tärnad butternutpumpa, Muskotpumpa, Hokkaidopumpa, Halloweenpumpa, Spaghettipumpa | 6 |
 | [tomato.svg](../src/assets/icons/tomato.svg) | Tomater, Babyplommontomater, Bifftomater, Gröna tomater, Gula tomater, Oxhjärtatomat | 9 |
 | [vegetables.svg](../src/assets/icons/vegetables.svg) | Blandade grönsaker, Wokmix, Färsk soppmix, Grillgrönsaksmix, Ugnsgrönsaksmix, Grillade grönsaker | 11 |
 | [yellow-onions.svg](../src/assets/icons/yellow-onions.svg) | Gul lök, Färsk silverlök, Vit lök, Pärllök, Steklök, Hackad lök | 6 |
-| [pickle-jar.svg](../src/assets/icons/pickle-jar.svg) | Saltgurka, Cornichons, Smörgåsgurka, Senapsgurka, Mixed pickles, Pressgurka | 7 |
-| [potato-wedges.svg](../src/assets/icons/potato-wedges.svg) | Klyftpotatis, Rostad potatis, Sötpotatispommes, Rotfruktspommes | 4 |
+| [pickle-jar.svg](../src/assets/icons/pickle-jar.svg) | Saltgurka, Cornichons, Inlagd gurka, Surkål, Mixed pickles, Pressgurka | 9 |
+| [potato-wedges.svg](../src/assets/icons/potato-wedges.svg) | Klyftpotatis, Rostad potatis, Sötpotatispommes, Rotfruktspommes, Pommes frites | 5 |
+| [capers.svg](../src/assets/icons/capers.svg) | Kapris, Kaprisbär, Kapris i salt | 3 |
+| [chanterelles.svg](../src/assets/icons/chanterelles.svg) | Kantareller, Trattkantareller, Torkade trattkantareller | 3 |
 | [beans.svg](../src/assets/icons/beans.svg) | Kokta bönor, Vita bönor, Stora vita bönor, Bondbönor, Lupinbönor, Adukibönor | 26 |
 | [chickpeas.svg](../src/assets/icons/chickpeas.svg) | Kikärter, Chana dal (delade kikärtor) | 2 |
 | [lentils.svg](../src/assets/icons/lentils.svg) | Röda linser, Färdigkokta linser, Belugalinser, Bruna linser, Franska gröna linser, Gula linser | 7 |
@@ -59,7 +64,9 @@ Each row lists up to six examples; the count is the number of explicit catalogue
 | [berries.svg](../src/assets/icons/berries.svg) | Blandade bär, Blåbär, Lingon, Svarta vinbär, Färsk bärmix, Bärmix | 20 |
 | [blackberries.svg](../src/assets/icons/blackberries.svg) | Björnbär | 1 |
 | [cherries.svg](../src/assets/icons/cherries.svg) | Körsbär, Bigarråer, Surkörsbär, Torkade körsbär | 4 |
+| [clementines.svg](../src/assets/icons/clementines.svg) | Clementin, Mandarin, Satsuma, Mandariner på burk | 4 |
 | [coconut.svg](../src/assets/icons/coconut.svg) | Kokosnöt, Kokosbitar, Kokoschips, Kokosflingor | 4 |
+| [dates.svg](../src/assets/icons/dates.svg) | Dadlar, Färska dadlar, Medjooldadlar, Urkärnade dadlar | 4 |
 | [fig.svg](../src/assets/icons/fig.svg) | Fikon, Torkade fikon | 2 |
 | [grapefruit.svg](../src/assets/icons/grapefruit.svg) | Grapefrukt, Blodgrapefrukt, Pomelo | 3 |
 | [grapes.svg](../src/assets/icons/grapes.svg) | Vindruvor, Gröna vindruvor, Röda vindruvor, Svarta vindruvor, Kärnfria vindruvor | 5 |
@@ -67,6 +74,7 @@ Each row lists up to six examples; the count is the number of explicit catalogue
 | [limes.svg](../src/assets/icons/limes.svg) | Lime | 1 |
 | [mangoes.svg](../src/assets/icons/mangoes.svg) | Mango, Skuren mango, Torkad mango | 3 |
 | [melon.svg](../src/assets/icons/melon.svg) | Cantaloupemelon, Charentaismelon, Galiamelon, Honungsmelon, Piel de sapo-melon, Skuren melon | 6 |
+| [nectarines.svg](../src/assets/icons/nectarines.svg) | Nektarin, Persika, Plattpersika, Frysta persikobitar, Persikor på burk | 5 |
 | [papaya.svg](../src/assets/icons/papaya.svg) | Papaya, Torkad papaya | 2 |
 | [passion-fruit.svg](../src/assets/icons/passion-fruit.svg) | Passionsfrukt, Grenadilla (söt passionsfrukt), Passionsfruktpuré | 3 |
 | [pears.svg](../src/assets/icons/pears.svg) | Päron, Nashipäron, Torkade päron | 3 |
@@ -77,11 +85,17 @@ Each row lists up to six examples; the count is the number of explicit catalogue
 | [strawberries.svg](../src/assets/icons/strawberries.svg) | Jordgubbar, Smultron | 2 |
 | [watermelon.svg](../src/assets/icons/watermelon.svg) | Vattenmelon, Minivattenmelon, Gul vattenmelon | 3 |
 | [basil.svg](../src/assets/icons/basil.svg) | basilika, Röd basilika, Thaibasilika, Fryst basilika | 3 |
+| [bay-leaves.svg](../src/assets/icons/bay-leaves.svg) | Lagerblad | 1 |
+| [cardamom.svg](../src/assets/icons/cardamom.svg) | Hela kardemummakapslar, Kardemumma, Kardemummakärnor, Svart kardemumma | 4 |
+| [cinnamon-sticks.svg](../src/assets/icons/cinnamon-sticks.svg) | Kanelstänger | 1 |
+| [cloves.svg](../src/assets/icons/cloves.svg) | Kryddnejlika | 1 |
 | [cilantro.svg](../src/assets/icons/cilantro.svg) | koriander, Fryst hackad koriander | 1 |
 | [dill.svg](../src/assets/icons/dill.svg) | Dill, Krondill, Hackad dill | 3 |
 | [herbs.svg](../src/assets/icons/herbs.svg) | Färska örter, Örtmix, Bouquet garni, Dragon, Salvia, Mejram | 12 |
 | [mint.svg](../src/assets/icons/mint.svg) | mynta, Marockansk mynta | 1 |
+| [nutmeg.svg](../src/assets/icons/nutmeg.svg) | Muskotnöt | 1 |
 | [parsley.svg](../src/assets/icons/parsley.svg) | persilja, Kruspersilja, Hackad persilja | 2 |
+| [saffron.svg](../src/assets/icons/saffron.svg) | Saffran | 1 |
 | [thyme.svg](../src/assets/icons/thyme.svg) | timjan, Citrontimjan | 1 |
 | [ground-spice.svg](../src/assets/icons/ground-spice.svg) | paprikapulver, Kanel, Currypulver, Cayennepeppar, Chilipulver, Chipotlepulver | 60 |
 | [pepper.svg](../src/assets/icons/pepper.svg) | Svartpeppar, Vitpeppar, Grönpeppar, Rosépeppar, Hel svartpeppar, Grovmalen svartpeppar | 13 |
@@ -103,32 +117,51 @@ Each row lists up to six examples; the count is the number of explicit catalogue
 | [sour-milk.svg](../src/assets/icons/sour-milk.svg) | Filmjölk, A-fil, Ekologisk filmjölk, Filbunke, Fjällfil, Kefir | 15 |
 | [yoghurt.svg](../src/assets/icons/yoghurt.svg) | Naturell yoghurt, Barnyoghurt, Bulgarisk yoghurt, Dessertyoghurt, Ekologisk yoghurt, Fruktyoghurt | 22 |
 | [bacon.svg](../src/assets/icons/bacon.svg) | Bacon, Baconbit, Baconströssel, Bacontärningar, Ekologiskt bacon, Frukostbacon | 14 |
+| [liver-pate.svg](../src/assets/icons/liver-pate.svg) | Leverpastej, Ankleverpaté, Bredbar leverpastej, Grovhackad leverpastej, Gåsleverpaté, Kalvleverpastej | 12 |
+| [pork-chops.svg](../src/assets/icons/pork-chops.svg) | Fläskkotletter, Benfri fläskkotlett, Kalvkotlett, Lammkotletter, Vildsvinskotlett, Marinerade kotletter | 7 |
 | [minced-meat.svg](../src/assets/icons/minced-meat.svg) | Blandfärs, Fläskfärs, Lammfärs, Ekologisk nötfärs, Hamburgerfärs, Hjortfärs | 18 |
 | [sausages.svg](../src/assets/icons/sausages.svg) | Falukorv, Bräckkorv, Chilikorv, Cocktailkorv, Fläskkorv, Frukostkorv | 50 |
 | [roast-chicken.svg](../src/assets/icons/roast-chicken.svg) | Tillagad kyckling, Ekologisk kyckling, Gårdskyckling, Halalkyckling, Majskyckling, Hel kalkon | 11 |
-| [chicken-drumstick.svg](../src/assets/icons/chicken-drumstick.svg) | kycklingfilé, Kycklingben (drumsticks), Kycklingdelar, Kycklinglår, Kycklingvingar, Kalkonklubbor | 15 |
+| [chicken-drumstick.svg](../src/assets/icons/chicken-drumstick.svg) | kycklingklubbor, Kycklingben (drumsticks), Kycklingdelar, Kycklinglår, Kycklingvingar, Kalkonklubbor | 15 |
+| [chicken-fillets.svg](../src/assets/icons/chicken-fillets.svg) | kycklingfilé, Kycklinginnerfilé, Kycklingminutfilé, Strimlad kyckling, Tärnad kycklingfilé, Kalkonbröst | 12 |
+| [white-fish-fillet.svg](../src/assets/icons/white-fish-fillet.svg) | Vit fisk, Abborrfilé, Gösfilé, Torskrygg, Hokifilé, Koljafilé | 11 |
 | [salmon-fillet.svg](../src/assets/icons/salmon-fillet.svg) | Kallrökt lax, Laxfilé, Laxkotletter, Laxsida, Marinerad laxfilé, Sashimilax | 16 |
 | [canned-fish.svg](../src/assets/icons/canned-fish.svg) | Makrill i tomatsås, Tonfisk i olja, Sardellfiléer, Ansjovis, Sardiner, Kronsardiner | 18 |
 | [shrimp.svg](../src/assets/icons/shrimp.svg) | Räkor, Rökta räkor, Handskalade räkor, Jätteräkor, Oskalade räkor, Räkor i lake | 12 |
 | [lobster.svg](../src/assets/icons/lobster.svg) | Hummer, Hummerstjärtar, Havskräftor, Kräftor, Kräftstjärtar, Languster | 7 |
-| [egg.svg](../src/assets/icons/egg.svg) | Ägg, Ankägg, Gåsägg, Kokta ägg, Vaktelägg | 5 |
+| [roe.svg](../src/assets/icons/roe.svg) | Stenbitsrom, Forellrom, Gäddrom, Ishavsrom, Kalix löjrom, Laxrom | 13 |
+| [egg.svg](../src/assets/icons/egg.svg) | Ägg, Ankägg, Gåsägg, Kokta ägg, Vaktelägg, Äggvita | 6 |
 | [egg-carton.svg](../src/assets/icons/egg-carton.svg) | Ekologiska ägg, Extra stora ägg, Frigående ägg, Medelstora ägg, Små ägg, Stora ägg | 7 |
+| [almond-oil.svg](../src/assets/icons/almond-oil.svg) | Sesamolja, Valnötsolja | 2 |
 | [almonds-2.svg](../src/assets/icons/almonds-2.svg) | Mandel, Bittermandel, Hackad mandel, Marconamandlar, Skållad mandel | 5 |
 | [cashews.svg](../src/assets/icons/cashews.svg) | Cashewnötter, Chilicashewnötter, Salta cashewnötter | 3 |
+| [hazelnuts.svg](../src/assets/icons/hazelnuts.svg) | Hasselnötter, Hackade hasselnötter, Hasselnötssmör, Hasselnötspasta | 4 |
 | [peanuts.svg](../src/assets/icons/peanuts.svg) | Jordnötter, Jordnötter i skal, Osaltade jordnötter, Honungsrostade jordnötter, Salta jordnötter, Jordnötssmör | 8 |
+| [pine-nuts.svg](../src/assets/icons/pine-nuts.svg) | Pinjenötter | 1 |
+| [pistachios.svg](../src/assets/icons/pistachios.svg) | Pistagenötter, Skalade pistagenötter, Hackade pistagenötter, Salta pistagenötter, Pistagekräm, Pistagepasta | 6 |
 | [seeds.svg](../src/assets/icons/seeds.svg) | Frön, Basilikafrön, Chiafrön, Fröblandning, Hampafrön, Krossat linfrö | 16 |
 | [flour.svg](../src/assets/icons/flour.svg) | Vetemjöl, Potatismjöl, Majsmjöl, Bovetemjöl, Majsstärkelse, Rismjöl | 25 |
 | [oats.svg](../src/assets/icons/oats.svg) | Havregryn, Fiberhavregryn, Grova havregryn, Havrekli, Havrekross, Skuren havre (steel cut) | 9 |
+| [cornflakes.svg](../src/assets/icons/cornflakes.svg) | Majsflingor, Sockrade cornflakes | 2 |
+| [granola.svg](../src/assets/icons/granola.svg) | Granola, Bärgranola, Chokladgranola, Granola utan tillsatt socker, Nötgranola, Proteingranola | 21 |
 | [rice-grains.svg](../src/assets/icons/rice-grains.svg) | Ris, Arborioris, Bombaris, Carnaroliris, Fullkornsbasmatiris, Fullkornsris | 25 |
 | [penne-jar.svg](../src/assets/icons/penne-jar.svg) | penne, Pasta, Bokstavspasta, Bönpasta, Casarecce, Cavatappi | 29 |
 | [spagheti.svg](../src/assets/icons/spagheti.svg) | spagetti, Nudlar, Färsk tagliatelle, Bucatini, Capellini, Fettuccine | 26 |
 | [wheat.svg](../src/assets/icons/wheat.svg) | Korngryn, Matvete, Mathavre, Hela vetekorn, Farro, Speltkärnor | 11 |
 | [bread-loaf.svg](../src/assets/icons/bread-loaf.svg) | Bröd, Ankarstock, Barkis (bergis), Bondbröd, Brioche, Danskt rågbröd | 50 |
 | [baguette.svg](../src/assets/icons/baguette.svg) | baguette, Fullkornsbaguette, Minibaguetter, Surdegsbaguette, Vitlöksbaguette | 4 |
+| [taco.svg](../src/assets/icons/taco.svg) | Tacoskal | 1 |
+| [tortillas.svg](../src/assets/icons/tortillas.svg) | Tortillabröd, Fullkornstortillas, Majstortillas, Minitortillas, Glutenfria tortillas, Lågkolhydrattortillas | 6 |
 | [crisp-bread.svg](../src/assets/icons/crisp-bread.svg) | Knäckebröd, Brungräddat knäckebröd, Dinkelknäcke, Frukostknäcke, Fröknäcke, Fullkornsknäcke | 15 |
 | [sandwiches.svg](../src/assets/icons/sandwiches.svg) | Bánh mì, Club sandwich, Fylld ciabatta, Köttbullsmacka, Landgång, Ost- och skinkfralla | 12 |
+| [crackers.svg](../src/assets/icons/crackers.svg) | Kex, Cream crackers, Frökex, Fullkornskex, Grahamskex, Havrekex | 14 |
+| [croissant.svg](../src/assets/icons/croissant.svg) | Croissanter, Fylld croissant, Mandelcroissant, Frysta croissanter | 4 |
 | [cinnamon-bun.svg](../src/assets/icons/cinnamon-bun.svg) | Kanelbullar, Kanelknutar, Kanellängd, Kardemummabullar | 4 |
 | [cookie.svg](../src/assets/icons/cookie.svg) | Cookies, Pepparkakor, Blandade småkakor, Bondkakor, Drömmar, Hallongrottor | 14 |
+| [candy.svg](../src/assets/icons/candy.svg) | Lakrits | 1 |
+| [chocolate.svg](../src/assets/icons/chocolate.svg) | Mörk choklad, Chokladdroppar, Chokladknappar, Chokladspån, Hackad choklad, Kakaomassa | 28 |
+| [cocoa.svg](../src/assets/icons/cocoa.svg) | Kakao, Chokladpulver, Drickchoklad | 3 |
+| [coconut-milk.svg](../src/assets/icons/coconut-milk.svg) | Kokosmjölk, Lätt kokosmjölk, Kondenserad kokosmjölk | 3 |
 | [macarons.svg](../src/assets/icons/macarons.svg) | Macarons | 1 |
 | [strawberry-shortcake.svg](../src/assets/icons/strawberry-shortcake.svg) | Jordgubbstårta, Gräddtårta, Frukttårta | 3 |
 | [birthday-cake.svg](../src/assets/icons/birthday-cake.svg) | Chokladtårta, Marängtårta, Moussetårta, Prinsesstårta, Schwarzwaldtårta | 5 |
@@ -157,6 +190,7 @@ Each row lists up to six examples; the count is the number of explicit catalogue
 | [tin-can.svg](../src/assets/icons/tin-can.svg) | Bläckfisk på burk, Musslor på burk, Rökta musslor på burk, Krabbkött, Köttbullar på burk, Köttgryta på burk | 8 |
 | [soup-bowl.svg](../src/assets/icons/soup-bowl.svg) | Svartsoppa, Fiskmix till soppa, Blomkålssoppa, Broccolisoppa, Bönsoppa, Fisksoppa | 48 |
 | [greek-salad.svg](../src/assets/icons/greek-salad.svg) | Grekisk sallad, Fetaostsallad | 2 |
+| [sparkling-water.svg](../src/assets/icons/sparkling-water.svg) | Kolsyrat vatten, Mineralvatten, Smaksatt kolsyrat vatten, Sodavatten | 4 |
 | [oregano.svg](../src/assets/icons/oregano.svg) | oregano | 0 |
 | [rosemary.svg](../src/assets/icons/rosemary.svg) | rosmarin | 0 |
 | [rocket.svg](../src/assets/icons/rocket.svg) | ruccola | 0 |

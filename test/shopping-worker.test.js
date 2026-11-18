@@ -46,7 +46,7 @@ test('the visited shopping page and all core scripts can reopen offline, includi
   const sw = worker();
   await sw.install();
   sw.down(true);
-  for (const path of ['inkopslista.html', 'delad-inkopslista.html', 'data/shopping-departments.js', 'js/shopping-departments.js', 'js/shopping-copy.js', 'js/shopping-share.js', 'js/shopping-copy-view.js', 'css/shopping-share.css', 'receptbok.html', 'nytt-recept.html?id=abc', 'js/recipe-book.js', 'js/account-sync.js', 'js/account.js', 'js/shopping-account.js', 'js/shopping-sync.js', 'js/vendor/supabase.js', 'css/kitchen.css']) {
+  for (const path of ['inkopslista.html', 'delad-inkopslista.html', 'lista/', 'data/shopping-departments.js', 'js/shopping-departments.js', 'js/shopping-copy.js', 'js/shopping-copy-links.js', 'js/shopping-share.js', 'js/shopping-copy-view.js', 'css/shopping-share.css', 'receptbok.html', 'nytt-recept.html?id=abc', 'js/recipe-book.js', 'js/account-sync.js', 'js/account.js', 'js/shopping-account.js', 'js/shopping-sync.js', 'js/vendor/supabase.js', 'css/kitchen.css']) {
     const response = await sw.fetch(path);
     assert.equal(response.status, 200);
     assert.match(await response.text(), /cached https:\/\/example.test\/site\//);
@@ -64,7 +64,7 @@ test('online visits update cached assets and offline visits use that latest succ
 test('the worker never intercepts account APIs, sign-in, other pages or third-party requests', async () => {
   const sw = worker();
   await sw.install();
-  for (const path of ['logga-in.html', 'konto.html', 'profil.html', 'rest/v1/rpc/sync_shopping_list', 'https://other.test/site/inkopslista.html'])
+  for (const path of ['logga-in.html', 'konto.html', 'profil.html', 'rest/v1/rpc/sync_shopping_list', 'https://backend.test/functions/v1/shopping-copy?code=abc', 'https://other.test/site/inkopslista.html'])
     assert.equal(sw.fetch(path), undefined, path);
   assert.equal(sw.fetch('inkopslista.html', 'POST'), undefined);
 });

@@ -1,4 +1,4 @@
-// Daily caps on the paid API calls. Each visitor gets a few a day, and everyone together a fixed number,
+// Daily caps on paid API calls and stored shopping copies. Each visitor gets a few a day, and everyone together a fixed number,
 // so an open page can't run up the Anthropic and OpenAI bills. The numbers can be changed with secrets
 // (DETECT_PER_VISITOR, DETECT_PER_DAY, RECIPE_PER_VISITOR, RECIPE_PER_DAY) without deploying again.
 // A new recipe also gets one photo, so RECIPE_PER_DAY caps the photos too.
@@ -7,6 +7,11 @@ import {db} from './db.ts';
 import {envNumber, VisitorError} from './http.ts';
 
 const caps = {
+  share: {
+    perVisitor: () => envNumber('SHARE_PER_VISITOR', 30),
+    perDay: () => envNumber('SHARE_PER_DAY', 1000),
+    message: 'Det har skapats många delningslänkar i dag. Prova igen i morgon.'
+  },
   detect: {
     perVisitor: () => envNumber('DETECT_PER_VISITOR', 15),
     perDay: () => envNumber('DETECT_PER_DAY', 150),

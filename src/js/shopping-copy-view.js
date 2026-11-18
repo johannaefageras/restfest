@@ -41,7 +41,10 @@ async function openCopy() {
     const fragment = location.hash.slice(1);
     if (!fragment) throw new Error('Öppna hela länken du fick, eller be avsändaren att dela listan igen.');
     tools = await import('./shopping-copy.js');
-    const next = await tools.decodeShoppingCopy(fragment);
+    const { loadShoppingCopy } = await import('./shopping-copy-links.js');
+    const next = await loadShoppingCopy(fragment, {
+      api: document.querySelector('meta[name="restfest-ai"]')?.content, storage: storage(),
+    });
     if (current !== revision) return;
     copy = next;
     checked = tools.readCopyChecks(storage(), copy);

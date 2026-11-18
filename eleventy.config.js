@@ -57,6 +57,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({'lib/shopping-sync.js': 'js/shopping-sync.js'});
   eleventyConfig.addPassthroughCopy({'lib/shopping-groups.js': 'js/shopping-groups.js'});
   eleventyConfig.addPassthroughCopy({'lib/shopping-copy.js': 'js/shopping-copy.js'});
+  eleventyConfig.addPassthroughCopy({'lib/shopping-copy-links.js': 'js/shopping-copy-links.js'});
   eleventyConfig.addPassthroughCopy({'lib/shopping-departments.js': 'js/shopping-departments.js'});
   eleventyConfig.addPassthroughCopy({'lib/account-sync.js': 'js/account-sync.js'});
   eleventyConfig.addPassthroughCopy({'lib/recipe-book-sync.js': 'js/recipe-book-sync.js'});
