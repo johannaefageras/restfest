@@ -3,7 +3,7 @@
 // After editing: run `npm run build`, then upload the contents of _site/.
 
 // Public website address. Used for the sitemap, canonical links and share images.
-const url = "https://oftabraefter.se";
+const url = "https://www.oftabraefter.se";
 
 // Site name: the header, footer, page-title suffix and sharing previews.
 const name = "Ofta bra efter";
