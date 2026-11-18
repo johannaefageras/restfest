@@ -102,7 +102,7 @@ async (page) => {
   const pressed = await page.getAttribute('[data-save-generated]', 'aria-pressed');
   check('7 the heart is still there to click', pressed === 'false', pressed);
 
-  // 7. "Spara i receptboken" signed out, then signing in, still saves the recipe.
+  // 7. "Spara i receptsamlingen" signed out, then signing in, still saves the recipe.
   await clean();
   await page.goto(`${site}/nytt-recept.html?id=${ids.Synlig}`);
   await page.waitForSelector('a.dialog-save');

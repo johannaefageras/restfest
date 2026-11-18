@@ -3,8 +3,8 @@
 // recipes they hearted, newest first. Built only when the site has accounts (accountPages in
 // eleventy.config.js). src/js/recipe-book.js fetches and draws it; HANDOFF.md, "Konton och receptbok".
 const layout = 'layouts/base.njk';
-const title = 'Min receptbok';
-const description = 'Din egen receptbok hos Ofta bra efter: recept du har hittat på och recept du har sparat.';
+const title = 'Receptsamling';
+const description = 'Din egen receptsamling hos Ofta bra efter: recept du har hittat på och recept du har sparat.';
 const noindex = true;
 const modules = ['recipe-book.js'];
 const permalink = 'receptbok.html';
@@ -13,9 +13,9 @@ const permalink = 'receptbok.html';
     <section class="account-card" aria-labelledby="book-title">
       <section class="greeting archive-greeting" aria-labelledby="book-title">
         <div>
-          <h1 id="book-title"><span class="marker">Min receptbok.</span></h1>
+          <h1 id="book-title"><span class="marker">Receptsamling.</span></h1>
           <p class="greeting-intro when-signed-in">Recept du har hittat på och recept du har sparat ur arkivet, samlade på ett ställe.</p>
-          <p class="greeting-intro when-signed-out">Logga in för att se din receptbok.</p>
+          <p class="greeting-intro when-signed-out">Logga in för att se din receptsamling.</p>
         </div>
         <div class="greeting-aside" aria-hidden="true">
           <div class="doodle-lineup"><img src="assets/icons/cook-book.svg" alt="" width="60" height="60"></div>
@@ -26,7 +26,7 @@ const permalink = 'receptbok.html';
         {%- set current = 'receptbok' %}
         {% include "account-nav.njk" %}
         <div class="shopping-sync-status">
-          <p class="meta" role="status" data-book-sync-status>Hämtar receptboken …</p>
+          <p class="meta" role="status" data-book-sync-status>Hämtar receptsamlingen …</p>
           <button class="text-button" type="button" data-book-sync-retry hidden>Försök igen</button>
         </div>
         <div class="book-toolbar" data-book-toolbar hidden>
@@ -37,17 +37,17 @@ const permalink = 'receptbok.html';
           </div>
           <a class="text-button" href="./#borja">Hitta på ett recept <i class="fas fa-arrow-up-right" aria-hidden="true"></i></a>
         </div>
-        <p class="account-status book-status" role="status" data-book-status>Hämtar receptboken …</p>
+        <p class="account-status book-status" role="status" data-book-status>Hämtar receptsamlingen …</p>
         <div class="recipe-grid" data-book-grid></div>
         <section class="book-empty" data-book-empty aria-labelledby="book-empty-title" hidden>
           <div class="step-heading">
-            <div><p class="eyebrow">Inga recept än</p><h2 id="book-empty-title">Här börjar din receptbok.</h2></div>
+            <div><p class="eyebrow">Inga recept än</p><h2 id="book-empty-title">Här börjar din receptsamling.</h2></div>
           </div>
           <div class="book-start-grid">
             <div class="add-card book-start-card">
               <img src="assets/icons/magic-wand.svg" alt="" width="48" height="48">
               <h3>Hitta på något nytt</h3>
-              <p class="card-intro">Utgå från det du har hemma, så hittar vi på ett recept åt dig. Det sparas här i din receptbok.</p>
+              <p class="card-intro">Utgå från det du har hemma, så hittar vi på ett recept åt dig. Det sparas här i din receptsamling.</p>
               <a class="button primary" href="./#borja">Till kylskåpet <i class="fas fa-arrow-up-right" aria-hidden="true"></i></a>
             </div>
             <div class="photo-card book-start-card">
@@ -64,6 +64,6 @@ const permalink = 'receptbok.html';
         <p><a class="button primary" href="logga-in.html" data-account-link>Logga in</a></p>
         <p class="meta">Recept du har sparat utan konto finns under <a href="receptarkiv.html?vy=sparade">Sparat i receptarkivet</a>.</p>
       </div>
-      <noscript><p class="meta">Receptboken behöver JavaScript.</p></noscript>
+      <noscript><p class="meta">Receptsamlingen behöver JavaScript.</p></noscript>
     </section>
   </main>

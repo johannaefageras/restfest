@@ -70,8 +70,8 @@ function render() {
   else if (!visible.length)
     status.textContent =
       filter === "egna"
-        ? "Du har inga egna recept i receptboken än."
-        : "Du har inga recept från arkivet i receptboken än.";
+        ? "Du har inga egna recept i receptsamlingen än."
+        : "Du har inga recept från arkivet i receptsamlingen än.";
   else
     status.textContent = `Visar ${visible.length}${visible.length === entries.length ? "" : ` av ${entries.length}`} recept`;
 }
@@ -100,7 +100,7 @@ function drawSnapshot() {
   }
   if (!loaded) {
     empty.hidden = true;
-    status.textContent = navigator.onLine ? "Hämtar receptboken …" : "Det finns ingen sparad kopia av receptboken på den här enheten än.";
+    status.textContent = navigator.onLine ? "Hämtar receptsamlingen …" : "Det finns ingen sparad kopia av receptsamlingen på den här enheten än.";
   }
 }
 
@@ -110,14 +110,14 @@ function showSync() {
   const retry = $("[data-book-sync-retry]");
   retry.hidden = state.phase !== "waiting" || !navigator.onLine;
   if (!state.durable && state.pending) label.textContent = "Ändringarna kan inte sparas på enheten. Håll sidan öppen tills de har synkats.";
-  else if (!state.durable) label.textContent = "Receptboken är sparad i kontot, men kan inte sparas på den här enheten för offlineanvändning.";
+  else if (!state.durable) label.textContent = "Receptsamlingen är sparad i kontot, men kan inte sparas på den här enheten för offlineanvändning.";
   else if (!navigator.onLine) label.textContent = "Du är offline. Sparade recept visas från enheten och ändringarna synkas när du är online igen.";
-  else if (state.pendingGenerated) label.textContent = "Receptboken är full. Ta bort ett recept för att ge plats åt nya recept som väntar på att sparas.";
-  else if (state.issue === "full") label.textContent = "Receptboken är full. Ta bort ett recept och försök spara igen.";
+  else if (state.pendingGenerated) label.textContent = "Receptsamlingen är full. Ta bort ett recept för att ge plats åt nya recept som väntar på att sparas.";
+  else if (state.issue === "full") label.textContent = "Receptsamlingen är full. Ta bort ett recept och försök spara igen.";
   else if (state.issue === "missing") label.textContent = "Ett recept kunde inte sparas eftersom det har tagits bort.";
   else if (state.phase === "waiting") label.textContent = "Kunde inte synka just nu. Sparade recept och ändringar finns kvar på den här enheten.";
-  else if (state.phase === "loading") label.textContent = "Hämtar receptboken …";
-  else if (state.phase === "syncing" || state.phase === "pending") label.textContent = "Synkar receptboken …";
+  else if (state.phase === "loading") label.textContent = "Hämtar receptsamlingen …";
+  else if (state.phase === "syncing" || state.phase === "pending") label.textContent = "Synkar receptsamlingen …";
   else label.textContent = "Sparat i kontot.";
 }
 async function load() {
@@ -158,7 +158,7 @@ if (account) {
     const index = [...grid.querySelectorAll(".favorite")].indexOf(heart);
     account.setGenerated(heart.dataset.saveGenerated, false);
     focusAfterRemoval(index);
-    showToast("Receptet har tagits bort från receptboken");
+    showToast("Receptet har tagits bort från receptsamlingen");
   });
 
   document.addEventListener("restfest:book", drawSnapshot);

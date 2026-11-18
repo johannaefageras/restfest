@@ -3422,7 +3422,7 @@ body:has(#shopping-dialog[open]) {
 }
 
 /* The menu follows the header's plain links and yellow underline. */
-.account-tabs {
+.account-menu {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -3431,6 +3431,12 @@ body:has(#shopping-dialog[open]) {
   padding-bottom: 8px;
   border-bottom: 1px solid var(--rule);
   font-size: var(--text-ui);
+}
+.account-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 22px;
 }
 .account-tabs > a {
   display: inline-flex;
@@ -3448,7 +3454,10 @@ body:has(#shopping-dialog[open]) {
   text-decoration-thickness: 3px;
   text-underline-offset: 6px;
 }
-.account-tabs > .text-button {
+.account-session {
+  display: flex;
+  align-items: center;
+  gap: 22px;
   margin-left: auto;
   flex: none;
 }
@@ -3478,7 +3487,7 @@ body:has(#shopping-dialog[open]) {
   color: var(--ink);
 }
 
-/* Min receptbok (pages/receptbok.njk). The cards and their grid are the archive's. */
+/* Receptsamling (pages/receptbok.njk). The cards and their grid are the archive's. */
 body:has(> :is(.book-page, .shopping-page)) {
   min-height: 100svh;
   display: flex;
@@ -3567,23 +3576,18 @@ body:has(> :is(.book-page, .shopping-page)) > :is(.site-header, .site-footer) {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-/* "Spara i receptboken" on a generated recipe is a link to the sign-in page, drawn as the button. */
+/* "Spara i receptsamlingen" on a generated recipe is a link to the sign-in page, drawn as the button. */
 a.dialog-save {
   text-decoration: none;
 }
 
 /* Profil and Konto (pages/profil.njk, konto.njk). */
 .account-who {
-  margin-left: auto;
   color: var(--muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 18ch;
-  padding-left: 12px;
-}
-.account-who:not([hidden]) + .text-button {
-  margin-left: 0;
 }
 [data-profile-page="profil"] .doodle-lineup img {
   transform: none;
@@ -3913,23 +3917,36 @@ a.dialog-save {
   }
 }
 @media (max-width: 699px) {
+  /* Phones: the tabs get the whole row, right on top of the page's content, and "Logga ut" (with the
+     name, where it still shows) moves up to the card's top right-hand corner, above the heading, which
+     moves down to make room. In the reading order "Logga ut" still comes after the tabs. */
+  .account-card:has(.account-session) {
+    position: relative;
+  }
+  :root.signed-in .account-card:has(.account-session) > .greeting {
+    padding-top: 48px;
+  }
+  .account-tabs {
+    flex: 1;
+    justify-content: space-between;
+    gap: 0 12px;
+  }
+  .account-session {
+    position: absolute;
+    top: 6px;
+    right: 0;
+  }
   .account-action-row {
     flex-direction: column;
     align-items: flex-start;
   }
 }
 @media (max-width: 519px) {
-  .account-tabs {
-    gap: 0 16px;
+  .account-menu {
     margin-bottom: 22px;
   }
   .account-who {
     display: none;
-  }
-  .account-tabs > .text-button,
-  .account-who:not([hidden]) + .text-button {
-    margin-left: auto;
-    font-size: var(--text-tag);
   }
   .account-checks {
     grid-template-columns: minmax(0, 1fr);
@@ -3951,6 +3968,11 @@ a.dialog-save {
   }
 }
 @media (max-width: 359px) {
+  /* Four tabs no longer fit on one row: two even columns rather than one tab left on its own. */
+  .account-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .account-add {
     flex-direction: column;
   }

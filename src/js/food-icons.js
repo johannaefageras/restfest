@@ -655,11 +655,27 @@ function iconForPantryFood(name) {
     ?? null;
 }
 
-// Keep the specific name when it has its own illustration; canonicalising "Farfalle" to "Pasta"
-// would otherwise discard the name before renderPantry gets to choose its picture.
+// "gurkor" → "gurk", "morötter" → "morott": a word without its plural or definite ending.
+function wordStem(value) {
+  const word = searchKey(cleanIngredient(value));
+  const ending = inflectionEndings.find(end => word.endsWith(end) && word.length - end.length >= 3);
+  return ending ? word.slice(0, -ending.length) : word;
+}
+
+// Whether a typed name is the food's own name in another form ("morötterna", "Morötter").
+// Aliases for other products ("skinka" → Julskinka) are not, so they keep the visitor's words.
+function isFormOfName(typed, name) {
+  const [a, b] = [wordStem(typed), wordStem(name)].sort((x, y) => x.length - y.length);
+  return b.startsWith(a) && b.length - a.length <= 2;
+}
+
+// Show the food's own name only when the visitor typed that name. Any other alias keeps what they
+// typed, and so does a name with its own illustration: canonicalising "Farfalle" to "Pasta" would
+// discard the name before renderPantry gets to choose its picture.
 function nameForPantryFood(name, key = keyForIngredient(name)) {
   const food = foods[key];
   return food && !genericIngredientKeys.has(key) && !pantryIconsByName.has(searchKey(cleanIngredient(name)))
+    && isFormOfName(name, food.name)
     ? food.name
     : capitalize(cleanIngredient(name));
 }

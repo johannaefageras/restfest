@@ -60,6 +60,21 @@ test('specific groceries keep their pictures while sharing the existing recipe k
   }
 });
 
+test('typed names stay as typed unless they are a form of the food\'s own name', () => {
+  const p = page();
+  for (const [typed, key, shown] of [
+    ['Skinka', 'julskinka', 'Skinka'], ['kokt skinka', 'julskinka', 'Kokt skinka'],
+    ['nötfärs', 'blandfars', 'Nötfärs'], ['kyckling', 'kyckling', 'Kyckling'],
+    ['körsbärstomater', 'tomat', 'Körsbärstomater'],
+    ['julskinka', 'julskinka', 'Julskinka'], ['JULSKINKAN', 'julskinka', 'Julskinka'],
+    ['agg', 'agg', 'Ägg'], ['tomat', 'tomat', 'Tomater'], ['gurkor', 'gurka', 'Gurka'],
+    ['morot', 'morot', 'Morötter'], ['morötterna', 'morot', 'Morötter'],
+  ]) {
+    assert.equal(p.keyForIngredient(typed), key, typed);
+    assert.equal(p.nameForPantryFood(typed), shown, typed);
+  }
+});
+
 test('product forms choose suitable pictures and unknown items remain unillustrated', () => {
   const p = page();
   for (const [name, icon] of [

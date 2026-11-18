@@ -4,7 +4,7 @@
 // ?till=<path> is where to go afterwards, ?lage=skapa opens "Skapa konto".
 const layout = 'layouts/base.njk';
 const title = 'Logga in';
-const description = 'Logga in eller skapa ett konto för att samla dina recept i en egen receptbok.';
+const description = 'Logga in eller skapa ett konto för att samla dina recept i en egen receptsamling.';
 const noindex = true;
 const modules = ['auth-forms.js'];
 const permalink = 'logga-in.html';
@@ -16,7 +16,7 @@ const permalink = 'logga-in.html';
         <img src="assets/icons/login.svg" alt="" width="859" height="769" data-auth-art="logga">
         <img src="assets/icons/signup.svg" alt="" width="740" height="878" data-auth-art="skapa" hidden>
         <img src="assets/icons/forgot-password.svg" alt="" width="803" height="912" data-auth-art="glomt" hidden>
-        <p>Med ett konto får du en egen receptbok, som följer med mellan mobilen och datorn.</p>
+        <p>Med ett konto får du en egen receptsamling, som följer med mellan mobilen och datorn.</p>
       </div>
 
       <div class="auth-body">
@@ -46,7 +46,7 @@ const permalink = 'logga-in.html';
             </div>
             <p class="account-error" role="alert" data-auth-error hidden></p>
             <button class="button primary account-wide" type="submit" data-auth-submit>Logga in</button>
-            <p class="account-hint" data-only="skapa" hidden>Vi sparar din e-postadress, ditt namn och det du lägger i receptboken. <a href="integritet.html">Så hanterar vi dina uppgifter</a>.</p>
+            <p class="account-hint" data-only="skapa" hidden>Vi sparar din e-postadress, ditt namn och det du lägger i receptsamlingen. <a href="integritet.html">Så hanterar vi dina uppgifter</a>.</p>
           </form>
           <p class="auth-switch" data-only="logga">Har du inget konto? <a href="logga-in.html?lage=skapa" data-mode="skapa">Skapa konto</a></p>
           <p class="auth-switch" data-only="skapa" hidden>Har du redan ett konto? <a href="logga-in.html" data-mode="logga">Logga in</a></p>

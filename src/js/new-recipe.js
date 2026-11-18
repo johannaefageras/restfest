@@ -294,7 +294,7 @@ function drawBookSave({ focus = false } = {}) {
     slot.innerHTML = `<button class="dialog-save" type="button" data-save-generated="${id}" aria-pressed="${inBook}">${heartIcon(inBook)}${inBook ? "Sparat" : "Spara recept"}</button>`;
   } else {
     const back = `${location.pathname}?id=${encodeURIComponent(id)}&spara=1`;
-    slot.innerHTML = `<a class="dialog-save" href="${escapeHtml(account.loginUrl(back))}" data-save-intent>${heartIcon(false)}Spara i receptboken</a>`;
+    slot.innerHTML = `<a class="dialog-save" href="${escapeHtml(account.loginUrl(back))}" data-save-intent>${heartIcon(false)}Spara i receptsamlingen</a>`;
   }
   if (focus) slot.firstElementChild.focus({ preventScroll: true });
 }
@@ -303,8 +303,8 @@ function setInBook(on) {
   account.setGenerated(id, on);
   showToast(
     on
-      ? "Sparat i din receptbok ♡"
-      : "Receptet har tagits bort från receptboken",
+      ? "Sparat i din receptsamling ♡"
+      : "Receptet har tagits bort från receptsamlingen",
   );
 }
 
@@ -320,7 +320,7 @@ function takeSaveIntent() {
 }
 
 if (account) {
-  // "Spara i receptboken", also when it's opened in a new tab.
+  // "Spara i receptsamlingen", also when it's opened in a new tab.
   for (const type of ["click", "auxclick"]) {
     main.addEventListener(type, (event) => {
       if (!event.target.closest("[data-save-intent]")) return;
@@ -373,7 +373,7 @@ async function load() {
   const article = $(".recipe-view", main);
   enhanceRecipe(article);
   drawBookSave();
-  // Back from signing in through "Spara i receptboken".
+  // Back from signing in through "Spara i receptsamlingen".
   if (pageParams.get("spara") === "1") {
     const asked = intendedSave(takeSaveIntent(), id, Date.now());
     if (asked && account?.signedIn() && !account.generatedIds().has(id)) {

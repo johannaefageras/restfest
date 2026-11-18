@@ -178,7 +178,7 @@ test('signInPage says where a sign-in in the address belongs', () => {
     assert.equal(signInPage(other), null, other);
 });
 
-// "Spara i receptboken" on a generated recipe, signed out (src/js/new-recipe.js).
+// "Spara i receptsamlingen" on a generated recipe, signed out (src/js/new-recipe.js).
 const hour = 60 * 60 * 1000;
 
 test('intendedSave is true for the recipe the visitor asked to save, for an hour', () => {

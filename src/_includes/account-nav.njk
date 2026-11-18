@@ -1,10 +1,15 @@
 {#- The menu on the signed-in pages (receptbok, inkopslista, profil, konto). Set `current` to the page's name before
-    including it. "Logga ut" and the visitor's name are handled by js/account.js. -#}
-<nav class="account-tabs" aria-label="Ditt konto">
-  <a href="profil.html"{% if current == 'profil' %} aria-current="page"{% endif %}>Min profil</a>
-  <a href="konto.html"{% if current == 'konto' %} aria-current="page"{% endif %}>Inställningar</a>
-  <a href="inkopslista.html"{% if current == 'inkopslista' %} aria-current="page"{% endif %}>Inköpslista</a>
-  <a href="receptbok.html"{% if current == 'receptbok' %} aria-current="page"{% endif %}>Receptbok</a>
-  <span class="account-who" data-account-name hidden></span>
-  <button class="text-button" type="button" data-sign-out>Logga ut</button>
-</nav>
+    including it. "Logga ut" and the visitor's name are handled by js/account.js. The tabs keep short names so all
+    four fit on one row on a 360px phone; there "Logga ut" moves up to the page's top corner (kitchen.css). -#}
+<div class="account-menu">
+  <nav class="account-tabs" aria-label="Ditt konto">
+    <a href="profil.html"{% if current == 'profil' %} aria-current="page"{% endif %}>Profil</a>
+    <a href="konto.html"{% if current == 'konto' %} aria-current="page"{% endif %}>Konto</a>
+    <a href="inkopslista.html"{% if current == 'inkopslista' %} aria-current="page"{% endif %}>Inköpslista</a>
+    <a href="receptbok.html"{% if current == 'receptbok' %} aria-current="page"{% endif %}>Receptsamling</a>
+  </nav>
+  <div class="account-session">
+    <span class="account-who" data-account-name hidden></span>
+    <button class="text-button" type="button" data-sign-out>Logga ut</button>
+  </div>
+</div>

@@ -94,7 +94,7 @@ function showState() {
     );
     savedLink.setAttribute(
       "aria-label",
-      inside ? "Visa din receptbok" : "Visa sparade recept",
+      inside ? "Visa din receptsamling" : "Visa sparade recept",
     );
   }
   document.querySelectorAll("[data-account-link]").forEach((link) => {

@@ -52,7 +52,7 @@ test("without a publishable key the pages have no trace of accounts", (t) => {
       "js/account.js",
       "logga-in",
       "signed-in",
-      "Receptbok",
+      "Receptsamling",
       "integritet",
       "data-saved-link",
       "data-account-link",
@@ -196,8 +196,8 @@ test("with a publishable key every page gets the account button and the account 
   ])
     assert.ok(book.includes(link), `the account menu has ${link}`);
   for (const [page, name] of [
-    ["profil.html", "Min profil"],
-    ["konto.html", "Inställningar"],
+    ["profil.html", "Profil"],
+    ["konto.html", "Konto"],
   ]) {
     const html = site.read(page);
     assert.match(
