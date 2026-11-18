@@ -16,11 +16,20 @@
   const cameraDialog = $("#fridge-camera-dialog");
   const cameraVideo = $("#fridge-camera-video");
   const cameraShoot = $("#fridge-camera-shoot");
-  // Progress and results go under the list, where the foods appear.
+  // Progress and results go above the list, so the review starts with a confirmation.
   const photoStatus = $("#pantry-status");
+  const pantryPanel = $("#pantry-panel");
   const inventBox = $("#invent-recipe");
   const inventButton = $("#invent-button");
   const inventStatus = $("#invent-status");
+  const inventMobile = $("#invent-mobile");
+  const inventMobileButton = $("#invent-mobile-button");
+  const inventMobileStatus = $("#invent-mobile-status");
+  const inventButtons = [inventButton, inventMobileButton];
+  let scanning = false;
+  let generating = false;
+  let pantryVisible = false;
+  let inventVisible = false;
   const generalError = "Något gick fel. Prova igen om en stund.";
 
   // The functions answer {error} in Swedish when something is wrong; a lost connection doesn't.
@@ -208,6 +217,8 @@
   // Sends the photos, and puts the foods Claude sees in them on the list. `button` is the one that was used.
   async function scan(files, button) {
     if (!files.length) return;
+    scanning = true;
+    updateInvent();
     setPhotoBusy(button, true);
     photoStatus.textContent =
       files.length > 1
@@ -237,22 +248,22 @@
           ? `${count} Listan rymmer 60 råvaror, så ${leftOut} fick inte plats. Ta bort några och fota igen.`
           : `Listan rymmer 60 råvaror, så ${leftOut} från ${where} fick inte plats. Ta bort några och fota igen.`;
       } else if (added.length) {
-        message = `${count} Stämmer något inte, tryck på det för att ta bort det.`;
+        message = `${count} Kontrollera listan och ta bort det som inte stämmer.`;
       } else if (names.length) {
         message = `Allt på ${where} fanns redan i listan.`;
       }
       updatePantry(message);
-      if (added.length) {
-        const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
-        $("#pantry-list").scrollIntoView({
-          block: "nearest",
-          behavior: smooth ? "smooth" : "auto",
-        });
-      }
+      const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+      pantryPanel.scrollIntoView({
+        block: "start",
+        behavior: smooth ? "smooth" : "auto",
+      });
     } catch (error) {
       photoStatus.textContent = error.message;
     } finally {
       setPhotoBusy(button, false);
+      scanning = false;
+      updateInvent();
     }
   }
 
@@ -265,20 +276,43 @@
   }
 
   function updateInvent() {
-    if (inventButton.disabled) return;
-    inventBox.hidden = !listItems().some((item) => item.key);
+    inventBox.hidden = !generating && !listItems().some((item) => item.key);
+    for (const button of inventButtons) {
+      button.disabled = scanning || generating;
+      if (generating) button.setAttribute("aria-busy", "true");
+      else button.removeAttribute("aria-busy");
+    }
+    inventMobile.hidden = inventBox.hidden || scanning || !pantryVisible || inventVisible;
   }
 
+  function setInventStatus(message) {
+    inventStatus.textContent = message;
+    inventMobileStatus.textContent = message;
+  }
+
+  // The mobile bar hands over to the regular button once it is fully visible. Without observer
+  // support, the regular action beside the ingredients remains available.
+  if (window.IntersectionObserver) {
+    const observer = new window.IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === pantryPanel) pantryVisible = entry.isIntersecting;
+        if (entry.target === inventButton) inventVisible = entry.intersectionRatio === 1;
+      }
+      updateInvent();
+    }, { threshold: [0, 1] });
+    observer.observe(pantryPanel);
+    observer.observe(inventButton);
+  }
   document.addEventListener("restfest:pantry", updateInvent);
   updateInvent();
 
-  inventButton.addEventListener("click", async () => {
-    inventButton.disabled = true;
-    inventButton.setAttribute("aria-busy", "true");
-    inventStatus.textContent =
-      "Vi skriver receptet. Det tar ungefär en halv minut …";
+  async function inventRecipe() {
+    if (scanning || generating || inventBox.hidden) return;
+    generating = true;
+    updateInvent();
+    setInventStatus("Vi skriver receptet. Det tar ungefär en halv minut …");
     const slow = setTimeout(() => {
-      inventStatus.textContent = "Snart klart …";
+      setInventStatus("Snart klart …");
     }, 25000);
     try {
       const result = await post(
@@ -288,24 +322,23 @@
       );
       // Cache the recipe and persist a retry before navigating, even when the initial save failed.
       window.restfestAccount?.noteGenerated(result);
-      inventStatus.textContent = "Klart. Öppnar receptet …";
+      setInventStatus("Klart. Öppnar receptet …");
       location.href = `${siteBase}nytt-recept.html?id=${encodeURIComponent(result.id)}`;
     } catch (error) {
-      inventStatus.textContent = error.message;
-      inventButton.disabled = false;
-      inventButton.removeAttribute("aria-busy");
+      setInventStatus(error.message);
+      generating = false;
       updateInvent();
     } finally {
       clearTimeout(slow);
     }
-  });
+  }
+  for (const button of inventButtons) button.addEventListener("click", inventRecipe);
 
   // Back from the new recipe, the browser may show this page as it was left, mid-"Öppnar receptet".
   window.addEventListener("pageshow", (event) => {
     if (!event.persisted) return;
-    inventButton.disabled = false;
-    inventButton.removeAttribute("aria-busy");
-    inventStatus.textContent = "";
+    generating = false;
+    setInventStatus("");
     updateInvent();
   });
 })();

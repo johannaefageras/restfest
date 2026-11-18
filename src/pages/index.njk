@@ -1,8 +1,6 @@
 ---
 layout: layouts/base.njk
 permalink: index.html
-title: Ofta bra efter — ditt lilla kylskåpskök
-description: Middag av det du redan har. Skriv in vad som finns i kylen och få receptförslag ur receptarkivet på Ofta bra efter.
 scripts: [kitchen.js, fridge-ai.js]
 allFoods: true
 ---
@@ -65,18 +63,31 @@ allFoods: true
             </div>
             {%- endif %}
           </div>
-          <div class="pantry-panel is-empty">
+          <div id="pantry-panel" class="pantry-panel is-empty">
             <div class="pane-heading">
               <h3>Det här finns hemma redan</h3>
               <span id="pantry-count" class="count" aria-live="polite">0</span>
             </div>
             <p id="pantry-help" class="pantry-help">Ingenting här än.</p>
+            <p id="pantry-status" class="meta pantry-status" role="status"></p>
             <ul id="pantry-list" class="pantry-list" aria-label="Dina råvaror"></ul>
             <ul id="pantry-unknown" class="pantry-unknown" aria-label="Råvaror som inte känns igen" hidden></ul>
             <div class="pantry-footer">
-              <p id="pantry-status" class="meta" role="status"></p>
               <button id="clear-pantry" class="text-button" type="button" hidden>Rensa listan</button>
             </div>
+            {%- if ai.functionsUrl %}
+            {#- The next step stays with the ingredients, before the archive's suggestions. #}
+            <section id="invent-recipe" class="invent-recipe" aria-labelledby="invent-title" hidden>
+              <img src="assets/icons/magic-wand.svg" width="48" height="48" alt="">
+              <div>
+                <p class="eyebrow">NÄSTA STEG</p>
+                <h3 id="invent-title">Vad lagar vi av det här?</h3>
+                <p>Kontrollera listan och låt oss hitta på en middag av dina råvaror. Receptet tar ungefär en halv minut, fotot en stund till.</p>
+                <button id="invent-button" class="button primary" type="button">Hitta på ett recept <i class="fas fa-arrow-up-right" aria-hidden="true"></i></button>
+                <p id="invent-status" class="meta invent-status" role="status"></p>
+              </div>
+            </section>
+            {%- endif %}
           </div>
         </div>
       </section>
@@ -88,19 +99,6 @@ allFoods: true
         </div>
         <p id="match-status" class="sr-only" role="status"></p>
         <div id="featured-recipe"></div>
-        {%- if ai.functionsUrl %}
-        {#- Shown once the list has something the site recognises. src/js/fridge-ai.js #}
-        <section id="invent-recipe" class="invent-recipe" aria-labelledby="invent-title" hidden>
-          <img src="assets/icons/magic-wand.svg" width="48" height="48" alt="">
-          <div>
-            <p class="eyebrow">NYTT RECEPT</p>
-            <h3 id="invent-title">Inget som lockar?</h3>
-            <p>Låt oss hitta på en ny middag av det som finns i din lista. Receptet tar ungefär en halv minut, fotot en stund till.</p>
-            <button id="invent-button" class="button primary" type="button">Hitta på ett recept <i class="fas fa-arrow-up-right" aria-hidden="true"></i></button>
-            <p id="invent-status" class="meta invent-status" role="status"></p>
-          </div>
-        </section>
-        {%- endif %}
       </section>
 
       <section id="vecka" class="kitchen-step week-plan" aria-labelledby="week-title" hidden>
@@ -157,6 +155,12 @@ allFoods: true
       </p>
     </section>
     {%- if ai.functionsUrl %}
+
+    {#- On phones, keep the next step in reach while reviewing the ingredients. #}
+    <div id="invent-mobile" class="invent-mobile" hidden>
+      <button id="invent-mobile-button" class="button primary" type="button">Hitta på ett recept <i class="fas fa-arrow-up-right" aria-hidden="true"></i></button>
+      <p id="invent-mobile-status" class="meta invent-status" role="status"></p>
+    </div>
 
     {#- "Fota" on a computer: the webcam, and a button that takes the picture. src/js/fridge-ai.js #}
     <dialog id="fridge-camera-dialog" class="camera-dialog" aria-labelledby="fridge-camera-title">

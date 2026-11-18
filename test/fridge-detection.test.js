@@ -68,15 +68,17 @@ const fridge = readFileSync(new URL('../src/js/fridge-ai.js', import.meta.url), 
 // The fake network returns detector output; no paid model calls or real photos are needed here.
 // `camera` is what "Fota" has to open: 'capture' for a phone's browser, 'webcam' for a computer with a
 // camera, 'blocked' for one where the visitor said no, and nothing for a browser with neither.
-function page({result = {names: []}, initial = [], width = 4032, height = 3024, blobSizes = [500_000], fail = false, camera} = {}) {
+function page({result = {names: []}, initial = [], width = 4032, height = 3024, blobSizes = [500_000], fail = false, camera, generateWait} = {}) {
   const elements = new Map();
   const uploads = [], encodes = [], bitmaps = [], sources = [], clicks = [], tracks = [];
+  const documentHandlers = {}, windowHandlers = {}, scrolls = [];
+  let observeVisibility;
   const node = selector => ({
     disabled: false, textContent: '', value: '', handlers: {}, attributes: {},
     addEventListener(type, handler) { this.handlers[type] = handler; },
     setAttribute(key, value) { this.attributes[key] = value; },
     removeAttribute(key) { delete this.attributes[key]; },
-    scrollIntoView() {}, click() { clicks.push(selector); },
+    scrollIntoView(options) { scrolls.push({selector, ...options}); }, click() { clicks.push(selector); },
   });
   const $ = selector => {
     if (!elements.has(selector)) elements.set(selector, node(selector));
@@ -98,10 +100,19 @@ function page({result = {names: []}, initial = [], width = 4032, height = 3024, 
   };
   const context = vm.createContext({
     foods, $, pantry, setTimeout, clearTimeout,
-    window: {addEventListener() {}, ...(camera === 'webcam' || camera === 'blocked' ? {navigator: {mediaDevices: {getUserMedia}}} : {})},
+    siteBase: '', location: {href: ''},
+    window: {
+      addEventListener(type, handler) { windowHandlers[type] = handler; },
+      IntersectionObserver: class {
+        constructor(callback) { observeVisibility = callback; }
+        observe() {}
+      },
+      ...(camera === 'webcam' || camera === 'blocked' ? {navigator: {mediaDevices: {getUserMedia}}} : {}),
+    },
     matchMedia: () => ({matches: true}),
     document: {
-      querySelector: () => ({content: 'https://api.test/functions/v1'}), addEventListener() {},
+      querySelector: () => ({content: 'https://api.test/functions/v1'}),
+      addEventListener(type, handler) { documentHandlers[type] = handler; },
       createElement() {
         return {width: 0, height: 0,
           getContext: () => ({fillRect() {}, drawImage() {}}),
@@ -123,12 +134,26 @@ function page({result = {names: []}, initial = [], width = 4032, height = 3024, 
     },
     fetch: async (url, options) => {
       uploads.push({url, body: JSON.parse(options.body)});
-      return {ok: !fail, json: async () => fail ? {error: 'Prova igen.'} : result};
+      const generating = url.endsWith('/generate-recipe');
+      if (generating && generateWait) await generateWait;
+      return {ok: !fail, json: async () => fail ? {error: 'Prova igen.'} : generating ? {id: 'generated-test'} : result};
     },
-    updatePantry: message => { $('#pantry-status').textContent = message; },
+    updatePantry: message => {
+      $('#pantry-status').textContent = message;
+      documentHandlers['restfest:pantry']();
+    },
   });
   vm.runInContext(helpers + capitalize + fridge, context);
-  return {pantry, $, uploads, encodes, bitmaps, sources, clicks, tracks, dialog,
+  return {pantry, $, uploads, encodes, bitmaps, sources, clicks, tracks, dialog, scrolls,
+    location: context.location,
+    refresh() { documentHandlers['restfest:pantry'](); },
+    back() { windowHandlers.pageshow({persisted: true}); },
+    visibility(panel, button = 0) {
+      observeVisibility([
+        {target: $('#pantry-panel'), isIntersecting: panel, intersectionRatio: panel ? 1 : 0},
+        {target: $('#invent-button'), isIntersecting: button > 0, intersectionRatio: button},
+      ]);
+    },
     async choose() { $('#fridge-photo-input').files = [{name: 'kyl.jpg'}]; await $('#fridge-photo-input').handlers.change(); },
     // The phone's camera hands its one photo to the capture input.
     async capture() { $('#fridge-camera-input').files = [{name: 'image.jpg'}]; await $('#fridge-camera-input').handlers.change(); },
@@ -217,7 +242,8 @@ test('"Fota" opens the phone camera at once, and steps aside where there is no c
   await p.capture();
   assert.deepEqual(p.pantry.items, ['Mjölk', 'Ägg']);
   assert.equal(p.uploads[0].body.images.length, 1);
-  assert.equal(p.$('#pantry-status').textContent, '2 råvaror från bilden lades till. Stämmer något inte, tryck på det för att ta bort det.');
+  assert.equal(p.$('#pantry-status').textContent, '2 råvaror från bilden lades till. Kontrollera listan och ta bort det som inte stämmer.');
+  assert.deepEqual(p.scrolls, [{selector: '#pantry-panel', block: 'start', behavior: 'auto'}], 'the confirmation and heading start the review, including with reduced motion');
   assert.equal(p.$('#fridge-camera').disabled, false);
   assert.equal(p.$('#fridge-photo').hidden, false, 'both buttons are back after the scan');
   assert.equal(p.$('span').textContent, 'Fota');
@@ -259,4 +285,70 @@ test('a blocked camera says so and leaves the photo library to use', async () =>
   assert.equal(p.$('#pantry-status').textContent, 'Kameran är blockerad. Tillåt den i webbläsaren, eller välj bilder i stället.');
   assert.equal(p.$('#fridge-camera').disabled, false);
   assert.equal(p.uploads.length, 0);
+});
+
+test('the mobile action follows ingredient review and hands over to the regular button', () => {
+  const p = page({initial: ['Ägg']});
+  assert.equal(p.$('#invent-mobile').hidden, true, 'the action stays out of the hero');
+  p.visibility(true);
+  assert.equal(p.$('#invent-mobile').hidden, false, 'a long ingredient list keeps the next step in reach');
+  p.visibility(true, 0.5);
+  assert.equal(p.$('#invent-mobile').hidden, false, 'a partially visible button is not enough');
+  p.visibility(true, 1);
+  assert.equal(p.$('#invent-mobile').hidden, true, 'only the regular action is shown when it is fully visible');
+  p.visibility(false);
+  assert.equal(p.$('#invent-mobile').hidden, true, 'the action stays out of the rest of the page');
+  p.visibility(true);
+  p.pantry.items = ['Okänd mat'];
+  p.refresh();
+  assert.equal(p.$('#invent-recipe').hidden, true);
+  assert.equal(p.$('#invent-mobile').hidden, true, 'unknown ingredients alone cannot enable generation');
+  p.pantry.items = [];
+  p.refresh();
+  assert.equal(p.$('#invent-mobile').hidden, true);
+});
+
+test('scanning pauses both recipe actions until the ingredient review is ready', async () => {
+  const p = page({initial: ['Ägg'], result: {names: ['Mjölk']}});
+  p.visibility(true);
+  const scan = p.choose();
+  assert.equal(p.$('#invent-mobile').hidden, true);
+  assert.equal(p.$('#invent-button').disabled, true);
+  assert.equal(p.$('#invent-mobile-button').disabled, true);
+  await scan;
+  assert.equal(p.$('#invent-mobile').hidden, false);
+  assert.equal(p.$('#invent-button').disabled, false);
+  assert.equal(p.$('#invent-mobile-button').disabled, false);
+});
+
+test('both recipe actions share one request, progress, error recovery and back navigation', async () => {
+  let finish;
+  const p = page({initial: ['Ägg'], generateWait: new Promise(resolve => { finish = resolve; })});
+  p.visibility(true);
+  const pending = p.$('#invent-mobile-button').handlers.click();
+  await p.$('#invent-button').handlers.click();
+  assert.equal(p.uploads.length, 1, 'the other action cannot start a second recipe');
+  assert.deepEqual(p.uploads[0].body, {items: [{name: 'Ägg', key: 'agg'}]});
+  for (const button of ['#invent-button', '#invent-mobile-button']) {
+    assert.equal(p.$(button).disabled, true);
+    assert.equal(p.$(button).attributes['aria-busy'], 'true');
+  }
+  assert.match(p.$('#invent-mobile-status').textContent, /Vi skriver receptet/);
+  assert.equal(p.$('#invent-mobile-status').textContent, p.$('#invent-status').textContent);
+  finish();
+  await pending;
+  assert.equal(p.location.href, 'nytt-recept.html?id=generated-test');
+  p.back();
+  assert.equal(p.$('#invent-button').disabled, false);
+  assert.equal(p.$('#invent-mobile-button').disabled, false);
+  assert.equal(p.$('#invent-mobile-status').textContent, '');
+
+  const failed = page({initial: ['Ägg'], fail: true});
+  failed.visibility(true);
+  await failed.$('#invent-mobile-button').handlers.click();
+  assert.equal(failed.$('#invent-mobile-status').textContent, 'Prova igen.');
+  assert.equal(failed.$('#invent-status').textContent, 'Prova igen.');
+  assert.equal(failed.$('#invent-button').disabled, false);
+  assert.equal(failed.$('#invent-mobile-button').disabled, false);
+  assert.equal(failed.$('#invent-mobile').hidden, false);
 });

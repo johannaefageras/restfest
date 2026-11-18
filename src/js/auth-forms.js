@@ -14,6 +14,7 @@ import {
 } from "./account-helpers.js";
 
 const account = window.restfestAccount;
+const siteName = document.querySelector('meta[name="application-name"]')?.content;
 const main = $("#main");
 const params = new URLSearchParams(location.search);
 const returnPath = safeReturnPath(params.get("till"), location.origin);
@@ -64,7 +65,7 @@ async function loginPage() {
     });
     title.textContent = creating ? "Skapa konto." : "Logga in.";
     submit.textContent = creating ? "Skapa konto" : "Logga in";
-    document.title = `${creating ? "Skapa konto" : "Logga in"} · Ofta bra efter`;
+    document.title = [creating ? "Skapa konto" : "Logga in", siteName].filter(Boolean).join(" · ");
     form.password.autocomplete = creating ? "new-password" : "current-password";
     show(errorBox, "");
     if (address) {

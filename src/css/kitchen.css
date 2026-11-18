@@ -182,6 +182,22 @@ textarea:focus-visible,
   margin-top: 7px;
 }
 
+.pantry-status {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-button);
+  background: var(--well);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+}
+.pantry-status:empty {
+  display: none;
+}
+#pantry-panel {
+  scroll-margin-top: 26px;
+}
+
 .pantry-list {
   display: flex;
   flex-wrap: wrap;
@@ -2763,7 +2779,7 @@ body:has(#shopping-dialog[open]) {
 .invent-recipe .button {
   margin-top: 13px;
 }
-.invent-recipe .button[aria-busy="true"] {
+:is(.invent-recipe, .invent-mobile) .button[aria-busy="true"] {
   cursor: progress;
   opacity: 0.75;
 }
@@ -2772,6 +2788,31 @@ body:has(#shopping-dialog[open]) {
 }
 .invent-status:empty {
   display: none;
+}
+
+/* The regular action stays in the list. Its mobile counterpart is shown only while the list is
+   on screen and the regular button is out of view (src/js/fridge-ai.js). */
+.invent-mobile {
+  display: none;
+}
+@media (max-width: 799px) {
+  .invent-mobile:not([hidden]) {
+    display: block;
+    position: fixed;
+    z-index: 10;
+    inset: auto 0 0;
+    padding: 12px max(18px, env(safe-area-inset-right))
+      max(12px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+    border-top: 2px solid var(--ink);
+    background: var(--surface);
+    box-shadow: 0 -4px 12px var(--shadow);
+  }
+  .invent-mobile .button {
+    width: 100%;
+  }
+  .pantry-chip {
+    scroll-margin-bottom: calc(100px + env(safe-area-inset-bottom));
+  }
 }
 
 @media (max-width: 699px) {

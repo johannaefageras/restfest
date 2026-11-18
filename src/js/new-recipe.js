@@ -10,6 +10,7 @@ import { intendedSave, saveIntent } from "./account-helpers.js";
 import { amountParts, recipeServings } from "./recipe-amounts.js";
 
 const api = document.querySelector('meta[name="restfest-ai"]')?.content;
+const siteName = document.querySelector('meta[name="application-name"]')?.content ?? "";
 // Accounts (account.js, which runs before this module), or undefined when the site has none.
 const account = window.restfestAccount;
 const main = $("#main");
@@ -135,7 +136,7 @@ function recipeHtml(recipe, data) {
   return `<article class="recipe-view" data-recipe="${recipeId}" data-shopping-source="generated:${escapeHtml(data.id)}">
     <div class="dialog-top cook-art has-photo" data-recipe-photo>${photoHtml(recipe, data.image)}</div>
     <div class="dialog-main">
-      <p class="dialog-kicker"><span class="mini-badge">OFTA BRA EFTER · NYTT RECEPT</span><span>${recipe.categories
+      <p class="dialog-kicker"><span class="mini-badge">${escapeHtml([siteName.toUpperCase(), "NYTT RECEPT"].filter(Boolean).join(" · "))}</span><span>${recipe.categories
         .filter((key) => mealTypes[key])
         .map(
           (key) =>
@@ -347,7 +348,7 @@ async function load() {
     return;
   }
   const { recipe } = data;
-  document.title = `${recipe.title} · Ofta bra efter`;
+  document.title = [recipe.title, siteName].filter(Boolean).join(" · ");
   document
     .querySelector('meta[name="description"]')
     ?.setAttribute("content", recipe.description);

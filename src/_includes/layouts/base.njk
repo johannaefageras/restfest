@@ -1,8 +1,9 @@
 {#- The layout every page shares: head, header, footer, shopping list and scripts.
     Small UI icons (arrows, chevrons, close, the save heart) come from icons.css: see tools/icons.mjs.
     Page data it reads:
-      title, description   <title> and meta description
-      titleSuffix          added after the title, e.g. " · Ofta bra efter" on recipe pages
+      title, description   page overrides for site.title and site.description
+      titleSuffix          defaults to " · " + site.name; set to '' to omit it
+      socialImage          optional {path, alt} override for site.socialImage
       base                 "../" for pages one folder down (recept/, kategori/, …), so paths resolve from the site root
       scripts              extra scripts from js/ after app.js, e.g. [kitchen.js] on the home page
       modules              extra scripts from js/ loaded as modules, after the others, e.g. [new-recipe.js]
@@ -10,13 +11,19 @@
                            foods are matched: the home page and nytt-recept.html. Other pages get only
                            the foods the recipes use, in data/recipe-index.js
       noindex              true keeps search engines away, e.g. on nytt-recept.html
-      recipe               set on recipe pages, which get share tags and recipe structured data
+      recipe               set on recipe pages, which use their own sharing photo and structured data
     The address of the AI functions (_data/ai.js) goes in <meta name="restfest-ai"> once it's set.
     Accounts (ai.accounts, HANDOFF.md "Konton och receptbok") add <meta name="restfest-account">, the
     account button and js/account.js. The pages are built signed out; a small script in the head adds
     the class signed-in to <html> before the first paint, and elements with the class when-signed-in
     or when-signed-out show in that state only (kitchen.css). -#}
 {%- set isHome = page.url == '/' -%}
+{%- set pageTitle = (title ~ (titleSuffix if titleSuffix is defined else (' · ' ~ site.name))) if title else site.title -%}
+{%- set pageDescription = description or site.description -%}
+{%- set shareTitle = recipe.title or pageTitle -%}
+{%- set shareImage = {path: recipe.image, alt: recipe.alt} if recipe else (socialImage or site.socialImage) -%}
+{%- set shareImageUrl = site.absolute(shareImage.path) if shareImage.path else null -%}
+{%- set canonicalUrl = site.absolute(page.url) if not noindex else null -%}
 {#- The home page links to its own sections; the other pages link to the home page. -#}
 {%- set homeUrl = '' if isHome else (base or './') -%}
 {#- The "Recept" menu, in the header (opens downwards) and the footer (opens upwards): one entry per
@@ -35,7 +42,7 @@
         </details>
 {%- endmacro -%}
 <!doctype html>
-<html lang="sv"{% if base %} data-base="{{ base }}"{% endif %}>
+<html lang="{{ site.language | escape }}"{% if base %} data-base="{{ base }}"{% endif %}>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,8 +50,9 @@
       one whose media query matches is used, and applyTheme below gives the dark one dark.css's query. #}
   <meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)" id="dark-theme-color">
   <meta name="theme-color" content="#ffffff">
-  <title>{{ title }}{{ titleSuffix }}</title>
-  <meta name="description" content="{{ description }}">
+  <title>{{ pageTitle | escape }}</title>
+  <meta name="description" content="{{ pageDescription | escape }}">
+  <meta name="application-name" content="{{ site.name | escape }}">
   {%- if noindex %}
   <meta name="robots" content="noindex">
   {%- endif %}
@@ -55,19 +63,23 @@
   <meta name="restfest-account" content="{{ ai.supabaseUrl }}" data-key="{{ ai.publishableKey }}">
   <script>try { if (localStorage.getItem('restfest-account')) document.documentElement.classList.add('signed-in') } catch {}</script>
   {%- endif %}
-  {%- if recipe %}
-  {%- if recipe.url %}
-  <link rel="canonical" href="{{ recipe.url }}">
-  <meta property="og:url" content="{{ recipe.url }}">
+  {%- if canonicalUrl %}
+  <link rel="canonical" href="{{ canonicalUrl | escape }}">
+  <meta property="og:url" content="{{ canonicalUrl | escape }}">
   {%- endif %}
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Ofta bra efter">
-  <meta property="og:title" content="{{ recipe.title }}">
-  <meta property="og:description" content="{{ recipe.description }}">
-  {%- if recipe.imageUrl %}
-  <meta property="og:image" content="{{ recipe.imageUrl }}">
-  <meta name="twitter:card" content="summary_large_image">
-  {%- endif %}
+  <meta property="og:type" content="{{ 'article' if recipe else 'website' }}">
+  <meta property="og:site_name" content="{{ site.name | escape }}">
+  <meta property="og:locale" content="{{ site.locale | escape }}">
+  <meta property="og:title" content="{{ shareTitle | escape }}">
+  <meta property="og:description" content="{{ pageDescription | escape }}">
+  <meta name="twitter:card" content="{{ 'summary_large_image' if shareImageUrl else 'summary' }}">
+  <meta name="twitter:title" content="{{ shareTitle | escape }}">
+  <meta name="twitter:description" content="{{ pageDescription | escape }}">
+  {%- if shareImageUrl %}
+  <meta property="og:image" content="{{ shareImageUrl | escape }}">
+  <meta property="og:image:alt" content="{{ shareImage.alt | escape }}">
+  <meta name="twitter:image" content="{{ shareImageUrl | escape }}">
+  <meta name="twitter:image:alt" content="{{ shareImage.alt | escape }}">
   {%- endif %}
   <link rel="icon" href="{{ base }}assets/favicon.png" type="image/png">
   {#- One file per role, plus the Medium that every header button uses. The other weights load when a page needs them. #}
@@ -106,8 +118,8 @@
           theme, the sun in the dark. It sits on the left, where there is room: on the right it would
           push the menu off centre. #}
       <div class="header-start">
-        <a class="brand" href="{{ homeUrl or '#' }}" aria-label="Ofta bra efter, startsida">
-          <span>Ofta bra efter</span>
+        <a class="brand" href="{{ homeUrl or '#' }}" aria-label="{{ site.name | escape }}, startsida">
+          <span>{{ site.name | escape }}</span>
         </a>
         <button class="saved-nav theme-toggle" type="button" aria-label="Mörkt läge" aria-pressed="false" hidden>
           <img class="theme-moon" src="{{ base }}assets/icons/moon.svg" alt="" width="24" height="24">
@@ -158,8 +170,8 @@
       so screen readers skip it. #}
   <footer class="site-footer">
     <div class="footer-inner wrap">
-      <a class="brand" href="{{ homeUrl or '#' }}" aria-label="Ofta bra efter, startsida">
-        <span>Ofta bra efter</span>
+      <a class="brand" href="{{ homeUrl or '#' }}" aria-label="{{ site.name | escape }}, startsida">
+        <span>{{ site.name | escape }}</span>
       </a>
       <p class="footer-tagline">Rädda resterna.</p>
       <nav aria-label="Sidfot">
@@ -168,9 +180,12 @@
         {%- if ai.accounts %}
         <a class="nav-link" href="{{ base }}integritet.html"{% if page.url == '/integritet.html' %} aria-current="page"{% endif %}>Integritet</a>
         {%- endif %}
+        {%- for profile in site.socialLinks %}
+        <a class="nav-link" href="{{ profile.url | escape }}" rel="me">{{ profile.label | escape }}</a>
+        {%- endfor %}
       </nav>
     </div>
-    <p class="footer-mark" aria-hidden="true">Ofta bra efter</p>
+    <p class="footer-mark" aria-hidden="true">{{ site.name | escape }}</p>
   </footer>
   {%- if not recipe %}
   {#- Recipe pages show the recipe in the page, so only the other pages need the recipe pop-up. #}

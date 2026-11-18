@@ -5,13 +5,9 @@ const eleventyExcludeFromCollections = true;
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{%- for path in ['', 'receptarkiv.html', 'mer-an-mat.html'] %}
-  <url><loc>{{ site.absolute(path) }}</loc></url>
-{%- endfor %}
-{%- for item in collections.recipes %}
-  <url><loc>{{ item.data.recipe.url }}</loc></url>
-{%- endfor %}
-{%- for listing in collections.recipeTypes.concat(collections.recipeCategories, collections.recipeTags) %}
-  <url><loc>{{ site.absolute(listing.path) }}</loc></url>
+{%- for item in collections.all %}
+{%- if item.url and not item.data.noindex and (item.url.endsWith('/') or item.url.endsWith('.html')) %}
+  <url><loc>{{ site.absolute(item.url) | escape }}</loc></url>
+{%- endif %}
 {%- endfor %}
 </urlset>

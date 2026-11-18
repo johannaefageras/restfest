@@ -1,0 +1,9 @@
+---js
+// Keep the sitemap reference on the same public address as sitemap.xml.
+const permalink = data => data.site.url ? 'robots.txt' : false;
+const eleventyExcludeFromCollections = true;
+---
+User-agent: *
+Allow: /
+
+Sitemap: {{ site.absolute('sitemap.xml') }}
