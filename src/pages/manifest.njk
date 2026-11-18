@@ -1,0 +1,24 @@
+---js
+// The web app manifest: the name and icons a phone uses when the site is added to its home screen.
+// The icons are drawn in design/app-icon.svg, app-icon-touch.svg and app-icon-maskable.svg, and
+// exported to src/assets/. "display": "browser" opens the site from the home screen in the browser
+// as usual, with its address bar and back button. Addresses here are relative to this file.
+const permalink = 'manifest.webmanifest';
+const eleventyExcludeFromCollections = true;
+---
+{
+  "name": {{ site.name | dump | safe }},
+  "short_name": {{ site.name | dump | safe }},
+  "description": {{ site.description | dump | safe }},
+  "lang": {{ site.language | dump | safe }},
+  "start_url": "./",
+  "scope": "./",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {"src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

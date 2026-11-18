@@ -10,7 +10,8 @@ import { intendedSave, saveIntent } from "./account-helpers.js";
 import { amountParts, recipeServings } from "./recipe-amounts.js";
 
 const api = document.querySelector('meta[name="restfest-ai"]')?.content;
-const siteName = document.querySelector('meta[name="application-name"]')?.content ?? "";
+const siteName =
+  document.querySelector('meta[name="application-name"]')?.content ?? "";
 // Accounts (account.js, which runs before this module), or undefined when the site has none.
 const account = window.restfestAccount;
 const main = $("#main");
@@ -62,7 +63,8 @@ function factsHtml(recipe) {
   return recipe.facts
     .map(({ label, value }) => {
       if (label === "Nivå") value = difficultyLabel(value);
-      const icon = label === "Nivå" ? difficultyLevels[value] : factIcons[label];
+      const icon =
+        label === "Nivå" ? difficultyLevels[value] : factIcons[label];
       const servings = label === "Portioner" ? recipeServings(value) : null;
       const dt = `<dt${servings ? ' id="recipe-servings-label"' : ""}>${icon ? `<img src="${squareIconPath(icon)}" alt="" width="44" height="44">` : ""}${escapeHtml(label)}</dt>`;
       const dd = servings
@@ -176,7 +178,7 @@ function recipeHtml(recipe, data) {
         </div>
         <div class="cook-shopping">
           <p>Tryck på + vid det du behöver köpa.</p>
-          <button class="text-button cook-open-shopping" type="button" aria-haspopup="dialog"><img src="${squareIconPath("shopping-basket-1")}" alt="" width="20" height="20">Inköpslista <span class="count cook-shopping-count">0</span></button>
+          <button class="text-button cook-open-shopping" type="button" aria-haspopup="dialog"><img src="${squareIconPath("shopping-basket")}" alt="" width="20" height="20">Inköpslista <span class="count cook-shopping-count">0</span></button>
         </div>
         <p class="meta" data-servings-note hidden>Ingredienslistan är omräknad. Mängder i instruktionerna gäller originalreceptet.</p>
         <div class="cook-ingredient-columns">${ingredientsHtml(recipe, recipeId)}</div>
@@ -206,14 +208,21 @@ function recipeHtml(recipe, data) {
 async function getRecipe() {
   try {
     if (!navigator.onLine) throw new Error("Du är offline.");
-    const response = await fetch(`${api}/get-recipe?id=${encodeURIComponent(id)}`, { signal: AbortSignal.timeout(12000) });
+    const response = await fetch(
+      `${api}/get-recipe?id=${encodeURIComponent(id)}`,
+      { signal: AbortSignal.timeout(12000) },
+    );
     const result = await response.json().catch(() => ({}));
-    if (!response.ok) throw Object.assign(new Error(result.error || "Något gick fel."), { status: response.status });
+    if (!response.ok)
+      throw Object.assign(new Error(result.error || "Något gick fel."), {
+        status: response.status,
+      });
     account?.rememberRecipe(result);
     return result;
   } catch (error) {
     const cached = account?.cachedRecipe(id);
-    if (cached && (!error.status || error.status >= 500)) return { ...cached, offline: true };
+    if (cached && (!error.status || error.status >= 500))
+      return { ...cached, offline: true };
     throw error;
   }
 }
@@ -293,7 +302,9 @@ function drawBookSave({ focus = false } = {}) {
 function setInBook(on) {
   account.setGenerated(id, on);
   showToast(
-    on ? "Sparat i din receptbok ♡" : "Receptet har tagits bort från receptboken",
+    on
+      ? "Sparat i din receptbok ♡"
+      : "Receptet har tagits bort från receptboken",
   );
 }
 
@@ -330,7 +341,9 @@ if (account) {
     drawBookSave({ focus: true });
   });
   document.addEventListener("restfest:account", () => {
-    const focused = $("[data-book-save]", main)?.contains(document.activeElement);
+    const focused = $("[data-book-save]", main)?.contains(
+      document.activeElement,
+    );
     drawBookSave({ focus: Boolean(focused) });
   });
 }
@@ -352,7 +365,8 @@ async function load() {
   document
     .querySelector('meta[name="description"]')
     ?.setAttribute("content", recipe.description);
-  if (data.offline) message.innerHTML = '<p>Visar en sparad kopia av receptet.</p>';
+  if (data.offline)
+    message.innerHTML = "<p>Visar en sparad kopia av receptet.</p>";
   else message.remove();
   main.insertAdjacentHTML("beforeend", recipeHtml(recipe, data));
   main.removeAttribute("aria-busy");
@@ -369,7 +383,8 @@ async function load() {
     pageParams.delete("spara");
     history.replaceState(null, "", `${location.pathname}?${pageParams}`);
   }
-  if ((!navigator.onLine || data.offline) && data.image.status !== "done") showNoPhoto(article);
+  if ((!navigator.onLine || data.offline) && data.image.status !== "done")
+    showNoPhoto(article);
   else if (data.image.status !== "done" || !data.image.url)
     loadPhoto(article, recipe, data.image);
 }

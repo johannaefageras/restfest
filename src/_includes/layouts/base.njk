@@ -100,6 +100,9 @@
   <meta name="twitter:image:alt" content="{{ shareImageAlt | escape }}">
   {%- endif %}
   <link rel="icon" href="{{ base }}assets/favicon.png" type="image/png">
+  {#- The home-screen icon on iPhone, and the manifest with the icons other phones use (pages/manifest.njk). #}
+  <link rel="apple-touch-icon" href="{{ base }}assets/apple-touch-icon.png">
+  <link rel="manifest" href="{{ base }}manifest.webmanifest">
   {#- One file per role, plus the Medium that every header button uses. The other weights load when a page needs them. #}
   <link rel="preload" href="{{ base }}assets/fonts/TrioGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ base }}assets/fonts/SpotGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -163,7 +166,7 @@
         {%- else %}
         <button id="shopping-nav" class="saved-nav" type="button" aria-label="Visa inköpslistan" aria-haspopup="dialog">
         {%- endif %}
-          <img src="{{ base }}assets/icons/shopping-basket-1.svg" alt="" width="24" height="24">
+          <img src="{{ base }}assets/icons/shopping-basket.svg" alt="" width="24" height="24">
           <span class="shopping-nav-label">Inköpslista</span><span id="shopping-count" class="count" aria-hidden="true">0</span>
         {%- if ai.accounts %}</a>{% else %}</button>{% endif %}
         {%- if ai.accounts %}
@@ -208,7 +211,7 @@
   <dialog id="shopping-dialog" aria-labelledby="shopping-title">
     <div class="dialog-main" data-shopping-list>
       <button class="dialog-close" type="button" aria-label="Stäng inköpslistan" autofocus><i class="fas fa-xmark" aria-hidden="true"></i></button>
-      <h2 id="shopping-title"><img src="{{ base }}assets/icons/shopping-basket-1.svg" alt="" width="30" height="30">Inköpslista</h2>
+      <h2 id="shopping-title"><img src="{{ base }}assets/icons/shopping-basket.svg" alt="" width="30" height="30">Inköpslista</h2>
       {% include "shopping-controls.njk" %}
       {% set shoppingListPrefix = 'shopping' %}
       {% include "shopping-items.njk" %}

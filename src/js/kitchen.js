@@ -332,12 +332,10 @@ function renderFeaturedRecipe() {
   let missing = "";
   if (match.missing.length)
     missing = `<strong>Saknas</strong> · ${listFoods(match.missing, { max: 4 })}`;
-  else if (match.swap) missing = "Med bytet har du det du behöver.";
   else if (!match.otherMissing.length) missing = "Du har allt som behövs.";
   const explanation = `<p class="match-count">Du har ${match.have.length} av ${match.mainCount} huvudråvaror</p>
     ${missing ? `<p>${missing}</p>` : ""}
-    ${match.otherMissing.length ? `<p class="match-extra">Kolla också: ${listFoods(match.otherMissing, { lower: true })}.</p>` : ""}
-    ${match.swap ? `<p class="recipe-swap"><strong>Bytestips</strong> · ${escapeHtml(match.swap.text)}</p>` : ""}`;
+    ${match.otherMissing.length ? `<p class="match-extra">Kolla också: ${listFoods(match.otherMissing, { lower: true })}.</p>` : ""}`;
   $("#featured-recipe").innerHTML = `<article class="featured-card">
     <div class="featured-art${recipe.cardImage ? " has-photo" : ""}">
       <span class="sticker">BÄSTA MATCHEN</span>

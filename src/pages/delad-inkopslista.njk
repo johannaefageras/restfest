@@ -22,7 +22,7 @@ const eleventyComputed = { base: data => data.copyPage.base };
         <h1 id="copy-title" tabindex="-1"><span class="marker" data-copy-title></span></h1>
         <p class="shopping-copy-intro">Bocka av medan du handlar.</p>
       </div>
-      <img src="{{ base }}assets/icons/shopping-basket-1.svg" width="100" height="100" alt="" aria-hidden="true">
+      <img src="{{ base }}assets/icons/shopping-basket.svg" width="100" height="100" alt="" aria-hidden="true">
     </header>
     <div class="shopping-copy-progress">
       <div role="status"><strong data-copy-remaining></strong><span class="meta" data-copy-count></span></div>
@@ -37,7 +37,7 @@ const eleventyComputed = { base: data => data.copyPage.base };
     <p class="meta shopping-copy-storage" role="status" data-copy-storage hidden>Avbockningarna kan inte sparas på den här enheten. Låt sidan vara öppen medan du handlar.</p>
   </article>
   <section class="shopping-copy-error" data-copy-error hidden aria-labelledby="copy-error-title">
-    <img src="{{ base }}assets/icons/shopping-basket-1.svg" alt="" width="80" height="80">
+    <img src="{{ base }}assets/icons/shopping-basket.svg" alt="" width="80" height="80">
     <h1 id="copy-error-title">Här saknas en inköpslista.</h1>
     <p data-copy-error-message></p>
     <a class="button" href="{{ base or './' }}">Till startsidan</a>

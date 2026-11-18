@@ -2,7 +2,7 @@
     It is the same card app.js builds in archiveCard() for the archive and Mer än mat: change both together.
     `card` is recipe.card from lib/recipes.js. app.js shows the saved state of the heart once the page loads. -#}
 {%- macro recipeCard(card, base) -%}
-<article class="archive-card" data-tone="">
+<article class="archive-card">
           <div class="archive-card-art has-photo">
             {%- set srcset = card.cardImage | webpSrcset(base) %}
             <img src="{{ base }}{{ card.cardImage | webp }}"{% if srcset %} srcset="{{ srcset }}" sizes="(min-width: 900px) 33vw, (min-width: 421px) 50vw, 100vw"{% endif %} alt="" width="600" height="338" loading="lazy" decoding="async">

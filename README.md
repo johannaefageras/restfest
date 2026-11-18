@@ -78,6 +78,10 @@ The branded recipe cards are selected; alternative `*-foto.png` exports stay ava
 
 Every page receives Open Graph and Twitter metadata. Indexable pages also receive canonical links. When `url` is set, each build generates `sitemap.xml` and a `robots.txt` reference to it. The sitemap includes public recipe, category, type and tag pages and excludes pages marked `noindex`.
 
+### Home-screen icons
+
+[src/assets/apple-touch-icon.png](src/assets/apple-touch-icon.png) is the iPhone home-screen icon. [src/pages/manifest.njk](src/pages/manifest.njk) builds `manifest.webmanifest`, which gives other phones the site's name and `icon-192.png`, `icon-512.png` and `icon-maskable-512.png`. The drawings are [design/app-icon.svg](design/app-icon.svg), [app-icon-touch.svg](design/app-icon-touch.svg) and [app-icon-maskable.svg](design/app-icon-maskable.svg); export them again at the same sizes after changing them. The manifest keeps `"display": "browser"`, so the site opens from the home screen in the browser as usual.
+
 ## Project structure
 
 | Path | Contents |

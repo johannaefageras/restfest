@@ -446,12 +446,6 @@ textarea:focus-visible,
   font-weight: var(--font-weight-medium);
 }
 
-.recipe-swap {
-  padding: 7px 9px;
-  background: var(--butter);
-  border-left: 2px solid var(--ink);
-}
-
 .match-extra {
   color: var(--muted);
 }
@@ -1133,10 +1127,6 @@ details[open] > summary > .fa-chevron-down {
   background: var(--butter);
   border-bottom: 1px solid var(--line);
 }
-
-.archive-card[data-tone="green"] .archive-card-art {
-  background: var(--green);
-}
 .archive-card:nth-child(4n + 3) .archive-card-art {
   background: var(--pink);
 }
@@ -1319,8 +1309,7 @@ details[open] > summary > .fa-chevron-down {
   letter-spacing: var(--track-display-lg);
 }
 
-.cook-pantry,
-.cook-swap {
+.cook-pantry {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1349,23 +1338,6 @@ details[open] > summary > .fa-chevron-down {
 .cook-add-missing img {
   width: 16px;
   height: 16px;
-}
-.cook-swap {
-  background: var(--butter);
-}
-.cook-swap h4 {
-  font-size: 18px;
-}
-.cook-swap p {
-  font-size: var(--text-small);
-  margin-top: 3px;
-}
-.cook-swap .button {
-  flex-shrink: 0;
-}
-.cook-swap .button[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--on-ink);
 }
 
 .recipe-section {
@@ -2060,17 +2032,6 @@ body:has(#shopping-dialog[open]) {
 @media (max-width: 620px) {
   .cook-ingredient-columns {
     columns: 1;
-  }
-}
-
-@media (max-width: 520px) {
-  .cook-swap {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 9px;
-  }
-  .cook-swap .button {
-    min-height: 39px;
   }
 }
 
