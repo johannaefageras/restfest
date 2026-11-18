@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min + minst 4 tim marinering"
   Tillagning: "45 min + 10 min vila"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [flaskkarre, honung, ris]
 ingredients:
   - title: "Marinad"

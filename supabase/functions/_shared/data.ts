@@ -25318,7 +25318,82 @@ export const data = {
     "chips",
     "kottfarssas",
     "rismjol",
-    "mandelmjol"
+    "mandelmjol",
+    "ananas",
+    "clementin",
+    "aubergine",
+    "fankal",
+    "gurkmeja",
+    "frisesallad",
+    "salvia",
+    "aggvita",
+    "emmentaler",
+    "brie",
+    "burrata",
+    "bringa",
+    "margben",
+    "oxfile",
+    "oxsvans",
+    "ankfett",
+    "anklar",
+    "rakorv",
+    "lufttorkad-skinka",
+    "laxfile",
+    "kraftstjartar",
+    "lojrom",
+    "pepparkaksdeg",
+    "ragbrod",
+    "croissanter",
+    "sockerkaka",
+    "mannagryn",
+    "ragkross",
+    "hallonsylt",
+    "inlagd-gurka",
+    "surkal",
+    "balsamvinager",
+    "matlagningsvin",
+    "sesamolja",
+    "sherryvinager",
+    "valnotsolja",
+    "vitvinsvinager",
+    "chilisas",
+    "worcestershiresas",
+    "linfron",
+    "russin",
+    "solroskarnor",
+    "senapsfro",
+    "senapspulver",
+    "torkad-chili",
+    "nitritsalt",
+    "benbuljong",
+    "kalvfond",
+    "fisksas",
+    "shaoxingvin",
+    "svart-risvinager-chinkiang",
+    "bonitoflingor",
+    "gochugaru",
+    "kombu",
+    "mirin",
+    "noriark",
+    "panko",
+    "fullkornsragmjol",
+    "farinsocker",
+    "florsocker",
+    "glukossirap",
+    "lonnsirap",
+    "mork-sirap",
+    "bikarbonat",
+    "farsk-jast",
+    "jast-for-sota-degar",
+    "surdegsgrund",
+    "mandelmassa",
+    "marsipan",
+    "strossel",
+    "gelatinblad",
+    "pektin",
+    "vaniljglass",
+    "svart-te",
+    "folkol"
   ],
   "dinnerMeals": [
     {
@@ -25352,6 +25427,10 @@ export const data = {
       "label": "Amerikanskt"
     },
     {
+      "key": "Duck",
+      "label": "Anka"
+    },
+    {
       "key": "Argentinian",
       "label": "Argentinskt"
     },
@@ -25360,8 +25439,16 @@ export const data = {
       "label": "Asiatiskt"
     },
     {
+      "key": "Baking",
+      "label": "Bakning"
+    },
+    {
       "key": "Bistro",
       "label": "Bistro"
+    },
+    {
+      "key": "Showstopper",
+      "label": "Blickfång"
     },
     {
       "key": "British",
@@ -25388,12 +25475,24 @@ export const data = {
       "label": "Danskt"
     },
     {
+      "key": "Deli",
+      "label": "Deli"
+    },
+    {
       "key": "Family friendly",
       "label": "Familjevänligt"
     },
     {
       "key": "Party",
       "label": "Fest"
+    },
+    {
+      "key": "Festive",
+      "label": "Festligt"
+    },
+    {
+      "key": "Fine dining",
+      "label": "Finkrog"
     },
     {
       "key": "Fish",
@@ -25414,6 +25513,10 @@ export const data = {
     {
       "key": "Fresh",
       "label": "Fräscht"
+    },
+    {
+      "key": "Fresh pasta",
+      "label": "Färsk pasta"
     },
     {
       "key": "Kids",
@@ -25450,6 +25553,14 @@ export const data = {
     {
       "key": "Halloween",
       "label": "Halloween"
+    },
+    {
+      "key": "Handmade",
+      "label": "Handgjort"
+    },
+    {
+      "key": "Weekend project",
+      "label": "Helgprojekt"
     },
     {
       "key": "Main course",
@@ -25500,8 +25611,16 @@ export const data = {
       "label": "Krispigt"
     },
     {
+      "key": "Crayfish party",
+      "label": "Kräftskiva"
+    },
+    {
       "key": "Chicken",
       "label": "Kyckling"
+    },
+    {
+      "key": "Meat",
+      "label": "Kött"
     },
     {
       "key": "Lactose free",
@@ -25542,6 +25661,10 @@ export const data = {
     {
       "key": "Mexican",
       "label": "Mexikanskt"
+    },
+    {
+      "key": "Dinner party",
+      "label": "Middagsbjudning"
     },
     {
       "key": "Zero waste",
@@ -25590,6 +25713,10 @@ export const data = {
     {
       "key": "Leftovers",
       "label": "Rester"
+    },
+    {
+      "key": "Curing",
+      "label": "Rimning"
     },
     {
       "key": "Rice bowl",
@@ -25670,6 +25797,10 @@ export const data = {
     {
       "key": "Weeknight",
       "label": "Vardagsmat"
+    },
+    {
+      "key": "Warm salad",
+      "label": "Varm sallad"
     },
     {
       "key": "Vegan",

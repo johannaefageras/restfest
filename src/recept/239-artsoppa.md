@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min + blötläggning över natten"
   Tillagning: "2 tim"
   Portioner: "6"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [artor, julskinka, lok, morot]
 ingredients:
   - title: "Ärtsoppa"

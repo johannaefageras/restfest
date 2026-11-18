@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min"
   Odlingstid: "2–3 veckor till första skörden"
   Räcker till: "3–4 krukor"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [orter]
 ingredients:
   - title: "Ingredienser"

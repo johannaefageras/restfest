@@ -13,7 +13,7 @@ facts:
   Förberedelse: "25 min"
   Tillagning: "10 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [stek, brod, lok, gurka]
 ingredients:
   - title: "Remoulad"

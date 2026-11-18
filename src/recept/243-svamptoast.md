@@ -13,7 +13,7 @@ facts:
   Förberedelse: "10 min"
   Tillagning: "15 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [svamp, brod, gradde, lok]
 ingredients:
   - title: "Svampstuvning"

@@ -56,7 +56,7 @@ export interface RecipeDoc {
 const foodKeys = Object.keys(data.foods);
 const tagKeys = data.tags.map(tag => tag.key);
 const mealKeys = data.dinnerMeals.map(meal => meal.key);
-const levels = ['Nybörjare', 'Medelsvårt'];
+const levels = ['Nybörjare', 'Medelsvårt', 'Avancerat', 'Mästerkock'];
 
 const text = {type: 'string'};
 const object = (properties: Record<string, unknown>) => ({
@@ -135,7 +135,7 @@ TEXT
 - time: total minutes. timeLabel: "30 min". prepTime and cookTime like "10 min"; cookTime "" when nothing is cooked.
 - servings: the number of portions, usually "4" or "2".
 - unsuitable: false, unless the preferences in the request leave nothing to make a dinner from.
-- level: "Nybörjare" or "Medelsvårt".
+- level: "Nybörjare", "Medelsvårt", "Avancerat" or "Mästerkock", in order of increasing difficulty.
 - categories: from DINNER CATEGORIES, the main one first.
 - tags: three to seven from TAGS. Diet tags only when they hold for the whole recipe; Vegan replaces Vegetarian, Dairy free, Egg free and Lactose free, and Dairy free replaces Lactose free. Leftovers when it uses up leftovers.
 - imagePrompt: in English, the scene for the recipe's photo, 100 to 150 words. The photo's prompt opens with "${photoOpening}" and closes with "${photoClosing}" Both are added for you, so write only what comes between them, in this order, like the examples:

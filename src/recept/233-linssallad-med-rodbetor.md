@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min"
   Tillagning: "45 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [linser, rodbetor, getost, valnot]
 ingredients:
   - title: "Rostade rödbetor"

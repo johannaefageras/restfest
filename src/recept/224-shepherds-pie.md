@@ -13,7 +13,7 @@ facts:
   Förberedelse: "25 min"
   Tillagning: "1 tim"
   Portioner: "6"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [lammfars, potatis, morot]
 ingredients:
   - title: "Fyllning"

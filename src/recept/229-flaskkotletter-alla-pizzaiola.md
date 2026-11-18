@@ -13,7 +13,7 @@ facts:
   Förberedelse: "10 min"
   Tillagning: "25 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [flaskkotlett, tomat, oliver]
 ingredients:
   - title: "Kotletter"

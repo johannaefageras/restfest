@@ -13,7 +13,7 @@ facts:
   Förberedelse: "10 min"
   Väntetid: "2–4 dagars jäsning + 1 veckas torkning"
   Räcker till: "ca 100 frön"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [tomat]
 ingredients:
   - title: "Ingredienser"

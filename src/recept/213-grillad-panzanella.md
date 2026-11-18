@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min + 15 min vila"
   Tillagning: "10 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [brod, tomat, paprika]
 ingredients:
   - title: "Grillat"

@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min"
   Vattnar sig själv i: "5–10 dagar"
   Räcker till: "1 kruka"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [orter]
 ingredients:
   - title: "Ingredienser"

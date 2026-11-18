@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min"
   Tillagning: "50 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [pumpa, kokosmjolk, lok, ingefara]
 ingredients:
   - title: "Soppa"

@@ -13,7 +13,7 @@ facts:
   Förberedelse: "10 min"
   Tillagning: "20 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [renskav, svamp, gradde]
 ingredients:
   - title: "Renskav"

@@ -13,7 +13,7 @@ facts:
   Förberedelse: "25 min"
   Tillagning: "2 tim 30 min"
   Portioner: "6"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [notkott, morot, lok]
 ingredients:
   - title: "Kalops"

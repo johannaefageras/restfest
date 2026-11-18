@@ -13,7 +13,7 @@ facts:
   Förberedelse: "25 min + minst 2 tim marinering"
   Tillagning: "15 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [kyckling, yoghurt, gurka, citron]
 ingredients:
   - title: "Spett"

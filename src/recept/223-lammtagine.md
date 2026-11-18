@@ -13,7 +13,7 @@ facts:
   Förberedelse: "25 min"
   Tillagning: "2 tim 15 min"
   Portioner: "6"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [lamm, aprikos, kikarter]
 ingredients:
   - title: "Tagine"

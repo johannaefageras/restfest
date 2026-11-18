@@ -13,7 +13,7 @@ facts:
   Förberedelse: "10 min"
   Väntetid: "2–3 timmar i ugnen"
   Räcker till: "ca 1 dl pulver av 6–8 skal"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [banan]
 ingredients:
   - title: "Ingredienser"

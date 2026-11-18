@@ -1016,7 +1016,17 @@ details[open] > summary > .fa-chevron-down {
   background: var(--pink);
 }
 #quick-filter[aria-pressed="true"] {
+  background: var(--lavender);
+}
+.food-filter[data-difficulty-filter="Medelsvårt"][aria-pressed="true"] {
   background: var(--yellow);
+}
+.food-filter[data-difficulty-filter="Avancerat"][aria-pressed="true"] {
+  background: #f59a2e;
+}
+.food-filter[data-difficulty-filter="Mästerkock"][aria-pressed="true"] {
+  background: var(--red);
+  color: #fff;
 }
 
 .archive-advanced-filters summary {

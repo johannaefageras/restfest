@@ -42,7 +42,6 @@ const factIcons = {
   Förberedelse: "cutting-board",
   Tillagning: "timer",
   Portioner: "cutlery",
-  Nivå: "difficulty-level",
 };
 
 // An ingredient's text, with each quantity the stepper may scale in a span, as recipe.njk does.
@@ -61,7 +60,8 @@ const keepRanges = (text) => escapeHtml(text).replace(/(\d)–(\d)/g, "$1⁠–�
 function factsHtml(recipe) {
   return recipe.facts
     .map(({ label, value }) => {
-      const icon = factIcons[label];
+      if (label === "Nivå") value = difficultyLabel(value);
+      const icon = label === "Nivå" ? difficultyLevels[value] : factIcons[label];
       const servings = label === "Portioner" ? recipeServings(value) : null;
       const dt = `<dt${servings ? ' id="recipe-servings-label"' : ""}>${icon ? `<img src="${squareIconPath(icon)}" alt="" width="44" height="44">` : ""}${escapeHtml(label)}</dt>`;
       const dd = servings

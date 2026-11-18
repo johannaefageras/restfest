@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min + 30 min vila"
   Tillagning: "35 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [kikartsmjol, gronsaker]
 ingredients:
   - title: "Socca"

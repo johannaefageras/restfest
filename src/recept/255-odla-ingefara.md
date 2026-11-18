@@ -13,7 +13,7 @@ facts:
   Förberedelse: "10 min + blötläggning över natten"
   Odlingstid: "8–10 månader till skörd"
   Räcker till: "1 kruka"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [ingefara]
 ingredients:
   - title: "Ingredienser"

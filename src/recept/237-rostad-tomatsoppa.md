@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min"
   Tillagning: "50 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [tomat, ost, brod, lok]
 ingredients:
   - title: "Tomatsoppa"

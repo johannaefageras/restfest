@@ -13,7 +13,7 @@ facts:
   Förberedelse: "30 min + 30 min marinering"
   Tillagning: "15 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [notkott, ris, paron, agg]
 ingredients:
   - title: "Bulgogi"

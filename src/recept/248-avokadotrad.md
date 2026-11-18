@@ -13,7 +13,7 @@ facts:
   Förberedelse: "10 min"
   Odlingstid: "2–8 veckor till rot och skott"
   Räcker till: "1 krukväxt"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [avokado]
 ingredients:
   - title: "Ingredienser"

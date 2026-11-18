@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min"
   Tillagning: "3 tim"
   Portioner: "6"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [blandfars, flaskfars, tomat, ost]
 ingredients:
   - title: "Soffritto"

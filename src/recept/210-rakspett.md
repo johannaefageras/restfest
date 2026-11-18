@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min + 30 min upptining"
   Tillagning: "5 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [rakor, mango, lime]
 ingredients:
   - title: "Räkspett"

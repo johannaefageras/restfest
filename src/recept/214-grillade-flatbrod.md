@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min + 20 min vila"
   Tillagning: "15 min"
   Portioner: "8 bröd"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [vetemjol, filmjolk, smor, orter]
 ingredients:
   - title: "Flatbröd"

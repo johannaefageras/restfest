@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min"
   Tillagning: "10 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [potatis, agg, tonfisk, tomat]
 ingredients:
   - title: "Sallad"

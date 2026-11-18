@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min"
   Tillagning: "5 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [gronkal, apple, quinoa, fron]
 ingredients:
   - title: "Sallad"

@@ -31,6 +31,7 @@ const dietFilter = new Set();
 let saved = readSavedRecipes() ?? new Set();
 let foodFilter = "all";
 let mealFilter = "all";
+let difficultyFilter = "all";
 let quickOnly = false;
 let savedOnly =
   Boolean(archiveSearch) &&
@@ -705,6 +706,8 @@ function renderArchive() {
   const visible = pool.filter((recipe) => {
     if (savedOnly && !saved.has(recipe.id)) return false;
     if (quickOnly && (recipe.time === null || recipe.time >= 20)) return false;
+    if (difficultyFilter !== "all" && recipe.difficulty !== difficultyFilter)
+      return false;
     if (mealFilter !== "all" && !recipe.meals.includes(mealFilter))
       return false;
     if (
@@ -771,6 +774,7 @@ function renderArchive() {
     dietFilter.size +
     (foodFilter !== "all" ? 1 : 0) +
     selectedTags.size +
+    (difficultyFilter !== "all" ? 1 : 0) +
     (quickOnly ? 1 : 0) +
     (savedOnly ? 1 : 0);
   const filterCount = $("#archive-filter-count");
@@ -794,6 +798,12 @@ function renderArchive() {
     button.setAttribute(
       "aria-pressed",
       String(dietFilter.has(button.dataset.dietFilter)),
+    );
+  });
+  document.querySelectorAll("[data-difficulty-filter]").forEach((button) => {
+    button.setAttribute(
+      "aria-pressed",
+      String(button.dataset.difficultyFilter === difficultyFilter),
     );
   });
 }
@@ -1222,6 +1232,22 @@ if (archiveSearch) {
     if (!dietFilter.delete(tag)) dietFilter.add(tag);
     renderArchive();
   });
+  const quickFilters = $(".archive-quick-filters");
+  quickFilters.insertAdjacentHTML(
+    "beforeend",
+    Object.entries(difficultyLevels)
+      .map(
+        ([level, icon]) =>
+          `<button type="button" class="food-filter" data-difficulty-filter="${level}" aria-pressed="false">${squareIcon(icon)}${level}</button>`,
+      )
+      .join(""),
+  );
+  quickFilters.addEventListener("click", (event) => {
+    const level = event.target.closest("[data-difficulty-filter]")?.dataset.difficultyFilter;
+    if (!level) return;
+    difficultyFilter = difficultyFilter === level ? "all" : level;
+    renderArchive();
+  });
   const clearTags = setupTagPicker();
   archiveSearch.addEventListener("input", renderArchive);
   archiveSort.addEventListener("change", () => {
@@ -1241,6 +1267,7 @@ if (archiveSearch) {
     clearTags();
     dietFilter.clear();
     foodFilter = "all";
+    difficultyFilter = "all";
     setMealFilter("all");
     quickOnly = false;
     renderArchive();

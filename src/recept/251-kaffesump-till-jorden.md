@@ -13,7 +13,7 @@ facts:
   Förberedelse: "5 min"
   Väntetid: "2–3 dagars torkning"
   Räcker till: "komposten och några krukor"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [kaffe]
 ingredients:
   - title: "Ingredienser"

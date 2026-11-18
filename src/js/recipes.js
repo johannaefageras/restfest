@@ -64,6 +64,16 @@ const mealTypes = {
 
 const mealName = (meal) => mealTypes[meal].name ?? mealTypes[meal].label;
 
+// The same difficulty names and fact icons on archive pages and generated recipes.
+const difficultyLevels = {
+  Nybörjare: "difficulty-level-beginner",
+  Medelsvårt: "difficulty-level-intermediate",
+  Avancerat: "difficulty-level-advanced",
+  Mästerkock: "difficulty-level-masterchef",
+};
+// Older saved recipes may still use the former name for the first level.
+const difficultyLabel = (value) => value === "Lätt" ? "Nybörjare" : value;
+
 // Spa, cleaning, pet and gardening recipes live on mer-an-mat.html, not in the food archive.
 const nonFoodMeals = ["spa", "household", "pets", "garden"];
 const isFood = (recipe) =>
@@ -254,6 +264,48 @@ const recipeTagLabels = {
   Upcycling: "Återbruk",
   Vietnamese: "Vietnamesiskt",
   Weeknight: "Vardagsmat",
+  Meat: "Kött",
+  "Fresh pasta": "Färsk pasta",
+  Handmade: "Handgjort",
+  "Weekend project": "Helgprojekt",
+  Festive: "Festligt",
+  "Dinner party": "Middagsbjudning",
+  Showstopper: "Blickfång",
+  Duck: "Anka",
+  "Warm salad": "Varm sallad",
+  "Fine dining": "Finkrog",
+  "Crayfish party": "Kräftskiva",
+  Curing: "Rimning",
+  Deli: "Deli",
+  Cheese: "Ost",
+  Raw: "Rått",
+  Sauce: "Sås",
+  "Egg whites": "Äggvitor",
+  Weekend: "Helg",
+  Snack: "Mellanmål",
+  Beer: "Öl",
+  Eggs: "Ägg",
+  Picnic: "Picknick",
+  Russian: "Ryskt",
+  "New Year": "Nyår",
+  Dumplings: "Dumplings",
+  Steamed: "Ångat",
+  "Dim sum": "Dim sum",
+  "Egg yolks": "Äggulor",
+  "Ice cream": "Glass",
+  Cake: "Tårta",
+  Rye: "Råg",
+  Sourdough: "Surdeg",
+  Candy: "Godis",
+  Drink: "Dryck",
+  Preserves: "Konservering",
+  Basics: "Grundrecept",
+  Stock: "Fond & buljong",
+  Umami: "Umami",
+  Birthday: "Födelsedag",
+  "Natural colors": "Naturliga färger",
+  Gingerbread: "Pepparkakor",
+  "Family project": "Familjeprojekt",
 };
 
 // The illustrated icon (assets/icons/) for a tag that has an obvious one. A tag's page shows it beside

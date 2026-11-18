@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min"
   Tillagning: "20 min"
   Portioner: "8 lompor"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [potatis, rismjol]
 ingredients:
   - title: "Lompor"

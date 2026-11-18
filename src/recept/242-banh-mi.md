@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min + 20 min picklning"
   Tillagning: "5 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [flaskkarre, brod, morot, gurka]
 ingredients:
   - title: "Snabbpickles"

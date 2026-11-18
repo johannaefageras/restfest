@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min"
   Väntetid: "2–6 veckor till rötter"
   Räcker till: "4–6 nya plantor"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: []
 ingredients:
   - title: "Ingredienser"

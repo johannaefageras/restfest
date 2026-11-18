@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min"
   Tillagning: "15–18 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [lax, potatis, citron, dill]
 ingredients:
   - title: "Folieknyten"

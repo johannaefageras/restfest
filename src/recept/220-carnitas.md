@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min"
   Tillagning: "3 tim 15 min"
   Portioner: "6"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [flaskkarre, apelsin, tortilla]
 ingredients:
   - title: "Carnitas"

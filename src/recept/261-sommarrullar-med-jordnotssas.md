@@ -13,7 +13,7 @@ facts:
   Förberedelse: "30 min"
   Tillagning: "5 min"
   Portioner: "4 (12 rullar)"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [nudlar, gronsaker, tofu, jordnotssmor]
 ingredients:
   - title: "Sommarrullar"

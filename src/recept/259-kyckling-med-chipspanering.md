@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min"
   Tillagning: "25 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [kyckling, chips, agg]
 ingredients:
   - title: "Kyckling"

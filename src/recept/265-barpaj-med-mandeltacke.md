@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min"
   Tillagning: "35 min"
   Portioner: "6"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [bar, mandelmjol, havre]
 ingredients:
   - title: "Fyllning"

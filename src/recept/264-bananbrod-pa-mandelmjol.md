@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min"
   Tillagning: "50 min"
   Portioner: "1 limpa (ca 10 skivor)"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [banan, mandelmjol, agg, havre]
 ingredients:
   - title: "Bananbröd"

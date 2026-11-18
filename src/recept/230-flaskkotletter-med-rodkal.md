@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min"
   Tillagning: "1 tim"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [flaskkotlett, kal, lok, potatis]
 ingredients:
   - title: "Rödkål"

@@ -20,7 +20,8 @@ layout: layouts/base.njk
         <p class="dialog-kicker"><span class="mini-badge">OFTA BRA EFTER · {{ recipe.badge or 'RECEPT' }}</span>{% if not recipe.badge %}<span>{% for category in recipe.categoryLinks %}<a href="{{ base }}{{ category.path }}">{{ category.label }}</a>{{ ' · ' if not loop.last }}{% endfor %}</span>{% endif %}</p>
         <h1 id="recipe-title" class="recipe-heading">{{ recipe.title }}</h1>
         <p class="dialog-intro">{{ recipe.description }}</p>
-        {#- An illustrated icon per fact label, from assets/icons/. factIcons has the labels every type
+        {#- An illustrated icon per fact label, from assets/icons/. Nivå uses the difficulty's icon.
+            factIcons has the labels every type
             shares, and typeFactIcons what a Mer än mat type shows instead or has of its own (Odlingstid,
             Väntetid). A label in neither shows without an icon.
             The icon is inside the dt, as a div in a dl may only hold dt and dd. #}
@@ -28,7 +29,7 @@ layout: layouts/base.njk
           'Förberedelse': 'cutting-board' if recipe.food else 'bubbles',
           'Tillagning': 'timer',
           'Portioner': 'cutlery',
-          'Nivå': 'difficulty-level' if recipe.food else 'difficulty-level-pink',
+          'Nivå': recipe.difficultyIcon,
           'Räcker till': 'jam-jar',
           'Verkningstid': 'kitchen-timer'
         } %}

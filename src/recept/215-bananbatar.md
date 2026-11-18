@@ -13,7 +13,7 @@ facts:
   Förberedelse: "10 min"
   Tillagning: "8–10 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [banan, choklad, kex]
 ingredients:
   - title: "Bananbåtar"

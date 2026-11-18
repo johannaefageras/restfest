@@ -13,7 +13,7 @@ facts:
   Förberedelse: "25 min"
   Tillagning: "2 tim"
   Portioner: "6"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [notkott, paprika, potatis, lok]
 ingredients:
   - title: "Gulaschsoppa"

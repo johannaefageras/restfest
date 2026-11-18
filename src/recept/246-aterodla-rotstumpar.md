@@ -13,7 +13,7 @@ facts:
   Förberedelse: "5 min"
   Odlingstid: "1–2 veckor till första skörden"
   Räcker till: "1 fönsterbräda"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [lok, purjolok, sallad]
 ingredients:
   - title: "Ingredienser"

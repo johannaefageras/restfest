@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min + minst 1 tim marinering"
   Tillagning: "20 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [flaskkotlett, senap, apple]
 ingredients:
   - title: "Marinad"

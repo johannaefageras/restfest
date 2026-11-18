@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min"
   Tillagning: "30 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [blomkal, kikarter, tahini, citron]
 ingredients:
   - title: "Rostad blomkål"

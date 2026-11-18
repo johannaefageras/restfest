@@ -13,7 +13,7 @@ facts:
   Förberedelse: "15 min"
   Tillagning: "20 min"
   Portioner: "4"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [miso, nudlar, tofu, svamp]
 ingredients:
   - title: "Buljong"

@@ -13,7 +13,7 @@ facts:
   Förberedelse: "20 min"
   Odlingstid: "3–5 veckor till utplantering"
   Räcker till: "12 småplantor"
-  Nivå: "Lätt"
+  Nivå: "Nybörjare"
 pantryKeys: [agg, fron]
 ingredients:
   - title: "Ingredienser"
