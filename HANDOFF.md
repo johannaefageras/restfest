@@ -198,7 +198,8 @@ Related behaviour:
 **Archive order:** the "Sortera" menu on the line above the cards (`archiveOrders` in `app.js`):
 
 - **Bäst matchning:** the home page score, so recipes you can start from the fridge come first. Only offered while the fridge list has something on it, and then picked when the page opens.
-- **Nyast först:** by `date`, and the higher file number first on the same day. The default with an empty fridge.
+- **Standard:** with an empty fridge and no search or active filters, recipes are shuffled once per page load. Re-renders and clearing filters retain that order. With a search or any filter (including Sparade), Standard uses newest first.
+- **Nyast först:** by `date`, and the higher file number first on the same day.
 - **A–Ö:** Swedish order, so Å, Ä and Ö come after Z.
 - **Fridge match line:** with a fridge list, the cards show "3 av 4 · Saknas: …" whatever the order. Search, filters and Sparade keep the chosen order.
 - **Not remembered:** the choice resets on every visit.

@@ -648,6 +648,17 @@ function archiveCard(recipe, match) {
 // The archive is for food. Saved spa, cleaning and pet recipes still show under Sparade.
 const foodRecipes = recipes.filter(isFood);
 
+// Shuffle once per visit so saving a recipe or clearing filters keeps the cards in place.
+const archiveRandomOrder = new Map();
+if (archiveSearch) {
+  const shuffled = [...foodRecipes];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  shuffled.forEach((recipe, index) => archiveRandomOrder.set(recipe.id, index));
+}
+
 function matchesSearch(recipe, words) {
   if (!words.length) return true;
   const tags = allTags(recipe);
@@ -667,7 +678,8 @@ function matchesSearch(recipe, words) {
   return words.every((word) => searchable.includes(word));
 }
 
-// The archive's "Sortera" choices. Each compares two {recipe, match} items.
+// The archive's orders. Each compares two {recipe, match} items.
+//   random   Standard: shuffled while there is no search, filter or chosen sort.
 //   match    Bäst matchning: the same score as the home page, so recipes you can start from the fridge
 //            come first. Ties keep recipe order.
 //   newest   Nyast först: by `date`, and the higher file number first on the same day.
@@ -676,6 +688,7 @@ const matchRank = (match) =>
   match.mainCount && match.ownMatches ? match.score : match.mainCount ? -1 : -2;
 const recipeNumber = (recipe) => parseInt(recipe.id, 10);
 const archiveOrders = {
+  random: (a, b) => archiveRandomOrder.get(a.recipe.id) - archiveRandomOrder.get(b.recipe.id),
   match: (a, b) =>
     matchRank(b.match) - matchRank(a.match) ||
     (matchRank(a.match) > 0 ? b.match.have.length - a.match.have.length : 0),
@@ -693,7 +706,7 @@ function offerMatchSort(offer) {
     archiveSort.prepend(new Option("Bäst matchning", "match"));
     if (!archiveSortChosen) archiveSort.value = "match";
   } else if (!offer && option) {
-    // Removing the selected option selects the first one left, Nyast först.
+    // Removing the selected option returns to Standard.
     option.remove();
   }
 }
@@ -702,6 +715,14 @@ function renderArchive() {
   if (!archiveSearch) return;
   const query = searchKey(archiveSearch.value.trim());
   const words = query ? query.split(/\s+/) : [];
+  const activeFilters =
+    (mealFilter !== "all" ? 1 : 0) +
+    dietFilter.size +
+    (foodFilter !== "all" ? 1 : 0) +
+    selectedTags.size +
+    (difficultyFilter !== "all" ? 1 : 0) +
+    (quickOnly ? 1 : 0) +
+    (savedOnly ? 1 : 0);
   const pool = savedOnly ? recipes : foodRecipes;
   const visible = pool.filter((recipe) => {
     if (savedOnly && !saved.has(recipe.id)) return false;
@@ -729,7 +750,10 @@ function renderArchive() {
     recipe,
     match: pantryInUse ? matchRecipe(recipe, pantryKeys) : null,
   }));
-  items.sort(archiveOrders[archiveSort.value] ?? archiveOrders.newest);
+  const defaultOrder = words.length || activeFilters
+    ? archiveOrders.newest
+    : archiveOrders.random;
+  items.sort(archiveOrders[archiveSort.value] ?? defaultOrder);
   $("#recipe-grid").innerHTML = items
     .map(({ recipe, match }) => archiveCard(recipe, match))
     .join("");
@@ -769,14 +793,6 @@ function renderArchive() {
   filterState.textContent = filtersInUse.length
     ? `· ${filtersInUse.join(" · ")}`
     : "";
-  const activeFilters =
-    (mealFilter !== "all" ? 1 : 0) +
-    dietFilter.size +
-    (foodFilter !== "all" ? 1 : 0) +
-    selectedTags.size +
-    (difficultyFilter !== "all" ? 1 : 0) +
-    (quickOnly ? 1 : 0) +
-    (savedOnly ? 1 : 0);
   const filterCount = $("#archive-filter-count");
   if (filterCount) {
     filterCount.hidden = activeFilters === 0;

@@ -1021,6 +1021,22 @@ details[open] > summary > .fa-chevron-down {
   min-height: 88px;
   padding: 10px 12px;
 }
+
+@media (max-width: 699px) {
+  .archive-quick-filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .archive-quick-filters .food-filter {
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    padding-inline: 4px;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+}
+
 .food-filter:hover {
   border-color: var(--ink);
 }
@@ -3651,7 +3667,7 @@ a.dialog-save {
   place-items: center;
   min-height: 44px;
   padding: 10px 8px;
-  border: 1.5px solid var(--control);
+  border: 1.5px solid var(--ink);
   border-radius: var(--radius-button);
   background: var(--surface);
   font-size: var(--text-ui);
