@@ -1,0 +1,96 @@
+/* The dark theme. layouts/base.njk links this file with a media query, which decides when it applies:
+   by default when the device is set to dark. From 960px the header has a sun/moon button (app.js),
+   and the visitor's choice there changes the media query (applyTheme in base.njk), so it holds on
+   wide screens only; below 960px the site always follows the device.
+
+   The page goes dark and the outlines light, but the coloured cards, chips and badges stay coloured
+   (a little dimmer) with black text and black outlines, as in the light theme: the illustrations are
+   drawn in black and need a light ground. So each of them gets the light neutrals back. A new
+   coloured element with text on it belongs in that list. The light colours are the tokens at the top
+   of styles.css. */
+:root {
+  --paper: #141414;
+  --surface: #1e1e1e;
+  --ink: #ececec;
+  --ink-soft: #c4c4c4;
+  --ink-hover: #cdcdcd;
+  --on-ink: #141414;
+  --muted: #a6a6a6;
+  --well: #232323;
+  --hover: #262626;
+  --rule: #2e2e2e;
+  --line: #3b3b3b;
+  --control: #727272;
+  --yellow: #f0bb10;
+  --butter: #e9cf75;
+  --green: #a0cf79;
+  --green-strong: #78c043;
+  --pink: #df92b6;
+  --pink-light: #e3a6c3;
+  --lavender: #a690d8;
+  --lavender-light: #b7a3e2;
+  --sage: #b5d69b;
+  --cream: #2f2a17;
+  --green-pale: #23311b;
+  --lavender-pale: #2c2540;
+  --green-deep: #7ccb45;
+  --blue: #4cb2ee;
+  --shadow: rgb(0 0 0 / 0.5);
+  --backdrop: rgb(0 0 0 / 0.65);
+  color-scheme: dark;
+}
+/* Coloured grounds: the light neutrals again, so text, outlines, fields and buttons on them look
+   as they do in the light theme. :where() and :not(:root) give the list the weight of one class:
+   enough to beat `button { color: inherit }`, less than the elements' own rules. */
+:where(
+  .brand > span,
+  .count,
+  .mini-badge,
+  .favorite[aria-pressed="true"],
+  .archive-results,
+  .kitchen-hero,
+  .add-card,
+  .photo-card,
+  .pantry-chip,
+  .featured-art,
+  .match-count,
+  .recipe-swap,
+  .food-filter[aria-pressed="true"],
+  .listing-links .food-filter[aria-current="page"],
+  .archive-filter-count,
+  .archive-card-art,
+  .dialog-top.cook-art,
+  .cook-pantry,
+  .cook-swap,
+  .ingredient-status,
+  .ingredients input[type="checkbox"]:checked,
+  .shopping-add[aria-pressed="true"],
+  .shopping-edit,
+  .tag-picker-pill,
+  .account-error,
+  .profile-time-card,
+  .account-check:has(input:checked),
+  .nav-menu-panel a:is(:hover, [aria-current="page"])
+):not(:root) {
+  --paper: #fff;
+  --surface: #fff;
+  --ink: #151515;
+  --ink-soft: #555;
+  --ink-hover: #333;
+  --on-ink: #fff;
+  --muted: #4a4a4a; /* darker than the light theme's, as the grounds are dimmer */
+  --well: #f8f8f8;
+  --hover: #f6f6f6;
+  --rule: #e8e8e8;
+  --line: #dedede;
+  --control: #a5a5a5;
+  --blue: #0a84c9;
+  color: var(--ink);
+  color-scheme: light;
+}
+/* The same for the text that pseudo-elements put on coloured grounds, which :where() can't list. */
+.directions li::before,
+.pantry-chip.is-unknown::before {
+  --ink: #151515;
+  color: var(--ink);
+}

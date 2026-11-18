@@ -39,6 +39,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {#- The browser bar: the page colour of each theme (--paper in styles.css and dark.css). The first
+      one whose media query matches is used, and applyTheme below gives the dark one dark.css's query. #}
+  <meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)" id="dark-theme-color">
   <meta name="theme-color" content="#ffffff">
   <title>{{ title }}{{ titleSuffix }}</title>
   <meta name="description" content="{{ description }}">
@@ -74,6 +77,21 @@
   <link rel="preload" href="{{ base }}assets/fonts/SpotSemi-Medium.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ base }}css/fonts.css">
   <link rel="stylesheet" href="{{ base }}css/styles.css">
+  <link rel="stylesheet" href="{{ base }}css/dark.css" media="(prefers-color-scheme: dark)" id="dark-theme">
+  {#- The theme: the device's, or from 960px the one chosen with the sun/moon button in the header
+      (app.js), saved as restfest-theme. A choice only changes when dark.css applies; below 960px it
+      always follows the device. Runs here, before the first paint, so the page never flashes the
+      other theme. #}
+  <script>
+    function applyTheme(choice) {
+      const media = choice === 'dark' ? '(prefers-color-scheme: dark), (min-width: 960px)'
+        : choice === 'light' ? '(prefers-color-scheme: dark) and (max-width: 959px)'
+        : '(prefers-color-scheme: dark)';
+      document.getElementById('dark-theme').media = media;
+      document.getElementById('dark-theme-color').media = media;
+    }
+    try { applyTheme(localStorage.getItem('restfest-theme')) } catch {}
+  </script>
   <link rel="stylesheet" href="{{ base }}css/icons.css">
   <link rel="stylesheet" href="{{ base }}css/kitchen.css">
   {%- if recipe.structuredData %}
@@ -84,9 +102,18 @@
   <a class="skip-link" href="#main">Hoppa till innehåll</a>
   <header class="site-header">
     <div class="header-inner wrap">
-      <a class="brand" href="{{ homeUrl or '#' }}" aria-label="Ofta bra efter, startsida">
-        <span>Ofta bra efter</span>
-      </a>
+      {#- The logo, and from 960px the sun/moon button beside it (app.js shows it): the moon in the light
+          theme, the sun in the dark. It sits on the left, where there is room: on the right it would
+          push the menu off centre. #}
+      <div class="header-start">
+        <a class="brand" href="{{ homeUrl or '#' }}" aria-label="Ofta bra efter, startsida">
+          <span>Ofta bra efter</span>
+        </a>
+        <button class="saved-nav theme-toggle" type="button" aria-label="Mörkt läge" aria-pressed="false" hidden>
+          <img class="theme-moon" src="{{ base }}assets/icons/moon.svg" alt="" width="24" height="24">
+          <img class="theme-sun" src="{{ base }}assets/icons/sun.svg" alt="" width="24" height="24">
+        </button>
+      </div>
       <nav aria-label="Huvudmeny">
         {{- recipeMenu(collections.recipeTypes, base, page.url, inRecipes, true) }}
         <a class="nav-link" href="{{ homeUrl }}#sa-funkar-det"><img src="{{ base }}assets/icons/info.svg" alt="" width="20" height="20">Så funkar det</a>

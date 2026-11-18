@@ -1,9 +1,9 @@
 // Offline account pages and visited public recipes. Private API responses stay in per-user browser
 // storage; this worker never caches authentication or API traffic.
-const cacheName = 'ofta-bra-efter-account-v10';
+const cacheName = 'ofta-bra-efter-account-v11';
 const base = self.registration.scope;
 const files = [
-  'inkopslista.html', 'receptbok.html', 'nytt-recept.html', 'css/fonts.css', 'css/styles.css', 'css/kitchen.css', 'css/icons.css',
+  'inkopslista.html', 'receptbok.html', 'nytt-recept.html', 'css/fonts.css', 'css/styles.css', 'css/dark.css', 'css/kitchen.css', 'css/icons.css',
   'data/recipe-index.js', 'data/foods.js', 'js/recipes.js', 'js/app.js', 'js/account.js', 'js/account-helpers.js',
   'js/shopping-account.js', 'js/shopping-sync.js', 'js/shopping-list.js', 'js/vendor/supabase.js',
   'js/account-sync.js', 'js/recipe-book-sync.js', 'js/recipe-book-account.js', 'js/recipe-book.js',
@@ -14,7 +14,7 @@ const files = [
   'assets/fonts/SpotSemi-Regular.woff2', 'assets/fonts/SpotSemi-Medium.woff2',
   'assets/fonts/font-awesome-400.woff2', 'assets/fonts/font-awesome-700.woff2',
   'assets/icons/shopping-basket-1.svg',
-  'assets/icons/heart.svg', 'assets/icons/user-profile.svg',
+  'assets/icons/heart.svg', 'assets/icons/user-profile.svg', 'assets/icons/sun.svg', 'assets/icons/moon.svg',
   'assets/illustrations/ramen.svg', 'assets/icons/cook-book.svg', 'assets/icons/magic-wand.svg', 'assets/icons/recipe-archive-box.svg',
 ];
 const urls = new Set(files.map(file => new URL(file, base).href));

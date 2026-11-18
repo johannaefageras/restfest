@@ -33,7 +33,7 @@ textarea:focus-visible,
   padding: clamp(24px, 4vw, 48px) clamp(19px, 4.5vw, 56px);
   border: 2px solid var(--ink);
   border-radius: var(--radius-card);
-  background: #b7a1e6;
+  background: var(--lavender);
 }
 .kitchen-hero h1 {
   margin-top: 12px;
@@ -136,7 +136,7 @@ textarea:focus-visible,
   border-radius: var(--radius-card);
 }
 .add-card {
-  background: #b4e48c;
+  background: var(--green);
 }
 .add-card h3,
 .photo-card h3,
@@ -200,7 +200,7 @@ textarea:focus-visible,
   align-items: center;
   gap: 7px;
   min-height: 37px;
-  background: #b4e48c;
+  background: var(--green);
   border: 1px solid var(--ink);
   border-radius: var(--radius-button);
   padding: 4px 8px;
@@ -211,7 +211,7 @@ textarea:focus-visible,
 }
 
 .pantry-chip:hover {
-  background: #7ccb45;
+  background: var(--green-strong);
 }
 .pantry-chip img {
   object-fit: contain;
@@ -240,7 +240,7 @@ textarea:focus-visible,
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #ffe48a;
+  background: var(--butter);
   font-family: var(--font-label);
   font-size: var(--text-tag);
 }
@@ -252,7 +252,7 @@ textarea:focus-visible,
   padding: 10px 12px;
   list-style: none;
   border-left: 3px solid var(--ink);
-  background: #fff8db;
+  background: var(--cream);
   font-size: var(--text-base);
   line-height: 1.5;
 }
@@ -335,7 +335,7 @@ textarea:focus-visible,
   position: relative;
   display: grid;
   place-items: center;
-  background: #f4a3c8;
+  background: var(--pink);
   border-bottom: 2px solid var(--ink);
 }
 
@@ -386,7 +386,7 @@ textarea:focus-visible,
 
 .featured-art .favorite[aria-pressed="true"],
 .archive-card-art .favorite[aria-pressed="true"] {
-  background: #f4a3c8;
+  background: var(--pink);
 }
 
 .favorite .fa-heart {
@@ -422,7 +422,7 @@ textarea:focus-visible,
 
 .match-count {
   display: inline-block;
-  background: #b4e48c;
+  background: var(--green);
   border-radius: 4px;
   padding: 4px 8px;
   font-family: var(--font-label);
@@ -432,7 +432,7 @@ textarea:focus-visible,
 
 .recipe-swap {
   padding: 7px 9px;
-  background: #ffe48a;
+  background: var(--butter);
   border-left: 2px solid var(--ink);
 }
 
@@ -727,7 +727,7 @@ textarea:focus-visible,
 }
 
 .listing-links .food-filter[aria-current="page"] {
-  background: #b4e48c;
+  background: var(--green);
   border-color: var(--ink);
 }
 
@@ -806,7 +806,7 @@ textarea:focus-visible,
   height: 22px;
   padding-inline: 6px;
   border-radius: 999px;
-  background: #b4e48c;
+  background: var(--green);
   font: var(--font-weight-medium) var(--text-tag)/1 var(--font-label);
   font-feature-settings: var(--spot-features);
 }
@@ -949,7 +949,7 @@ details[open] > summary > .fa-chevron-down {
   border: 1.5px solid var(--control);
   border-radius: var(--radius-button);
   background: var(--surface);
-  box-shadow: 0 4px 12px rgb(0 0 0 / 0.09);
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 .meal-picker-options > button {
@@ -964,7 +964,7 @@ details[open] > summary > .fa-chevron-down {
   background: var(--well);
 }
 .meal-picker-options > button[aria-pressed="true"] {
-  background: #edf7e5;
+  background: var(--green-pale);
   font-weight: var(--font-weight-medium);
 }
 .meal-picker-options > button:focus-visible {
@@ -1009,11 +1009,11 @@ details[open] > summary > .fa-chevron-down {
   border-color: var(--ink);
 }
 .food-filter[aria-pressed="true"] {
-  background: #b4e48c;
+  background: var(--green);
   border-color: var(--ink);
 }
 #saved-filter[aria-pressed="true"] {
-  background: #f4a3c8;
+  background: var(--pink);
 }
 #quick-filter[aria-pressed="true"] {
   background: var(--yellow);
@@ -1088,18 +1088,18 @@ details[open] > summary > .fa-chevron-down {
   place-items: center;
   min-height: 132px;
   position: relative;
-  background: #ffe48a;
+  background: var(--butter);
   border-bottom: 1px solid var(--line);
 }
 
 .archive-card[data-tone="green"] .archive-card-art {
-  background: #b4e48c;
+  background: var(--green);
 }
 .archive-card:nth-child(4n + 3) .archive-card-art {
-  background: #f4a3c8;
+  background: var(--pink);
 }
 .archive-card:nth-child(4n + 4) .archive-card-art {
-  background: #b7a1e6;
+  background: var(--lavender);
 }
 .archive-card-art > img {
   object-fit: contain;
@@ -1256,7 +1256,7 @@ details[open] > summary > .fa-chevron-down {
 
 /* Cooking view */
 .dialog-top.cook-art {
-  background: #f4a3c8;
+  background: var(--pink);
   border-bottom: 2px solid var(--ink);
 }
 
@@ -1296,7 +1296,7 @@ details[open] > summary > .fa-chevron-down {
 
 .cook-pantry {
   flex-wrap: wrap;
-  background: #b4e48c;
+  background: var(--green);
 }
 .cook-pantry > div {
   display: grid;
@@ -1315,7 +1315,7 @@ details[open] > summary > .fa-chevron-down {
   height: 16px;
 }
 .cook-swap {
-  background: #ffe48a;
+  background: var(--butter);
 }
 .cook-swap h4 {
   font-size: 18px;
@@ -1329,7 +1329,7 @@ details[open] > summary > .fa-chevron-down {
 }
 .cook-swap .button[aria-pressed="true"] {
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 
 .recipe-section {
@@ -1384,7 +1384,7 @@ details[open] > summary > .fa-chevron-down {
 .cook-checklist progress {
   width: 100%;
   height: 10px;
-  accent-color: #579a27;
+  accent-color: var(--green-deep);
 }
 
 .cook-ingredient {
@@ -1405,10 +1405,10 @@ details[open] > summary > .fa-chevron-down {
   line-height: 1.4;
 }
 .ingredient-status.have {
-  background: #b4e48c;
+  background: var(--green);
 }
 .ingredient-status.missing {
-  background: #ffe48a;
+  background: var(--butter);
 }
 
 .header-actions {
@@ -1520,7 +1520,7 @@ details[open] > summary > .fa-chevron-down {
 }
 .shopping-add[aria-pressed="true"] {
   border-color: var(--ink);
-  background: #b4e48c;
+  background: var(--green);
 }
 /* The add button stays quiet beside the ingredient list: smaller, with a grey plus that turns ink on hover. */
 .shopping-add {
@@ -1622,10 +1622,10 @@ body:has(#shopping-dialog[open]) {
 }
 .shopping-remove {
   background: var(--red);
-  color: var(--surface);
+  color: #fff;
 }
 .shopping-remove:hover {
-  background: #ac3027;
+  background: var(--red-hover);
 }
 .shopping-edit,
 .shopping-edit:hover {
@@ -1915,14 +1915,42 @@ body:has(#shopping-dialog[open]) {
   }
 }
 
+/* The sun/moon button (layouts/base.njk, app.js), beside the logo from 960px. Below that the theme
+   follows the device (css/dark.css), so there's no button. It shows the moon in the light theme and
+   the sun in the dark: the theme a click switches to. */
+.theme-toggle {
+  display: none;
+}
+@media (min-width: 960px) {
+  .theme-toggle:not([hidden]) {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    padding: 0;
+  }
+}
+.theme-toggle[aria-pressed="true"] .theme-moon,
+.theme-toggle[aria-pressed="false"] .theme-sun {
+  display: none;
+}
+
 /* From 960px the menu sits in the middle of the header, with the logo and the buttons at the edges:
-   the side columns are equally wide, so the menu is centred on the page whatever the buttons show. */
+   the side columns are equally wide, so the menu is centred on the page whatever the buttons show.
+   The buttons fill most of their side from 1200px (436 of 460px), so the sun/moon button sits beside
+   the logo instead, in .header-start. Below 960px that wrapper drops out of the layout and the logo
+   is a grid item of its own again. */
+.header-start {
+  display: contents;
+}
 @media (min-width: 960px) {
   .header-inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   }
-  .site-header .brand {
+  .header-start {
+    display: flex;
+    align-items: center;
+    gap: 16px;
     justify-self: start;
   }
   .site-header nav {
@@ -2042,12 +2070,12 @@ body:has(#shopping-dialog[open]) {
   max-width: 100%;
   min-height: 36px;
   border-color: var(--ink);
-  background: #b7a1e6;
+  background: var(--lavender);
   text-align: left;
 }
 
 .tag-picker-pill:hover {
-  background: #c9b6ee;
+  background: var(--lavender-light);
 }
 .tag-picker-pill > .fa-xmark {
   font-size: 12px;
@@ -2062,7 +2090,7 @@ body:has(#shopping-dialog[open]) {
   border: 1.5px solid var(--control);
   border-radius: var(--radius-button);
   background: var(--surface);
-  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  box-shadow: 0 4px 12px var(--shadow);
   font-size: var(--text-small);
 }
 
@@ -2081,7 +2109,7 @@ body:has(#shopping-dialog[open]) {
 }
 .tag-picker-suggestions > li:hover,
 .tag-picker-suggestions > li[aria-selected="true"] {
-  background: #ede4fb;
+  background: var(--lavender-pale);
 }
 .tag-picker-empty {
   padding: 9px 12px;
@@ -2540,7 +2568,7 @@ body:has(#shopping-dialog[open]) {
   text-underline-offset: 4px;
 }
 .how-more a:hover {
-  color: #555;
+  color: var(--ink-soft);
 }
 
 @media (max-width: 1023px) {
@@ -2611,10 +2639,10 @@ body:has(#shopping-dialog[open]) {
    is away during a scan. */
 .photo-actions .button[hidden] ~ .button {
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 .photo-actions .button[hidden] ~ .button:hover {
-  background: #333;
+  background: var(--ink-hover);
 }
 /* The Font Awesome icons in the hero button and the two step 01 buttons, a little bigger than the text. */
 :is(.kitchen-hero, .pantry-form, .photo-actions) .button .fas {
@@ -2951,7 +2979,7 @@ body:has(#shopping-dialog[open]) {
   border-top-width: 3px;
   border-radius: 0 0 8px 9px;
   background: var(--surface);
-  box-shadow: 0 6px 14px rgb(0 0 0 / 0.1);
+  box-shadow: 0 6px 14px var(--shadow);
   font-family: var(--font-body);
   font-size: var(--text-small);
   font-weight: var(--font-weight-body);
@@ -3006,19 +3034,19 @@ body:has(#shopping-dialog[open]) {
   outline-offset: -3px;
 }
 .nav-menu-panel [data-type="food"] {
-  --menu-tint: #ffe48a;
+  --menu-tint: var(--butter);
 }
 .nav-menu-panel [data-type="spa"] {
-  --menu-tint: #f7bcd7;
+  --menu-tint: var(--pink-light);
 }
 .nav-menu-panel [data-type="household"] {
-  --menu-tint: #b4e48c;
+  --menu-tint: var(--green);
 }
 .nav-menu-panel [data-type="pets"] {
-  --menu-tint: #c9b6ee;
+  --menu-tint: var(--lavender-light);
 }
 .nav-menu-panel [data-type="garden"] {
-  --menu-tint: #cce8b5;
+  --menu-tint: var(--sage);
 }
 
 /* The footer's menu opens upwards, so its chevron points up until then. On wide screens the menu
@@ -3036,7 +3064,7 @@ body:has(#shopping-dialog[open]) {
   right: 0;
   border-width: 2px 2px 3px;
   border-radius: 8px 11px 0 0;
-  box-shadow: 0 -6px 14px rgb(0 0 0 / 0.1);
+  box-shadow: 0 -6px 14px var(--shadow);
 }
 .site-footer .nav-menu[open] > .nav-menu-panel {
   animation-name: nav-menu-up;
@@ -3187,7 +3215,7 @@ body:has(#shopping-dialog[open]) {
   padding: 10px 12px;
   border: 2px solid var(--ink);
   border-radius: var(--radius-button);
-  background: #ffe48a;
+  background: var(--butter);
   font-size: var(--text-base);
   line-height: 1.4;
 }
@@ -3402,7 +3430,7 @@ a.dialog-save {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #b7a1e6;
+  background: var(--lavender);
 }
 .profile-time-options {
   display: grid;
@@ -3431,7 +3459,7 @@ a.dialog-save {
 .profile-time-choice > input:checked + span {
   border-color: var(--ink);
   background: var(--ink);
-  color: var(--surface);
+  color: var(--on-ink);
 }
 .account-panel {
   min-width: 0;
@@ -3504,7 +3532,7 @@ a.dialog-save {
   border-color: var(--ink);
 }
 .account-check:has(input:checked) {
-  background: #b4e48c;
+  background: var(--green);
   border-color: var(--ink);
 }
 .account-check:has(input:disabled) {
@@ -3652,11 +3680,11 @@ a.dialog-save {
   flex: none;
 }
 .button.account-danger {
-  background: #c43d32;
-  color: var(--surface);
+  background: var(--red);
+  color: #fff;
 }
 .button.account-danger:hover {
-  background: #ac3027;
+  background: var(--red-hover);
 }
 .account-dialog {
   max-width: 460px;

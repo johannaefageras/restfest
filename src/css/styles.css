@@ -41,23 +41,44 @@
   /* Capitals also get capital-height punctuation and accents (Å, Ä, Ö). */
   --caps-features: "kern", "case", "ss01", "ss02";
   --display-features: "kern", "liga";
-  --paper: #fff;
-  --surface: #fff;
-  --ink: #151515;
+  /* Colours. css/dark.css swaps them for the dark theme. Neutrals first: */
+  --paper: #fff; /* the page */
+  --surface: #fff; /* buttons, fields, cards, menus and dialogs on the page */
+  --ink: #151515; /* text, and the outlines everything is drawn with */
+  --ink-soft: #555; /* recipe steps, intros, hovered text buttons */
+  --ink-hover: #333; /* black buttons when hovered */
+  --on-ink: #fff; /* text on anything filled with --ink */
   --muted: #686868;
   --well: #f8f8f8;
   --hover: #f6f6f6;
   --rule: #e8e8e8;
   --line: #dedede;
   --control: #a5a5a5;
+  /* The coloured cards, chips and badges. They keep black text in both themes (css/dark.css). */
   --yellow: #ffc612;
-  --red: #c43d32;
-  --blue: #0a84c9;
+  --butter: #ffe48a;
+  --green: #b4e48c;
+  --green-strong: #7ccb45;
   --pink: #f4a3c8;
+  --pink-light: #f7bcd7;
+  --lavender: #b7a1e6;
+  --lavender-light: #c9b6ee;
+  --sage: #cce8b5;
+  /* Pale tints behind chosen rows and notes. These follow the theme, like the neutrals. */
+  --cream: #fff8db;
+  --green-pale: #edf7e5;
+  --lavender-pale: #ede4fb;
+  --green-deep: #579a27; /* the cooking checklist's progress bar */
+  --red: #c43d32;
+  --red-hover: #ac3027;
+  --blue: #0a84c9;
+  --shadow: rgb(0 0 0 / 0.1);
+  --backdrop: rgba(21, 21, 21, 0.4);
   --radius-button: 7px 9px 6px 8px;
   --radius-card: 8px 11px 8px 9px;
   color-scheme: light;
 }
+
 *,
 *::before,
 *::after {
@@ -294,6 +315,8 @@ a:focus-visible {
   width: 21px;
   height: 21px;
   min-width: 21px;
+  /* A little more room between the count and the button's edge than the padding gives. */
+  margin-right: 3px;
   font-size: var(--text-label);
 }
 .eyebrow {
@@ -353,7 +376,7 @@ h1 {
   margin-top: 18px;
   font-size: var(--text-lead);
   line-height: 1.5;
-  color: #555;
+  color: var(--ink-soft);
 }
 .greeting-aside {
   padding-right: 33px;
@@ -493,7 +516,7 @@ h1 {
   padding: 11px 16px;
   border: 2px solid var(--ink);
   border-radius: var(--radius-button);
-  background: #fff;
+  background: var(--surface);
   font-size: 16px;
   font-weight: var(--font-weight-medium);
   line-height: 1.2;
@@ -509,10 +532,10 @@ h1 {
 }
 .button.primary {
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 .button.primary:hover {
-  background: #333;
+  background: var(--ink-hover);
 }
 .button svg {
   width: 17px;
@@ -535,7 +558,7 @@ h1 {
   text-underline-offset: 4px;
 }
 .text-button:hover {
-  color: #555;
+  color: var(--ink-soft);
 }
 .file-hint {
   margin-top: 12px;
@@ -857,7 +880,7 @@ h1 {
   height: 36px;
   border: 1.5px solid var(--line);
   border-radius: var(--radius-button);
-  background: #fff;
+  background: var(--surface);
 }
 .favorite svg {
   width: 18px;
@@ -966,7 +989,7 @@ h1 {
   left: 8px;
   z-index: 20;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   padding: 10px 16px;
   transform: translateY(-150%);
 }
@@ -981,11 +1004,11 @@ dialog {
   width: calc(100% - 40px);
   max-height: 90vh;
   overscroll-behavior: contain;
-  background: #fff;
+  background: var(--surface);
   color: var(--ink);
 }
 dialog::backdrop {
-  background: rgba(21, 21, 21, 0.4);
+  background: var(--backdrop);
 }
 .dialog-top {
   position: relative;
@@ -1014,7 +1037,7 @@ dialog::backdrop {
   line-height: 1;
   border: 1.5px solid var(--ink);
   border-radius: var(--radius-button);
-  background: #fff;
+  background: var(--surface);
 }
 .dialog-main {
   padding: 26px 30px 30px;
@@ -1067,7 +1090,7 @@ dialog::backdrop {
   font-size: 23px;
   border: 1.5px solid var(--line);
   border-radius: var(--radius-button);
-  background: #fff;
+  background: var(--surface);
 }
 .servings button:disabled {
   opacity: 0.3;
@@ -1127,7 +1150,7 @@ dialog::backdrop {
   max-width: calc(68ch + 28px);
   font-size: var(--text-base);
   line-height: 1.6;
-  color: #555;
+  color: var(--ink-soft);
   position: relative;
   padding: 0 0 17px 28px;
   counter-increment: recipe-step;
@@ -1161,7 +1184,7 @@ dialog::backdrop {
   bottom: 24px;
   transform: translateX(-50%);
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   border-radius: var(--radius-button);
   padding: 12px 19px;
   font-size: var(--text-small);
@@ -1749,7 +1772,7 @@ dialog::backdrop {
   width: fit-content;
   padding: 4px 8px;
   border-radius: 4px;
-  background: #ffe48a;
+  background: var(--butter);
   color: var(--ink);
   font-weight: var(--font-weight-medium);
 }
