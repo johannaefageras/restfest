@@ -10,6 +10,8 @@ const root = Deno.args[0] ?? new URL('../..', import.meta.url).pathname.replace(
 Deno.env.set('SUPABASE_URL', 'http://standin.local');
 Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'secret');
 Deno.env.set('ANTHROPIC_API_KEY', 'x');
+// The defaults are checked, whatever the shell has (Claude Code's own shell sets CLAUDE_EFFORT).
+for (const name of ['CLAUDE_EFFORT', 'CLAUDE_DETECT_EFFORT', 'CLAUDE_RECIPE_EFFORT']) Deno.env.delete(name);
 
 const handlers: Array<(req: Request) => Promise<Response>> = [];
 // deno-lint-ignore no-explicit-any
@@ -186,6 +188,23 @@ check('request: effort is set and the answer has room', sent?.body.max_tokens ==
 check('request: declined requests fall back to another model', sent?.body.fallbacks === 'default' && sent.headers.get('anthropic-beta') === 'server-side-fallback-2026-07-01', sent?.body.fallbacks);
 const logged = state.logs.map(line => { try { return JSON.parse(line); } catch { return null; } }).find(entry => entry?.claude === 'recipe');
 check('usage: one log line with the tokens and cache hits', logged?.input === 120 && logged?.cache_read === 2400 && logged?.output === 300 && logged?.stop === 'end_turn' && typeof logged?.seconds === 'number', state.logs);
+
+// The effort secrets: CLAUDE_EFFORT for both, the function's own before it, any capitalisation, nonsense skipped.
+const sentEffort = () => (state.claudeRequests[0]?.body.output_config as {effort?: string})?.effort;
+Deno.env.set('CLAUDE_EFFORT', 'high');
+reset();
+await call(generate);
+check('effort: CLAUDE_EFFORT sets it', sentEffort() === 'high', sentEffort());
+Deno.env.set('CLAUDE_RECIPE_EFFORT', ' Low ');
+reset();
+await call(generate);
+check('effort: CLAUDE_RECIPE_EFFORT comes first, in any capitalisation', sentEffort() === 'low', sentEffort());
+Deno.env.set('CLAUDE_RECIPE_EFFORT', 'lots');
+reset();
+await call(generate);
+check('effort: a value that is not a level is skipped', sentEffort() === 'high', sentEffort());
+Deno.env.delete('CLAUDE_EFFORT');
+Deno.env.delete('CLAUDE_RECIPE_EFFORT');
 
 // Claude busy once: one more try, and the visitor notices nothing.
 reset();

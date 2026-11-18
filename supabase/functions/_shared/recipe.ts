@@ -1,6 +1,7 @@
 // A new dinner recipe from a fridge list: the instructions and answer format for Claude, and the checks
 // that turn its answer into a RecipeDoc, the shape the site stores and renders.
 import {data} from './data.ts';
+import {photoClosing, photoOpening} from './photo-prompt.ts';
 
 // What Claude answers with. The fields follow a recipe file's front matter (HANDOFF.md, "Recipes"),
 // flattened so that the schema has no optional fields: an empty string or list means "none".
@@ -48,7 +49,7 @@ export interface RecipeDoc {
   steps: string[];
   tips: {title: string; text: string}[];
   sections: {title: string; items: string[]}[];
-  // English, for the image model (_shared/image.ts).
+  // English, for the image model: the middle of the photo's prompt (_shared/photo-prompt.ts).
   imagePrompt: string;
 }
 
@@ -137,7 +138,12 @@ TEXT
 - level: "Nybörjare" or "Medelsvårt".
 - categories: from DINNER CATEGORIES, the main one first.
 - tags: three to seven from TAGS. Diet tags only when they hold for the whole recipe; Vegan replaces Vegetarian, Dairy free, Egg free and Lactose free, and Dairy free replaces Lactose free. Leftovers when it uses up leftovers.
-- imagePrompt: in English, two to four sentences on how the finished dish looks when served: the vessel (a cast-iron pan, a speckled stoneware bowl, a wooden board), colours, textures and garnish, and two to four raw ingredients from the recipe placed around it. No people and no text.
+- imagePrompt: in English, the scene for the recipe's photo, 100 to 150 words. The photo's prompt opens with "${photoOpening}" and closes with "${photoClosing}" Both are added for you, so write only what comes between them, in this order, like the examples:
+  1. The finished dish in a named vessel (a black cast-iron pan, a wide white bowl, a speckled stoneware bowl, a wooden board): its colours and textures in vivid, exact words (glossy, golden, crisp, glistening, velvety), its garnish, and one moment that makes it look alive, like a spoon lifting a piece, cheese stretching or butter melting into a glossy pool.
+  2. A sentence that starts "Beside it,", "In front," or "Behind it,": a served portion, a side or a sauce from the recipe.
+  3. "Setting: " a cozy or bright Scandinavian kitchen table or counter (a bistro-style table if the dish suits it better), its surface (dark weathered wood, pale oak, white marble, slate), a linen tea towel or napkin in a named colour or pattern, and four to six props: raw ingredients from the recipe, one or two of them a little past their best as a nod to the leftovers (a slightly wilted bunch of herbs, a wrinkled pepper, the heel of a loaf, a few ends of cheese), and a kitchen tool. A season or time of day may set the mood ("on a dark November evening").
+  4. The light: warm golden side light, window light or candlelight, with a strong backlight shining through or catching the dish so its sauce, broth or glaze glows, and soft steam or a faint wisp of steam when it's hot.
+  Nothing in the scene has writing on it (an unlabeled bottle, a bowl of corn rather than the tin), and no hands or people.
 
 FOOD SAFETY
 Cook poultry, minced meat and eggs through, and say how to tell (no pink, or 70 degrees in the middle for chicken). Leftovers that have been cooked before are heated until piping hot.
@@ -268,6 +274,6 @@ export function recipeDoc(draft: RecipeDraft): RecipeDoc {
       .map(section => ({title: line(section?.title, 80), items: (section?.items ?? []).map(item => line(item)).filter(Boolean)}))
       .filter(section => section.title && section.items.length)
       .slice(0, 3),
-    imagePrompt: line(draft.imagePrompt, 1200) || title
+    imagePrompt: line(draft.imagePrompt, 1500) || title
   };
 }

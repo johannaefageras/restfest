@@ -10,14 +10,18 @@ export const models = {
 };
 
 // How much Claude thinks before it answers. Left out, Sonnet 5.5 runs at "high", which is slower and
-// spends more of max_tokens on thinking than a fridge inventory or a dinner recipe needs. The secrets
-// CLAUDE_DETECT_EFFORT and CLAUDE_RECIPE_EFFORT change it without a deploy. The model has to be one
-// that takes an effort (the Claude 5 models do; Haiku 4.5 answers 400).
+// spends more of max_tokens on thinking than a fridge inventory or a dinner recipe needs. Secrets change
+// it without a deploy, like the models above: CLAUDE_DETECT_EFFORT or CLAUDE_RECIPE_EFFORT for one,
+// CLAUDE_EFFORT for both. A value that isn't a level is skipped. The model has to be one that takes an
+// effort (the Claude 5 models do; Haiku 4.5 answers 400).
 const effortLevels = ['low', 'medium', 'high', 'xhigh', 'max'] as const;
 export type Effort = typeof effortLevels[number];
 function effort(secret: string, fallback: Effort): Effort {
-  const value = Deno.env.get(secret) as Effort | undefined;
-  return value && effortLevels.includes(value) ? value : fallback;
+  for (const name of [secret, 'CLAUDE_EFFORT']) {
+    const value = Deno.env.get(name)?.trim().toLowerCase() as Effort | undefined;
+    if (value && effortLevels.includes(value)) return value;
+  }
+  return fallback;
 }
 export const efforts = {
   detect: () => effort('CLAUDE_DETECT_EFFORT', 'medium'),

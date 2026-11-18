@@ -1,7 +1,9 @@
 // The recipe's photo, from OpenAI's image API (https://developers.openai.com/api/docs/guides/image-generation).
-// With style references (the default) it uses the edits endpoint, which takes reference images: two
-// archive photos from supabase/style/, so the new photo gets the archive's light, props and colours.
+// The prompt is in photo-prompt.ts. With style references (the default) it uses the edits endpoint, which
+// takes reference images: two archive photos from supabase/style/, so the new photo gets the archive's
+// light, props and colours.
 import {env} from './http.ts';
+import {photoPrompt} from './photo-prompt.ts';
 import type {RecipeDoc} from './recipe.ts';
 import {styleReferences} from './style-references.ts';
 
@@ -14,18 +16,6 @@ const settings = () => ({
   references: Deno.env.get('IMAGE_STYLE_REFERENCES') !== 'off' && styleReferences.length > 0
 });
 
-export function imagePrompt(recipe: RecipeDoc, withReferences: boolean): string {
-  return [
-    'An appetising editorial food photograph for a Swedish home-cooking website. Landscape, 16:9.',
-    `The dish: ${recipe.imagePrompt}`,
-    'Style: warm, low golden-hour side light; a dark, rustic wooden table; cast iron, speckled handmade stoneware or a wooden board; a linen napkin in a muted warm colour; a few of the raw ingredients and fresh herbs placed around the dish; soft out-of-focus background with a candle or a window; seen from the front and slightly above; shallow depth of field; rich, saturated colours.',
-    withReferences
-      ? 'The reference images show the style only. Make a completely new photograph of this dish: do not reuse their food, their exact props or their layout.'
-      : '',
-    'No people, no hands, no text, no logos, no branded packaging.'
-  ].filter(Boolean).join('\n\n');
-}
-
 // Returns the photo as JPEG bytes.
 export async function makePhoto(recipe: RecipeDoc): Promise<Uint8Array> {
   const {model, size, quality, references} = settings();
@@ -34,7 +24,7 @@ export async function makePhoto(recipe: RecipeDoc): Promise<Uint8Array> {
     headers: {Authorization: `Bearer ${env('OPENAI_API_KEY')}`, 'Content-Type': 'application/json'},
     body: JSON.stringify({
       model,
-      prompt: imagePrompt(recipe, references),
+      prompt: photoPrompt(recipe.imagePrompt, references),
       size,
       quality,
       output_format: 'jpeg',
