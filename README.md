@@ -49,13 +49,27 @@ Edit [src/_data/site.js](src/_data/site.js), then rebuild and publish the site.
 | `description` | Home-page description and the fallback for other pages. |
 | `language` | HTML language and recipe structured-data language; currently `sv`. |
 | `locale` | Sharing-preview locale; currently `sv_SE`. |
-| `socialImage` | Default sharing image, with `path` and `alt` text. |
+| `socialImage` | Default sharing image, with `path`, `alt`, `width`, `height` and MIME `type`. |
 | `contact` | Email link under **Frågor** on the privacy page. An empty string hides it. |
 | `socialLinks` | Optional `{ label, url }` entries shown in the footer. An empty list hides them. |
 
-Page front matter can override `title`, `description` and `socialImage`. Page titles get ` · <site name>` automatically; set `titleSuffix: ''` to omit it. Recipe pages use their own titles, descriptions and photos.
+Page front matter can override `title`, `description` and `socialImage`. Page titles get ` · <site name>` automatically; set `titleSuffix: ''` to omit it. Recipe pages use their own titles and descriptions, with a dedicated sharing card when one exists and their recipe photo otherwise.
 
-The default sharing image is [src/assets/social-card.png](src/assets/social-card.png). Its vector source is [design/social-card.svg](design/social-card.svg). If you replace the image, update its alt text too.
+### Social preview images
+
+Social artwork lives in [src/assets/social/](src/assets/social/):
+
+| Folder | Use |
+| --- | --- |
+| `1200x630/` | Landscape cards selected by the website's Open Graph and Twitter metadata. |
+| `1080x1080/` | Square artwork for uploading directly as social posts. |
+| `1080x1920/` | Portrait artwork for uploading directly as stories. |
+
+The default is [1200x630/startsida.png](src/assets/social/1200x630/startsida.png), configured in `site.js`. Update its alt text and dimensions if you replace it. The square and portrait versions are also copied into `_site/assets/social/`; they are not automatically substituted in link previews.
+
+[src/_data/socialImages.js](src/_data/socialImages.js) maps landscape cards to pages by filename: `receptarkiv.png` → `/receptarkiv.html`, `kategori-soppor.png` → `/kategori/soppor.html`, and `typ-odling.png` → `/typ/odling.html`. Its aliases handle the home page, the shorter household filename and the two recipe cards for Rödbetspytt and Bolognese. Add an alias there when a card's filename differs from its page address. New recipe cards can use `recept-<full-recipe-id>.png` to match automatically.
+
+The branded recipe cards are selected; alternative `*-foto.png` exports stay available without being selected. A page's explicit `socialImage` overrides the automatic selection. Recipe structured data continues to use the original dish photo.
 
 Every page receives Open Graph and Twitter metadata. Indexable pages also receive canonical links. When `url` is set, each build generates `sitemap.xml` and a `robots.txt` reference to it. The sitemap includes public recipe, category, type and tag pages and excludes pages marked `noindex`.
 

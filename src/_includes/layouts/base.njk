@@ -3,7 +3,7 @@
     Page data it reads:
       title, description   page overrides for site.title and site.description
       titleSuffix          defaults to " · " + site.name; set to '' to omit it
-      socialImage          optional {path, alt} override for site.socialImage
+      socialImage          optional {path, alt, width, height, type} override for sharing previews
       base                 "../" for pages one folder down (recept/, kategori/, …), so paths resolve from the site root
       scripts              extra scripts from js/ after app.js, e.g. [kitchen.js] on the home page
       modules              extra scripts from js/ loaded as modules, after the others, e.g. [new-recipe.js]
@@ -11,7 +11,7 @@
                            foods are matched: the home page and nytt-recept.html. Other pages get only
                            the foods the recipes use, in data/recipe-index.js
       noindex              true keeps search engines away, e.g. on nytt-recept.html
-      recipe               set on recipe pages, which use their own sharing photo and structured data
+      recipe               set on recipe pages, with structured data and a photo fallback for sharing
     The address of the AI functions (_data/ai.js) goes in <meta name="restfest-ai"> once it's set.
     Accounts (ai.accounts, HANDOFF.md "Konton och receptbok") add <meta name="restfest-account">, the
     account button and js/account.js. The pages are built signed out; a small script in the head adds
@@ -21,7 +21,9 @@
 {%- set pageTitle = (title ~ (titleSuffix if titleSuffix is defined else (' · ' ~ site.name))) if title else site.title -%}
 {%- set pageDescription = description or site.description -%}
 {%- set shareTitle = recipe.title or pageTitle -%}
-{%- set shareImage = {path: recipe.image, alt: recipe.alt} if recipe else (socialImage or site.socialImage) -%}
+{%- set pageSocialImage = socialImages[page.url] -%}
+{%- set shareImage = socialImage or (site.socialImage if isHome else pageSocialImage) or ({path: recipe.image, alt: recipe.alt} if recipe else site.socialImage) -%}
+{%- set shareImageAlt = shareImage.alt or shareTitle -%}
 {%- set shareImageUrl = site.absolute(shareImage.path) if shareImage.path else null -%}
 {%- set canonicalUrl = site.absolute(page.url) if not noindex else null -%}
 {#- The home page links to its own sections; the other pages link to the home page. -#}
@@ -77,9 +79,16 @@
   <meta name="twitter:description" content="{{ pageDescription | escape }}">
   {%- if shareImageUrl %}
   <meta property="og:image" content="{{ shareImageUrl | escape }}">
-  <meta property="og:image:alt" content="{{ shareImage.alt | escape }}">
+  {%- if shareImage.width and shareImage.height %}
+  <meta property="og:image:width" content="{{ shareImage.width | escape }}">
+  <meta property="og:image:height" content="{{ shareImage.height | escape }}">
+  {%- endif %}
+  {%- if shareImage.type %}
+  <meta property="og:image:type" content="{{ shareImage.type | escape }}">
+  {%- endif %}
+  <meta property="og:image:alt" content="{{ shareImageAlt | escape }}">
   <meta name="twitter:image" content="{{ shareImageUrl | escape }}">
-  <meta name="twitter:image:alt" content="{{ shareImage.alt | escape }}">
+  <meta name="twitter:image:alt" content="{{ shareImageAlt | escape }}">
   {%- endif %}
   <link rel="icon" href="{{ base }}assets/favicon.png" type="image/png">
   {#- One file per role, plus the Medium that every header button uses. The other weights load when a page needs them. #}

@@ -17,10 +17,14 @@ const language = "sv";
 const locale = "sv_SE";
 
 // Default sharing image: a path relative to src/, or a full HTTPS image URL.
-// Recipe pages use their own photo. Replace this image and its alt text together.
+// Matching page cards are selected by socialImages.js; other recipes use their own photo.
+// Replace this image and its alt text together; keep width, height and type in sync with the file.
 const socialImage = {
-  path: "assets/social-card.png",
-  alt: `${name} – Middag av det du redan har, med en illustrerad skål ramen.`,
+  path: "assets/social/1200x630/startsida.png",
+  alt: `${name} – Middag av det du redan har. En skål curry med ris.`,
+  width: 1200,
+  height: 630,
+  type: "image/png",
 };
 
 // Contact email shown under "Frågor" on the privacy page. Empty = hidden.
