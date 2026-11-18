@@ -34,7 +34,7 @@ function generatedCard(row) {
     .map((tag) => recipeTagLabels[tag] ?? tag);
   return `<article class="archive-card">
     <div class="archive-card-art${photo ? " has-photo" : ""}">
-      <img src="${escapeHtml(photo ?? assetUrl("assets/illustrations/ramen.svg"))}" alt="" width="${photo ? 600 : 80}" height="${photo ? 338 : 80}" loading="lazy" decoding="async">
+      <img src="${escapeHtml(photo ?? assetUrl("assets/icons/ramen.svg"))}" alt="" width="${photo ? 600 : 80}" height="${photo ? 338 : 80}" loading="lazy" decoding="async">
       <span class="archive-time">${escapeHtml(row.time_label ?? "")}</span>
       <button class="favorite" data-save-generated="${escapeHtml(row.id)}" aria-label="Ta bort ${title}" aria-pressed="true">${heartIcon(true)}</button>
     </div>
@@ -44,7 +44,6 @@ function generatedCard(row) {
       <p class="archive-description">${escapeHtml(row.description ?? "")}</p>
       <p class="archive-match">Eget recept</p>
       <div class="ingredient-chips">${chips.map((name) => `<span>${escapeHtml(name)}</span>`).join("")}</div>
-      <a class="open-recipe" href="${url}" aria-label="Öppna ${title}">Visa recept ${faIcon("arrow-up-right")}</a>
     </div>
   </article>`;
 }

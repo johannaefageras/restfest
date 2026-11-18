@@ -12,7 +12,8 @@
 //   _data/             foods.json (the ingredient list, divided between two files: lib/foods.js), site.js (the site's address) and ai.js (the
 //                      Supabase project behind the fridge photo and the new recipes)
 //   css/, js/          stylesheets and browser scripts, copied as they are to css/ and js/
-//   assets/            fonts, icons and photos, copied as they are
+//   assets/            fonts, icons and photos, copied as they are. The recipe photos also get WebP
+//                      copies, made by tools/photos.mjs in .cache/recipe-photos/ (`npm run photos`)
 //
 // src/recept/recept.11tydata.js gives the recipes their layout (_includes/layouts/recipe.njk) and
 // address, and lib/recipes.js works out the rest.
@@ -86,6 +87,20 @@ export default function (eleventyConfig) {
   // Keeps a range like "1–3" or "15–20" on one line: a word joiner (U+2060) either side of the dash
   // stops the browser breaking there. For the narrow boxes under a recipe's description (recipe.njk).
   eleventyConfig.addFilter('keepRanges', text => String(text).replace(/(\d)–(\d)/g, '$1⁠–⁠$2'));
+
+  // The WebP copies of the recipe photos (tools/photos.mjs), copied next to the PNGs in
+  // assets/recipes/, where the service worker also caches them for offline recipe pages.
+  // `webp` gives one copy's address and `webpSrcset` all of them for srcset, both relative to the
+  // site root; anything that isn't a PNG gets its own address and no srcset. The browser builds the
+  // same addresses in photoAttributes() (src/js/app.js), so keep the widths the same in all three.
+  eleventyConfig.addPassthroughCopy({'.cache/recipe-photos': 'assets/recipes'});
+  const photoWidths = [600, 1200, 1600];
+  const isPhoto = image => /\.png$/.test(image ?? '');
+  const webp = (image, width) => image.replace(/\.png$/, `-${width}.webp`);
+  eleventyConfig.addFilter('webp', (image, width = 600) => isPhoto(image) ? webp(image, width) : image);
+  eleventyConfig.addFilter('webpSrcset', (image, base = '') => isPhoto(image)
+    ? photoWidths.map(width => `${base}${webp(image, width)} ${width}w`).join(', ')
+    : '');
 }
 
 export const config = {

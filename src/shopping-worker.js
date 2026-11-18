@@ -1,6 +1,6 @@
 // Offline account pages and visited public recipes. Private API responses stay in per-user browser
 // storage; this worker never caches authentication or API traffic.
-const cacheName = 'ofta-bra-efter-account-v21';
+const cacheName = 'ofta-bra-efter-account-v22';
 const base = self.registration.scope;
 const files = [
   'inkopslista.html', 'delad-inkopslista.html', 'lista/', 'receptbok.html', 'nytt-recept.html', 'css/fonts.css', 'css/styles.css', 'css/dark.css', 'css/kitchen.css', 'css/shopping-share.css', 'css/icons.css',
@@ -17,7 +17,7 @@ const files = [
   'assets/icons/shopping-basket-1.svg',
   'assets/icons/check-mark.svg', 'assets/icons/share.svg',
   'assets/icons/heart.svg', 'assets/icons/user-profile.svg', 'assets/icons/sun.svg', 'assets/icons/moon.svg',
-  'assets/illustrations/ramen.svg', 'assets/icons/cook-book.svg', 'assets/icons/magic-wand.svg', 'assets/icons/recipe-archive-box.svg',
+  'assets/icons/ramen.svg', 'assets/icons/cook-book.svg', 'assets/icons/magic-wand.svg', 'assets/icons/recipe-archive-box.svg',
 ];
 const urls = new Set(files.map(file => new URL(file, base).href));
 self.addEventListener('install', event => {

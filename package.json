@@ -3,14 +3,18 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "npm run photos",
     "build": "rm -rf _site && eleventy",
+    "prestart": "npm run photos",
     "start": "eleventy --serve",
     "test": "node --test",
+    "photos": "node tools/photos.mjs",
     "supabase-data": "node tools/supabase-data.mjs",
     "promote": "node tools/promote.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "3.1.7",
+    "@11ty/eleventy-img": "^7.1.1",
     "@supabase/supabase-js": "2.119.0",
     "js-yaml": "4.3.2",
     "markdown-it": "14.3.3"

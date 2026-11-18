@@ -38,6 +38,7 @@ The `20261118120000_shopping_copies.sql` migration and `shopping-copy` Edge Func
 | `npm start` | Starts the local Eleventy server. |
 | `npm run build` | Deletes `_site/` and builds a fresh copy of the website there. |
 | `npm test` | Runs the Node test suite, including builds with and without accounts. |
+| `npm run photos` | Makes WebP copies of the recipe photos in `.cache/recipe-photos/`, skipping photos that already have up-to-date copies. `npm start` and `npm run build` run it first. |
 | `npm run supabase-data` | Regenerates the ingredient, taxonomy, example-recipe and style-reference data used by the Edge Functions. |
 | `npm run promote -- "<recipe-uuid-or-url>"` | Adds a generated recipe and its photo to the Markdown archive. |
 
@@ -94,6 +95,7 @@ Every page receives Open Graph and Twitter metadata. Indexable pages also receiv
 | [test/](test/) | Automated tests. |
 | [design/](design/) | Design source files, outside the published site. |
 | `_site/` | Generated website. Ignored by Git; do not edit it directly. |
+| `.cache/recipe-photos/` | WebP copies of the recipe photos, made by `npm run photos` and copied into `_site/assets/recipes/`. Ignored by Git. |
 
 [eleventy.config.js](eleventy.config.js) defines collections, copied assets and the `src/` → `_site/` build. Templates set explicit permalinks, so the `pages/` folder does not appear in public URLs.
 
@@ -101,9 +103,43 @@ Every page receives Open Graph and Twitter metadata. Indexable pages also receiv
 
 1. Copy a similar recipe in `src/recept/` and give a new recipe the next unused numeric filename prefix, followed by a short slug.
 2. Edit its YAML front matter: title, publication date (`YYYY-MM-DD`), description, image paths, alt text, categories, tags, time label and ingredients. Set `time` to a number of minutes when applicable.
-3. Put its photos in `src/assets/recipes/`. Both `image` and `cardImage` are paths relative to `src/` and must point to existing files; they can use the same photo.
+3. Put its photos in `src/assets/recipes/`. Both `image` and `cardImage` are paths relative to `src/` and must point to existing files; they can use the same photo. PNG photos get the WebP copies the pages show, 600, 1200 and 1600 px wide ([tools/photos.mjs](tools/photos.mjs)); other formats are used as they are. If `npm start` is already running, run `npm run photos` after adding a photo.
 4. Write the instructions as numbered Markdown steps. Optional `###` headings group steps; `##` headings introduce extra sections with bullet lists. A paragraph starting with bold text becomes a tip.
 5. Preview the page, regenerate Supabase data if needed, then run the build and tests.
+
+A recipe's front matter, with what each field does:
+
+```yaml
+---
+title: Rödbetspytt i torn med gyllene äggula
+date: 2026-11-09 # the day it was published; not shown, but "Nyast först" sorts by it
+description: Gårdagens kokta potatis, en burk inlagda rödbetor …
+image: assets/recipes/01-rodbetspytt.png # the large photo, path from src/
+cardImage: assets/recipes/01-rodbetspytt.png # the photo on cards; can be the same file
+alt: Rödbetspytt i torn med gyllene äggula
+categories: [main, breakfast] # keys from mealTypes in src/js/recipes.js; the first is shown on cards
+tags: [Vegetarian, Gluten free, Swedish] # keys from recipeTagLabels in src/js/recipes.js
+time: 35 # total minutes, for "Under 20 min"; leave out when it isn't one number
+timeLabel: 35 min # shown on cards
+facts: # the boxes under the description, in this order
+  Förberedelse: 15 min
+  Portioner: "4"
+  Nivå: Nybörjare
+beforeYouStart: … # optional: the "Bra att veta." box
+pantryKeys: [potatis, lok, rodbetor, agg] # the main ingredients for fridge matching
+ingredients:
+  - title: Pytt # groups are optional; without titles, list the items directly
+    items:
+      - name: 800 g kokt, kall potatis
+        key: potatis # a key from foods.json, for matching
+      - name: 1 tsk salt
+        basic: true # assumed to be at home
+      - name: 1 handduk
+        tool: true # equipment: its amount doesn't scale with the yield
+      - name: Byt honungen mot ljus sirap.
+        note: true # a note line, not an ingredient
+---
+```
 
 **Keep existing recipe filenames unchanged.** Their IDs are used in public URLs, saved recipes and shopping lists.
 
@@ -113,7 +149,7 @@ Ingredient keys come from [src/_data/foods.json](src/_data/foods.json), with bro
 
 Non-food recipes use exactly one category: `spa`, `household`, `pets` or `garden`. They appear under **Mer än mat** and stay out of dinner matching and food-recipe structured data.
 
-The build reports missing fields, unknown categories, tags or ingredient keys, missing images and unsupported Markdown. It checks the data format; recipes still need editorial review. See [Recipes in HANDOFF.md](HANDOFF.md#recipes) for the full front-matter example and content conventions.
+The build reports missing fields, unknown categories, tags or ingredient keys, missing images and unsupported Markdown. It checks the data format; recipes still need editorial review.
 
 ### Add a generated recipe to the archive
 
@@ -147,8 +183,34 @@ Supabase Edge Functions provide:
 | `get-recipe` | Returns a stored generated recipe. |
 | `recipe-image` | Generates its recipe photo. |
 | `delete-account` | Deletes the signed-in visitor's account and associated data. |
+| `shopping-copy` | Stores and returns the snapshots behind shared shopping-list links. |
 
-Provider credentials belong in Supabase secrets, not browser files. The publishable browser key is public; access is controlled by database policies and function checks. Database migrations, authentication redirects, Google sign-in and email delivery need separate backend setup. See [HANDOFF.md](HANDOFF.md) for the setup and migration-history notes, and [supabase/templates/README.md](supabase/templates/README.md) for the Swedish auth-email templates.
+Provider credentials belong in Supabase secrets, not browser files. The publishable browser key is public; access is controlled by database policies and function checks. Database migrations, authentication redirects, Google sign-in and email delivery need separate backend setup, described below.
+
+### Set up the backend
+
+The project is already set up; these steps are for a new Supabase project. Run the commands in the project folder; `npx supabase` needs no install.
+
+1. Create a Supabase project (region Stockholm, `eu-north-1`) and note its reference, the `abcd…` in `https://abcd….supabase.co`.
+2. Run `npx supabase login`, then `npx supabase link --project-ref <reference>`.
+3. Run `npx supabase db push` to apply [supabase/migrations/](supabase/migrations/): the tables, database functions and photo bucket.
+4. Set the secrets: `npx supabase secrets set ANTHROPIC_API_KEY=… OPENAI_API_KEY=… RATE_LIMIT_SALT=$(openssl rand -hex 24) ALLOWED_ORIGINS=https://oftabraefter.se,http://localhost:8080`.
+5. Run `npx supabase functions deploy` to deploy all the functions. Add `--use-api` if it asks for Docker.
+6. Put the project URL and the publishable key (`sb_publishable_…`, under Project Settings → API keys) in [src/_data/ai.js](src/_data/ai.js). Never put a secret key there.
+7. Under Authentication → URL Configuration, set the Site URL to the site's address, and add `http://localhost:8080/**` and the public address followed by `/**` to the redirect list.
+8. Under Authentication → Sign In / Providers → Email, set the minimum password length to 8 and keep "Confirm email" on. The site checks for 8 characters; Supabase's default is 6.
+9. Paste the three mail templates from [supabase/templates/](supabase/templates/); [its README](supabase/templates/README.md) says which goes where.
+10. For Google sign-in, create a Web application OAuth client in Google Cloud Console, using the redirect address shown on Supabase's Google provider page, and enter its ID and secret on that page.
+11. Before real visitors arrive, connect a mail service under Authentication → Emails → SMTP Settings. Supabase's built-in sender only delivers to the project's own team, a few mails an hour.
+12. Set monthly spending limits in the Anthropic Console and on OpenAI's platform. The daily caps limit the volume; the spending limits are the hard stop.
+
+Optional secrets change how the functions behave without a new deploy. They are explained where they are read, in `supabase/functions/_shared/`:
+
+| Secrets | Read in | Used for |
+| --- | --- | --- |
+| `CLAUDE_MODEL`, `CLAUDE_DETECT_MODEL`, `CLAUDE_RECIPE_MODEL`, `CLAUDE_EFFORT`, `CLAUDE_DETECT_EFFORT`, `CLAUDE_RECIPE_EFFORT` | `claude.ts` | The Claude model and effort for photo recognition and recipes. |
+| `DETECT_PER_VISITOR`, `DETECT_PER_DAY`, `RECIPE_PER_VISITOR`, `RECIPE_PER_DAY`, `SHARE_PER_VISITOR`, `SHARE_PER_DAY` | `limits.ts` | Daily caps per visitor and for everyone together. |
+| `IMAGE_MODEL`, `IMAGE_SIZE`, `IMAGE_QUALITY`, `IMAGE_STYLE_REFERENCES` | `image.ts` | The recipe photos; `IMAGE_STYLE_REFERENCES=off` stops sending the style photos. |
 
 ### Keep generated backend data in sync
 
@@ -170,7 +232,7 @@ npm run build
 npm test
 ```
 
-Tests cover ingredient matching, recipe parsing, preferences, shopping-list grouping and sync, offline behaviour and account-dependent builds. Backend and browser checks are described in [HANDOFF.md](HANDOFF.md). Automated checks do not replace testing real sign-ins, fridge photos and generated recipes against the configured backend.
+Tests cover ingredient matching, recipe parsing, preferences, shopping-list grouping and sync, offline behaviour and account-dependent builds. The stand-ins in [tools/standin/](tools/standin/) check the Edge Functions, database policies, shared shopping lists and account pages without the real backend; each file's opening comment says how to run it. Automated checks do not replace testing real sign-ins, fridge photos and generated recipes against the configured backend.
 
 If a preview stays stale after changing `lib/` or `eleventy.config.js`, restart `npm start`. For stale CSS or browser scripts, reload without the browser cache.
 
@@ -186,8 +248,6 @@ Build the site and upload **the contents of `_site/`** to the web root. For a ho
 
 Preserve the generated directories and `.html` URLs. The frontend is static; it does not need an application server or a catch-all SPA rewrite. Backend changes require their own Supabase migration or function deployment and are not published by the Eleventy build.
 
-## Further notes and licence
-
-[HANDOFF.md](HANDOFF.md) records architecture decisions, detailed setup, known issues and previous verification. Check dated deployment notes against the current backend before applying changes.
+## Licence
 
 Project code is licensed under the [MIT licence](LICENSE). Bundled commercial typefaces have separate licensing terms.

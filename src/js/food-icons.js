@@ -24,6 +24,10 @@ const pantryIconFoods = {
   ],
   cauliflower: ["blomkal", "lila-blomkal", "blomkalsbuketter", "blomkalsris", "romanesco"],
   celery: ["selleri"],
+  "chili-pepper": [
+    "gron-chili", "rod-chili", "serranochili", "thaichili", "anchochili", "torkad-chili",
+    "fryst-hackad-chili", "kashmiri-chili", "inlagd-chili",
+  ],
   corn: ["majs", "majskolv", "majskolvar", "minimajs", "fardigkokta-majskolvar"],
   cucumber: ["gurka", "minigurka", "vasterasgurka"],
   eggplant: ["aubergine", "miniaubergine", "thaiaubergine", "grillad-aubergine"],
@@ -36,6 +40,8 @@ const pantryIconFoods = {
   jalapenos: ["jalapeno", "jalapenos"],
   "green-cabbage": ["kal", "savojkal", "kinakal", "strimlad-vitkal-och-morot", "stuvad-vitkal"],
   kale: ["gronkal", "svartkal"],
+  "knobby-tubers": ["jordartskocka", "jams", "taro"],
+  kohlrabi: ["kalrabbi"],
   leeks: ["purjolok"],
   parsnips: ["persiljerot"],
   radishes: ["radisa", "rattika", "svart-rattika"],
@@ -45,7 +51,7 @@ const pantryIconFoods = {
   "root-vegetables": [
     "rotfrukter", "potatis", "bakpotatis", "bla-potatis", "delikatesspotatis", "rod-potatis",
     "skalad-potatis", "smapotatis", "sparrispotatis", "skivad-fryst-potatis", "kalrot", "majrova",
-    "kalrabbi", "jordartskocka", "pepparrot", "svartrot", "jams", "kassava", "taro", "rotfruktsmix",
+    "pepparrot", "svartrot", "kassava", "rotfruktsmix",
   ],
   salad: [
     "sallad", "bataviasallad", "ekbladssallad", "endiv", "frisesallad", "hjartsallad", "huvudsallad",
@@ -83,6 +89,10 @@ const pantryIconFoods = {
   ],
   capers: ["kapris", "kaprisbar", "kapris-i-salt"],
   chanterelles: ["kantareller", "trattkantareller", "torkade-trattkantareller"],
+  "button-mushrooms": [
+    "svamp", "bruna-champinjoner", "skivade-champinjoner", "marinerade-champinjoner",
+    "champinjoner-pa-burk", "fryst-champinjon-i-skivor",
+  ],
 
   beans: [
     "bonor", "vita-bonor", "stora-vita-bonor", "bondbonor", "lupinbonor", "adukibonor", "bakade-bonor",
@@ -109,11 +119,12 @@ const pantryIconFoods = {
   apricots: ["aprikos-frukt", "aprikos"],
   bananas: ["banan", "matbanan", "minibanan", "roda-bananer", "bananskivor", "bananchips"],
   berries: [
-    "bar", "blabar", "lingon", "svartvinbar", "farsk-barmix", "barmix", "skogsbarsmix", "vilda-blabar",
-    "torkade-blabar", "tranbar", "torkade-tranbar", "roda-vinbar", "vita-vinbar", "krusbar", "hjortron",
+    "bar", "svartvinbar", "farsk-barmix", "barmix", "skogsbarsmix",
+    "tranbar", "torkade-tranbar", "roda-vinbar", "vita-vinbar", "krusbar", "hjortron",
     "havtorn", "aronia", "akerbar", "mullbar", "torkade-mullbar",
   ],
   blackberries: ["bjornbar"],
+  blueberries: ["blabar", "vilda-blabar", "torkade-blabar"],
   cherries: ["korsbar", "bigarraer", "surkorsbar", "torkade-korsbar"],
   clementines: ["clementin", "mandarin", "satsuma", "mandariner-pa-burk"],
   coconut: ["kokosnot", "kokosbitar", "kokoschips", "kokosflingor"],
@@ -121,18 +132,26 @@ const pantryIconFoods = {
   fig: ["fikon", "torkade-fikon"],
   grapefruit: ["grapefrukt", "blodgrapefrukt", "pomelo"],
   grapes: ["vindruvor", "grona-vindruvor", "roda-vindruvor", "svarta-vindruvor", "karnfria-vindruvor"],
+  guava: ["guava"],
   lemons: ["citron", "yuzu", "bergamott"],
   limes: ["lime"],
+  "lingon-berry": ["lingon"],
   mangoes: ["mango", "skuren-mango", "torkad-mango"],
   melon: [
     "cantaloupemelon", "charentaismelon", "galiamelon", "honungsmelon", "piel-de-sapo-melon",
     "skuren-melon",
   ],
-  nectarines: ["nektarin", "persika", "plattpersika", "frysta-persikobitar", "persikor-pa-burk"],
+  nectarines: ["nektarin"],
+  oranges: ["apelsin", "blodapelsin", "juiceapelsiner"],
   papaya: ["papaya", "torkad-papaya"],
   "passion-fruit": ["passionsfrukt", "grenadilla-sot-passionsfrukt", "passionsfruktpure"],
+  peaches: ["persika", "plattpersika", "frysta-persikobitar", "persikor-pa-burk"],
   pears: ["paron", "nashiparon", "torkade-paron"],
   physalis: ["physalis", "inkabar"],
+  pineapple: [
+    "ananas", "babyananas", "skuren-ananas", "ananas-pa-burk", "krossad-ananas", "torkad-ananas",
+    "ananasbitar",
+  ],
   plums: ["plommon", "gula-plommon", "krikon", "mirabeller", "katrinplommon"],
   pomegranate: ["granatapple", "granatappelkarnor", "frysta-granatappelkarnor"],
   raspberries: ["hallon", "gula-hallon"],
@@ -145,6 +164,7 @@ const pantryIconFoods = {
   "cinnamon-sticks": ["kanelstanger"],
   cloves: ["kryddnejlika"],
   cilantro: ["fryst-hackad-koriander"],
+  chives: ["fryst-graslok"],
   dill: ["dill", "krondill", "hackad-dill"],
   herbs: [
     "orter", "ortmix", "bouquet-garni", "dragon", "salvia", "mejram", "kyndel", "korvel", "libbsticka",
@@ -198,19 +218,19 @@ const pantryIconFoods = {
     "bredbart-havrepalagg",
   ],
   cheese: [
-    "cheddar", "ost-lagrad", "halloumi", "getost", "comte", "danbo", "edamer", "ekologisk-hardost",
+    "cheddar", "ost-lagrad", "getost", "comte", "danbo", "edamer", "ekologisk-hardost",
     "emmentaler", "fontina", "farost", "gouda", "gruyere", "graddost", "havarti", "hard-getost",
     "jarlsberg", "julost", "kashkaval", "kittost", "klosterost", "kryddost", "kumminost",
     "lagrad-cheddar", "lagrad-gouda", "lattost", "maasdam", "manchego", "mellanlagrad-ost", "mimolette",
     "morbier", "provolone", "raclette", "red-leicester", "rokt-ost", "svecia", "tete-de-moine",
-    "tilsiter", "vallagrad-ost", "riven-vegansk-ost", "skivad-vegansk-ost", "vegansk-grillost",
+    "tilsiter", "vallagrad-ost", "riven-vegansk-ost", "skivad-vegansk-ost",
     "vegansk-ost", "hamburgerost", "pizzaost", "riven-greve", "riven-lagrad-ost", "riven-lattost",
     "riven-prastost", "riven-vasterbottensost", "skivad-cheddar", "skivad-edamer", "skivad-emmentaler",
     "skivad-gouda", "skivad-greve", "skivad-havarti", "skivad-herrgardsost", "skivad-hushallsost",
     "skivad-lagrad-ost", "skivad-lattost", "skivad-maasdam", "skivad-prastost", "snackost",
     "tex-mex-ost", "tarnad-ost", "laktosfri-hardost", "laktosfri-skivad-ost", "laktosfri-riven-ost",
-    "laktosfri-halloumi",
   ],
+  halloumi: ["halloumi", "chilihalloumi", "laktosfri-halloumi", "vegansk-grillost"],
   "cottage-cheese": ["keso", "laktosfri-keso", "latt-keso", "smaksatt-keso", "keso-med-sylt"],
   "cream-cheese": [
     "farskost", "vegansk-farskost", "mascarpone", "ekologisk-farskost", "fromage-frais", "getfarskost",
@@ -238,12 +258,15 @@ const pantryIconFoods = {
     "mjolk", "barista-mjolk", "chokladmjolk", "ekologisk-mjolk", "farmjolk", "getmjolk",
     "jordgubbsmjolk", "kaffemjolk", "karnmjolk", "laktosfri-lattmjolk", "laktosfri-mellanmjolk",
     "laktosfri-minimjolk", "laktosfri-standardmjolk", "lantmjolk", "langtidshallbar-mjolk", "minimjolk",
-    "ohomogeniserad-mjolk", "proteinmjolk", "ramjolk", "havredryck", "barista-havredryck",
-    "barista-sojadryck", "bovetedryck", "cashewdryck", "chokladhavredryck", "chokladsojadryck",
-    "ekologisk-havredryck", "glutenfri-havredryck", "hampadryck", "hasselnotsdryck", "kokosdryck",
-    "mandeldryck", "osotad-mandeldryck", "osotad-sojadryck", "potatisdryck", "risdryck", "sojadryck",
-    "vaniljsojadryck", "artdryck", "laktosfri-chokladmjolk",
+    "ohomogeniserad-mjolk", "proteinmjolk", "ramjolk", "bovetedryck", "cashewdryck",
+    "hampadryck", "hasselnotsdryck", "kokosdryck", "mandeldryck", "osotad-mandeldryck",
+    "potatisdryck", "risdryck", "artdryck", "laktosfri-chokladmjolk",
   ],
+  "oat-milk": [
+    "havredryck", "barista-havredryck", "chokladhavredryck", "ekologisk-havredryck",
+    "glutenfri-havredryck",
+  ],
+  "soy-milk": ["sojadryck", "barista-sojadryck", "chokladsojadryck", "osotad-sojadryck", "vaniljsojadryck"],
   mozzarella: [
     "mozzarella", "buffelmozzarella", "burrata", "minimozzarella", "stracciatella",
     "marinerade-mozzarellakulor", "laktosfri-mozzarella", "vegansk-mozzarella", "riven-mozzarella",
@@ -271,6 +294,11 @@ const pantryIconFoods = {
     "forstekt-bacon", "kalkonbacon", "kycklingbacon", "pancetta", "rokt-notbacon", "strimlat-bacon",
     "tjockskivat-bacon", "vegobacon",
   ],
+  ham: [
+    "julskinka", "kassler", "rimmad-julskinka-okokt", "basturokt-skinka", "honungsskinka",
+    "lantskinka", "pepparskinka", "skivad-julskinka", "skivad-kassler", "tarnad-skinka", "olskinka",
+    "lufttorkad-skinka", "parmaskinka", "serranoskinka", "spickeskinka", "vegoskinka",
+  ],
   "liver-pate": [
     "leverpastej", "ankleverpate", "bredbar-leverpastej", "grovhackad-leverpastej", "gasleverpate",
     "kalvleverpastej", "kycklingleverpate", "latt-leverpastej", "skivbar-leverpastej",
@@ -294,6 +322,10 @@ const pantryIconFoods = {
     "algkorv", "jaktkorv", "olkorv", "rode-polser-roda-danska-korvar", "vegobratwurst", "vegochorizo",
     "vegofalukorv", "vegogrillkorv", "vegokabanoss", "vegokorv", "vegoprinskorv", "vegovarmkorv",
     "tofukorv", "bratwurst", "chorizo", "isterband", "kabanoss", "merguez", "salsiccia", "kabanosy",
+  ],
+  salami: [
+    "salami", "dansk-salami", "milanosalami", "pepparsalami", "pepperoni", "salamipinnar",
+    "tryffelsalami", "ungersk-salami", "viltsalami", "vitlokssalami", "vegopepperoni", "vegosalami",
   ],
   "roast-chicken": [
     "kyckling", "ekologisk-kyckling", "gardskyckling", "halalkyckling", "majskyckling", "hel-kalkon",
@@ -324,6 +356,13 @@ const pantryIconFoods = {
     "brisling-i-tomatsas", "kippers", "lax-pa-burk", "makrillfile-i-olja", "sardiner-i-tomatsas",
     "sprats-rokt-skarpsill-i-olja", "tonfisk-i-vatten", "tonfiskfile-i-olivolja",
     "tonfisksallad-pa-burk", "torsklever", "torskrom-pa-burk",
+  ],
+  "pickled-herring": [
+    "5-minuterssill", "bismarcksill", "brantevikssill", "citronsill", "currysill", "dillsill",
+    "gaffelbitar", "glasmastarsill", "inlagd-sill", "inlaggningssill", "julsill", "kryddsill",
+    "kraftsill", "loksill", "matjessill", "pasksill", "rollmops", "saltsill", "senapssill",
+    "sherrysill", "skargardssill", "tomatsill", "vitlokssill", "inlagd-stromming",
+    "stekt-inlagd-stromming", "gravad-stromming",
   ],
   shrimp: [
     "rakor", "rokta-rakor", "handskalade-rakor", "jatterakor", "oskalade-rakor", "rakor-i-lake",
@@ -368,7 +407,12 @@ const pantryIconFoods = {
   ],
   oats: [
     "havre", "fiberhavregryn", "grova-havregryn", "havrekli", "havrekross", "skuren-havre-steel-cut",
-    "snabbhavregryn", "fardig-havregrynsgrot", "overnight-oats",
+    "snabbhavregryn",
+  ],
+  porridge: [
+    "grot", "fardig-havregrynsgrot", "mannagrynsgrot", "portionsgrot", "proteingrot", "overnight-oats",
+    "barngrot", "fruktgrot-for-barn", "fullkornsgrot-for-barn", "havregrot-for-barn",
+    "mjolkfri-barngrot", "risgrot-for-barn",
   ],
   cornflakes: ["majsflingor", "sockrade-cornflakes"],
   granola: [
@@ -417,6 +461,7 @@ const pantryIconFoods = {
     "tortilla", "fullkornstortillas", "majstortillas", "minitortillas", "glutenfria-tortillas",
     "lagkolhydrattortillas",
   ],
+  pizza: ["pizza", "minipizza", "pizzaslice", "fryspizza", "panpizza", "vegansk-pizza", "glutenfri-fardigpizza"],
   "crisp-bread": [
     "knackebrod", "brungraddat-knackebrod", "dinkelknacke", "frukostknacke", "froknacke",
     "fullkornsknacke", "havreknacke", "miniknacke", "runda-knackebrod", "ragknacke", "sesamknacke",
@@ -447,7 +492,8 @@ const pantryIconFoods = {
     "mjolkchoklad", "nougatchoklad", "notchoklad", "sockerfri-choklad", "vegansk-choklad",
     "vit-choklad", "laktosfri-mjolkchoklad", "proteinchoklad", "mjolkfri-choklad",
   ],
-  cocoa: ["kakao", "chokladpulver", "drickchoklad"],
+  cocoa: ["kakao", "chokladpulver"],
+  "hot-chocolate": ["drickchoklad"],
   "coconut-milk": ["kokosmjolk", "latt-kokosmjolk", "kondenserad-kokosmjolk"],
   macarons: ["macarons"],
   "strawberry-shortcake": ["jordgubbstarta", "graddtarta", "frukttarta"],
@@ -555,7 +601,13 @@ const pantryIconFoods = {
     "nyponsoppa", "maltidsersattningssoppa",
   ],
   "greek-salad": ["grekisk-sallad", "fetaostsallad"],
+  lemonade: ["lemonad", "rosa-lemonad"],
   "sparkling-water": ["kolsyrat-vatten", "mineralvatten", "smaksatt-kolsyrat-vatten", "sodavatten"],
+  "sunflower-oil": ["solrosolja"],
+  "wine-bottle": [
+    "matlagningsvin", "shaoxingvin", "sake", "alkoholfritt-rosevin", "alkoholfritt-rott-vin",
+    "alkoholfritt-vitt-vin",
+  ],
 };
 
 // Some distinct groceries intentionally share a recipe key (farfalle → pasta, basilika → örter).
@@ -563,6 +615,7 @@ const pantryIconFoods = {
 const pantryIconNames = {
   basil: ["basilika", "basilikan"],
   cilantro: ["koriander", "koriandern"],
+  chives: ["gräslök", "gräslöken"],
   parsley: ["persilja", "persiljan", "bladpersilja"],
   mint: ["mynta", "myntan"],
   oregano: ["oregano", "oreganon"],
@@ -570,6 +623,8 @@ const pantryIconNames = {
   thyme: ["timjan", "timjanen"],
   rocket: ["ruccola", "ruccolan"],
   parsnips: ["palsternacka", "palsternackan", "palsternackor", "palsternackorna"],
+  "celery-root": ["rotselleri", "rotsellerin"],
+  "chili-pepper": ["chili", "chilin"],
   "red-cabbage": ["rödkål", "rödkålen"],
   "green-cabbage": ["vitkål", "vitkålen", "spetskål", "spetskålen"],
   farfalle: ["farfalle"],

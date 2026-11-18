@@ -68,7 +68,7 @@ test('product forms choose suitable pictures and unknown items remain unillustra
     ['Jordgubbar', 'strawberries'], ['Jordgubbssylt', 'jam-jar'],
     ['Keso med sylt', 'cottage-cheese'], ['Dijonsenap', 'mustard'],
     ['Senapspulver', 'ground-spice'], ['Havregryn', 'oats'],
-    ['Havredryck', 'milk-carton-2'], ['Fryst tärnad sötpotatis', 'sweet-potatoes'],
+    ['Havredryck', 'oat-milk'], ['Fryst tärnad sötpotatis', 'sweet-potatoes'],
     ['Tonfisk i olja', 'canned-fish'], ['Tonfisk', 'fish'],
     ['Laxfilé', 'salmon-fillet'], ['Popcorn', 'popcorn'],
     ['Linser', 'lentils'], ['Gröna linser', 'lentils'], ['Belugalinser', 'lentils'],
@@ -78,7 +78,7 @@ test('product forms choose suitable pictures and unknown items remain unillustra
     ['Jordnötter', 'peanuts'], ['Jordnötssmör', 'peanuts'], ['Jordnötsolja', 'olive-oil'],
     ['Pumpafrön', 'seeds'], ['Sesamfrön', 'seeds'], ['Chiafrön', 'seeds'],
     ['Tomatpuré', 'tomato-puree'], ['Krossade tomater', 'canned-tomatoes'],
-    ['Apelsin', 'fruit'], ['Natto', 'beans'],
+    ['Apelsin', 'oranges'], ['Natto', 'beans'],
     ['Vinterportlak', 'broccoli'], ['Påhittad råvara', null], ['Diskborste', null],
   ]) assert.equal(p.iconForPantryFood(name), icon, name);
 });

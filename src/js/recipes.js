@@ -45,20 +45,17 @@ const mealTypes = {
     name: "Hemmaspa",
     icon: "rolled-towels",
     badge: "HEMMASPA",
-    action: "Visa behandling",
   },
   household: {
     label: "Hushåll & rengöring",
     icon: "spray-bottle",
     badge: "HUSHÅLL & RENGÖRING",
-    action: "Visa instruktioner",
   },
   pets: { label: "Husdjur", icon: "dog-bone", badge: "HUSDJUR" },
   garden: {
     label: "Odling",
     icon: "pot-and-trowel",
     badge: "ODLING",
-    action: "Visa instruktioner",
   },
 };
 

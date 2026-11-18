@@ -1183,12 +1183,6 @@ details[open] > summary > .fa-chevron-down {
 .archive-card-body .ingredient-chips {
   margin-bottom: 4px;
 }
-.archive-card-body .open-recipe {
-  margin-top: auto;
-}
-.open-recipe > .fa-arrow-up-right {
-  font-size: 13px;
-}
 .archive-card:focus-within {
   border-color: var(--yellow);
 }

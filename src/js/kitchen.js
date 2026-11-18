@@ -147,7 +147,7 @@ function matchItem(match) {
     ? `Saknas: ${listFoods(match.missing)}`
     : "Du har alla huvudråvaror";
   return `<li class="match-item">
-    <img src="${assetUrl(recipe.cardImage ?? recipe.image)}" width="600" height="338" alt="" loading="lazy" decoding="async">
+    <img ${photoAttributes(recipe.cardImage ?? recipe.image, "(min-width: 700px) 33vw, 96px")} width="600" height="338" alt="" loading="lazy" decoding="async">
     <div>
       <h4><a class="recipe-main-link" href="${recipeUrl(recipe.id)}" data-open="${recipe.id}">${escapeHtml(recipe.title)}</a></h4>
       <p class="match-item-count">${match.have.length} av ${match.mainCount} huvudråvaror · <span>${escapeHtml(recipe.timeLabel)}</span></p>
@@ -343,7 +343,7 @@ function renderFeaturedRecipe() {
       <span class="sticker">BÄSTA MATCHEN</span>
       ${
         recipe.cardImage
-          ? `<img src="${assetUrl(recipe.cardImage)}" srcset="${assetUrl(recipe.cardImage)} 600w, ${assetUrl(recipe.image)} 1200w" sizes="(min-width: 900px) 460px, calc(100vw - 40px)" width="600" height="338" alt="">`
+          ? `<img ${photoAttributes(recipe.cardImage, "(min-width: 900px) 460px, calc(100vw - 40px)")} width="600" height="338" alt="">`
           : `<div class="featured-plate"><img src="${assetUrl(recipe.image)}" width="112" height="112" alt=""></div>`
       }
       <span class="featured-time">${escapeHtml(recipe.timeLabel)}</span>

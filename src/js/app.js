@@ -13,6 +13,21 @@ document
   .forEach((link) => link.setAttribute("href", link.href));
 const assetUrl = (path) => siteBase + path;
 const recipeUrl = (id) => `${siteBase}recept/${id}.html`;
+// The WebP copies of the recipe photos (tools/photos.mjs), at the same addresses as the `webp`
+// filters in eleventy.config.js: keep the widths the same in all three. photoAttributes() gives an
+// <img> its src, srcset and sizes; anything that isn't a PNG keeps its own address and no srcset.
+const photoWidths = [600, 1200, 1600];
+const isPhoto = (path) => /\.png$/.test(path ?? "");
+const webpUrl = (path, width = 600) =>
+  assetUrl(path.replace(/\.png$/, `-${width}.webp`));
+const photoAttributes = (path, sizes) =>
+  isPhoto(path)
+    ? `src="${webpUrl(path)}" srcset="${photoWidths
+        .map((width) => `${webpUrl(path, width)} ${width}w`)
+        .join(", ")}" sizes="${sizes}"`
+    : `src="${assetUrl(path)}"`;
+// Archive cards: three columns from 900px, two from 421px, otherwise one (kitchen.css).
+const cardPhotoSizes = "(min-width: 900px) 33vw, (min-width: 421px) 50vw, 100vw";
 // Fitted SVG artwork is displayed in square UI slots, preserving its proportions.
 const squareIconPath = (name) => assetUrl(`assets/icons/${name}.svg`);
 const squareIcon = (name, size = 22) =>
@@ -659,10 +674,9 @@ function archiveCard(recipe, match) {
   const chips =
     recipe.tags?.slice(0, 3).map((tag) => recipeTagLabels[tag] ?? tag) ??
     recipe.chips;
-  const action = meal.action ?? "Visa recept";
   return `<article class="archive-card" data-tone="${recipe.category ?? ""}">
     <div class="archive-card-art${photo ? " has-photo" : ""}">
-      <img src="${assetUrl(photo ?? recipe.image)}" alt="" width="${photo ? 600 : 80}" height="${photo ? 338 : 80}" loading="lazy" decoding="async">
+      <img ${photoAttributes(photo ?? recipe.image, cardPhotoSizes)} alt="" width="${photo ? 600 : 80}" height="${photo ? 338 : 80}" loading="lazy" decoding="async">
       <span class="archive-time">${escapeHtml(recipe.timeLabel)}</span>
       ${saveButton(recipe)}
     </div>
@@ -672,7 +686,6 @@ function archiveCard(recipe, match) {
       <p class="archive-description">${escapeHtml(recipe.description)}</p>
       ${archiveMatchLine(match)}
       <div class="ingredient-chips">${chips.map((name) => `<span>${escapeHtml(name)}</span>`).join("")}</div>
-      <a class="open-recipe" href="${recipeUrl(recipe.id)}" data-open="${recipe.id}" aria-label="Öppna ${escapeHtml(recipe.title)}">${action} ${faIcon("arrow-up-right")}</a>
     </div>
   </article>`;
 }
