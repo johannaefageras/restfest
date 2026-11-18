@@ -6,6 +6,11 @@ import vm from 'node:vm';
 import test from 'node:test';
 import { groupShoppingItems, shoppingRecipeSources } from '../lib/shopping-groups.js';
 import { applyShoppingChanges } from '../lib/shopping-sync.js';
+import { shoppingDepartmentNames, createShoppingDepartmentClassifier, groupShoppingDepartments } from '../lib/shopping-departments.js';
+import { taxonomy } from '../lib/taxonomy.js';
+
+const catalogue = JSON.parse(readFileSync(new URL('../src/_data/foods.json', import.meta.url), 'utf8'));
+const classify = createShoppingDepartmentClassifier(shoppingDepartmentNames({ ...catalogue, ...taxonomy().foods }));
 
 const source = readFileSync(new URL('../src/js/app.js', import.meta.url), 'utf8');
 const code = source.slice(source.indexOf('function shoppingSources('), source.indexOf('function shoppingText('));
@@ -35,6 +40,7 @@ function view(items) {
     shoppingOwner: () => context.owner,
     shoppingRecipeTools: { shoppingRecipeSources }, recipes: [], window: {},
     shoppingRows: groupShoppingItems, shoppingText: item => item.customText || item.text,
+    loadShoppingDepartments() {}, shoppingSections: rows => groupShoppingDepartments(rows, classify),
     escapeHtml: value => String(value).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;'),
     faIcon: () => '', showToast() {},
     document: { activeElement: null, querySelectorAll: () => roots },
@@ -122,4 +128,28 @@ test('remote purchase changes keep an open draft in its section without duplicat
     assert.equal(page.roots[0].count(section), 0);
     assert.equal(page.roots[0].count(startedBought ? 'pending' : 'bought'), 1);
   }
+});
+
+test('department sections follow displayed edits and keep counts, identities and recipe filters intact', () => {
+  const page = view([
+    item('a', '1 l mjölk', false, { recipe: 'Soppa', source: 'archive:01-soppa', note: 'Laktosfri' }),
+    item('b', '2 tomater', false, { recipe: 'Soppa', source: 'archive:01-soppa' }),
+    item('c', '1 kg potatis'), item('d', '1 påse chips'), item('e', 'Okänd vara'),
+  ]);
+  page.render();
+  const list = page.roots[0].pending;
+  assert.equal(page.roots[0].count('pending'), 5, 'department headings are not counted as items');
+  assert.match(list.innerHTML, /data-shopping-department="produce"/);
+  assert.match(list.innerHTML, /data-shopping-department="dairy"/);
+  assert.match(list.innerHTML, /data-shopping-department="other"/);
+  assert.ok(list.innerHTML.indexOf('Frukt &amp; grönt') < list.innerHTML.indexOf('Mejeri &amp; ägg'));
+  page.change([{ kind: 'edit', id: 'a', fields: { customText: '500 g fryst broccoli' } }]);
+  assert.doesNotMatch(list.innerHTML, /data-shopping-department="dairy"/);
+  assert.match(list.innerHTML, /data-shopping-department="frozen"/);
+  assert.match(list.innerHTML, /Laktosfri/);
+  assert.equal(page.context.shoppingItems.get('a').source, 'archive:01-soppa');
+  page.context.shoppingRecipeFilter = { key: 'archive:01-soppa', ids: ['a', 'b'], owner: null };
+  page.render();
+  assert.equal(page.roots[0].count('pending'), 2);
+  assert.doesNotMatch(list.innerHTML, /chips|Okänd vara|potatis/);
 });

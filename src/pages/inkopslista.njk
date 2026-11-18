@@ -1,5 +1,5 @@
 ---js
-// The signed-in shopping list keeps an offline copy and syncs individual changes with the account.
+// Guests keep their list on this device; signed-in visitors also sync with their account.
 const layout = 'layouts/base.njk';
 const title = 'Inköpslista';
 const description = 'Det du behöver köpa, samlat på din inköpslista hos Ofta bra efter.';
@@ -18,19 +18,23 @@ const permalink = 'inkopslista.html';
           <div class="doodle-lineup"><img src="assets/icons/shopping-basket-1.svg" alt="" width="60" height="60"></div>
         </div>
       </header>
+      {%- if ai.accounts %}
       <div class="when-signed-in">
         {%- set current = 'inkopslista' %}
         {% include "account-nav.njk" %}
-        <div class="shopping-sync-status">
-          <p class="meta" role="status" data-shopping-sync-status>Hämtar inköpslistan …</p>
-          <button class="text-button" type="button" data-shopping-sync-retry hidden>Försök igen</button>
-        </div>
-        <section class="shopping-panel" data-shopping-list aria-label="Din inköpslista">
-          {% include "shopping-controls.njk" %}
-          {% set shoppingListPrefix = 'shopping-page' %}
-          {% include "shopping-items.njk" %}
-        </section>
       </div>
+      {%- endif %}
+      <div class="shopping-sync-status">
+        <p class="meta" role="status" data-shopping-sync-status>Listan sparas på den här enheten. Du kan dela en kopia utan att logga in.</p>
+        <button class="text-button" type="button" data-shopping-sync-retry hidden>Försök igen</button>
+      </div>
+      <section class="shopping-panel" data-shopping-list data-shopping-page-list aria-labelledby="shopping-panel-title" hidden>
+        {% set shoppingPanelTitle = 'Din inköpslista' %}
+        {% include "shopping-controls.njk" %}
+        {% set shoppingPanelTitle = '' %}
+        {% set shoppingListPrefix = 'shopping-page' %}
+        {% include "shopping-items.njk" %}
+      </section>
       <noscript><p class="account-error">Inköpslistan behöver JavaScript.</p></noscript>
     </section>
   </main>

@@ -28,12 +28,13 @@ import {otherFoods, recipeFoods} from './lib/foods.js';
 import {recipeListings} from './lib/recipes.js';
 import {taxonomy} from './lib/taxonomy.js';
 import ai from './src/_data/ai.js';
+import {shoppingDepartmentNames} from './lib/shopping-departments.js';
 
 const recipes = api => api.getFilteredByGlob('src/recept/*.md')
   .sort((a, b) => parseInt(a.fileSlug, 10) - parseInt(b.fileSlug, 10));
 
 // Sign-in, the recipe book and the pages around them (HANDOFF.md, "Konton och receptbok").
-const accountPages = ['logga-in', 'nytt-losenord', 'receptbok', 'inkopslista', 'profil', 'konto', 'integritet'];
+const accountPages = ['logga-in', 'nytt-losenord', 'receptbok', 'profil', 'konto', 'integritet'];
 
 export default function (eleventyConfig) {
   // The account pages are built only when the site has accounts (src/_data/ai.js): without a
@@ -55,6 +56,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({'lib/account-helpers.js': 'js/account-helpers.js'});
   eleventyConfig.addPassthroughCopy({'lib/shopping-sync.js': 'js/shopping-sync.js'});
   eleventyConfig.addPassthroughCopy({'lib/shopping-groups.js': 'js/shopping-groups.js'});
+  eleventyConfig.addPassthroughCopy({'lib/shopping-copy.js': 'js/shopping-copy.js'});
+  eleventyConfig.addPassthroughCopy({'lib/shopping-departments.js': 'js/shopping-departments.js'});
   eleventyConfig.addPassthroughCopy({'lib/account-sync.js': 'js/account-sync.js'});
   eleventyConfig.addPassthroughCopy({'lib/recipe-book-sync.js': 'js/recipe-book-sync.js'});
   if (ai.accounts) {
@@ -77,6 +80,7 @@ export default function (eleventyConfig) {
   const frontMatter = items => items.map(item => item.data);
   eleventyConfig.addFilter('recipeFoods', (foods, items) => recipeFoods(foods, frontMatter(items), taxonomy()));
   eleventyConfig.addFilter('otherFoods', (foods, items) => otherFoods(foods, frontMatter(items), taxonomy()));
+  eleventyConfig.addFilter('shoppingDepartmentNames', foods => shoppingDepartmentNames({...foods, ...taxonomy().foods}));
 
   // Keeps a range like "1–3" or "15–20" on one line: a word joiner (U+2060) either side of the dash
   // stops the browser breaking there. For the narrow boxes under a recipe's description (recipe.njk).

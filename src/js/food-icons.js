@@ -1,0 +1,530 @@
+"use strict";
+
+// Reviewed against the artwork in assets/icons/. These are food keys, so aliases and plural
+// forms inherit the same picture without changing how an ingredient matches recipes.
+// Only the home page loads this file. Unlisted foods keep their food group's icon.
+const pantryIconFoods = {
+  artichoke: [
+    "kronartskocka", "kronartskocksbottnar", "kronartskockshjartan", "inlagda-kronartskocksbottnar",
+    "marinerade-kronartskockor",
+  ],
+  asparagus: ["sparris", "gron-sparris", "vit-sparris", "minisparris", "sparris-pa-burk"],
+  avocados: ["avokado", "fryst-avokado-i-bitar"],
+  beetroots: ["rodbetor", "gulbeta", "knippbetor", "polkabeta"],
+  "bell-peppers": [
+    "paprika", "orange-paprika", "paprikamix", "snackpaprika", "spetspaprika", "strimlad-paprika",
+    "grillad-paprika",
+  ],
+  "bok-choy": ["pak-choi", "choi-sum", "tatsoi"],
+  broccoli: ["broccoli", "broccolini", "thaibroccoli-kailan"],
+  carrot: [
+    "morot", "knippmorotter", "lila-morotter", "morotsmix-med-flera-farger", "snackmorotter",
+    "morotsstavar", "riven-morot", "skalade-morotter", "minimorotter", "skivade-morotter",
+  ],
+  cauliflower: ["blomkal", "lila-blomkal", "blomkalsbuketter", "blomkalsris", "romanesco"],
+  celery: ["selleri"],
+  corn: ["majs", "majskolv", "majskolvar", "minimajs", "fardigkokta-majskolvar"],
+  cucumber: ["gurka", "minigurka", "vasterasgurka"],
+  eggplant: ["aubergine", "miniaubergine", "thaiaubergine", "grillad-aubergine"],
+  fennel: ["fankal"],
+  garlic: [
+    "vitlok", "farsk-vitlok", "solovitlok", "svart-vitlok", "vitloksflata", "skalade-vitloksklyftor",
+    "hackad-vitlok", "marinerad-vitlok",
+  ],
+  ginger: ["ingefara", "fryst-ingefara"],
+  "green-cabbage": ["kal", "savojkal", "kinakal", "strimlad-vitkal-och-morot", "stuvad-vitkal"],
+  kale: ["gronkal", "svartkal"],
+  leeks: ["purjolok"],
+  parsnips: ["persiljerot"],
+  radishes: ["radisa", "rattika", "svart-rattika"],
+  "red-cabbage": ["rod-spetskal", "strimlad-rodkal", "kokt-rodkal", "inlagd-rodkal"],
+  "red-onion": ["rodlok"],
+  "root-vegetables": [
+    "rotfrukter", "potatis", "bakpotatis", "bla-potatis", "delikatesspotatis", "rod-potatis",
+    "skalad-potatis", "smapotatis", "sparrispotatis", "skivad-fryst-potatis", "kalrot", "majrova",
+    "kalrabbi", "jordartskocka", "pepparrot", "svartrot", "jams", "kassava", "taro", "rotfruktsmix",
+  ],
+  salad: [
+    "sallad", "bataviasallad", "ekbladssallad", "endiv", "frisesallad", "hjartsallad", "huvudsallad",
+    "krispsallad", "kruksallad", "lollo-bianco", "lollo-rosso", "machesallad", "plocksallat",
+    "romansalladshjartan", "strimlad-isbergssallad",
+  ],
+  "bagged-salad": ["babyleaf", "salladskit", "salladsmix"],
+  shallots: ["schalottenlok", "bananschalottenlok"],
+  spinach: ["spenat", "vattenspenat", "hackad-spenat", "stuvad-spenat", "mangold"],
+  "spring-onions": ["salladslok"],
+  sprout: [
+    "alfalfagroddar", "broccoligroddar", "bongroddar", "linsgroddar", "purjoloksgroddar",
+    "radisgroddar", "rodbetsgroddar", "solrosskott", "artskott", "krasse", "mikrogront",
+  ],
+  "sweet-potatoes": ["sotpotatis", "lila-sotpotatis", "tarnad-sotpotatis", "fryst-tarnad-sotpotatis"],
+  "butternut-squash": ["pumpa", "tarnad-butternutpumpa", "muskotpumpa"],
+  tomato: [
+    "tomat", "babyplommontomater", "bifftomater", "grona-tomater", "gula-tomater", "oxhjartatomat",
+    "tomatmix", "halvtorkade-tomater", "soltorkade-tomater",
+  ],
+  vegetables: [
+    "gronsaker", "wokmix", "farsk-soppmix", "grillgronsaksmix", "ugnsgronsaksmix", "grillade-gronsaker",
+    "gronsaksblandning", "soppgront", "wokgronsaker", "art-majs-paprika", "artor-och-morotter",
+  ],
+  "yellow-onions": ["lok", "farsk-silverlok", "vit-lok", "parllok", "steklok", "hackad-lok"],
+  "pickle-jar": [
+    "saltgurka", "cornichons", "smorgasgurka", "senapsgurka", "mixed-pickles", "pressgurka", "relish",
+  ],
+  "potato-wedges": ["klyftpotatis", "rostad-potatis", "sotpotatispommes", "rotfruktspommes"],
+
+  beans: [
+    "bonor", "vita-bonor", "stora-vita-bonor", "bondbonor", "lupinbonor", "adukibonor", "bakade-bonor",
+    "borlottibonor", "bruna-bonor", "butterbonor", "bonmix", "cannellinibonor", "chilibonor",
+    "flageoletbonor", "limabonor", "mungbonor", "pintobonor", "roda-bonor", "sojabonor",
+    "svartogda-bonor", "torkade-bondbonor", "uridbonor-urad-dal", "vita-bonor-i-tomatsas", "akerbonor",
+    "favabonor", "foul-medames-kokta-favabonor",
+  ],
+  chickpeas: ["kikarter", "chana-dal-delade-kikartor"],
+  lentils: [
+    "linser", "fardigkokta-linser", "belugalinser", "bruna-linser", "franska-grona-linser",
+    "gula-linser", "linser-pa-burk",
+  ],
+  edamame: ["edamame", "skalade-edamamebonor"],
+  "green-beans": ["haricots-verts", "brytbonor", "langbonor", "rosenbonor", "skarbonor", "vaxbonor"],
+  peas: [
+    "arter", "artor", "farska-artor-i-balja", "sockerartor", "sugarsnaps", "graartor",
+    "grona-torkade-artor",
+  ],
+
+  apple: [
+    "apple", "grona-applen", "roda-applen", "appelklyftor-i-pase", "appelringar", "krispiga-appelchips",
+  ],
+  apricots: ["aprikos-frukt", "aprikos"],
+  bananas: ["banan", "matbanan", "minibanan", "roda-bananer", "bananskivor", "bananchips"],
+  berries: [
+    "bar", "blabar", "lingon", "svartvinbar", "farsk-barmix", "barmix", "skogsbarsmix", "vilda-blabar",
+    "torkade-blabar", "tranbar", "torkade-tranbar", "roda-vinbar", "vita-vinbar", "krusbar", "hjortron",
+    "havtorn", "aronia", "akerbar", "mullbar", "torkade-mullbar",
+  ],
+  blackberries: ["bjornbar"],
+  cherries: ["korsbar", "bigarraer", "surkorsbar", "torkade-korsbar"],
+  coconut: ["kokosnot", "kokosbitar", "kokoschips", "kokosflingor"],
+  fig: ["fikon", "torkade-fikon"],
+  grapefruit: ["grapefrukt", "blodgrapefrukt", "pomelo"],
+  grapes: ["vindruvor", "grona-vindruvor", "roda-vindruvor", "svarta-vindruvor", "karnfria-vindruvor"],
+  lemons: ["citron", "yuzu", "bergamott"],
+  limes: ["lime"],
+  mangoes: ["mango", "skuren-mango", "torkad-mango"],
+  melon: [
+    "cantaloupemelon", "charentaismelon", "galiamelon", "honungsmelon", "piel-de-sapo-melon",
+    "skuren-melon",
+  ],
+  papaya: ["papaya", "torkad-papaya"],
+  "passion-fruit": ["passionsfrukt", "grenadilla-sot-passionsfrukt", "passionsfruktpure"],
+  pears: ["paron", "nashiparon", "torkade-paron"],
+  physalis: ["physalis", "inkabar"],
+  plums: ["plommon", "gula-plommon", "krikon", "mirabeller", "katrinplommon"],
+  pomegranate: ["granatapple", "granatappelkarnor", "frysta-granatappelkarnor"],
+  raspberries: ["hallon", "gula-hallon"],
+  strawberries: ["jordgubbar", "smultron"],
+  watermelon: ["vattenmelon", "minivattenmelon", "gul-vattenmelon"],
+
+  basil: ["rod-basilika", "thaibasilika", "fryst-basilika"],
+  cilantro: ["fryst-hackad-koriander"],
+  dill: ["dill", "krondill", "hackad-dill"],
+  herbs: [
+    "orter", "ortmix", "bouquet-garni", "dragon", "salvia", "mejram", "kyndel", "korvel", "libbsticka",
+    "ramslok", "citronmeliss", "citronverbena",
+  ],
+  mint: ["marockansk-mynta"],
+  parsley: ["kruspersilja", "hackad-persilja"],
+  thyme: ["citrontimjan"],
+  "ground-spice": [
+    "kanel", "curry", "cayennepeppar", "chilipulver", "chipotlepulver", "lakritspulver", "lokpulver",
+    "malen-ingefara", "malen-koriander", "rokt-paprikapulver", "senapspulver", "starkt-paprikapulver",
+    "sumak", "svamppulver", "vitloksgranulat", "vitlokspulver", "allkrydda", "baharat", "bbq-rub",
+    "berbere", "burritokrydda", "cajunkrydda", "chaat-masala", "chili-con-carne-krydda",
+    "fajitaskrydda", "femkrydda", "garam-masala", "grillkrydda", "gulaschkrydda", "gyroskrydda",
+    "hamburgerkrydda", "jerkkrydda", "kebabkrydda", "kycklingkrydda", "kottfarskrydda", "lammkrydda",
+    "pepparkakskrydda", "pizzakrydda", "pommeskrydda", "potatiskrydda", "pumpkin-spice",
+    "quatre-epices", "ras-el-hanout", "shawarmakrydda", "stark-curry", "tacokrydda", "tandoori-masala",
+    "tikka-masala-krydda", "wokkrydda", "za-atar", "nasi-goreng-krydda", "gochugaru",
+    "shichimi-togarashi", "enchiladakrydda", "aleppopeppar", "urfa-biber", "adobokrydda",
+    "jollofkrydda", "mitmita", "suyakrydda",
+  ],
+  pepper: [
+    "svartpeppar", "vitpeppar", "gronpeppar", "rosepeppar", "hel-svartpeppar", "grovmalen-svartpeppar",
+    "malen-svartpeppar", "malen-vitpeppar", "pepparblandning", "pepparkvarn", "citronpeppar",
+    "szechuanpeppar", "langpeppar",
+  ],
+  "salt-shaker": [
+    "salt", "bergsalt", "chilisalt", "fint-havssalt", "fleur-de-sel", "flingsalt", "grovsalt",
+    "havssalt", "himalayasalt", "joderat-bordssalt", "kala-namak-svartsalt", "kryddsalt", "lattsalt",
+    "mineralsalt", "nitritsalt", "rokt-salt", "salt-utan-jod", "saltkvarn", "sellerisalt",
+    "tryffelsalt", "vitlokssalt", "ortsalt",
+  ],
+
+  "blue-cheese": [
+    "adelost", "bleu-d-auvergne", "cambozola", "danablu", "fourme-d-ambert", "gorgonzola",
+    "graddadelost", "roquefort", "stilton",
+  ],
+  brie: [
+    "brie", "brie-de-meaux", "brillat-savarin", "camembert", "camembert-for-ugn", "coulommiers",
+    "tryffelbrie", "vitmogelost", "friterad-camembert",
+  ],
+  butter: [
+    "smor", "ekologiskt-smor", "extrasaltat-smor", "laktosfritt-smor", "portionssmor",
+    "smor-med-havssalt", "ghee", "kryddsmor", "tryffelsmor", "vitlokssmor", "ortsmor",
+    "vaxtbaserat-smor", "bakmargarin", "stekmargarin",
+  ],
+  "butter-spread": [
+    "bordsmargarin", "lattmargarin", "mjolkfritt-margarin", "smorblandning", "latt-smorblandning",
+    "bredbart-havrepalagg",
+  ],
+  cheese: [
+    "cheddar", "ost-lagrad", "halloumi", "getost", "comte", "danbo", "edamer", "ekologisk-hardost",
+    "emmentaler", "fontina", "farost", "gouda", "gruyere", "graddost", "havarti", "hard-getost",
+    "jarlsberg", "julost", "kashkaval", "kittost", "klosterost", "kryddost", "kumminost",
+    "lagrad-cheddar", "lagrad-gouda", "lattost", "maasdam", "manchego", "mellanlagrad-ost", "mimolette",
+    "morbier", "provolone", "raclette", "red-leicester", "rokt-ost", "svecia", "tete-de-moine",
+    "tilsiter", "vallagrad-ost", "riven-vegansk-ost", "skivad-vegansk-ost", "vegansk-grillost",
+    "vegansk-ost", "hamburgerost", "pizzaost", "riven-greve", "riven-lagrad-ost", "riven-lattost",
+    "riven-prastost", "riven-vasterbottensost", "skivad-cheddar", "skivad-edamer", "skivad-emmentaler",
+    "skivad-gouda", "skivad-greve", "skivad-havarti", "skivad-herrgardsost", "skivad-hushallsost",
+    "skivad-lagrad-ost", "skivad-lattost", "skivad-maasdam", "skivad-prastost", "snackost",
+    "tex-mex-ost", "tarnad-ost", "laktosfri-hardost", "laktosfri-skivad-ost", "laktosfri-riven-ost",
+    "laktosfri-halloumi",
+  ],
+  "cottage-cheese": ["keso", "laktosfri-keso", "latt-keso", "smaksatt-keso", "keso-med-sylt"],
+  "cream-cheese": [
+    "farskost", "vegansk-farskost", "mascarpone", "ekologisk-farskost", "fromage-frais", "getfarskost",
+    "grasloksfarskost", "labneh", "laktosfri-farskost", "latt-farskost", "paprikafarskost",
+    "pepparrotsfarskost", "ricotta", "smaksatt-farskost", "stracchino", "twarog-tvorog",
+    "vitloksfarskost", "ortfarskost", "laktosfri-mascarpone",
+  ],
+  cream: [
+    "gradde", "matlagningsgradde", "buljonggradde", "clotted-cream", "dubbelgradde-creme-double",
+    "ekologisk-gradde", "kaffegradde", "laktosfri-matlagningsgradde", "laktosfri-vispgradde",
+    "langtidshallbar-gradde", "latt-matlagningsgradde", "mellangradde", "smaksatt-matlagningsgradde",
+    "syrad-gradde", "havregradde", "risgradde", "sojagradde", "vispbar-havregradde",
+    "vispbar-kokosgradde",
+  ],
+  "creme-fraiche": [
+    "creme-fraiche", "graddfil", "ekologisk-creme-fraiche", "laktosfri-creme-fraiche",
+    "latt-creme-fraiche", "latt-graddfil", "smaksatt-creme-fraiche", "smetana", "havrefraiche",
+    "sojafraiche", "vaxtbaserad-graddfil", "laktosfri-graddfil", "laktosfri-smetana", "romme",
+  ],
+  feta: [
+    "fetaost", "salladsost-i-olja", "tarnad-salladsost", "vit-ost-beyaz-peynir", "marinerad-feta",
+    "laktosfri-fetaost", "vegansk-salladsost",
+  ],
+  "milk-carton-2": [
+    "mjolk", "barista-mjolk", "chokladmjolk", "ekologisk-mjolk", "farmjolk", "getmjolk",
+    "jordgubbsmjolk", "kaffemjolk", "karnmjolk", "laktosfri-lattmjolk", "laktosfri-mellanmjolk",
+    "laktosfri-minimjolk", "laktosfri-standardmjolk", "lantmjolk", "langtidshallbar-mjolk", "minimjolk",
+    "ohomogeniserad-mjolk", "proteinmjolk", "ramjolk", "havredryck", "barista-havredryck",
+    "barista-sojadryck", "bovetedryck", "cashewdryck", "chokladhavredryck", "chokladsojadryck",
+    "ekologisk-havredryck", "glutenfri-havredryck", "hampadryck", "hasselnotsdryck", "kokosdryck",
+    "mandeldryck", "osotad-mandeldryck", "osotad-sojadryck", "potatisdryck", "risdryck", "sojadryck",
+    "vaniljsojadryck", "artdryck", "laktosfri-chokladmjolk",
+  ],
+  mozzarella: [
+    "mozzarella", "buffelmozzarella", "burrata", "minimozzarella", "stracciatella",
+    "marinerade-mozzarellakulor", "laktosfri-mozzarella", "vegansk-mozzarella", "riven-mozzarella",
+  ],
+  parmesan: ["ost", "hyvlad-parmesan", "parmesanflarn", "riven-grana-padano", "riven-parmesan"],
+  quark: [
+    "kvarg", "fet-kvarg", "laktosfri-kvarg", "latt-kvarg", "proteinkvarg", "smaksatt-kvarg",
+    "vaniljkvarg", "sojakvarg", "skyr", "smaksatt-skyr", "yoghurtkvarg",
+  ],
+  "sour-milk": [
+    "filmjolk", "a-fil", "ekologisk-filmjolk", "filbunke", "fjallfil", "kefir", "laktosfri-filmjolk",
+    "laktosfri-kefir", "langfil", "lattfil", "mellanfil", "probiotisk-fil", "smaksatt-fil", "ymer",
+    "viili-finsk-langfil",
+  ],
+  yoghurt: [
+    "yoghurt", "barnyoghurt", "bulgarisk-yoghurt", "dessertyoghurt", "ekologisk-yoghurt",
+    "fruktyoghurt", "faryoghurt", "getyoghurt", "laktosfri-yoghurt", "lattyoghurt", "mild-yoghurt",
+    "proteinyoghurt", "rysk-yoghurt", "vaniljyoghurt", "yoghurt-med-topping",
+    "yoghurt-utan-tillsatt-socker", "havreyoghurt", "kokosyoghurt", "mandelyoghurt",
+    "smaksatt-havreyoghurt", "sojayoghurt", "laktosfri-grekisk-yoghurt",
+  ],
+
+  bacon: [
+    "bacon", "baconbit", "baconstrossel", "bacontarningar", "ekologiskt-bacon", "frukostbacon",
+    "forstekt-bacon", "kalkonbacon", "kycklingbacon", "pancetta", "rokt-notbacon", "strimlat-bacon",
+    "tjockskivat-bacon", "vegobacon",
+  ],
+  "minced-meat": [
+    "blandfars", "flaskfars", "lammfars", "ekologisk-notfars", "hamburgerfars", "hjortfars",
+    "hogrevsfars", "kalvfars", "kryddad-tacofars", "latt-notfars", "renfars", "salsicciafars",
+    "vildsvinsfars", "viltfars", "algfars", "kycklingfars", "kalkonfars", "tacofars",
+  ],
+  "sausages": [
+    "falukorv", "brackkorv", "chilikorv", "cocktailkorv", "flaskkorv", "frukostkorv", "grillkorv",
+    "grynkorv", "julkorv", "kalkonkorv", "kokt-kottkorv", "kryddig-grillkorv", "kycklingkorv",
+    "lammkorv", "lantkorv", "medisterkorv", "nurnbergerkorv", "ostkorv",
+    "oxgrillare-grillkorv-av-notkott", "pilsnerkorv-pa-burk", "potatiskorv", "prinskorv", "renkorv",
+    "rakorv", "tjock-grillkorv", "varmkorv", "vildsvinskorv", "viltkorv", "varmlandskorv", "wienerkorv",
+    "algkorv", "jaktkorv", "olkorv", "rode-polser-roda-danska-korvar", "vegobratwurst", "vegochorizo",
+    "vegofalukorv", "vegogrillkorv", "vegokabanoss", "vegokorv", "vegoprinskorv", "vegovarmkorv",
+    "tofukorv", "bratwurst", "chorizo", "isterband", "kabanoss", "merguez", "salsiccia", "kabanosy",
+  ],
+  "roast-chicken": [
+    "kyckling", "ekologisk-kyckling", "gardskyckling", "halalkyckling", "majskyckling", "hel-kalkon",
+    "hel-anka", "hel-gas", "kokhona", "poussin", "parlhona",
+  ],
+  "chicken-drumstick": [
+    "kycklingben-drumsticks", "kycklingdelar", "kycklinglar", "kycklingvingar", "kalkonklubbor",
+    "kalkonlar", "kalkonvingar", "anklar", "gaslar", "bbq-vingar", "buffalo-wings",
+    "grillade-kycklingklubbor", "grillade-kycklinglar", "marinerade-kycklingklubbor",
+    "marinerade-kycklingvingar",
+  ],
+  "salmon-fillet": [
+    "lax", "laxfile", "laxkotletter", "laxsida", "marinerad-laxfile", "sashimilax", "gravad-lax",
+    "kallrokta-laxbitar", "rokt-laxsida", "varmrokt-pepparlax", "inkokt-lax", "rimmad-lax", "sotad-lax",
+    "frysta-laxkuber", "laxportioner", "vildfangad-lax",
+  ],
+  "canned-fish": [
+    "makrill", "tonfisk", "sardeller", "ansjovis", "sardiner", "kronsardiner", "surstromming",
+    "brisling-i-tomatsas", "kippers", "lax-pa-burk", "makrillfile-i-olja", "sardiner-i-tomatsas",
+    "sprats-rokt-skarpsill-i-olja", "tonfisk-i-vatten", "tonfiskfile-i-olivolja",
+    "tonfisksallad-pa-burk", "torsklever", "torskrom-pa-burk",
+  ],
+  shrimp: [
+    "rakor", "rokta-rakor", "handskalade-rakor", "jatterakor", "oskalade-rakor", "rakor-i-lake",
+    "scampi", "tigerrakor", "vitloksmarinerade-rakor", "frysta-rakor", "raa-rakor", "torkade-rakor",
+  ],
+  lobster: [
+    "hummer", "hummerstjartar", "havskraftor", "kraftor", "kraftstjartar", "languster", "signalkraftor",
+  ],
+  egg: ["agg", "ankagg", "gasagg", "kokta-agg", "vaktelagg"],
+  "egg-carton": [
+    "ekologiska-agg", "extra-stora-agg", "frigaende-agg", "medelstora-agg", "sma-agg", "stora-agg",
+    "utomhusagg",
+  ],
+
+  "almonds-2": ["mandel", "bittermandel", "hackad-mandel", "marconamandlar", "skallad-mandel"],
+  cashews: ["cashewnotter", "chilicashewnotter", "salta-cashewnotter"],
+  peanuts: [
+    "jordnotter", "jordnotter-i-skal", "osaltade-jordnotter", "honungsrostade-jordnotter",
+    "salta-jordnotter", "jordnotssmor", "jordnotssmor-utan-tillsatt-socker", "krispigt-jordnotssmor",
+  ],
+  seeds: [
+    "fron", "basilikafron", "chiafron", "froblandning", "hampafron", "krossat-linfro", "linfron",
+    "melonkarnor", "psylliumfron", "solroskarnor", "svarta-sesamfron", "vallmofron", "egusifron",
+    "ogbonofron", "rostade-och-saltade-solrosfron", "snackmix-med-fron",
+  ],
+  flour: [
+    "vetemjol", "potatismjol", "majsmjol", "bovetemjol", "majsstarkelse", "rismjol", "mandelmjol",
+    "kikartsmjol", "sojamjol", "lupinmjol", "kokosmjol", "hasselnotsmjol", "durramjol", "bananmjol",
+    "klibbrismjol", "tempuramjol", "chapatimjol", "pizzamjol", "semola-rimacinata",
+    "arepamjol-forkokt-majsmjol", "fufumjol", "kassavamjol", "teffmjol", "vitt-majsmjol", "yamsmjol",
+  ],
+  oats: [
+    "havre", "fiberhavregryn", "grova-havregryn", "havrekli", "havrekross", "skuren-havre-steel-cut",
+    "snabbhavregryn", "fardig-havregrynsgrot", "overnight-oats",
+  ],
+  "rice-grains": [
+    "ris", "arborioris", "bombaris", "carnaroliris", "fullkornsbasmatiris", "fullkornsris", "grotris",
+    "havreris", "klibbris", "kokpasris", "langkornigt-ris", "mikroris", "paellaris", "parboiled-ris",
+    "risgryn", "rundkornigt-ris", "raris", "rott-ris", "smaksatt-ris", "snabbris", "sushiris",
+    "svart-ris", "vialone-nano-ris", "vildris", "vildrismix",
+  ],
+  "penne-jar": [
+    "pasta", "bokstavspasta", "bonpasta", "casarecce", "cavatappi", "conchiglie", "conchiglioni",
+    "dinkelpasta", "ditalini", "figurpasta", "fullkornsmakaroner", "fullkornspasta", "gemelli",
+    "idealmakaroner", "kikartspasta", "linspasta", "majspasta", "orecchiette", "orzo", "paccheri",
+    "pasta-av-sojabonor", "radiatori", "rotelle-hjulpasta", "snabbmakaroner", "soppasta",
+    "strozzapreti", "tortiglioni", "tricolorepasta", "trofie",
+  ],
+  spagheti: [
+    "nudlar", "farsk-tagliatelle", "bucatini", "capellini", "fettuccine", "fullkornsspaghetti",
+    "glasnudlar", "linguine", "mafaldine", "mienudlar", "pappardelle", "ramennudlar", "risvermicelli",
+    "snabbnudlar", "sobanudlar", "somennudlar", "spaghettini", "sotpotatisnudlar-dangmyeon",
+    "tagliolini", "udonnudlar", "vermicelli", "breda-risnudlar", "farska-nudlar", "farska-risnudlar",
+    "farska-udonnudlar", "fardigkokta-woknudlar",
+  ],
+  wheat: [
+    "korngryn", "matvete", "mathavre", "hela-vetekorn", "farro", "speltkarnor", "vetekross",
+    "vetegroddar", "vetekli", "parlgryn", "freekeh",
+  ],
+  "bread-loaf": [
+    "brod", "ankarstock", "barkis-bergis", "bondbrod", "brioche", "danskt-ragbrod", "finskt-ragbrod",
+    "focaccia", "formfranska", "franskbrod", "fruktbrod", "frobrod", "fullkornsbrod",
+    "fullkornsrostbrod", "grovbrod", "havrebrod", "halkaka", "jullimpa", "kavring", "kumminbrod",
+    "karnbrod", "lantbrod", "levain", "lingonlimpa", "morotsbrod", "olivbrod", "potatisbrod",
+    "pumpernickel", "ragbrod", "ragkaka", "ragsiktsbrod", "schwarzbrot", "sirapslimpa", "skargardsbrod",
+    "solrosbrod", "speltbrod", "stenugnsbakat-brod", "valnotsbrod", "vortbrod", "ciabatta", "frallor",
+    "frofrallor", "grahamsfrallor", "grova-frallor", "havrefrallor", "ostfrallor", "ragfrallor",
+    "surdegsfrallor", "tekakor", "vallmofrallor",
+  ],
+  "baguette": ["fullkornsbaguette", "minibaguetter", "surdegsbaguette", "vitloksbaguette"],
+  "crisp-bread": [
+    "knackebrod", "brungraddat-knackebrod", "dinkelknacke", "frukostknacke", "froknacke",
+    "fullkornsknacke", "havreknacke", "miniknacke", "runda-knackebrod", "ragknacke", "sesamknacke",
+    "spisbrod", "surdegsknacke", "tunt-knackebrod", "hart-tunnbrod",
+  ],
+  sandwiches: [
+    "banh-mi", "club-sandwich", "fylld-ciabatta", "kottbullsmacka", "landgang", "ost-och-skinkfralla",
+    "panini", "raksmorgas", "smorrebrod", "toast-skagen", "trekantsmacka", "aggmacka",
+  ],
+  "cinnamon-bun": ["kanelbullar", "kanelknutar", "kanellangd", "kardemummabullar"],
+  cookie: [
+    "cookies", "pepparkakor", "blandade-smakakor", "bondkakor", "drommar", "hallongrottor",
+    "havreflarn", "chokladflarn", "kokoskakor", "kolakakor", "notkakor", "schackrutor", "amaretti",
+    "cantuccini",
+  ],
+  macarons: ["macarons"],
+  "strawberry-shortcake": ["jordgubbstarta", "graddtarta", "frukttarta"],
+  "birthday-cake": ["chokladtarta", "marangtarta", "moussetarta", "prinsesstarta", "schwarzwaldtarta"],
+  "ice-cream-cone": ["glasstrut", "glassran"],
+  sundae: [
+    "vaniljglass", "blabarsglass", "chokladglass", "cookie-dough-glass", "frozen-yoghurt", "gelato",
+    "glass-utan-tillsatt-socker", "glassbagare", "graddglass", "hjortronglass", "jordgubbsglass",
+    "kaffeglass", "kolaglass", "lakritsglass", "laktosfri-glass", "mintchokladglass", "nougatglass",
+    "pistageglass", "proteinglass", "paronglass", "romrussinglass", "stracciatellaglass",
+    "vaxtbaserad-glass", "havreglass", "kokosglass", "mjolkfri-glass",
+  ],
+
+  "baking-soda": ["bikarbonat", "bakpulver"],
+  "canned-tomatoes": [
+    "kross", "finkrossade-tomater", "korsbarstomater-pa-burk", "smaksatta-krossade-tomater",
+    "tarnade-tomater",
+  ],
+  "coffee-bean": [
+    "kaffe", "kaffebonor", "ekologiskt-kaffe", "espressomalet-kaffe", "koffeinfritt-kaffe", "kokkaffe",
+    "presskaffe", "snabbkaffe", "turkiskt-kaffe",
+  ],
+  "honey-jar": ["honung", "akaciahonung", "fast-honung", "flytande-honung", "ljunghonung", "manukahonung"],
+  hummus: ["hummus", "rodbetshummus", "smaksatt-hummus"],
+  "jam-jar": [
+    "apelsinmarmelad", "aprikosmarmelad", "blabarsmarmelad", "chilimarmelad", "citronmarmelad",
+    "fikonmarmelad", "hallonmarmelad", "havtornsmarmelad", "ingefarsmarmelad", "jordgubbsmarmelad",
+    "kvittenmarmelad-membrillo", "korsbarsmarmelad", "nyponmarmelad", "plommonmarmelad",
+    "paronmarmelad", "rabarbermarmelad", "rodloksmarmelad", "ronnbarsgele", "svartvinbarsgele",
+    "sylt-utan-tillsatt-socker", "vinbarsgele", "appelgele", "sockerfri-sylt", "bjornbarssylt",
+    "blandbarssylt", "blabarssylt", "drottningsylt", "hallonsylt", "hjortronsylt", "jordgubbssylt",
+    "krusbarssylt", "kylsylt", "korsbarssylt", "lingonsylt", "lattsylt", "plommonsylt", "rabarbersylt",
+    "salmbarssylt", "svartvinbarssylt", "tranbarssylt", "akerbarssylt",
+  ],
+  ketchup: ["ketchup", "chiliketchup", "curryketchup", "sockerfri-ketchup"],
+  mustard: [
+    "senap", "fransk-senap", "grovkornig-senap", "honungssenap", "julsenap", "skansk-senap",
+    "stark-senap", "sot-senap",
+  ],
+  mayonnaise: [
+    "majo", "aioli", "gurkmajonnas", "chilimajonnas", "latt-majonnas", "srirachamajonnas",
+    "tryffelmajonnas", "vegansk-majonnas", "japansk-majonnas",
+  ],
+  "tomato-puree": ["tomatpure"],
+  "olives": [
+    "oliver", "castelvetrano-oliver", "fyllda-oliver", "marinerade-oliver", "olivmix",
+    "urkarnade-oliver", "mandelfyllda-oliver", "vitloksfyllda-oliver",
+  ],
+  "orange-juice": [
+    "apelsinjuice", "apelsinjuice-med-fruktkott", "blodapelsinjuice", "farskpressad-apelsinjuice",
+    "clementinjuice",
+  ],
+  "juice-box": [
+    "ananasjuice", "aroniajuice", "druvjuice", "granatapplejuice", "grapefruktjuice", "gronsaksjuice",
+    "havtornsjuice", "juice-i-portionstetra", "kallpressad-juice", "katrinplommonjuice",
+    "korsbarsjuice", "morotsjuice", "multijuice", "paronjuice", "rodbetsjuice", "sellerijuice",
+    "tomatjuice", "tranbarsjuice", "tropisk-juice", "appeljuice",
+  ],
+  "sugar-dispenser": [
+    "socker", "demerarasocker", "ekologiskt-strosocker", "farinsocker", "florsocker", "kokossocker",
+    "ljust-muscovadosocker", "muscovadosocker", "morkt-farinsocker", "parlsocker", "rasocker",
+    "rorsocker", "syltsocker", "vaniljsocker", "vanillinsocker",
+  ],
+  vanilla: ["vaniljstang", "vaniljpulver", "vaniljpasta", "vaniljextrakt", "vaniljarom"],
+  "potato-chips": [
+    "chips", "chilichips", "dillchips", "grillchips", "graddfilschips", "kettlechips", "lattchips",
+    "ost-och-lokchips", "paprikachips", "rotfruktschips", "rafflade-chips", "saltade-chips",
+    "saltvinagerchips", "stapelchips", "sweet-chili-chips", "sotpotatischips", "tryffelchips",
+    "tunnbrodschips", "ugnsbakade-chips",
+  ],
+  "popcorn": [
+    "chokladpopcorn", "kolapopcorn", "micropopcorn", "ostpopcorn", "popcorn", "popcornmajs",
+    "smorpopcorn", "sota-popcorn",
+  ],
+  "tea-bag": [
+    "assamte", "ceylonte", "darjeelingte", "english-breakfast-te", "fruktte", "gront-te", "ingefarste",
+    "jasminte", "kamomillte", "kvallste", "lakritste", "loste", "nyponte", "oolongte", "pepparmyntste",
+    "pu-erh-te", "sencha", "smaksatt-svart-te", "svart-te", "vitt-te", "ortte",
+  ],
+  "soda-can": [
+    "apelsinlask", "bitter-lemon", "champagnelask", "citron-och-limelask", "citronlask", "cola",
+    "cream-soda", "enbarsdricka", "fladerblomslask", "fruktsoda", "ginger-ale", "grapefruktlask",
+    "hallonsoda", "hantverkslask", "ingefarsol", "jordgubbslask", "julmust", "koffeinfri-cola",
+    "korsbarscola", "passionsfruktlask", "paskmust", "paronsoda", "rabarberlask", "root-beer",
+    "sockerdricka", "sockerfri-cola", "sockerfri-julmust", "sockerfri-lask", "appellask", "tonic",
+  ],
+  "saft-bottle": [
+    "apelsinsaft", "blandsaft", "blabarssaft", "drickfardig-saft", "fladerblomssaft", "hallonsaft",
+    "havtornssaft", "jordgubbssaft", "korsbarssaft", "lingonsaft", "paronsaft", "rabarbersaft",
+    "sockerfri-saft", "svartvinbarssaft", "appelsaft", "saft-utan-tillsatt-socker",
+  ],
+  "tin-can": [
+    "blackfisk-pa-burk", "musslor-pa-burk", "rokta-musslor-pa-burk", "krabbkott", "kottbullar-pa-burk",
+    "kottgryta-pa-burk", "luncheon-meat", "skinkkonserv",
+  ],
+  "soup-bowl": [
+    "svartsoppa", "fiskmix-till-soppa", "blomkalssoppa", "broccolisoppa", "bonsoppa", "fisksoppa",
+    "fransk-loksoppa", "gron-artsoppa", "gronsakssoppa", "gulaschsoppa", "hummersoppa",
+    "jordartskockssoppa", "kantarellsoppa", "kikartssoppa", "korvsoppa", "kycklingsoppa", "kalsoppa",
+    "kottfarssoppa", "kottsoppa", "laxsoppa", "linssoppa", "majssoppa", "morotssoppa", "nudelsoppa",
+    "nasselsoppa", "oxsvanssoppa", "palsternackssoppa", "paprikasoppa", "potatis-och-purjolokssoppa",
+    "pumpasoppa", "rotfruktssoppa", "skaldjurssoppa", "sparrissoppa", "spenatsoppa", "svampsoppa",
+    "sotpotatissoppa", "tacosoppa", "thailandsk-kycklingsoppa", "tomatsoppa", "zucchinisoppa",
+    "artsoppa", "passoppa", "snabbsoppa", "blandad-fruktsoppa", "misosoppa", "blabarssoppa",
+    "nyponsoppa", "maltidsersattningssoppa",
+  ],
+  "greek-salad": ["grekisk-sallad", "fetaostsallad"],
+};
+
+// Some distinct groceries intentionally share a recipe key (farfalle → pasta, basilika → örter).
+// Match their typed names first so the picture can be precise while recipe matching stays intact.
+const pantryIconNames = {
+  basil: ["basilika", "basilikan"],
+  cilantro: ["koriander", "koriandern"],
+  parsley: ["persilja", "persiljan", "bladpersilja"],
+  mint: ["mynta", "myntan"],
+  oregano: ["oregano", "oreganon"],
+  rosemary: ["rosmarin", "rosmarinen"],
+  thyme: ["timjan", "timjanen"],
+  rocket: ["ruccola", "ruccolan"],
+  parsnips: ["palsternacka", "palsternackan", "palsternackor", "palsternackorna"],
+  "red-cabbage": ["rödkål", "rödkålen"],
+  "green-cabbage": ["vitkål", "vitkålen", "spetskål", "spetskålen"],
+  farfalle: ["farfalle"],
+  "penne-jar": ["penne", "rigatoni", "makaroner", "pastaskruvar", "fusilli"],
+  spagheti: ["spagetti", "spaghetti", "tagliatelle"],
+  baguette: ["baguette", "baguetten", "baguetter", "baguetterna"],
+  "ground-spice": ["paprikapulver", "spiskummin", "malen kanel"],
+  "chicken-drumstick": [
+    "kycklingfilé", "kycklingfiléer", "kycklingbröst", "kycklinglårfilé", "kycklingklubbor",
+  ],
+};
+
+const pantryIconsByKey = new Map(Object.entries(pantryIconFoods).flatMap(([icon, keys]) =>
+  keys.map(key => [key, icon]),
+));
+const pantryIconsByName = new Map(Object.entries(pantryIconNames).flatMap(([icon, names]) =>
+  names.map(name => [searchKey(name), icon]),
+));
+
+function iconForPantryFood(name) {
+  const key = keyForIngredient(name);
+  const food = foods[key];
+  if (!food) return null;
+  return pantryIconsByName.get(searchKey(cleanIngredient(name)))
+    ?? pantryIconsByKey.get(key)
+    ?? foodGroups[food.group]?.icon
+    ?? null;
+}
+
+// Keep the specific name when it has its own illustration; canonicalising "Farfalle" to "Pasta"
+// would otherwise discard the name before renderPantry gets to choose its picture.
+function nameForPantryFood(name, key = keyForIngredient(name)) {
+  const food = foods[key];
+  return food && !genericIngredientKeys.has(key) && !pantryIconsByName.has(searchKey(cleanIngredient(name)))
+    ? food.name
+    : capitalize(cleanIngredient(name));
+}

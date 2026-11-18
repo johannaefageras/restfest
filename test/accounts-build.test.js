@@ -19,12 +19,12 @@ function build(publishableKey) {
   return { out, read: path => readFileSync(join(out, path), 'utf8'), has: path => existsSync(join(out, path)) };
 }
 
-const accountPages = ['logga-in.html', 'nytt-losenord.html', 'receptbok.html', 'inkopslista.html', 'profil.html', 'konto.html', 'integritet.html'];
+const accountPages = ['logga-in.html', 'nytt-losenord.html', 'receptbok.html', 'profil.html', 'konto.html', 'integritet.html'];
 
 test('without a publishable key the pages have no trace of accounts', t => {
   const site = build('');
   t.after(() => rmSync(site.out, { recursive: true, force: true }));
-  for (const page of ['index.html', 'receptarkiv.html', 'recept/01-rodbetspytt.html', 'nytt-recept.html']) {
+  for (const page of ['index.html', 'receptarkiv.html', 'recept/01-rodbetspytt.html', 'nytt-recept.html', 'inkopslista.html']) {
     const html = site.read(page);
     for (const trace of ['restfest-account', 'js/account.js', 'logga-in', 'signed-in', 'Receptbok', 'integritet', 'data-saved-link', 'data-account-link'])
       assert.equal(html.includes(trace), false, `${page} mentions ${trace}`);
@@ -37,6 +37,21 @@ test('without a publishable key the pages have no trace of accounts', t => {
     assert.match(site.read('index.html'), new RegExp(`data-shopping-items="${section}"`), `guests have the ${section} section`);
   assert.equal(site.has('js/vendor/supabase.js'), false, 'the Supabase library was copied, though no page loads it');
   assert.equal(site.has('shopping-worker.js'), false, 'a site without accounts has no shopping worker');
+  const copy = site.read('delad-inkopslista.html');
+  assert.match(copy, /<meta name="robots" content="noindex">/);
+  assert.match(copy, /data-shopping-copy/);
+  assert.match(copy, /js\/shopping-copy-view.js/);
+  assert.doesNotMatch(copy, /js\/shopping-list.js|class="when-signed-in"[^>]*data-shopping-copy/);
+  assert.ok(site.has('js/shopping-copy.js'));
+  assert.match(site.read('index.html'), /data-shopping-share/);
+  const shopping = site.read('inkopslista.html');
+  assert.match(shopping, /class="shopping-panel" data-shopping-list/);
+  assert.equal((shopping.match(/data-shopping-share/g) ?? []).length, 2, 'guests can share from both the page and modal');
+  assert.match(shopping, /Du kan dela en kopia utan att logga in/);
+  assert.match(shopping, /js\/shopping-list.js/);
+  assert.doesNotMatch(shopping, /class="when-signed-in"/);
+  assert.doesNotMatch(site.read('sitemap.xml'), /delad-inkopslista/);
+  assert.doesNotMatch(site.read('sitemap.xml'), /inkopslista/);
 });
 
 test('with a publishable key every page gets the account button and the account script', t => {
@@ -63,7 +78,7 @@ test('with a publishable key every page gets the account button and the account 
   assert.match(book, /<a href="receptbok\.html" aria-current="page">/, 'the account menu marks the recipe book as the current page');
   for (const link of ['href="inkopslista.html"', 'href="profil.html"', 'href="konto.html"', 'data-sign-out'])
     assert.ok(book.includes(link), `the account menu has ${link}`);
-  for (const [page, name] of [['profil.html', 'Profil'], ['konto.html', 'Konto']]) {
+  for (const [page, name] of [['profil.html', 'Min profil'], ['konto.html', 'Inställningar']]) {
     const html = site.read(page);
     assert.match(html, /<meta name="robots" content="noindex">/, `${page} is kept out of search engines`);
     assert.ok(html.includes('<script type="module" src="js/profile.js"></script>'), `${page} loads profile.js`);
@@ -86,6 +101,8 @@ test('with a publishable key every page gets the account button and the account 
   assert.ok(site.has('shopping-worker.js'));
   assert.ok(site.has('js/shopping-sync.js'));
   assert.ok(site.has('js/shopping-account.js'));
+  assert.equal((shopping.match(/data-shopping-share/g) ?? []).length, 2, 'account and modal can both share a copy');
+  assert.ok(site.has('delad-inkopslista.html'));
   const worker = site.read('shopping-worker.js');
   for (const path of [...worker.matchAll(/'([^']+\.(?:js|html|css|woff2|svg))'/g)].map(match => match[1]))
     assert.ok(site.has(path), `the shopping worker's offline asset ${path} exists`);

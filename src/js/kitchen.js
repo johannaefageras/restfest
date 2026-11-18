@@ -78,7 +78,7 @@ function renderPantry() {
       "aria-label",
       unknown ? `Ta bort ${name} (känns inte igen)` : `Ta bort ${name}`,
     );
-    const artwork = foodGroups[foods[keyForIngredient(name)]?.group]?.icon;
+    const artwork = iconForPantryFood(name);
     if (artwork) {
       const image = document.createElement("img");
       image.src = squareIconPath(artwork);
@@ -415,8 +415,7 @@ $("#pantry-form").addEventListener("submit", (event) => {
   }
   const key = keyForIngredient(name);
   const food = foods[key];
-  const displayName =
-    food && !genericIngredientKeys.has(key) ? food.name : capitalize(name);
+  const displayName = nameForPantryFood(name, key);
   if (pantry.items.some((item) => sameIngredient(item, displayName))) {
     $("#pantry-status").textContent = "Råvaran finns redan i listan.";
     pantryInput.select();

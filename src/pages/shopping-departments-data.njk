@@ -1,0 +1,6 @@
+---
+permalink: data/shopping-departments.js
+eleventyExcludeFromCollections: true
+---
+// Generated from foods.json. Loaded only for a populated shopping list or a shared copy.
+export default {{ foods | shoppingDepartmentNames | dump | safe }};

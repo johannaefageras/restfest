@@ -1,3 +1,7 @@
+<div class="shopping-share-tools">
+  {% if shoppingPanelTitle %}<h2 id="shopping-panel-title" class="shopping-panel-title">{{ shoppingPanelTitle }}</h2>{% endif %}
+  <button class="button secondary" type="button" data-shopping-share aria-haspopup="dialog" disabled>Dela en kopia <i class="fas fa-arrow-up-right" aria-hidden="true"></i></button>
+</div>
 <form class="shopping-add-form" data-shopping-add>
   <div class="shopping-add-row">
     <label class="shopping-field"><span>Vara och mängd</span><input name="text" type="text" placeholder="T.ex. 2 l mjölk" required maxlength="4000" autocomplete="off"></label>

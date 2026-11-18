@@ -27,6 +27,8 @@ RESTFEST_SUPABASE_URL='' RESTFEST_PUBLISHABLE_KEY='' npm start
 
 The recipe archive, ingredient matching, browser-saved favourites, week plan and guest shopping list work without Supabase.
 
+The shopping list at **inkopslista.html** is available without signing in, including when accounts are disabled. Guests keep their list on the current device; signed-in visitors also sync with their account. **Dela en kopia** creates a named, independent checklist that opens without an account. Outstanding combined quantities and notes travel in the link; recipe names stay in the original list, and the recipient's checks are saved separately on their device. Sharing works from both the page and the guest modal and needs no database migration. Both the original list and shared copies group items by store department, using the grocery catalogue and product-form rules (for example frozen and canned goods). Unrecognised items appear under Övrigt. Rebuild and publish the static site to make the new shared-list page available to recipients.
+
 ## Commands
 
 | Command | What it does |

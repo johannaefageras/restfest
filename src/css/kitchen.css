@@ -1190,7 +1190,7 @@ details[open] > summary > .fa-chevron-down {
   font-size: 13px;
 }
 .archive-card:focus-within {
-  border-color: var(--blue);
+  border-color: var(--yellow);
 }
 
 @media (min-width: 900px) {
