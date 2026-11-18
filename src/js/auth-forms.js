@@ -55,7 +55,18 @@ async function loginPage() {
   const backHere =
     assetUrl("logga-in.html") +
     (returnPath ? `?till=${encodeURIComponent(returnPath)}` : "");
+  const arts = main.querySelectorAll("[data-auth-art]");
   let mode = "logga";
+
+  // The title and the drawing beside the form name what is on show: the part's own (data-title,
+  // data-art) for "Glömt lösenordet?" and "Kolla din mejl.", else the mode's.
+  function label() {
+    const part = [resetForm, sentBox].find((element) => !element.hidden);
+    title.textContent =
+      part?.dataset.title ?? (mode === "skapa" ? "Skapa konto." : "Logga in.");
+    const art = part?.dataset.art ?? mode;
+    arts.forEach((image) => (image.hidden = image.dataset.authArt !== art));
+  }
 
   function setMode(next, { address = true } = {}) {
     mode = next;
@@ -63,7 +74,7 @@ async function loginPage() {
     main.querySelectorAll("[data-only]").forEach((element) => {
       element.hidden = element.dataset.only !== mode;
     });
-    title.textContent = creating ? "Skapa konto." : "Logga in.";
+    label();
     submit.textContent = creating ? "Skapa konto" : "Logga in";
     document.title = [creating ? "Skapa konto" : "Logga in", siteName].filter(Boolean).join(" · ");
     form.password.autocomplete = creating ? "new-password" : "current-password";
@@ -80,6 +91,7 @@ async function loginPage() {
     mainBox.hidden = part !== mainBox;
     resetForm.hidden = part !== resetForm;
     sentBox.hidden = part !== sentBox;
+    label();
     (part.querySelector("input") ?? part.querySelector("button"))?.focus();
   }
 
@@ -154,7 +166,7 @@ async function loginPage() {
           throw { code: "user_already_exists" };
         showSent(
           address,
-          `Kolla din mejl. Vi har skickat en länk till ${address}. Klicka på den för att börja använda kontot.`,
+          `Vi har skickat en länk till ${address}. Klicka på den för att börja använda kontot.`,
         );
       },
       fields,

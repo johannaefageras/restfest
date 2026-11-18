@@ -1941,18 +1941,41 @@ body:has(#shopping-dialog[open]) {
   }
 }
 
-/* The sun/moon button (layouts/base.njk, app.js), beside the logo from 960px. Below that the theme
-   follows the device (css/dark.css), so there's no button. It shows the moon in the light theme and
-   the sun in the dark: the theme a click switches to. */
+/* The sun/moon button (layouts/base.njk, app.js). The header has two, and shows one: from 960px
+   beside the logo, framed like the buttons on the right; below that at the end of the menu row,
+   unframed like the links beside it, as the top row has no room for a third button beside the name.
+   It shows the moon in the light theme and the sun in the dark: the theme a click switches to. */
 .theme-toggle {
   display: none;
 }
 @media (min-width: 960px) {
-  .theme-toggle:not([hidden]) {
+  .header-start > .theme-toggle:not([hidden]) {
     display: grid;
     place-items: center;
     width: 44px;
     padding: 0;
+  }
+}
+/* The menu row spaces its items by their margin boxes, which here are as wide as the icon: the 44px
+   target reaches 11px past it on each side, so the gaps to the icon match the others and the icon
+   lines up with the right edge of the buttons above it. */
+@media (max-width: 959px) {
+  .site-header nav > .theme-toggle:not([hidden]) {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    min-height: 44px;
+    margin-inline: -11px;
+    padding: 0;
+    background: none;
+    border-radius: var(--radius-button);
+  }
+  .site-header nav > .theme-toggle:hover {
+    background: var(--hover);
+  }
+  .site-header nav > .theme-toggle > img {
+    width: 22px;
+    height: 22px;
   }
 }
 .theme-toggle[aria-pressed="true"] .theme-moon,
@@ -3166,10 +3189,6 @@ body:has(#shopping-dialog[open]) {
   width: 64px;
   height: 72px;
 }
-.wrap.account-auth {
-  max-width: 660px;
-  padding-top: 0;
-}
 .account-card {
   min-width: 0;
 }
@@ -3181,17 +3200,6 @@ body:has(#shopping-dialog[open]) {
 }
 .account-card .greeting-intro {
   max-width: 51ch;
-}
-.account-intro {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: var(--text-lead);
-  line-height: 1.5;
-}
-.account-card > [data-auth-main],
-.account-card > form,
-.account-card > .account-sent {
-  margin-top: 0;
 }
 .account-form {
   display: flex;
@@ -3232,9 +3240,7 @@ body:has(#shopping-dialog[open]) {
   font-size: var(--text-small);
   line-height: 1.5;
 }
-.account-hint a,
-.account-links a,
-.account-intro a {
+.account-hint a {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -3277,20 +3283,171 @@ body:has(#shopping-dialog[open]) {
 .account-status:empty {
   display: none;
 }
-.account-links {
-  margin-top: 12px;
+
+/* Sign-in and new password (pages/logga-in.njk, nytt-losenord.njk): one outlined card, split like the
+   home page's hero: a drawing on a coloured ground beside the form on white. Below 760px the drawing
+   is a band above the form. The line between the halves belongs to the form side, so it takes the
+   card's outline colour in the dark theme, where the coloured ground has the light neutrals. */
+.wrap.account-auth {
+  max-width: calc(920px + 64px);
+  padding-top: clamp(28px, 5vw, 56px);
+}
+.auth-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  overflow: hidden;
+}
+.auth-art {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: clamp(32px, 4vw, 52px) clamp(24px, 3.5vw, 44px);
+  /* Light pink, as the icons are purple, orange, green and yellow: on yellow the padlock disappears. */
+  background: var(--pink-light);
+  text-align: center;
+}
+/* The same square for each icon, so the panel keeps its size when the form changes part. */
+.auth-art img {
+  width: min(100%, 190px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  transform: rotate(-4deg);
+}
+.auth-art p {
+  max-width: 24ch;
+  font-size: var(--text-lead);
+  line-height: 1.45;
+  text-wrap: balance;
+}
+.auth-body {
+  min-width: 0;
+  padding: clamp(32px, 4.5vw, 52px) clamp(24px, 4.5vw, 52px) clamp(30px, 4vw, 44px);
+  border-left: 2px solid var(--ink);
+}
+.auth-title {
+  font-size: clamp(30px, 4.6vw, 40px);
+  line-height: 1.12;
+}
+/* The site's marker, drawn as a background here so it follows "Glömt lösenordet?" onto a second line. */
+.auth-title .marker {
+  display: inline;
+  padding-right: 4px;
+  background: linear-gradient(transparent 68%, var(--yellow) 68% 93%, transparent 93%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.auth-title .marker::before {
+  content: none;
+}
+.auth-part {
+  margin-top: 28px;
+}
+.auth-lead {
+  color: var(--ink-soft);
+  font-size: var(--text-base);
+  line-height: 1.55;
+}
+/* Under the password: the length hint when creating an account, "Glömt lösenordet?" when signing in. */
+.auth-field-foot {
+  display: flex;
+  justify-content: flex-end;
+}
+.auth-field-foot .account-hint {
+  margin-right: auto;
+}
+.auth-field-foot .text-button {
+  min-height: 36px;
+  padding: 6px 0 0;
+}
+.auth-card .account-form > .account-hint {
+  margin-top: -4px;
+}
+/* Links on the card get the yellow underline of the account menu's current page. */
+.auth-switch a,
+.auth-card .account-hint a {
+  font-weight: var(--font-weight-medium);
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+.auth-switch a:hover,
+.auth-card .account-hint a:hover {
+  text-decoration-color: currentColor;
+}
+.auth-switch {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
   font-size: var(--text-base);
 }
-.account-links .text-button {
-  min-height: 0;
+.auth-back .text-button {
+  min-height: 36px;
   padding: 0;
 }
-.account-sent > p:first-child {
+.account-sent,
+.auth-expired {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.account-sent > .account-hint {
+  margin-top: -4px;
+}
+.account-sent > .auth-lead {
+  color: var(--ink);
   font-size: var(--text-lead);
   line-height: 1.5;
 }
-.account-sent .button {
-  margin-top: 14px;
+/* "Om det finns ett konto …" after "Skicka länk", and the expired link on nytt-losenord. */
+.auth-note {
+  padding: 12px 14px;
+  border-radius: var(--radius-button);
+  background: var(--green-pale);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+.auth-expired .auth-note {
+  background: var(--cream);
+}
+
+@media (max-width: 759px) {
+  .auth-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .auth-art {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 18px;
+    padding: 18px 20px;
+    text-align: left;
+  }
+  .auth-art img {
+    flex: none;
+    width: 64px;
+  }
+  .auth-card-icon-only .auth-art {
+    justify-content: center;
+    padding-block: 14px;
+  }
+  .auth-art p {
+    font-size: var(--text-base);
+    text-wrap: pretty;
+  }
+  .auth-body {
+    padding: 26px 20px 28px;
+    border-left: 0;
+    border-top: 2px solid var(--ink);
+  }
+  .auth-part {
+    margin-top: 22px;
+  }
 }
 
 /* The menu follows the header's plain links and yellow underline. */
@@ -3346,11 +3503,8 @@ body:has(#shopping-dialog[open]) {
 /* Keep text on the kitchen's green and yellow cards as dark as their body copy. */
 .account-card
   :is(.add-card, .photo-card, .profile-time-card)
-  :is(.account-hint, .account-intro, .account-panel-intro) {
+  :is(.account-hint, .account-panel-intro) {
   color: var(--ink);
-}
-.auth-card .account-links + .account-hint {
-  margin-top: 22px;
 }
 
 /* Min receptbok (pages/receptbok.njk). The cards and their grid are the archive's. */

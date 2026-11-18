@@ -1,7 +1,6 @@
 /* The dark theme. layouts/base.njk links this file with a media query, which decides when it applies:
-   by default when the device is set to dark. From 960px the header has a sun/moon button (app.js),
-   and the visitor's choice there changes the media query (applyTheme in base.njk), so it holds on
-   wide screens only; below 960px the site always follows the device.
+   by default when the device is set to dark. The header has a sun/moon button (app.js), and the
+   visitor's choice there changes the media query (applyTheme in base.njk) to always or never.
 
    The page goes dark and the outlines light, but the coloured cards, chips and badges stay coloured
    (a little dimmer) with black text and black outlines, as in the light theme: the illustrations are
@@ -68,6 +67,7 @@
   .shopping-edit,
   .tag-picker-pill,
   .account-error,
+  .auth-art,
   .profile-time-card,
   .account-check:has(input:checked),
   .privacy-guest,

@@ -43,6 +43,15 @@
           </ul>
         </details>
 {%- endmacro -%}
+{#- The sun/moon button. The header has two and shows one (kitchen.css): from 960px beside the logo,
+    framed like the buttons on the right, and below that unframed at the end of the menu row. app.js
+    shows them, and keeps them alike: the moon in the light theme, the sun in the dark. -#}
+{%- macro themeToggle(base, className) %}
+        <button class="{{ className }} theme-toggle" type="button" aria-label="Mörkt läge" aria-pressed="false" hidden>
+          <img class="theme-moon" src="{{ base }}assets/icons/moon.svg" alt="" width="24" height="24">
+          <img class="theme-sun" src="{{ base }}assets/icons/sun.svg" alt="" width="24" height="24">
+        </button>
+{%- endmacro -%}
 <!doctype html>
 <html lang="{{ site.language | escape }}"{% if base %} data-base="{{ base }}"{% endif %}>
 <head>
@@ -99,15 +108,12 @@
   <link rel="stylesheet" href="{{ base }}css/fonts.css">
   <link rel="stylesheet" href="{{ base }}css/styles.css">
   <link rel="stylesheet" href="{{ base }}css/dark.css" media="(prefers-color-scheme: dark)" id="dark-theme">
-  {#- The theme: the device's, or from 960px the one chosen with the sun/moon button in the header
-      (app.js), saved as restfest-theme. A choice only changes when dark.css applies; below 960px it
-      always follows the device. Runs here, before the first paint, so the page never flashes the
-      other theme. #}
+  {#- The theme: the device's, or the one chosen with the sun/moon button in the header (app.js),
+      saved as restfest-theme. A choice sets when dark.css applies: always ("all") or never
+      ("not all"). Runs here, before the first paint, so the page never flashes the other theme. #}
   <script>
     function applyTheme(choice) {
-      const media = choice === 'dark' ? '(prefers-color-scheme: dark), (min-width: 960px)'
-        : choice === 'light' ? '(prefers-color-scheme: dark) and (max-width: 959px)'
-        : '(prefers-color-scheme: dark)';
+      const media = choice === 'dark' ? 'all' : choice === 'light' ? 'not all' : '(prefers-color-scheme: dark)';
       document.getElementById('dark-theme').media = media;
       document.getElementById('dark-theme-color').media = media;
     }
@@ -123,17 +129,14 @@
   <a class="skip-link" href="#main">Hoppa till innehåll</a>
   <header class="site-header">
     <div class="header-inner wrap">
-      {#- The logo, and from 960px the sun/moon button beside it (app.js shows it): the moon in the light
-          theme, the sun in the dark. It sits on the left, where there is room: on the right it would
-          push the menu off centre. #}
+      {#- The logo, and from 960px the sun/moon button beside it. It sits on the left, where there is
+          room: on the right it would push the menu off centre. Below 960px the top row has no room
+          for it beside the name, so there it is the last item in the menu row instead. #}
       <div class="header-start">
         <a class="brand" href="{{ homeUrl or '#' }}" aria-label="{{ site.name | escape }}, startsida">
           <span>{{ site.name | escape }}</span>
         </a>
-        <button class="saved-nav theme-toggle" type="button" aria-label="Mörkt läge" aria-pressed="false" hidden>
-          <img class="theme-moon" src="{{ base }}assets/icons/moon.svg" alt="" width="24" height="24">
-          <img class="theme-sun" src="{{ base }}assets/icons/sun.svg" alt="" width="24" height="24">
-        </button>
+        {{- themeToggle(base, 'saved-nav') }}
       </div>
       <nav aria-label="Huvudmeny">
         {{- recipeMenu(collections.recipeTypes, base, page.url, inRecipes, true) }}
@@ -142,6 +145,7 @@
         {#- On phones the account link sits in the menu row; from 520px it is a button beside the others. #}
         <a class="nav-link account-menu-link" href="{{ base }}logga-in.html" data-account-link><span class="when-signed-out">Logga in</span><span class="when-signed-in">Konto</span></a>
         {%- endif %}
+        {{- themeToggle(base, 'menu-theme-toggle') }}
       </nav>
       <div class="header-actions">
         <a class="saved-nav" href="{{ base }}receptarkiv.html?vy=sparade" aria-label="Visa sparade recept"{% if ai.accounts %} data-saved-link{% endif %}>

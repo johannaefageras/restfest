@@ -1820,20 +1820,23 @@ window.addEventListener("pageshow", () => {
   for (const menu of navMenus) menu.open = false;
 });
 
-// The sun/moon button in the header, from 960px (kitchen.css). applyTheme (layouts/base.njk) sets
-// when css/dark.css applies; the button is pressed while it does. A choice that matches the device's
-// setting is forgotten, so the site follows the device again until the visitor picks the other theme.
-const themeToggle = $(".theme-toggle");
-if (themeToggle && typeof applyTheme === "function") {
+// The sun/moon buttons in the header: beside the logo from 960px, at the end of the menu row below
+// that (kitchen.css). applyTheme (layouts/base.njk) sets when css/dark.css applies; the buttons are
+// pressed while it does. A choice that matches the device's setting is forgotten, so the site
+// follows the device again until the visitor picks the other theme.
+const themeToggles = document.querySelectorAll(".theme-toggle");
+if (themeToggles.length && typeof applyTheme === "function") {
   const darkSheet = document.getElementById("dark-theme");
   const deviceDark = matchMedia("(prefers-color-scheme: dark)");
   const isDark = () => matchMedia(darkSheet.media).matches;
   const showTheme = () => {
     const dark = isDark();
-    themeToggle.setAttribute("aria-pressed", String(dark));
-    themeToggle.title = dark ? "Byt till ljust läge" : "Byt till mörkt läge";
+    for (const toggle of themeToggles) {
+      toggle.setAttribute("aria-pressed", String(dark));
+      toggle.title = dark ? "Byt till ljust läge" : "Byt till mörkt läge";
+    }
   };
-  themeToggle.addEventListener("click", () => {
+  const switchTheme = () => {
     const dark = !isDark();
     const choice = dark === deviceDark.matches ? null : dark ? "dark" : "light";
     try {
@@ -1842,7 +1845,8 @@ if (themeToggle && typeof applyTheme === "function") {
     } catch {}
     applyTheme(choice);
     showTheme();
-  });
+  };
+  for (const toggle of themeToggles) toggle.addEventListener("click", switchTheme);
   deviceDark.addEventListener("change", showTheme);
   // A choice made in another tab.
   window.addEventListener("storage", (event) => {
@@ -1851,7 +1855,7 @@ if (themeToggle && typeof applyTheme === "function") {
     showTheme();
   });
   showTheme();
-  themeToggle.hidden = false;
+  for (const toggle of themeToggles) toggle.hidden = false;
 }
 
 // On a recipe's own page (recept/<id>.html) the recipe is part of the page.

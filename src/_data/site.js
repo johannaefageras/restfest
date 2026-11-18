@@ -28,7 +28,7 @@ const socialImage = {
 };
 
 // Contact email shown under "Frågor" on the privacy page. Empty = hidden.
-const contact = "johanna@oftabraefter.se";
+const contact = "info@oftabraefter.se";
 
 // Optional social profiles: add one object per profile to show links in the footer.
 // Use full HTTPS URLs. Leave the list empty until you have profiles to link to.
