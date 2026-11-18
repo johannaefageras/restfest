@@ -3780,31 +3780,176 @@ a.dialog-save {
   }
 }
 
-/* Integritet (pages/integritet.njk): running text, a little wider than the forms. */
+/* Integritet (pages/integritet.njk): running text in the kitchen's own parts. Without an account,
+   everything stays home (the green card); what an account stores is listed like "Det här finns
+   hemma redan", with a count; the cookies get a dashed box like the kitchen's empty lists, since
+   there are none for ads or statistics; deleting the account closes the page on yellow. */
 .wrap.privacy-page {
-  max-width: calc(620px + 64px);
+  max-width: calc(680px + 64px);
 }
-.privacy-text > h2 {
-  margin: 30px 0 8px;
-  font-size: 24px;
+.privacy-text h2 {
+  font-size: clamp(26px, 3.2vw, 30px);
+  line-height: 1.1;
+  letter-spacing: var(--track-display-sm);
 }
-.privacy-text > p:not(.account-intro),
-.privacy-text > ul {
+.privacy-stored .pane-heading h3 {
+  font-size: 21px;
+}
+.privacy-text :is(.privacy-section, .privacy-card) p {
   font-size: var(--text-base);
   line-height: 1.6;
-}
-.privacy-text > p + p,
-.privacy-text > ul + p {
-  margin-top: 10px;
-}
-.privacy-text > ul {
-  margin: 8px 0 0;
-  padding-left: 20px;
-}
-.privacy-text > ul > li + li {
-  margin-top: 6px;
 }
 .privacy-text a {
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+.privacy-text > * + * {
+  margin-top: 48px;
+}
+.privacy-text > .greeting + * {
+  margin-top: 0;
+}
+.privacy-section > h2 {
+  margin-bottom: 14px;
+}
+.privacy-section > .pantry-panel + p,
+.privacy-section > p + p {
+  margin-top: 12px;
+}
+.privacy-section > .pantry-panel + p {
+  margin-top: 20px;
+}
+
+/* The cards: title and text, and a doodle beside both. On phones the doodle moves up beside the
+   title, so the text has the card's full width. */
+.privacy-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "title art"
+    "text art";
+  align-items: center;
+  column-gap: clamp(14px, 3vw, 32px);
+  padding: clamp(18px, 3vw, 30px);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-card);
+}
+.privacy-card > h2 {
+  grid-area: title;
+}
+.privacy-card > p {
+  grid-area: text;
+  margin-top: 8px;
+}
+.privacy-art {
+  grid-area: art;
+  width: clamp(64px, 14vw, 96px);
+  height: auto;
+  transform: rotate(-5deg);
+}
+.privacy-guest {
+  background: var(--green);
+}
+.privacy-cookies {
+  border-style: dashed;
+  border-color: var(--control);
+  background: var(--well);
+}
+.privacy-cookies > .privacy-art {
+  width: clamp(52px, 10vw, 72px);
+  transform: rotate(-8deg);
+}
+.privacy-delete {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "title"
+    "text";
+  background: var(--yellow);
+}
+
+/* "Det här sparar vi": one row per kind of data, each with its doodle, tilted a little either way
+   like the doodles beside the page titles. */
+.privacy-items {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.privacy-items > li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+  font-size: var(--text-base);
+  line-height: 1.45;
+}
+.privacy-items img {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  transform: rotate(-6deg);
+}
+.privacy-items > li:nth-child(even) img {
+  transform: rotate(5deg);
+}
+.privacy-where {
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font: var(--text-meta) / 1.4 var(--font-label);
+  font-feature-settings: var(--spot-features);
+}
+
+/* Kylfoto och nya recept: what is sent where, a doodle beside each. */
+.privacy-list {
+  display: grid;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.privacy-list > li {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+}
+.privacy-list img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+@media (max-width: 519px) {
+  .privacy-text > * + * {
+    margin-top: 40px;
+  }
+  .privacy-card {
+    grid-template-areas:
+      "title art"
+      "text text";
+  }
+  .privacy-card > p {
+    margin-top: 10px;
+  }
+  .privacy-art,
+  .privacy-cookies > .privacy-art {
+    width: 52px;
+  }
+  .privacy-items > li {
+    gap: 14px;
+  }
+  .privacy-items img {
+    width: 34px;
+    height: 34px;
+  }
+  .privacy-list > li {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 14px;
+  }
+  .privacy-list img {
+    width: 36px;
+    height: 36px;
+  }
 }

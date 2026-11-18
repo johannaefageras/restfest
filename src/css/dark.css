@@ -70,6 +70,8 @@
   .account-error,
   .profile-time-card,
   .account-check:has(input:checked),
+  .privacy-guest,
+  .privacy-delete,
   .nav-menu-panel a:is(:hover, [aria-current="page"])
 ):not(:root) {
   --paper: #fff;
