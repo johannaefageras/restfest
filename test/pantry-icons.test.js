@@ -50,7 +50,7 @@ test('specific groceries keep their pictures while sharing the existing recipe k
     ['Persilja', 'orter', 'parsley'], ['Oregano', 'kryddor', 'oregano'],
     ['Rödkål', 'kal', 'red-cabbage'], ['Vitkål', 'kal', 'green-cabbage'],
     ['Ruccola', 'sallad', 'rocket'], ['Palsternackor', 'rotfrukter', 'parsnips'],
-    ['Farfalle', 'pasta', 'farfalle'], ['Spaghetti', 'pasta', 'spagheti'],
+    ['Farfalle', 'pasta', 'farfalle'], ['Spaghetti', 'pasta', 'spaghetti'],
     ['Baguette', 'brod', 'baguette'],
     ['  RODKAL  ', 'kal', 'red-cabbage'], ['morötterna', 'morot', 'carrot'],
   ]) {

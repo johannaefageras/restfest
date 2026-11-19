@@ -58,30 +58,65 @@
     return result;
   }
 
+  // Some phone browsers can display a photo even when createImageBitmap cannot decode it.
+  // Both paths respect the photo's orientation. Keep the decoded source only until it is resized.
+  async function readPhoto(file) {
+    // The webcam already gave us a decoded canvas; don't allocate another full-size bitmap.
+    if (typeof file.getContext === "function") {
+      return {
+        image: file, width: file.width, height: file.height,
+        release() { file.width = file.height = 0; },
+      };
+    }
+    try {
+      const bitmap = await createImageBitmap(file, {
+        imageOrientation: "from-image",
+      });
+      return {
+        image: bitmap, width: bitmap.width, height: bitmap.height,
+        release() { bitmap.close(); },
+      };
+    } catch {
+      // Also handles browsers without createImageBitmap. Try their native image loader below.
+    }
+    const url = URL.createObjectURL(file);
+    const image = new Image();
+    const release = () => {
+      image.removeAttribute("src");
+      URL.revokeObjectURL(url);
+    };
+    try {
+      await new Promise((resolve, reject) => {
+        image.onload = resolve;
+        image.onerror = reject;
+        image.src = url;
+      });
+      if (!image.naturalWidth || !image.naturalHeight) throw new Error();
+      return {image, width: image.naturalWidth, height: image.naturalHeight, release};
+    } catch {
+      release();
+      throw new Error(
+        `${file.name || "Bilden"} gick inte att läsa. Prova att välja bilden från bildbiblioteket eller ta en ny bild med Fota.`,
+      );
+    }
+  }
+
   // Preserve small labels for high-resolution vision. Keep each JPEG under the function's base64 cap.
   // `file` is a photo from one of the inputs, or the canvas the webcam's picture was drawn on.
   async function shrink(file) {
-    let bitmap;
-    try {
-      bitmap = await createImageBitmap(file, {
-        imageOrientation: "from-image",
-      });
-    } catch {
-      throw new Error(
-        `${file.name || "Bilden"} gick inte att läsa. Prova en JPEG- eller PNG-bild.`,
-      );
-    }
-    const scale = Math.min(1, 2560 / Math.max(bitmap.width, bitmap.height));
+    const photo = await readPhoto(file);
     const canvas = document.createElement("canvas");
-    canvas.width = Math.round(bitmap.width * scale);
-    canvas.height = Math.round(bitmap.height * scale);
     let blob;
     try {
+      const scale = Math.min(1, 2560 / Math.max(photo.width, photo.height));
+      canvas.width = Math.round(photo.width * scale);
+      canvas.height = Math.round(photo.height * scale);
       do {
         const context = canvas.getContext("2d");
+        if (!context) throw new Error("Bilden kunde inte förberedas. Prova en bild i taget.");
         context.fillStyle = "#fff";
         context.fillRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+        context.drawImage(photo.image, 0, 0, canvas.width, canvas.height);
         blob = await new Promise((resolve) =>
           canvas.toBlob(resolve, "image/jpeg", 0.9),
         );
@@ -91,12 +126,14 @@
         canvas.height = Math.max(1, Math.round(canvas.height * 0.8));
       } while (true);
     } finally {
-      bitmap.close();
+      photo.release();
+      // Safari can retain canvas storage until GC even after its bitmap has been closed.
+      canvas.width = canvas.height = 0;
     }
     const dataUrl = await new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
+      reader.onerror = () => reject(new Error(generalError));
       reader.readAsDataURL(blob);
     });
     return dataUrl.slice(dataUrl.indexOf(",") + 1);
@@ -225,7 +262,9 @@
         ? "Tittar på bilderna. Det tar några sekunder …"
         : "Tittar på bilden. Det tar några sekunder …";
     try {
-      const images = await Promise.all(files.map(shrink));
+      // Three full-size phone photos at once can exhaust a mobile browser's image memory.
+      const images = [];
+      for (const file of files) images.push(await shrink(file));
       const names = foundNames(await post("detect-ingredients", { images }));
       const added = [];
       // New foods the list had no room for (it holds 60, like the typed ones).

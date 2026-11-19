@@ -68,10 +68,12 @@ const fridge = readFileSync(new URL('../src/js/fridge-ai.js', import.meta.url), 
 // The fake network returns detector output; no paid model calls or real photos are needed here.
 // `camera` is what "Fota" has to open: 'capture' for a phone's browser, 'webcam' for a computer with a
 // camera, 'blocked' for one where the visitor said no, and nothing for a browser with neither.
-function page({result = {names: []}, initial = [], width = 4032, height = 3024, blobSizes = [500_000], fail = false, camera, generateWait} = {}) {
+function page({result = {names: []}, initial = [], width = 4032, height = 3024, blobSizes = [500_000], fail = false, camera, generateWait, bitmapFails = false, bitmapMissing = false, imageFails = false, noContext = false, readerFails = false} = {}) {
   const elements = new Map();
   const uploads = [], encodes = [], bitmaps = [], sources = [], clicks = [], tracks = [];
   const documentHandlers = {}, windowHandlers = {}, scrolls = [];
+  const canvases = [], imageElements = [], objectUrls = [], revokedUrls = [];
+  let activeBitmaps = 0, peakBitmaps = 0;
   let observeVisibility;
   const node = selector => ({
     disabled: false, textContent: '', value: '', handlers: {}, attributes: {},
@@ -114,23 +116,51 @@ function page({result = {names: []}, initial = [], width = 4032, height = 3024, 
       querySelector: () => ({content: 'https://api.test/functions/v1'}),
       addEventListener(type, handler) { documentHandlers[type] = handler; },
       createElement() {
-        return {width: 0, height: 0,
-          getContext: () => ({fillRect() {}, drawImage() {}}),
+        const canvas = {width: 0, height: 0,
+          getContext: () => noContext ? null : ({fillRect() {}, drawImage() {}}),
           toBlob(callback, type, quality) {
             encodes.push({width: this.width, height: this.height, type, quality});
             callback(blobSizes.length ? {size: blobSizes.shift()} : null);
           },
         };
+        canvases.push(canvas);
+        return canvas;
       },
     },
-    createImageBitmap: async source => {
+    ...(!bitmapMissing && {createImageBitmap: async source => {
       sources.push(source);
-      const bitmap = {width, height, closed: false, close() { this.closed = true; }};
+      if (bitmapFails) throw new Error('The source image cannot be decoded.');
+      activeBitmaps++;
+      peakBitmaps = Math.max(peakBitmaps, activeBitmaps);
+      const bitmap = {width, height, closed: false, close() { this.closed = true; activeBitmaps--; }};
       bitmaps.push(bitmap);
       return bitmap;
+    }}),
+    URL: {
+      createObjectURL(file) {
+        const url = `blob:photo-${objectUrls.length}`;
+        objectUrls.push({file, url});
+        return url;
+      },
+      revokeObjectURL(url) { revokedUrls.push(url); },
+    },
+    Image: class {
+      constructor() { imageElements.push(this); }
+      set src(value) {
+        this.source = value;
+        this.naturalWidth = width;
+        this.naturalHeight = height;
+        if (imageFails) this.onerror();
+        else this.onload();
+      }
+      removeAttribute(name) { if (name === 'src') this.source = ''; }
     },
     FileReader: class {
-      readAsDataURL() { this.result = 'data:image/jpeg;base64,ZmFrZQ=='; this.onload(); }
+      readAsDataURL() {
+        if (readerFails) return this.onerror();
+        this.result = 'data:image/jpeg;base64,ZmFrZQ==';
+        this.onload();
+      }
     },
     fetch: async (url, options) => {
       uploads.push({url, body: JSON.parse(options.body)});
@@ -145,6 +175,8 @@ function page({result = {names: []}, initial = [], width = 4032, height = 3024, 
   });
   vm.runInContext(helpers + capitalize + fridge, context);
   return {pantry, $, uploads, encodes, bitmaps, sources, clicks, tracks, dialog, scrolls,
+    canvases, imageElements, objectUrls, revokedUrls,
+    peakBitmaps: () => peakBitmaps,
     location: context.location,
     refresh() { documentHandlers['restfest:pantry'](); },
     back() { windowHandlers.pageshow({persisted: true}); },
@@ -154,7 +186,7 @@ function page({result = {names: []}, initial = [], width = 4032, height = 3024, 
         {target: $('#invent-button'), isIntersecting: button > 0, intersectionRatio: button},
       ]);
     },
-    async choose() { $('#fridge-photo-input').files = [{name: 'kyl.jpg'}]; await $('#fridge-photo-input').handlers.change(); },
+    async choose(files = [{name: 'kyl.jpg'}]) { $('#fridge-photo-input').files = files; await $('#fridge-photo-input').handlers.change(); },
     // The phone's camera hands its one photo to the capture input.
     async capture() { $('#fridge-camera-input').files = [{name: 'image.jpg'}]; await $('#fridge-camera-input').handlers.change(); },
     keys: () => pantry.items.map(name => context.keyForIngredient(name)),
@@ -213,6 +245,53 @@ test('large JPEGs are reduced to the existing upload cap and bitmap resources ar
   assert.equal(broken.$('#fridge-photo').disabled, false);
 });
 
+test('iPhone photos use the native image decoder when bitmap decoding fails or is unavailable', async () => {
+  for (const options of [{bitmapFails: true}, {bitmapMissing: true}]) {
+    const p = page({...options, width: 3024, height: 4032, result: {names: ['Bananer']}});
+    const file = {name: 'IMG_1234.HEIC', type: 'image/heic'};
+    await p.choose([file]);
+    assert.deepEqual(p.pantry.items, ['Bananer']);
+    assert.deepEqual(p.encodes, [{width: 1920, height: 2560, type: 'image/jpeg', quality: 0.9}]);
+    assert.equal(p.uploads.length, 1);
+    assert.equal(p.objectUrls[0].file, file);
+    assert.deepEqual(p.revokedUrls, [p.objectUrls[0].url]);
+    assert.equal(p.imageElements[0].source, '');
+    assert.ok(p.canvases.every(canvas => canvas.width === 0 && canvas.height === 0));
+  }
+});
+
+test('three full-size iPhone photos are processed one at a time and uploaded together in order', async () => {
+  const p = page({width: 3024, height: 4032, blobSizes: [500_000, 600_000, 700_000]});
+  const files = ['juice.jpg', 'kyl.jpg', 'bananer.jpg'].map(name => ({name}));
+  await p.choose(files);
+  assert.deepEqual(p.sources, files);
+  assert.equal(p.peakBitmaps(), 1, 'only one full-size decoded image is held at a time');
+  assert.equal(p.uploads.length, 1);
+  assert.equal(p.uploads[0].body.images.length, 3);
+  assert.ok(p.bitmaps.every(bitmap => bitmap.closed));
+  assert.ok(p.canvases.every(canvas => canvas.width === 0 && canvas.height === 0));
+});
+
+test('unreadable photos and preparation failures release resources and allow another selection', async () => {
+  for (const options of [
+    {bitmapFails: true, imageFails: true},
+    {bitmapFails: true, blobSizes: []},
+    {noContext: true},
+    {readerFails: true},
+  ]) {
+    const p = page({...options, initial: ['Ägg']});
+    await p.choose([{name: 'IMG_1234.HEIC'}]);
+    assert.equal(p.uploads.length, 0);
+    assert.deepEqual(p.pantry.items, ['Ägg']);
+    assert.equal(p.$('#fridge-photo').disabled, false);
+    assert.equal(p.$('#fridge-photo-input').value, '');
+    assert.ok(p.bitmaps.every(bitmap => bitmap.closed));
+    assert.ok(p.canvases.every(canvas => canvas.width === 0 && canvas.height === 0));
+    assert.deepEqual(p.revokedUrls, p.objectUrls.map(({url}) => url));
+    assert.match(p.$('#pantry-status').textContent, /Prova|prova/);
+  }
+});
+
 test('an old detector still works during rollout and failed or empty scans leave existing groceries alone', async () => {
   const old = page({result: {keys: ['mjolk', 'invalid'], other: ['Sriracha']}});
   await old.choose();
@@ -267,7 +346,8 @@ test('on a computer "Fota" shows the webcam, sends its picture and turns the cam
   assert.equal(p.dialog.open, false);
   assert.equal(p.tracks[0].stopped, true);
   assert.equal(p.$('#fridge-camera-video').srcObject, null);
-  assert.deepEqual([p.sources[0].width, p.sources[0].height], [1920, 1080], 'the frame at the camera\'s own size');
+  assert.deepEqual([p.encodes[0].width, p.encodes[0].height], [1920, 1080], 'the frame at the camera\'s own size');
+  assert.equal(p.sources.length, 0, 'the captured canvas is encoded without making another full-size bitmap');
   assert.equal(p.uploads.length, 1);
   assert.deepEqual(p.pantry.items, ['Gurka']);
 
