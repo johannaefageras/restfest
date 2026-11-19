@@ -23,6 +23,7 @@ function root() {
   const nodes = new Map([
     ['[data-shopping-empty]', element()], ['[data-shopping-pending]', element()],
     ['[data-shopping-bought]', element()], ['[data-shopping-pending-empty]', element()],
+    ['[data-shopping-actions]', element()], ['[data-shopping-share]', element()],
     ['[data-shopping-section-count="pending"]', element()], ['[data-shopping-section-count="bought"]', element()],
   ]);
   return {
@@ -109,6 +110,28 @@ test('empty and all-purchased lists have distinct messages, including within a r
   assert.equal(page.roots[0].count('bought'), 1);
   assert.equal(page.roots[0].nodes.get('[data-shopping-pending-empty]').textContent, 'Allt från receptet är köpt.');
   assert.doesNotMatch(page.roots[0].pending.innerHTML, /mjölk/);
+});
+
+test('sharing appears only when there is something left to buy in the page and modal', () => {
+  const page = view([]);
+  const assertSharing = (hidden, disabled) => {
+    for (const root of page.roots) {
+      assert.equal(root.nodes.get('[data-shopping-actions]').hidden, hidden);
+      assert.equal(root.nodes.get('[data-shopping-share]').disabled, disabled);
+    }
+  };
+  page.render();
+  assertSharing(true, true);
+  page.change([{ kind: 'add', id: 'a', item: item('a', '2 l mjölk') }]);
+  assertSharing(false, false);
+  page.context.shoppingEditor = { id: 'a', owner: null };
+  page.render();
+  assertSharing(false, true);
+  page.context.shoppingEditor = null;
+  page.change([{ kind: 'check', id: 'a', checked: true }]);
+  assertSharing(true, true);
+  page.change([{ kind: 'check', id: 'a', checked: false }]);
+  assertSharing(false, false);
 });
 
 test('remote purchase changes keep an open draft in its section without duplicating its sources', () => {

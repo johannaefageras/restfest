@@ -55,6 +55,9 @@
 .fa-pen-to-square::before {
   content: "\f39f";
 }
+.fa-share-nodes::before {
+  content: "\f534";
+}
 .fa-xmark::before {
   content: "\f8be";
 }

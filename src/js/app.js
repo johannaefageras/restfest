@@ -601,12 +601,13 @@ function renderShoppingList() {
   const visibleItems = shoppingRecipeFilter
     ? sources.find((source) => source.key === shoppingRecipeFilter.key).items
     : [...shoppingItems.values()];
+  const hasPendingItems = [...shoppingItems.values()].some((item) => !item.checked);
   document.querySelectorAll("[data-shopping-list]").forEach((root) => {
+    const shareTools = $("[data-shopping-actions]", root);
+    if (shareTools) shareTools.hidden = !hasPendingItems;
     const share = $("[data-shopping-share]", root);
     if (share)
-      share.disabled =
-        Boolean(shoppingEditor) ||
-        ![...shoppingItems.values()].some((item) => !item.checked);
+      share.disabled = Boolean(shoppingEditor) || !hasPendingItems;
     $("[data-shopping-empty]", root).hidden = shoppingItems.size > 0;
     $("[data-shopping-pending]", root).hidden = !shoppingItems.size;
     const bought = $("[data-shopping-bought]", root);

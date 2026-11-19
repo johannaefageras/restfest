@@ -5,7 +5,7 @@ const foodGroups = {
   legumes: { label: "Baljväxter", icon: "beans" },
   grains: { label: "Pasta, ris & spannmål", icon: "spagheti" },
   dairy: { label: "Mejeri", icon: "milk-carton-2" },
-  eggs: { label: "Ägg", icon: "egg-carton" },
+  eggs: { label: "Ägg", icon: "eggs" },
   poultry: { label: "Fågel", icon: "chicken-drumstick" },
   fish: { label: "Fisk & skaldjur", icon: "fish" },
   meat: { label: "Kött", icon: "steak-2" },
@@ -69,7 +69,7 @@ const difficultyLevels = {
   Mästerkock: "difficulty-level-masterchef",
 };
 // Older saved recipes may still use the former name for the first level.
-const difficultyLabel = (value) => value === "Lätt" ? "Nybörjare" : value;
+const difficultyLabel = (value) => (value === "Lätt" ? "Nybörjare" : value);
 
 // Spa, cleaning, pet and gardening recipes live on mer-an-mat.html, not in the food archive.
 const nonFoodMeals = ["spa", "household", "pets", "garden"];

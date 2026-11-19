@@ -27,6 +27,7 @@ const icons = [
   'chevron-down',     // the archive's category picker and the other <details> summaries
   'heart',            // save buttons
   'pen-to-square',    // edit an item on the shopping list
+  'share-nodes',      // share a copy of the shopping list
   'plus',             // a recipe's ingredient: add it to the shopping list
   'xmark'             // close and remove buttons
 ];

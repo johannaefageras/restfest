@@ -1,20 +1,14 @@
 /* Portable shopping copies use the site's existing type, colours and drawn outlines. */
 .shopping-share-tools {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px 24px;
-  justify-content: flex-end;
-  margin-bottom: 18px;
+  margin-top: 16px;
 }
 .shopping-panel-title {
-  margin: 0 auto 0 0;
+  margin: 0 0 24px;
   font-size: 26px;
   line-height: 1.2;
 }
-.shopping-share-tools .button {
-  min-height: 42px;
-  gap: 8px;
+.shopping-share-tools .text-button {
+  color: var(--ink-soft);
 }
 .ingredients > .shopping-department,
 .shopping-copy-items.ingredients > .shopping-department {
