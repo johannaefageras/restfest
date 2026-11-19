@@ -147,6 +147,8 @@ supabase/.temp/
 supabase/.branches/
 
 .DS_Store
+src/.DS_Store
+src/assets/.DS_Store
 
 .claude/
 .superpowers/
