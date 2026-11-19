@@ -1162,7 +1162,7 @@ function setupMealPicker() {
     foodRecipes.flatMap((recipe) => recipe.meals),
   );
   const meals = new Map([
-    ["all", { label: "Alla kategorier", icon: "grid" }],
+    ["all", { label: "Alla kategorier", icon: "categories" }],
     ...Object.entries(mealTypes).filter(([key]) => representedMeals.has(key)),
   ]);
   list.innerHTML = [...meals]
