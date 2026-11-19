@@ -26,6 +26,7 @@
 {%- set shareImageAlt = shareImage.alt or shareTitle -%}
 {%- set shareImageUrl = site.absolute(shareImage.path) if shareImage.path else null -%}
 {%- set canonicalUrl = site.absolute(page.url) if not noindex else null -%}
+{%- set searchStructuredData = page.url | pageStructuredData(site, title, recipe.back or listing.back, noindex) -%}
 {#- The home page links to its own sections; the other pages link to the home page. -#}
 {%- set homeUrl = '' if isHome else (base or './') -%}
 {#- The "Recept" menu, in the header (opens downwards) and the footer (opens upwards): one entry per
@@ -66,6 +67,8 @@
   <meta name="application-name" content="{{ site.name | escape }}">
   {%- if noindex %}
   <meta name="robots" content="noindex">
+  {%- else %}
+  <meta name="robots" content="max-image-preview:large">
   {%- endif %}
   {%- if ai.functionsUrl %}
   <meta name="restfest-ai" content="{{ ai.functionsUrl }}">
@@ -125,6 +128,9 @@
   <link rel="stylesheet" href="{{ base }}css/icons.css">
   <link rel="stylesheet" href="{{ base }}css/kitchen.css">
   <link rel="stylesheet" href="{{ base }}css/shopping-share.css">
+  {%- if searchStructuredData %}
+  <script type="application/ld+json">{{ searchStructuredData | safe }}</script>
+  {%- endif %}
   {%- if recipe.structuredData %}
   <script type="application/ld+json">{{ recipe.structuredData | safe }}</script>
   {%- endif %}

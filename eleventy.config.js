@@ -30,6 +30,7 @@ import {recipeListings} from './lib/recipes.js';
 import {taxonomy} from './lib/taxonomy.js';
 import ai from './src/_data/ai.js';
 import {shoppingDepartmentNames} from './lib/shopping-departments.js';
+import {pageStructuredData} from './lib/metadata.js';
 
 const recipes = api => api.getFilteredByGlob('src/recept/*.md')
   .sort((a, b) => parseInt(a.fileSlug, 10) - parseInt(b.fileSlug, 10));
@@ -83,6 +84,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('recipeFoods', (foods, items) => recipeFoods(foods, frontMatter(items), taxonomy()));
   eleventyConfig.addFilter('otherFoods', (foods, items) => otherFoods(foods, frontMatter(items), taxonomy()));
   eleventyConfig.addFilter('shoppingDepartmentNames', foods => shoppingDepartmentNames({...foods, ...taxonomy().foods}));
+  eleventyConfig.addFilter('pageStructuredData', pageStructuredData);
 
   // Keeps a range like "1–3" or "15–20" on one line: a word joiner (U+2060) either side of the dash
   // stops the browser breaking there. For the narrow boxes under a recipe's description (recipe.njk).

@@ -287,9 +287,9 @@ test("with a publishable key every page gets the account button and the account 
       `the shopping worker's offline asset ${path} exists`,
     );
   const privacy = site.read("integritet.html");
-  assert.equal(
-    privacy.includes('name="robots"'),
-    false,
+  assert.doesNotMatch(
+    privacy,
+    /<meta name="robots" content="[^"]*\bnoindex\b/,
     "the privacy page may be indexed",
   );
   assert.match(privacy, /<h1[^>]*>.*Integritet/s);
