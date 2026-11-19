@@ -2973,8 +2973,8 @@ body:has(#shopping-dialog[open]) {
 }
 
 /* The "Recept" menu in the header and footer (layouts/base.njk): a <details> whose panel lists the
-   recipe types. The panel is placed against the menu row (nav), which is as tall as its bar. In the
-   header it hangs from the header's rule, and in the footer it stands on the footer's: the panel's
+   recipe types. On desktop the panel is centred on its own trigger, which fills the bar's height. In
+   the header it hangs from the header's rule, and in the footer it stands on the footer's: the panel's
    3px edge lies on the rule, so the two read as one line. It unrolls from that line when it opens.
    Each row takes its own colour on hover and on its own page. */
 .site-header nav,
@@ -3015,7 +3015,7 @@ body:has(#shopping-dialog[open]) {
   position: absolute;
   z-index: 30;
   top: 100%;
-  left: -18px;
+  left: 0;
   width: 272px;
   margin: 0;
   padding: 6px;
@@ -3094,8 +3094,7 @@ body:has(#shopping-dialog[open]) {
   --menu-tint: var(--sage);
 }
 
-/* The footer's menu opens upwards, so its chevron points up until then. On wide screens the menu
-   is at the right edge, and the panel lines up with that edge. */
+/* The footer's menu opens upwards, so its chevron points up until then. */
 .site-footer .nav-menu > summary > .fa-chevron-down {
   transform: rotate(180deg);
 }
@@ -3105,8 +3104,6 @@ body:has(#shopping-dialog[open]) {
 .site-footer .nav-menu-panel {
   top: auto;
   bottom: 100%;
-  left: auto;
-  right: 0;
   border-width: 2px 2px 3px;
   border-radius: 8px 11px 0 0;
   box-shadow: 0 -6px 14px var(--shadow);
@@ -3123,16 +3120,27 @@ body:has(#shopping-dialog[open]) {
   }
 }
 
+/* Anchor each desktop panel to "Recept", rather than to the whole navigation row. Stretching the
+   trigger keeps the panel attached to the header/footer rule and leaves no gap when it opens. */
+@media (min-width: 960px) {
+  .nav-menu {
+    position: relative;
+    align-self: stretch;
+  }
+  .nav-menu > summary {
+    height: 100%;
+  }
+  .nav-menu-panel {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 /* Below 960px the menu has its own row, and the panel starts at its left edge. The footer's row has
    the brand above it instead of the footer's rule, so there the panel floats free of the row. */
 @media (max-width: 959px) {
-  .nav-menu-panel {
-    left: 0;
-  }
   .site-footer .nav-menu-panel {
     bottom: calc(100% + 6px);
-    left: 0;
-    right: auto;
     border-width: 2px;
     border-radius: var(--radius-card);
   }
