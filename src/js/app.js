@@ -54,6 +54,10 @@ let savedOnly =
   new URLSearchParams(location.search).get("vy") === "sparade";
 let revealedSavedFilters = false;
 let archiveSortChosen = false;
+const archivePageSize = 12;
+let archiveVisibleCount = archivePageSize;
+let archiveViewKey = "";
+let archiveItems = [];
 let activeRecipe = null;
 let toastTimer;
 
@@ -899,6 +903,49 @@ function offerMatchSort(offer) {
   }
 }
 
+function renderArchivePage(append = false) {
+  const grid = $("#recipe-grid");
+  const start = append ? grid.children.length : 0;
+  const cards = archiveItems
+    .slice(start, archiveVisibleCount)
+    .map(({ recipe, match }) => archiveCard(recipe, match))
+    .join("");
+  if (append) grid.insertAdjacentHTML("beforeend", cards);
+  else grid.innerHTML = cards;
+
+  const shown = Math.min(archiveVisibleCount, archiveItems.length);
+  const hasMore = shown < archiveItems.length;
+  $("#archive-more").hidden = !hasMore;
+  $("#archive-preview").innerHTML = hasMore
+    ? archiveItems
+        .slice(shown, shown + 3)
+        .map(({ recipe, match }) => archiveCard(recipe, match))
+        .join("")
+    : "";
+  $("#archive-page-count").textContent = `${shown} av ${archiveItems.length} recept`;
+  const label = savedOnly
+    ? `${archiveItems.length === 1 ? "sparat" : "sparade"} recept`
+    : "recept";
+  const summary = `Visar ${shown}${hasMore ? ` av ${archiveItems.length}` : ""} ${label}`;
+  const results = $("#archive-results");
+  if (results.textContent !== summary) results.textContent = summary;
+}
+
+function loadMoreArchiveRecipes(event) {
+  const grid = $("#recipe-grid");
+  const preview = $("#archive-preview");
+  const firstNew = preview.firstElementChild;
+  // Reuse the teaser cards and their loaded photos as the first cards of the next batch.
+  grid.append(...preview.children);
+  archiveVisibleCount += archivePageSize;
+  renderArchivePage(true);
+
+  const link = firstNew?.querySelector(".recipe-main-link");
+  link?.focus({ preventScroll: true });
+  // Pointer activation keeps the viewport still. Keyboard activation keeps focus in view.
+  if (event.detail === 0) link?.scrollIntoView({ block: "nearest", behavior: "instant" });
+}
+
 function renderArchive() {
   if (!archiveSearch) return;
   const query = searchKey(archiveSearch.value.trim());
@@ -941,18 +988,18 @@ function renderArchive() {
   const defaultOrder =
     words.length || activeFilters ? archiveOrders.newest : archiveOrders.random;
   items.sort(archiveOrders[archiveSort.value] ?? defaultOrder);
-  $("#recipe-grid").innerHTML = items
-    .map(({ recipe, match }) => archiveCard(recipe, match))
-    .join("");
+  // A new search, filter or sort starts at the beginning. Saving a card keeps the current depth.
+  const viewKey = JSON.stringify([
+    query, mealFilter, foodFilter, [...dietFilter].sort(), [...selectedTags].sort(),
+    difficultyFilter, quickOnly, savedOnly, archiveSort.value, [...pantryKeys].sort(),
+  ]);
+  if (viewKey !== archiveViewKey) archiveVisibleCount = archivePageSize;
+  archiveViewKey = viewKey;
+  archiveItems = items;
+  renderArchivePage();
   const noSavedRecipes = savedOnly && saved.size === 0;
   $("#empty-saved").hidden = !noSavedRecipes;
   $("#empty-search").hidden = visible.length > 0 || noSavedRecipes;
-  const results = $("#archive-results");
-  const total = savedOnly
-    ? pool.filter((recipe) => saved.has(recipe.id)).length
-    : pool.length;
-  const summary = `Visar ${visible.length}${visible.length === total ? "" : ` av ${total}`} ${savedOnly ? "sparade" : "recept"}`;
-  if (results.textContent !== summary) results.textContent = summary;
   // Point to Mer än mat when a search only finds something there, e.g. "kaffeskrubb".
   const elsewhere =
     savedOnly || !words.length
@@ -1453,6 +1500,7 @@ if (archiveSearch) {
     renderArchive();
   });
   const clearTags = setupTagPicker();
+  $("#load-more-recipes").addEventListener("click", loadMoreArchiveRecipes);
   archiveSearch.addEventListener("input", renderArchive);
   archiveSort.addEventListener("change", () => {
     archiveSortChosen = true;

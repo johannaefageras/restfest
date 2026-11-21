@@ -148,6 +148,20 @@ layout: layouts/base.njk
           <p class="recipe-tip"><b>{{ note.title }}</b> {{ note.html | safe }}</p>
           {%- endfor %}
         </section>
+        {#- A pasta dough's recipe lists the sorts that link to it (lib/pasta.js), each with its drawing,
+            like "Byt mot" on a sort's page. In the dialog the address is this page's (app.js), so the
+            links resolve from recept/ there too. #}
+        {%- set madeWith = collections.pastas | pastasMadeWith(recipe.id) %}
+        {%- if madeWith.length %}
+        <section class="recipe-pastas" aria-labelledby="pastas-heading">
+          <h2 id="pastas-heading">Sorter att göra av degen</h2>
+          <ul class="pasta-links pasta-swaps">
+            {%- for item in madeWith %}
+            <li><a href="{{ base }}pasta/{{ item.fileSlug }}.html"><img src="{{ base }}assets/icons/pasta/{{ item.fileSlug }}.svg" alt="" width="40" height="40">{{ item.data.namn }}</a></li>
+            {%- endfor %}
+          </ul>
+        </section>
+        {%- endif %}
         {%- for section in recipe.extraSections %}
         <section class="recipe-extra">
           <h2>{{ section.title }}</h2>

@@ -1,0 +1,145 @@
+// Exercise the archive renderer with a small DOM boundary: pages must keep their order, preserve
+// existing cards when expanded, and reset only when the visitor changes their search or filters.
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import vm from 'node:vm';
+import test from 'node:test';
+
+const source = readFileSync(new URL('../src/js/app.js', import.meta.url), 'utf8');
+const state = source.slice(source.indexOf('const archivePageSize ='), source.indexOf('let activeRecipe ='));
+const archive = source.slice(source.indexOf('// The archive is for food.'), source.indexOf('// mer-an-mat.html:'));
+
+function element() {
+  let html = '';
+  const node = {
+    children: [], hidden: false, value: '', textContent: '',
+    get firstElementChild() { return this.children[0] ?? null; },
+    append(...cards) { this.children.push(...cards); },
+    setAttribute() {}, querySelector: () => null,
+    insertAdjacentHTML(position, value) {
+      html += value;
+      for (const [, id] of value.matchAll(/data-id="([^"]+)"/g)) {
+        const card = {
+          id, querySelector: () => ({
+            focus: options => { card.focused = options; },
+            scrollIntoView: options => { card.scrolled = options; },
+          }),
+        };
+        node.children.push(card);
+      }
+    },
+  };
+  Object.defineProperty(node, 'innerHTML', {
+    get: () => html,
+    set(value) { html = ''; node.children = []; node.insertAdjacentHTML('beforeend', value); },
+  });
+  return node;
+}
+
+function page(count = 29) {
+  const nodes = new Map();
+  const $ = selector => {
+    if (!nodes.has(selector)) nodes.set(selector, element());
+    return nodes.get(selector);
+  };
+  const recipes = Array.from({ length: count }, (_, index) => ({
+    id: `${index + 1}-recipe`, title: `Recept ${String(index + 1).padStart(2, '0')}`,
+    meals: ['main'], foodKeys: [], tags: [], search: '', time: 10,
+    difficulty: 'Nybörjare', date: '2026-11-20',
+  }));
+  const context = vm.createContext({
+    $, recipes, archiveSearch: $('#recipe-search'), archiveSort: $('#archive-sort'),
+    savedOnly: false, saved: new Set(), quickOnly: false, mealFilter: 'all',
+    foodFilter: 'all', difficultyFilter: 'all', dietFilter: new Set(), selectedTags: new Set(),
+    revealedSavedFilters: false, archiveSortChosen: false,
+    isFood: () => true, loadPantry: () => ({ items: [] }), keyForIngredient: item => item,
+    searchKey: value => value.toLocaleLowerCase('sv-SE'), allTags: recipe => recipe.tags,
+    hasTag: (recipe, tag) => recipe.tags.includes(tag),
+    mealTypes: { main: { label: 'Huvudrätt' } }, mealName: () => 'Huvudrätt',
+    recipeTagLabels: {}, foodGroups: {},
+    archiveCard: recipe => `<article data-id="${recipe.id}"></article>`,
+    document: { querySelectorAll: () => [] },
+    window: { matchMedia: () => ({ matches: false }) },
+  });
+  context.archiveSort.value = 'title';
+  vm.runInContext(state + archive, context);
+  return {
+    $, context, grid: $('#recipe-grid'), preview: $('#archive-preview'),
+    render: () => context.renderArchive(),
+    load: (detail = 1) => context.loadMoreArchiveRecipes({ detail }),
+  };
+}
+
+test('the archive starts with 12 usable recipes and previews only the next three', () => {
+  const view = page();
+  view.render();
+  assert.equal(view.grid.children.length, 12);
+  assert.deepEqual(view.preview.children.map(card => card.id), ['13-recipe', '14-recipe', '15-recipe']);
+  assert.equal(view.$('#archive-more').hidden, false);
+  assert.equal(view.$('#archive-results').textContent, 'Visar 12 av 29 recept');
+});
+
+test('loading reuses the preview cards, preserves the viewport on click and clears the fade at the end', () => {
+  const view = page();
+  view.render();
+  const firstCard = view.grid.children[0];
+  const firstPreview = view.preview.firstElementChild;
+  view.load();
+  assert.equal(view.grid.children.length, 24);
+  assert.equal(view.grid.children[0], firstCard);
+  assert.equal(view.grid.children[12], firstPreview);
+  assert.equal(firstPreview.focused?.preventScroll, true);
+  assert.equal(firstPreview.scrolled, undefined);
+  const nextPreview = view.preview.firstElementChild;
+  view.load(0);
+  assert.equal(nextPreview.focused?.preventScroll, true);
+  assert.equal(nextPreview.scrolled?.block, 'nearest');
+  assert.equal(nextPreview.scrolled?.behavior, 'instant');
+  assert.equal(view.grid.children.length, 29);
+  assert.equal(new Set(view.grid.children.map(card => card.id)).size, 29);
+  assert.equal(view.$('#archive-more').hidden, true);
+  assert.equal(view.preview.children.length, 0);
+  assert.equal(view.$('#archive-results').textContent, 'Visar 29 recept');
+});
+
+test('saving keeps the expanded depth; changing a search, filter or sort resets it', () => {
+  const view = page();
+  view.render(); view.load();
+  view.context.saved.add('1-recipe');
+  view.render();
+  assert.equal(view.grid.children.length, 24);
+  view.context.archiveSearch.value = 'recept';
+  view.render();
+  assert.equal(view.grid.children.length, 12);
+  view.load();
+  view.context.archiveSort.value = 'newest';
+  view.render();
+  assert.equal(view.grid.children.length, 12);
+  assert.equal(view.grid.children[0].id, '29-recipe');
+  view.load();
+  view.context.quickOnly = true;
+  view.render();
+  assert.equal(view.grid.children.length, 12);
+});
+
+test('short results, empty searches and saved recipes do not leave a teaser or a more button', () => {
+  const view = page(5);
+  view.render();
+  assert.equal(view.grid.children.length, 5);
+  assert.equal(view.$('#archive-more').hidden, true);
+  view.context.archiveSearch.value = 'no match';
+  view.render();
+  assert.equal(view.grid.children.length, 0);
+  assert.equal(view.$('#empty-search').hidden, false);
+  assert.equal(view.$('#archive-more').hidden, true);
+  view.context.archiveSearch.value = '';
+  view.context.savedOnly = true;
+  view.context.revealedSavedFilters = true;
+  view.render();
+  assert.equal(view.$('#empty-saved').hidden, false);
+  view.context.saved.add('1-recipe');
+  view.render();
+  assert.equal(view.grid.children.length, 1);
+  assert.equal(view.$('#archive-results').textContent, 'Visar 1 sparat recept');
+  assert.equal(view.$('#archive-more').hidden, true);
+});

@@ -1,0 +1,111 @@
+---
+layout: layouts/base.njk
+---
+{#- The page of one pasta sort, for the Markdown files in src/pasta/ (pasta.11tydata.js; _mall.md
+    explains the fields). The dialog on pastasorter.html fetches this page and shows its .pasta-view
+    (src/js/pasta.js), so everything that belongs in both places goes inside the article, with links
+    written relative to this page. The links to the sorts before and after, under the article, are for
+    this page only.
+    The article starts with the sort's cover, a wide drawing from assets/covers/pasta/<slug>.svg, on
+    the same ground as its card on pastasorter.html. The square drawing is the card's.
+    In the article, recipe links open the recipe dialog like the recipe cards do (data-open, app.js),
+    and the "Byt mot" links open that sort in the pasta dialog (data-pasta). A sauce links to the
+    list filtered on it. -#}
+{%- set slug = page.fileSlug -%}
+{%- set swaps = collections.pastas | pastasBySlug(bytMot) -%}
+{%- set tryIn = collections.recipes | recipesById(recept) -%}
+{%- set homemade = (collections.recipes | recipesById([grundrecept]))[0] if deg == 'färsk' or deg == 'båda' -%}
+{%- set neighbours = collections.pastas | pastaNeighbours(slug) -%}
+{%- set ground = collections.pastas | pastaGround(slug) -%}
+  <main id="main" class="wrap recipe-page pasta-page">
+    <a class="text-button recipe-page-back" href="{{ base }}{{ back.path }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> {{ back.label }}</a>
+    <article class="pasta-view" data-pasta-view="{{ slug }}">
+      <div class="dialog-top pasta-view-art" data-ground="{{ ground }}">
+        <img src="{{ base }}assets/covers/pasta/{{ slug }}.svg" alt="{{ bildAlt }}" width="1672" height="941" fetchpriority="high">
+      </div>
+      <div class="dialog-main">
+        <p class="dialog-kicker"><span class="mini-badge">{{ site.name | upper | escape }} · PASTASORT</span>{% if region %}<span>{{ region }}</span>{% endif %}</p>
+        <h1 id="pasta-title" class="recipe-heading">{{ namn }}</h1>
+        {%- if alias.length %}
+        <p class="pasta-alias">Även {{ alias | join(', ') }}</p>
+        {%- endif %}
+        <p class="dialog-intro">{{ intro }}</p>
+        <dl class="recipe-facts pasta-facts">
+          <div>
+            <dt><img src="{{ base }}assets/icons/pasta/{{ pastaForms[kategori] }}.svg" alt="" width="44" height="44">Form</dt>
+            <dd>{{ kategori | capitalize }}</dd>
+          </div>
+          <div>
+            <dt><img src="{{ base }}assets/icons/timer.svg" alt="" width="44" height="44">Koktid</dt>
+            <dd>{{ {koktid: koktid, deg: deg} | cookingTime(true) | keepRanges }}</dd>
+          </div>
+          <div>
+            <dt><img src="{{ base }}assets/icons/{{ pastaDoughs[deg].icon }}.svg" alt="" width="44" height="44">Deg</dt>
+            <dd>{{ pastaDoughs[deg].label | capitalize }}</dd>
+          </div>
+        </dl>
+
+        <section class="pasta-field">
+          <h2>Namnet</h2>
+          <p>{{ namnet }}</p>
+        </section>
+        <section class="pasta-field">
+          <h2>Därför ser den ut så</h2>
+          <p>{{ funktion }}</p>
+        </section>
+        <section class="pasta-field">
+          <h2>Passar till</h2>
+          <p>{{ passarTill }}</p>
+          <ul class="recipe-tags" aria-label="Fler sorter som passar till">
+            {%- for sauce in saser %}
+            <li><a href="{{ base }}pastasorter.html?sas={{ sauce | urlencode }}">{{ (pastaSauceLabels[sauce] or sauce) | capitalize }}</a></li>
+            {%- endfor %}
+          </ul>
+        </section>
+        {%- if tryIn.length %}
+        <section class="pasta-field">
+          <h2>Prova i</h2>
+          <ul class="pasta-links">
+            {%- for recipe in tryIn %}
+            <li><a href="{{ base }}recept/{{ recipe.fileSlug }}.html" data-open="{{ recipe.fileSlug }}">{{ recipe.data.title }}</a></li>
+            {%- endfor %}
+          </ul>
+        </section>
+        {%- endif %}
+        {%- if swaps.length %}
+        <section class="pasta-field">
+          <h2>Byt mot</h2>
+          <ul class="pasta-links pasta-swaps">
+            {%- for item in swaps %}
+            <li><a href="{{ base }}pasta/{{ item.fileSlug }}.html" data-pasta="{{ item.fileSlug }}"><img src="{{ base }}assets/icons/pasta/{{ item.fileSlug }}.svg" alt="" width="40" height="40">{{ item.data.namn }}</a></li>
+            {%- endfor %}
+          </ul>
+        </section>
+        {%- endif %}
+        <p class="recipe-tip"><b>Bra att veta.</b> {{ braAttVeta }}</p>
+        <section class="pasta-field pasta-rest">
+          <h2>Rädda en rest</h2>
+          <p>{{ raddaEnRest }}</p>
+        </section>
+        {%- if content | trim %}
+        <div class="pasta-more">
+{{ content | safe }}
+        </div>
+        {%- endif %}
+        {%- if homemade %}
+        <p class="pasta-homemade"><img src="{{ base }}assets/icons/bowl-and-whisk.svg" alt="" width="36" height="36"><span>Går att göra hemma: <a href="{{ base }}recept/{{ homemade.fileSlug }}.html" data-open="{{ homemade.fileSlug }}">grundrecept på färsk äggpasta</a>.</span></p>
+        {%- endif %}
+      </div>
+    </article>
+    {%- if neighbours.previous or neighbours.next %}
+
+    <nav class="pasta-neighbours" aria-label="Fler sorter med formen {{ kategori }}">
+      {%- if neighbours.previous %}
+      <a class="text-button" href="{{ base }}pasta/{{ neighbours.previous.fileSlug }}.html" rel="prev"><i class="fas fa-arrow-left" aria-hidden="true"></i> {{ neighbours.previous.data.namn }}</a>
+      {%- endif %}
+      {%- if neighbours.next %}
+      <a class="text-button pasta-next" href="{{ base }}pasta/{{ neighbours.next.fileSlug }}.html" rel="next">{{ neighbours.next.data.namn }} <i class="fas fa-arrow-left" aria-hidden="true"></i></a>
+      {%- endif %}
+    </nav>
+    {%- endif %}
+  </main>

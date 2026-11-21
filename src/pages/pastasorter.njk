@@ -1,0 +1,126 @@
+---
+layout: layouts/base.njk
+permalink: pastasorter.html
+title: Pastasorter
+description: "Från agnolotti till ziti: vad pastasorterna heter, vilken sås som passar och vad du gör med pastan som blev över."
+back: {path: receptarkiv.html, label: Till receptarkivet}
+scripts: [pasta.js]
+---
+{#- The pasta sorts in src/pasta/, A–Ö as cards (pasta-card.njk), laid out like the recipe archive
+    (receptarkiv.njk) and built from its parts: the search with the menus beside it, a row of filter
+    buttons, the count with a menu on the right, and the cards. Without JavaScript the filter stays
+    hidden and the cards are links to the sorts' pages. With it (src/js/pasta.js) the filter narrows
+    the cards, and a card opens its sort in the dialog at the end, which shows the sort's page.
+    The choices are the values the sorts have (pastaChoices in lib/pasta.js). Their field names,
+    kategori, deg, sas and region, are also the query string (pastasorter.html?sas=soppa) and the
+    cards' data attributes. -#}
+{%- from 'pasta-card.njk' import pastaCard with context -%}
+{%- set choices = collections.pastas | pastaChoices -%}
+{#- The fresh-pasta recipe (lib/pasta.js), linked in the intro; it opens in the recipe dialog (data-open, app.js). -#}
+{%- set homemade = (collections.recipes | recipesById([pastaGrundrecept]))[0] -%}
+{#- A menu like the archive's category menu (.meal-picker): a <details> whose options are buttons, the
+    chosen one pressed. pasta.js makes them choose; `name` is the filter field. -#}
+{%- macro picker(name, label, allLabel, allIcon, options) %}
+          <div class="archive-category">
+            <p class="filter-label" id="pasta-{{ name }}-label">{{ label }}</p>
+            <details class="meal-picker" data-picker="{{ name }}">
+              <summary aria-labelledby="pasta-{{ name }}-label pasta-{{ name }}-value">
+                <img src="assets/icons/{{ allIcon }}.svg" alt="" width="24" height="24">
+                <span id="pasta-{{ name }}-value">{{ allLabel }}</span>
+                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+              </summary>
+              <div class="meal-picker-options" role="group" aria-labelledby="pasta-{{ name }}-label">
+                <button type="button" tabindex="-1" data-value="" aria-pressed="true"><img src="assets/icons/{{ allIcon }}.svg" alt="" width="24" height="24"><span>{{ allLabel }}</span><img src="assets/icons/check-mark.svg" alt="" width="16" height="16"></button>
+                {%- for option in options %}
+                <button type="button" tabindex="-1" data-value="{{ option.value }}" aria-pressed="false"><img src="assets/icons/{{ option.icon }}.svg" alt="" width="24" height="24"><span>{{ option.label | capitalize }}</span><img src="assets/icons/check-mark.svg" alt="" width="16" height="16"></button>
+                {%- endfor %}
+              </div>
+            </details>
+          </div>
+{%- endmacro -%}
+{%- set formOptions = [] -%}
+{%- for form in choices.forms %}{% set formOptions = (formOptions.push({value: form, label: form, icon: 'pasta/' + pastaForms[form]}), formOptions) %}{% endfor -%}
+{%- set doughOptions = [] -%}
+{%- for dough in choices.doughs %}{% set doughOptions = (doughOptions.push({value: dough, label: pastaDoughs[dough].label, icon: pastaDoughs[dough].icon}), doughOptions) %}{% endfor -%}
+  <main id="main" class="wrap archive-page pasta-index">
+    <section class="greeting archive-greeting" aria-labelledby="pasta-index-title">
+      <div>
+        <a class="text-button archive-back" href="{{ back.path }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> {{ back.label }}</a>
+        <h1 id="pasta-index-title"><span class="marker">Pastasorter.</span></h1>
+        <p class="greeting-intro">Vad de heter, vilken sås som passar och vad du gör med pastan som blev över. {{ collections.pastas.length }} sorter, från tunna strängar till fyllda kuddar.{% if homemade %} De flesta färska går att göra hemma, med <a href="recept/{{ homemade.fileSlug }}.html" data-open="{{ homemade.fileSlug }}">grundrecept på färsk äggpasta</a>.{% endif %}</p>
+      </div>
+      <div class="greeting-aside" aria-hidden="true">
+        <img src="assets/icons/pasta-bouquet.svg" alt="" width="104" height="160">
+      </div>
+    </section>
+
+    <section class="recipes-section archive-recipes pasta-list" aria-labelledby="pasta-list-title">
+      <h2 id="pasta-list-title" class="eyebrow">Hitta en sort</h2>
+      <form id="pasta-filter" class="archive-controls pasta-controls" role="search" aria-labelledby="pasta-list-title" hidden>
+        <div class="archive-search">
+          <label for="pasta-search">Sök på namn eller region</label>
+          <div class="archive-search-field">
+            <img src="assets/icons/magnifying-glass.svg" alt="" width="23" height="23">
+            <input id="pasta-search" name="q" type="search" placeholder="T.ex. makaroner, änglahår eller Sardinien" autocomplete="off">
+          </div>
+        </div>
+        <details class="archive-filter-panel">
+          <summary>
+            <img src="assets/icons/filter-funnel.svg" alt="" width="18" height="18">
+            <span>Filter</span>
+            <span class="archive-filter-count" hidden>0</span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+          </summary>
+          <div class="archive-filter-panel-body">
+            {{- picker('kategori', 'Form', 'Alla former', 'categories', formOptions) }}
+            {{- picker('deg', 'Deg', 'Alla degar', 'flour', doughOptions) }}
+            <div class="archive-filters">
+              <p class="filter-label" id="pasta-sas-label">Passar till</p>
+              <div class="archive-quick-filters" role="group" aria-labelledby="pasta-sas-label">
+                {%- for sauce in choices.sauces %}
+                <button class="food-filter" type="button" data-sas="{{ sauce }}" aria-pressed="false"><img src="assets/icons/{{ pastaSauces[sauce] }}.svg" alt="" width="22" height="22">{{ (pastaSauceLabels[sauce] or sauce) | capitalize }}</button>
+                {%- endfor %}
+              </div>
+            </div>
+          </div>
+        </details>
+      </form>
+      <div class="archive-results-row">
+        <p id="pasta-count" class="meta archive-results" role="status">{{ collections.pastas.length }} sorter</p>
+        <button id="pasta-reset" class="text-button pasta-reset" type="button" data-pasta-clear hidden>Rensa filtren</button>
+        <div id="pasta-region-field" class="archive-sort" hidden>
+          <label for="pasta-region">Region</label>
+          <div class="archive-sort-field">
+            <select id="pasta-region" autocomplete="off">
+              <option value="">Alla regioner</option>
+              {%- for region in choices.regions %}
+              <option>{{ region }}</option>
+              {%- endfor %}
+            </select>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+      <div id="pasta-grid" class="recipe-grid pasta-grid">
+        {%- for pasta in collections.pastas %}
+        {{ pastaCard(pasta, '') }}
+        {%- endfor %}
+      </div>
+      <div id="pasta-empty" class="empty-saved" hidden>
+        <img src="assets/icons/book-search.svg" width="52" height="52" alt="">
+        <h3>Inga träffar.</h3>
+        <p>Ingen sort passar alla valen. Prova en annan kombination.</p>
+        <button class="text-button" type="button" data-pasta-clear>Rensa filtren</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="pasta-dialog" class="pasta-dialog" aria-labelledby="pasta-title">
+    <div class="pasta-dialog-bar">
+      <button class="pasta-dialog-step" type="button" data-step="-1" aria-label="Föregående sort"><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
+      <button class="pasta-dialog-step pasta-next" type="button" data-step="1" aria-label="Nästa sort"><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
+      <a class="text-button pasta-dialog-page" href="#">Egen sida <i class="fas fa-arrow-up-right" aria-hidden="true"></i></a>
+      <button class="dialog-close" type="button" aria-label="Stäng"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div id="pasta-dialog-content"></div>
+  </dialog>

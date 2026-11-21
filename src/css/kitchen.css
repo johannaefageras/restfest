@@ -1105,6 +1105,59 @@ details[open] > summary > .fa-chevron-down {
   display: none;
 }
 
+/* A glimpse of the next row, fading into the page before the footer. The preview is inert;
+   loading more moves those recipes into the usable grid. Keep the fade on the whole row so
+   photos, borders and card backgrounds disappear together in either theme. */
+.archive-more {
+  overflow-anchor: none;
+}
+.archive-more[hidden] {
+  display: none;
+}
+.archive-page .archive-preview {
+  grid-auto-rows: max-content;
+  height: clamp(170px, 18vw, 230px);
+  margin-top: 0;
+  border-top: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(#000 0%, rgb(0 0 0 / 0.65) 32%, transparent 94%);
+  mask-image: linear-gradient(#000 0%, rgb(0 0 0 / 0.65) 32%, transparent 94%);
+}
+.archive-more-controls {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-top: -24px;
+  padding-bottom: 12px;
+}
+.archive-more-controls .text-button {
+  padding-inline: 12px;
+  font-size: var(--text-base);
+}
+.archive-page-count {
+  color: var(--muted);
+  font: var(--font-weight-body) var(--text-meta) / 1.4 var(--font-label);
+}
+@media (max-width: 699px) {
+  .archive-page .archive-preview {
+    padding-top: 11px;
+  }
+}
+@media (min-width: 421px) and (max-width: 899px) {
+  .archive-preview > :nth-child(n + 3) {
+    display: none;
+  }
+}
+@media (max-width: 420px) {
+  .archive-preview > :nth-child(n + 2) {
+    display: none;
+  }
+}
+
 .archive-card {
   min-width: 0;
   position: relative;
@@ -1173,7 +1226,7 @@ details[open] > summary > .fa-chevron-down {
 .archive-card-body .ingredient-chips {
   margin-bottom: 4px;
 }
-.archive-card:focus-within {
+.archive-card:has(:focus-visible) {
   border-color: var(--yellow);
 }
 
@@ -2367,14 +2420,18 @@ body:has(#shopping-dialog[open]) {
   color: var(--muted);
 }
 
+/* .recipe-pastas is the sorts made from a pasta dough's recipe (recipe.njk), shown as buttons like
+   "Byt mot" (.pasta-swaps). */
 .recipe-extra,
+.recipe-pastas,
 .recipe-measurements {
   margin-top: 24px;
   padding-top: 16px;
   border-top: 1px solid var(--rule);
 }
 
-.recipe-extra h2 {
+.recipe-extra h2,
+.recipe-pastas h2 {
   margin: 0 0 8px;
   font-size: 22px;
   line-height: 1.2;
@@ -4159,3 +4216,505 @@ a.dialog-save {
     height: 36px;
   }
 }
+
+/* Guides: guider/<namn>.html (layouts/guide.njk). The cards are built like the recipe cards, the
+   drawing on a coloured ground with the text below, but they aren't links, so their border doesn't
+   change on hover. A card linked to by its anchor (guider/<namn>.html#<slug>) is outlined. */
+.guide-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding-bottom: 36px;
+}
+.guide-jump .food-filter img {
+  width: 24px;
+  height: 24px;
+}
+
+.guide-section {
+  padding-bottom: 44px;
+  scroll-margin-top: 20px;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+  padding-top: 17px;
+}
+
+.guide-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  scroll-margin-top: 20px;
+}
+.guide-card:target {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 2px var(--yellow);
+}
+
+.guide-card-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  padding: 18px;
+  background: var(--pink);
+  border-bottom: 1px solid var(--line);
+}
+.guide-card:nth-child(3n + 2) .guide-card-art {
+  background: var(--lavender);
+}
+.guide-card:nth-child(3n + 3) .guide-card-art {
+  background: var(--sage);
+}
+/* Placed, not in the flow, so drawings of different proportions leave every card the same height. */
+.guide-card-art > img {
+  position: absolute;
+  inset: 12% 15%;
+  width: 70%;
+  height: 76%;
+  object-fit: contain;
+  transform: rotate(-6deg);
+}
+.guide-card:nth-child(even) .guide-card-art > img {
+  transform: rotate(5deg);
+}
+/* The card's number, like the time on a recipe card, in the other corner. */
+.guide-card-number {
+  position: absolute;
+  top: 11px;
+  left: 12px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  padding: 4px 7px;
+  font-family: var(--font-label);
+  font-size: var(--text-tag);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+}
+
+.guide-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 15px 15px;
+}
+.guide-card-body h3 {
+  font-size: 22px;
+  line-height: 1.15;
+}
+.guide-card-meta {
+  margin-top: -3px;
+  font: var(--font-weight-body) var(--text-meta) / 1.4 var(--font-label);
+  font-feature-settings: var(--spot-features);
+  color: var(--muted);
+}
+.guide-card-text {
+  font-size: var(--text-small);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.guide-card-fact {
+  padding: 9px 11px;
+  font-size: var(--text-ui);
+  line-height: 1.45;
+  background: var(--cream);
+  border-radius: var(--radius-button);
+}
+/* Pushed to the bottom, so the links line up across a row of cards. */
+.guide-card-recipes {
+  margin-top: auto;
+  padding-top: 4px;
+}
+.guide-card-recipes .eyebrow {
+  margin-bottom: 6px;
+  color: var(--muted);
+}
+.guide-card-recipes ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.guide-card-recipes a,
+.guide-article a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.guide-card-recipes a {
+  font-size: var(--text-ui);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.35;
+}
+
+/* The guide's Markdown body, between the cards and the recipes. */
+.guide-article {
+  max-width: 680px;
+  padding-bottom: 36px;
+}
+.guide-article h2 {
+  margin: 0 0 12px;
+}
+.guide-article h2:not(:first-child) {
+  margin-top: 34px;
+}
+.guide-article p,
+.guide-article li {
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.guide-article p + p,
+.guide-article ul + p {
+  margin-top: 12px;
+}
+.guide-article ul {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding-left: 20px;
+}
+.guide-article strong,
+.guide-article a {
+  color: var(--ink);
+}
+
+.guide-recipes {
+  padding-top: 24px;
+  padding-bottom: 56px;
+}
+.guide-recipes > .eyebrow {
+  margin: 8px 0 0;
+}
+
+@media (max-width: 1099px) {
+  .guide-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 799px) {
+  .guide-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Phones: one card per row, the drawing in a narrow column beside the text. */
+@media (max-width: 519px) {
+  .guide-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .guide-card {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+  }
+  .guide-card-art {
+    aspect-ratio: auto;
+    place-items: start center;
+    padding: 40px 10px 12px;
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+  .guide-card-art > img {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+  .guide-card-number {
+    top: 10px;
+    left: 10px;
+  }
+  .guide-card-body {
+    padding: 12px 12px 13px;
+  }
+  .guide-card-body h3 {
+    font-size: 20px;
+  }
+}
+
+/* Pasta sorts: pastasorter.html (pages/pastasorter.njk) lists them as cards (pasta-card.njk), and a
+   card opens its sort in a dialog (src/js/pasta.js) that shows the sort's page, pasta/<slug>.html
+   (layouts/pasta.njk). The list is built from the archive's parts (.archive-controls, .meal-picker,
+   .archive-quick-filters, .archive-results-row, .recipe-grid, .archive-card), and the sort from the
+   recipe's (.dialog-top, .dialog-main, .dialog-kicker, .recipe-facts, .recipe-tags, .recipe-tip). */
+
+.pasta-index .greeting-aside {
+  align-self: center;
+  margin-top: 0;
+}
+
+.pasta-index .greeting-aside > img {
+  width: auto;
+  height: clamp(120px, 13vw, 160px);
+}
+
+/* Two menus beside the search, Form and Deg, where the archive has one; the sauces are the row of
+   buttons below them. */
+@media (min-width: 900px) {
+  .archive-controls.pasta-controls {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 260px) minmax(0, 260px);
+  }
+}
+
+/* The count, "Rensa filtren" beside it when something is chosen, and the region menu on the right. */
+.pasta-list .archive-results-row {
+  justify-content: flex-start;
+}
+.pasta-reset {
+  min-height: 0;
+  padding-block: 4px;
+  font-size: var(--text-ui);
+}
+
+/* Four cards across on wide screens: they hold less than a recipe card. */
+.archive-page .recipe-grid.pasta-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-bottom: 56px;
+}
+@media (max-width: 1099px) {
+  .archive-page .recipe-grid.pasta-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 899px) {
+  .archive-page .recipe-grid.pasta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 420px) {
+  .archive-page .recipe-grid.pasta-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* The drawings are yellow, so their grounds are pink, lavender and sage, not the archive's butter. */
+.pasta-card:nth-child(3n + 1) .pasta-card-art {
+  background: var(--pink);
+}
+.pasta-card:nth-child(3n + 2) .pasta-card-art {
+  background: var(--lavender);
+}
+.pasta-card:nth-child(3n + 3) .pasta-card-art {
+  background: var(--sage);
+}
+/* Placed, not in the flow, like the guide cards' drawings, so every card's ground keeps the archive's
+   16:9 whatever the drawing's proportions. */
+.pasta-card-art > img {
+  position: absolute;
+  inset: 11% 12%;
+  width: 76%;
+  height: 78%;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+.pasta-card:nth-child(even) .pasta-card-art > img {
+  transform: rotate(5deg);
+}
+.pasta-card:hover .pasta-card-art > img {
+  transform: rotate(0deg) scale(1.06);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pasta-card-art > img {
+    transition: none;
+  }
+}
+.pasta-card .archive-meal-type img {
+  object-fit: contain;
+}
+
+/* The dialog: a bar that stays at the top while the sort scrolls, with the arrows to the sorts before
+   and after, the link to the sort's own page and the close button. */
+.pasta-dialog-bar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: var(--surface);
+  border-bottom: 1.5px solid var(--line);
+}
+.pasta-dialog-bar .dialog-close {
+  position: static;
+}
+.pasta-dialog-step {
+  min-width: 38px;
+  min-height: 38px;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-button);
+  background: var(--surface);
+}
+.pasta-dialog-step:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.pasta-dialog-page {
+  min-height: 38px;
+  margin-inline-start: auto;
+  padding-block: 0;
+  font-size: var(--text-ui);
+}
+/* The icon set has no arrow to the right, so "next" turns the left one round. */
+.pasta-next .fa-arrow-left {
+  transform: scaleX(-1);
+}
+
+/* A sort, on its own page (framed like a recipe's page) and in the dialog. It opens with its cover, a
+   wide pattern of the pasta across the whole width, on its card's ground (data-ground, from
+   pastaGround in lib/pasta.js), cut to a band like a recipe's photo (.dialog-top.has-photo). */
+.recipe-page .pasta-view {
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.dialog-top.pasta-view-art {
+  display: block;
+  height: auto;
+  background: var(--pink);
+}
+.pasta-view-art[data-ground="lavender"] {
+  background: var(--lavender);
+}
+.pasta-view-art[data-ground="sage"] {
+  background: var(--sage);
+}
+.dialog-top.pasta-view-art > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1672 / 941;
+  max-height: 280px;
+  object-fit: cover;
+  transform: none;
+}
+.pasta-view .recipe-heading {
+  margin: 13px 0 14px;
+  font-size: clamp(28px, 3.4vw, 36px);
+  line-height: 1.08;
+  letter-spacing: var(--track-display-lg);
+}
+.pasta-alias {
+  margin: -6px 0 14px;
+  font: var(--font-weight-body) var(--text-meta) / 1.4 var(--font-label);
+  font-feature-settings: var(--spot-features);
+  color: var(--muted);
+}
+.recipe-facts.pasta-facts {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pasta-field {
+  margin-top: 24px;
+}
+/* The field names, as eyebrows. .dialog-main h2 would make them recipe titles. */
+.pasta-view .pasta-field > h2 {
+  margin: 0 0 6px;
+  font-family: var(--font-label);
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--track-label);
+  line-height: 1.3;
+  text-transform: uppercase;
+  font-feature-settings: var(--caps-features);
+  color: var(--muted);
+}
+.pasta-field p,
+.pasta-more p {
+  max-width: 680px;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.pasta-more p {
+  margin-top: 12px;
+}
+.pasta-field .recipe-tags {
+  margin-top: 10px;
+}
+
+.pasta-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pasta-links a,
+.pasta-homemade a {
+  font-weight: var(--font-weight-medium);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* "Byt mot": each sort with its drawing, as a small button. */
+.pasta-links.pasta-swaps {
+  gap: 8px;
+}
+.pasta-swaps a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 4px 12px 4px 6px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-button);
+  text-decoration: none;
+}
+.pasta-swaps a:hover {
+  border-color: var(--ink);
+}
+.pasta-swaps img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Rädda en rest is what the site is for, so it gets a ground of its own. */
+.pasta-view .recipe-tip {
+  margin-top: 26px;
+}
+.pasta-field.pasta-rest {
+  padding: 14px 16px 15px;
+  background: var(--green-pale);
+  border-radius: var(--radius-card);
+}
+
+.pasta-homemade {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+.pasta-homemade img {
+  flex-shrink: 0;
+}
+
+/* Under a sort's own page: the sorts before and after with the same form. */
+.pasta-neighbours {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 14px;
+}
+.pasta-neighbours .pasta-next {
+  margin-inline-start: auto;
+}
+

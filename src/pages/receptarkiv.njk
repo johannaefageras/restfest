@@ -97,6 +97,13 @@ description: Hitta något att laga i receptarkivet på Ofta bra efter och samla 
         </div>
         <p id="archive-elsewhere" class="meta archive-elsewhere" hidden></p>
         <div id="recipe-grid" class="recipe-grid"></div>
+        <div id="archive-more" class="archive-more" hidden>
+          <div id="archive-preview" class="recipe-grid archive-preview" aria-hidden="true" inert></div>
+          <div class="archive-more-controls">
+            <button id="load-more-recipes" class="text-button" type="button" aria-controls="recipe-grid">Visa fler recept</button>
+            <p id="archive-page-count" class="archive-page-count"></p>
+          </div>
+        </div>
         <div id="empty-saved" class="empty-saved" hidden>
           <img src="assets/icons/heart.svg" width="52" height="52" alt="">
           <h3>Inga sparade recept än.</h3>

@@ -90,6 +90,7 @@ The home page includes `WebSite` structured data for the site's name, address, d
 | --- | --- |
 | [src/pages/](src/pages/) | Page templates, listing pages, sitemap and generated browser-data templates. |
 | [src/recept/](src/recept/) | One Markdown file per archive recipe. |
+| [src/pasta/](src/pasta/) | One Markdown file per pasta sort, listed on `pastasorter.html`. |
 | [src/_includes/](src/_includes/) | Shared layouts, recipe cards, account navigation and shopping-list markup. |
 | [src/_data/](src/_data/) | Site settings, Supabase settings and the food catalogue. |
 | [src/js/](src/js/) | Browser behaviour and the shared taxonomy in `recipes.js`. |
@@ -168,6 +169,16 @@ npm run promote -- "<recipe-uuid-or-url>"
 Replace the argument with its UUID or full `nytt-recept.html?id=…` URL. The script fetches the recipe, assigns the next number and today's Stockholm date, and saves the Markdown and photo locally. Review both before publishing.
 
 The script optionally reads `SUPABASE_SECRET_KEY` from the local, ignored `.env` file. With that key, it also marks the stored recipe as promoted so its generated page links to the archive version. Without it, the script explains how to set `promoted_as` manually.
+
+## Add or edit pasta sorts
+
+`pastasorter.html` lists the pasta sorts as cards with a filter, and a card opens the sort in a dialog. Each sort also has its own page, `pasta/<slug>.html`, which the dialog shows.
+
+1. Copy [src/pasta/_mall.md](src/pasta/_mall.md) to `src/pasta/<slug>.md`. The template explains every field; the build skips the template itself.
+2. Put the square drawing for its card in `src/assets/icons/pasta/<slug>.svg`, 512 × 512, and the wide cover for its page in `src/assets/covers/pasta/<slug>.svg`, about 1672 × 941.
+3. `bytMot` names other sorts by slug, and the optional `recept` names archive recipes by file name. Run `npm test`: it reports unknown values, missing drawings or covers and links to sorts or recipes that don't exist.
+
+The allowed forms, sauces and doughs are in [lib/pasta.js](lib/pasta.js). Fresh sorts link to the recipe named `grundrecept` in [src/pasta/pasta.11tydata.js](src/pasta/pasta.11tydata.js).
 
 ## Supabase and AI features
 

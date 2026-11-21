@@ -1,0 +1,24 @@
+{#- A pasta sort's card on pastasorter.html, built like the recipe cards in the archive (recipe-card.njk):
+    the drawing on a coloured ground with the cooking time in the corner, then the form and region,
+    the name, the intro and the sauces. The name links to the sort's page and covers the whole card
+    (.recipe-main-link); src/js/pasta.js opens the sort in the dialog instead.
+    The data attributes are what the filter and the search compare (pasta.js): data-kategori, -sas,
+    -deg and -region are named after the filter's fields, which are also the query string, and
+    data-search holds the name, the other names and the region. data-sas and data-deg are lists,
+    separated by spaces: a sort sold both fresh and dried is both. `pasta` is an item of
+    collections.pastas. -#}
+{%- macro pastaCard(pasta, base) -%}
+{%- set d = pasta.data -%}
+<article class="archive-card pasta-card" data-slug="{{ pasta.fileSlug }}" data-kategori="{{ d.kategori }}" data-sas="{{ d.saser | join(' ') }}" data-deg="{{ d.deg | filterDoughs | join(' ') }}" data-region="{{ d.region or '' }}" data-search="{{ d.namn }}{% for name in d.alias %} {{ name }}{% endfor %}{% if d.region %} {{ d.region }}{% endif %}">
+          <div class="archive-card-art pasta-card-art">
+            <img src="{{ base }}assets/icons/pasta/{{ pasta.fileSlug }}.svg" alt="" width="512" height="512" loading="lazy" decoding="async">
+            <span class="archive-time">{{ d | cookingTime | keepRanges }}</span>
+          </div>
+          <div class="archive-card-body">
+            <p class="archive-meal-type"><img src="{{ base }}assets/icons/pasta/{{ pastaForms[d.kategori] }}.svg" alt="" width="20" height="20">{{ d.kategori | capitalize }}{% if d.region %} · {{ d.region }}{% endif %}</p>
+            <h3><a class="recipe-main-link" href="{{ base }}pasta/{{ pasta.fileSlug }}.html" data-pasta="{{ pasta.fileSlug }}">{{ d.namn }}</a></h3>
+            <p class="archive-description">{{ d.intro }}</p>
+            <div class="ingredient-chips">{% for sauce in d.saser %}<span>{{ (pastaSauceLabels[sauce] or sauce) | capitalize }}</span>{% endfor %}</div>
+          </div>
+        </article>
+{%- endmacro %}

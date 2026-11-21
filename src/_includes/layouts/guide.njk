@@ -1,0 +1,89 @@
+---
+layout: layouts/base.njk
+---
+{#- The layout for the guides in src/guider/ (src/guider/guider.11tydata.js describes the front matter):
+    a title, links to the sections, the cards section by section, the Markdown body, and last the
+    archive's recipes that use the guide's foodKeys. `cards` is `sections` with the cards numbered.
+    The cards' recipe links open the recipe dialog like the recipe cards do (data-open, app.js). -#}
+{%- from 'recipe-card.njk' import recipeCard -%}
+{%- set guideRecipes = collections.recipes | recipesUsing(foodKeys) -%}
+  <main id="main" class="wrap archive-page guide-page">
+    <section class="greeting archive-greeting" aria-labelledby="guide-title">
+      <div>
+        <a class="text-button archive-back" href="{{ base }}{{ back.path }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> {{ back.label }}</a>
+        <h1 id="guide-title"><span class="marker">{{ heading }}.</span></h1>
+        <p class="greeting-intro">{{ intro }}</p>
+      </div>
+      <div class="greeting-aside" aria-hidden="true">
+        <div class="doodle-lineup">
+          {%- for slug in lineup %}
+          <img src="{{ base }}{{ imageDir }}{{ slug }}.svg" alt="" width="60" height="60">
+          {%- endfor %}
+        </div>
+      </div>
+    </section>
+
+    <nav class="guide-jump" aria-label="Avsnitt">
+      {%- for section in cards %}
+      <a class="food-filter" href="#{{ section.id }}"><img src="{{ base }}{{ imageDir }}{{ section.icon }}.svg" alt="" width="24" height="24">{{ section.title }}</a>
+      {%- endfor %}
+      {%- if guideRecipes.length %}
+      <a class="food-filter" href="#recept"><img src="{{ base }}assets/icons/cook-book.svg" alt="" width="24" height="24">Recept</a>
+      {%- endif %}
+    </nav>
+
+    {%- for section in cards %}
+
+    <section class="guide-section" id="{{ section.id }}" aria-labelledby="{{ section.id }}-title">
+      <h2 id="{{ section.id }}-title" class="more-heading"><img src="{{ base }}{{ imageDir }}{{ section.icon }}.svg" alt="" width="32" height="32"><span>{{ section.title }}</span></h2>
+      <p class="more-intro">{{ section.intro }}</p>
+      <div class="guide-grid">
+        {%- for item in section.items %}
+        <article class="guide-card" id="{{ item.slug }}" aria-labelledby="{{ item.slug }}-name">
+          <div class="guide-card-art">
+            <img src="{{ base }}{{ imageDir }}{{ item.slug }}.svg" alt="" width="160" height="150" loading="lazy" decoding="async">
+            <span class="guide-card-number" aria-hidden="true">{{ item.number }}</span>
+          </div>
+          <div class="guide-card-body">
+            <h3 id="{{ item.slug }}-name">{{ item.name }}</h3>
+            {%- if item.meaning or item.region %}
+            <p class="guide-card-meta">{{ item.meaning }}{% if item.meaning and item.region %} · {% endif %}{{ item.region }}</p>
+            {%- endif %}
+            <p class="guide-card-text">{{ item.text }}</p>
+            {%- if item.fact %}
+            <p class="guide-card-fact"><strong>Bra att veta.</strong> {{ item.fact }}</p>
+            {%- endif %}
+            {%- set links = collections.recipes | recipesById(item.recipes) %}
+            {%- if links.length %}
+            <div class="guide-card-recipes">
+              <p class="eyebrow">Prova i</p>
+              <ul>
+                {%- for recipe in links %}
+                <li><a href="{{ base }}recept/{{ recipe.fileSlug }}.html" data-open="{{ recipe.fileSlug }}">{{ recipe.data.title }}</a></li>
+                {%- endfor %}
+              </ul>
+            </div>
+            {%- endif %}
+          </div>
+        </article>
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endfor %}
+
+    <article class="guide-article">
+{{ content | safe }}
+    </article>
+    {%- if guideRecipes.length %}
+
+    <section class="recipes-section archive-recipes guide-recipes" id="recept" aria-labelledby="guide-recipes-title">
+      <h2 id="guide-recipes-title">{{ recipesHeading }}</h2>
+      <p class="eyebrow">{{ guideRecipes.length }} recept</p>
+      <div class="recipe-grid">
+        {%- for item in guideRecipes %}
+        {{ recipeCard(item.data.recipe.card, base) }}
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endif %}
+  </main>

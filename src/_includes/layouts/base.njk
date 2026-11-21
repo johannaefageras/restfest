@@ -26,7 +26,7 @@
 {%- set shareImageAlt = shareImage.alt or shareTitle -%}
 {%- set shareImageUrl = site.absolute(shareImage.path) if shareImage.path else null -%}
 {%- set canonicalUrl = site.absolute(page.url) if not noindex else null -%}
-{%- set searchStructuredData = page.url | pageStructuredData(site, title, recipe.back or listing.back, noindex) -%}
+{%- set searchStructuredData = page.url | pageStructuredData(site, title, recipe.back or listing.back or back, noindex) -%}
 {#- The home page links to its own sections; the other pages link to the home page. -#}
 {%- set homeUrl = '' if isHome else (base or './') -%}
 {#- The "Recept" menu, in the header (opens downwards) and the footer (opens upwards): one entry per
@@ -200,6 +200,8 @@
       <nav aria-label="Sidfot">
         {{- recipeMenu(collections.recipeTypes, base, page.url, inRecipes, false) }}
         <a class="nav-link" href="{{ homeUrl }}#sa-funkar-det">Så funkar det</a>
+        {#- The pasta sorts (src/pages/pastasorter.njk), marked as the current page on a sort's own page too. #}
+        <a class="nav-link" href="{{ base }}pastasorter.html"{% if page.url == '/pastasorter.html' or page.url.startsWith('/pasta/') %} aria-current="page"{% endif %}>Pastasorter</a>
         {%- if ai.accounts %}
         <a class="nav-link" href="{{ base }}integritet.html"{% if page.url == '/integritet.html' %} aria-current="page"{% endif %}>Integritet</a>
         {%- endif %}

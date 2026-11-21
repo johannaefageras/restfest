@@ -7,7 +7,11 @@
 //   pages/             the page templates (*.njk). Each sets its own `permalink`, as the folder name
 //                      isn't part of the address: pages/receptarkiv.njk builds receptarkiv.html
 //   recept/            the recipes, one Markdown file each
-//   _includes/layouts/ base.njk (every page shares it), recipe.njk and listing.njk
+//   guider/            the guides (tips, facts and collectible cards), one Markdown file each:
+//                      see guider/guider.11tydata.js
+//   pasta/             the pasta sorts, one Markdown file each, listed on pastasorter.html: see
+//                      pasta/pasta.11tydata.js and pasta/_mall.md
+//   _includes/layouts/ base.njk (every page shares it), recipe.njk, listing.njk, guide.njk and pasta.njk
 //   _includes/         snippets the layouts include, e.g. recipe-card.njk
 //   _data/             foods.json (the ingredient list, divided between two files: lib/foods.js), site.js (the site's address) and ai.js (the
 //                      Supabase project behind the fridge photo and the new recipes)
@@ -23,14 +27,16 @@
 //   recipeCategories   the food categories, for kategori/<slug>.html (src/pages/kategori.njk)
 //   recipeTypes        Mat, Hemmaspa, Hushåll & rengöring and Husdjur, for typ/<slug>.html (src/pages/typ.njk)
 //   recipeTags         every tag, for tagg/<slug>.html (src/pages/tagg.njk)
+//   pastas             every pasta sort, A–Ö by name (lib/pasta.js)
 // Eleventy also makes a collection per tag from the recipes' `tags`, e.g. collections.Vegan.
 
-import {otherFoods, recipeFoods} from './lib/foods.js';
+import {otherFoods, recipeFoodKeys, recipeFoods} from './lib/foods.js';
 import {recipeListings} from './lib/recipes.js';
 import {taxonomy} from './lib/taxonomy.js';
 import ai from './src/_data/ai.js';
 import {shoppingDepartmentNames} from './lib/shopping-departments.js';
 import {pageStructuredData} from './lib/metadata.js';
+import {cookingTime, doughs, filterDoughs, forms, freshPastaRecipe, pastaChoices, pastaGround, pastaNeighbours, pastasBySlug, pastasMadeWith, sauceLabels, sauces, sortPastas} from './lib/pasta.js';
 
 const recipes = api => api.getFilteredByGlob('src/recept/*.md')
   .sort((a, b) => parseInt(a.fileSlug, 10) - parseInt(b.fileSlug, 10));
@@ -44,6 +50,8 @@ export default function (eleventyConfig) {
   if (!ai.accounts) {
     for (const page of accountPages) eleventyConfig.ignores.add(`src/pages/${page}.njk`);
   }
+  // The template for a new pasta sort, not a sort of its own.
+  eleventyConfig.ignores.add('src/pasta/_mall.md');
 
   // Copied to _site/ as they are.
   eleventyConfig.addPassthroughCopy('src/assets');
@@ -77,6 +85,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection('recipeCategories', api => recipeListings(recipes(api)).categories);
   eleventyConfig.addCollection('recipeTypes', api => recipeListings(recipes(api)).types);
   eleventyConfig.addCollection('recipeTags', api => recipeListings(recipes(api)).tags);
+  eleventyConfig.addCollection('pastas', api => sortPastas(api.getFilteredByGlob('src/pasta/*.md')));
 
   // foods.json divided between data/recipe-index.js (the foods the recipes use, on every page) and
   // data/foods.js (the rest of the food list, on the pages that need it). `items` is collections.recipes.
@@ -85,6 +94,32 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('otherFoods', (foods, items) => otherFoods(foods, frontMatter(items), taxonomy()));
   eleventyConfig.addFilter('shoppingDepartmentNames', foods => shoppingDepartmentNames({...foods, ...taxonomy().foods}));
   eleventyConfig.addFilter('pageStructuredData', pageStructuredData);
+
+  // For the guides (layouts/guide.njk, src/guider/): the recipes that use any of a guide's foodKeys,
+  // in id order, and the recipes a card names by id, in the order given. `items` is collections.recipes.
+  eleventyConfig.addFilter('recipesUsing', (items, keys = []) =>
+    items.filter(item => [...recipeFoodKeys([item.data])].some(key => keys.includes(key))));
+  eleventyConfig.addFilter('recipesById', (items, ids = []) =>
+    ids.map(id => items.find(item => item.fileSlug === id)).filter(Boolean));
+
+  // For the pasta sorts (lib/pasta.js): the index page's filter choices and the doughs a sort counts
+  // as there, the sorts a page names in bytMot, the sorts before and after one of the same form, the
+  // ground behind a sort's cover, and the cooking time as it is shown. `items` is collections.pastas.
+  eleventyConfig.addFilter('pastaChoices', pastaChoices);
+  eleventyConfig.addFilter('filterDoughs', filterDoughs);
+  eleventyConfig.addFilter('pastasBySlug', pastasBySlug);
+  eleventyConfig.addFilter('pastaNeighbours', pastaNeighbours);
+  eleventyConfig.addFilter('pastaGround', pastaGround);
+  eleventyConfig.addFilter('cookingTime', cookingTime);
+  // On a recipe's page: the fresh sorts whose grundrecept it is.
+  eleventyConfig.addFilter('pastasMadeWith', pastasMadeWith);
+  // The forms, sauces and doughs with their icons (lib/pasta.js), for the filter and a sort's page.
+  eleventyConfig.addGlobalData('pastaForms', forms);
+  eleventyConfig.addGlobalData('pastaSauces', sauces);
+  eleventyConfig.addGlobalData('pastaSauceLabels', sauceLabels);
+  eleventyConfig.addGlobalData('pastaDoughs', doughs);
+  // The fresh-pasta recipe's id, for the link in pastasorter.html's intro.
+  eleventyConfig.addGlobalData('pastaGrundrecept', freshPastaRecipe);
 
   // Keeps a range like "1–3" or "15–20" on one line: a word joiner (U+2060) either side of the dash
   // stops the browser breaking there. For the narrow boxes under a recipe's description (recipe.njk).
