@@ -33,8 +33,8 @@ const cardPhotoSizes =
 const squareIconPath = (name) => assetUrl(`assets/icons/${name}.svg`);
 const squareIcon = (name, size = 22) =>
   `<img src="${squareIconPath(name)}" alt="" width="${size}" height="${size}">`;
-// Small UI icons from icons.css (see tools/icons.mjs). Arrows, chevrons and close buttons use the bold
-// weight (fas), which matches the label font's strokes; far is the regular weight.
+// Small UI icons from css/icons.css, which says how to add one. Arrows, chevrons and close buttons
+// use the bold weight (fas), which matches the label font's strokes; far is the regular weight.
 const faIcon = (name, weight = "fas") =>
   `<i class="${weight} fa-${name}" aria-hidden="true"></i>`;
 // The save heart: an outline (regular) when not saved, filled (bold) when saved.
@@ -458,8 +458,8 @@ function updateShoppingButtons() {
     button.title = added
       ? "Ta bort från inköpslistan"
       : "Lägg till i inköpslistan";
-    // A grey plus to add it; a check once it's on the list.
-    $("i", button).className = `fas fa-${added ? "check" : "plus"}`;
+    // A grey plus to add it; a basket once it's on the list.
+    $("i", button).className = `fas fa-${added ? "basket-shopping" : "plus"}`;
   });
   document.querySelectorAll(".recipe-view").forEach(updateMissingButton);
 }

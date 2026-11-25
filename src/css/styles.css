@@ -763,13 +763,15 @@ dialog::backdrop {
   padding: 0;
   margin: 0;
 }
+/* The text starts 33px in: the 24px number badge and a 9px gap. The bulleted lists after the steps
+   share that edge (.recipe-extra li in kitchen.css). */
 .directions li {
-  max-width: calc(68ch + 28px);
+  max-width: calc(68ch + 33px);
   font-size: var(--text-base);
   line-height: 1.6;
   color: var(--ink-soft);
   position: relative;
-  padding: 0 0 17px 28px;
+  padding: 0 0 17px 33px;
   counter-increment: recipe-step;
 }
 .directions li:before {
@@ -779,11 +781,15 @@ dialog::backdrop {
   top: 0;
   background: var(--yellow);
   border-radius: 3px;
-  min-width: 19px;
+  /* One width for every number, wide enough for two digits in Trio (10 is the widest, about 20px). */
+  width: 24px;
   height: 21px;
   display: grid;
   place-items: center;
-  font-family: var(--font-label);
+  /* Trio, so its features (--display-features): the inherited ss01 would circle the digits. */
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-medium);
+  font-feature-settings: var(--display-features);
   font-size: var(--text-tag);
   color: var(--ink);
 }

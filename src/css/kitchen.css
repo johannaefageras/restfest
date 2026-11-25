@@ -1632,8 +1632,8 @@ details[open] > summary > .fa-chevron-down {
 
 /* The checkboxes in a recipe's ingredient list and in the shopping list (both .ingredients). They match
    the + buttons at the other end of the row: grey 1.5px border and uneven corners, ink on hover. Checked,
-   they fill yellow like the step numbers, with an ink tick that springs in. Yellow keeps them apart from
-   the green "on the shopping list" state of the + button. The tick is a background image, so it only
+   they fill green (--green-strong), with an ink tick that springs in. The + button's "on the shopping
+   list" state is yellow, so the two ends of the row don't look alike. The tick is a background image, so it only
    animates on a change, not when the shopping list is drawn with items already checked. */
 .ingredients input[type="checkbox"] {
   appearance: none;
@@ -1659,7 +1659,7 @@ details[open] > summary > .fa-chevron-down {
 
 .ingredients input[type="checkbox"]:checked {
   border-color: var(--ink);
-  background-color: var(--yellow);
+  background-color: var(--green-strong);
   background-size: 14px 14px;
 }
 
@@ -1678,6 +1678,9 @@ details[open] > summary > .fa-chevron-down {
   flex: none;
   width: 36px;
   height: 36px;
+  /* No browser padding: an icon wider than the space it leaves (the basket) would start at its left
+     edge instead of being centred. */
+  padding: 0;
   border: 1.5px solid var(--control);
   border-radius: var(--radius-button);
   background: var(--surface);
@@ -1689,9 +1692,10 @@ details[open] > summary > .fa-chevron-down {
   border-color: var(--ink);
   background: var(--well);
 }
+/* On the shopping list: yellow, so it doesn't look like the green ticked checkbox at the row's other end. */
 .shopping-add[aria-pressed="true"] {
   border-color: var(--ink);
-  background: var(--green);
+  background: var(--yellow);
 }
 /* The add button stays quiet beside the ingredient list: smaller, with a grey plus that turns ink on hover. */
 .shopping-add {
@@ -2556,18 +2560,18 @@ body:has(#shopping-dialog[open]) {
 }
 
 /* The bullets echo the yellow step numbers above them (.directions li:before in styles.css): a small
-   yellow square with the site's uneven corners, centred under the number badges, with the same 28px
-   indent so both lists share a text edge. The ul has role="list", since Safari drops list semantics
+   yellow square with the site's uneven corners, centred under the 24px number badges, with the same
+   33px indent so both lists share a text edge. The ul has role="list", since Safari drops list semantics
    from lists without list-style. */
 .recipe-extra li {
   position: relative;
-  padding-inline-start: 28px;
+  padding-inline-start: 33px;
 }
 
 .recipe-extra li::before {
   content: "";
   position: absolute;
-  inset-inline-start: 6px;
+  inset-inline-start: 8px;
   top: calc(1.6em / 2 - 4px);
   width: 8px;
   height: 8px;
@@ -4902,9 +4906,10 @@ a.dialog-save {
   }
 }
 
-/* The link to a base recipe under the greeting: the box a fresh pasta sort has, without its rule. */
+/* The link to a base recipe under the greeting: the box a fresh pasta sort has, without its rule,
+   and with the greeting's space below (.archive-page .archive-greeting) between it and "Hitta en tårta". */
 .pasta-homemade.cake-base {
-  margin-top: 0;
+  margin: 0 0 26px;
   padding-top: 0;
   border-top: 0;
 }

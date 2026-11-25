@@ -168,7 +168,7 @@ layout: layouts/base.njk
         {%- set cakesWith = collections.cakes | cakesMadeWith(recipe.id) %}
         {%- if cakesWith.length %}
         <section class="recipe-pastas recipe-cakes" aria-labelledby="cakes-heading">
-          <h2 id="cakes-heading">Tårtor att bygga på den</h2>
+          <h2 id="cakes-heading">Tårtor att bygga på dem</h2>
           <ul class="pasta-links pasta-swaps">
             {%- for item in cakesWith %}
             <li><a href="{{ base }}recept/{{ item.fileSlug }}.html" data-open="{{ item.fileSlug }}"><img src="{{ base }}{{ item.data.recipe.cardImage | webp }}" alt="" width="40" height="40">{{ item.data.tarta.namn }}</a></li>

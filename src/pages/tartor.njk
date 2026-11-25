@@ -37,7 +37,7 @@ scripts: [tartor.js]
     </section>
     {%- for entry in bases %}
 
-    <p class="pasta-homemade cake-base"><img src="assets/icons/{{ cakeParts[entry.part].icon }}.svg" alt="" width="36" height="36"><span>{{ entry.label }} finns i {{ collections.cakes | cakesMadeWith(entry.recipe.fileSlug) | length }} av tårtorna. Börja med bottnen: <a href="recept/{{ entry.recipe.fileSlug }}.html" data-open="{{ entry.recipe.fileSlug }}">{{ entry.recipe.data.title }}</a>.</span></p>
+    <p class="pasta-homemade cake-base"><img src="assets/icons/{{ cakeParts[entry.part].icon }}.svg" alt="" width="36" height="36"><span>{{ entry.label }} finns i {{ collections.cakes | cakesMadeWith(entry.recipe.fileSlug) | length }} av tårtorna. Börja med grundreceptet: <a href="recept/{{ entry.recipe.fileSlug }}.html" data-open="{{ entry.recipe.fileSlug }}">{{ entry.recipe.data.title }}</a>.</span></p>
     {%- endfor %}
 
     <section class="recipes-section archive-recipes pasta-list cake-list" aria-labelledby="cake-list-title">
