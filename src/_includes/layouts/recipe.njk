@@ -18,7 +18,8 @@ layout: layouts/base.njk
           {%- if srcset %} srcset="{{ srcset }}" sizes="(min-width: 860px) 810px, 100vw"{% endif %} alt="{{ recipe.alt }}" width="1200" height="675" fetchpriority="high">
       </div>
       <div class="dialog-main">
-        <p class="dialog-kicker"><span class="mini-badge">{{ site.name | upper | escape }} · {{ recipe.badge or 'RECEPT' }}</span>{% if not recipe.badge %}<span>{% for category in recipe.categoryLinks %}<a href="{{ base }}{{ category.path }}">{{ category.label }}</a>{{ ' · ' if not loop.last }}{% endfor %}</span>{% endif %}</p>
+        {#- A cake (lib/cakes.js) also says where it comes from, with its flag, as on its card on tartor.html. #}
+        <p class="dialog-kicker"><span class="mini-badge">{{ site.name | upper | escape }} · {{ recipe.badge or 'RECEPT' }}</span>{% if not recipe.badge %}<span>{% for category in recipe.categoryLinks %}<a href="{{ base }}{{ category.path }}">{{ category.label }}</a>{{ ' · ' if not loop.last }}{% endfor %}</span>{% endif %}{% if tarta %}<span class="cake-origin">{% if cakeFlags[tarta.ursprung] %}<img src="{{ base }}assets/icons/flag-{{ cakeFlags[tarta.ursprung] }}.svg" alt="" width="24" height="19">{% endif %}{{ tarta.ursprung }}</span>{% endif %}</p>
         <h1 id="recipe-title" class="recipe-heading">{{ recipe.title }}</h1>
         <p class="dialog-intro">{{ recipe.description }}</p>
         {#- An illustrated icon per fact label, from assets/icons/. Nivå uses the difficulty's icon.
@@ -158,6 +159,19 @@ layout: layouts/base.njk
           <ul class="pasta-links pasta-swaps">
             {%- for item in madeWith %}
             <li><a href="{{ base }}pasta/{{ item.fileSlug }}.html"><img src="{{ base }}assets/icons/pasta/{{ item.fileSlug }}.svg" alt="" width="40" height="40">{{ item.data.namn }}</a></li>
+            {%- endfor %}
+          </ul>
+        </section>
+        {%- endif %}
+        {#- A cake part's base recipe lists the cakes built with it (lib/cakes.js), each with its photo,
+            like the pasta sorts above. They are recipes too, so in the dialog a link opens that cake there. #}
+        {%- set cakesWith = collections.cakes | cakesMadeWith(recipe.id) %}
+        {%- if cakesWith.length %}
+        <section class="recipe-pastas recipe-cakes" aria-labelledby="cakes-heading">
+          <h2 id="cakes-heading">Tårtor att bygga på den</h2>
+          <ul class="pasta-links pasta-swaps">
+            {%- for item in cakesWith %}
+            <li><a href="{{ base }}recept/{{ item.fileSlug }}.html" data-open="{{ item.fileSlug }}"><img src="{{ base }}{{ item.data.recipe.cardImage | webp }}" alt="" width="40" height="40">{{ item.data.tarta.namn }}</a></li>
             {%- endfor %}
           </ul>
         </section>

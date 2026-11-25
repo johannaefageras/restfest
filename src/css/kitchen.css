@@ -3134,7 +3134,7 @@ body:has(#shopping-dialog[open]) {
 }
 
 /* The "Recept" menu in the header and footer (layouts/base.njk): a <details> whose panel lists the
-   recipe types. On desktop the panel is centred on its own trigger, which fills the bar's height. In
+   recipe types. The footer's "Samlingar" menu, the pasta sorts and the cakes, is built the same way. On desktop the panel is centred on its own trigger, which fills the bar's height. In
    the header it hangs from the header's rule, and in the footer it stands on the footer's: the panel's
    3px edge lies on the rule, so the two read as one line. It unrolls from that line when it opens.
    Each row takes its own colour on hover and on its own page. */
@@ -3253,6 +3253,12 @@ body:has(#shopping-dialog[open]) {
 }
 .nav-menu-panel [data-type="garden"] {
   --menu-tint: var(--sage);
+}
+.nav-menu-panel [data-collection="pasta"] {
+  --menu-tint: var(--butter);
+}
+.nav-menu-panel [data-collection="cakes"] {
+  --menu-tint: var(--pink-light);
 }
 
 /* The footer's menu opens upwards, so its chevron points up until then. */
@@ -4822,3 +4828,109 @@ a.dialog-save {
   margin-inline-start: auto;
 }
 
+
+/* Cakes: tartor.html (pages/tartor.njk) lists the cakes, archive recipes with a `tarta` block
+   (lib/cakes.js), as recipe cards with their number, level and origin (cake-card.njk). A card opens
+   its recipe in the recipe dialog. The page is built like pastasorter.html, from the archive's parts,
+   and shares its results row and reset button (.pasta-list, .pasta-reset). */
+
+.cake-index .greeting-aside {
+  align-self: center;
+  margin-top: 0;
+}
+.cake-index .greeting-aside > img {
+  width: auto;
+  height: clamp(120px, 13vw, 160px);
+}
+
+/* No menu beside the search, so the search takes the whole row; the level and part buttons are the
+   rows below it. */
+@media (min-width: 900px) {
+  .archive-controls.cake-controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.cake-card .archive-meal-type img {
+  object-fit: contain;
+}
+
+/* The line above a cake's title on its card: the number as a yellow badge (.mini-badge, a little
+   tighter here so the line keeps its height), the level's icon and name, and the origin's flag on the
+   right, no taller than the level's icon. The card's body sets its lines at their own width
+   (align-items: flex-start), so this one is stretched across the card for the flag to reach the edge.
+   An origin written out instead of a flag (Latinamerika) moves to a line of its own on a narrow card. */
+.cake-card .archive-card-body > .archive-meal-type {
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+.cake-number {
+  margin-inline-end: 3px;
+  padding: 3px 6px 2px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.cake-flag {
+  flex-shrink: 0;
+  margin-inline-start: auto;
+}
+
+/* A cake's origin with its flag in the line above its recipe's title (recipe.njk). */
+.cake-origin {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.cake-origin img {
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+/* The count and "Rensa filtren" side by side, with the origin menu on the right of the row. On phones
+   the three don't fit on one line, so the count and the button stack and the menu stays beside them. */
+.cake-results {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+@media (max-width: 519px) {
+  .cake-results {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+/* The link to a base recipe under the greeting: the box a fresh pasta sort has, without its rule. */
+.pasta-homemade.cake-base {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* "Rester i finkläder": the archive recipes for what the baking leaves over, under the cakes. The
+   space above it is the pasta grid's below (.pasta-grid), so the heading doesn't sit on the last
+   row of cakes. */
+.cake-leftovers {
+  margin-top: 56px;
+}
+@media (max-width: 699px) {
+  .cake-leftovers {
+    margin-top: 40px;
+  }
+}
+.cake-leftovers-intro {
+  max-width: 62ch;
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+
+/* On a base recipe's page, the cakes built with it (recipe.njk): the pasta sorts' buttons, with a
+   round crop of the cake's photo where a sort has its drawing. */
+.recipe-cakes .pasta-swaps img {
+  object-fit: cover;
+  border-radius: 50%;
+}

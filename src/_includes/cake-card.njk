@@ -1,0 +1,33 @@
+{#- A cake's card on tartor.html: the archive's recipe card (recipe-card.njk) with the cake's number
+    as a badge like the recipe's (.mini-badge), its level's icon and name and, on the right, its
+    origin's flag above the title, and what it is built
+    with as the chips. The flag's alt text and tooltip are the origin's name; an origin without a flag
+    (Latinamerika) shows its name there instead. The title opens the recipe in the recipe dialog, as on
+    the archive's cards (data-open, app.js).
+    The data attributes are what the filter and the search compare (src/js/tartor.js): data-niva,
+    -del and -ursprung are named after the filter's fields, which are also the query string. data-del
+    is a list, separated by spaces, and data-ursprung is the region of the cake's origin (Europa for
+    Sverige), which the origin menu offers; the search also has the origin itself.
+    `item` is an item of collections.cakes (lib/cakes.js). -#}
+{%- macro cakeCard(item, base) -%}
+{%- set recipe = item.data.recipe -%}
+{%- set cake = item.data.tarta -%}
+{%- set level = recipe.facts['Nivå'] -%}
+{%- set region = cake.ursprung | cakeRegion -%}
+<article class="archive-card cake-card" data-niva="{{ level }}" data-del="{{ cake.delar | join(' ') }}" data-ursprung="{{ region }}" data-search="{{ recipe.title }} {{ cake.ursprung }} {{ region }}{% for part in cake.delar %} {{ cakeParts[part].label }}{% endfor %}">
+          <div class="archive-card-art has-photo">
+            {%- set srcset = recipe.cardImage | webpSrcset(base) %}
+            <img src="{{ base }}{{ recipe.cardImage | webp }}"{% if srcset %} srcset="{{ srcset }}" sizes="(min-width: 900px) 33vw, (min-width: 421px) 50vw, 100vw"{% endif %} alt="" width="600" height="338" loading="lazy" decoding="async">
+            <span class="archive-time">{{ recipe.timeLabel }}</span>
+            <button class="favorite" data-save="{{ recipe.id }}" aria-label="Spara {{ recipe.title }}" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i></button>
+          </div>
+          <div class="archive-card-body">
+            <p class="archive-meal-type"><span class="mini-badge cake-number">Nr {{ cake.nr }}</span><img src="{{ base }}assets/icons/{{ cakeLevels[level] }}.svg" alt="" width="20" height="20">{{ level }}{% if cakeFlags[cake.ursprung] %}<img class="cake-flag" src="{{ base }}assets/icons/flag-{{ cakeFlags[cake.ursprung] }}.svg" alt="{{ cake.ursprung }}" title="{{ cake.ursprung }}" width="22" height="17">{% else %}<span class="cake-flag">{{ cake.ursprung }}</span>{% endif %}</p>
+            <h3><a class="recipe-main-link" href="{{ base }}recept/{{ recipe.id }}.html" data-open="{{ recipe.id }}">{{ recipe.title }}</a></h3>
+            <p class="archive-description">{{ recipe.description }}</p>
+            {%- if cake.delar.length %}
+            <div class="ingredient-chips">{% for part in cake.delar %}<span>{{ cakeParts[part].label }}</span>{% endfor %}</div>
+            {%- endif %}
+          </div>
+        </article>
+{%- endmacro %}

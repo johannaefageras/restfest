@@ -44,6 +44,24 @@
           </ul>
         </details>
 {%- endmacro -%}
+{#- The "Samlingar" menu in the footer, built like "Recept" above and opening upwards beside it: the
+    pasta sorts (src/pages/pastasorter.njk) and the cakes (src/pages/tartor.njk). The word is marked
+    as the current page on both pages and on a pasta sort's own page; the cakes' recipes are in the
+    archive, so a cake's page is not. -#}
+{%- macro collectionsMenu(base, url) %}
+        {%- set entries = [
+          {path: 'pastasorter.html', key: 'pasta', icon: 'spaghetti', label: 'Pasta', note: 'Sorter, såser och rester', current: url == '/pastasorter.html' or url.startsWith('/pasta/')},
+          {path: 'tartor.html', key: 'cakes', icon: 'birthday-cake', label: 'Tårtor', note: 'Världens mest kända tårtor', current: url == '/tartor.html'}
+        ] %}
+        <details class="nav-menu">
+          <summary class="nav-link{% if entries | selectattr('current') | length %} is-current{% endif %}"><span>Samlingar</span><i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+          <ul class="nav-menu-panel">
+            {%- for item in entries %}
+            <li><a href="{{ base }}{{ item.path }}" data-collection="{{ item.key }}"{% if item.current %} aria-current="page"{% endif %}><img src="{{ base }}assets/icons/{{ item.icon }}.svg" alt="" width="32" height="32"><span><strong>{{ item.label }}</strong><small>{{ item.note }}</small></span></a></li>
+            {%- endfor %}
+          </ul>
+        </details>
+{%- endmacro -%}
 {#- The sun/moon button. The header has two and shows one (kitchen.css): from 960px beside the logo,
     framed like the buttons on the right, and below that unframed at the end of the menu row. app.js
     shows them, and keeps them alike: the moon in the light theme, the sun in the dark. -#}
@@ -200,8 +218,7 @@
       <nav aria-label="Sidfot">
         {{- recipeMenu(collections.recipeTypes, base, page.url, inRecipes, false) }}
         <a class="nav-link" href="{{ homeUrl }}#sa-funkar-det">Så funkar det</a>
-        {#- The pasta sorts (src/pages/pastasorter.njk), marked as the current page on a sort's own page too. #}
-        <a class="nav-link" href="{{ base }}pastasorter.html"{% if page.url == '/pastasorter.html' or page.url.startsWith('/pasta/') %} aria-current="page"{% endif %}>Pastasorter</a>
+        {{- collectionsMenu(base, page.url) }}
         {%- if ai.accounts %}
         <a class="nav-link" href="{{ base }}integritet.html"{% if page.url == '/integritet.html' %} aria-current="page"{% endif %}>Integritet</a>
         {%- endif %}

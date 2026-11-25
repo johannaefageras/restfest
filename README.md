@@ -180,6 +180,24 @@ The script optionally reads `SUPABASE_SECRET_KEY` from the local, ignored `.env`
 
 The allowed forms, sauces and doughs are in [lib/pasta.js](lib/pasta.js). Fresh sorts link to the recipe named `grundrecept` in [src/pasta/pasta.11tydata.js](src/pasta/pasta.11tydata.js).
 
+## Add or edit cakes
+
+`tartor.html` lists the cakes as cards with a filter for level, parts and origin. The cakes are ordinary archive recipes (303–332), so a card opens the recipe in the recipe dialog, and they also appear in the archive under **Fika & bakning**. What makes a recipe a cake is a `tarta` block in its front matter:
+
+```yaml
+tarta:
+  nr: 15 # its number on tartor.html; the cakes have their own numbering, 1, 2, 3 … without gaps
+  namn: "Prinsesstårta" # a short name, for the list on a base recipe's page
+  ursprung: "Sverige" # shown on its card; the origin menu filters on its region (`regions` in lib/cakes.js)
+  delar: [sockerbotten, vaniljkram, sylt, gradde, marsipan] # keys from `parts` in lib/cakes.js
+```
+
+1. Add the recipe as usual (above), with the `tarta` block. The level filter uses `facts: Nivå`.
+2. Use the whole cake as `image` and a piece as `cardImage`, e.g. `assets/recipes/317-prinsesstarta.png` and `317-prinsesstarta-bit.png`. The cards show 16:9, and photos narrower than 1600 px get no 1600 px copy, so make the piece about 1672 × 941.
+3. Run `npm test`: it reports gaps or repeats in the numbering, unknown parts or levels, an origin that belongs to no region and missing icons or recipes.
+
+The parts, levels, regions and leftover recipes are in [lib/cakes.js](lib/cakes.js). A part with `grundrecept` links to its base recipe from `tartor.html`, and that recipe's page lists the cakes built with it.
+
 ## Supabase and AI features
 
 The browser's connection is configured in [src/_data/ai.js](src/_data/ai.js):

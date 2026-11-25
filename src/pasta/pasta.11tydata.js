@@ -12,7 +12,7 @@ export default {
   layout: 'layouts/pasta.njk',
   base: '../',
   // The back link above the sort, also the middle step of the breadcrumb (lib/metadata.js).
-  back: {path: 'pastasorter.html', label: 'Till pastasorterna'},
+  back: {path: 'pastasorter.html', label: 'Till Pasta'},
   // The recipe a fresh sort (deg: färsk or båda) links to under "Går att göra hemma": a file name in
   // src/recept/ without .md (lib/pasta.js). A sort whose dough is not egg pasta sets `grundrecept: ""`
   // in its front matter and gets no link.

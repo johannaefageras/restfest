@@ -306,6 +306,9 @@ const recipeTagLabels = {
   "Natural colors": "Naturliga färger",
   Gingerbread: "Pepparkakor",
   "Family project": "Familjeprojekt",
+  Austrian: "Österrikiskt",
+  Filipino: "Filippinskt",
+  Easter: "Påsk",
 };
 
 // The illustrated icon (assets/icons/) for a tag that has an obvious one. A tag's page shows it beside

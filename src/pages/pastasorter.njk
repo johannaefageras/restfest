@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 permalink: pastasorter.html
-title: Pastasorter
+title: Pasta
 description: "Från agnolotti till ziti: vad pastasorterna heter, vilken sås som passar och vad du gör med pastan som blev över."
 back: {path: receptarkiv.html, label: Till receptarkivet}
 scripts: [pasta.js]
@@ -46,7 +46,7 @@ scripts: [pasta.js]
     <section class="greeting archive-greeting" aria-labelledby="pasta-index-title">
       <div>
         <a class="text-button archive-back" href="{{ back.path }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> {{ back.label }}</a>
-        <h1 id="pasta-index-title"><span class="marker">Pastasorter.</span></h1>
+        <h1 id="pasta-index-title"><span class="marker">Pasta.</span></h1>
         <p class="greeting-intro">Vad de heter, vilken sås som passar och vad du gör med pastan som blev över. {{ collections.pastas.length }} sorter, från tunna strängar till fyllda kuddar.{% if homemade %} De flesta färska går att göra hemma, med <a href="recept/{{ homemade.fileSlug }}.html" data-open="{{ homemade.fileSlug }}">grundrecept på färsk äggpasta</a>.{% endif %}</p>
       </div>
       <div class="greeting-aside" aria-hidden="true">

@@ -2247,7 +2247,7 @@ document.querySelectorAll("[data-shopping-add]").forEach((form) => {
   });
 });
 
-// The "Recept" menus in the header and footer (layouts/base.njk) are <details>, so they open and
+// The "Recept" menus in the header and footer and the footer's "Samlingar" (layouts/base.njk) are <details>, so they open and
 // close on their own. Here they also close on Escape, on a click outside, when focus leaves them,
 // and when the visitor comes back to the page with Back.
 const navMenus = [...document.querySelectorAll(".nav-menu")];

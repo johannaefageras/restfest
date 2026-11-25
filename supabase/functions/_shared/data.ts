@@ -25321,14 +25321,22 @@ export const data = {
     "mandelmjol",
     "ananas",
     "clementin",
+    "granatapple",
+    "kiwi",
+    "korsbar",
+    "mandarin",
+    "passionsfrukt",
+    "jordgubbar",
     "aubergine",
     "fankal",
     "gurkmeja",
     "frisesallad",
     "salvia",
+    "karnmjolk",
     "aggvita",
     "emmentaler",
     "brie",
+    "ricotta",
     "burrata",
     "bringa",
     "margben",
@@ -25347,6 +25355,7 @@ export const data = {
     "sockerkaka",
     "mannagryn",
     "ragkross",
+    "aprikosmarmelad",
     "hallonsylt",
     "inlagd-gurka",
     "surkal",
@@ -25358,9 +25367,12 @@ export const data = {
     "vitvinsvinager",
     "chilisas",
     "worcestershiresas",
+    "kokosflingor",
     "linfron",
+    "pekannotter",
     "russin",
     "solroskarnor",
+    "kardemumma",
     "senapsfro",
     "senapspulver",
     "torkad-chili",
@@ -25376,6 +25388,8 @@ export const data = {
     "mirin",
     "noriark",
     "panko",
+    "amarenakorsbar",
+    "savoiardi",
     "fullkornsragmjol",
     "farinsocker",
     "florsocker",
@@ -25386,14 +25400,26 @@ export const data = {
     "farsk-jast",
     "jast-for-sota-degar",
     "surdegsgrund",
+    "vinsten",
+    "bittermandelarom",
     "mandelmassa",
     "marsipan",
+    "suckat",
+    "vaniljextrakt",
+    "vaniljstang",
+    "gelfarg",
     "strossel",
     "gelatinblad",
+    "kondenserad-mjolk",
+    "osotad-kondenserad-mjolk",
     "pektin",
+    "surkorsbar",
     "vaniljglass",
+    "matcha",
+    "snabbkaffe",
     "svart-te",
-    "folkol"
+    "folkol",
+    "kanderad-frukt"
   ],
   "dinnerMeals": [
     {
@@ -25691,6 +25717,10 @@ export const data = {
       "label": "Nybörjarvänligt"
     },
     {
+      "key": "Nut free",
+      "label": "Nötfritt"
+    },
+    {
       "key": "Beef",
       "label": "Nötkött"
     },
@@ -25731,6 +25761,10 @@ export const data = {
       "label": "Skaldjur"
     },
     {
+      "key": "Shellfish free",
+      "label": "Skaldjursfritt"
+    },
+    {
       "key": "Sandwich",
       "label": "Smörgås"
     },
@@ -25741,6 +25775,10 @@ export const data = {
     {
       "key": "Quick",
       "label": "Snabblagat"
+    },
+    {
+      "key": "Soy free",
+      "label": "Sojafritt"
     },
     {
       "key": "Summer",
@@ -25978,7 +26016,10 @@ export const data = {
         "Middle Eastern",
         "One pot",
         "Beginner friendly",
-        "Budget"
+        "Budget",
+        "Nut free",
+        "Shellfish free",
+        "Soy free"
       ],
       "time": 30,
       "timeLabel": "30 min",

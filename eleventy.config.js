@@ -11,6 +11,7 @@
 //                      see guider/guider.11tydata.js
 //   pasta/             the pasta sorts, one Markdown file each, listed on pastasorter.html: see
 //                      pasta/pasta.11tydata.js and pasta/_mall.md
+//                      The cakes on tartor.html are recipes in recept/ with a `tarta` block: see lib/cakes.js
 //   _includes/layouts/ base.njk (every page shares it), recipe.njk, listing.njk, guide.njk and pasta.njk
 //   _includes/         snippets the layouts include, e.g. recipe-card.njk
 //   _data/             foods.json (the ingredient list, divided between two files: lib/foods.js), site.js (the site's address) and ai.js (the
@@ -28,6 +29,7 @@
 //   recipeTypes        Mat, Hemmaspa, Hushåll & rengöring and Husdjur, for typ/<slug>.html (src/pages/typ.njk)
 //   recipeTags         every tag, for tagg/<slug>.html (src/pages/tagg.njk)
 //   pastas             every pasta sort, A–Ö by name (lib/pasta.js)
+//   cakes              the recipes on tartor.html, by their number there (lib/cakes.js)
 // Eleventy also makes a collection per tag from the recipes' `tags`, e.g. collections.Vegan.
 
 import {otherFoods, recipeFoodKeys, recipeFoods} from './lib/foods.js';
@@ -37,6 +39,7 @@ import ai from './src/_data/ai.js';
 import {shoppingDepartmentNames} from './lib/shopping-departments.js';
 import {pageStructuredData} from './lib/metadata.js';
 import {makePhotos} from './tools/photos.mjs';
+import {baseRecipes, cakeChoices, cakeRegion, cakesMadeWith, flags as cakeFlags, leftoverRecipes, levels as cakeLevels, parts as cakeParts, sortCakes} from './lib/cakes.js';
 import {cookingTime, doughs, filterDoughs, forms, freshPastaRecipe, pastaChoices, pastaGround, pastaNeighbours, pastasBySlug, pastasMadeWith, sauceLabels, sauces, sortPastas} from './lib/pasta.js';
 
 const recipes = api => api.getFilteredByGlob('src/recept/*.md')
@@ -87,6 +90,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection('recipeTypes', api => recipeListings(recipes(api)).types);
   eleventyConfig.addCollection('recipeTags', api => recipeListings(recipes(api)).tags);
   eleventyConfig.addCollection('pastas', api => sortPastas(api.getFilteredByGlob('src/pasta/*.md')));
+  eleventyConfig.addCollection('cakes', api => sortCakes(recipes(api)));
 
   // foods.json divided between data/recipe-index.js (the foods the recipes use, on every page) and
   // data/foods.js (the rest of the food list, on the pages that need it). `items` is collections.recipes.
@@ -121,6 +125,19 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData('pastaDoughs', doughs);
   // The fresh-pasta recipe's id, for the link in pastasorter.html's intro.
   eleventyConfig.addGlobalData('pastaGrundrecept', freshPastaRecipe);
+
+  // For the cakes (lib/cakes.js): tartor.html's filter choices, the region a cake's origin belongs to,
+  // and on a base recipe's page the cakes built with it. `items` is collections.cakes. Then the parts
+  // and levels with their labels and icons, the origins' flags, the base recipes the cakes are built on
+  // and the leftover recipes, for tartor.html, the cards and a cake's recipe page.
+  eleventyConfig.addFilter('cakeChoices', cakeChoices);
+  eleventyConfig.addFilter('cakeRegion', cakeRegion);
+  eleventyConfig.addFilter('cakesMadeWith', cakesMadeWith);
+  eleventyConfig.addGlobalData('cakeParts', cakeParts);
+  eleventyConfig.addGlobalData('cakeLevels', cakeLevels);
+  eleventyConfig.addGlobalData('cakeFlags', cakeFlags);
+  eleventyConfig.addGlobalData('cakeBaseRecipes', baseRecipes());
+  eleventyConfig.addGlobalData('cakeLeftovers', leftoverRecipes);
 
   // Keeps a range like "1–3" or "15–20" on one line: a word joiner (U+2060) either side of the dash
   // stops the browser breaking there. For the narrow boxes under a recipe's description (recipe.njk).
