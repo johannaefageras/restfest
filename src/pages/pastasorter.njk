@@ -20,10 +20,15 @@ scripts: [pasta.js]
 {%- set homemade = (collections.recipes | recipesById([pastaGrundrecept]))[0] -%}
 {#- A menu like the archive's category menu (.meal-picker): a <details> whose options are buttons, the
     chosen one pressed. pasta.js makes them choose; `name` is the filter field. -#}
-{%- macro picker(name, label, allLabel, allIcon, options) %}
+{%- macro picker(name, label, allLabel, allIcon, options, inResults = false) %}
+          {% if inResults -%}
+          <div id="pasta-{{ name }}-field" class="archive-sort" hidden>
+            <p class="pasta-region-label" id="pasta-{{ name }}-label">{{ label }}</p>
+          {%- else -%}
           <div class="archive-category">
             <p class="filter-label" id="pasta-{{ name }}-label">{{ label }}</p>
-            <details class="meal-picker" data-picker="{{ name }}">
+          {%- endif %}
+            <details{% if inResults %} id="pasta-{{ name }}"{% endif %} class="meal-picker" data-picker="{{ name }}">
               <summary aria-labelledby="pasta-{{ name }}-label pasta-{{ name }}-value">
                 <img src="assets/icons/{{ allIcon }}.svg" alt="" width="24" height="24">
                 <span id="pasta-{{ name }}-value">{{ allLabel }}</span>
@@ -32,16 +37,21 @@ scripts: [pasta.js]
               <div class="meal-picker-options" role="group" aria-labelledby="pasta-{{ name }}-label">
                 <button type="button" tabindex="-1" data-value="" aria-pressed="true"><img src="assets/icons/{{ allIcon }}.svg" alt="" width="24" height="24"><span>{{ allLabel }}</span><img src="assets/icons/check-mark.svg" alt="" width="16" height="16"></button>
                 {%- for option in options %}
-                <button type="button" tabindex="-1" data-value="{{ option.value }}" aria-pressed="false"><img src="assets/icons/{{ option.icon }}.svg" alt="" width="24" height="24"><span>{{ option.label | capitalize }}</span><img src="assets/icons/check-mark.svg" alt="" width="16" height="16"></button>
+                <button type="button" tabindex="-1" data-value="{{ option.value }}" aria-pressed="false"><img src="assets/icons/{{ option.icon }}.svg" alt="" width="24" height="24"><span>{{ option.label }}</span><img src="assets/icons/check-mark.svg" alt="" width="16" height="16"></button>
                 {%- endfor %}
               </div>
             </details>
           </div>
 {%- endmacro -%}
 {%- set formOptions = [] -%}
-{%- for form in choices.forms %}{% set formOptions = (formOptions.push({value: form, label: form, icon: 'pasta/' + pastaForms[form]}), formOptions) %}{% endfor -%}
+{%- for form in choices.forms %}{% set formOptions = (formOptions.push({value: form, label: form | capitalize, icon: 'pasta/' + pastaForms[form]}), formOptions) %}{% endfor -%}
 {%- set doughOptions = [] -%}
-{%- for dough in choices.doughs %}{% set doughOptions = (doughOptions.push({value: dough, label: pastaDoughs[dough].label, icon: pastaDoughs[dough].icon}), doughOptions) %}{% endfor -%}
+{%- for dough in choices.doughs %}{% set doughOptions = (doughOptions.push({value: dough, label: pastaDoughs[dough].label | capitalize, icon: pastaDoughs[dough].icon}), doughOptions) %}{% endfor -%}
+{%- set regionOptions = [] -%}
+{%- for region in choices.regions -%}
+{%- set icon = 'flag-us' if region == 'USA' else 'flag-it' -%}
+{%- set regionOptions = (regionOptions.push({value: region, label: region, icon: icon}), regionOptions) -%}
+{%- endfor -%}
   <main id="main" class="wrap archive-page pasta-index">
     <section class="greeting archive-greeting" aria-labelledby="pasta-index-title">
       <div>
@@ -88,18 +98,7 @@ scripts: [pasta.js]
       <div class="archive-results-row">
         <p id="pasta-count" class="meta archive-results" role="status">{{ collections.pastas.length }} sorter</p>
         <button id="pasta-reset" class="text-button pasta-reset" type="button" data-pasta-clear hidden>Rensa filtren</button>
-        <div id="pasta-region-field" class="archive-sort" hidden>
-          <label for="pasta-region">Region</label>
-          <div class="archive-sort-field">
-            <select id="pasta-region" autocomplete="off">
-              <option value="">Alla regioner</option>
-              {%- for region in choices.regions %}
-              <option>{{ region }}</option>
-              {%- endfor %}
-            </select>
-            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-          </div>
-        </div>
+        {{- picker('region', 'Region', 'Alla regioner', 'globe', regionOptions, true) }}
       </div>
       <div id="pasta-grid" class="recipe-grid pasta-grid">
         {%- for pasta in collections.pastas %}

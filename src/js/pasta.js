@@ -22,11 +22,10 @@
 
   // ---------- The filter ----------
 
-  // The controls: the search, the Form and Deg menus (details[data-picker], like the archive's
-  // category menu in app.js), the sauce buttons and the region menu beside the count.
+  // The controls: the search, the Form, Deg and Region menus (like the archive's category menu
+  // in app.js), and the sauce buttons.
   const search = form.elements.q;
-  const region = document.getElementById("pasta-region");
-  const pickers = [...form.querySelectorAll("details[data-picker]")];
+  const pickers = [...form.closest(".pasta-list").querySelectorAll("details[data-picker]")];
   const sauceButtons = [...form.querySelectorAll("[data-sas]")];
   const filterCount = form.querySelector(".archive-filter-count");
   const count = document.getElementById("pasta-count");
@@ -44,11 +43,12 @@
 
   // The values each field offers, to leave out one the filter doesn't have (an old link, a typo).
   const offered = {
-    kategori: (value) => pickers.find((p) => p.dataset.picker === "kategori").querySelector(`[data-value="${CSS.escape(value)}"]`),
-    deg: (value) => pickers.find((p) => p.dataset.picker === "deg").querySelector(`[data-value="${CSS.escape(value)}"]`),
     sas: (value) => sauceButtons.some((button) => button.dataset.sas === value),
-    region: (value) => [...region.options].some((option) => option.value === value),
   };
+  for (const picker of pickers) {
+    offered[picker.dataset.picker] = (value) =>
+      picker.querySelector(`[data-value="${CSS.escape(value)}"]`);
+  }
 
   // Lower case without accents, so "anglahar" finds änglahår (Capellini).
   const plain = (text) =>
@@ -58,7 +58,6 @@
   // pressed, and the Filter button on phones how many filters are on.
   function showChoices() {
     if (search.value.trim() !== chosen.q) search.value = chosen.q;
-    region.value = chosen.region;
     for (const picker of pickers) {
       for (const option of picker.querySelectorAll("[data-value]")) {
         const on = option.dataset.value === chosen[picker.dataset.picker];
@@ -126,7 +125,6 @@
 
   form.addEventListener("submit", (event) => event.preventDefault());
   search.addEventListener("input", () => choose({ q: search.value.trim() }));
-  region.addEventListener("change", () => choose({ region: region.value }));
   // A sauce button turns its sauce on, and off again; one sauce at a time.
   for (const button of sauceButtons)
     button.addEventListener("click", () =>

@@ -600,7 +600,8 @@ textarea:focus-visible,
   font-size: var(--text-small);
 }
 
-.archive-sort label {
+.archive-sort label,
+.pasta-region-label {
   color: var(--muted);
 }
 .archive-sort-field {
@@ -665,7 +666,8 @@ textarea:focus-visible,
     right: 11px;
   }
 
-  .archive-sort label:not(.sr-only) {
+  .archive-sort label:not(.sr-only),
+  .pasta-region-label {
     position: absolute;
     overflow: hidden;
     width: 1px;
@@ -1515,6 +1517,42 @@ details[open] > summary > .fa-chevron-down {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 6px 16px;
+}
+
+.recipe-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0 12px;
+  margin-inline-start: auto;
+}
+
+.recipe-actions > .text-button {
+  text-decoration: none;
+}
+
+.recipe-actions > .text-button > span {
+  text-decoration: underline;
+}
+
+.recipe-share-status {
+  text-align: end;
+}
+
+.recipe-share-status:not(:empty) {
+  margin-block-start: 6px;
+}
+
+.recipe-share-link {
+  display: block;
+  width: min(100%, 28rem);
+  margin-block-start: 6px;
+  margin-inline-start: auto;
+  padding: 8px 12px;
+  border: 1.5px solid var(--control);
+  border-radius: var(--radius-button);
+  background: var(--surface);
 }
 
 .recipe-section h2 {
@@ -4583,6 +4621,22 @@ a.dialog-save {
 /* The count, "Rensa filtren" beside it when something is chosen, and the region menu on the right. */
 .pasta-list .archive-results-row {
   justify-content: flex-start;
+}
+#pasta-region {
+  width: max-content;
+  white-space: nowrap;
+}
+#pasta-region > summary {
+  min-height: 40px;
+  padding-block: 6px;
+}
+#pasta-region .meal-picker-options {
+  inset-inline-start: auto;
+  width: max-content;
+  min-width: 100%;
+}
+#pasta-region img:first-child {
+  object-fit: contain;
 }
 .pasta-reset {
   min-height: 0;

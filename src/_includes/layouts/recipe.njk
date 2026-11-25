@@ -91,8 +91,13 @@ layout: layouts/base.njk
         <section class="recipe-section" aria-labelledby="ingredients-heading">
           <div class="recipe-section-heading">
             <h2 id="ingredients-heading" class="cook-ingredient-heading"><img src="{{ base }}assets/icons/clipboard-2.svg" alt="" width="24" height="24">Det här behöver du</h2>
-            <button class="dialog-save" type="button" data-save="{{ recipe.id }}" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i>Spara {{ recipe.noun }}</button>
+            <div class="recipe-actions">
+              <button class="text-button" type="button" data-save="{{ recipe.id }}" aria-pressed="false"><span>Spara {{ recipe.noun }}</span><i class="far fa-heart" aria-hidden="true"></i></button>
+              <button class="text-button" type="button" data-share-recipe="{{ (site.absolute(page.url) or '') | escape }}" hidden><span>Dela {{ recipe.noun }}</span><i class="far fa-arrow-up-right-from-square" aria-hidden="true"></i></button>
+            </div>
           </div>
+          <p class="meta recipe-share-status" data-recipe-share-status role="status"></p>
+          <input class="recipe-share-link" type="url" data-recipe-share-link aria-label="Länk att dela" readonly hidden>
           {%- if recipe.pantryKeys.length %}
           <div class="cook-pantry" hidden>
             <div>

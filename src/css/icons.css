@@ -48,6 +48,9 @@
 .fa-arrow-up-right::before {
   content: "\e09f";
 }
+.fa-arrow-up-right-from-square::before {
+  content: "\f08e";
+}
 .fa-camera::before {
   content: "\f030";
 }

@@ -1643,7 +1643,7 @@ function updateChecklistProgress(article) {
 }
 
 function updateSaveButtons() {
-  document.querySelectorAll(".dialog-save[data-save]").forEach((button) => {
+  document.querySelectorAll(".recipe-actions [data-save]").forEach((button) => {
     const id = button.dataset.save;
     const isSaved = saved.has(id);
     const noun = recipes
@@ -1652,7 +1652,7 @@ function updateSaveButtons() {
       ? "behandling"
       : "recept";
     button.setAttribute("aria-pressed", String(isSaved));
-    button.innerHTML = `${heartIcon(isSaved)}${isSaved ? "Sparat" : `Spara ${noun}`}`;
+    button.innerHTML = `<span>${isSaved ? "Sparat" : `Spara ${noun}`}</span>${heartIcon(isSaved)}`;
   });
 }
 
@@ -1744,10 +1744,41 @@ function enhanceServings(article) {
   });
 }
 
+function enhanceRecipeShare(article, title) {
+  const button = $("[data-share-recipe]", article);
+  if (!button) return;
+  const url = button.dataset.shareRecipe || recipeUrl(article.dataset.recipe);
+  const status = $("[data-recipe-share-status]", article);
+  const link = $("[data-recipe-share-link]", article);
+  button.hidden = false;
+  button.addEventListener("click", async () => {
+    if (typeof navigator.share === "function") {
+      try {
+        await navigator.share({ title, url });
+        return;
+      } catch (error) {
+        if (error.name === "AbortError") return;
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      link.hidden = true;
+      status.textContent = "Länken kopierad";
+    } catch {
+      link.value = url;
+      link.hidden = false;
+      status.textContent = "Kopiera den markerade länken.";
+      link.focus();
+      link.select();
+    }
+  });
+}
+
 // Wires up a recipe's interactive parts, on its own page or in the dialog.
 function enhanceRecipe(article) {
   enhanceServings(article);
   const title = $(".recipe-heading", article).textContent;
+  enhanceRecipeShare(article, title);
   const source =
     article.dataset.shoppingSource ||
     (article.dataset.recipe ? `archive:${article.dataset.recipe}` : "");
