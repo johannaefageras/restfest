@@ -16,6 +16,9 @@ tags:
     Zero waste,
     Leftovers,
     Budget,
+    Nut free,
+    Shellfish free,
+    Soy free,
   ]
 timeLabel: 30 min + 1–3 veckor
 facts:

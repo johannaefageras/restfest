@@ -7,7 +7,7 @@ cardImage: assets/recipes/29-shakshuka.png
 alt: Shakshuka med fetaost och örter
 categories: [main, breakfast]
 tags:
-  [Vegetarian, Gluten free, Middle Eastern, One pot, Beginner friendly, Budget]
+  [Vegetarian, Gluten free, Middle Eastern, One pot, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 30
 timeLabel: 30 min
 facts:

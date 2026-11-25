@@ -76,7 +76,7 @@ const nonFoodMeals = ["spa", "household", "pets", "garden"];
 const isFood = (recipe) =>
   !recipe.meals.some((meal) => nonFoodMeals.includes(meal));
 
-// Only food recipes have diet tags. The archive shows these as their own filter group.
+// The diet options supported by account preferences.
 const dietTags = [
   "Vegetarian",
   "Vegan",
@@ -142,10 +142,13 @@ const recipeTagLabels = {
   "Middle Eastern": "Mellanöstern",
   Natural: "Naturligt",
   "No bake": "Utan ugn",
+  "Nut free": "Nötfritt",
   "One pot": "Allt i en gryta",
   Pescatarian: "Pescetariskt",
   Relaxing: "Avkopplande",
+  "Shellfish free": "Skaldjursfritt",
   Soothing: "Lugnande",
+  "Soy free": "Sojafritt",
   Spanish: "Spanskt",
   Stew: "Gryta",
   "Sunday dinner": "Söndagsmiddag",
@@ -309,12 +312,15 @@ const recipeTagLabels = {
 // the heading, and the archive's diet filter uses the diet ones; a tag without one gets the hashtag.
 const tagIcons = {
   // Diets
-  Vegetarian: "vegetarian",
-  Vegan: "vegan",
-  "Dairy free": "milk-free",
-  "Egg free": "egg-free",
-  "Gluten free": "gluten-free",
-  "Lactose free": "dairy-free",
+  Vegetarian: "diets/vegetarian",
+  Vegan: "diets/vegan",
+  "Dairy free": "diets/milk-free",
+  "Egg free": "diets/egg-free",
+  "Gluten free": "diets/gluten-free",
+  "Lactose free": "diets/dairy-free",
+  "Nut free": "diets/nut-free",
+  "Shellfish free": "diets/shellfish-free",
+  "Soy free": "diets/soy-free",
   // Odling
   Gardening: "pot-and-trowel",
   Houseplants: "monstera",

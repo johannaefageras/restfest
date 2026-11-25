@@ -6,7 +6,7 @@ image: assets/recipes/100-branda-mandlar.png
 cardImage: assets/recipes/100-branda-mandlar.png
 alt: Brända mandlar med kanel
 categories: [candy]
-tags: [Vegan, Gluten free, Christmas, Gift, Beginner friendly, Budget]
+tags: [Vegan, Gluten free, Christmas, Gift, Beginner friendly, Budget, Shellfish free, Soy free]
 time: 20
 timeLabel: 20 min
 facts:

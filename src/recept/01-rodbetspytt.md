@@ -6,7 +6,7 @@ image: assets/recipes/01-rodbetspytt.png
 cardImage: assets/recipes/01-rodbetspytt.png
 alt: Rödbetspytt i torn med gyllene äggula
 categories: [main, breakfast]
-tags: [Vegetarian, Gluten free, Swedish, Leftovers, Beginner friendly, Budget]
+tags: [Vegetarian, Gluten free, Swedish, Leftovers, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 35
 timeLabel: 35 min
 facts:

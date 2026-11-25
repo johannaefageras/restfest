@@ -6,7 +6,7 @@ image: assets/recipes/23-balsamicorostade-lokhalvor.png
 cardImage: assets/recipes/23-balsamicorostade-lokhalvor.png
 alt: Balsamicorostade lökhalvor med timjan
 categories: [side]
-tags: [Vegan, Gluten free, Beginner friendly, Budget]
+tags: [Vegan, Gluten free, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 60
 timeLabel: 1 tim
 facts:

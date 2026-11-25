@@ -6,7 +6,7 @@ image: assets/recipes/124-gnocchi.png
 cardImage: assets/recipes/124-gnocchi.png
 alt: Ugnsbakad potatisgnocchi på gårdagens potatis med tomat och mozzarella
 categories: [main]
-tags: [Vegetarian, Italian, Comfort food, Family friendly, Leftovers, Budget]
+tags: [Vegetarian, Italian, Comfort food, Family friendly, Leftovers, Budget, Nut free, Shellfish free, Soy free]
 time: 55
 timeLabel: 55 min
 facts:

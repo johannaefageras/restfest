@@ -17,6 +17,9 @@ tags:
     Make ahead,
     Gift,
     Budget,
+    Nut free,
+    Shellfish free,
+    Soy free,
   ]
 time: 60
 timeLabel: 1 tim

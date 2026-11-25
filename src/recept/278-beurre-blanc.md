@@ -6,7 +6,7 @@ image: assets/recipes/278-beurre-blanc.png
 cardImage: assets/recipes/278-beurre-blanc.png
 alt: "Beurre blanc med rom och gräslök över en bit fisk med sparris"
 categories: [sauce]
-tags: ["Vegetarian", "Gluten free", "Sauce", "French", "Leftovers", "Zero waste", "Fish", "Classic"]
+tags: ["Vegetarian", "Gluten free", "Sauce", "French", "Leftovers", "Zero waste", "Fish", "Classic", "Nut free", "Shellfish free", "Soy free"]
 time: 30
 timeLabel: "30 min"
 facts:

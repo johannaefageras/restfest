@@ -6,7 +6,7 @@ image: assets/recipes/123-falafel.png
 cardImage: assets/recipes/123-falafel.png
 alt: Ugnsbakade falafel med tahinisås och picklad rödkål
 categories: [main]
-tags: [Vegan, Middle Eastern, Meal prep, Budget]
+tags: [Vegan, Middle Eastern, Meal prep, Budget, Nut free, Shellfish free, Soy free]
 timeLabel: 1 tim + blötläggning
 facts:
   Förberedelse: 30 min + blötläggning över natten

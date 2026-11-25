@@ -38,7 +38,7 @@ The `20261118120000_shopping_copies.sql` migration and `shopping-copy` Edge Func
 | `npm start` | Starts the local Eleventy server. |
 | `npm run build` | Deletes `_site/` and builds a fresh copy of the website there. |
 | `npm test` | Runs the Node test suite, including builds with and without accounts. |
-| `npm run photos` | Makes WebP copies of the recipe photos in `.cache/recipe-photos/`, skipping photos that already have up-to-date copies. `npm start` and `npm run build` run it first. |
+| `npm run photos` | Makes WebP copies of the recipe photos in `.cache/recipe-photos/`, skipping photos that already have up-to-date copies. Every build does this first, also while `npm start` is running, so it is rarely needed by itself. |
 | `npm run supabase-data` | Regenerates the ingredient, taxonomy, example-recipe and style-reference data used by the Edge Functions. |
 | `npm run promote -- "<recipe-uuid-or-url>"` | Adds a generated recipe and its photo to the Markdown archive. |
 
@@ -102,7 +102,7 @@ The home page includes `WebSite` structured data for the site's name, address, d
 | [test/](test/) | Automated tests. |
 | [design/](design/) | Design source files, outside the published site. |
 | `_site/` | Generated website. Ignored by Git; do not edit it directly. |
-| `.cache/recipe-photos/` | WebP copies of the recipe photos, made by `npm run photos` and copied into `_site/assets/recipes/`. Ignored by Git. |
+| `.cache/recipe-photos/` | WebP copies of the recipe photos, made before every build and copied into `_site/assets/recipes/`. Ignored by Git. |
 
 [eleventy.config.js](eleventy.config.js) defines collections, copied assets and the `src/` → `_site/` build. Templates set explicit permalinks, so the `pages/` folder does not appear in public URLs.
 
@@ -110,7 +110,7 @@ The home page includes `WebSite` structured data for the site's name, address, d
 
 1. Copy a similar recipe in `src/recept/` and give a new recipe the next unused numeric filename prefix, followed by a short slug.
 2. Edit its YAML front matter: title, publication date (`YYYY-MM-DD`), description, image paths, alt text, categories, tags, time label and ingredients. Set `time` to a number of minutes when applicable.
-3. Put its photos in `src/assets/recipes/`. Both `image` and `cardImage` are paths relative to `src/` and must point to existing files; they can use the same photo. PNG photos get the WebP copies the pages show, 600, 1200 and 1600 px wide ([tools/photos.mjs](tools/photos.mjs)); other formats are used as they are. If `npm start` is already running, run `npm run photos` after adding a photo.
+3. Put its photos in `src/assets/recipes/`. Both `image` and `cardImage` are paths relative to `src/` and must point to existing files; they can use the same photo. PNG photos get the WebP copies the pages show, 600, 1200 and 1600 px wide ([tools/photos.mjs](tools/photos.mjs)); other formats are used as they are. The copies are made when the site is built, also while `npm start` is running and when a photo is replaced.
 4. Write the instructions as numbered Markdown steps. Optional `###` headings group steps; `##` headings introduce extra sections with bullet lists. A paragraph starting with bold text becomes a tip.
 5. Preview the page, regenerate Supabase data if needed, then run the build and tests.
 

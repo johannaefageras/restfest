@@ -6,7 +6,7 @@ image: assets/recipes/02-glaserade-morotter.png
 cardImage: assets/recipes/02-glaserade-morotter.png
 alt: Glaserade morötter på vit bönkräm med frödukkah
 categories: [side, starter, main]
-tags: [Vegan, Gluten free, Middle Eastern, Beginner friendly, Budget]
+tags: [Vegan, Gluten free, Middle Eastern, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 45
 timeLabel: 45 min
 facts:

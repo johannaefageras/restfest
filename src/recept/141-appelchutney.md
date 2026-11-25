@@ -6,7 +6,7 @@ image: assets/recipes/141-appelchutney.png
 cardImage: assets/recipes/141-appelchutney.png
 alt: Äppelchutney med russin, ingefära och senapsfrön
 categories: [preserves]
-tags: [Vegan, Gluten free, Chutney, British, Leftovers, Gift, Budget]
+tags: [Vegan, Gluten free, Chutney, British, Leftovers, Gift, Budget, Nut free, Shellfish free, Soy free]
 time: 70
 timeLabel: 1 tim 10 min
 facts:

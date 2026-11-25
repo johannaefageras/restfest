@@ -6,7 +6,7 @@ image: assets/recipes/48-smorkola.png
 cardImage: assets/recipes/48-smorkola.png
 alt: Mjuk smörkola med flingsalt i vaxpapper
 categories: [candy, baking]
-tags: [Vegetarian, Gluten free, Swedish, Christmas, Make ahead, Gift, Budget]
+tags: [Vegetarian, Gluten free, Swedish, Christmas, Make ahead, Gift, Budget, Nut free, Shellfish free, Soy free]
 time: 155
 timeLabel: 2 tim 35 min
 facts:

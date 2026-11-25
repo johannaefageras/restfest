@@ -6,7 +6,7 @@ image: assets/recipes/87-apelsinmarmelad.png
 cardImage: assets/recipes/87-apelsinmarmelad.png
 alt: Apelsinmarmelad med tunt skurna skal
 categories: [preserves]
-tags: [Vegan, Gluten free, Marmalade, Zero waste, Gift]
+tags: [Vegan, Gluten free, Marmalade, Zero waste, Gift, Nut free, Shellfish free, Soy free]
 time: 150
 timeLabel: 2 tim 30 min
 facts:

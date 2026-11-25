@@ -6,7 +6,7 @@ image: assets/recipes/59-fokaccia.png
 cardImage: assets/recipes/59-fokaccia.png
 alt: Fokaccia med rödlök, rosmarin och flingsalt
 categories: [bread, baking, side]
-tags: [Vegan, Italian, Make ahead, Beginner friendly, Budget]
+tags: [Vegan, Italian, Make ahead, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 880
 timeLabel: 14 tim 40 min
 facts:

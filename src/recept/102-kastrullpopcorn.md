@@ -6,7 +6,7 @@ image: assets/recipes/102-kastrullpopcorn.png
 cardImage: assets/recipes/102-kastrullpopcorn.png
 alt: Kastrullpopcorn med smör, flingsalt och rökt paprika
 categories: [snack, party]
-tags: [Vegetarian, Gluten free, Family friendly, Beginner friendly, Budget]
+tags: [Vegetarian, Gluten free, Family friendly, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 10
 timeLabel: 10 min
 facts:

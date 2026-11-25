@@ -6,7 +6,7 @@ image: assets/recipes/93-pizzadeg.png
 cardImage: assets/recipes/93-pizzadeg.png
 alt: Pizzadeg med kall jäsning
 categories: [basics]
-tags: [Vegan, Italian, Family friendly, Make ahead, Budget]
+tags: [Vegan, Italian, Family friendly, Make ahead, Budget, Nut free, Shellfish free, Soy free]
 timeLabel: Jäsning i 1–3 dygn
 facts:
   Förberedelse: 20 min + 1 tim jäsning + 1–3 dygn i kylen

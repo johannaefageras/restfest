@@ -6,7 +6,7 @@ image: assets/recipes/257-socca.png
 cardImage: assets/recipes/257-socca.png
 alt: "Socca med rostade tomater, zucchini, rödlök, svamp och ruccola"
 categories: [main]
-tags: ["Vegan", "Gluten free", "Dairy free", "Main course", "French", "Leftovers", "Zero waste", "Sheet pan"]
+tags: ["Vegan", "Gluten free", "Dairy free", "Main course", "French", "Leftovers", "Zero waste", "Sheet pan", "Nut free", "Shellfish free", "Soy free"]
 time: 80
 timeLabel: "1 tim 20 min"
 facts:

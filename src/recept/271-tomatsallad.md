@@ -6,7 +6,7 @@ image: assets/recipes/271-tomatsallad.png
 cardImage: assets/recipes/271-tomatsallad.png
 alt: "Tomater i olika färger med burrata, tomatchips, gelé och basilikaolja"
 categories: [salad, starter]
-tags: ["Gluten free", "Salad", "Starter", "Leftovers", "Zero waste", "Summer", "Fine dining"]
+tags: ["Gluten free", "Salad", "Starter", "Leftovers", "Zero waste", "Summer", "Fine dining", "Nut free", "Shellfish free", "Soy free"]
 timeLabel: "5 tim 30 min + silning över natten"
 facts:
   Förberedelse: "1 tim + silning över natten"

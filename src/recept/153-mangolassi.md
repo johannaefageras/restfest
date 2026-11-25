@@ -14,6 +14,8 @@ tags:
     Alcohol free,
     Leftovers,
     Beginner friendly,
+    Shellfish free,
+    Soy free,
   ]
 time: 5
 timeLabel: 5 min

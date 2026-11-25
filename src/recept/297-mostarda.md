@@ -6,7 +6,7 @@ image: assets/recipes/297-mostarda.png
 cardImage: assets/recipes/297-mostarda.png
 alt: "Blanka fruktbitar i senapssirap i glasburkar bredvid ost och kallskuret"
 categories: [preserves]
-tags: ["Vegan", "Vegetarian", "Gluten free", "Preserves", "Italian", "Leftovers", "Zero waste", "Christmas"]
+tags: ["Vegan", "Vegetarian", "Gluten free", "Preserves", "Italian", "Leftovers", "Zero waste", "Christmas", "Nut free", "Shellfish free", "Soy free"]
 timeLabel: "5 dagar + 1 vecka mognad"
 facts:
   Förberedelse: "30 min + 5 dagar"

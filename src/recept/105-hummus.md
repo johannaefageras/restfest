@@ -6,7 +6,7 @@ image: assets/recipes/105-hummus.png
 cardImage: assets/recipes/105-hummus.png
 alt: Snabb hummus med grönsaksstavar
 categories: [snack, sauce]
-tags: [Vegan, Gluten free, Middle Eastern, Beginner friendly, Budget]
+tags: [Vegan, Gluten free, Middle Eastern, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 10
 timeLabel: 10 min
 facts:

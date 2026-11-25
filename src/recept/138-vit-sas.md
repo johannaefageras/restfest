@@ -14,6 +14,9 @@ tags:
     Family friendly,
     Budget,
     Beginner friendly,
+    Nut free,
+    Shellfish free,
+    Soy free,
   ]
 time: 30
 timeLabel: 30 min

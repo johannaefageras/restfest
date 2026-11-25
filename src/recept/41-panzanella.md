@@ -6,7 +6,7 @@ image: assets/recipes/41-panzanella.png
 cardImage: assets/recipes/41-panzanella.png
 alt: Panzanella på gammalt bröd med tomater, gurka och kapris
 categories: [salad, side]
-tags: [Vegan, Italian, Leftovers, Beginner friendly, Budget]
+tags: [Vegan, Italian, Leftovers, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 45
 timeLabel: 45 min
 facts:

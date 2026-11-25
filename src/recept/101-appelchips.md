@@ -7,7 +7,7 @@ cardImage: assets/recipes/101-appelchips.png
 alt: Krispiga äppelchips med kanel
 categories: [snack]
 tags:
-  [Vegan, Gluten free, Family friendly, Leftovers, Beginner friendly, Budget]
+  [Vegan, Gluten free, Family friendly, Leftovers, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 135
 timeLabel: 1 tim 45 min–2 tim 15 min
 facts:

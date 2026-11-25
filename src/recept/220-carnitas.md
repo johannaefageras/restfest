@@ -6,7 +6,7 @@ image: assets/recipes/220-carnitas.png
 cardImage: assets/recipes/220-carnitas.png
 alt: "Carnitas på fläskkarré och de sista apelsinerna"
 categories: [main]
-tags: ["Gluten free", "Dairy free", "Pork", "Main course", "Mexican", "Leftovers", "Zero waste", "Slow cooking", "Tacos", "Make ahead"]
+tags: ["Gluten free", "Dairy free", "Pork", "Main course", "Mexican", "Leftovers", "Zero waste", "Slow cooking", "Tacos", "Make ahead", "Nut free", "Shellfish free", "Soy free"]
 time: 195
 timeLabel: "3 tim 15 min"
 facts:

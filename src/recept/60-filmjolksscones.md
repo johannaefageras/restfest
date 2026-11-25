@@ -6,7 +6,7 @@ image: assets/recipes/60-filmjolksscones.png
 cardImage: assets/recipes/60-filmjolksscones.png
 alt: Filmjölksscones med lagrad ost och gräslök
 categories: [bread, baking, breakfast]
-tags: [Vegetarian, Leftovers, Beginner friendly, Budget]
+tags: [Vegetarian, Leftovers, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 25
 timeLabel: 25 min
 facts:

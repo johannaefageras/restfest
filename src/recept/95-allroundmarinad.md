@@ -6,7 +6,7 @@ image: assets/recipes/95-allroundmarinad.png
 cardImage: assets/recipes/95-allroundmarinad.png
 alt: Allroundmarinad med soja, honung, vitlök och ingefära
 categories: [basics]
-tags: [Vegetarian, Dairy free, Marinade, Asian, Beginner friendly, Budget]
+tags: [Vegetarian, Dairy free, Marinade, Asian, Beginner friendly, Budget, Nut free, Shellfish free]
 timeLabel: 10 min + marinering
 facts:
   Förberedelse: 5 min + marinering

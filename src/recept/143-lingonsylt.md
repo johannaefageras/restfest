@@ -6,7 +6,7 @@ image: assets/recipes/143-lingonsylt.png
 cardImage: assets/recipes/143-lingonsylt.png
 alt: Lingonsylt med äpple och kanel
 categories: [preserves]
-tags: [Vegan, Gluten free, Jam, Swedish, Leftovers, Budget, Beginner friendly]
+tags: [Vegan, Gluten free, Jam, Swedish, Leftovers, Budget, Beginner friendly, Nut free, Shellfish free, Soy free]
 time: 25
 timeLabel: 25 min
 facts:

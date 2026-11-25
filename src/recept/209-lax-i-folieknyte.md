@@ -6,7 +6,7 @@ image: assets/recipes/209-lax-i-folie.png
 cardImage: assets/recipes/209-lax-i-folie.png
 alt: "Lax i folieknyte med gårdagens potatis, citron och dill"
 categories: [main]
-tags: ["Gluten free", "Fish", "Main course", "Swedish", "Leftovers", "Zero waste", "BBQ", "Summer", "Quick"]
+tags: ["Gluten free", "Fish", "Main course", "Swedish", "Leftovers", "Zero waste", "BBQ", "Summer", "Quick", "Nut free", "Shellfish free", "Soy free"]
 time: 33
 timeLabel: "33 min"
 facts:

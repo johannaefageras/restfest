@@ -6,7 +6,7 @@ image: assets/recipes/86-paron-och-vaniljsylt.png
 cardImage: assets/recipes/86-paron-och-vaniljsylt.png
 alt: Päron- och vaniljsylt med kardemumma
 categories: [preserves]
-tags: [Vegan, Gluten free, Jam, Leftovers, Gift, Budget]
+tags: [Vegan, Gluten free, Jam, Leftovers, Gift, Budget, Nut free, Shellfish free, Soy free]
 time: 40
 timeLabel: 40 min
 facts:

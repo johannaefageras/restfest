@@ -6,7 +6,7 @@ image: assets/recipes/203-fruktlader.png
 cardImage: assets/recipes/203-fruktlader.png
 alt: Fruktläder på övermogna bär och mjuka päron
 categories: [snack, kids]
-tags: [Vegan, Gluten free, Meal prep, Leftovers, Zero waste]
+tags: [Vegan, Gluten free, Meal prep, Leftovers, Zero waste, Nut free, Shellfish free, Soy free]
 time: 265
 timeLabel: 3 tim 25 min–4 tim 25 min
 facts:

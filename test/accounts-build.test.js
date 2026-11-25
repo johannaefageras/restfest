@@ -2,7 +2,14 @@
 // fully there or leave no trace (src/_data/ai.js, `accounts`).
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import {
+  existsSync,
+  mkdtempSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  statSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -307,4 +314,27 @@ test("with a publishable key every page gets the account button and the account 
   assert.ok(site.has("js/account.js"));
   assert.ok(site.has("js/account-helpers.js"));
   assert.match(site.read("js/vendor/supabase.js"), /createClient/);
+});
+
+// Here as it needs a build too, and builds that run at the same time would write the same copies.
+test("a build by itself brings the WebP copies of the recipe photos up to date", (t) => {
+  const site = build("");
+  t.after(() => rmSync(site.out, { recursive: true, force: true }));
+  const photos = join(root, "src/assets/recipes");
+  const outdated = readdirSync(photos)
+    .filter((name) => name.endsWith(".png"))
+    .flatMap((name) =>
+      [600, 1200, 1600].map((width) => [
+        name,
+        name.replace(/\.png$/, `-${width}.webp`),
+      ]),
+    )
+    .filter(
+      ([photo, copy]) =>
+        !site.has(`assets/recipes/${copy}`) ||
+        statSync(join(root, ".cache/recipe-photos", copy)).mtimeMs <
+          statSync(join(photos, photo)).mtimeMs,
+    )
+    .map(([, copy]) => copy);
+  assert.deepEqual(outdated, []);
 });

@@ -6,7 +6,7 @@ image: assets/recipes/28-pasta-aglio-e-olio.png
 cardImage: assets/recipes/28-pasta-aglio-e-olio.png
 alt: Pasta aglio e olio med citronpangrattato
 categories: [main]
-tags: [Vegan, Italian, Leftovers, Beginner friendly, Budget]
+tags: [Vegan, Italian, Leftovers, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 20
 timeLabel: 20 min
 facts:

@@ -6,7 +6,7 @@ image: assets/recipes/51-pesto.png
 cardImage: assets/recipes/51-pesto.png
 alt: Grön pesto på broccolistjälk, persilja och solrosfrön
 categories: [sauce]
-tags: [Vegan, Gluten free, Leftovers, Zero waste, Beginner friendly, Budget]
+tags: [Vegan, Gluten free, Leftovers, Zero waste, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 20
 timeLabel: 20 min
 facts:

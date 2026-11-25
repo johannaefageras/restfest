@@ -6,7 +6,7 @@ image: assets/recipes/92-pajdeg.png
 cardImage: assets/recipes/92-pajdeg.png
 alt: Frasig pajdeg med smör
 categories: [basics, baking]
-tags: [Vegetarian, Make ahead, Beginner friendly, Budget]
+tags: [Vegetarian, Make ahead, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 72
 timeLabel: 1 tim 12 min
 facts:

@@ -624,6 +624,7 @@ textarea:focus-visible,
   border-color: var(--ink);
 }
 
+.archive-sort-field > .archive-sort-icon,
 .archive-sort-field > .fa-chevron-down {
   position: absolute;
   top: 50%;
@@ -633,6 +634,11 @@ textarea:focus-visible,
   pointer-events: none;
 }
 
+.archive-sort-field > .archive-sort-icon {
+  right: 11px;
+  object-fit: contain;
+}
+
 /* Below 700px the menu's border would nearly touch the Filter button above it. */
 @media (max-width: 699px) {
   .archive-results-row {
@@ -640,8 +646,7 @@ textarea:focus-visible,
   }
 }
 
-/* On a phone the word "Sortera" would push the menu onto a line of its own. Screen readers still read it
-   (the same rules as .sr-only). A little less space also fits "Bäst matchning" beside the count at 375px. */
+/* Tighten the results row on phones so "Bäst matchning" fits beside the count. */
 @media (max-width: 519px) {
   .archive-results-row {
     column-gap: 10px;
@@ -649,11 +654,18 @@ textarea:focus-visible,
   .archive-sort select {
     padding-right: 31px;
   }
+  #archive-sort {
+    padding-inline: 9px 29px;
+    font-size: var(--text-ui);
+  }
+  .archive-sort-field > .archive-sort-icon {
+    right: 7px;
+  }
   .archive-sort-field > .fa-chevron-down {
     right: 11px;
   }
 
-  .archive-sort label {
+  .archive-sort label:not(.sr-only) {
     position: absolute;
     overflow: hidden;
     width: 1px;
@@ -797,7 +809,8 @@ textarea:focus-visible,
 }
 
 .archive-filters {
-  margin: 9px 0 13px;
+  gap: 12px;
+  margin: 14px 0 8px;
 }
 
 /* On a phone the category, diet and quick filters sit behind one control so the
@@ -852,6 +865,9 @@ textarea:focus-visible,
   .archive-filters {
     margin: 0;
   }
+  .archive-page .archive-category .meal-picker {
+    width: 100%;
+  }
 }
 
 @media (min-width: 700px) {
@@ -867,14 +883,17 @@ textarea:focus-visible,
 }
 
 @media (min-width: 900px) {
-  /* The category sits to the right of the search, and the other filters go on the row below.
+  /* The category sits to the right of the search, and the other filters span the full row below.
      The panel's wrappers step aside (display: contents) so the category and the other filters become
      items of this grid. A browser that keeps the ::details-content box gets it across both columns,
      which is the stacked layout above. */
   .archive-controls {
-    grid-template-columns: minmax(0, 650px) minmax(0, 320px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
     align-items: end;
     row-gap: 0;
+  }
+  .archive-recipes .archive-search {
+    max-width: none;
   }
 
   .archive-filter-panel,
@@ -1008,14 +1027,6 @@ details[open] > summary > .fa-chevron-down {
 .food-filter img {
   object-fit: contain;
 }
-#diet-filters .food-filter {
-  flex-direction: column;
-  justify-content: center;
-  min-width: 120px;
-  min-height: 88px;
-  padding: 10px 12px;
-}
-
 @media (max-width: 699px) {
   .archive-quick-filters {
     display: grid;
@@ -1028,6 +1039,33 @@ details[open] > summary > .fa-chevron-down {
     padding-inline: 4px;
     text-align: center;
     overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 360px) {
+  .archive-recipes .archive-quick-filters .food-filter {
+    font-size: 13px;
+  }
+}
+@media (min-width: 700px) and (max-width: 849px) {
+  .pasta-list .archive-quick-filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 1199px) {
+  #archive-filter-panel .archive-quick-filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 519px) {
+  #archive-filter-panel .archive-quick-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  #archive-filter-panel .archive-quick-filters > .food-filter {
+    flex-direction: row;
+    min-height: 44px;
   }
 }
 
@@ -1044,6 +1082,7 @@ details[open] > summary > .fa-chevron-down {
 #quick-filter[aria-pressed="true"] {
   background: var(--lavender);
 }
+#budget-filter[aria-pressed="true"],
 .food-filter[data-difficulty-filter="Medelsvårt"][aria-pressed="true"] {
   background: var(--yellow);
 }
@@ -1055,36 +1094,107 @@ details[open] > summary > .fa-chevron-down {
   color: #fff;
 }
 
-.archive-advanced-filters summary {
-  width: fit-content;
-  cursor: pointer;
-  font-family: var(--font-label);
-  font-size: var(--text-meta);
-  font-weight: var(--font-weight-medium);
-  padding: 8px 0;
+.archive-advanced-filters {
+  border: 1.5px solid var(--control);
+  border-radius: var(--radius-button);
+  background: var(--surface);
 }
-
-/* .food-filters { display: flex } would otherwise show this block while the details is closed. */
-.archive-advanced-filters:not([open]) > :not(summary) {
+.archive-advanced-filters > summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-medium);
+}
+.archive-advanced-filters:hover,
+.archive-advanced-filters[open] {
+  border-color: var(--ink);
+}
+.archive-advanced-filters > summary > .fa-chevron-down {
+  margin-inline-start: auto;
+}
+.archive-advanced-filters:not([open]) > .archive-advanced-filter-groups {
   display: none;
 }
-
-.archive-advanced-filters summary .fa-chevron-down {
-  margin-inline-start: 7px;
-  vertical-align: -1px;
+.archive-advanced-filter-groups {
+  display: grid;
+  gap: 18px;
+  padding: 14px 12px 16px;
+  border-top: 1px solid var(--rule);
+}
+.archive-advanced-filter-groups .filter-label {
+  margin-bottom: 8px;
+}
+.archive-diet-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.archive-diet-filters .food-filter {
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  min-height: 82px;
+  padding: 8px 3px;
+  font-size: clamp(12px, 3.5vw, 14px);
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: anywhere;
 }
 
-.archive-advanced-filters summary img {
-  display: inline-block;
-  margin-inline-end: 5px;
-  vertical-align: middle;
+@media (max-width: 699px) {
+  .archive-advanced-filter-groups .food-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .archive-advanced-filter-groups .food-filters .food-filter {
+    min-width: 0;
+    min-height: 44px;
+    padding-inline: 7px;
+    font-size: clamp(13px, 3.5vw, 15px);
+    text-align: start;
+  }
+  .archive-advanced-filter-groups .food-filters img {
+    flex: none;
+  }
 }
-
-.archive-advanced-filters > .filter-label {
-  margin-block: 6px;
+@media (max-width: 360px) {
+  .archive-advanced-filter-groups {
+    padding-inline: 8px;
+  }
+  .archive-diet-filters {
+    gap: 6px;
+  }
+  .archive-diet-filters .food-filter {
+    padding-inline: 1px;
+  }
 }
-.archive-advanced-filters > .food-filters {
-  margin-bottom: 10px;
+@media (min-width: 700px) and (max-width: 1049px) {
+  .archive-diet-filters .food-filter {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+    min-height: 58px;
+    padding: 5px 10px;
+  }
+}
+@media (min-width: 900px) {
+  .archive-advanced-filter-groups {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 20px;
+    padding: 16px;
+  }
+  .archive-diet-group {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 1050px) {
+  .archive-diet-filters {
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+  }
 }
 
 .filter-label {
@@ -2088,14 +2198,8 @@ body:has(#shopping-dialog[open]) {
   }
 }
 
-.archive-tag-filter {
-  max-width: 650px;
-  margin-block: 14px 8px;
-}
-
 .archive-tag-filter > label {
   display: block;
-  margin-bottom: 6px;
 }
 .archive-tag-filter > p {
   margin-top: 5px;

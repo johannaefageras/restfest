@@ -6,7 +6,7 @@ image: assets/recipes/239-artsoppa.png
 cardImage: assets/recipes/239-artsoppa.png
 alt: "Ärtsoppa på skinkbenet med senap"
 categories: [main]
-tags: ["Gluten free", "Dairy free", "Pork", "Soup", "Swedish", "Leftovers", "Zero waste", "Budget", "Classic", "Freezer friendly"]
+tags: ["Gluten free", "Dairy free", "Pork", "Soup", "Swedish", "Leftovers", "Zero waste", "Budget", "Classic", "Freezer friendly", "Nut free", "Shellfish free", "Soy free"]
 time: 735
 timeLabel: "12 tim 15 min"
 facts:

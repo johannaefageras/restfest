@@ -6,7 +6,7 @@ image: assets/recipes/214-grillade-flatbrod.png
 cardImage: assets/recipes/214-grillade-flatbrod.png
 alt: "Grillade flatbröd på filmjölkens sista skvätt med vitlöks- och örtsmör"
 categories: [side]
-tags: ["Vegetarian", "Bread", "Side dish", "Middle Eastern", "Leftovers", "Zero waste", "BBQ", "Summer", "Quick"]
+tags: ["Vegetarian", "Bread", "Side dish", "Middle Eastern", "Leftovers", "Zero waste", "BBQ", "Summer", "Quick", "Nut free", "Shellfish free", "Soy free"]
 time: 50
 timeLabel: "50 min"
 facts:

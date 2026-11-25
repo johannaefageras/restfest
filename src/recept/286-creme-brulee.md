@@ -6,7 +6,7 @@ image: assets/recipes/286-creme-brulee.png
 cardImage: assets/recipes/286-creme-brulee.png
 alt: "Crème brûlée med karamelliserat sockertäcke och färska hallon"
 categories: [dessert]
-tags: ["Vegetarian", "Gluten free", "Dessert", "French", "Leftovers", "Zero waste", "Egg yolks", "Make ahead"]
+tags: ["Vegetarian", "Gluten free", "Dessert", "French", "Leftovers", "Zero waste", "Egg yolks", "Make ahead", "Nut free", "Shellfish free", "Soy free"]
 timeLabel: "1 tim 30 min + minst 4 tim kylning"
 facts:
   Förberedelse: "30 min + 20 min dragning"

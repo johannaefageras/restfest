@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 import test from 'node:test';
+import { taxonomy } from '../lib/taxonomy.js';
 
 const source = readFileSync(new URL('../src/js/app.js', import.meta.url), 'utf8');
 const state = source.slice(source.indexOf('const archivePageSize ='), source.indexOf('let activeRecipe ='));
@@ -47,16 +48,19 @@ function page(count = 29) {
     meals: ['main'], foodKeys: [], tags: [], search: '', time: 10,
     difficulty: 'Nybörjare', date: '2026-11-20',
   }));
+  const { allTags, recipeTagLabels } = taxonomy();
   const context = vm.createContext({
     $, recipes, archiveSearch: $('#recipe-search'), archiveSort: $('#archive-sort'),
-    savedOnly: false, saved: new Set(), quickOnly: false, mealFilter: 'all',
+    savedOnly: false, saved: new Set(), quickOnly: false, meatFreeOnly: false, budgetOnly: false,
+    mealFilter: 'all',
     foodFilter: 'all', difficultyFilter: 'all', dietFilter: new Set(), selectedTags: new Set(),
     revealedSavedFilters: false, archiveSortChosen: false,
     isFood: () => true, loadPantry: () => ({ items: [] }), keyForIngredient: item => item,
-    searchKey: value => value.toLocaleLowerCase('sv-SE'), allTags: recipe => recipe.tags,
-    hasTag: (recipe, tag) => recipe.tags.includes(tag),
+    searchKey: value => value.toLocaleLowerCase('sv-SE'), allTags,
+    hasTag: (recipe, tag) => allTags(recipe).includes(tag),
     mealTypes: { main: { label: 'Huvudrätt' } }, mealName: () => 'Huvudrätt',
-    recipeTagLabels: {}, foodGroups: {},
+    recipeTagLabels, foodGroups: {},
+    squareIconPath: name => `assets/icons/${name}.svg`,
     archiveCard: recipe => `<article data-id="${recipe.id}"></article>`,
     document: { querySelectorAll: () => [] },
     window: { matchMedia: () => ({ matches: false }) },
@@ -105,6 +109,7 @@ test('loading reuses the preview cards, preserves the viewport on click and clea
 test('saving keeps the expanded depth; changing a search, filter or sort resets it', () => {
   const view = page();
   view.render(); view.load();
+  assert.equal(view.$('.archive-sort-icon').src, 'assets/icons/sort-alphabetical.svg');
   view.context.saved.add('1-recipe');
   view.render();
   assert.equal(view.grid.children.length, 24);
@@ -116,10 +121,14 @@ test('saving keeps the expanded depth; changing a search, filter or sort resets 
   view.render();
   assert.equal(view.grid.children.length, 12);
   assert.equal(view.grid.children[0].id, '29-recipe');
+  assert.equal(view.$('.archive-sort-icon').src, 'assets/icons/sort-newest.svg');
   view.load();
   view.context.quickOnly = true;
   view.render();
   assert.equal(view.grid.children.length, 12);
+  view.context.archiveSort.value = 'default';
+  view.render();
+  assert.equal(view.$('.archive-sort-icon').src, 'assets/icons/sort-default.svg');
 });
 
 test('short results, empty searches and saved recipes do not leave a teaser or a more button', () => {
@@ -142,4 +151,79 @@ test('short results, empty searches and saved recipes do not leave a teaser or a
   assert.equal(view.grid.children.length, 1);
   assert.equal(view.$('#archive-results').textContent, 'Visar 1 sparat recept');
   assert.equal(view.$('#archive-more').hidden, true);
+});
+
+test('lactose-free filtering and search include lactose-free, milk-free and vegan recipes', () => {
+  const view = page(4);
+  const [vegan, dairyFree, lactoseFree, vegetarian] = view.context.recipes;
+  vegan.tags = ['Vegan', 'Soy free'];
+  dairyFree.tags = ['Dairy free'];
+  lactoseFree.tags = ['Lactose free', 'Soy free'];
+  vegetarian.tags = ['Vegetarian', 'Soy free'];
+
+  const resultIds = () => view.grid.children.map(card => card.id);
+  view.context.dietFilter.add('Lactose free');
+  view.render();
+  assert.deepEqual(resultIds(), [vegan.id, dairyFree.id, lactoseFree.id]);
+
+  view.context.dietFilter.add('Soy free');
+  view.render();
+  assert.deepEqual(resultIds(), [vegan.id, lactoseFree.id]);
+  assert.equal(view.$('#advanced-filter-state').textContent, '2');
+
+  view.context.dietFilter.clear();
+  view.context.dietFilter.add('Dairy free');
+  view.render();
+  assert.deepEqual(resultIds(), [vegan.id, dairyFree.id]);
+
+  view.context.dietFilter.clear();
+  for (const query of ['Laktosfritt', 'lactose free']) {
+    view.context.archiveSearch.value = query;
+    view.render();
+    assert.deepEqual(resultIds(), [vegan.id, dairyFree.id, lactoseFree.id]);
+  }
+});
+
+test('Utan kött matches vegetarian and vegan recipes and combines with the saved filter', () => {
+  const view = page(4);
+  const [vegan, vegetarian, fish, meat] = view.context.recipes;
+  vegan.tags = ['Vegan'];
+  vegetarian.tags = ['Vegetarian'];
+  fish.tags = ['Pescatarian'];
+  meat.tags = ['Pork'];
+
+  const resultIds = () => view.grid.children.map(card => card.id);
+  view.context.meatFreeOnly = true;
+  view.render();
+  assert.deepEqual(resultIds(), [vegan.id, vegetarian.id]);
+  assert.equal(view.$('#archive-filter-count').textContent, '1');
+
+  view.context.savedOnly = true;
+  for (const recipe of [vegan, fish, meat]) view.context.saved.add(recipe.id);
+  view.render();
+  assert.deepEqual(resultIds(), [vegan.id]);
+  assert.equal(view.$('#archive-filter-count').textContent, '2');
+
+  view.context.meatFreeOnly = false;
+  view.render();
+  assert.deepEqual(resultIds(), [vegan.id, fish.id, meat.id]);
+});
+
+test('Budgetvänligt matches the Budget tag and combines with Utan kött', () => {
+  const view = page(3);
+  const [vegetarian, meat, untagged] = view.context.recipes;
+  vegetarian.tags = ['Vegetarian', 'Budget'];
+  meat.tags = ['Pork', 'Budget'];
+  untagged.tags = ['Vegan'];
+
+  const resultIds = () => view.grid.children.map(card => card.id);
+  view.context.budgetOnly = true;
+  view.render();
+  assert.deepEqual(resultIds(), [vegetarian.id, meat.id]);
+  assert.equal(view.$('#archive-filter-count').textContent, '1');
+
+  view.context.meatFreeOnly = true;
+  view.render();
+  assert.deepEqual(resultIds(), [vegetarian.id]);
+  assert.equal(view.$('#archive-filter-count').textContent, '2');
 });

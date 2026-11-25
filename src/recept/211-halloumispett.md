@@ -6,7 +6,7 @@ image: assets/recipes/211-halloumispett.png
 cardImage: assets/recipes/211-halloumispett.png
 alt: "Halloumispett på kylskåpets sista grönsaker med citronhonung"
 categories: [main]
-tags: ["Vegetarian", "Gluten free", "Main course", "Mediterranean", "Leftovers", "Zero waste", "BBQ", "Summer", "Quick"]
+tags: ["Vegetarian", "Gluten free", "Main course", "Mediterranean", "Leftovers", "Zero waste", "BBQ", "Summer", "Quick", "Nut free", "Shellfish free"]
 time: 30
 timeLabel: "30 min"
 facts:

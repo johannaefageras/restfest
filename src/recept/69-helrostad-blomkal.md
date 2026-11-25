@@ -6,7 +6,7 @@ image: assets/recipes/69-helrostad-blomkal.png
 cardImage: assets/recipes/69-helrostad-blomkal.png
 alt: Helrostad blomkål med tahinisås, citron och rostade mandlar
 categories: [main, side]
-tags: [Vegan, Gluten free, Middle Eastern, Sunday dinner, Budget]
+tags: [Vegan, Gluten free, Middle Eastern, Sunday dinner, Budget, Shellfish free, Soy free]
 time: 75
 timeLabel: 1 tim 15 min
 facts:

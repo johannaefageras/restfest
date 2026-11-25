@@ -6,7 +6,7 @@ image: assets/recipes/208-flankstek-med-chimichurri.png
 cardImage: assets/recipes/208-flankstek-med-chimichurri.png
 alt: "Flankstek med chimichurri på slokiga örter"
 categories: [main]
-tags: ["Gluten free", "Dairy free", "Beef", "Main course", "Argentinian", "Leftovers", "Zero waste", "BBQ", "Summer"]
+tags: ["Gluten free", "Dairy free", "Beef", "Main course", "Argentinian", "Leftovers", "Zero waste", "BBQ", "Summer", "Nut free", "Shellfish free", "Soy free"]
 time: 70
 timeLabel: "1 tim 10 min"
 facts:

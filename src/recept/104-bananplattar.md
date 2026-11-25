@@ -6,7 +6,7 @@ image: assets/recipes/104-bananplattar.png
 cardImage: assets/recipes/104-bananplattar.png
 alt: Små bananplättar med havre och kanel
 categories: [snack, breakfast]
-tags: [Vegetarian, Family friendly, Leftovers, Beginner friendly, Budget]
+tags: [Vegetarian, Family friendly, Leftovers, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 20
 timeLabel: 20 min
 facts:

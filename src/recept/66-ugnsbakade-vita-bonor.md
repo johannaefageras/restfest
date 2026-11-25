@@ -7,7 +7,7 @@ cardImage: assets/recipes/66-ugnsbakade-vita-bonor.png
 alt: Ugnsbakade stora vita bönor i tomatsås med dill och citron
 categories: [main, side]
 tags:
-  [Vegan, Gluten free, Greek, One pot, Make ahead, Beginner friendly, Budget]
+  [Vegan, Gluten free, Greek, One pot, Make ahead, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 60
 timeLabel: 1 tim
 facts:

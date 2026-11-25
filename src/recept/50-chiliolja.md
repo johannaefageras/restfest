@@ -6,7 +6,7 @@ image: assets/recipes/50-chiliolja.png
 cardImage: assets/recipes/50-chiliolja.png
 alt: Krispig chiliolja med vitlök, lök och sesam
 categories: [sauce]
-tags: [Vegan, Condiment, Asian, Make ahead, Gift, Budget]
+tags: [Vegan, Condiment, Asian, Make ahead, Gift, Budget, Nut free, Shellfish free]
 time: 100
 timeLabel: 1 tim 40 min
 facts:

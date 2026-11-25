@@ -16,6 +16,9 @@ tags:
     Leftovers,
     Budget,
     Beginner friendly,
+    Nut free,
+    Shellfish free,
+    Soy free,
   ]
 time: 5
 timeLabel: 5 min

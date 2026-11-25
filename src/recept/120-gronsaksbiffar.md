@@ -7,7 +7,7 @@ cardImage: assets/recipes/120-gronsaksbiffar.png
 alt: Grönsaksbiffar på rotfruktsrester med tzatziki
 categories: [main]
 tags:
-  [Vegetarian, Family friendly, Meal prep, Leftovers, Beginner friendly, Budget]
+  [Vegetarian, Family friendly, Meal prep, Leftovers, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 45
 timeLabel: 45 min
 facts:

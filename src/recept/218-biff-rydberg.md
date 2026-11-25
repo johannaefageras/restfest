@@ -6,7 +6,7 @@ image: assets/recipes/218-biff-rydberg.png
 cardImage: assets/recipes/218-biff-rydberg.png
 alt: "Biff Rydberg på gårdagens potatis med senapsgrädde och äggula"
 categories: [main]
-tags: ["Gluten free", "Beef", "Main course", "Swedish", "Leftovers", "Zero waste", "Classic", "Bistro"]
+tags: ["Gluten free", "Beef", "Main course", "Swedish", "Leftovers", "Zero waste", "Classic", "Bistro", "Nut free", "Shellfish free", "Soy free"]
 time: 45
 timeLabel: "45 min"
 facts:

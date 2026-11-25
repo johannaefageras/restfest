@@ -17,7 +17,7 @@
 //                      Supabase project behind the fridge photo and the new recipes)
 //   css/, js/          stylesheets and browser scripts, copied as they are to css/ and js/
 //   assets/            fonts, icons and photos, copied as they are. The recipe photos also get WebP
-//                      copies, made by tools/photos.mjs in .cache/recipe-photos/ (`npm run photos`)
+//                      copies, made by tools/photos.mjs in .cache/recipe-photos/ before every build
 //
 // src/recept/recept.11tydata.js gives the recipes their layout (_includes/layouts/recipe.njk) and
 // address, and lib/recipes.js works out the rest.
@@ -36,6 +36,7 @@ import {taxonomy} from './lib/taxonomy.js';
 import ai from './src/_data/ai.js';
 import {shoppingDepartmentNames} from './lib/shopping-departments.js';
 import {pageStructuredData} from './lib/metadata.js';
+import {makePhotos} from './tools/photos.mjs';
 import {cookingTime, doughs, filterDoughs, forms, freshPastaRecipe, pastaChoices, pastaGround, pastaNeighbours, pastasBySlug, pastasMadeWith, sauceLabels, sauces, sortPastas} from './lib/pasta.js';
 
 const recipes = api => api.getFilteredByGlob('src/recept/*.md')
@@ -125,11 +126,13 @@ export default function (eleventyConfig) {
   // stops the browser breaking there. For the narrow boxes under a recipe's description (recipe.njk).
   eleventyConfig.addFilter('keepRanges', text => String(text).replace(/(\d)–(\d)/g, '$1⁠–⁠$2'));
 
-  // The WebP copies of the recipe photos (tools/photos.mjs), copied next to the PNGs in
-  // assets/recipes/, where the service worker also caches them for offline recipe pages.
+  // The WebP copies of the recipe photos (tools/photos.mjs), made before each build and copied next
+  // to the PNGs in assets/recipes/, where the service worker also caches them for offline recipe pages.
+  // The local server ignores changes in .cache/ as Git does, so it's the PNG that makes it rebuild.
   // `webp` gives one copy's address and `webpSrcset` all of them for srcset, both relative to the
   // site root; anything that isn't a PNG gets its own address and no srcset. The browser builds the
   // same addresses in photoAttributes() (src/js/app.js), so keep the widths the same in all three.
+  eleventyConfig.on('eleventy.before', () => makePhotos());
   eleventyConfig.addPassthroughCopy({'.cache/recipe-photos': 'assets/recipes'});
   const photoWidths = [600, 1200, 1600];
   const isPhoto = image => /\.png$/.test(image ?? '');

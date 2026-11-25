@@ -6,7 +6,7 @@ image: assets/recipes/198-superrod-pastasas.png
 cardImage: assets/recipes/198-superrod-pastasas.png
 alt: Superröd pastasås med sju gömda grönsaker
 categories: [main, sauce, kids]
-tags: [Vegan, Family friendly, Pasta, Leftovers, Zero waste, Make ahead, Budget]
+tags: [Vegan, Family friendly, Pasta, Leftovers, Zero waste, Make ahead, Budget, Nut free, Shellfish free, Soy free]
 time: 50
 timeLabel: 50 min
 facts:

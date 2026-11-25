@@ -15,6 +15,9 @@ tags:
     Zero waste,
     Beginner friendly,
     Budget,
+    Nut free,
+    Shellfish free,
+    Soy free,
   ]
 time: 70
 timeLabel: 1 tim 10 min

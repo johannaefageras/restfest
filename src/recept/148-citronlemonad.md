@@ -15,6 +15,9 @@ tags:
     Zero waste,
     Family friendly,
     Make ahead,
+    Nut free,
+    Shellfish free,
+    Soy free,
   ]
 time: 130
 timeLabel: 1 tim 10 min–2 tim 10 min

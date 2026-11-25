@@ -16,6 +16,8 @@ tags:
     Gift,
     Beginner friendly,
     Budget,
+    Nut free,
+    Shellfish free,
   ]
 time: 10
 timeLabel: 10 min

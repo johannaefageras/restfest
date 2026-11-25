@@ -6,7 +6,7 @@ image: assets/recipes/231-gronkalssallad.png
 cardImage: assets/recipes/231-gronkalssallad.png
 alt: "Grönkålssallad med äpple, tranbär och fröpåsarnas sista skedar"
 categories: [main]
-tags: ["Vegan", "Gluten free", "Dairy free", "Salad", "Leftovers", "Zero waste", "Winter", "Make ahead", "Lunch box"]
+tags: ["Vegan", "Gluten free", "Dairy free", "Salad", "Leftovers", "Zero waste", "Winter", "Make ahead", "Lunch box", "Nut free", "Shellfish free", "Soy free"]
 time: 25
 timeLabel: "25 min"
 facts:

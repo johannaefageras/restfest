@@ -15,6 +15,9 @@ tags:
     Make ahead,
     Beginner friendly,
     Budget,
+    Nut free,
+    Shellfish free,
+    Soy free,
   ]
 time: 80
 timeLabel: 1 tim 20 min

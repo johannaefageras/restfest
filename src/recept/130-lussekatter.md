@@ -6,7 +6,7 @@ image: assets/recipes/130-lussekatter.png
 cardImage: assets/recipes/130-lussekatter.png
 alt: Saftiga lussekatter med kesella
 categories: [bread, baking]
-tags: [Vegetarian, Swedish, Christmas, Make ahead]
+tags: [Vegetarian, Swedish, Christmas, Make ahead, Nut free, Shellfish free, Soy free]
 timeLabel: 2 tim + gräddning
 facts:
   Förberedelse: 45 min + 75 min jäsning

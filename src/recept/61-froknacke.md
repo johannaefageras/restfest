@@ -6,7 +6,7 @@ image: assets/recipes/61-froknacke.png
 cardImage: assets/recipes/61-froknacke.png
 alt: Fröknäcke med pumpafrön, sesam och flingsalt
 categories: [bread, baking, side]
-tags: [Vegan, Gluten free, Swedish, Make ahead, Beginner friendly, Budget]
+tags: [Vegan, Gluten free, Swedish, Make ahead, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 70
 timeLabel: 1 tim 10 min
 facts:

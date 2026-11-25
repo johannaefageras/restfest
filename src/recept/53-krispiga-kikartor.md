@@ -6,7 +6,7 @@ image: assets/recipes/53-krispiga-kikartor.png
 cardImage: assets/recipes/53-krispiga-kikartor.png
 alt: Krispiga kikärtor med rökt paprika, lime och flingsalt
 categories: [party]
-tags: [Vegan, Gluten free, Leftovers, Beginner friendly, Budget]
+tags: [Vegan, Gluten free, Leftovers, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 45
 timeLabel: 45 min
 facts:

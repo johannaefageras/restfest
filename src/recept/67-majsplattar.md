@@ -6,7 +6,7 @@ image: assets/recipes/67-majsplattar.png
 cardImage: assets/recipes/67-majsplattar.png
 alt: Krispiga majsplättar med limecrème och koriander
 categories: [main, party, breakfast]
-tags: [Vegetarian, Family friendly, Beginner friendly, Budget]
+tags: [Vegetarian, Family friendly, Beginner friendly, Budget, Nut free, Shellfish free, Soy free]
 time: 25
 timeLabel: 25 min
 facts:

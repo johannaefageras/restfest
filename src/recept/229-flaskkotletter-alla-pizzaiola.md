@@ -6,7 +6,7 @@ image: assets/recipes/229-flaskkotletter-alla-pizzaiola.png
 cardImage: assets/recipes/229-flaskkotletter-alla-pizzaiola.png
 alt: "Fläskkotletter alla pizzaiola med den halva burken tomater och de sista oliverna"
 categories: [main]
-tags: ["Gluten free", "Dairy free", "Pork", "Main course", "Italian", "Leftovers", "Zero waste", "One pan", "Weeknight"]
+tags: ["Gluten free", "Dairy free", "Pork", "Main course", "Italian", "Leftovers", "Zero waste", "One pan", "Weeknight", "Nut free", "Shellfish free", "Soy free"]
 time: 35
 timeLabel: "35 min"
 facts:

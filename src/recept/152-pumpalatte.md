@@ -6,7 +6,7 @@ image: assets/recipes/152-pumpalatte.png
 cardImage: assets/recipes/152-pumpalatte.png
 alt: Pumpalatte på överbliven pumpapuré
 categories: [drink]
-tags: [Vegetarian, Gluten free, Hot drink, Autumn, Leftovers, Beginner friendly]
+tags: [Vegetarian, Gluten free, Hot drink, Autumn, Leftovers, Beginner friendly, Nut free, Shellfish free, Soy free]
 time: 15
 timeLabel: 15 min
 facts:

@@ -6,7 +6,7 @@ image: assets/recipes/294-ingefarsdricka.png
 cardImage: assets/recipes/294-ingefarsdricka.png
 alt: "Gul ingefärsdricka i glas och patentflaskor med citron och ingefära"
 categories: [drink]
-tags: ["Vegan", "Vegetarian", "Gluten free", "Drink", "Fermented", "Leftovers", "Zero waste", "Summer"]
+tags: ["Vegan", "Vegetarian", "Gluten free", "Drink", "Fermented", "Leftovers", "Zero waste", "Summer", "Nut free", "Shellfish free", "Soy free"]
 timeLabel: "45 min + 5–7 dagar för kulturen och 2–3 dagar jäsning"
 facts:
   Förberedelse: "5–7 dagar för kulturen + 30 min"

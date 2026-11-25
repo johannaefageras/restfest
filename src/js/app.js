@@ -49,12 +49,25 @@ let foodFilter = "all";
 let mealFilter = "all";
 let difficultyFilter = "all";
 let quickOnly = false;
+let meatFreeOnly = false;
+let budgetOnly = false;
 let savedOnly =
   Boolean(archiveSearch) &&
   new URLSearchParams(location.search).get("vy") === "sparade";
 let revealedSavedFilters = false;
 let archiveSortChosen = false;
 const archivePageSize = 12;
+const archiveDietTags = [
+  "Lactose free",
+  "Egg free",
+  "Gluten free",
+  "Dairy free",
+  "Nut free",
+  "Shellfish free",
+  "Soy free",
+  "Vegan",
+  "Vegetarian",
+];
 let archiveVisibleCount = archivePageSize;
 let archiveViewKey = "";
 let archiveItems = [];
@@ -889,6 +902,11 @@ const archiveOrders = {
     recipeNumber(b.recipe) - recipeNumber(a.recipe),
   title: (a, b) => a.recipe.title.localeCompare(b.recipe.title, "sv-SE"),
 };
+const archiveSortIcons = {
+  match: "sort-best",
+  newest: "sort-newest",
+  title: "sort-alphabetical",
+};
 
 // "Bäst matchning" is only offered while the fridge list has something on it. Then it comes first
 // and is picked, unless the visitor has already chosen another order.
@@ -950,15 +968,22 @@ function renderArchive() {
   if (!archiveSearch) return;
   const query = searchKey(archiveSearch.value.trim());
   const words = query ? query.split(/\s+/) : [];
-  const activeFilters =
-    (mealFilter !== "all" ? 1 : 0) +
+  const advancedFilters =
     dietFilter.size +
     (foodFilter !== "all" ? 1 : 0) +
-    selectedTags.size +
+    selectedTags.size;
+  const activeFilters =
+    advancedFilters +
+    (mealFilter !== "all" ? 1 : 0) +
     (difficultyFilter !== "all" ? 1 : 0) +
     (quickOnly ? 1 : 0) +
+    (meatFreeOnly ? 1 : 0) +
+    (budgetOnly ? 1 : 0) +
     (savedOnly ? 1 : 0);
-  const pool = savedOnly ? recipes : foodRecipes;
+  const requiredTags = [...dietFilter, ...selectedTags];
+  if (meatFreeOnly) requiredTags.push("Vegetarian");
+  if (budgetOnly) requiredTags.push("Budget");
+  const pool = savedOnly && !meatFreeOnly && !budgetOnly ? recipes : foodRecipes;
   const visible = pool.filter((recipe) => {
     if (savedOnly && !saved.has(recipe.id)) return false;
     if (quickOnly && (recipe.time === null || recipe.time >= 20)) return false;
@@ -971,16 +996,19 @@ function renderArchive() {
       !recipe.foodKeys.some((key) => foods[key].group === foodFilter)
     )
       return false;
-    for (const tag of [...dietFilter, ...selectedTags]) {
-      if (!hasTag(recipe, tag)) return false;
-    }
-    return matchesSearch(recipe, words);
+    return (
+      requiredTags.every((tag) => hasTag(recipe, tag)) &&
+      matchesSearch(recipe, words)
+    );
   });
 
   // With something on the fridge list, every card says how well it matches, whatever the order.
   const pantryKeys = new Set(loadPantry().items.map(keyForIngredient));
   const pantryInUse = [...pantryKeys].some((key) => !key.startsWith("custom:"));
   offerMatchSort(pantryInUse);
+  const sortIcon = $(".archive-sort-icon");
+  const sortIconUrl = squareIconPath(archiveSortIcons[archiveSort.value] ?? "sort-default");
+  if (sortIcon && sortIcon.src !== sortIconUrl) sortIcon.src = sortIconUrl;
   const items = visible.map((recipe) => ({
     recipe,
     match: pantryInUse ? matchRecipe(recipe, pantryKeys) : null,
@@ -991,7 +1019,8 @@ function renderArchive() {
   // A new search, filter or sort starts at the beginning. Saving a card keeps the current depth.
   const viewKey = JSON.stringify([
     query, mealFilter, foodFilter, [...dietFilter].sort(), [...selectedTags].sort(),
-    difficultyFilter, quickOnly, savedOnly, archiveSort.value, [...pantryKeys].sort(),
+    difficultyFilter, quickOnly, meatFreeOnly, budgetOnly, savedOnly,
+    archiveSort.value, [...pantryKeys].sort(),
   ]);
   if (viewKey !== archiveViewKey) archiveVisibleCount = archivePageSize;
   archiveViewKey = viewKey;
@@ -1014,19 +1043,11 @@ function renderArchive() {
     : "";
   $("#saved-filter").setAttribute("aria-pressed", String(savedOnly));
   $("#quick-filter").setAttribute("aria-pressed", String(quickOnly));
-  const filtersInUse = [...dietFilter].map((tag) => recipeTagLabels[tag]);
-  if (foodFilter !== "all") filtersInUse.push(foodGroups[foodFilter].label);
-  if (selectedTags.size === 1) {
-    const [tag] = selectedTags;
-    filtersInUse.push(recipeTagLabels[tag] ?? tag);
-  } else if (selectedTags.size > 1) {
-    filtersInUse.push(`${selectedTags.size} taggar`);
-  }
+  $("#meat-free-filter").setAttribute("aria-pressed", String(meatFreeOnly));
+  $("#budget-filter").setAttribute("aria-pressed", String(budgetOnly));
   const filterState = $("#advanced-filter-state");
-  filterState.hidden = !filtersInUse.length;
-  filterState.textContent = filtersInUse.length
-    ? `· ${filtersInUse.join(" · ")}`
-    : "";
+  filterState.hidden = advancedFilters === 0;
+  filterState.textContent = String(advancedFilters);
   const filterCount = $("#archive-filter-count");
   if (filterCount) {
     filterCount.hidden = activeFilters === 0;
@@ -1294,9 +1315,12 @@ function setupTagPicker() {
   const list = $("#recipe-tag-suggestions");
   const empty = $(".tag-picker-empty");
   // Diet has its own buttons, so it stays out of the tag suggestions.
-  const dietKeys = dietTags.map((tag) => searchKey(recipeTagLabels[tag]));
+  const dietKeys = archiveDietTags.flatMap((tag) => [
+    searchKey(tag),
+    searchKey(recipeTagLabels[tag]),
+  ]);
   const tags = [...new Set(foodRecipes.flatMap((recipe) => recipe.tags ?? []))]
-    .filter((tag) => !dietTags.includes(tag))
+    .filter((tag) => !archiveDietTags.includes(tag))
     .map((tag) => {
       const label = recipeTagLabels[tag] ?? tag;
       return { tag, label, labelKey: searchKey(label), tagKey: searchKey(tag) };
@@ -1351,7 +1375,7 @@ function setupTagPicker() {
     input.setAttribute("aria-expanded", String(!list.hidden));
     if (suggestions.length) empty.textContent = "";
     else if (query && dietKeys.some((key) => key.startsWith(query)))
-      empty.textContent = "Kost väljer du med knapparna ovanför.";
+      empty.textContent = "Välj kostfilter med knapparna ovanför.";
     else
       empty.textContent = query
         ? "Inga matchande taggar."
@@ -1470,10 +1494,10 @@ if (archiveSearch) {
       renderArchive();
     });
   });
-  $("#diet-filters").innerHTML = dietTags
+  $("#diet-filters").innerHTML = archiveDietTags
     .map(
       (tag) =>
-        `<button type="button" class="food-filter" data-diet-filter="${tag}" aria-pressed="false">${squareIcon(tagIcons[tag], 48)}${recipeTagLabels[tag]}</button>`,
+        `<button type="button" class="food-filter" data-diet-filter="${tag}" aria-pressed="false">${squareIcon(tagIcons[tag], 48)}<span>${recipeTagLabels[tag]}</span></button>`,
     )
     .join("");
   $("#diet-filters").addEventListener("click", (event) => {
@@ -1514,6 +1538,14 @@ if (archiveSearch) {
     setSavedView(!savedOnly);
     renderArchive();
   });
+  $("#meat-free-filter").addEventListener("click", () => {
+    meatFreeOnly = !meatFreeOnly;
+    renderArchive();
+  });
+  $("#budget-filter").addEventListener("click", () => {
+    budgetOnly = !budgetOnly;
+    renderArchive();
+  });
   function clearFilters() {
     archiveSearch.value = "";
     clearTags();
@@ -1522,6 +1554,8 @@ if (archiveSearch) {
     difficultyFilter = "all";
     setMealFilter("all");
     quickOnly = false;
+    meatFreeOnly = false;
+    budgetOnly = false;
     renderArchive();
     archiveSearch.focus({ preventScroll: true });
   }

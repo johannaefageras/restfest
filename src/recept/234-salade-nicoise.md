@@ -6,7 +6,7 @@ image: assets/recipes/234-salade-nicoise.png
 cardImage: assets/recipes/234-salade-nicoise.png
 alt: "Salade niçoise på gårdagens potatis och de sista haricots verts"
 categories: [main]
-tags: ["Gluten free", "Dairy free", "Fish", "Salad", "French", "Leftovers", "Zero waste", "Lunch", "Quick"]
+tags: ["Gluten free", "Dairy free", "Fish", "Salad", "French", "Leftovers", "Zero waste", "Lunch", "Quick", "Nut free", "Shellfish free", "Soy free"]
 time: 30
 timeLabel: "30 min"
 facts:
