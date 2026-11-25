@@ -1,4 +1,6 @@
-{#- A cake's card on tartor.html: the archive's recipe card (recipe-card.njk) with the cake's number
+{#- A cake's card on tartor.html: the archive's recipe card (recipe-card.njk) with the drawing of the
+    whole cake on a coloured ground where that has the photo, as the pasta sorts' cards have theirs
+    (the photos are on the recipe and on its card in the archive). Then the cake's number
     as a badge like the recipe's (.mini-badge), its level's icon and name and, on the right, its
     origin's flag above the title, and what it is built
     with as the chips. The flag's alt text and tooltip are the origin's name; an origin without a flag
@@ -15,9 +17,8 @@
 {%- set level = recipe.facts['Nivå'] -%}
 {%- set region = cake.ursprung | cakeRegion -%}
 <article class="archive-card cake-card" data-niva="{{ level }}" data-del="{{ cake.delar | join(' ') }}" data-ursprung="{{ region }}" data-search="{{ recipe.title }} {{ cake.ursprung }} {{ region }}{% for part in cake.delar %} {{ cakeParts[part].label }}{% endfor %}">
-          <div class="archive-card-art has-photo">
-            {%- set srcset = recipe.cardImage | webpSrcset(base) %}
-            <img src="{{ base }}{{ recipe.cardImage | webp }}"{% if srcset %} srcset="{{ srcset }}" sizes="(min-width: 900px) 33vw, (min-width: 421px) 50vw, 100vw"{% endif %} alt="" width="600" height="338" loading="lazy" decoding="async">
+          <div class="archive-card-art cake-card-art">
+            <img src="{{ base }}assets/icons/tartor/{{ item.fileSlug }}.svg" alt="" width="512" height="512" loading="lazy" decoding="async">
             <span class="archive-time">{{ recipe.timeLabel }}</span>
             <button class="favorite" data-save="{{ recipe.id }}" aria-label="Spara {{ recipe.title }}" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i></button>
           </div>

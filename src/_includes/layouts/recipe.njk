@@ -163,15 +163,16 @@ layout: layouts/base.njk
           </ul>
         </section>
         {%- endif %}
-        {#- A cake part's base recipe lists the cakes built with it (lib/cakes.js), each with its photo,
-            like the pasta sorts above. They are recipes too, so in the dialog a link opens that cake there. #}
+        {#- A cake part's base recipe lists the cakes built with it (lib/cakes.js), each with the drawing of
+            a piece, like the pasta sorts above. They are recipes too, so in the dialog a link opens that
+            cake there. #}
         {%- set cakesWith = collections.cakes | cakesMadeWith(recipe.id) %}
         {%- if cakesWith.length %}
         <section class="recipe-pastas recipe-cakes" aria-labelledby="cakes-heading">
           <h2 id="cakes-heading">Tårtor att bygga på dem</h2>
           <ul class="pasta-links pasta-swaps">
             {%- for item in cakesWith %}
-            <li><a href="{{ base }}recept/{{ item.fileSlug }}.html" data-open="{{ item.fileSlug }}"><img src="{{ base }}{{ item.data.recipe.cardImage | webp }}" alt="" width="40" height="40">{{ item.data.tarta.namn }}</a></li>
+            <li><a href="{{ base }}recept/{{ item.fileSlug }}.html" data-open="{{ item.fileSlug }}"><img src="{{ base }}assets/icons/tartor/{{ item.fileSlug }}-bit.svg" alt="" width="40" height="40">{{ item.data.tarta.namn }}</a></li>
             {%- endfor %}
           </ul>
         </section>
@@ -187,6 +188,35 @@ layout: layouts/base.njk
           <summary>Mått och ugnstemperaturer<i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
           <p>Måtten är svenska (dl, msk, tsk, krm). Ugnstemperaturerna gäller vanlig ugn med över- och undervärme; med varmluft, sänk med 20 grader.</p>
         </details>
+        {%- endif %}
+        {#- A cake (lib/cakes.js): its place among the cakes on tartor.html, with the drawing of a piece
+            (its card there has the whole cake). Each part it is built with links to the cakes that share it (tartor.html?del=), and the
+            cakes before and after it open in the dialog when it is one, like the list above. #}
+        {%- if tarta %}
+        {%- set nearby = collections.cakes | cakeNeighbours(recipe.id) %}
+        <section class="cake-place" aria-labelledby="cake-place-heading">
+          <img class="cake-place-art" src="{{ base }}assets/icons/tartor/{{ recipe.id }}-bit.svg" alt="" width="160" height="160" loading="lazy">
+          <div class="cake-place-text">
+            <h2 id="cake-place-heading">Tårta nr {{ tarta.nr }} av {{ collections.cakes.length }}</h2>
+            {%- if tarta.delar.length %}
+            <p>Fler tårtor byggda med</p>
+            <ul class="cake-place-parts">
+              {%- for part in tarta.delar %}
+              <li><a href="{{ base }}tartor.html?del={{ part }}"><img src="{{ base }}assets/icons/{{ cakeParts[part].icon }}.svg" alt="" width="24" height="24">{{ cakeParts[part].label }}</a></li>
+              {%- endfor %}
+            </ul>
+            {%- endif %}
+          </div>
+          <nav class="cake-place-nav" aria-label="Fler tårtor">
+            {%- if nearby.previous %}
+            <a class="text-button" href="{{ base }}recept/{{ nearby.previous.fileSlug }}.html" data-open="{{ nearby.previous.fileSlug }}" rel="prev"><i class="fas fa-arrow-left" aria-hidden="true"></i> {{ nearby.previous.data.tarta.namn }}</a>
+            {%- endif %}
+            <a class="text-button cake-place-all" href="{{ base }}tartor.html">Alla tårtor</a>
+            {%- if nearby.next %}
+            <a class="text-button cake-place-next" href="{{ base }}recept/{{ nearby.next.fileSlug }}.html" data-open="{{ nearby.next.fileSlug }}" rel="next">{{ nearby.next.data.tarta.namn }} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            {%- endif %}
+          </nav>
+        </section>
         {%- endif %}
       </div>
     </article>

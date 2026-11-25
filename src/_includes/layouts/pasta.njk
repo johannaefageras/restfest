@@ -104,7 +104,7 @@ layout: layouts/base.njk
       <a class="text-button" href="{{ base }}pasta/{{ neighbours.previous.fileSlug }}.html" rel="prev"><i class="fas fa-arrow-left" aria-hidden="true"></i> {{ neighbours.previous.data.namn }}</a>
       {%- endif %}
       {%- if neighbours.next %}
-      <a class="text-button pasta-next" href="{{ base }}pasta/{{ neighbours.next.fileSlug }}.html" rel="next">{{ neighbours.next.data.namn }} <i class="fas fa-arrow-left" aria-hidden="true"></i></a>
+      <a class="text-button pasta-next" href="{{ base }}pasta/{{ neighbours.next.fileSlug }}.html" rel="next">{{ neighbours.next.data.namn }} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
       {%- endif %}
     </nav>
     {%- endif %}

@@ -193,10 +193,11 @@ tarta:
 ```
 
 1. Add the recipe as usual (above), with the `tarta` block. The level filter uses `facts: Nivå`.
-2. Use the whole cake as `image` and a piece as `cardImage`, e.g. `assets/recipes/317-prinsesstarta.png` and `317-prinsesstarta-bit.png`. The cards show 16:9, and photos narrower than 1600 px get no 1600 px copy, so make the piece about 1672 × 941.
-3. Run `npm test`: it reports gaps or repeats in the numbering, unknown parts or levels, an origin that belongs to no region and missing icons or recipes.
+2. Use the whole cake as `image` and a piece as `cardImage`, e.g. `assets/recipes/317-prinsesstarta.png` and `317-prinsesstarta-bit.png`. The piece is the cake's card in the archive (on `tartor.html` the card has the drawing). The cards show 16:9, and photos narrower than 1600 px get no 1600 px copy, so make the piece about 1672 × 941.
+3. Add its two drawings, named the same way: `assets/icons/tartor/317-prinsesstarta.svg` (the whole cake, on its card on `tartor.html`) and `317-prinsesstarta-bit.svg` (a piece, in the box at the bottom of its recipe's page and in the list on the base recipe's page). Give them a square `viewBox`, like the pasta drawings, so they all show at the same size.
+4. Run `npm test`: it reports gaps or repeats in the numbering, unknown parts or levels, an origin that belongs to no region and missing drawings, icons or recipes.
 
-The parts, levels, regions and leftover recipes are in [lib/cakes.js](lib/cakes.js). A part with `grundrecept` links to its base recipe from `tartor.html`, and that recipe's page lists the cakes built with it.
+The parts, levels, regions and leftover recipes are in [lib/cakes.js](lib/cakes.js). A part with `grundrecept` links to its base recipe from `tartor.html`, and that recipe's page lists the cakes built with it. A cake's own page ends with its number, the parts it is built with (each a link to `tartor.html` filtered by it) and the cakes before and after it.
 
 ## Supabase and AI features
 

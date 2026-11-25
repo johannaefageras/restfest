@@ -4622,8 +4622,9 @@ a.dialog-save {
   background: var(--sage);
 }
 /* Placed, not in the flow, like the guide cards' drawings, so every card's ground keeps the archive's
-   16:9 whatever the drawing's proportions. */
-.pasta-card-art > img {
+   16:9 whatever the drawing's proportions. The cakes' cards on tartor.html place theirs the same way. */
+.pasta-card-art > img,
+.cake-card-art > img {
   position: absolute;
   inset: 11% 12%;
   width: 76%;
@@ -4631,14 +4632,17 @@ a.dialog-save {
   object-fit: contain;
   transition: transform 0.2s ease;
 }
-.pasta-card:nth-child(even) .pasta-card-art > img {
+.pasta-card:nth-child(even) .pasta-card-art > img,
+.cake-card:nth-child(even) .cake-card-art > img {
   transform: rotate(5deg);
 }
-.pasta-card:hover .pasta-card-art > img {
+.pasta-card:hover .pasta-card-art > img,
+.cake-card:hover .cake-card-art > img {
   transform: rotate(0deg) scale(1.06);
 }
 @media (prefers-reduced-motion: reduce) {
-  .pasta-card-art > img {
+  .pasta-card-art > img,
+  .cake-card-art > img {
     transition: none;
   }
 }
@@ -4682,11 +4686,6 @@ a.dialog-save {
   padding-block: 0;
   font-size: var(--text-ui);
 }
-/* The icon set has no arrow to the right, so "next" turns the left one round. */
-.pasta-next .fa-arrow-left {
-  transform: scaleX(-1);
-}
-
 /* A sort, on its own page (framed like a recipe's page) and in the dialog. It opens with its cover, a
    wide pattern of the pasta across the whole width, on its card's ground (data-ground, from
    pastaGround in lib/pasta.js), cut to a band like a recipe's photo (.dialog-top.has-photo). */
@@ -4933,9 +4932,148 @@ a.dialog-save {
   line-height: 1.5;
 }
 
-/* On a base recipe's page, the cakes built with it (recipe.njk): the pasta sorts' buttons, with a
-   round crop of the cake's photo where a sort has its drawing. */
-.recipe-cakes .pasta-swaps img {
-  object-fit: cover;
-  border-radius: 50%;
+/* The cakes' drawings on their cards, placed like the pasta sorts' (.pasta-card-art above), on the
+   same three grounds in another order: the cards come in number order, and in this one no cake gets
+   a ground of its own colour (the green Prinsesstårta, Cassata and Matcharulltårta are on pink, the
+   purple Ubetårta on sage). The filter hides cards without moving them, so a cake keeps its ground. */
+.cake-card:nth-child(3n + 1) .cake-card-art {
+  background: var(--lavender);
+}
+.cake-card:nth-child(3n + 2) .cake-card-art {
+  background: var(--sage);
+}
+.cake-card:nth-child(3n + 3) .cake-card-art {
+  background: var(--pink);
+}
+/* A taller ground than the archive's 16:9, so the drawing is bigger and its stand ends above the
+   cooking time in the corner, which is long on some ("5 tim 10 min + över natten"). */
+.archive-card-art.cake-card-art {
+  aspect-ratio: 4 / 3;
+}
+.cake-card-art > img {
+  inset: 6% 12% 19%;
+  height: 75%;
+}
+
+/* On a cake's recipe page (recipe.njk): its place among the cakes, on the pink Tårtor has in the
+   collections menu. The drawing of a piece sits beside its number and the parts it is built with,
+   and the cakes before and after it run along the bottom, "Alla tårtor" between them. On a phone
+   the number gets a row of its own above a smaller drawing, as it doesn't fit beside it, and
+   "Alla tårtor" one under the two cakes. (On a base recipe's page the list of cakes built with it is
+   the pasta sorts' buttons, .pasta-swaps.) */
+.cake-place {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 22px;
+  margin-top: 28px;
+  padding: 18px 22px 4px;
+  border-radius: var(--radius-card);
+  background: var(--pink-light);
+}
+.cake-place-art {
+  width: 140px;
+  height: 140px;
+}
+.cake-place h2 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+}
+.cake-place-text p {
+  margin: 8px 0 8px;
+  font-size: var(--text-ui);
+}
+.cake-place-parts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cake-place-parts a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 4px 12px 4px 8px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-button);
+  background: var(--surface);
+  font-size: var(--text-ui);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+}
+.cake-place-parts a:hover {
+  background: var(--hover);
+}
+.cake-place-parts img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+/* The line above is the ink a little see-through, so it shows on the pink in both themes. */
+.cake-place-nav {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-areas: "previous all next";
+  column-gap: 16px;
+  margin-top: 16px;
+  border-top: 1px solid rgb(21 21 21 / 0.2);
+}
+.cake-place-nav [rel="prev"] {
+  grid-area: previous;
+  justify-self: start;
+  text-align: start;
+}
+.cake-place-all {
+  grid-area: all;
+}
+.cake-place-next {
+  grid-area: next;
+  justify-self: end;
+  text-align: end;
+}
+@media (max-width: 519px) {
+  .cake-place {
+    grid-template-columns: 88px minmax(0, 1fr);
+    grid-template-areas:
+      "heading heading"
+      "art lead"
+      "art parts"
+      "nav nav";
+    column-gap: 14px;
+    padding: 16px 16px 4px;
+  }
+  /* Its heading, line and parts become the grid's own items, so the heading can span the row. */
+  .cake-place-text {
+    display: contents;
+  }
+  .cake-place h2 {
+    grid-area: heading;
+    margin-bottom: 6px;
+    font-size: 20px;
+  }
+  .cake-place-art {
+    grid-area: art;
+    width: 88px;
+    height: 88px;
+  }
+  .cake-place-text p {
+    grid-area: lead;
+    align-self: end;
+  }
+  .cake-place-parts {
+    grid-area: parts;
+    align-self: start;
+  }
+  .cake-place-nav {
+    grid-area: nav;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "previous next"
+      "all all";
+  }
 }

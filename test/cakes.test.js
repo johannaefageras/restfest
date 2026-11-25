@@ -1,11 +1,12 @@
 // The cakes on tartor.html: archive recipes with a `tarta` block (lib/cakes.js). Every cake has its own
-// number, a short name, an origin in one of the regions, parts and a level the page knows; the icons, base recipes and leftover
-// recipes the page uses exist; and the helpers pick the right cakes. Each test lists every cake that fails it.
+// number, a short name, an origin in one of the regions, parts and a level the page knows, and its two
+// drawings; the icons, base recipes and leftover recipes the page uses exist; and the helpers pick the
+// right cakes. Each test lists every cake that fails it.
 import assert from 'node:assert/strict';
 import {existsSync, readdirSync, readFileSync} from 'node:fs';
 import test from 'node:test';
 import yaml from 'js-yaml';
-import {baseRecipes, cakeChoices, cakeRegion, cakesMadeWith, flags, leftoverRecipes, levels, parts, regions, sortCakes} from '../lib/cakes.js';
+import {baseRecipes, cakeChoices, cakeNeighbours, cakeRegion, cakesMadeWith, flags, leftoverRecipes, levels, parts, regions, sortCakes} from '../lib/cakes.js';
 
 const src = path => new URL(`../src/${path}`, import.meta.url);
 const cakes = readdirSync(src('recept/'))
@@ -42,6 +43,13 @@ test('the icons, flags, base recipes and leftover recipes the page uses exist', 
     assert.ok(existsSync(src(`assets/icons/${icon}.svg`)), icon);
   for (const {id} of baseRecipes()) assert.ok(existsSync(src(`recept/${id}.md`)), id);
   for (const id of leftoverRecipes) assert.ok(existsSync(src(`recept/${id}.md`)), id);
+});
+
+test('every cake has a drawing of the whole cake and of a piece, and every drawing belongs to a cake', () => {
+  const drawings = readdirSync(src('assets/icons/tartor/')).filter(name => name.endsWith('.svg'));
+  const expected = cakes.flatMap(({fileSlug}) => [`${fileSlug}.svg`, `${fileSlug}-bit.svg`]);
+  assert.deepEqual(expected.filter(name => !drawings.includes(name)), [], 'missing');
+  assert.deepEqual(drawings.filter(name => !expected.includes(name)), [], 'not a cake');
 });
 
 test('the cakes come in number order, and only recipes with a tarta block are cakes', () => {
@@ -81,4 +89,13 @@ test('a base recipe lists the cakes built with its part, and no others', () => {
   const items = [cake('with', base ? [base[0]] : []), cake('without', ['ganache']), cake('none', [])];
   if (base) assert.deepEqual(cakesMadeWith(items, base[1].grundrecept).map(item => item.fileSlug), ['with']);
   assert.deepEqual(cakesMadeWith(items, 'not-a-base-recipe'), []);
+});
+
+test('the neighbours of a cake are the cakes numbered before and after it, and the ends have one each', () => {
+  const items = ['a', 'b', 'c'].map(fileSlug => ({fileSlug}));
+  const slugs = ({previous, next}) => [previous?.fileSlug, next?.fileSlug];
+  assert.deepEqual(slugs(cakeNeighbours(items, 'b')), ['a', 'c']);
+  assert.deepEqual(slugs(cakeNeighbours(items, 'a')), [undefined, 'b']);
+  assert.deepEqual(slugs(cakeNeighbours(items, 'c')), ['b', undefined]);
+  assert.deepEqual(cakeNeighbours(items, 'not-a-cake'), {});
 });

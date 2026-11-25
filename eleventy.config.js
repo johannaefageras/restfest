@@ -39,7 +39,7 @@ import ai from './src/_data/ai.js';
 import {shoppingDepartmentNames} from './lib/shopping-departments.js';
 import {pageStructuredData} from './lib/metadata.js';
 import {makePhotos} from './tools/photos.mjs';
-import {baseRecipes, cakeChoices, cakeRegion, cakesMadeWith, flags as cakeFlags, leftoverRecipes, levels as cakeLevels, parts as cakeParts, sortCakes} from './lib/cakes.js';
+import {baseRecipes, cakeChoices, cakeNeighbours, cakeRegion, cakesMadeWith, flags as cakeFlags, leftoverRecipes, levels as cakeLevels, parts as cakeParts, sortCakes} from './lib/cakes.js';
 import {cookingTime, doughs, filterDoughs, forms, freshPastaRecipe, pastaChoices, pastaGround, pastaNeighbours, pastasBySlug, pastasMadeWith, sauceLabels, sauces, sortPastas} from './lib/pasta.js';
 
 const recipes = api => api.getFilteredByGlob('src/recept/*.md')
@@ -127,12 +127,14 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData('pastaGrundrecept', freshPastaRecipe);
 
   // For the cakes (lib/cakes.js): tartor.html's filter choices, the region a cake's origin belongs to,
-  // and on a base recipe's page the cakes built with it. `items` is collections.cakes. Then the parts
-  // and levels with their labels and icons, the origins' flags, the base recipes the cakes are built on
-  // and the leftover recipes, for tartor.html, the cards and a cake's recipe page.
+  // on a base recipe's page the cakes built with it, and on a cake's page the cakes before and after
+  // it. `items` is collections.cakes. Then the parts and levels with their labels and icons, the
+  // origins' flags, the base recipes the cakes are built on and the leftover recipes, for tartor.html,
+  // the cards and a cake's recipe page.
   eleventyConfig.addFilter('cakeChoices', cakeChoices);
   eleventyConfig.addFilter('cakeRegion', cakeRegion);
   eleventyConfig.addFilter('cakesMadeWith', cakesMadeWith);
+  eleventyConfig.addFilter('cakeNeighbours', cakeNeighbours);
   eleventyConfig.addGlobalData('cakeParts', cakeParts);
   eleventyConfig.addGlobalData('cakeLevels', cakeLevels);
   eleventyConfig.addGlobalData('cakeFlags', cakeFlags);
