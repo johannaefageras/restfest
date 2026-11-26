@@ -2742,6 +2742,15 @@ body:has(#shopping-dialog[open]) {
 .cook-steps-reset {
   color: var(--ink);
 }
+/* "Skärmen hålls tänd · Stäng av" reads as one phrase, closer than the heading's other actions. */
+.recipe-actions.cook-screen {
+  gap: 0 6px;
+  color: var(--muted);
+  font-size: var(--text-ui);
+}
+.cook-screen .text-button {
+  color: var(--ink);
+}
 .cook-step {
   --cook-ring: var(--ink);
   cursor: pointer;
