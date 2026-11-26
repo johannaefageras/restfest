@@ -6,7 +6,7 @@
 
 Enter ingredients, find matching recipes, save favourites and plan the week. The archive also includes drinks, baking, pantry recipes and **Mer än mat**: home spa, cleaning, pet treats and gardening ideas for things left over.
 
-Recipes help while you cook. Steps can be checked off, and times in the instructions (from 30 seconds to 2 hours) start timers that stay at the bottom of every page until dismissed. The screen stays on from the first step or timer until the recipe is done, unless you turn that off. Checked steps and ingredients are kept on the device for 12 hours. Timers are kept until they are dismissed or an hour after they finish. The design is in [docs/superpowers/specs/2026-11-26-cooking-steps-design.md](docs/superpowers/specs/2026-11-26-cooking-steps-design.md).
+Recipes help while you cook. Steps can be checked off, and times in the instructions (from 30 seconds to 2 hours) start timers that stay at the bottom of every page until dismissed. The screen stays on from the first step or timer until the recipe is done, unless you turn that off. Checked steps and ingredients are kept on the device for 12 hours. Timers are kept until they are dismissed or an hour after they finish.
 
 The site is built with Eleventy, Nunjucks, Markdown and plain browser JavaScript. Supabase provides optional accounts, a synced recipe book and shopping list, fridge-photo recognition and generated recipes. Claude handles recognition and recipe writing; OpenAI generates recipe photos.
 
