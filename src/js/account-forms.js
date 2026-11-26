@@ -50,11 +50,13 @@ const errorFields = {
   validation_failed: "email",
   user_already_exists: "email",
   email_exists: "email",
+  phone_exists: "phone",
+  sms_send_failed: "phone",
 };
 
 // Runs `work` with the container's buttons off, and shows what went wrong in `errorBox`. A problem
 // with one field marks that field and puts the keyboard there. `fields` is the form's
-// {email, password} inputs, for the problems Supabase finds.
+// {email, password, phone} inputs, for the problems Supabase finds.
 export async function busy(container, errorBox, work, fields = {}) {
   const buttons = [...container.querySelectorAll("button")];
   show(errorBox, "");

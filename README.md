@@ -223,7 +223,7 @@ Supabase Edge Functions provide:
 | `delete-account` | Deletes the signed-in visitor's account and associated data. |
 | `shopping-copy` | Stores and returns the snapshots behind shared shopping-list links. |
 
-Provider credentials belong in Supabase secrets, not browser files. The publishable browser key is public; access is controlled by database policies and function checks. Database migrations, authentication redirects, Google sign-in and email delivery need separate backend setup, described below.
+Provider credentials belong in Supabase secrets, not browser files. The publishable browser key is public; access is controlled by database policies and function checks. Database migrations, authentication redirects, Google sign-in, sign-in by text message and email delivery need separate backend setup, described below.
 
 ### Set up the backend
 
@@ -239,8 +239,9 @@ The project is already set up; these steps are for a new Supabase project. Run t
 8. Under Authentication → Sign In / Providers → Email, set the minimum password length to 8 and keep "Confirm email" on. The site checks for 8 characters; Supabase's default is 6.
 9. Paste the three mail templates from [supabase/templates/](supabase/templates/); [its README](supabase/templates/README.md) says which goes where.
 10. For Google sign-in, create a Web application OAuth client in Google Cloud Console, using the redirect address shown on Supabase's Google provider page, and enter its ID and secret on that page.
-11. Before real visitors arrive, connect a mail service under Authentication → Emails → SMTP Settings. Supabase's built-in sender only delivers to the project's own team, a few mails an hour.
-12. Set monthly spending limits in the Anthropic Console and on OpenAI's platform. The daily caps limit the volume; the spending limits are the hard stop.
+11. For sign-in by text message, put an SMS-capable Swedish mobile number in a Twilio Messaging Service, and under Messaging → Settings → Geo permissions in Twilio allow Sweden only. In Supabase, under Authentication → Sign In / Providers → Phone, choose Twilio and enter the Account SID, the Auth Token and the Messaging Service SID (`MG…`); the SMS text can say `Din kod till Ofta bra efter: {{ .Code }}`. The site only accepts Swedish mobile numbers. Every code is a paid text that anyone can ask for, so set the SMS limit under Authentication → Rate Limits, turn off auto-recharge in Twilio and add a usage alert there.
+12. Before real visitors arrive, connect a mail service under Authentication → Emails → SMTP Settings. Supabase's built-in sender only delivers to the project's own team, a few mails an hour.
+13. Set monthly spending limits in the Anthropic Console and on OpenAI's platform. The daily caps limit the volume; the spending limits are the hard stop.
 
 Optional secrets change how the functions behave without a new deploy. They are explained where they are read, in `supabase/functions/_shared/`:
 

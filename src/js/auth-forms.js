@@ -1,6 +1,7 @@
-// logga-in.html and nytt-losenord.html: signing in, creating an account, asking for and choosing a
-// new password (HANDOFF.md, "Konton och receptbok"). A module, after account.js, which gives it the
-// Supabase client (window.restfestAccount) and the plain scripts' globals ($, assetUrl).
+// logga-in.html and nytt-losenord.html: signing in, creating an account, signing in with a code sent
+// by text, asking for and choosing a new password (HANDOFF.md, "Konton och receptbok"). A module,
+// after account.js, which gives it the Supabase client (window.restfestAccount) and the plain
+// scripts' globals ($, assetUrl).
 //
 // A link in a mail, and the way back from Google, lead here with the sign-in in the address; the
 // client reads it when it starts. After signing in the visitor goes to ?till=<path> when that is a
@@ -10,6 +11,8 @@ import { busy, checked, emailValue, problem, show } from "./account-forms.js";
 import {
   authErrorText,
   passwordProblem,
+  phoneDisplay,
+  phoneNumber,
   safeReturnPath,
 } from "./account-helpers.js";
 
@@ -48,6 +51,9 @@ async function loginPage() {
   const nameInput = form.elements.namedItem("name");
   const resetForm = $("[data-reset-form]");
   const sentBox = $("[data-auth-sent]");
+  const phoneForm = $("[data-phone-form]");
+  const codeForm = $("[data-code-form]");
+  const parts = [mainBox, resetForm, sentBox, phoneForm, codeForm];
   const destination = returnPath
     ? location.origin + returnPath
     : assetUrl("receptbok.html");
@@ -59,9 +65,9 @@ async function loginPage() {
   let mode = "logga";
 
   // The title and the drawing beside the form name what is on show: the part's own (data-title,
-  // data-art) for "Glömt lösenordet?" and "Kolla din mejl.", else the mode's.
+  // data-art) for "Glömt lösenordet?", "Kolla din mejl." and the text-message parts, else the mode's.
   function label() {
-    const part = [resetForm, sentBox].find((element) => !element.hidden);
+    const part = parts.slice(1).find((element) => !element.hidden);
     title.textContent =
       part?.dataset.title ?? (mode === "skapa" ? "Skapa konto." : "Logga in.");
     const art = part?.dataset.art ?? mode;
@@ -76,6 +82,9 @@ async function loginPage() {
     });
     label();
     submit.textContent = creating ? "Skapa konto" : "Logga in";
+    phoneForm.dataset.title = creating
+      ? "Skapa konto med mobilen."
+      : "Logga in med mobilen.";
     document.title = [creating ? "Skapa konto" : "Logga in", siteName].filter(Boolean).join(" · ");
     form.password.autocomplete = creating ? "new-password" : "current-password";
     show(errorBox, "");
@@ -88,9 +97,7 @@ async function loginPage() {
   }
 
   function showPart(part) {
-    mainBox.hidden = part !== mainBox;
-    resetForm.hidden = part !== resetForm;
-    sentBox.hidden = part !== sentBox;
+    parts.forEach((element) => (element.hidden = element !== part));
     label();
     (part.querySelector("input") ?? part.querySelector("button"))?.focus();
   }
@@ -185,6 +192,97 @@ async function loginPage() {
     });
   });
 
+  // Sign-in by text message. Supabase makes an account for a number it doesn't know, with the name
+  // from "Skapa konto" when there is one; a number added on konto.html signs in to that account.
+  const phoneInput = phoneForm.elements.namedItem("phone");
+  const phoneName = phoneForm.elements.namedItem("name");
+  const codeInput = codeForm.elements.namedItem("code");
+
+  async function sendCode(phone) {
+    const client = await account.client();
+    const name = mode === "skapa" ? phoneName.value.trim().slice(0, 80) : "";
+    checked(
+      await client.auth.signInWithOtp({
+        phone,
+        options: name ? { data: { display_name: name } } : {},
+      }),
+    );
+  }
+
+  $("[data-phone-open]").addEventListener("click", () => {
+    phoneName.value ||= nameInput.value;
+    show($("[data-phone-error]"), "");
+    showPart(phoneForm);
+    phoneInput.focus();
+  });
+  $("[data-phone-back]").addEventListener("click", () => showPart(mainBox));
+
+  phoneForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    busy(
+      phoneForm,
+      $("[data-phone-error]"),
+      async () => {
+        const phone = phoneNumber(phoneInput.value);
+        if (!phone)
+          throw problem(
+            phoneInput.value.trim()
+              ? "Skriv ett svenskt mobilnummer, till exempel 070-123 45 67."
+              : "Skriv ditt mobilnummer.",
+            phoneInput,
+          );
+        await sendCode(phone);
+        codeForm.dataset.phone = phone;
+        $("[data-code-text]").textContent =
+          `Vi har skickat en kod till ${phoneDisplay(phone)}. Skriv den här.`;
+        codeInput.value = "";
+        show($("[data-code-error]"), "");
+        showPart(codeForm);
+      },
+      { phone: phoneInput },
+    );
+  });
+
+  codeForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    busy(
+      codeForm,
+      $("[data-code-error]"),
+      async () => {
+        const token = codeInput.value.replace(/\s/g, "");
+        if (!/^\d{4,10}$/.test(token))
+          throw problem("Skriv koden från sms:et.", codeInput);
+        const client = await account.client();
+        const { error } = await client.auth.verifyOtp({
+          phone: codeForm.dataset.phone,
+          token,
+          type: "sms",
+        });
+        // Supabase gives the same answer for a wrong code and an old one.
+        if (error?.code === "otp_expired")
+          throw problem(
+            "Koden stämmer inte, eller har slutat gälla. Prova igen, eller skicka en ny kod.",
+            codeInput,
+          );
+        if (error) throw error;
+        await finish(destination);
+      },
+      { code: codeInput },
+    );
+  });
+
+  $("[data-code-resend]").addEventListener("click", () => {
+    busy(codeForm, $("[data-code-error]"), async () => {
+      await sendCode(codeForm.dataset.phone);
+      showToast("Vi har skickat en ny kod.");
+      codeInput.focus();
+    });
+  });
+  $("[data-code-back]").addEventListener("click", () => {
+    showPart(phoneForm);
+    phoneInput.focus();
+  });
+
   $("[data-resend]").addEventListener("click", () => {
     const errors = $("[data-sent-error]");
     busy(sentBox, errors, async () => {
@@ -240,7 +338,8 @@ async function loginPage() {
     );
   });
 
-  // Arriving from a mail link or from Google, or already signed in.
+  // Arriving from a mail link or from Google, or already signed in. (A code from a text signs in on
+  // this page, and the SIGNED_IN below takes the visitor on.)
   const arrivalError = addressError();
   try {
     const client = await account.client();

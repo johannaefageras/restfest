@@ -66,6 +66,9 @@
 .fa-heart::before {
   content: "\f004";
 }
+.fa-mobile-screen-button::before {
+  content: "\f3cd";
+}
 .fa-plus::before {
   content: "\2b";
 }

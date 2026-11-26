@@ -4,11 +4,20 @@
 //
 // profil.html: the name and the preferences in the visitor's row of the profiles table. The database
 // decides what can be stored (supabase/migrations/…_accounts.sql); the form keeps to the same limits.
-// konto.html: the sign-in itself, which is Supabase Auth, and deleting the account (the
-// delete-account function).
+// konto.html: the sign-in itself, which is Supabase Auth: the email address, the mobile number and the
+// password, and deleting the account (the delete-account function).
 
 import { busy, checked, emailValue, problem, show } from "./account-forms.js";
-import { addFood, authErrorText, passwordProblem } from "./account-helpers.js";
+import {
+  addFood,
+  authErrorText,
+  loginMethods,
+  loginMethodsText,
+  passwordProblem,
+  phoneDisplay,
+  phoneNumber,
+  signedInAs,
+} from "./account-helpers.js";
 
 const account = window.restfestAccount;
 const main = $("#main");
@@ -189,24 +198,33 @@ async function accountPage(db, sessionUser) {
     // The copy from the sign-in will do.
   }
 
+  // An account made with a mobile number has no email address until one is added, and so no use for
+  // a password: the login form asks for the address.
   function drawLogin() {
-    const methods = new Set([
-      ...(user.identities ?? []).map((identity) => identity.provider),
-      ...(user.app_metadata?.providers ?? []),
-    ]);
-    const password = methods.has("email");
-    const google = methods.has("google");
-    $("[data-account-email]").textContent = user.email ?? "";
-    $("[data-account-methods]").textContent =
-      password && google
-        ? "Du loggar in med lösenord eller med Google."
-        : google
-          ? "Du loggar in med Google."
-          : "Du loggar in med e-postadress och lösenord.";
-    $("[data-password-title]").textContent = password
+    const methods = loginMethods(user);
+    const hasEmail = Boolean(user.email);
+    $("[data-account-email]").textContent = signedInAs(user);
+    $("[data-account-methods]").textContent = loginMethodsText(methods);
+    $("[data-email-title]").textContent = hasEmail
+      ? "Byt e-postadress"
+      : "Lägg till e-postadress";
+    $("[data-email-intro]").textContent = hasEmail
+      ? "En ny adress? Vi skickar en länk så att du kan bekräfta bytet."
+      : "Med en e-postadress kan du också logga in med lösenord. Vi skickar en länk så att du kan bekräfta den.";
+    $("[data-email-submit]").textContent = hasEmail
+      ? "Byt e-postadress"
+      : "Lägg till e-postadress";
+    $("[data-password-section]").hidden = !hasEmail;
+    $("[data-password-title]").textContent = methods.password
       ? "Byt lösenord"
       : "Välj ett lösenord";
-    $("[data-password-intro]").hidden = password;
+    $("[data-password-intro]").hidden = methods.password;
+    $("[data-phone-title]").textContent = methods.phone
+      ? "Byt mobilnummer"
+      : "Lägg till mobilnummer";
+    $("[data-phone-intro]").textContent = methods.phone
+      ? `Du loggar in med en kod som vi sms:ar till ${phoneDisplay(user.phone)}.`
+      : "Med ett mobilnummer kan du också logga in med en kod per sms.";
   }
   drawLogin();
   wait.hidden = true;
@@ -230,7 +248,9 @@ async function accountPage(db, sessionUser) {
       emailForm.reset();
       show(
         status,
-        `Vi har skickat en länk till ${address}. Bytet gäller när du har klickat på den.`,
+        user.email
+          ? `Vi har skickat en länk till ${address}. Bytet gäller när du har klickat på den.`
+          : `Vi har skickat en länk till ${address}. Adressen läggs till när du har klickat på den.`,
       );
     }, { email: input });
   });
@@ -249,6 +269,91 @@ async function accountPage(db, sessionUser) {
       drawLogin();
       show(status, "Lösenordet är sparat.");
     }, { password: input });
+  });
+
+  // A new number: a code goes to it first, and the number is the account's once the code is typed.
+  // Until then Supabase keeps it apart (new_phone), and the old number, if any, still signs in.
+  const phoneForm = $("[data-phone-change]");
+  const phoneInput = phoneForm.elements.namedItem("phone");
+  const codeInput = phoneForm.elements.namedItem("code");
+  const codeField = $("[data-phone-code-field]");
+  const phoneStatus = $("[data-phone-status]");
+  let pendingPhone = null;
+
+  function waitForCode(phone) {
+    pendingPhone = phone;
+    codeField.hidden = !phone;
+    codeInput.value = "";
+    $("[data-phone-submit]").textContent = phone ? "Spara numret" : "Skicka kod";
+  }
+
+  // Another number needs a code of its own.
+  phoneInput.addEventListener("input", () => {
+    if (pendingPhone && phoneNumber(phoneInput.value) !== pendingPhone) {
+      waitForCode(null);
+      show(phoneStatus, "");
+    }
+  });
+
+  async function sendPhoneCode(phone) {
+    checked(await db.auth.updateUser({ phone }));
+    waitForCode(phone);
+    show(
+      phoneStatus,
+      `Vi har skickat en kod till ${phoneDisplay(phone)}. Skriv den här.`,
+    );
+    codeInput.focus();
+  }
+
+  phoneForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    show(phoneStatus, "");
+    busy(
+      phoneForm,
+      $("[data-phone-error]"),
+      async () => {
+        const phone = phoneNumber(phoneInput.value);
+        if (!phone)
+          throw problem(
+            phoneInput.value.trim()
+              ? "Skriv ett svenskt mobilnummer, till exempel 070-123 45 67."
+              : "Skriv ditt mobilnummer.",
+            phoneInput,
+          );
+        if (phone !== pendingPhone) {
+          if (loginMethods(user).phone && phone === phoneNumber(`+${user.phone}`))
+            throw problem("Det är redan ditt nummer.", phoneInput);
+          await sendPhoneCode(phone);
+          return;
+        }
+        const token = codeInput.value.replace(/\s/g, "");
+        if (!/^\d{4,10}$/.test(token))
+          throw problem("Skriv koden från sms:et.", codeInput);
+        const { data, error } = await db.auth.verifyOtp({
+          phone,
+          token,
+          type: "phone_change",
+        });
+        // Supabase gives the same answer for a wrong code and an old one.
+        if (error?.code === "otp_expired")
+          throw problem(
+            "Koden stämmer inte, eller har slutat gälla. Prova igen, eller skicka en ny kod.",
+            codeInput,
+          );
+        if (error) throw error;
+        if (data.user) user = data.user;
+        phoneForm.reset();
+        waitForCode(null);
+        drawLogin();
+        show(phoneStatus, "Numret är sparat.");
+      },
+      { phone: phoneInput },
+    );
+  });
+
+  $("[data-phone-resend]").addEventListener("click", () => {
+    show(phoneStatus, "");
+    busy(phoneForm, $("[data-phone-error]"), () => sendPhoneCode(pendingPhone));
   });
 
   const opener = $("[data-delete-open]");

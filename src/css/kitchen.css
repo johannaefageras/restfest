@@ -3707,7 +3707,17 @@ body:has(> .cook-tray:not([hidden])) .toast {
 .account-sent[aria-busy="true"] .button {
   opacity: 0.6;
 }
-/* "eller" between Google and the form, with a rule on either side. */
+/* "Fortsätt med Google" and "Fortsätt med mobilnummer", stacked, with icons the same size. */
+.auth-providers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.auth-providers .fas {
+  width: 20px;
+  font-size: 20px;
+}
+/* "eller" between the buttons above and the form, with a rule on either side. */
 .account-or {
   display: flex;
   align-items: center;
@@ -4298,6 +4308,10 @@ a.dialog-save {
 .account-section-copy {
   margin-bottom: 18px;
 }
+/* A plain panel with the cards' padding, so its title lines up with the email card's beside it. */
+.account-phone {
+  padding: clamp(18px, 3vw, 30px);
+}
 .account-section-copy > .account-panel-intro {
   margin: -8px 0 0;
 }
@@ -4398,6 +4412,15 @@ a.dialog-save {
   .account-login-summary,
   .account-action-row {
     grid-column: 1 / -1;
+  }
+  /* Beside the email and password cards, the number gets a row of its own, its form no wider than
+     theirs. An account without an email address has no password card, and the number sits beside the
+     email card instead. */
+  .account-settings-grid:has([data-password-section]:not([hidden])) .account-phone {
+    grid-column: 1 / -1;
+  }
+  .account-settings-grid:has([data-password-section]:not([hidden])) .account-phone > .account-form {
+    max-width: calc(50% - 8px);
   }
 }
 @media (max-width: 699px) {

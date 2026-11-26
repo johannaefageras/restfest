@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  addFood, applyQueue, authErrorText, heartsToQueue, intendedSave, passwordProblem, queueChange, refusedForGood,
-  resumeQueue, safeReturnPath, saveIntent, sendQueue, signInPage, stashQueue, withoutSent
+  addFood, applyQueue, authErrorText, heartsToQueue, intendedSave, loginMethods, loginMethodsText, passwordProblem,
+  phoneDisplay, phoneNumber, queueChange, refusedForGood, resumeQueue, safeReturnPath, saveIntent, sendQueue,
+  signedInAs, signInPage, stashQueue, withoutSent
 } from '../lib/account-helpers.js';
 
 const origin = 'https://example.se';
@@ -43,6 +44,69 @@ test('authErrorText gives Swedish texts for the common cases', () => {
   assert.equal(authErrorText({message: 'Failed to fetch'}), 'Kunde inte nå Ofta bra efter. Kolla uppkopplingen och prova igen.');
   assert.equal(authErrorText({code: 'something_new'}), 'Något gick fel. Prova igen om en stund.');
   assert.equal(authErrorText(null), 'Något gick fel. Prova igen om en stund.');
+});
+
+test('authErrorText gives Swedish texts for the text-message problems', () => {
+  assert.equal(authErrorText({code: 'over_sms_send_rate_limit'}), 'För många sms på kort tid. Vänta en stund och prova igen.');
+  assert.equal(authErrorText({code: 'sms_send_failed'}), 'Vi kunde inte skicka sms:et. Kolla numret och prova igen.');
+  assert.equal(authErrorText({code: 'phone_exists'}), 'Det numret hör redan till ett annat konto.');
+  assert.equal(authErrorText({code: 'phone_provider_disabled'}), 'Det går inte att logga in med mobilnummer just nu.');
+});
+
+// Sign-in by text message (src/js/auth-forms.js, src/js/profile.js).
+test('phoneNumber turns a Swedish mobile number, however it is typed, into the international form', () => {
+  for (const typed of ['070-123 45 67', '0701234567', ' 070 123 45 67 ', '+46 70 123 45 67', '+46701234567',
+    '0046 70-123 45 67', '+46 (0)70-123 45 67', '46701234567'])
+    assert.equal(phoneNumber(typed), '+46701234567', typed);
+});
+
+test('phoneNumber refuses what is not a Swedish mobile number', () => {
+  for (const bad of [null, undefined, '', '08-123 456 78', '070-123 45 6', '070-123 45 678', '+45 20 12 34 56',
+    'telefon', '070-123 45 67 ring', '+46+701234567', '701234567'])
+    assert.equal(phoneNumber(bad), null, String(bad));
+});
+
+test('phoneDisplay writes a Swedish mobile number the Swedish way', () => {
+  assert.equal(phoneDisplay('46701234567'), '070-123 45 67'); // as Supabase keeps it
+  assert.equal(phoneDisplay('+46701234567'), '070-123 45 67');
+  assert.equal(phoneDisplay('4520123456'), '+4520123456');
+  assert.equal(phoneDisplay(''), '');
+  assert.equal(phoneDisplay(undefined), '');
+});
+
+// A user as Supabase describes it: sign-in methods in identities and app_metadata.
+const userWith = (providers, extra = {}) =>
+  ({identities: providers.map(provider => ({provider})), app_metadata: {providers}, ...extra});
+
+test('loginMethods reads the sign-in methods from the user', () => {
+  assert.deepEqual(loginMethods(userWith(['email'])), {password: true, google: false, phone: false});
+  assert.deepEqual(loginMethods(userWith(['google', 'phone'])), {password: false, google: true, phone: true});
+  assert.deepEqual(loginMethods({identities: [{provider: 'google'}]}), {password: false, google: true, phone: false});
+});
+
+test('loginMethods counts a confirmed number added on Konto, not one still waiting for its code', () => {
+  const added = userWith(['email'], {phone: '46701234567', phone_confirmed_at: '2026-11-26T10:00:00Z'});
+  assert.equal(loginMethods(added).phone, true);
+  const waiting = userWith(['email'], {phone: '', new_phone: '46701234567'});
+  assert.equal(loginMethods(waiting).phone, false);
+});
+
+test('loginMethodsText names every way the account signs in', () => {
+  const text = methods => loginMethodsText({password: false, google: false, phone: false, ...methods});
+  assert.equal(text({password: true}), 'Du loggar in med e-postadress och lösenord.');
+  assert.equal(text({google: true}), 'Du loggar in med Google.');
+  assert.equal(text({phone: true}), 'Du loggar in med en kod per sms.');
+  assert.equal(text({password: true, google: true}), 'Du loggar in med lösenord eller med Google.');
+  assert.equal(text({password: true, phone: true}), 'Du loggar in med lösenord eller med en kod per sms.');
+  assert.equal(text({google: true, phone: true}), 'Du loggar in med Google eller med en kod per sms.');
+  assert.equal(text({password: true, google: true, phone: true}), 'Du loggar in med lösenord, med Google eller med en kod per sms.');
+  assert.equal(text({}), 'Du loggar in med e-postadress och lösenord.');
+});
+
+test('signedInAs shows the email address, or the number when there is none', () => {
+  assert.equal(signedInAs({email: 'greta@example.se', phone: '46701234567'}), 'greta@example.se');
+  assert.equal(signedInAs({email: '', phone: '46701234567'}), '070-123 45 67');
+  assert.equal(signedInAs({}), '');
 });
 
 test('passwordProblem wants 8 characters', () => {

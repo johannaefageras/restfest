@@ -9,9 +9,10 @@
 // POST /__control changes what it holds and how it behaves (see control() below): reset, add users,
 // seed a recipe book, hide a generated recipe, make every call fail, or get a link like the ones in the mails.
 // GET /__state shows what it holds, including every request it has received.
-// "Fortsätt med Google" signs in google@example.se at once.
+// "Fortsätt med Google" signs in google@example.se at once. Text messages aren't sent: each code is
+// kept in `sms`, which GET /__state shows.
 import { createServer } from 'node:http';
-import { randomUUID, randomBytes } from 'node:crypto';
+import { randomInt, randomUUID, randomBytes } from 'node:crypto';
 import { applyShoppingChanges } from '../../lib/shopping-sync.js';
 import { validateShoppingCopy } from '../../lib/shopping-copy.js';
 
@@ -20,8 +21,10 @@ const b64 = value => Buffer.from(JSON.stringify(value)).toString('base64url');
 let state;
 function reset() {
   state = {
-    users: new Map(),        // email → {id, email, password, confirmed, data, providers}
-    tokens: new Map(),       // access token → email
+    // email, or the number for an account without one → {id, email, password, confirmed, data, providers,
+    // phone, pendingPhone}. Numbers are kept as "+46…".
+    users: new Map(),
+    tokens: new Map(),       // access token → the user's key in `users`
     profiles: new Map(),     // user id → {display_name, diets, avoid, servings, max_cooking_minutes}
     saved: [],               // {user_id, recipe_id, created_at}
     savedGenerated: [],      // {user_id, recipe_id, created_at}
@@ -34,6 +37,8 @@ function reset() {
     unsuitable: false,       // true → generate-recipe answers 422
     log: [],                 // [{method, path, auth, body}]
     mails: [],               // [{type, email}]
+    sms: [],                 // [{type: 'sms' | 'phone_change', phone, code, used}]
+    smsFail: false,          // true → sending a code fails, as when Twilio refuses
     deleted: []
   };
 }
@@ -41,32 +46,44 @@ reset();
 let clock = Date.now();
 const now = () => new Date(clock += 1000).toISOString();
 
-function addUser(email, password, { confirmed = true, name = '', providers = ['email'] } = {}) {
-  const user = { id: randomUUID(), email, password, confirmed, data: { display_name: name }, providers };
-  state.users.set(email, user);
+function addUser(email, password, { confirmed = true, name = '', providers = ['email'], phone = '' } = {}) {
+  const user = { id: randomUUID(), email, password, confirmed, data: { display_name: name }, providers, phone, pendingPhone: '' };
+  state.users.set(userKey(user), user);
   state.profiles.set(user.id, { display_name: name || null, diets: [], avoid: [], servings: null, max_cooking_minutes: null });
   return user;
 }
+const userKey = user => user.email || user.phone;
+// Supabase keeps numbers without the "+" and answers with them so.
+const bare = phone => (phone ?? '').replace(/^\+/, '');
+const plus = phone => `+${bare(String(phone ?? ''))}`;
+const byPhone = phone => [...state.users.values()].find(user => user.phone === phone);
 const publicUser = user => ({
   id: user.id, aud: 'authenticated', role: 'authenticated', email: user.email,
-  email_confirmed_at: user.confirmed ? '2026-11-13T00:00:00Z' : null,
+  email_confirmed_at: user.confirmed && user.email ? '2026-11-13T00:00:00Z' : null,
+  phone: bare(user.phone), phone_confirmed_at: user.phone ? '2026-11-13T00:00:00Z' : null,
+  new_phone: bare(user.pendingPhone),
   app_metadata: { provider: user.providers[0], providers: user.providers },
   user_metadata: user.data,
-  identities: user.providers.map(provider => ({ id: randomUUID(), user_id: user.id, provider, identity_data: { email: user.email } })),
+  identities: user.providers.map(provider => ({ id: randomUUID(), user_id: user.id, provider,
+    identity_data: provider === 'phone' ? { phone: bare(user.phone) } : { email: user.email } })),
   created_at: '2026-11-13T00:00:00Z'
 });
 function session(user) {
   const exp = Math.floor(Date.now() / 1000) + 3600;
-  const token = `${b64({ alg: 'HS256', typ: 'JWT' })}.${b64({ sub: user.id, email: user.email, role: 'authenticated', aud: 'authenticated', exp, jti: randomUUID() })}.sig`;
-  state.tokens.set(token, user.email);
+  const token = `${b64({ alg: 'HS256', typ: 'JWT' })}.${b64({ sub: user.id, email: user.email, phone: bare(user.phone), role: 'authenticated', aud: 'authenticated', exp, jti: randomUUID() })}.sig`;
+  state.tokens.set(token, userKey(user));
   return { access_token: token, token_type: 'bearer', expires_in: 3600, expires_at: exp, refresh_token: randomUUID(), user: publicUser(user) };
 }
 const caller = req => {
   const token = req.headers.authorization?.replace(/^Bearer\s+/i, '');
-  const email = state.tokens.get(token);
-  return email ? state.users.get(email) ?? null : null;
+  const key = state.tokens.get(token);
+  return key ? state.users.get(key) ?? null : null;
 };
 const authError = (code, message, status = 400) => [status, { code: status, error_code: code, msg: message }];
+// "Sends" a code: keeps it where GET /__state shows it.
+function text(type, phone) {
+  state.sms.push({ type, phone, code: String(randomInt(0, 1e6)).padStart(6, '0'), used: false });
+}
 
 function recipeDoc(title) {
   return {
@@ -101,6 +118,33 @@ async function handle(req, url, body) {
   if (path === '/auth/v1/recover') { state.mails.push({ type: 'recovery', email: body.email, redirect: q.get('redirect_to') }); return [200, {}]; }
   if (path === '/auth/v1/resend') { state.mails.push({ type: 'resend', email: body.email }); return [200, {}]; }
   if (path === '/auth/v1/logout') return [204, null];
+  // Sign-in by text message. Like Supabase, an unknown number gets a new account (unless create_user
+  // is false), which counts as signed up once the code is typed.
+  if (path === '/auth/v1/otp' && body.phone) {
+    const phone = plus(body.phone);
+    if (!/^\+\d{8,15}$/.test(phone)) return authError('validation_failed', 'Invalid phone number format (E.164 required)', 422);
+    if (state.smsFail) return authError('sms_send_failed', 'Error sending sms OTP', 500);
+    if (!byPhone(phone)) {
+      if (body.create_user === false) return authError('otp_disabled', 'Signups not allowed for otp', 422);
+      addUser('', null, { phone, name: body.data?.display_name ?? '', providers: ['phone'] });
+    }
+    text('sms', phone);
+    return [200, {}];
+  }
+  // The code from a text: signs in (sms), or moves a number added on konto.html to the account (phone_change).
+  if (path === '/auth/v1/verify' && ['sms', 'phone_change'].includes(body.type)) {
+    const phone = plus(body.phone);
+    const sent = state.sms.findLast(m => m.type === body.type && m.phone === phone);
+    const user = body.type === 'sms' ? byPhone(phone) : [...state.users.values()].find(u => u.pendingPhone === phone);
+    if (!sent || sent.used || sent.code !== body.token || !user) return authError('otp_expired', 'Token has expired or is invalid', 403);
+    sent.used = true;
+    if (body.type === 'phone_change') {
+      user.phone = phone;
+      user.pendingPhone = '';
+      if (!user.providers.includes('phone')) user.providers.push('phone');
+    }
+    return [200, session(user)];
+  }
   if (path === '/auth/v1/user') {
     const user = caller(req);
     if (!user) return authError('bad_jwt', 'invalid JWT', 403);
@@ -112,6 +156,14 @@ async function handle(req, url, body) {
         if (!user.providers.includes('email')) user.providers.push('email');
       }
       if (body.email) state.mails.push({ type: 'email_change', email: body.email });
+      if (body.phone) {
+        const phone = plus(body.phone);
+        const owner = byPhone(phone);
+        if (owner && owner !== user) return authError('phone_exists', 'A user with this phone number has already been registered', 422);
+        if (state.smsFail) return authError('sms_send_failed', 'Error sending sms OTP', 500);
+        user.pendingPhone = phone;
+        text('phone_change', phone);
+      }
       if (body.data) Object.assign(user.data, body.data);
     }
     return [200, publicUser(user)];
@@ -241,8 +293,8 @@ async function handle(req, url, body) {
   if (path === '/functions/v1/recipe-image') return [200, { status: 'failed', url: null }];
   if (path === '/functions/v1/delete-account') {
     if (!user) return [401, { error: 'Du behöver vara inloggad.' }];
-    state.deleted.push(user.email);
-    state.users.delete(user.email);
+    state.deleted.push(userKey(user));
+    state.users.delete(userKey(user));
     state.saved = state.saved.filter(row => row.user_id !== user.id);
     state.savedGenerated = state.savedGenerated.filter(row => row.user_id !== user.id);
     state.shopping.delete(user.id);
@@ -253,7 +305,7 @@ async function handle(req, url, body) {
 
 function control(body) {
   if (body.reset) reset();
-  for (const key of ['fail', 'unsuitable']) if (key in body) state[key] = body[key];
+  for (const key of ['fail', 'unsuitable', 'smsFail']) if (key in body) state[key] = body[key];
   for (const user of body.users ?? []) addUser(user.email, user.password, user);
   if (body.confirm) state.users.get(body.confirm).confirmed = true;
   for (const [email, ids] of Object.entries(body.saved ?? {})) for (const id of ids) state.saved.push({ user_id: state.users.get(email).id, recipe_id: id, created_at: now() });
@@ -275,14 +327,15 @@ function control(body) {
   return { ok: true };
 }
 function snapshot() {
-  const byEmail = rows => Object.fromEntries([...state.users.values()].map(user => [user.email, rows.filter(row => row.user_id === user.id).map(row => row.recipe_id)]));
+  // Keyed by email, or by number for an account without one.
+  const byEmail = rows => Object.fromEntries([...state.users.values()].map(user => [userKey(user), rows.filter(row => row.user_id === user.id).map(row => row.recipe_id)]));
   return {
-    users: [...state.users.values()].map(({ email, confirmed, password, providers, data }) => ({ email, confirmed, password, providers, data })),
+    users: [...state.users.values()].map(({ email, confirmed, password, providers, data, phone, pendingPhone }) => ({ email, confirmed, password, providers, data, phone, pendingPhone })),
     saved: byEmail(state.saved), savedGenerated: byEmail(state.savedGenerated),
-    shopping: Object.fromEntries([...state.users.values()].map(user => [user.email, state.shopping.get(user.id)?.items ?? []])),
-    profiles: Object.fromEntries([...state.users.values()].map(user => [user.email, state.profiles.get(user.id)])),
+    shopping: Object.fromEntries([...state.users.values()].map(user => [userKey(user), state.shopping.get(user.id)?.items ?? []])),
+    profiles: Object.fromEntries([...state.users.values()].map(user => [userKey(user), state.profiles.get(user.id)])),
     generated: [...state.generated.entries()].map(([id, g]) => ({ id, title: g.recipe.title })),
-    mails: state.mails, deleted: state.deleted, log: state.log
+    mails: state.mails, sms: state.sms, deleted: state.deleted, log: state.log
   };
 }
 

@@ -1,6 +1,7 @@
 // Checks the account pages in a browser, against the stand-in backend: the first sign-in's hearts in
-// one request, what receptbok.html fetches, the header's count, ?spara=1, the lock between tabs, and
-// problems tied to their fields. HANDOFF.md, "Konton och receptbok".
+// one request, what receptbok.html fetches, the header's count, ?spara=1, the lock between tabs,
+// problems tied to their fields, and sign-in by text message, including a number added on konto.html.
+// HANDOFF.md, "Konton och receptbok".
 //
 // It is a function for the Playwright tool (browser_run_code_unsafe with this file), not a script
 // for node. First start the two servers, as tools/standin/server.mjs says at its top:
@@ -121,9 +122,9 @@ async (page) => {
   // Hearts one at a time (b is signed in): a removal, then the same heart again.
   await control({ saved: { 'b@example.se': ['01-rodbetspytt'] } });
   await page.goto(`${site}/recept/01-rodbetspytt.html`);
-  await page.waitForSelector('.dialog-save[data-save][aria-pressed="true"]');
+  await page.waitForSelector('.recipe-actions [data-save][aria-pressed="true"]');
   await settle();
-  await page.click('.dialog-save[data-save]');
+  await page.click('.recipe-actions [data-save]');
   await settle();
   s = await state();
   check('a heart taken out leaves the account', !s.saved['b@example.se'].includes('01-rodbetspytt'), s.saved['b@example.se']);
@@ -138,9 +139,9 @@ async (page) => {
     navigator.locks.request(`restfest-book:${owner}`, () => new Promise(resolve => { window.releaseBook = resolve; }));
   });
   await page.waitForFunction(() => window.releaseBook);
-  await page.click('.dialog-save[data-save]');
+  await page.click('.recipe-actions [data-save]');
   await page.waitForTimeout(800);
-  const pressedNow = await page.getAttribute('.dialog-save[data-save]', 'aria-pressed');
+  const pressedNow = await page.getAttribute('.recipe-actions [data-save]', 'aria-pressed');
   let sentMeanwhile = (await state()).log.slice(mark2).filter(entry => entry.method === 'POST' && entry.path.startsWith('/rest/v1/rpc/sync_recipe_book') && entry.body.changes?.length);
   check('3 the heart shows at once while another tab is at work', pressedNow === 'true', pressedNow);
   check('3 and nothing is sent until that tab is done', sentMeanwhile.length === 0, sentMeanwhile);
@@ -196,5 +197,114 @@ async (page) => {
   await settle();
   const after = await page.evaluate(() => ({ saved: localStorage.getItem('restfest-saved'), marker: localStorage.getItem('restfest-account'), count: document.querySelector('#saved-count').textContent }));
   check('signed out: no hearts or marker left in the browser', after.saved === '[]' && after.marker == null && after.count === '0', after);
+
+  // Sign-in by text message. The stand-in keeps each code in its state instead of texting it.
+  const signOut = async () => {
+    await page.click('[data-sign-out]');
+    await page.waitForURL(url => url.pathname === '/' || url.pathname.endsWith('index.html'));
+    await settle();
+  };
+  const problemOf = selector => page.evaluate(selector => {
+    const input = document.querySelector(selector);
+    const described = (input.getAttribute('aria-describedby') ?? '').split(' ').filter(Boolean).map(id => document.getElementById(id)?.textContent ?? '');
+    return { invalid: input.getAttribute('aria-invalid'), described: described.join(' | '), focused: document.activeElement === input };
+  }, selector);
+
+  // 9. A new number gets an account, with the name typed under "Skapa konto".
+  await clean();
+  await page.goto(`${site}/logga-in.html?lage=skapa`);
+  await settle();
+  await page.fill('#auth-name', 'Mona Mobil');
+  await page.click('[data-phone-open]');
+  field = await page.evaluate(() => ({ name: document.querySelector('#auth-phone-name').value, title: document.querySelector('[data-auth-title]').textContent }));
+  check('9 the phone form takes the name along', field.name === 'Mona Mobil' && field.title === 'Skapa konto med mobilen.', field);
+  await page.fill('#auth-phone', '08-123 456 78');
+  await page.click('[data-phone-form] [type="submit"]');
+  field = await problemOf('#auth-phone');
+  s = await state();
+  check('9 a landline number is refused at the field, before anything is sent',
+    field.invalid === 'true' && field.described.includes('Skriv ett svenskt mobilnummer') && field.focused && s.sms.length === 0, { field, sms: s.sms });
+  await page.fill('#auth-phone', '070-123 45 67');
+  await page.click('[data-phone-form] [type="submit"]');
+  await page.waitForSelector('[data-code-form]:not([hidden])');
+  s = await state();
+  const first = s.sms.at(-1);
+  check('9 the code goes to the number in the international form', first?.type === 'sms' && first.phone === '+46701234567', s.sms);
+  const title = await page.textContent('[data-auth-title]');
+  check('9 the page asks for the code', title === 'Kolla din mobil.', title);
+  await page.fill('#auth-code', first.code === '000000' ? '111111' : '000000');
+  await page.click('[data-code-form] [type="submit"]');
+  await page.waitForSelector('[data-code-error]:not([hidden])');
+  field = await problemOf('#auth-code');
+  check('9 a wrong code is tied to the code field', field.invalid === 'true' && field.described.includes('Koden stämmer inte'), field);
+  await page.fill('#auth-code', first.code);
+  await page.click('[data-code-form] [type="submit"]');
+  await page.waitForURL(url => url.pathname.endsWith('receptbok.html'));
+  await settle();
+  s = await state();
+  check('9 the right code signs in, to a new account with the name', s.profiles['+46701234567']?.display_name === 'Mona Mobil', s.profiles);
+
+  // 10. Konto for an account without an email address.
+  await page.goto(`${site}/konto.html`);
+  await settle();
+  field = await page.evaluate(() => ({
+    who: document.querySelector('[data-account-email]').textContent,
+    methods: document.querySelector('[data-account-methods]').textContent,
+    email: document.querySelector('#account-email-title').textContent,
+    password: document.querySelector('[data-password-section]').hidden,
+    phone: document.querySelector('[data-phone-title]').textContent
+  }));
+  check('10 konto shows the number and how the account signs in', field.who === '070-123 45 67' && field.methods === 'Du loggar in med en kod per sms.', field);
+  check('10 it offers to add an email address, and no password without one', field.email === 'Lägg till e-postadress' && field.password === true, field);
+  check('10 and to change the number', field.phone === 'Byt mobilnummer', field);
+  await signOut();
+
+  // 11. An account with an email address adds a number on Konto, then signs in with it.
+  await clean();
+  await page.goto(`${site}/logga-in.html`);
+  await settle();
+  await signIn('a@example.se');
+  await page.goto(`${site}/konto.html`);
+  await settle();
+  const before = await page.textContent('[data-phone-title]');
+  check('11 konto offers to add a number', before === 'Lägg till mobilnummer', before);
+  await page.fill('#account-new-phone', '070-123 45 67');
+  await page.click('[data-phone-submit]');
+  await page.waitForSelector('[data-phone-error]:not([hidden])');
+  field = await problemOf('#account-new-phone');
+  check('11 a number on another account is tied to the field', field.invalid === 'true' && field.described.includes('hör redan till ett annat konto'), field);
+  await page.fill('#account-new-phone', '+46 73 555 12 34');
+  await page.click('[data-phone-submit]');
+  await page.waitForSelector('[data-phone-code-field]:not([hidden])');
+  s = await state();
+  const change = s.sms.at(-1);
+  check('11 a code goes to the new number', change?.type === 'phone_change' && change.phone === '+46735551234', s.sms);
+  await page.fill('#account-phone-code', change.code);
+  await page.click('[data-phone-submit]');
+  await page.waitForFunction(() => document.querySelector('[data-phone-status]').textContent.includes('sparat'));
+  field = await page.evaluate(() => ({
+    methods: document.querySelector('[data-account-methods]').textContent,
+    phone: document.querySelector('[data-phone-title]').textContent,
+    code: document.querySelector('[data-phone-code-field]').hidden
+  }));
+  check('11 once the code is typed, the number is a way to sign in',
+    field.methods === 'Du loggar in med lösenord eller med en kod per sms.' && field.phone === 'Byt mobilnummer' && field.code === true, field);
+  await signOut();
+  await clean();
+  await page.goto(`${site}/logga-in.html`);
+  await settle();
+  await page.click('[data-phone-open]');
+  await page.fill('#auth-phone', '0735551234');
+  await page.click('[data-phone-form] [type="submit"]');
+  await page.waitForSelector('[data-code-form]:not([hidden])');
+  s = await state();
+  await page.fill('#auth-code', s.sms.at(-1).code);
+  await page.click('[data-code-form] [type="submit"]');
+  await page.waitForURL(url => url.pathname.endsWith('receptbok.html'));
+  await settle();
+  s = await state();
+  const marker = await page.evaluate(() => JSON.parse(localStorage.getItem('restfest-account') ?? 'null'));
+  const owners = s.users.filter(user => user.phone === '+46735551234').map(user => user.email);
+  check('11 signing in with that number reaches the same account', marker?.name === 'Anna' && owners.length === 1 && owners[0] === 'a@example.se', { marker, owners });
   return results;
 }

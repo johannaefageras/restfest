@@ -1,6 +1,6 @@
 ---js
-// konto.html: a signed-in visitor's sign-in details: change the email address or the password, sign
-// out, delete the account. Built only when the site has accounts (accountPages in eleventy.config.js).
+// konto.html: a signed-in visitor's sign-in details: change or add the email address, the mobile
+// number and the password, sign out, delete the account. Built only when the site has accounts (accountPages in eleventy.config.js).
 // src/js/profile.js; HANDOFF.md, "Konton och receptbok".
 const layout = 'layouts/base.njk';
 const title = 'Konto';
@@ -35,9 +35,10 @@ const permalink = 'konto.html';
         </section>
 
         <section class="account-section account-credentials add-card" aria-labelledby="account-email-title">
-          <h2 id="account-email-title">Byt e-postadress</h2>
+          {#- "Lägg till e-postadress" for an account made with a mobile number (profile.js). #}
+          <h2 id="account-email-title" data-email-title>Byt e-postadress</h2>
           <div class="account-section-copy">
-            <p class="account-panel-intro">En ny adress? Vi skickar en länk så att du kan bekräfta bytet.</p>
+            <p class="account-panel-intro" data-email-intro>En ny adress? Vi skickar en länk så att du kan bekräfta bytet.</p>
           </div>
           <form class="account-form" data-email-form novalidate>
             <div class="account-field">
@@ -46,14 +47,15 @@ const permalink = 'konto.html';
             </div>
             <p class="account-error" role="alert" data-email-error hidden></p>
             <p class="account-status" role="status" data-email-status></p>
-            <div class="account-submit"><button class="button" type="submit">Byt e-postadress</button></div>
+            <div class="account-submit"><button class="button" type="submit" data-email-submit>Byt e-postadress</button></div>
           </form>
         </section>
 
-        <section class="account-section account-credentials photo-card" aria-labelledby="account-password-title">
+        {#- Hidden for an account without an email address: the password goes with the address. #}
+        <section class="account-section account-credentials photo-card" aria-labelledby="account-password-title" data-password-section>
           <h2 id="account-password-title" data-password-title>Byt lösenord</h2>
           <div class="account-section-copy">
-            <p class="account-panel-intro" data-password-intro hidden>Med ett lösenord kan du också logga in utan Google.</p>
+            <p class="account-panel-intro" data-password-intro hidden>Med ett lösenord kan du också logga in med din e-postadress.</p>
           </div>
           <form class="account-form" data-password-change novalidate>
             <div class="account-field">
@@ -63,6 +65,28 @@ const permalink = 'konto.html';
             <p class="account-error" role="alert" data-password-error hidden></p>
             <p class="account-status" role="status" data-password-status></p>
             <div class="account-submit"><button class="button" type="submit">Spara lösenordet</button></div>
+          </form>
+        </section>
+
+        {#- Adding or changing the number takes a code sent to it: the code field shows once it is sent. #}
+        <section class="account-section account-credentials account-phone pantry-panel" aria-labelledby="account-phone-title">
+          <h2 id="account-phone-title" data-phone-title>Lägg till mobilnummer</h2>
+          <div class="account-section-copy">
+            <p class="account-panel-intro" data-phone-intro>Med ett mobilnummer kan du också logga in med en kod per sms.</p>
+          </div>
+          <form class="account-form" data-phone-change novalidate>
+            <div class="account-field">
+              <label for="account-new-phone">Mobilnummer</label>
+              <input id="account-new-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+            </div>
+            <div class="account-field" data-phone-code-field hidden>
+              <label for="account-phone-code">Koden från sms:et</label>
+              <input id="account-phone-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="12">
+              <div class="auth-field-foot"><button class="text-button" type="button" data-phone-resend>Skicka en ny kod</button></div>
+            </div>
+            <p class="account-error" role="alert" data-phone-error hidden></p>
+            <p class="account-status" role="status" data-phone-status></p>
+            <div class="account-submit"><button class="button" type="submit" data-phone-submit>Skicka kod</button></div>
           </form>
         </section>
 

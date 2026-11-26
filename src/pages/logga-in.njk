@@ -1,5 +1,5 @@
 ---js
-// logga-in.html: sign in, create an account, ask for a new password. Built only when the site has
+// logga-in.html: sign in, create an account, sign in with a code sent by text, ask for a new password. Built only when the site has
 // accounts (accountPages in eleventy.config.js). src/js/auth-forms.js does the work; HANDOFF.md, "Konton och receptbok".
 // ?till=<path> is where to go afterwards, ?lage=skapa opens "Skapa konto".
 const layout = 'layouts/base.njk';
@@ -25,7 +25,10 @@ const permalink = 'logga-in.html';
         <h1 id="auth-title" class="auth-title"><span class="marker" data-auth-title>Logga in.</span></h1>
 
         <div class="auth-part" data-auth-main>
-          <button class="button account-wide" type="button" data-google><img src="assets/icons/google.svg" alt="" width="20" height="20">Fortsätt med Google</button>
+          <div class="auth-providers">
+            <button class="button account-wide" type="button" data-google><img src="assets/icons/google.svg" alt="" width="20" height="20">Fortsätt med Google</button>
+            <button class="button account-wide" type="button" data-phone-open><i class="fas fa-mobile-screen-button" aria-hidden="true"></i>Fortsätt med mobilnummer</button>
+          </div>
           <p class="account-or"><span>eller</span></p>
           <form class="account-form" data-auth-form novalidate>
             <div class="account-field" data-only="skapa" hidden>
@@ -62,6 +65,38 @@ const permalink = 'logga-in.html';
           <p class="account-status auth-note" role="status" data-reset-status></p>
           <button class="button primary account-wide" type="submit">Skicka länk</button>
           <p class="auth-back"><button class="text-button" type="button" data-reset-back><i class="fas fa-arrow-left" aria-hidden="true"></i> Till inloggningen</button></p>
+        </form>
+
+        {#- Sign-in by text message: the number, then the code. A number without an account gets one, so
+            both modes use it; the title follows the mode (auth-forms.js). #}
+        <form class="account-form auth-part" data-phone-form novalidate hidden>
+          <p class="auth-lead">Skriv ditt mobilnummer, så skickar vi en kod i ett sms.</p>
+          <div class="account-field" data-only="skapa" hidden>
+            <label for="auth-phone-name">Namn <span class="account-optional">(valfritt)</span></label>
+            <input id="auth-phone-name" name="name" type="text" autocomplete="name" maxlength="80">
+          </div>
+          <div class="account-field">
+            <label for="auth-phone">Mobilnummer</label>
+            <input id="auth-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="auth-phone-hint">
+            <p id="auth-phone-hint" class="account-hint">Ett svenskt mobilnummer, till exempel 070-123 45 67.</p>
+          </div>
+          <p class="account-error" role="alert" data-phone-error hidden></p>
+          <button class="button primary account-wide" type="submit">Skicka kod</button>
+          <p class="account-hint" data-only="skapa" hidden>Vi sparar ditt mobilnummer, ditt namn och det du lägger i receptsamlingen. <a href="integritet.html">Så hanterar vi dina uppgifter</a>.</p>
+          <p class="auth-back"><button class="text-button" type="button" data-phone-back><i class="fas fa-arrow-left" aria-hidden="true"></i> Till inloggningen</button></p>
+        </form>
+
+        <form class="account-form auth-part" data-code-form data-title="Kolla din mobil." novalidate hidden>
+          <p class="auth-lead" role="status" data-code-text></p>
+          <div class="account-field">
+            <label for="auth-code">Kod</label>
+            <input id="auth-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="12" required>
+          </div>
+          <p class="account-error" role="alert" data-code-error hidden></p>
+          <button class="button primary account-wide" type="submit">Logga in</button>
+          <p class="account-hint">Kom inget sms? Vänta en minut och skicka koden igen.</p>
+          <button class="button account-wide" type="button" data-code-resend>Skicka koden igen</button>
+          <p class="auth-back"><button class="text-button" type="button" data-code-back><i class="fas fa-arrow-left" aria-hidden="true"></i> Byt nummer</button></p>
         </form>
 
         <div class="account-sent auth-part" data-auth-sent data-title="Kolla din mejl." hidden>
