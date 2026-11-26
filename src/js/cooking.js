@@ -144,6 +144,59 @@ function cookingWantsScreen({ started, screenOff, allDone, running }) {
   return !screenOff && ((started && !allDone) || running > 0);
 }
 
+// Keeps the screen on through the Screen Wake Lock API (navigator.wakeLock, passed in). The browser
+// lets go whenever the tab is hidden; resume() asks again if the page still wants it. A refused
+// request (some browsers want a fresh tap) leaves it off and wanted, so the next try may succeed.
+// onChange runs whenever held() changes.
+function cookingScreenLock(wakeLock, onChange) {
+  let sentinel = null;
+  let wanted = false;
+  let pending = null;
+  const hold = (next) => {
+    const was = Boolean(sentinel);
+    sentinel = next;
+    if (was !== Boolean(sentinel)) onChange();
+  };
+  async function ask() {
+    try {
+      const next = await wakeLock.request("screen");
+      // Let go while the browser was answering.
+      if (!wanted) {
+        next.release().catch?.(() => {});
+        return false;
+      }
+      next.addEventListener("release", () => {
+        if (sentinel === next) hold(null);
+      });
+      hold(next);
+      return true;
+    } catch {
+      return false;
+    } finally {
+      pending = null;
+    }
+  }
+  function request() {
+    if (!wakeLock) return Promise.resolve(false);
+    wanted = true;
+    if (sentinel) return Promise.resolve(true);
+    return (pending ??= ask());
+  }
+  async function release() {
+    wanted = false;
+    const current = sentinel;
+    if (!current) return;
+    hold(null);
+    try {
+      await current.release();
+    } catch {}
+  }
+  async function resume() {
+    if (wanted && !sentinel) await request();
+  }
+  return { supported: Boolean(wakeLock), held: () => Boolean(sentinel), request, release, resume };
+}
+
 // --- The page part. Everything below touches the document; it runs from cookingInitPage() and from
 // enhanceCooking(), which app.js calls for each recipe it shows (its own page, the pop-up, nytt-recept).
 
@@ -202,11 +255,89 @@ function cookingRevealCurrent(article) {
   });
 }
 
-// Called after every step toggle and timer start, inside the tap (cooking.js keeps the screen on).
-function cookingActivity(article) {}
+// --- Keeping the screen on. It turns on with the first step checked or timer started, stays on while a
+// recipe is under way or a timer runs, and the visitor can turn it off per recipe ("Stäng av").
+
+let cookingScreen = null;
+
+// The recipes on screen: the page's own and the open pop-up's. A closed pop-up keeps its last recipe
+// in the page, which no longer counts.
+function cookingShownRecipes() {
+  return [...document.querySelectorAll("main .recipe-view, #recipe-dialog[open] .recipe-view")];
+}
+
+function cookingScreenState(article) {
+  const running = cookingReadTimers(localStorage, Date.now()).filter((timer) => !timer.done).length;
+  const view = article && cookingViews.get(article);
+  if (!view) return { started: false, screenOff: false, allDone: false, running };
+  return {
+    started: article.dataset.cookingStarted === "1",
+    screenOff: view.screenOff,
+    allDone: view.boxes.every((box) => box.checked),
+    running,
+  };
+}
+
+// Called after every step toggle and timer start, inside the tap: the only place the screen is asked
+// to stay on, as some browsers allow that only in a tap.
+function cookingActivity(article) {
+  if (!cookingScreen?.supported) return;
+  if (cookingWantsScreen(cookingScreenState(article))) cookingScreen.request();
+  else cookingScreen.release();
+  cookingDrawScreen();
+}
 
 // Called whenever the timers change outside a tap: may let the screen go dark, never asks to keep it on.
-function cookingUpdateScreen() {}
+function cookingUpdateScreen() {
+  if (!cookingScreen?.supported) return;
+  const shown = cookingShownRecipes();
+  const wanted = shown.length
+    ? shown.some((article) => cookingWantsScreen(cookingScreenState(article)))
+    : cookingWantsScreen(cookingScreenState(null));
+  if (cookingScreen.held() && !wanted) cookingScreen.release();
+  cookingDrawScreen();
+}
+
+// The line in each recipe's "Gör så här" heading: "Skärmen hålls tänd · Stäng av" while the screen is
+// kept on, a "Håll skärmen tänd" button while cooking without it, otherwise nothing. Redrawn only
+// when that changes, keeping focus on its button.
+function cookingDrawScreen() {
+  for (const article of document.querySelectorAll(".recipe-view")) {
+    const box = article.querySelector(".cook-screen");
+    if (!box || !cookingViews.has(article)) continue;
+    const { started, allDone, running } = cookingScreenState(article);
+    const state = !cookingScreen?.supported
+      ? "hidden"
+      : cookingScreen.held()
+        ? "on"
+        : started && (!allDone || running > 0)
+          ? "off"
+          : "hidden";
+    if (box.dataset.state === state) continue;
+    const hadFocus = box.contains(document.activeElement);
+    box.dataset.state = state;
+    box.hidden = state === "hidden";
+    box.innerHTML =
+      state === "on"
+        ? '<span>Skärmen hålls tänd</span> · <button class="text-button cook-screen-off" type="button">Stäng av</button>'
+        : state === "off"
+          ? '<button class="text-button cook-screen-on" type="button">Håll skärmen tänd</button>'
+          : "";
+    if (hadFocus) box.querySelector("button")?.focus({ preventScroll: true });
+  }
+}
+
+function cookingScreenClick(event) {
+  const button = event.target.closest(".cook-screen button");
+  if (!button) return;
+  const article = button.closest(".recipe-view");
+  const view = cookingViews.get(article);
+  view.screenOff = button.matches(".cook-screen-off");
+  cookingSave(article);
+  if (view.screenOff) cookingScreen.release();
+  else cookingScreen.request();
+  cookingDrawScreen();
+}
 
 // Turns each cooking time in the steps, and in the notes after them, into a timer button. The text
 // stays as written; the button's name says what it does. Notes are labelled "Tips".
@@ -551,8 +682,10 @@ function enhanceCooking(article) {
     );
     cookingRenderTray();
     cookingAnnounce(`Timer startad, ${cookingDurationWords(seconds)}`);
+    article.dataset.cookingStarted = "1";
     cookingActivity(article);
   });
+  cookingDrawScreen();
 
   // A tap anywhere on a step's text checks it, except on its buttons and links, or when it ends a
   // text selection.
@@ -616,7 +749,20 @@ function cookingInitPage() {
     attributes: true,
     attributeFilter: ["open"],
   });
+
+  cookingScreen = cookingScreenLock(navigator.wakeLock, cookingDrawScreen);
+  document.addEventListener("click", cookingScreenClick);
+  // The browser lets go of the screen whenever the tab is hidden; ask again on return.
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") cookingScreen.resume();
+  });
+  // Closing the recipe pop-up lets the screen go dark, unless a timer still has to ring.
+  document.querySelector("#recipe-dialog")?.addEventListener("close", cookingUpdateScreen);
   cookingTick();
+  // With timers still running from before a reload, try to keep the screen on; if the browser wants
+  // a tap first, the next step or timer tapped asks again.
+  if (cookingReadTimers(localStorage, Date.now()).some((timer) => !timer.done))
+    cookingScreen.request().then(cookingDrawScreen);
 }
 
 if (typeof document !== "undefined") cookingInitPage();

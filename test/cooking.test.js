@@ -117,3 +117,72 @@ test('sorts by end time', () => {
   const ids = plain(cookingSortTimers([{ id: 'b', endsAt: 2 }, { id: 'a', endsAt: 1 }])).map((t) => t.id);
   assert.deepEqual(ids, ['a', 'b']);
 });
+
+// A stand-in for navigator.wakeLock. Each request() gives a sentinel; drop() is the browser letting go
+// (the tab was hidden), release() is the page letting go. `fail` makes the next requests refuse.
+function fakeWakeLock() {
+  const fake = {
+    fail: false,
+    last: null,
+    async request() {
+      if (fake.fail) throw new Error('NotAllowedError');
+      const listeners = [];
+      const sentinel = {
+        released: false,
+        addEventListener: (name, listener) => { if (name === 'release') listeners.push(listener); },
+        async release() {
+          if (sentinel.released) return;
+          sentinel.released = true;
+          listeners.forEach((listener) => listener());
+        },
+        drop() {
+          sentinel.released = true;
+          listeners.forEach((listener) => listener());
+        },
+      };
+      fake.last = sentinel;
+      return sentinel;
+    },
+  };
+  return fake;
+}
+
+test('screen lock follows the browser', async () => {
+  const { cookingScreenLock } = context;
+  let changes = 0;
+  assert.equal(cookingScreenLock(undefined, () => changes++).supported, false);
+  assert.equal(await cookingScreenLock(undefined, () => changes++).request(), false);
+  assert.equal(changes, 0);
+  const fake = fakeWakeLock();
+  const lock = cookingScreenLock(fake, () => changes++);
+  assert.equal(lock.supported, true);
+  assert.equal(await lock.request(), true);
+  assert.equal(lock.held(), true);
+  fake.last.drop(); // the tab was hidden
+  assert.equal(lock.held(), false);
+  await lock.resume();
+  assert.equal(lock.held(), true);
+  await lock.release();
+  assert.equal(fake.last.released, true);
+  await lock.resume(); // not wanted any more
+  assert.equal(lock.held(), false);
+  fake.fail = true;
+  assert.equal(await lock.request(), false);
+  assert.equal(lock.held(), false);
+  fake.fail = false;
+  await lock.resume(); // still wanted, so it tries again
+  assert.equal(lock.held(), true);
+  assert.ok(changes >= 4, `${changes} changes`);
+});
+
+test('two requests at once hold one lock', async () => {
+  const { cookingScreenLock } = context;
+  const fake = fakeWakeLock();
+  let requests = 0;
+  const request = fake.request;
+  fake.request = (...args) => { requests++; return request(...args); };
+  const lock = cookingScreenLock(fake, () => {});
+  await Promise.all([lock.request(), lock.request()]);
+  assert.equal(requests, 1);
+  assert.equal(lock.held(), true);
+});
