@@ -253,6 +253,9 @@
   {%- if archivePicker %}
   <script src="{{ base }}js/archive-picker.js"></script>
   {%- endif %}
+  {#- Cooking along on any recipe (step checks, timers, screen-on), and the timer tray on every page. #}
+  <script src="{{ base }}js/cooking-times.js"></script>
+  <script src="{{ base }}js/cooking.js"></script>
   <script src="{{ base }}js/app.js"></script>
   {%- for script in scripts %}
   <script src="{{ base }}js/{{ script }}"></script>

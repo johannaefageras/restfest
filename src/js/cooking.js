@@ -143,3 +143,163 @@ function cookingStepLabel(sectionTitle, stepNumber, sectionCount) {
 function cookingWantsScreen({ started, screenOff, allDone, running }) {
   return !screenOff && ((started && !allDone) || running > 0);
 }
+
+// --- The page part. Everything below touches the document; it runs from cookingInitPage() and from
+// enhanceCooking(), which app.js calls for each recipe it shows (its own page, the pop-up, nytt-recept).
+
+// Per recipe view on screen: its step items, ingredient checkboxes and saved screen choice.
+const cookingViews = new WeakMap();
+
+const cookingReducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function cookingIngredientBoxes(article) {
+  return [...article.querySelectorAll('.cook-ingredient input[type="checkbox"]')];
+}
+
+function cookingCheckedIndexes(boxes) {
+  return boxes.flatMap((box, index) => (box.checked ? [index] : []));
+}
+
+function cookingSave(article) {
+  const view = cookingViews.get(article);
+  cookingSaveEntry(
+    localStorage,
+    article.dataset.recipe,
+    {
+      steps: cookingCheckedIndexes(view.boxes),
+      ingredients: cookingCheckedIndexes(cookingIngredientBoxes(article)),
+      screenOff: view.screenOff,
+    },
+    Date.now(),
+  );
+}
+
+function cookingDrawSteps(article) {
+  const view = cookingViews.get(article);
+  const checked = view.boxes.map((box) => box.checked);
+  const count = checked.filter(Boolean).length;
+  // The marker shows only once cooking has begun, so an untouched recipe looks as it always has.
+  const current = count ? cookingCurrentStep(checked) : -1;
+  view.steps.forEach((step, index) => {
+    step.classList.toggle("is-done", checked[index]);
+    step.classList.toggle("is-current", index === current);
+  });
+  view.bar.max = view.steps.length;
+  view.bar.value = count;
+  view.text.textContent = `${count} av ${view.steps.length} klara`;
+  view.reset.hidden =
+    !count && !cookingIngredientBoxes(article).some((box) => box.checked);
+}
+
+// After a step is checked, brings the next one into view if it is entirely below the screen, and
+// never moves the page otherwise.
+function cookingRevealCurrent(article) {
+  const step = article.querySelector(".cook-step.is-current");
+  if (!step || step.getBoundingClientRect().top < innerHeight) return;
+  step.scrollIntoView({
+    block: "nearest",
+    behavior: cookingReducedMotion() ? "instant" : "smooth",
+  });
+}
+
+// Called after every step toggle and timer start, inside the tap (cooking.js keeps the screen on).
+function cookingActivity(article) {}
+
+function enhanceCooking(article) {
+  const section = article.querySelector(".recipe-directions");
+  if (!section || cookingViews.has(article)) return;
+  const heading = section.querySelector("h2");
+  const row = document.createElement("div");
+  row.className = "recipe-section-heading";
+  heading.replaceWith(row);
+  row.append(heading);
+  row.insertAdjacentHTML(
+    "beforeend",
+    '<div class="recipe-actions cook-screen" hidden></div>',
+  );
+  row.insertAdjacentHTML(
+    "afterend",
+    `<p class="cook-steps-hint">Tryck på ett steg när det är klart.</p>
+    <div class="cook-checklist cook-steps-progress">
+      <progress class="cook-steps-bar" aria-label="Klara steg" value="0" max="1"></progress>
+      <p class="meta cook-steps-text" aria-live="polite"></p>
+      <button class="text-button cook-steps-reset" type="button" hidden>Börja om</button>
+    </div>`,
+  );
+
+  // Each section (an h3 and its list) is numbered from 1; the saved indexes run across all of them.
+  const lists = [...section.querySelectorAll("ol.directions")];
+  const steps = [];
+  const labels = [];
+  for (const list of lists) {
+    const before = list.previousElementSibling;
+    const title = before?.matches("h3") ? before.textContent.trim() : null;
+    [...list.children].forEach((step, index) => {
+      const label = cookingStepLabel(title, index + 1, lists.length);
+      const box = document.createElement("input");
+      box.type = "checkbox";
+      box.className = "cook-step-check";
+      box.setAttribute("aria-label", `${label} klart`);
+      step.classList.add("cook-step");
+      step.prepend(box);
+      steps.push(step);
+      labels.push(label);
+    });
+  }
+
+  const saved =
+    cookingReadState(localStorage, Date.now())[article.dataset.recipe] ?? {};
+  const view = {
+    steps,
+    labels,
+    boxes: steps.map((step) => step.querySelector(".cook-step-check")),
+    bar: section.querySelector(".cook-steps-bar"),
+    text: section.querySelector(".cook-steps-text"),
+    reset: section.querySelector(".cook-steps-reset"),
+    screenOff: Boolean(saved.screenOff),
+  };
+  cookingViews.set(article, view);
+  for (const index of saved.steps ?? []) if (view.boxes[index]) view.boxes[index].checked = true;
+  const ingredients = cookingIngredientBoxes(article);
+  for (const index of saved.ingredients ?? [])
+    if (ingredients[index]) ingredients[index].checked = true;
+  cookingDrawSteps(article);
+
+  // A tap anywhere on a step's text checks it, except on its buttons and links, or when it ends a
+  // text selection.
+  section.addEventListener("click", (event) => {
+    const step = event.target.closest(".cook-step");
+    if (!step || event.target.closest("button, a, input, label")) return;
+    if (getSelection()?.toString()) return;
+    const box = step.querySelector(".cook-step-check");
+    box.checked = !box.checked;
+    box.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+  section.addEventListener("change", (event) => {
+    if (!event.target.matches(".cook-step-check")) return;
+    article.dataset.cookingStarted = "1";
+    cookingSave(article);
+    cookingDrawSteps(article);
+    if (event.target.checked) cookingRevealCurrent(article);
+    cookingActivity(article);
+  });
+  article
+    .querySelector(".cook-ingredient-columns")
+    ?.addEventListener("change", () => {
+      cookingSave(article);
+      cookingDrawSteps(article);
+    });
+  // "Börja om" clears the steps and the ingredients; running timers have their own ✕.
+  view.reset.addEventListener("click", () => {
+    for (const box of [...view.boxes, ...ingredients]) box.checked = false;
+    // app.js redraws the ingredient progress on a change in the list.
+    ingredients[0]?.dispatchEvent(new Event("change", { bubbles: true }));
+    cookingSave(article);
+    cookingDrawSteps(article);
+    view.boxes[0]?.focus({ preventScroll: true });
+  });
+}
+
+function cookingInitPage() {}
+
+if (typeof document !== "undefined") cookingInitPage();

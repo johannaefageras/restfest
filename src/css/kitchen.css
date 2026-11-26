@@ -2725,6 +2725,55 @@ body:has(#shopping-dialog[open]) {
   letter-spacing: 0;
 }
 
+/* Cooking along (cooking.js). Each step's yellow number badge doubles as its checkbox: the real
+   checkbox lies invisibly over the badge, and a tap on the step's text toggles it too. A done step
+   shows a check in the badge and muted text, not struck through, as you may want to reread it. The
+   step after the last done one gets a ring; --cook-ring is resolved on the li, as dark.css gives the
+   badge itself dark ink. */
+.cook-steps-hint {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: var(--text-ui);
+}
+.cook-steps-progress {
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  margin-block: 10px 18px;
+}
+.cook-steps-reset {
+  color: var(--ink);
+}
+.cook-step {
+  --cook-ring: var(--ink);
+  cursor: pointer;
+}
+.cook-step-check {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  width: 24px;
+  height: 21px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.cook-step.is-done {
+  color: var(--muted);
+}
+.cook-step.is-done::before {
+  content: "\f00c";
+  font-family: "Font Awesome";
+  font-weight: 700;
+  font-size: 12px;
+}
+.cook-step.is-current::before {
+  outline: 2px solid var(--cook-ring);
+  outline-offset: 2px;
+}
+.cook-step:has(.cook-step-check:focus-visible)::before {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
 /* A recipe's own page (recept/<id>.html): the same card as the dialog, centred. */
 .wrap.recipe-page {
   max-width: calc(810px + 64px);

@@ -1771,6 +1771,13 @@ function enhanceRecipeShare(article, title) {
 // Wires up a recipe's interactive parts, on its own page or in the dialog.
 function enhanceRecipe(article) {
   enhanceServings(article);
+  // Step checks, timers and screen-on (cooking.js), before the ingredient progress below is drawn,
+  // as it restores checked ingredients too. If it fails, the rest of the recipe still works.
+  try {
+    enhanceCooking(article);
+  } catch (error) {
+    console.error(error);
+  }
   const title = $(".recipe-heading", article).textContent;
   enhanceRecipeShare(article, title);
   const source =
