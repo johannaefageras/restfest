@@ -7,7 +7,6 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 .archive-search-field input:focus-visible,
-.archive-sort select:focus-visible,
 .ingredients input[type="checkbox"]:focus-visible,
 .shopping-field input:focus-visible,
 .ingredients .shopping-field input:focus-visible,
@@ -23,7 +22,7 @@ textarea:focus-visible,
   outline: none;
 }
 
-/* The home page (src/pages/index.njk): a yellow hero, then three steps with the same heading. */
+/* The home page (src/pages/index.njk): the hero, recipe carousel and three steps. */
 .kitchen-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(150px, 0.6fr);
@@ -63,6 +62,106 @@ textarea:focus-visible,
 .kitchen-hero-art img {
   width: 100%;
   height: auto;
+}
+
+.recipe-carousel {
+  --carousel-fade: clamp(22px, 3.5vw, 46px);
+  --carousel-inset: clamp(12px, 1.6vw, 20px);
+  margin-top: clamp(24px, 3.5vw, 40px);
+}
+.recipe-carousel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  margin-bottom: 10px;
+}
+.recipe-carousel-heading h2 {
+  font-size: clamp(19px, 10px + 3vw, 30px);
+  letter-spacing: var(--track-display-sm);
+  hyphens: none;
+}
+.recipe-carousel-controls {
+  display: flex;
+  gap: 4px;
+}
+.recipe-carousel-controls .button {
+  width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 1.5px solid var(--line);
+  font-size: 14px;
+}
+.recipe-carousel-controls .button:hover {
+  border-color: var(--ink);
+}
+.recipe-carousel-play::before {
+  content: "";
+  border-block: 6px solid transparent;
+  border-left: 9px solid currentColor;
+}
+.recipe-carousel-play[data-playing="true"]::before {
+  width: 10px;
+  height: 12px;
+  border: 0;
+  border-inline: 3px solid currentColor;
+}
+.recipe-carousel-track {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 4px var(--carousel-inset);
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--carousel-inset);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--carousel-fade), #000 calc(100% - var(--carousel-fade)), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 var(--carousel-fade), #000 calc(100% - var(--carousel-fade)), transparent);
+}
+.recipe-carousel-track[data-ready] {
+  scrollbar-width: none;
+}
+.recipe-carousel-track:has(:focus-visible) {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.recipe-carousel-track > li {
+  flex: 0 0 clamp(196px, 24%, 236px);
+  scroll-snap-align: start;
+}
+.recipe-carousel-card {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+  text-decoration: none;
+}
+.recipe-carousel-card:hover {
+  border-color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.recipe-carousel-card:focus-visible {
+  outline-offset: -3px;
+}
+.recipe-carousel-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--well);
+}
+.recipe-carousel-card span {
+  display: block;
+  padding: 10px 12px 12px;
 }
 
 .kitchen-grid {
@@ -600,46 +699,6 @@ textarea:focus-visible,
   font-size: var(--text-small);
 }
 
-.archive-sort label,
-.pasta-region-label {
-  color: var(--muted);
-}
-.archive-sort-field {
-  position: relative;
-}
-
-.archive-sort select {
-  appearance: none;
-  min-height: 40px;
-  padding: 6px 36px 6px 12px;
-  border: 1.5px solid var(--control);
-  border-radius: var(--radius-button);
-  background: var(--surface);
-  color: var(--ink);
-  font: inherit;
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-}
-
-.archive-sort select:hover {
-  border-color: var(--ink);
-}
-
-.archive-sort-field > .archive-sort-icon,
-.archive-sort-field > .fa-chevron-down {
-  position: absolute;
-  top: 50%;
-  right: 13px;
-  translate: 0 -50%;
-  font-size: 13px;
-  pointer-events: none;
-}
-
-.archive-sort-field > .archive-sort-icon {
-  right: 11px;
-  object-fit: contain;
-}
-
 /* Below 700px the menu's border would nearly touch the Filter button above it. */
 @media (max-width: 699px) {
   .archive-results-row {
@@ -651,30 +710,6 @@ textarea:focus-visible,
 @media (max-width: 519px) {
   .archive-results-row {
     column-gap: 10px;
-  }
-  .archive-sort select {
-    padding-right: 31px;
-  }
-  #archive-sort {
-    padding-inline: 9px 29px;
-    font-size: var(--text-ui);
-  }
-  .archive-sort-field > .archive-sort-icon {
-    right: 7px;
-  }
-  .archive-sort-field > .fa-chevron-down {
-    right: 11px;
-  }
-
-  .archive-sort label:not(.sr-only),
-  .pasta-region-label {
-    position: absolute;
-    overflow: hidden;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
   }
 }
 
@@ -988,7 +1023,7 @@ details[open] > summary > .fa-chevron-down {
   background: var(--surface);
 }
 
-.meal-picker-options > button + button {
+.meal-picker-options > button:not([hidden]) ~ button {
   border-top: 1px solid var(--rule);
 }
 .meal-picker-options > button:hover {
@@ -1003,6 +1038,39 @@ details[open] > summary > .fa-chevron-down {
 }
 .meal-picker-options > button[aria-pressed="false"] > img:last-child {
   visibility: hidden;
+}
+
+/* The menus beside the archive counts open along the trigger's right edge. */
+.archive-sort > .meal-picker {
+  width: max-content;
+  white-space: nowrap;
+}
+.archive-sort > .meal-picker > summary {
+  min-height: 40px;
+  padding-block: 6px;
+}
+.archive-sort .meal-picker-options {
+  inset-inline-start: auto;
+  width: max-content;
+  min-width: 100%;
+}
+.archive-sort .meal-picker img:first-child {
+  object-fit: contain;
+}
+@media (max-width: 519px) {
+  #archive-sort > summary {
+    grid-template-columns: 22px minmax(0, 1fr) 12px;
+    gap: 3px;
+    padding-inline: 7px;
+    font-size: var(--text-ui);
+  }
+  #archive-sort > summary > img {
+    width: 22px;
+    height: 22px;
+  }
+  #archive-sort > summary > .fa-chevron-down {
+    font-size: 12px;
+  }
 }
 
 .food-filters,
@@ -4621,22 +4689,6 @@ a.dialog-save {
 /* The count, "Rensa filtren" beside it when something is chosen, and the region menu on the right. */
 .pasta-list .archive-results-row {
   justify-content: flex-start;
-}
-#pasta-region {
-  width: max-content;
-  white-space: nowrap;
-}
-#pasta-region > summary {
-  min-height: 40px;
-  padding-block: 6px;
-}
-#pasta-region .meal-picker-options {
-  inset-inline-start: auto;
-  width: max-content;
-  min-width: 100%;
-}
-#pasta-region img:first-child {
-  object-fit: contain;
 }
 .pasta-reset {
   min-height: 0;

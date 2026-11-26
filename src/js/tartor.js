@@ -11,7 +11,7 @@
 
   const cards = [...grid.querySelectorAll(".cake-card")];
   const search = form.elements.q;
-  const origin = document.getElementById("cake-origin");
+  const origin = setupArchivePicker(document.getElementById("cake-origin"), value => choose({ ursprung: value }));
   const buttons = [...form.querySelectorAll("[data-niva], [data-del]")];
   const filterCount = form.querySelector(".archive-filter-count");
   const count = document.getElementById("cake-count");
@@ -30,7 +30,7 @@
   const offered = {
     niva: (value) => buttons.some((button) => button.dataset.niva === value),
     del: (value) => buttons.some((button) => button.dataset.del === value),
-    ursprung: (value) => [...origin.options].some((option) => option.value === value),
+    ursprung: origin.hasValue,
   };
 
   // Lower case without accents, so "creme" finds crème and "osterrike" Österrike.
@@ -40,7 +40,7 @@
   // The controls show what is chosen, and the Filter button on phones how many filters are on.
   function showChoices() {
     if (search.value.trim() !== chosen.q) search.value = chosen.q;
-    origin.value = chosen.ursprung;
+    origin.setValue(chosen.ursprung);
     for (const button of buttons) {
       const field = "niva" in button.dataset ? "niva" : "del";
       button.setAttribute("aria-pressed", button.dataset[field] === chosen[field]);
@@ -98,7 +98,6 @@
 
   form.addEventListener("submit", (event) => event.preventDefault());
   search.addEventListener("input", () => choose({ q: search.value.trim() }));
-  origin.addEventListener("change", () => choose({ ursprung: origin.value }));
   // A level or part button turns its choice on, and off again; one of each at a time.
   for (const button of buttons) {
     const field = "niva" in button.dataset ? "niva" : "del";

@@ -41,7 +41,12 @@ const faIcon = (name, weight = "fas") =>
 const heartIcon = (pressed) => faIcon("heart", pressed ? "fas" : "far");
 const savedKey = "restfest-saved";
 const archiveSearch = $("#recipe-search");
-const archiveSort = $("#archive-sort");
+const archiveSort = archiveSearch && setupArchivePicker($("#archive-sort"), (value) => {
+  if (value === archiveSort.value) return;
+  archiveSortChosen = true;
+  archiveSort.setValue(value);
+  renderArchive();
+});
 const selectedTags = new Set();
 const dietFilter = new Set();
 let saved = readSavedRecipes() ?? new Set();
@@ -886,39 +891,35 @@ function matchesSearch(recipe, words) {
 //   random   Standard: shuffled while there is no search, filter or chosen sort.
 //   match    Bäst matchning: the same score as the home page, so recipes you can start from the fridge
 //            come first. Ties keep recipe order.
-//   newest   Nyast först: by `date`, and the higher file number first on the same day.
-//   title    A–Ö in Swedish order, with Å, Ä and Ö after Z.
+//   newest / oldest   By publication date, then recipe number in the same direction.
+//   title / title-descending   Swedish alphabetical order, with Å, Ä and Ö after Z.
 const matchRank = (match) =>
   match.mainCount && match.ownMatches ? match.score : match.mainCount ? -1 : -2;
 const recipeNumber = (recipe) => parseInt(recipe.id, 10);
+const newestFirst = (a, b) =>
+  (b.recipe.date ?? "").localeCompare(a.recipe.date ?? "") ||
+  recipeNumber(b.recipe) - recipeNumber(a.recipe);
+const titleAscending = (a, b) => a.recipe.title.localeCompare(b.recipe.title, "sv-SE");
 const archiveOrders = {
   random: (a, b) =>
     archiveRandomOrder.get(a.recipe.id) - archiveRandomOrder.get(b.recipe.id),
   match: (a, b) =>
     matchRank(b.match) - matchRank(a.match) ||
     (matchRank(a.match) > 0 ? b.match.have.length - a.match.have.length : 0),
-  newest: (a, b) =>
-    (b.recipe.date ?? "").localeCompare(a.recipe.date ?? "") ||
-    recipeNumber(b.recipe) - recipeNumber(a.recipe),
-  title: (a, b) => a.recipe.title.localeCompare(b.recipe.title, "sv-SE"),
+  title: titleAscending,
+  "title-descending": (a, b) => titleAscending(b, a),
+  newest: newestFirst,
+  oldest: (a, b) => newestFirst(b, a),
 };
-const archiveSortIcons = {
-  match: "sort-best",
-  newest: "sort-newest",
-  title: "sort-alphabetical",
-};
-
-// "Bäst matchning" is only offered while the fridge list has something on it. Then it comes first
-// and is picked, unless the visitor has already chosen another order.
+// "Bäst matchning" is offered while the fridge list has something we can match. It is picked
+// automatically unless the visitor has already chosen another order.
 function offerMatchSort(offer) {
-  const option = archiveSort.querySelector('option[value="match"]');
-  if (offer && !option) {
-    archiveSort.prepend(new Option("Bäst matchning", "match"));
-    if (!archiveSortChosen) archiveSort.value = "match";
-  } else if (!offer && option) {
-    // Removing the selected option returns to Standard.
-    option.remove();
-  }
+  const option = $("#archive-sort-match");
+  const wasOffered = !option.hidden;
+  if (offer === wasOffered) return;
+  option.hidden = !offer;
+  if (offer && !archiveSortChosen) archiveSort.setValue("match");
+  if (!offer && archiveSort.value === "match") archiveSort.setValue("default");
 }
 
 function renderArchivePage(append = false) {
@@ -1006,9 +1007,6 @@ function renderArchive() {
   const pantryKeys = new Set(loadPantry().items.map(keyForIngredient));
   const pantryInUse = [...pantryKeys].some((key) => !key.startsWith("custom:"));
   offerMatchSort(pantryInUse);
-  const sortIcon = $(".archive-sort-icon");
-  const sortIconUrl = squareIconPath(archiveSortIcons[archiveSort.value] ?? "sort-default");
-  if (sortIcon && sortIcon.src !== sortIconUrl) sortIcon.src = sortIconUrl;
   const items = visible.map((recipe) => ({
     recipe,
     match: pantryInUse ? matchRecipe(recipe, pantryKeys) : null,
@@ -1526,10 +1524,6 @@ if (archiveSearch) {
   const clearTags = setupTagPicker();
   $("#load-more-recipes").addEventListener("click", loadMoreArchiveRecipes);
   archiveSearch.addEventListener("input", renderArchive);
-  archiveSort.addEventListener("change", () => {
-    archiveSortChosen = true;
-    renderArchive();
-  });
   $("#quick-filter").addEventListener("click", () => {
     quickOnly = !quickOnly;
     renderArchive();

@@ -25,7 +25,10 @@
   // The controls: the search, the Form, Deg and Region menus (like the archive's category menu
   // in app.js), and the sauce buttons.
   const search = form.elements.q;
-  const pickers = [...form.closest(".pasta-list").querySelectorAll("details[data-picker]")];
+  const pickers = [...form.closest(".pasta-list").querySelectorAll("details[data-picker]")].map(picker => {
+    const name = picker.dataset.picker;
+    return [name, setupArchivePicker(picker, value => choose({ [name]: value }))];
+  });
   const sauceButtons = [...form.querySelectorAll("[data-sas]")];
   const filterCount = form.querySelector(".archive-filter-count");
   const count = document.getElementById("pasta-count");
@@ -45,10 +48,7 @@
   const offered = {
     sas: (value) => sauceButtons.some((button) => button.dataset.sas === value),
   };
-  for (const picker of pickers) {
-    offered[picker.dataset.picker] = (value) =>
-      picker.querySelector(`[data-value="${CSS.escape(value)}"]`);
-  }
+  for (const [name, picker] of pickers) offered[name] = picker.hasValue;
 
   // Lower case without accents, so "anglahar" finds änglahår (Capellini).
   const plain = (text) =>
@@ -58,15 +58,7 @@
   // pressed, and the Filter button on phones how many filters are on.
   function showChoices() {
     if (search.value.trim() !== chosen.q) search.value = chosen.q;
-    for (const picker of pickers) {
-      for (const option of picker.querySelectorAll("[data-value]")) {
-        const on = option.dataset.value === chosen[picker.dataset.picker];
-        option.setAttribute("aria-pressed", on);
-        if (!on) continue;
-        picker.querySelector("summary > img").src = option.querySelector("img").src;
-        picker.querySelector("summary > span").textContent = option.querySelector("span").textContent;
-      }
-    }
+    for (const [name, picker] of pickers) picker.setValue(chosen[name]);
     for (const button of sauceButtons)
       button.setAttribute("aria-pressed", button.dataset.sas === chosen.sas);
     const on = fields.filter((name) => chosen[name]).length;
@@ -136,55 +128,6 @@
       search.focus({ preventScroll: true });
     }),
   );
-
-  // The menus behave like the archive's category menu (setupMealPicker in app.js): the chosen option
-  // gets focus when one opens, ↑ ↓ Home End move between the options, Esc closes it, and so do a
-  // click outside it and focus leaving it.
-  for (const picker of pickers) {
-    const trigger = picker.querySelector("summary");
-    const options = [...picker.querySelectorAll("[data-value]")];
-    const selected = () =>
-      options.find((option) => option.getAttribute("aria-pressed") === "true") ?? options[0];
-    const close = () => {
-      picker.open = false;
-      trigger.focus({ preventScroll: true });
-    };
-    picker.addEventListener("toggle", () => {
-      if (picker.open) selected().focus();
-    });
-    picker.addEventListener("click", (event) => {
-      const option = event.target.closest("[data-value]");
-      if (!option) return;
-      choose({ [picker.dataset.picker]: option.dataset.value });
-      close();
-    });
-    picker.addEventListener("keydown", (event) => {
-      const { key } = event;
-      if (key === "Escape" && picker.open) {
-        event.preventDefault();
-        event.stopPropagation();
-        close();
-      } else if (key === "ArrowDown" || key === "ArrowUp") {
-        event.preventDefault();
-        if (!picker.open) {
-          picker.open = true;
-          return;
-        }
-        const index = options.indexOf(event.target);
-        const step = key === "ArrowDown" ? 1 : -1;
-        (index < 0 ? selected() : options[(index + step + options.length) % options.length]).focus();
-      } else if (picker.open && (key === "Home" || key === "End")) {
-        event.preventDefault();
-        options[key === "Home" ? 0 : options.length - 1].focus();
-      }
-    });
-    picker.addEventListener("focusout", (event) => {
-      if (event.relatedTarget && !picker.contains(event.relatedTarget)) picker.open = false;
-    });
-    document.addEventListener("click", (event) => {
-      if (picker.open && !picker.contains(event.target)) picker.open = false;
-    });
-  }
 
   // ---------- The dialog ----------
 

@@ -6,6 +6,7 @@
       socialImage          optional {path, alt, width, height, type} override for sharing previews
       base                 "../" for pages one folder down (recept/, kategori/, …), so paths resolve from the site root
       scripts              extra scripts from js/ after app.js, e.g. [kitchen.js] on the home page
+      archivePicker        loads the shared archive dropdown script before app.js
       modules              extra scripts from js/ loaded as modules, after the others, e.g. [new-recipe.js]
       allFoods             true also loads data/foods.js, the whole food list, where typed or photographed
                            foods are matched: the home page and nytt-recept.html. Other pages get only
@@ -249,6 +250,9 @@
   <script src="{{ base }}data/foods.js"></script>
   {%- endif %}
   <script src="{{ base }}js/recipes.js"></script>
+  {%- if archivePicker %}
+  <script src="{{ base }}js/archive-picker.js"></script>
+  {%- endif %}
   <script src="{{ base }}js/app.js"></script>
   {%- for script in scripts %}
   <script src="{{ base }}js/{{ script }}"></script>

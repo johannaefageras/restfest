@@ -4,6 +4,7 @@ permalink: pastasorter.html
 title: Pasta
 description: "Från agnolotti till ziti: vad pastasorterna heter, vilken sås som passar och vad du gör med pastan som blev över."
 back: {path: receptarkiv.html, label: Till receptarkivet}
+archivePicker: true
 scripts: [pasta.js]
 ---
 {#- The pasta sorts in src/pasta/, A–Ö as cards (pasta-card.njk), laid out like the recipe archive
@@ -23,18 +24,17 @@ scripts: [pasta.js]
 {%- macro picker(name, label, allLabel, allIcon, options, inResults = false) %}
           {% if inResults -%}
           <div id="pasta-{{ name }}-field" class="archive-sort" hidden>
-            <p class="pasta-region-label" id="pasta-{{ name }}-label">{{ label }}</p>
           {%- else -%}
           <div class="archive-category">
             <p class="filter-label" id="pasta-{{ name }}-label">{{ label }}</p>
           {%- endif %}
             <details{% if inResults %} id="pasta-{{ name }}"{% endif %} class="meal-picker" data-picker="{{ name }}">
-              <summary aria-labelledby="pasta-{{ name }}-label pasta-{{ name }}-value">
+              <summary aria-labelledby="{% if not inResults %}pasta-{{ name }}-label {% endif %}pasta-{{ name }}-value">
                 <img src="assets/icons/{{ allIcon }}.svg" alt="" width="24" height="24">
                 <span id="pasta-{{ name }}-value">{{ allLabel }}</span>
                 <i class="fas fa-chevron-down" aria-hidden="true"></i>
               </summary>
-              <div class="meal-picker-options" role="group" aria-labelledby="pasta-{{ name }}-label">
+              <div class="meal-picker-options" role="group"{% if inResults %} aria-label="{{ label }}"{% else %} aria-labelledby="pasta-{{ name }}-label"{% endif %}>
                 <button type="button" tabindex="-1" data-value="" aria-pressed="true"><img src="assets/icons/{{ allIcon }}.svg" alt="" width="24" height="24"><span>{{ allLabel }}</span><img src="assets/icons/check-mark.svg" alt="" width="16" height="16"></button>
                 {%- for option in options %}
                 <button type="button" tabindex="-1" data-value="{{ option.value }}" aria-pressed="false"><img src="assets/icons/{{ option.icon }}.svg" alt="" width="24" height="24"><span>{{ option.label }}</span><img src="assets/icons/check-mark.svg" alt="" width="16" height="16"></button>
@@ -47,9 +47,23 @@ scripts: [pasta.js]
 {%- for form in choices.forms %}{% set formOptions = (formOptions.push({value: form, label: form | capitalize, icon: 'pasta/' + pastaForms[form]}), formOptions) %}{% endfor -%}
 {%- set doughOptions = [] -%}
 {%- for dough in choices.doughs %}{% set doughOptions = (doughOptions.push({value: dough, label: pastaDoughs[dough].label | capitalize, icon: pastaDoughs[dough].icon}), doughOptions) %}{% endfor -%}
+{%- set regionFlags = {
+  'Emilia-Romagna': 'flag-it-emilia-romagna',
+  'Kampanien': 'flag-it-campania',
+  'Lazio': 'flag-it-lazio',
+  'Ligurien': 'flag-it-liguria',
+  'Lombardiet': 'flag-it-lombardy',
+  'Piemonte': 'flag-it-piedmont',
+  'Puglia': 'flag-it-puglia',
+  'Sardinien': 'flag-it-sardinia',
+  'Sicilien': 'flag-it-sicily',
+  'Sydtyrolen': 'flag-it-south-tyrol',
+  'Toscana': 'flag-it-tuscany',
+  'USA': 'flag-us'
+} -%}
 {%- set regionOptions = [] -%}
 {%- for region in choices.regions -%}
-{%- set icon = 'flag-us' if region == 'USA' else 'flag-it' -%}
+{%- set icon = regionFlags[region] or 'flag-it' -%}
 {%- set regionOptions = (regionOptions.push({value: region, label: region, icon: icon}), regionOptions) -%}
 {%- endfor -%}
   <main id="main" class="wrap archive-page pasta-index">

@@ -48,24 +48,25 @@ function page(count = 29) {
     meals: ['main'], foodKeys: [], tags: [], search: '', time: 10,
     difficulty: 'Nybörjare', date: '2026-11-20',
   }));
+  $('#archive-sort-match').hidden = true;
+  const archiveSort = { value: 'title', setValue(value) { this.value = value; } };
   const { allTags, recipeTagLabels } = taxonomy();
   const context = vm.createContext({
-    $, recipes, archiveSearch: $('#recipe-search'), archiveSort: $('#archive-sort'),
+    $, recipes, archiveSearch: $('#recipe-search'), archiveSort,
     savedOnly: false, saved: new Set(), quickOnly: false, meatFreeOnly: false, budgetOnly: false,
     mealFilter: 'all',
     foodFilter: 'all', difficultyFilter: 'all', dietFilter: new Set(), selectedTags: new Set(),
     revealedSavedFilters: false, archiveSortChosen: false,
     isFood: () => true, loadPantry: () => ({ items: [] }), keyForIngredient: item => item,
+    matchRecipe: recipe => ({ mainCount: 1, ownMatches: 1, score: parseInt(recipe.id, 10), have: [] }),
     searchKey: value => value.toLocaleLowerCase('sv-SE'), allTags,
     hasTag: (recipe, tag) => allTags(recipe).includes(tag),
     mealTypes: { main: { label: 'Huvudrätt' } }, mealName: () => 'Huvudrätt',
     recipeTagLabels, foodGroups: {},
-    squareIconPath: name => `assets/icons/${name}.svg`,
     archiveCard: recipe => `<article data-id="${recipe.id}"></article>`,
     document: { querySelectorAll: () => [] },
     window: { matchMedia: () => ({ matches: false }) },
   });
-  context.archiveSort.value = 'title';
   vm.runInContext(state + archive, context);
   return {
     $, context, grid: $('#recipe-grid'), preview: $('#archive-preview'),
@@ -109,7 +110,6 @@ test('loading reuses the preview cards, preserves the viewport on click and clea
 test('saving keeps the expanded depth; changing a search, filter or sort resets it', () => {
   const view = page();
   view.render(); view.load();
-  assert.equal(view.$('.archive-sort-icon').src, 'assets/icons/sort-alphabetical.svg');
   view.context.saved.add('1-recipe');
   view.render();
   assert.equal(view.grid.children.length, 24);
@@ -121,14 +121,69 @@ test('saving keeps the expanded depth; changing a search, filter or sort resets 
   view.render();
   assert.equal(view.grid.children.length, 12);
   assert.equal(view.grid.children[0].id, '29-recipe');
-  assert.equal(view.$('.archive-sort-icon').src, 'assets/icons/sort-newest.svg');
   view.load();
   view.context.quickOnly = true;
   view.render();
   assert.equal(view.grid.children.length, 12);
   view.context.archiveSort.value = 'default';
   view.render();
-  assert.equal(view.$('.archive-sort-icon').src, 'assets/icons/sort-default.svg');
+  assert.equal(view.grid.children[0].id, '29-recipe');
+});
+
+test('title and publication-date sorts work in both directions', () => {
+  const view = page(5);
+  const details = [
+    ['Örtpasta', '2026-11-20'],
+    ['Albondigas', '2026-11-22'],
+    ['Zucchinigratäng', '2026-11-19'],
+    ['Äppelpaj', '2026-11-22'],
+    ['Ålandspannkaka', '2026-11-20'],
+  ];
+  view.context.recipes.forEach((recipe, index) => {
+    [recipe.title, recipe.date] = details[index];
+  });
+
+  const orders = {
+    title: [2, 3, 5, 4, 1],
+    'title-descending': [1, 4, 5, 3, 2],
+    newest: [4, 2, 5, 1, 3],
+    oldest: [3, 1, 5, 2, 4],
+  };
+  for (const [order, numbers] of Object.entries(orders)) {
+    view.context.archiveSort.setValue(order);
+    view.render();
+    assert.deepEqual(view.grid.children.map(card => card.id), numbers.map(number => `${number}-recipe`), order);
+  }
+});
+
+test('fridge matching is offered for known ingredients and respects a chosen order', () => {
+  const view = page(5);
+  const { archiveSort } = view.context;
+  const option = view.$('#archive-sort-match');
+  const items = ['custom:unknown'];
+  view.context.loadPantry = () => ({ items });
+  archiveSort.setValue('default');
+  view.render();
+  assert.equal(option.hidden, true);
+  assert.equal(archiveSort.value, 'default');
+
+  items.push('potatis');
+  view.render();
+  assert.equal(option.hidden, false);
+  assert.equal(archiveSort.value, 'match');
+  assert.deepEqual(view.grid.children.map(card => card.id), ['5-recipe', '4-recipe', '3-recipe', '2-recipe', '1-recipe']);
+
+  items.pop();
+  view.render();
+  assert.equal(option.hidden, true);
+  assert.equal(archiveSort.value, 'default');
+
+  view.context.archiveSortChosen = true;
+  archiveSort.setValue('title');
+  items.push('potatis');
+  view.render();
+  assert.equal(option.hidden, false);
+  assert.equal(archiveSort.value, 'title');
 });
 
 test('short results, empty searches and saved recipes do not leave a teaser or a more button', () => {

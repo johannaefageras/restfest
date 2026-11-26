@@ -3,7 +3,16 @@ layout: layouts/base.njk
 permalink: receptarkiv.html
 title: Receptarkivet
 description: Hitta något att laga i receptarkivet på Ofta bra efter och samla dina favoriter.
+archivePicker: true
 ---
+{%- set sortOptions = [
+  {value: 'default', label: 'Standard', icon: 'sort-default'},
+  {value: 'match', label: 'Bäst matchning', icon: 'sort-best'},
+  {value: 'title', label: 'A–Z', icon: 'sort-ascending'},
+  {value: 'title-descending', label: 'Z–A', icon: 'sort-descending'},
+  {value: 'newest', label: 'Nyast först', icon: 'sort-newest'},
+  {value: 'oldest', label: 'Äldst först', icon: 'sort-oldest'}
+] -%}
   <main id="main" class="wrap archive-page">
     <section class="greeting archive-greeting" aria-labelledby="archive-title">
       <div>
@@ -52,7 +61,7 @@ description: Hitta något att laga i receptarkivet på Ofta bra efter och samla 
                 <div class="archive-quick-filters" role="group" aria-label="Snabbfilter">
                   <button id="quick-filter" class="food-filter" type="button" aria-pressed="false"><img src="assets/icons/stopwatch.svg" alt="" width="22" height="22">Under 20 min</button>
                   <button id="saved-filter" class="food-filter" type="button" aria-pressed="false">
-                    <img src="assets/icons/heart.svg" alt="" width="22" height="22"> Sparade
+                    <img src="assets/icons/heart.svg" alt="" width="22" height="22"> Sparade recept
                   </button>
                   <button id="meat-free-filter" class="food-filter" type="button" aria-pressed="false">
                     <img src="assets/icons/leaf.svg" alt="" width="22" height="22"> Utan kött
@@ -99,17 +108,21 @@ description: Hitta något att laga i receptarkivet på Ofta bra efter och samla 
         </div>
         <div class="archive-results-row">
           <p id="archive-results" class="meta archive-results" role="status"></p>
-          {#- app.js adds "Bäst matchning" first, and picks it, when the fridge list on the home page has something on it. #}
+          {#- app.js shows "Bäst matchning" when the fridge list has an ingredient it can match. #}
           <div class="archive-sort">
-            <label class="sr-only" for="archive-sort">Sortera</label>
-            <div class="archive-sort-field">
-              <select id="archive-sort" autocomplete="off">
-                <option value="default">Standard</option>
-                <option value="newest">Nyast först</option>
-                <option value="title">A–Ö</option>
-              </select>
-              <img class="archive-sort-icon" src="assets/icons/sort-default.svg" alt="" width="20" height="20">
-            </div>
+            <span class="sr-only" id="archive-sort-label">Sortera</span>
+            <details id="archive-sort" class="meal-picker">
+              <summary aria-labelledby="archive-sort-label archive-sort-value">
+                <img src="assets/icons/sort-default.svg" alt="" width="24" height="24">
+                <span id="archive-sort-value">Standard</span>
+                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+              </summary>
+              <div class="meal-picker-options" role="group" aria-labelledby="archive-sort-label">
+                {%- for option in sortOptions %}
+                <button type="button" tabindex="-1" data-value="{{ option.value }}" aria-pressed="{{ option.value == 'default' }}"{% if option.value == 'match' %} id="archive-sort-match" hidden{% endif %}><img src="assets/icons/{{ option.icon }}.svg" alt="" width="24" height="24"><span>{{ option.label }}</span><img src="assets/icons/check-mark.svg" alt="" width="16" height="16"></button>
+                {%- endfor %}
+              </div>
+            </details>
           </div>
         </div>
         <p id="archive-elsewhere" class="meta archive-elsewhere" hidden></p>

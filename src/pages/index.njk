@@ -2,9 +2,23 @@
 layout: layouts/base.njk
 permalink: index.html
 scripts: [food-icons.js, kitchen.js, fridge-ai.js]
+modules: [recipe-carousel.js]
 allFoods: true
+carouselRecipes:
+  - 30-fiskpinnetacos
+  - 29-shakshuka
+  - 31-stekt-ris
+  - 238-misosoppa-med-udon
+  - 209-lax-i-folieknyte
+  - 122-spenatlasagne
+  - 41-panzanella
+  - 259-kyckling-med-chipspanering
+  - 32-rod-linssoppa
+  - 261-sommarrullar-med-jordnotssas
+  - 243-svamptoast
+  - 45-pastafrittata
 ---
-{#- The home page: a purple hero, then three steps with the same kind of heading (.step-heading):
+{#- The home page: a purple hero, recipes from the archive, then three steps with the same heading:
     01 Inventera (the fridge list, and the fridge photo when it's turned on), 02 Matcha (tonight's dinner)
     and 03 Planera (a week of dinners, shown once the list matches enough recipes). "Så funkar det" at
     the bottom sums it up in four pictures (three without the photo) and a link to the archive. -#}
@@ -20,6 +34,32 @@ allFoods: true
         <img src="assets/icons/ramen.svg" width="1104" height="1141" alt="">
       </div>
     </section>
+
+    {%- set carouselItems = collections.recipes | recipesById(carouselRecipes) %}
+    {%- if carouselItems.length %}
+    <section class="recipe-carousel" aria-labelledby="recipe-carousel-title">
+      <div class="recipe-carousel-heading">
+        <h2 id="recipe-carousel-title">Recepttips</h2>
+        <div class="recipe-carousel-controls" role="group" aria-label="Bläddra bland recepten" hidden>
+          <button class="button recipe-carousel-play" type="button" aria-controls="recipe-carousel-track" aria-label="Spela upp receptkarusellen"></button>
+          <button class="button recipe-carousel-prev" type="button" aria-controls="recipe-carousel-track" aria-label="Föregående recept"><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
+          <button class="button recipe-carousel-next" type="button" aria-controls="recipe-carousel-track" aria-label="Nästa recept"><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <ul id="recipe-carousel-track" class="recipe-carousel-track" role="list">
+        {%- for item in carouselItems %}
+        {%- set card = item.data.recipe.card %}
+        {%- set srcset = card.cardImage | webpSrcset %}
+        <li>
+          <a class="recipe-carousel-card" href="recept/{{ card.id }}.html" data-open="{{ card.id }}">
+            <img src="{{ card.cardImage | webp }}"{% if srcset %} srcset="{{ srcset }}" sizes="236px"{% endif %} alt="" width="600" height="338" loading="lazy" decoding="async">
+            <span>{{ card.title }}</span>
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
 
     <div class="kitchen-grid">
       <section class="kitchen-step" id="borja" aria-labelledby="fridge-title">
