@@ -88,3 +88,16 @@ test('duration words', () => {
     [5400, '1 timme 30 minuter'],
   ]) assert.equal(cookingDurationWords(seconds), words);
 });
+
+test('slash fractions, "och en halv" and hours with minutes', () => {
+  for (const [input, expected] of [
+    ['1/2 timme', [['1/2 timme', 1800]]],
+    ['3/4 timme', [['3/4 timme', 2700]]],
+    ['i en och en halv timme', [['en och en halv timme', 5400]]],
+    ['1 och en halv timme', [['1 och en halv timme', 5400]]],
+    ['en och en halv minut', [['en och en halv minut', 90]]],
+    ['1 timme 30 minuter', [['1 timme 30 minuter', 5400]]],
+  ]) assert.deepEqual(found(input), expected, input);
+  for (const input of ['två och en halv timme', '1/2 tsk salt', '2/3 dl'])
+    assert.deepEqual(found(input), [], input);
+});

@@ -9,8 +9,8 @@
 const cookingMinSeconds = 30;
 const cookingMaxSeconds = 2 * 60 * 60;
 
-// A number as recipes write it: 10, 1,5, 1½, 1 ½ or ¾.
-const cookingNumber = String.raw`(?:\d+(?:,\d+)?(?: ?[½¼¾])?|[½¼¾])`;
+// A number as recipes write it: 10, 1,5, 1½, 1 ½, ¾ or 1/2.
+const cookingNumber = String.raw`(?:\d+\/\d+|\d+(?:,\d+)?(?: ?[½¼¾])?|[½¼¾])`;
 // The units, longest spelling first. Nothing may follow but a non-letter, so the definite forms
 // ("de sista 2 minuterna") and words like "spiskummin" or "kvarts" never match.
 const cookingUnit = String.raw`(?:sekunders|sekunder|sekund|minuters|minuter|minuts|minut|min|timmars|timmar|timmes|timme|tim)(?!\p{L})`;
@@ -19,9 +19,10 @@ const cookingRangeTo = String.raw`(?:\s?[–-]\s?|\s+till\s+)`;
 // group is the character before the time (or the start), standing in for a lookbehind, which Safari
 // before 16.4 can't parse.
 const cookingTimePattern = new RegExp(
-  String.raw`(^|[^\p{L}\d,½¼¾])(` +
+  String.raw`(^|[^\p{L}\d,½¼¾/])(` +
     [
-      String.raw`${cookingNumber}\s+tim(?:me|mar)\s+och\s+${cookingNumber}\s+minut(?:er)?(?!\p{L})`,
+      String.raw`(?:en|${cookingNumber})\s+och\s+en\s+halv\s+(?:timme|minut)(?!\p{L})`,
+      String.raw`${cookingNumber}\s+tim(?:me|mar)\s+(?:och\s+)?${cookingNumber}\s+minut(?:er)?(?!\p{L})`,
       String.raw`${cookingNumber}\s+${cookingUnit}${cookingRangeTo}${cookingNumber}\s+${cookingUnit}`,
       String.raw`${cookingNumber}${cookingRangeTo}${cookingNumber}\s+${cookingUnit}`,
       String.raw`${cookingNumber}\s+${cookingUnit}`,
@@ -41,6 +42,8 @@ const cookingWordTimes = {
 const cookingFractions = { "½": 0.5, "¼": 0.25, "¾": 0.75 };
 
 function cookingParseNumber(text) {
+  const slash = text.match(/^(\d+)\/(\d+)$/);
+  if (slash) return Number(slash[2]) ? Number(slash[1]) / Number(slash[2]) : 0;
   const [, whole = "", decimals, fraction] = text.match(/^(\d*)(?:,(\d+))? ?([½¼¾])?$/);
   return (
     Number(whole || 0) +
@@ -57,13 +60,18 @@ function cookingUnitSeconds(unit) {
 
 // The low end of a matched phrase, in seconds.
 function cookingPhraseSeconds(phrase) {
+  // "en och en halv timme", "1 och en halv timme".
+  if (/\soch\s+en\s+halv\s/.test(phrase)) {
+    const whole = phrase.startsWith("en") ? 1 : cookingParseNumber(phrase.split(/\s+och\s/)[0]);
+    return (whole + 0.5) * (phrase.endsWith("timme") ? 3600 : 60);
+  }
   if (phrase.startsWith("en"))
     return cookingWordTimes[phrase.replace(/^en\s+/, "").replace(/\s+/g, " ")];
   const pairs = [
     ...phrase.matchAll(new RegExp(`(${cookingNumber})(?:\\s+(${cookingUnit}))?`, "gu")),
   ].map(([, number, unit]) => ({ number: cookingParseNumber(number), unit }));
-  // "1 timme och 15 minuter": both parts add up.
-  if (/\soch\s/.test(phrase))
+  // "1 timme och 15 minuter", "1 timme 30 minuter": both parts add up. A range has a dash or "till".
+  if (pairs.length === 2 && pairs.every((pair) => pair.unit) && !/[–-]|\still\s/.test(phrase))
     return pairs.reduce((sum, { number, unit }) => sum + number * cookingUnitSeconds(unit), 0);
   // A single time or a range: the first number, in the first unit written ("4–5 minuter",
   // "15 minuter till 1 timme").
@@ -75,9 +83,11 @@ function cookingFindTimes(text) {
   const times = [];
   for (const match of text.matchAll(cookingTimePattern)) {
     const phrase = match[2];
+    const start = match.index + match[1].length;
+    // "två och en halv timme": the half alone is not the time.
+    if (phrase.startsWith("en halv") && /och\s+$/.test(text.slice(0, start))) continue;
     const seconds = Math.round(cookingPhraseSeconds(phrase));
     if (seconds < cookingMinSeconds || seconds > cookingMaxSeconds) continue;
-    const start = match.index + match[1].length;
     times.push({ start, end: start + phrase.length, text: phrase, seconds });
   }
   return times;

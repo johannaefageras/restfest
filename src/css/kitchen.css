@@ -2730,26 +2730,37 @@ body:has(#shopping-dialog[open]) {
    shows a check in the badge and muted text, not struck through, as you may want to reread it. The
    step after the last done one gets a ring; --cook-ring is resolved on the li, as dark.css gives the
    badge itself dark ink. */
-.cook-steps-hint {
-  margin: 8px 0 0;
+/* The line under the heading: the hint until cooking begins, then "Skärmen hålls tänd · Stäng av" or
+   "Håll skärmen tänd" in its place. Always one line of the same height, so the steps never move. */
+.cook-steps-note {
+  display: flex;
+  align-items: center;
+  min-height: 26px;
+  margin: 0;
   color: var(--muted);
   font-size: var(--text-ui);
 }
+.cook-screen:not([hidden]) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0 6px;
+}
+.cook-screen .text-button {
+  color: var(--ink);
+}
 .cook-steps-progress {
   grid-template-columns: minmax(0, 1fr) auto auto;
+  min-height: 24px;
   margin-block: 10px 18px;
 }
 .cook-steps-reset {
   color: var(--ink);
 }
-/* "Skärmen hålls tänd · Stäng av" reads as one phrase, closer than the heading's other actions. */
-.recipe-actions.cook-screen {
-  gap: 0 6px;
-  color: var(--muted);
-  font-size: var(--text-ui);
-}
-.cook-screen .text-button {
-  color: var(--ink);
+/* These buttons come and go as cooking begins. They keep the 44px tap height of .text-button, but
+   take no more room in their line than its text, so nothing below them moves. */
+.cook-screen .text-button,
+.cook-steps-reset {
+  margin-block: -10px;
 }
 .cook-step {
   --cook-ring: var(--ink);

@@ -7,8 +7,15 @@ import vm from 'node:vm';
 import test from 'node:test';
 
 const source = readFileSync(new URL('../src/js/cooking.js', import.meta.url), 'utf8');
-const context = {};
-vm.runInNewContext(source, context);
+const timesSource = readFileSync(new URL('../src/js/cooking-times.js', import.meta.url), 'utf8');
+// Both scripts, as on the page: cooking.js uses cooking-times.js's words for durations.
+function load(globals = {}) {
+  const loaded = vm.createContext(globals);
+  vm.runInContext(timesSource, loaded);
+  vm.runInContext(source, loaded);
+  return loaded;
+}
+const context = load();
 const {
   cookingReadState, cookingSaveEntry, cookingReadTimers, cookingWriteTimers, cookingTimerId,
   cookingStartTimer, cookingAddMinute, cookingRemoveTimer, cookingDueTimers, cookingSortTimers,
@@ -185,4 +192,96 @@ test('two requests at once hold one lock', async () => {
   await Promise.all([lock.request(), lock.request()]);
   assert.equal(requests, 1);
   assert.equal(lock.held(), true);
+});
+
+test('blocked site data reads as no storage, and odd saved entries are dropped', () => {
+  const blocked = {};
+  Object.defineProperty(blocked, 'localStorage', { get() { throw new Error('SecurityError'); } });
+  assert.equal(load(blocked).cookingStorage(), null);
+  const storage = memoryStorage();
+  assert.equal(load({ localStorage: storage }).cookingStorage(), storage);
+  storage.setItem('restfest-cooking', JSON.stringify({ a: { steps: 3, ingredients: [], screenOff: false, updated: NOW } }));
+  assert.deepEqual(plain(cookingReadState(storage, NOW)), {});
+});
+
+test('timers live on in memory when storage refuses them', () => {
+  const fresh = load();
+  fresh.cookingWriteTimers(brokenStorage, [{ id: 'x', endsAt: NOW + 1000, done: false }]);
+  assert.deepEqual(plain(fresh.cookingReadTimers(brokenStorage, NOW)).map((t) => t.id), ['x']);
+  assert.deepEqual(plain(fresh.cookingReadTimers(null, NOW)).map((t) => t.id), ['x']);
+  const storage = memoryStorage();
+  fresh.cookingWriteTimers(storage, []);
+  assert.deepEqual(plain(fresh.cookingReadTimers(storage, NOW)), []);
+});
+
+test('the tray goes to the modal dialog on top', () => {
+  const { cookingModalStack } = context;
+  const a = { id: 'a' };
+  const b = { id: 'b' };
+  const ids = (stack) => plain(stack.map((dialog) => dialog.id));
+  let stack = cookingModalStack([], a, true);
+  stack = cookingModalStack(stack, b, true);
+  assert.deepEqual(ids(stack), ['a', 'b']);
+  assert.deepEqual(ids(cookingModalStack(stack, b, false)), ['a']);
+  assert.deepEqual(ids(cookingModalStack(cookingModalStack(stack, b, false), a, false)), []);
+  assert.deepEqual(ids(cookingModalStack(stack, a, true)), ['b', 'a']);
+});
+
+test('a finished timer rings before any tap; only vibration waits for one', () => {
+  const { cookingAlerts } = context;
+  const fresh = [{ endsAt: NOW - 1000 }];
+  const stale = [{ endsAt: NOW - 61000 }];
+  assert.deepEqual(plain(cookingAlerts(fresh, NOW, false)), { ring: true, vibrate: false });
+  assert.deepEqual(plain(cookingAlerts(fresh, NOW, true)), { ring: true, vibrate: true });
+  assert.deepEqual(plain(cookingAlerts(stale, NOW, true)), { ring: false, vibrate: false });
+  assert.deepEqual(plain(cookingAlerts([], NOW, true)), { ring: false, vibrate: false });
+});
+
+test('the alarm waits for running audio and stops when no finished timer is left', async () => {
+  let tones = 0;
+  class FakeAudio {
+    constructor() { this.state = 'suspended'; this.currentTime = 0; this.destination = {}; }
+    resume() { return Promise.reject(new Error('not allowed')); }
+    createOscillator() { tones++; return { frequency: {}, connect: (node) => node, start() {}, stop() {} }; }
+    createGain() {
+      return { gain: { setValueAtTime() {}, exponentialRampToValueAtTime() {} }, connect: (node) => node };
+    }
+  }
+  const audio = load({ window: { AudioContext: FakeAudio }, setTimeout, clearTimeout });
+  const alarm = vm.runInContext('cookingAlarm', audio); // a const, so not on the context object
+  alarm.prime();
+  alarm.ring();
+  assert.equal(tones, 0, 'no beeps pile up while the browser holds the sound back');
+  alarm.context.state = 'running';
+  alarm.ring();
+  assert.equal(tones, 3);
+  audio.cookingSettleAlarm([{ done: true }]);
+  assert.notEqual(alarm.timeout, 0, 'still ringing for a finished timer');
+  audio.cookingSettleAlarm([{ done: false }]);
+  assert.equal(alarm.timeout, 0);
+  await new Promise((resolve) => setTimeout(resolve, 10)); // lets an unhandled resume() rejection surface
+});
+
+test('tray buttons say which timer they belong to, and focus returns to the same kind', () => {
+  const { cookingTrayLabels, cookingDismissMessage, cookingFocusSelector } = context;
+  const timer = { phrase: '4–5 minuter', stepLabel: 'Steg 3', seconds: 240, done: false };
+  assert.deepEqual(plain(cookingTrayLabels(timer)), {
+    more: '+1 min, 4–5 minuter · Steg 3',
+    close: 'Avbryt timer, 4–5 minuter · Steg 3',
+  });
+  assert.equal(cookingTrayLabels({ ...timer, done: true }).close, 'Stäng timer, 4–5 minuter · Steg 3');
+  assert.equal(cookingDismissMessage(timer), 'Timer avbruten: 4 minuter, Steg 3');
+  assert.equal(cookingDismissMessage({ ...timer, done: true }), 'Timer stängd: 4 minuter, Steg 3');
+  assert.equal(cookingFocusSelector('text-button cook-tray-more'), '.cook-tray-more');
+  assert.equal(cookingFocusSelector('cook-tray-close'), '.cook-tray-close');
+  assert.equal(cookingFocusSelector('cook-tray-recipe'), '.cook-tray-recipe');
+  assert.equal(cookingFocusSelector('cook-tray-list'), null);
+});
+
+test('the screen lock says while it is still asking', async () => {
+  const lock = context.cookingScreenLock(fakeWakeLock(), () => {});
+  const asking = lock.request();
+  assert.equal(lock.busy(), true);
+  await asking;
+  assert.equal(lock.busy(), false);
 });

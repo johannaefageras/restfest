@@ -15,6 +15,16 @@ const cookingDoneKeepMs = 60 * 60 * 1000;
 // A timer that finished while the page was away rings on return only if it ended this recently.
 const cookingRingWithinMs = 60 * 1000;
 
+// The page's localStorage, or null where reading it throws: blocked site data (Chrome's "don't allow
+// sites to save data", Safari's "block all cookies"). Everything below takes null as no storage.
+function cookingStorage() {
+  try {
+    return localStorage;
+  } catch {
+    return null;
+  }
+}
+
 function cookingReadJson(storage, key) {
   try {
     return JSON.parse(storage.getItem(key));
@@ -23,10 +33,14 @@ function cookingReadJson(storage, key) {
   }
 }
 
+// Whether it was saved.
 function cookingWriteJson(storage, key, value) {
   try {
     storage.setItem(key, JSON.stringify(value));
-  } catch {}
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 const cookingIsObject = (value) =>
@@ -40,6 +54,8 @@ function cookingReadState(storage, now) {
     Object.entries(stored).filter(
       ([, entry]) =>
         cookingIsObject(entry) &&
+        Array.isArray(entry.steps) &&
+        Array.isArray(entry.ingredients) &&
         typeof entry.updated === "number" &&
         entry.updated >= now - cookingKeepMs,
     ),
@@ -52,9 +68,13 @@ function cookingSaveEntry(storage, recipeId, { steps, ingredients, screenOff }, 
   cookingWriteJson(storage, cookingStateKey, state);
 }
 
+// The timers as last written, while storage refuses them (blocked site data, a full quota), so a
+// started timer still shows and rings on this page.
+let cookingTimersMemory = null;
+
 // The saved timers, without the ones that ended more than an hour ago.
 function cookingReadTimers(storage, now) {
-  const stored = cookingReadJson(storage, cookingTimersKey);
+  const stored = cookingTimersMemory ?? cookingReadJson(storage, cookingTimersKey);
   if (!Array.isArray(stored)) return [];
   return stored.filter(
     (timer) =>
@@ -65,7 +85,7 @@ function cookingReadTimers(storage, now) {
 }
 
 function cookingWriteTimers(storage, timers) {
-  cookingWriteJson(storage, cookingTimersKey, timers);
+  cookingTimersMemory = cookingWriteJson(storage, cookingTimersKey, timers) ? null : timers;
 }
 
 // A time button's timer: its recipe, its place (the step's index across all sections, or n<index>
@@ -144,6 +164,42 @@ function cookingWantsScreen({ started, screenOff, allDone, running }) {
   return !screenOff && ((started && !allDone) || running > 0);
 }
 
+// The open modal dialogs, the last on top: `dialog` moved to the top when it opens, out when it
+// closes. A modal dialog makes the rest of the page inert, so the tray belongs in the top one.
+function cookingModalStack(stack, dialog, open) {
+  return [...stack.filter((item) => item !== dialog), ...(open ? [dialog] : [])];
+}
+
+// What a finished timer sets off. The sound is tried even before the page has had a tap (after a
+// link from a page that had one, some browsers allow it); vibration is refused and logged then.
+function cookingAlerts(finished, now, tapped) {
+  const ring = finished.some((timer) => cookingShouldRing(timer, now));
+  return { ring, vibrate: ring && tapped };
+}
+
+// The tray buttons' names say which timer they belong to, starting with what they show.
+function cookingTrayLabels(timer) {
+  const what = `${timer.phrase} · ${timer.stepLabel}`;
+  return {
+    more: `+1 min, ${what}`,
+    close: `${timer.done ? "Stäng" : "Avbryt"} timer, ${what}`,
+  };
+}
+
+function cookingDismissMessage(timer) {
+  return `Timer ${timer.done ? "stängd" : "avbruten"}: ${cookingDurationWords(timer.seconds)}, ${timer.stepLabel}`;
+}
+
+// After the tray's rows are rebuilt, focus goes back to the same kind of control in the same row, and
+// nowhere for anything else: a key press must never land on a ✕ the visitor didn't choose.
+function cookingFocusSelector(className) {
+  const names = className.split(/\s+/);
+  const kind = ["cook-tray-more", "cook-tray-close", "cook-tray-recipe"].find((name) =>
+    names.includes(name),
+  );
+  return kind ? `.${kind}` : null;
+}
+
 // Keeps the screen on through the Screen Wake Lock API (navigator.wakeLock, passed in). The browser
 // lets go whenever the tab is hidden; resume() asks again if the page still wants it. A refused
 // request (some browsers want a fresh tap) leaves it off and wanted, so the next try may succeed.
@@ -194,7 +250,14 @@ function cookingScreenLock(wakeLock, onChange) {
   async function resume() {
     if (wanted && !sentinel) await request();
   }
-  return { supported: Boolean(wakeLock), held: () => Boolean(sentinel), request, release, resume };
+  return {
+    supported: Boolean(wakeLock),
+    held: () => Boolean(sentinel),
+    busy: () => pending !== null,
+    request,
+    release,
+    resume,
+  };
 }
 
 // --- The page part. Everything below touches the document; it runs from cookingInitPage() and from
@@ -216,7 +279,7 @@ function cookingCheckedIndexes(boxes) {
 function cookingSave(article) {
   const view = cookingViews.get(article);
   cookingSaveEntry(
-    localStorage,
+    cookingStorage(),
     article.dataset.recipe,
     {
       steps: cookingCheckedIndexes(view.boxes),
@@ -267,7 +330,7 @@ function cookingShownRecipes() {
 }
 
 function cookingScreenState(article) {
-  const running = cookingReadTimers(localStorage, Date.now()).filter((timer) => !timer.done).length;
+  const running = cookingReadTimers(cookingStorage(), Date.now()).filter((timer) => !timer.done).length;
   const view = article && cookingViews.get(article);
   if (!view) return { started: false, screenOff: false, allDone: false, running };
   return {
@@ -282,7 +345,8 @@ function cookingScreenState(article) {
 // to stay on, as some browsers allow that only in a tap.
 function cookingActivity(article) {
   if (!cookingScreen?.supported) return;
-  if (cookingWantsScreen(cookingScreenState(article))) cookingScreen.request();
+  if (cookingWantsScreen(cookingScreenState(article)))
+    cookingScreen.request().then(cookingDrawScreen);
   else cookingScreen.release();
   cookingDrawScreen();
 }
@@ -298,10 +362,13 @@ function cookingUpdateScreen() {
   cookingDrawScreen();
 }
 
-// The line in each recipe's "Gör så här" heading: "Skärmen hålls tänd · Stäng av" while the screen is
-// kept on, a "Håll skärmen tänd" button while cooking without it, otherwise nothing. Redrawn only
-// when that changes, keeping focus on its button.
+// The line under each recipe's "Gör så här" heading: "Skärmen hålls tänd · Stäng av" while the screen
+// is kept on, a "Håll skärmen tänd" button while cooking without it, otherwise the hint "Tryck på ett
+// steg när det är klart.". One line either way, so the steps never move when it changes. Not redrawn
+// while the browser is still answering a request (it would flash "off"), and only when it changes,
+// keeping focus on its button.
 function cookingDrawScreen() {
+  if (cookingScreen?.busy()) return;
   for (const article of document.querySelectorAll(".recipe-view")) {
     const box = article.querySelector(".cook-screen");
     if (!box || !cookingViews.has(article)) continue;
@@ -317,6 +384,7 @@ function cookingDrawScreen() {
     const hadFocus = box.contains(document.activeElement);
     box.dataset.state = state;
     box.hidden = state === "hidden";
+    article.querySelector(".cook-steps-hint").hidden = state !== "hidden";
     box.innerHTML =
       state === "on"
         ? '<span>Skärmen hålls tänd</span> · <button class="text-button cook-screen-off" type="button">Stäng av</button>'
@@ -424,22 +492,24 @@ function cookingTrayRow(timer) {
     link.href = timer.recipeUrl;
     info.append(link);
   }
+  const labels = cookingTrayLabels(timer);
   const close = cookingElement("button", "cook-tray-close");
   close.type = "button";
-  close.setAttribute("aria-label", timer.done ? "Stäng timer" : "Avbryt timer");
+  close.setAttribute("aria-label", labels.close);
   close.innerHTML = '<i class="fas fa-xmark" aria-hidden="true"></i>';
   const more = cookingElement("button", "text-button cook-tray-more", "+1 min");
   more.type = "button";
+  more.setAttribute("aria-label", labels.more);
   row.append(cookingElement("span", "cook-tray-time"), info, more, close);
   return row;
 }
 
 // Draws the tray from the saved timers. The rows are rebuilt only when the timers, their order or
-// their state change, keeping focus on the same button; otherwise only the countdowns change.
+// their state change, keeping focus on the same control; otherwise only the countdowns change.
 function cookingRenderTray() {
   if (!cookingTray) return;
   const now = Date.now();
-  const timers = cookingSortTimers(cookingReadTimers(localStorage, now));
+  const timers = cookingSortTimers(cookingReadTimers(cookingStorage(), now));
   const key = timers
     .map((timer) => `${timer.id}:${timer.done}:${cookingRecipeOnPage(timer.recipeId)}`)
     .join("|");
@@ -447,9 +517,10 @@ function cookingRenderTray() {
     cookingTrayKey = key;
     const focused = cookingTray.contains(document.activeElement) ? document.activeElement : null;
     const focusId = focused?.closest(".cook-tray-row")?.dataset.timerId;
-    const focusClass = focused?.matches(".cook-tray-more") ? ".cook-tray-more" : ".cook-tray-close";
+    const focusSelector = focused ? cookingFocusSelector(focused.className) : null;
     cookingTrayList.replaceChildren(...timers.map(cookingTrayRow));
-    if (focusId) cookingTrayButton(focusId, focusClass)?.focus({ preventScroll: true });
+    if (focusId && focusSelector)
+      cookingTrayButton(focusId, focusSelector)?.focus({ preventScroll: true });
   }
   timers.forEach((timer, index) => {
     cookingTrayList.children[index].querySelector(".cook-tray-time").textContent = timer.done
@@ -477,16 +548,12 @@ function cookingRenderTray() {
 function cookingTick() {
   const now = Date.now();
   if (document.visibilityState === "visible") {
-    const { timers, finished } = cookingDueTimers(cookingReadTimers(localStorage, now), now);
+    const { timers, finished } = cookingDueTimers(cookingReadTimers(cookingStorage(), now), now);
     if (finished.length) {
-      cookingWriteTimers(localStorage, timers);
-      // Browsers allow sound and vibration only once the page has had a tap; before that, the tray
-      // shows "Klart!" by itself.
-      const tapped = navigator.userActivation?.hasBeenActive ?? true;
-      if (tapped && finished.some((timer) => cookingShouldRing(timer, now))) {
-        cookingAlarm.ring();
-        navigator.vibrate?.([200, 100, 200]);
-      }
+      cookingWriteTimers(cookingStorage(), timers);
+      const alerts = cookingAlerts(finished, now, navigator.userActivation?.hasBeenActive ?? true);
+      if (alerts.ring) cookingAlarm.ring();
+      if (alerts.vibrate) navigator.vibrate?.([200, 100, 200]);
       for (const timer of finished)
         cookingAnnounce(`Klart: ${cookingDurationWords(timer.seconds)}, ${timer.stepLabel}`);
     }
@@ -509,31 +576,39 @@ function cookingTrayClick(event) {
   if (!button) return;
   const id = button.closest(".cook-tray-row").dataset.timerId;
   const now = Date.now();
-  let timers = cookingReadTimers(localStorage, now);
+  let timers = cookingReadTimers(cookingStorage(), now);
   let next = null;
   if (button.matches(".cook-tray-more")) timers = cookingAddMinute(timers, id, now);
   else {
-    // Focus goes to the next row's ✕, or the one before, or back to the time button in the recipe.
+    // Focus goes to the next row's "+1 min" (not its ✕, so a second press can't cancel another
+    // timer), or the one before, or back to the time button in a recipe on screen.
     const rows = [...cookingTrayList.children];
     const index = rows.findIndex((row) => row.dataset.timerId === id);
     next = (rows[index + 1] ?? rows[index - 1])?.dataset.timerId;
+    const removed = timers.find((timer) => timer.id === id);
+    if (removed) cookingAnnounce(cookingDismissMessage(removed));
     timers = cookingRemoveTimer(timers, id);
   }
-  cookingWriteTimers(localStorage, timers);
-  if (!timers.some((timer) => timer.done)) cookingAlarm.stop();
+  cookingWriteTimers(cookingStorage(), timers);
+  cookingSettleAlarm(timers);
   cookingRenderTray();
   if (button.matches(".cook-tray-close")) {
     const target = next
-      ? cookingTrayButton(next, ".cook-tray-close")
-      : document.querySelector(`.cook-time[data-timer-id="${CSS.escape(id)}"]`);
+      ? cookingTrayButton(next, ".cook-tray-more")
+      : document.querySelector(
+          `:is(main, #recipe-dialog[open]) .cook-time[data-timer-id="${CSS.escape(id)}"]`,
+        );
     target?.focus({ preventScroll: Boolean(next) });
   }
   cookingUpdateScreen();
 }
 
-// A modal dialog (the recipe pop-up, the shopping list) makes the rest of the page inert, so the tray
-// moves into the open one and back to the page when it closes.
-function cookingPlaceTray() {
+// A modal dialog (the recipe pop-up, the shopping list, a pasta sort) makes the rest of the page inert,
+// so the tray moves into the one on top, and back to the page when none is open. Dialogs open on top
+// of each other (the shopping list over a recipe), so the order they opened in is kept.
+let cookingModals = [];
+
+function cookingPlaceTray(records = []) {
   const isModal = (dialog) => {
     try {
       return dialog.matches(":modal");
@@ -541,13 +616,24 @@ function cookingPlaceTray() {
       return true;
     }
   };
-  const home = [...document.querySelectorAll("dialog[open]")].find(isModal) ?? document.body;
+  for (const { target } of records)
+    if (target.localName === "dialog")
+      cookingModals = cookingModalStack(cookingModals, target, target.open && isModal(target));
+  cookingModals = cookingModals.filter((dialog) => dialog.isConnected && dialog.open);
+  const home = cookingModals[cookingModals.length - 1] ?? document.body;
   if (cookingTray.parentElement !== home) home.append(cookingTray, cookingLive);
   cookingRenderTray();
 }
 
+// Stops the alarm once no finished timer is left to ring for.
+function cookingSettleAlarm(timers) {
+  if (!timers.some((timer) => timer.done)) cookingAlarm.stop();
+}
+
 // A short kitchen-timer beep made in the browser, repeated for half a minute or until stopped. Browsers
-// only allow sound after a tap, so prime() runs in the tap that starts a timer.
+// only allow sound after a tap, so prime() runs in the tap that starts a timer and in every click or
+// key press while timers exist (iPhones unlock sound on a click, not on touch-start). While the
+// browser still holds the sound back, no beeps are scheduled, so they can't pile up and play at once.
 const cookingAlarm = {
   context: null,
   timeout: 0,
@@ -555,7 +641,7 @@ const cookingAlarm = {
   prime() {
     try {
       this.context ??= new (window.AudioContext || window.webkitAudioContext)();
-      if (this.context.state === "suspended") this.context.resume();
+      if (this.context.state === "suspended") this.context.resume().catch(() => {});
     } catch {}
   },
   ring() {
@@ -565,19 +651,21 @@ const cookingAlarm = {
     this.until = Date.now() + 30000;
     const beep = () => {
       try {
-        if (this.context.state === "suspended") this.context.resume();
-        const start = this.context.currentTime;
-        for (let index = 0; index < 3; index++) {
-          const at = start + index * 0.25;
-          const tone = this.context.createOscillator();
-          const gain = this.context.createGain();
-          tone.frequency.value = 880;
-          gain.gain.setValueAtTime(0.0001, at);
-          gain.gain.exponentialRampToValueAtTime(0.3, at + 0.01);
-          gain.gain.exponentialRampToValueAtTime(0.0001, at + 0.15);
-          tone.connect(gain).connect(this.context.destination);
-          tone.start(at);
-          tone.stop(at + 0.16);
+        if (this.context.state === "suspended") this.context.resume().catch(() => {});
+        if (this.context.state === "running") {
+          const start = this.context.currentTime;
+          for (let index = 0; index < 3; index++) {
+            const at = start + index * 0.25;
+            const tone = this.context.createOscillator();
+            const gain = this.context.createGain();
+            tone.frequency.value = 880;
+            gain.gain.setValueAtTime(0.0001, at);
+            gain.gain.exponentialRampToValueAtTime(0.3, at + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.0001, at + 0.15);
+            tone.connect(gain).connect(this.context.destination);
+            tone.start(at);
+            tone.stop(at + 0.16);
+          }
         }
       } catch {}
       if (Date.now() + 1500 < this.until) this.timeout = setTimeout(beep, 1500);
@@ -593,18 +681,11 @@ const cookingAlarm = {
 function enhanceCooking(article) {
   const section = article.querySelector(".recipe-directions");
   if (!section || cookingViews.has(article)) return;
-  const heading = section.querySelector("h2");
-  const row = document.createElement("div");
-  row.className = "recipe-section-heading";
-  heading.replaceWith(row);
-  row.append(heading);
-  row.insertAdjacentHTML(
-    "beforeend",
-    '<div class="recipe-actions cook-screen" hidden></div>',
-  );
-  row.insertAdjacentHTML(
+  // Under the heading, one line holds the hint until cooking begins, then the screen line in its place
+  // (cookingDrawScreen), so nothing below it moves.
+  section.querySelector("h2").insertAdjacentHTML(
     "afterend",
-    `<p class="cook-steps-hint">Tryck på ett steg när det är klart.</p>
+    `<p class="cook-steps-note"><span class="cook-steps-hint">Tryck på ett steg när det är klart.</span><span class="cook-screen" hidden></span></p>
     <div class="cook-checklist cook-steps-progress">
       <progress class="cook-steps-bar" aria-label="Klara steg" value="0" max="1"></progress>
       <p class="meta cook-steps-text" aria-live="polite"></p>
@@ -633,7 +714,7 @@ function enhanceCooking(article) {
   }
 
   const saved =
-    cookingReadState(localStorage, Date.now())[article.dataset.recipe] ?? {};
+    cookingReadState(cookingStorage(), Date.now())[article.dataset.recipe] ?? {};
   const view = {
     steps,
     labels,
@@ -659,27 +740,27 @@ function enhanceCooking(article) {
     const id = button.dataset.timerId;
     const seconds = Number(button.dataset.seconds);
     const now = Date.now();
-    const timers = cookingReadTimers(localStorage, now);
+    const timers = cookingReadTimers(cookingStorage(), now);
     if (timers.some((timer) => timer.id === id && !timer.done)) {
       cookingTrayButton(id, ".cook-tray-more")?.focus();
       return;
     }
-    cookingWriteTimers(
-      localStorage,
-      cookingStartTimer(
-        timers,
-        {
-          id,
-          recipeId: article.dataset.recipe,
-          recipeTitle: article.querySelector(".recipe-heading")?.textContent.trim() ?? "",
-          recipeUrl: location.href.split("#")[0],
-          stepLabel: button.dataset.stepLabel,
-          phrase: button.dataset.phrase,
-          seconds,
-        },
-        now,
-      ),
+    const started = cookingStartTimer(
+      timers,
+      {
+        id,
+        recipeId: article.dataset.recipe,
+        recipeTitle: article.querySelector(".recipe-heading")?.textContent.trim() ?? "",
+        recipeUrl: location.href.split("#")[0],
+        stepLabel: button.dataset.stepLabel,
+        phrase: button.dataset.phrase,
+        seconds,
+      },
+      now,
     );
+    cookingWriteTimers(cookingStorage(), started);
+    // Restarting a finished timer silences it.
+    cookingSettleAlarm(started);
     cookingRenderTray();
     cookingAnnounce(`Timer startad, ${cookingDurationWords(seconds)}`);
     article.dataset.cookingStarted = "1";
@@ -732,14 +813,16 @@ function cookingInitPage() {
   cookingTrayList = cookingTray.querySelector(".cook-tray-list");
   cookingLive = document.querySelector(".cook-live");
   cookingTrayList.addEventListener("click", cookingTrayClick);
-  // After a reload or on another page, the timers' sound is allowed again by the next tap anywhere.
-  document.addEventListener(
-    "pointerdown",
-    () => {
-      if (!cookingTray.hidden) cookingAlarm.prime();
-    },
-    { capture: true },
-  );
+  // After a reload or on another page, the timers' sound is allowed again by the next click or key
+  // press anywhere (an iPhone unlocks sound on a click, not on touch-start).
+  for (const type of ["click", "keydown"])
+    document.addEventListener(
+      type,
+      () => {
+        if (!cookingTray.hidden) cookingAlarm.prime();
+      },
+      { capture: true },
+    );
   document.addEventListener("visibilitychange", cookingTick);
   addEventListener("storage", (event) => {
     if (event.key === cookingTimersKey) cookingRenderTray();
@@ -761,7 +844,7 @@ function cookingInitPage() {
   cookingTick();
   // With timers still running from before a reload, try to keep the screen on; if the browser wants
   // a tap first, the next step or timer tapped asks again.
-  if (cookingReadTimers(localStorage, Date.now()).some((timer) => !timer.done))
+  if (cookingReadTimers(cookingStorage(), Date.now()).some((timer) => !timer.done))
     cookingScreen.request().then(cookingDrawScreen);
 }
 
