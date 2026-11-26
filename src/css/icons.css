@@ -96,6 +96,9 @@
 .fa-hourglass-half::before {
   content: "\f252";
 }
+.fa-stopwatch::before {
+  content: "\f2f2";
+}
 .fa-images::before {
   content: "\f302";
 }

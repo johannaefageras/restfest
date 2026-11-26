@@ -205,6 +205,260 @@ function cookingRevealCurrent(article) {
 // Called after every step toggle and timer start, inside the tap (cooking.js keeps the screen on).
 function cookingActivity(article) {}
 
+// Called whenever the timers change outside a tap: may let the screen go dark, never asks to keep it on.
+function cookingUpdateScreen() {}
+
+// Turns each cooking time in the steps, and in the notes after them, into a timer button. The text
+// stays as written; the button's name says what it does. Notes are labelled "Tips".
+function cookingAddTimeButtons(article, view) {
+  const places = [
+    ...view.steps.map((step, index) => ({ root: step, place: index, label: view.labels[index] })),
+    ...[...article.querySelectorAll(".recipe-directions > .recipe-tip")].map((note, index) => ({
+      root: note,
+      place: `n${index}`,
+      label: "Tips",
+    })),
+  ];
+  for (const { root, place, label } of places) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode())
+      if (!walker.currentNode.parentElement.closest("button, input")) nodes.push(walker.currentNode);
+    let phraseIndex = 0;
+    for (const node of nodes) {
+      const times = cookingFindTimes(node.data).map((time) => ({ ...time, index: phraseIndex++ }));
+      // From the end, so the earlier offsets in the node stay right.
+      for (const time of times.reverse()) {
+        node.splitText(time.end);
+        node.splitText(time.start).replaceWith(
+          cookingTimeButton({
+            id: cookingTimerId(article.dataset.recipe, place, time.index),
+            seconds: time.seconds,
+            phrase: time.text,
+            label,
+          }),
+        );
+      }
+    }
+  }
+}
+
+function cookingTimeButton({ id, seconds, phrase, label }) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "cook-time";
+  Object.assign(button.dataset, { timerId: id, seconds, phrase, stepLabel: label });
+  button.setAttribute("aria-label", `Starta timer, ${cookingDurationWords(seconds)}`);
+  button.innerHTML = '<i class="fas fa-stopwatch" aria-hidden="true"></i>';
+  button.append(phrase);
+  return button;
+}
+
+// --- The timer tray, at the bottom of every page while there are timers. They are saved with their end
+// times, so a reload, another page or a second tab shows the same ones.
+
+let cookingTray = null;
+let cookingTrayList = null;
+let cookingLive = null;
+let cookingInterval = 0;
+let cookingTrayKey = "";
+const cookingDonePrefix = "Klart! · ";
+
+function cookingElement(tag, className, text) {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text !== undefined) element.textContent = text;
+  return element;
+}
+
+function cookingTrayButton(id, selector) {
+  return [...(cookingTrayList?.children ?? [])]
+    .find((row) => row.dataset.timerId === id)
+    ?.querySelector(selector);
+}
+
+function cookingRecipeOnPage(recipeId) {
+  return Boolean(document.querySelector(`.recipe-view[data-recipe="${CSS.escape(recipeId)}"]`));
+}
+
+function cookingTrayRow(timer) {
+  const row = cookingElement("li", `cook-tray-row${timer.done ? " is-done" : ""}`);
+  row.dataset.timerId = timer.id;
+  const info = cookingElement("span", "cook-tray-info");
+  info.append(cookingElement("span", "cook-tray-what", `${timer.phrase} · ${timer.stepLabel}`));
+  if (cookingRecipeOnPage(timer.recipeId))
+    info.append(cookingElement("span", "cook-tray-recipe", timer.recipeTitle));
+  else {
+    const link = cookingElement("a", "cook-tray-recipe", timer.recipeTitle);
+    link.href = timer.recipeUrl;
+    info.append(link);
+  }
+  const close = cookingElement("button", "cook-tray-close");
+  close.type = "button";
+  close.setAttribute("aria-label", timer.done ? "Stäng timer" : "Avbryt timer");
+  close.innerHTML = '<i class="fas fa-xmark" aria-hidden="true"></i>';
+  const more = cookingElement("button", "text-button cook-tray-more", "+1 min");
+  more.type = "button";
+  row.append(cookingElement("span", "cook-tray-time"), info, more, close);
+  return row;
+}
+
+// Draws the tray from the saved timers. The rows are rebuilt only when the timers, their order or
+// their state change, keeping focus on the same button; otherwise only the countdowns change.
+function cookingRenderTray() {
+  if (!cookingTray) return;
+  const now = Date.now();
+  const timers = cookingSortTimers(cookingReadTimers(localStorage, now));
+  const key = timers
+    .map((timer) => `${timer.id}:${timer.done}:${cookingRecipeOnPage(timer.recipeId)}`)
+    .join("|");
+  if (key !== cookingTrayKey) {
+    cookingTrayKey = key;
+    const focused = cookingTray.contains(document.activeElement) ? document.activeElement : null;
+    const focusId = focused?.closest(".cook-tray-row")?.dataset.timerId;
+    const focusClass = focused?.matches(".cook-tray-more") ? ".cook-tray-more" : ".cook-tray-close";
+    cookingTrayList.replaceChildren(...timers.map(cookingTrayRow));
+    if (focusId) cookingTrayButton(focusId, focusClass)?.focus({ preventScroll: true });
+  }
+  timers.forEach((timer, index) => {
+    cookingTrayList.children[index].querySelector(".cook-tray-time").textContent = timer.done
+      ? "Klart!"
+      : cookingFormatRemaining(timer.endsAt - now);
+  });
+  cookingTray.hidden = !timers.length;
+  document.documentElement.style.setProperty("--cook-tray-height", `${cookingTray.offsetHeight}px`);
+  // "Klart! · " in the tab's title while a timer is done. app.js changes the title when the recipe
+  // pop-up opens and closes, so this is set again on every tick rather than once.
+  const title = document.title.startsWith(cookingDonePrefix)
+    ? document.title.slice(cookingDonePrefix.length)
+    : document.title;
+  const wanted = timers.some((timer) => timer.done) ? cookingDonePrefix + title : title;
+  if (document.title !== wanted) document.title = wanted;
+  if (timers.length && !cookingInterval) cookingInterval = setInterval(cookingTick, 1000);
+  if (!timers.length && cookingInterval) {
+    clearInterval(cookingInterval);
+    cookingInterval = 0;
+  }
+}
+
+// Once a second, and when the page becomes visible again. Only a visible page marks timers done,
+// so the tab you're looking at is the one that rings, also when another tab has the same timers.
+function cookingTick() {
+  const now = Date.now();
+  if (document.visibilityState === "visible") {
+    const { timers, finished } = cookingDueTimers(cookingReadTimers(localStorage, now), now);
+    if (finished.length) {
+      cookingWriteTimers(localStorage, timers);
+      // Browsers allow sound and vibration only once the page has had a tap; before that, the tray
+      // shows "Klart!" by itself.
+      const tapped = navigator.userActivation?.hasBeenActive ?? true;
+      if (tapped && finished.some((timer) => cookingShouldRing(timer, now))) {
+        cookingAlarm.ring();
+        navigator.vibrate?.([200, 100, 200]);
+      }
+      for (const timer of finished)
+        cookingAnnounce(`Klart: ${cookingDurationWords(timer.seconds)}, ${timer.stepLabel}`);
+    }
+  }
+  cookingRenderTray();
+  cookingUpdateScreen();
+}
+
+function cookingAnnounce(message) {
+  if (!cookingLive) return;
+  // Emptied first, so the same message twice is announced twice.
+  cookingLive.textContent = "";
+  setTimeout(() => {
+    cookingLive.textContent = message;
+  }, 50);
+}
+
+function cookingTrayClick(event) {
+  const button = event.target.closest("button");
+  if (!button) return;
+  const id = button.closest(".cook-tray-row").dataset.timerId;
+  const now = Date.now();
+  let timers = cookingReadTimers(localStorage, now);
+  let next = null;
+  if (button.matches(".cook-tray-more")) timers = cookingAddMinute(timers, id, now);
+  else {
+    // Focus goes to the next row's ✕, or the one before, or back to the time button in the recipe.
+    const rows = [...cookingTrayList.children];
+    const index = rows.findIndex((row) => row.dataset.timerId === id);
+    next = (rows[index + 1] ?? rows[index - 1])?.dataset.timerId;
+    timers = cookingRemoveTimer(timers, id);
+  }
+  cookingWriteTimers(localStorage, timers);
+  if (!timers.some((timer) => timer.done)) cookingAlarm.stop();
+  cookingRenderTray();
+  if (button.matches(".cook-tray-close")) {
+    const target = next
+      ? cookingTrayButton(next, ".cook-tray-close")
+      : document.querySelector(`.cook-time[data-timer-id="${CSS.escape(id)}"]`);
+    target?.focus({ preventScroll: Boolean(next) });
+  }
+  cookingUpdateScreen();
+}
+
+// A modal dialog (the recipe pop-up, the shopping list) makes the rest of the page inert, so the tray
+// moves into the open one and back to the page when it closes.
+function cookingPlaceTray() {
+  const isModal = (dialog) => {
+    try {
+      return dialog.matches(":modal");
+    } catch {
+      return true;
+    }
+  };
+  const home = [...document.querySelectorAll("dialog[open]")].find(isModal) ?? document.body;
+  if (cookingTray.parentElement !== home) home.append(cookingTray, cookingLive);
+  cookingRenderTray();
+}
+
+// A short kitchen-timer beep made in the browser, repeated for half a minute or until stopped. Browsers
+// only allow sound after a tap, so prime() runs in the tap that starts a timer.
+const cookingAlarm = {
+  context: null,
+  timeout: 0,
+  until: 0,
+  prime() {
+    try {
+      this.context ??= new (window.AudioContext || window.webkitAudioContext)();
+      if (this.context.state === "suspended") this.context.resume();
+    } catch {}
+  },
+  ring() {
+    this.prime();
+    if (!this.context) return;
+    this.stop();
+    this.until = Date.now() + 30000;
+    const beep = () => {
+      try {
+        if (this.context.state === "suspended") this.context.resume();
+        const start = this.context.currentTime;
+        for (let index = 0; index < 3; index++) {
+          const at = start + index * 0.25;
+          const tone = this.context.createOscillator();
+          const gain = this.context.createGain();
+          tone.frequency.value = 880;
+          gain.gain.setValueAtTime(0.0001, at);
+          gain.gain.exponentialRampToValueAtTime(0.3, at + 0.01);
+          gain.gain.exponentialRampToValueAtTime(0.0001, at + 0.15);
+          tone.connect(gain).connect(this.context.destination);
+          tone.start(at);
+          tone.stop(at + 0.16);
+        }
+      } catch {}
+      if (Date.now() + 1500 < this.until) this.timeout = setTimeout(beep, 1500);
+    };
+    beep();
+  },
+  stop() {
+    clearTimeout(this.timeout);
+    this.timeout = 0;
+  },
+};
+
 function enhanceCooking(article) {
   const section = article.querySelector(".recipe-directions");
   if (!section || cookingViews.has(article)) return;
@@ -264,6 +518,41 @@ function enhanceCooking(article) {
   for (const index of saved.ingredients ?? [])
     if (ingredients[index]) ingredients[index].checked = true;
   cookingDrawSteps(article);
+  cookingAddTimeButtons(article, view);
+
+  // A time button starts its timer, or, if it is already running, goes to it in the tray.
+  section.addEventListener("click", (event) => {
+    const button = event.target.closest(".cook-time");
+    if (!button) return;
+    cookingAlarm.prime();
+    const id = button.dataset.timerId;
+    const seconds = Number(button.dataset.seconds);
+    const now = Date.now();
+    const timers = cookingReadTimers(localStorage, now);
+    if (timers.some((timer) => timer.id === id && !timer.done)) {
+      cookingTrayButton(id, ".cook-tray-more")?.focus();
+      return;
+    }
+    cookingWriteTimers(
+      localStorage,
+      cookingStartTimer(
+        timers,
+        {
+          id,
+          recipeId: article.dataset.recipe,
+          recipeTitle: article.querySelector(".recipe-heading")?.textContent.trim() ?? "",
+          recipeUrl: location.href.split("#")[0],
+          stepLabel: button.dataset.stepLabel,
+          phrase: button.dataset.phrase,
+          seconds,
+        },
+        now,
+      ),
+    );
+    cookingRenderTray();
+    cookingAnnounce(`Timer startad, ${cookingDurationWords(seconds)}`);
+    cookingActivity(article);
+  });
 
   // A tap anywhere on a step's text checks it, except on its buttons and links, or when it ends a
   // text selection.
@@ -300,6 +589,34 @@ function enhanceCooking(article) {
   });
 }
 
-function cookingInitPage() {}
+function cookingInitPage() {
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `<section class="cook-tray" aria-label="Timers" hidden><ol class="cook-tray-list"></ol></section>
+    <p class="sr-only cook-live" role="status"></p>`,
+  );
+  cookingTray = document.querySelector(".cook-tray");
+  cookingTrayList = cookingTray.querySelector(".cook-tray-list");
+  cookingLive = document.querySelector(".cook-live");
+  cookingTrayList.addEventListener("click", cookingTrayClick);
+  // After a reload or on another page, the timers' sound is allowed again by the next tap anywhere.
+  document.addEventListener(
+    "pointerdown",
+    () => {
+      if (!cookingTray.hidden) cookingAlarm.prime();
+    },
+    { capture: true },
+  );
+  document.addEventListener("visibilitychange", cookingTick);
+  addEventListener("storage", (event) => {
+    if (event.key === cookingTimersKey) cookingRenderTray();
+  });
+  new MutationObserver(cookingPlaceTray).observe(document.body, {
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["open"],
+  });
+  cookingTick();
+}
 
 if (typeof document !== "undefined") cookingInitPage();
