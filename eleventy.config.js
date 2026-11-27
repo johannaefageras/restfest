@@ -39,6 +39,7 @@ import ai from './src/_data/ai.js';
 import {shoppingDepartmentNames} from './lib/shopping-departments.js';
 import {pageStructuredData} from './lib/metadata.js';
 import {makePhotos} from './tools/photos.mjs';
+import {makeScrollstoppImages} from './tools/scrollstopp-images.mjs';
 import {baseRecipes, cakeChoices, cakeNeighbours, cakeRegion, cakesMadeWith, flags as cakeFlags, leftoverRecipes, levels as cakeLevels, parts as cakeParts, sortCakes} from './lib/cakes.js';
 import {cookingTime, doughs, filterDoughs, forms, freshPastaRecipe, pastaChoices, pastaGround, pastaNeighbours, pastasBySlug, pastasMadeWith, sauceLabels, sauces, sortPastas} from './lib/pasta.js';
 
@@ -151,8 +152,11 @@ export default function (eleventyConfig) {
   // `webp` gives one copy's address and `webpSrcset` all of them for srcset, both relative to the
   // site root; anything that isn't a PNG gets its own address and no srcset. The browser builds the
   // same addresses in photoAttributes() (src/js/app.js), so keep the widths the same in all three.
-  eleventyConfig.on('eleventy.before', () => makePhotos());
+  // The Scrollstopp TikTok images (tools/scrollstopp-images.mjs) are made the same way, in
+  // .cache/scrollstopp/, and copied next to their originals in assets/scrollstopp/.
+  eleventyConfig.on('eleventy.before', () => Promise.all([makePhotos(), makeScrollstoppImages()]));
   eleventyConfig.addPassthroughCopy({'.cache/recipe-photos': 'assets/recipes'});
+  eleventyConfig.addPassthroughCopy({'.cache/scrollstopp': 'assets/scrollstopp'});
   const photoWidths = [600, 1200, 1600];
   const isPhoto = image => /\.png$/.test(image ?? '');
   const webp = (image, width) => image.replace(/\.png$/, `-${width}.webp`);
