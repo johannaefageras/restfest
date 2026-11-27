@@ -1313,8 +1313,9 @@ details[open] > summary > .fa-chevron-down {
 .js .recipe-grid[data-load-more]:not([data-paging]) > :nth-child(n + 13) {
   display: none;
 }
-/* The faded row holds up to four copies, for the four-across pasta grid; three-across grids show three. */
-.archive-preview > :nth-child(n + 4) {
+/* The faded row holds up to four copies, for the four-across pasta grid; three-across grids show three.
+   Counted among the cards only: the hidden spacers that line the copies up with their cards don't count. */
+.archive-preview > :nth-child(n + 4 of .archive-card) {
   display: none;
 }
 .archive-more-controls {
@@ -1340,12 +1341,12 @@ details[open] > summary > .fa-chevron-down {
   }
 }
 @media (min-width: 421px) and (max-width: 899px) {
-  .archive-preview > :nth-child(n + 3) {
+  .archive-preview > :nth-child(n + 3 of .archive-card) {
     display: none;
   }
 }
 @media (max-width: 420px) {
-  .archive-preview > :nth-child(n + 2) {
+  .archive-preview > :nth-child(n + 2 of .archive-card) {
     display: none;
   }
 }
@@ -4963,7 +4964,7 @@ a.dialog-save {
   padding-bottom: 0;
 }
 @media (min-width: 1100px) {
-  .archive-preview.pasta-grid > :nth-child(4) {
+  .archive-preview.pasta-grid > :nth-child(4 of .archive-card) {
     display: flex;
   }
 }

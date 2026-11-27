@@ -14,6 +14,9 @@ const loadMorePageSize = 12;
 // Copies in the faded row: four for the four-across pasta grid. CSS hides the ones a narrower grid
 // has no room for.
 const loadMorePreviewSize = 4;
+// A card's ground and drawing tilt follow its place in the grid (nth-child in kitchen.css): the
+// grounds repeat every three or four cards and the tilt every two, so every 12 places look the same.
+const loadMorePlaceCycle = 12;
 const loadMorePagers = new WeakMap();
 let loadMoreGridCount = 0;
 
@@ -87,13 +90,22 @@ function pagedGrid(grid) {
       const out = new Set(later);
       for (const card of grid.children)
         card.toggleAttribute("data-paged-out", out.has(card));
-      preview.replaceChildren(
-        ...upcoming.map((card) => {
-          const copy = card.cloneNode(true);
-          copy.removeAttribute("data-paged-out");
-          return copy;
-        }),
-      );
+      // Each copy sits at its card's place, counted in twelves, so it looks like the card it
+      // previews also when a filter has hidden cards before it. Hidden spacers fill the gaps.
+      const places = [...grid.children];
+      const row = [];
+      for (const card of upcoming) {
+        const place = places.indexOf(card) % loadMorePlaceCycle;
+        while (row.length % loadMorePlaceCycle !== place) {
+          const spacer = document.createElement("span");
+          spacer.hidden = true;
+          row.push(spacer);
+        }
+        const copy = card.cloneNode(true);
+        copy.removeAttribute("data-paged-out");
+        row.push(copy);
+      }
+      preview.replaceChildren(...row);
       block.hidden = later.length === 0;
       count.textContent = loadMoreCount(
         shown.length,

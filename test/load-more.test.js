@@ -156,6 +156,20 @@ test('cards a filter hides are neither shown nor counted', () => {
   assert.equal(grid.next.children[0].children.length, 0);
 });
 
+test('copies sit where their cards do, counted in twelves, so they keep their ground and tilt', () => {
+  const { grid, cards } = makeGrid(30);
+  cards[1].hidden = true; cards[2].hidden = true;
+  api.pagedGrid(grid).update('filtered');
+  const preview = grid.next.children[0];
+  const copies = preview.children.filter(child => child.original);
+  assert.deepEqual(copies.map(copy => copy.original), cards.slice(14, 18));
+  for (const copy of copies)
+    assert.equal(preview.children.indexOf(copy) % 12, grid.children.indexOf(copy.original) % 12);
+  const spacers = preview.children.filter(child => !child.original);
+  assert.equal(spacers.length, 2);
+  assert.ok(spacers.every(spacer => spacer.hidden));
+});
+
 test('a grid of 12 or fewer gets no button and no marks', () => {
   const { grid } = makeGrid(12);
   api.pagedGrid(grid).update();
@@ -194,6 +208,12 @@ test('long card grids ask to be paged, and the page is ready for it', () => {
   assert.match(read('pages/tartor.njk'), /cake-leftovers[\s\S]*class="recipe-grid" data-load-more="recept"/);
   assert.match(read('js/pasta.js'), /pagedGrid\(grid\)\.update\(JSON\.stringify\(chosen\)\)/);
   assert.match(read('js/tartor.js'), /pagedGrid\(grid\)\.update\(JSON\.stringify\(chosen\)\)/);
+});
+
+test('the faded row counts only cards, not the spacers, when it decides how many copies fit', () => {
+  const css = readFileSync(new URL('../src/css/kitchen.css', import.meta.url), 'utf8');
+  const rules = [...css.matchAll(/\.archive-preview[^{]*> :nth-child\(([^)]*)\)/g)].map(match => match[1]);
+  assert.deepEqual(rules, ['n + 4 of .archive-card', 'n + 3 of .archive-card', 'n + 2 of .archive-card', '4 of .archive-card']);
 });
 
 test('the recipe book flattens only its own grid, so its faded row keeps the gap above it', () => {
