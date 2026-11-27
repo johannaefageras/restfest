@@ -35,7 +35,7 @@ layout: layouts/base.njk
     {%- endif %}
     <section class="recipes-section archive-recipes" aria-labelledby="listing-count">
       <h2 id="listing-count" class="eyebrow">{{ listing.recipes.length }} recept</h2>
-      <div class="recipe-grid" data-load-more="recept">
+      <div class="recipe-grid" data-load-more="recept" data-random-order>
         {%- for item in listing.recipes %}
         {{ recipeCard(item.data.recipe.card, base) }}
         {%- endfor %}

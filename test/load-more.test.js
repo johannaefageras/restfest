@@ -68,6 +68,7 @@ function fakeCard(n) {
 
 function load() {
   const context = vm.createContext({ document: { createElement: fakeElement } });
+  vm.runInContext('Math.random = () => 0;', context);
   vm.runInContext(source, context);
   return context;
 }
@@ -159,6 +160,29 @@ test('cards a filter hides are neither shown nor counted', () => {
   assert.equal(grid.next.children[0].children.length, 0);
 });
 
+test('an archive keeps one shuffle, with the original order used while filtered', () => {
+  const { grid, cards } = makeGrid(30);
+  grid.setAttribute('data-random-order', '');
+  const pager = api.pagedGrid(grid);
+  const shuffled = [...cards.slice(1), cards[0]];
+  pager.update();
+  assert.deepEqual(shown(grid), shuffled.slice(0, 12));
+  pager.loadMore({ detail: 1 });
+  assert.deepEqual(shown(grid), shuffled.slice(0, 24));
+
+  cards[0].hidden = true;
+  pager.update('filtered', { filtered: true });
+  assert.deepEqual(shown(grid), cards.slice(1, 13));
+  pager.loadMore({ detail: 1 });
+  assert.deepEqual(grid.children, cards);
+  assert.deepEqual(shown(grid), cards.slice(1, 25));
+
+  cards[0].hidden = false;
+  pager.update();
+  assert.deepEqual(grid.children, shuffled);
+  assert.deepEqual(shown(grid), shuffled.slice(0, 12));
+});
+
 test('copies sit where their cards do, counted in twelves, so they keep their ground and tilt', () => {
   const { grid, cards } = makeGrid(30);
   cards[1].hidden = true; cards[2].hidden = true;
@@ -221,8 +245,8 @@ test('long card grids ask to be paged, and the page is ready for it', () => {
   assert.match(read('pages/pastasorter.njk'), /id="pasta-grid" class="recipe-grid pasta-grid" data-load-more="sorter"/);
   assert.match(read('pages/tartor.njk'), /id="cake-grid" class="recipe-grid" data-load-more="tårtor"/);
   assert.match(read('pages/tartor.njk'), /cake-leftovers[\s\S]*class="recipe-grid" data-load-more="recept"/);
-  assert.match(read('js/pasta.js'), /pagedGrid\(grid\)\.update\(JSON\.stringify\(chosen\)\)/);
-  assert.match(read('js/tartor.js'), /pagedGrid\(grid\)\.update\(JSON\.stringify\(chosen\)\)/);
+  assert.match(read('js/pasta.js'), /pagedGrid\(grid\)\.update\(JSON\.stringify\(chosen\), \{ filtered \}\)/);
+  assert.match(read('js/tartor.js'), /pagedGrid\(grid\)\.update\(JSON\.stringify\(chosen\), \{ filtered \}\)/);
 });
 
 test('if the pager never takes over, every card shows once the page has loaded', () => {

@@ -4,9 +4,9 @@
 // data-load-more="<noun>", e.g. "recept" or "sorter". The archive itself builds only the cards it shows
 // (renderArchivePage() in app.js) and uses the count and focus helpers here.
 //
-// Every card stays in the grid, in order. Cards past the current depth get data-paged-out, never
-// `hidden`: the pasta and cake filters hide cards with `hidden`, and paging counts only the cards a
-// filter left. Without JavaScript nothing is paged and every card shows.
+// Cards past the current depth get data-paged-out. The pasta and cake filters hide cards with
+// `hidden`, and paging counts only the cards a filter left. Grids with data-random-order get one
+// shuffle per visit, used whenever there is no filter. Without JavaScript every card shows.
 //
 // The block under a grid is the same as #archive-more in receptarkiv.njk: change the two together.
 
@@ -19,6 +19,15 @@ const loadMorePreviewSize = 4;
 const loadMorePlaceCycle = 12;
 const loadMorePagers = new WeakMap();
 let loadMoreGridCount = 0;
+
+function shuffledCopy(items) {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 function loadMoreCount(shown, total, noun) {
   return `${shown} av ${total} ${noun}`;
@@ -54,8 +63,8 @@ function showPagedCard(element) {
 }
 
 // The pager for a grid whose cards are all in the page. The same grid always gets the same pager.
-//   update(view)        Shows the cards again. A different `view` (e.g. the filter's choices) starts
-//                       again at 12; the same one keeps what was loaded.
+//   update(view, {filtered})  Shows the cards again. A different `view` starts again at 12.
+//                             Filtered results use the original card order.
 //   loadMore(event)     Shows 12 more and focuses the first of them.
 //   revealThrough(card) Shows whole pages until `card` is shown, e.g. to return focus to it.
 function pagedGrid(grid) {
@@ -86,51 +95,62 @@ function pagedGrid(grid) {
 
   let depth = loadMorePageSize;
   let lastView;
+  const originalOrder = grid.hasAttribute("data-random-order") ? [...grid.children] : null;
+  const randomOrder = originalOrder && shuffledCopy(originalOrder);
+  let order = originalOrder;
 
   const view = () => loadMoreView(grid.children, depth);
+  const render = () => {
+    const { shown, later, preview: upcoming } = view();
+    const out = new Set(later);
+    for (const card of grid.children)
+      card.toggleAttribute("data-paged-out", out.has(card));
+    // Each copy sits at its card's place, counted in twelves, so it looks like the card it
+    // previews also when a filter has hidden cards before it. Hidden spacers fill the gaps.
+    const places = [...grid.children];
+    const row = [];
+    for (const card of upcoming) {
+      const place = places.indexOf(card) % loadMorePlaceCycle;
+      while (row.length % loadMorePlaceCycle !== place) {
+        const spacer = document.createElement("span");
+        spacer.hidden = true;
+        row.push(spacer);
+      }
+      const copy = card.cloneNode(true);
+      copy.removeAttribute("data-paged-out");
+      row.push(copy);
+    }
+    preview.replaceChildren(...row);
+    block.hidden = later.length === 0;
+    count.textContent = loadMoreCount(
+      shown.length,
+      shown.length + later.length,
+      noun,
+    );
+  };
 
   const pager = {
-    update(nextView = "") {
+    update(nextView = "", { filtered = false } = {}) {
+      const nextOrder = filtered ? originalOrder : randomOrder;
+      if (nextOrder !== order) {
+        grid.replaceChildren(...nextOrder);
+        order = nextOrder;
+      }
       if (nextView !== lastView) depth = loadMorePageSize;
       lastView = nextView;
-      const { shown, later, preview: upcoming } = view();
-      const out = new Set(later);
-      for (const card of grid.children)
-        card.toggleAttribute("data-paged-out", out.has(card));
-      // Each copy sits at its card's place, counted in twelves, so it looks like the card it
-      // previews also when a filter has hidden cards before it. Hidden spacers fill the gaps.
-      const places = [...grid.children];
-      const row = [];
-      for (const card of upcoming) {
-        const place = places.indexOf(card) % loadMorePlaceCycle;
-        while (row.length % loadMorePlaceCycle !== place) {
-          const spacer = document.createElement("span");
-          spacer.hidden = true;
-          row.push(spacer);
-        }
-        const copy = card.cloneNode(true);
-        copy.removeAttribute("data-paged-out");
-        row.push(copy);
-      }
-      preview.replaceChildren(...row);
-      block.hidden = later.length === 0;
-      count.textContent = loadMoreCount(
-        shown.length,
-        shown.length + later.length,
-        noun,
-      );
+      render();
     },
     loadMore(event) {
       const firstNew = view().later[0];
       depth += loadMorePageSize;
-      pager.update(lastView);
+      render();
       focusFirstNew(firstNew, event);
     },
     revealThrough(card) {
       const index = view().later.indexOf(card);
       if (index < 0) return;
       depth += Math.ceil((index + 1) / loadMorePageSize) * loadMorePageSize;
-      pager.update(lastView);
+      render();
     },
   };
 

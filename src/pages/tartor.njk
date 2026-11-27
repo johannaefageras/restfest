@@ -107,7 +107,7 @@ scripts: [tartor.js]
           </details>
         </div>
       </div>
-      <div id="cake-grid" class="recipe-grid" data-load-more="tårtor">
+      <div id="cake-grid" class="recipe-grid" data-load-more="tårtor" data-random-order>
         {%- for item in collections.cakes %}
         {{ cakeCard(item, '') }}
         {%- endfor %}

@@ -69,7 +69,7 @@ function page(count = 29) {
     document: { querySelectorAll: () => [] },
     window: { matchMedia: () => ({ matches: false }) },
   });
-  vm.runInContext([loadMore, state, archive].join('\n'), context);
+  vm.runInContext(['Math.random = () => 0;', loadMore, state, archive].join('\n'), context);
   return {
     $, context, grid: $('#recipe-grid'), preview: $('#archive-preview'),
     render: () => context.renderArchive(),
@@ -159,29 +159,46 @@ test('title and publication-date sorts work in both directions', () => {
   }
 });
 
-test('fridge matching is offered for known ingredients and respects a chosen order', () => {
+test('the unfiltered default stays shuffled with fridge ingredients and returns after clearing a search', () => {
   const view = page(5);
   const { archiveSort } = view.context;
   const option = view.$('#archive-sort-match');
+  const resultIds = () => view.grid.children.map(card => card.id);
+  const shuffled = ['2-recipe', '3-recipe', '4-recipe', '5-recipe', '1-recipe'];
   const items = ['custom:unknown'];
   view.context.loadPantry = () => ({ items });
   archiveSort.setValue('default');
   view.render();
   assert.equal(option.hidden, true);
   assert.equal(archiveSort.value, 'default');
+  assert.deepEqual(resultIds(), shuffled);
 
   items.push('potatis');
   view.render();
   assert.equal(option.hidden, false);
+  assert.equal(archiveSort.value, 'default');
+  assert.deepEqual(resultIds(), shuffled);
+
+  view.context.archiveSearch.value = 'recept';
+  view.render();
   assert.equal(archiveSort.value, 'match');
-  assert.deepEqual(view.grid.children.map(card => card.id), ['5-recipe', '4-recipe', '3-recipe', '2-recipe', '1-recipe']);
+  assert.deepEqual(resultIds(), ['5-recipe', '4-recipe', '3-recipe', '2-recipe', '1-recipe']);
+
+  view.context.archiveSearch.value = '';
+  view.render();
+  assert.equal(archiveSort.value, 'default');
+  assert.deepEqual(resultIds(), shuffled);
+
+  view.context.archiveSortChosen = true;
+  archiveSort.setValue('match');
+  view.render();
+  assert.deepEqual(resultIds(), ['5-recipe', '4-recipe', '3-recipe', '2-recipe', '1-recipe']);
 
   items.pop();
   view.render();
   assert.equal(option.hidden, true);
   assert.equal(archiveSort.value, 'default');
 
-  view.context.archiveSortChosen = true;
   archiveSort.setValue('title');
   items.push('potatis');
   view.render();

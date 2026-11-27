@@ -42,8 +42,8 @@ const heartIcon = (pressed) => faIcon("heart", pressed ? "fas" : "far");
 const savedKey = "restfest-saved";
 const archiveSearch = $("#recipe-search");
 const archiveSort = archiveSearch && setupArchivePicker($("#archive-sort"), (value) => {
-  if (value === archiveSort.value) return;
   archiveSortChosen = true;
+  if (value === archiveSort.value) return;
   archiveSort.setValue(value);
   renderArchive();
 });
@@ -861,12 +861,7 @@ const foodRecipes = recipes.filter(isFood);
 // Shuffle once per visit so saving a recipe or clearing filters keeps the cards in place.
 const archiveRandomOrder = new Map();
 if (archiveSearch) {
-  const shuffled = [...foodRecipes];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  shuffled.forEach((recipe, index) => archiveRandomOrder.set(recipe.id, index));
+  shuffledCopy(foodRecipes).forEach((recipe, index) => archiveRandomOrder.set(recipe.id, index));
 }
 
 function matchesSearch(recipe, words) {
@@ -911,15 +906,14 @@ const archiveOrders = {
   newest: newestFirst,
   oldest: (a, b) => newestFirst(b, a),
 };
-// "Bäst matchning" is offered while the fridge list has something we can match. It is picked
-// automatically unless the visitor has already chosen another order.
-function offerMatchSort(offer) {
-  const option = $("#archive-sort-match");
-  const wasOffered = !option.hidden;
-  if (offer === wasOffered) return;
-  option.hidden = !offer;
-  if (offer && !archiveSortChosen) archiveSort.setValue("match");
-  if (!offer && archiveSort.value === "match") archiveSort.setValue("default");
+// "Bäst matchning" is available with matching ingredients and is the automatic order for
+// filtered results until the visitor chooses a sort.
+function offerMatchSort(offer, filtered) {
+  $("#archive-sort-match").hidden = !offer;
+  if (offer && filtered && !archiveSortChosen) archiveSort.setValue("match");
+  else if (archiveSort.value === "match" && (!offer || !archiveSortChosen)) {
+    archiveSort.setValue("default");
+  }
 }
 
 function renderArchivePage(append = false) {
@@ -1003,13 +997,13 @@ function renderArchive() {
   // With something on the fridge list, every card says how well it matches, whatever the order.
   const pantryKeys = new Set(loadPantry().items.map(keyForIngredient));
   const pantryInUse = [...pantryKeys].some((key) => !key.startsWith("custom:"));
-  offerMatchSort(pantryInUse);
+  const filtered = words.length > 0 || activeFilters > 0;
+  offerMatchSort(pantryInUse, filtered);
   const items = visible.map((recipe) => ({
     recipe,
     match: pantryInUse ? matchRecipe(recipe, pantryKeys) : null,
   }));
-  const defaultOrder =
-    words.length || activeFilters ? archiveOrders.newest : archiveOrders.random;
+  const defaultOrder = filtered ? archiveOrders.newest : archiveOrders.random;
   items.sort(archiveOrders[archiveSort.value] ?? defaultOrder);
   // A new search, filter or sort starts at the beginning. Saving a card keeps the current depth.
   const viewKey = JSON.stringify([
@@ -1074,20 +1068,17 @@ function renderArchive() {
   });
 }
 
-// mer-an-mat.html: one grid per category, filled from the recipe index, each 12 at a time
-// (load-more.js). Drawn again when something is saved, keeping what each section has loaded.
+// mer-an-mat.html: fill each category from the recipe index before starting its pager.
 function renderMorePage() {
   document.querySelectorAll("[data-more]").forEach((grid) => {
     grid.innerHTML = recipes
       .filter((recipe) => recipe.meals[0] === grid.dataset.more)
-      .map(archiveCard)
+      .map((recipe) => archiveCard(recipe))
       .join("");
-    pagedGrid(grid).update();
   });
 }
 
-// The category, type and tag pages have cards rendered at build time, with the heart not pressed.
-// Show which ones are saved. Cards app.js renders itself are already right and are left alone.
+// Update the hearts on cards already in the page, including the build-time recipe lists.
 function updateCardHearts() {
   document.querySelectorAll(".favorite[data-save]").forEach((button) => {
     const recipe = recipes.find((item) => item.id === button.dataset.save);
@@ -1106,7 +1097,6 @@ function updateCardHearts() {
 function refreshSavedViews() {
   $("#saved-count").textContent = saved.size;
   renderArchive();
-  renderMorePage();
   updateCardHearts();
   updateSaveButtons();
   document.dispatchEvent(new Event("restfest:saved"));
@@ -2355,7 +2345,8 @@ if (themeToggles.length && typeof applyTheme === "function") {
 const pageRecipe = $("main .recipe-view");
 if (pageRecipe) enhanceRecipe(pageRecipe);
 
-// Long card grids show 12 at a time (load-more.js). Mer än mat fills its grids in refreshSavedViews().
+// Long card grids show 12 at a time (load-more.js).
+renderMorePage();
 document.querySelectorAll("[data-load-more]").forEach((grid) => pagedGrid(grid).update());
 refreshSavedViews();
 updateShoppingButtons();

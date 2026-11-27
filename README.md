@@ -206,7 +206,7 @@ The parts, levels, regions and leftover recipes are in [lib/cakes.js](lib/cakes.
 
 ## Add or edit Scrollstopp recipes
 
-`scrollstopp.html` lists baking, desserts and drinks for teenagers as tall cards, 12 at a time, with no filter. Like the cakes, they are ordinary archive recipes (340–358), so a card opens the recipe in the recipe dialog, and they also appear in the archive under their categories. What makes a recipe part of Scrollstopp is a `scrollstopp` block in its front matter:
+`scrollstopp.html` lists baking, desserts and drinks for teenagers as tall cards, 12 at a time, with no filter. Like the cakes, they are ordinary archive recipes, so a card opens the recipe in the recipe dialog, and they also appear in the archive under their categories. What makes a recipe part of Scrollstopp is a `scrollstopp` block in its front matter:
 
 ```yaml
 scrollstopp:

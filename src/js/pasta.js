@@ -91,7 +91,7 @@
     grid.hidden = shown === 0;
     // 12 at a time (load-more.js). New choices start again at 12; the same ones, e.g. when Back
     // runs the filter again, keep the cards already loaded.
-    pagedGrid(grid).update(JSON.stringify(chosen));
+    pagedGrid(grid).update(JSON.stringify(chosen), { filtered });
 
     // The choices go into the address in place of the old ones, so Back leaves the page as usual.
     const params = new URLSearchParams();
@@ -162,7 +162,7 @@
     return sort;
   }
 
-  const visibleCards = () => cards.filter((card) => !card.hidden);
+  const visibleCards = () => [...grid.children].filter((card) => !card.hidden);
 
   // Shows a sort. `push` adds a step to the history, so Back closes the dialog; stepping with the
   // arrows or following a "Byt mot" link replaces it, so Back still closes it in one go.

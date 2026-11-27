@@ -72,7 +72,7 @@
     grid.hidden = shown === 0;
     // 12 at a time (load-more.js). New choices start again at 12; the same ones, e.g. when Back
     // runs the filter again, keep the cards already loaded.
-    pagedGrid(grid).update(JSON.stringify(chosen));
+    pagedGrid(grid).update(JSON.stringify(chosen), { filtered });
 
     // The choices go into the address in place of the old ones, so Back leaves the page as usual.
     const params = new URLSearchParams();
