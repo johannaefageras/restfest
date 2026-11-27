@@ -100,4 +100,9 @@ test('signing out clears private cards immediately', async () => {
   assert.equal(view.nodes.get('[data-book-toolbar]').hidden, true);
   // The pager saw the empty grid too, so its faded row holds no copies of the private cards.
   assert.equal(view.pagerSaw.at(-1), '');
+  // An empty book is a view of its own, so signing in again starts the book at 12, not the old depth.
+  assert.notEqual(view.views.at(-1), 'alla');
+  view.data.signedIn = true;
+  view.document.dispatchEvent(new Event('restfest:account'));
+  assert.equal(view.views.at(-1), 'alla');
 });

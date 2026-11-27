@@ -82,8 +82,9 @@ function render() {
 function drawSnapshot() {
   if (!account.signedIn()) {
     entries = []; grid.innerHTML = ""; toolbar.hidden = true; empty.hidden = true; status.textContent = "";
-    // The pager's faded row holds copies of the cards: empty it with them.
-    pagedGrid(grid).update(filter);
+    // The pager's faded row holds copies of the cards: empty it with them. An empty book is a view
+    // of its own, so signing in again (perhaps as someone else) starts the book at 12.
+    pagedGrid(grid).update("");
     loaded = false;
     return;
   }
