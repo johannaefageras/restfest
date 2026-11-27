@@ -6,6 +6,8 @@
 
 Enter ingredients, find matching recipes, save favourites and plan the week. The archive also includes drinks, baking, pantry recipes and **Mer än mat**: home spa, cleaning, pet treats and gardening ideas for things left over.
 
+Three collections gather parts of it: **Pasta** (pasta sorts), **Tårtor** (the world's best-known cakes) and **Scrollstopp**, baking, desserts and drinks for teenagers. Every Scrollstopp recipe has a portrait image with the site's address that visitors can save and post on TikTok.
+
 Recipes help while you cook. Steps can be checked off, and times in the instructions (from 30 seconds to 2 hours) start timers that stay at the bottom of every page until dismissed. The screen stays on from the first step or timer until the recipe is done, unless you turn that off. Checked steps and ingredients are kept on the device for 12 hours. Timers are kept until they are dismissed or an hour after they finish.
 
 The site is built with Eleventy, Nunjucks, Markdown and plain browser JavaScript. Supabase provides optional accounts, a synced recipe book and shopping list, fridge-photo recognition and generated recipes. Claude handles recognition and recipe writing; OpenAI generates recipe photos.
@@ -97,7 +99,7 @@ The home page includes `WebSite` structured data for the site's name, address, d
 | [src/_data/](src/_data/) | Site settings, Supabase settings and the food catalogue. |
 | [src/js/](src/js/) | Browser behaviour and the shared taxonomy in `recipes.js`. |
 | [src/css/](src/css/) | Fonts, design tokens, page styles, dark theme and UI icons. |
-| [src/assets/](src/assets/) | Recipe photos, illustrations, icons, fonts and the sharing image. |
+| [src/assets/](src/assets/) | Recipe photos, Scrollstopp's TikTok images, illustrations, icons, fonts and the sharing image. |
 | [lib/](lib/) | Build-time recipe validation and parsing, plus helpers shared with browser code. |
 | [supabase/](supabase/) | Database migrations, Edge Functions, photo references and auth-email templates. |
 | [tools/](tools/) | Data generation, recipe promotion and backend test helpers. |
@@ -105,6 +107,7 @@ The home page includes `WebSite` structured data for the site's name, address, d
 | [design/](design/) | Design source files, outside the published site. |
 | `_site/` | Generated website. Ignored by Git; do not edit it directly. |
 | `.cache/recipe-photos/` | WebP copies of the recipe photos, made before every build and copied into `_site/assets/recipes/`. Ignored by Git. |
+| `.cache/scrollstopp/` | The stamped TikTok images and their WebP copies, made before every build and copied into `_site/assets/scrollstopp/`. Ignored by Git. |
 
 [eleventy.config.js](eleventy.config.js) defines collections, copied assets and the `src/` → `_site/` build. Templates set explicit permalinks, so the `pages/` folder does not appear in public URLs.
 
@@ -200,6 +203,27 @@ tarta:
 4. Run `npm test`: it reports gaps or repeats in the numbering, unknown parts or levels, an origin that belongs to no region and missing drawings, icons or recipes.
 
 The parts, levels, regions and leftover recipes are in [lib/cakes.js](lib/cakes.js). A part with `grundrecept` links to its base recipe from `tartor.html`, and that recipe's page lists the cakes built with it. A cake's own page ends with its number, the parts it is built with (each a link to `tartor.html` filtered by it) and the cakes before and after it.
+
+## Add or edit Scrollstopp recipes
+
+`scrollstopp.html` lists baking, desserts and drinks for teenagers as tall cards, 12 at a time, with no filter. Like the cakes, they are ordinary archive recipes (340–358), so a card opens the recipe in the recipe dialog, and they also appear in the archive under their categories. What makes a recipe part of Scrollstopp is a `scrollstopp` block in its front matter:
+
+```yaml
+scrollstopp:
+  nr: 3 # its number on scrollstopp.html: 1, 2, 3 … without gaps
+  namn: "Kanelbullar på pinne" # a short name, for the previous and next links on a recipe's page
+```
+
+1. Add the recipe as usual (above), with the `scrollstopp` block. The card shows `facts: Nivå` with the cakes' level icons.
+2. Put its cover photo in `src/assets/recipes/<id>.png`, as for any recipe, and use it as both `image` and `cardImage`.
+3. Put its TikTok image, in portrait and close to 9:16, in `src/assets/scrollstopp/<id>.png`. Don't put it in `src/assets/recipes/`: every PNG there gets 600, 1200 and 1600 px wide copies, and a portrait about 940 px wide would be missing the wider ones.
+4. Run `npm test`: it reports gaps or repeats in the numbering, a missing short name or level, and a missing, landscape or stray TikTok image.
+
+Every build makes three files from each TikTok image ([tools/scrollstopp-images.mjs](tools/scrollstopp-images.mjs)): `<id>.jpg`, 1080 × 1920 with "oftabraefter.se" in the top left corner, which visitors save; a 540 px wide copy of it, shown on the recipe's page; and a 600 px wide copy without the address, for the card. An image that isn't exactly 9:16 is cropped in the middle first. Only new or changed images are made again.
+
+The address is [design/scrollstopp-stamp.png](design/scrollstopp-stamp.png), drawn by [tools/scrollstopp-stamp.mjs](tools/scrollstopp-stamp.mjs) in Trio Grotesk on the site's lavender. To change its text, size or colours, edit that script, run `node tools/scrollstopp-stamp.mjs 2>/dev/null`, look at the PNG and rebuild: a newer stamp makes all the images again. Its place on the image is set in `tools/scrollstopp-images.mjs`, below TikTok's tabs and away from its buttons and caption.
+
+On a Scrollstopp recipe's page, the image and **Spara bilden** come after the extra sections ([src/js/tiktok-save.js](src/js/tiktok-save.js)). The button downloads the JPEG; on a phone that can share files it opens the share sheet instead, where the image can go to Photos or straight to TikTok. The page ends with the recipe's number and the recipes before and after it. The helpers are in [lib/scrollstopp.js](lib/scrollstopp.js).
 
 ## Supabase and AI features
 
