@@ -13,11 +13,12 @@ test('the snapshot combines outstanding amounts and retains display edits and no
     item('b', '½ kg potatis', { note: 'Ekologisk', recipe: 'Gratäng' }),
     item('c', '1 kg potatis', { checked: true }),
     item('d', '1 l mjölk', { note: 'Laktosfri' }),
+    item('e', '2 l mjölk', { note: 'Standard' }),
   ];
   const original = structuredClone(items);
   const copy = createShoppingCopy(items, 'Till helgen');
   assert.equal(copy.t, 'Till helgen');
-  assert.deepEqual(copy.i, [['800 g potatis', 'Ekologisk', ''], ['1 l mjölk', 'Laktosfri', '']]);
+  assert.deepEqual(copy.i, [['800 g potatis', 'Ekologisk', ''], ['1 l mjölk', 'Laktosfri', ''], ['2 l mjölk', 'Standard', '']]);
   assert.deepEqual(items, original);
   assert.doesNotMatch(JSON.stringify(copy), /Soppa|Gratäng|private-source|customText|checked|source/);
   assert.throws(() => createShoppingCopy([item('a', 'Ägg', { checked: true })]), /inga varor/);

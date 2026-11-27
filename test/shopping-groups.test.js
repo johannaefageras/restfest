@@ -19,6 +19,7 @@ test('recognizes simple Swedish singulars, plurals, count units and preparation 
   assert.deepEqual(texts('1 gul lök', '2 gula lökar, finhackade'), ['3 gula lökar']);
   assert.deepEqual(texts('1 morot', '2 morötter'), ['3 morötter']);
   assert.deepEqual(texts('1 st ägg', '2 ägg'), ['3 ägg']);
+  assert.deepEqual(texts('6 ägg, rumstempererade', '3 ägg'), ['9 ägg']);
   assert.deepEqual(texts('½ citron', '½ citron'), ['1 citron']);
   assert.deepEqual(texts('200 g morot', '300 gram morötter'), ['500 g morötter']);
 });
@@ -45,14 +46,15 @@ test('never guesses weight-to-volume conversions, product variants or ambiguous 
   ]) assert.equal(texts(...lines).length, 2, lines.join(' + '));
 });
 
-test('different notes and purchased amounts stay separate from the outstanding total', () => {
+test('different notes stay on their contributions and purchased amounts stay out of the outstanding total', () => {
   const rows = groupShoppingItems([
     item('1 l mjölk', 'a', { note: 'Laktosfri' }), item('1 l mjölk', 'b', { note: 'Standard' }),
     item('1 l mjölk', 'c', { note: 'Laktosfri', checked: true }), item('½ l mjölk', 'd', { note: 'Laktosfri' }),
   ]);
   assert.deepEqual(rows.map(row => [row.text, row.checked, row.note]), [
-    ['1½ l mjölk', false, 'Laktosfri'], ['1 l mjölk', false, 'Standard'], ['1 l mjölk', true, 'Laktosfri'],
+    ['2½ l mjölk', false, ''], ['1 l mjölk', true, 'Laktosfri'],
   ]);
+  assert.deepEqual(rows[0].items.map(part => part.note), ['Laktosfri', 'Standard', 'Laktosfri']);
 });
 
 test('uses edited buying text while retaining original ids, amounts, notes and recipe membership', () => {

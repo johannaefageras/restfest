@@ -448,7 +448,7 @@ function cookingTimeButton({ id, seconds, phrase, label }) {
   button.className = "cook-time";
   Object.assign(button.dataset, { timerId: id, seconds, phrase, stepLabel: label });
   button.setAttribute("aria-label", `Starta timer, ${cookingDurationWords(seconds)}`);
-  button.innerHTML = '<i class="fas fa-stopwatch" aria-hidden="true"></i>';
+  button.innerHTML = '<i class="far fa-stopwatch" aria-hidden="true"></i>';
   button.append(phrase);
   return button;
 }

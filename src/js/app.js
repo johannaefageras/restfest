@@ -620,6 +620,9 @@ function renderShoppingList() {
     showToast("Varan har tagits bort från listan.");
   }
   const sources = shoppingSources();
+  const recipeByItem = new Map(
+    sources.flatMap((source) => source.items.map((item) => [item.id, source])),
+  );
   const visibleItems = shoppingRecipeFilter
     ? sources.find((source) => source.key === shoppingRecipeFilter.key).items
     : [...shoppingItems.values()];
@@ -703,16 +706,34 @@ function renderShoppingList() {
           </li>`;
         }
         const text = item.text;
+        const rowRecipes = new Set(
+          item.items.map((part) => recipeByItem.get(part.id)).filter(Boolean),
+        );
+        // Older week plans stored several recipe names on one ingredient entry.
+        const hasRecipeBreakdown =
+          rowRecipes.size > 1 ||
+          item.items.some(
+            (part) =>
+              recipeByItem.get(part.id)?.kind === "legacy-week" &&
+              part.recipe?.includes(" · "),
+          );
+        const hasPartNotes = !item.note && item.items.some((part) => part.note);
+        const breakdownLabel = hasRecipeBreakdown ? "Visa recept" : `Visa ${item.items.length} delposter`;
         return `
       <li class="shopping-item" data-shopping-item="${escapeHtml(item.id)}" data-shopping-members="${escapeHtml(JSON.stringify(item.items.map((source) => source.id)))}">
         <div>
           <label><input type="checkbox" ${item.checked ? "checked" : ""}><span>${escapeHtml(text)}</span></label>
-          ${item.recipe ? `<p class="meta">${escapeHtml(item.recipe)}</p>` : ""}
           ${item.note ? `<p class="meta shopping-note">${escapeHtml(item.note)}</p>` : ""}
           ${
-            item.items.length > 1
-              ? `<details class="shopping-breakdown" ${openDetails.has(item.id) ? "open" : ""}><summary>Visa ${item.items.length} delposter${faIcon("chevron-down")}</summary>
-            <ul>${item.items.map((source) => `<li>${escapeHtml(shoppingText(source))}${source.recipe ? `<span class="meta">${escapeHtml(source.recipe)}</span>` : '<span class="meta">Egen vara</span>'}</li>`).join("")}</ul></details>`
+            item.items.length > 1 || hasRecipeBreakdown
+              ? `<details class="shopping-breakdown" ${openDetails.has(item.id) ? "open" : ""}><summary>${breakdownLabel}${hasPartNotes ? " och anteckningar" : ""}${faIcon("chevron-down")}</summary>
+            <ul>${item.items
+              .map((part) => `<li>${escapeHtml(shoppingText(part))}${
+                hasRecipeBreakdown ? `<span class="meta">${escapeHtml(part.recipe || recipeByItem.get(part.id)?.title || "Egen vara")}</span>` : ""
+              }${
+                hasPartNotes && part.note ? `<span class="meta shopping-note">${escapeHtml(part.note)}</span>` : ""
+              }</li>`)
+              .join("")}</ul></details>`
               : ""
           }
         </div>

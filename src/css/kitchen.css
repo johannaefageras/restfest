@@ -2952,6 +2952,11 @@ body:has(#shopping-dialog[open]) {
   margin-inline-end: 5px;
   font-size: 0.85em;
 }
+@media (any-hover: hover) {
+  .cook-time:hover .fa-stopwatch {
+    font-weight: 700;
+  }
+}
 
 /* On the page, the tray sticks to the bottom of the screen until the footer scrolls into view.
    The tray's place in the page gives the last steps room to scroll clear of it. */

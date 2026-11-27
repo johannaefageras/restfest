@@ -78,6 +78,52 @@ test('account and modal separate combined buying rows from purchases, retaining 
   assert.equal(page.roots[0].nodes.get('[data-shopping-bought]').open, true, 'refresh retains the visitor disclosure choice');
 });
 
+test('recipe names are disclosed only for groceries shared by distinct recipes', () => {
+  const page = view([
+    item('a', '3 dl mjölk', false, { recipe: 'Pannkakor', source: 'archive:01-pannkakor' }),
+    item('b', '4 dl mjölk', false, { recipe: 'Pannkakor', source: 'archive:02-pannkakor' }),
+    item('c', '1 gul lök', false, { recipe: 'Soppa', source: 'archive:03-soppa' }),
+    item('d', '2 gula lökar'),
+    item('e', '2 ägg', true, { recipe: 'Omelett', source: 'archive:04-omelett' }),
+  ]);
+  page.render();
+  for (const root of page.roots) {
+    const html = root.pending.innerHTML;
+    const [breakdown] = html.match(/<details class="shopping-breakdown"\s*><summary>Visa recept<\/summary>[\s\S]*?<\/details>/g);
+    assert.match(html, /7 dl mjölk/);
+    assert.match(breakdown, /3 dl mjölk<span class="meta">Pannkakor<\/span>/);
+    assert.match(breakdown, /4 dl mjölk<span class="meta">Pannkakor<\/span>/);
+    assert.doesNotMatch(html.replace(breakdown, ''), /Pannkakor|Soppa/);
+    assert.match(html, /Visa 2 delposter/);
+    assert.doesNotMatch(root.bought.innerHTML, /Omelett|shopping-breakdown/);
+  }
+});
+
+test('older week-plan entries with several stored recipe names still offer a collapsed disclosure', () => {
+  const page = view([item(JSON.stringify(['week', 'potatis']), 'Potatis', false, { recipe: 'Soppa · Gratäng' })]);
+  page.render();
+  assert.match(page.roots[0].pending.innerHTML, /<details class="shopping-breakdown"\s*><summary>Visa recept<\/summary>\s*<ul><li>Potatis<span class="meta">Soppa · Gratäng<\/span>/);
+});
+
+test('adding a note to each recipe contribution keeps the grocery total and shows notes in its breakdown', () => {
+  const page = view([
+    item('a', '6 ägg, rumstempererade', false, { recipe: 'Tårta', source: 'archive:01-tarta' }),
+    item('b', '3 ägg', false, { recipe: 'Kaka', source: 'archive:02-kaka' }),
+  ]);
+  page.change([
+    { kind: 'edit', id: 'a', fields: { note: 'Test 1' } },
+    { kind: 'edit', id: 'b', fields: { note: 'Test 2' } },
+  ]);
+  for (const root of page.roots) {
+    assert.equal(root.count('pending'), 1);
+    const html = root.pending.innerHTML;
+    assert.match(html, /9 ägg/);
+    assert.match(html, /<summary>Visa recept och anteckningar<\/summary>/);
+    assert.match(html, /<li>6 ägg, rumstempererade<span class="meta">Tårta<\/span><span class="meta shopping-note">Test 1<\/span><\/li>/);
+    assert.match(html, /<li>3 ägg<span class="meta">Kaka<\/span><span class="meta shopping-note">Test 2<\/span><\/li>/);
+  }
+});
+
 test('buying a combined row moves every contribution and unchecking merges compatible amounts back', () => {
   const page = view([item('a', '200 g potatis', false, { note: 'Ekologisk', customText: '300 g potatis' }), item('b', '½ kg potatis', true, { note: 'Ekologisk' })]);
   page.render();
