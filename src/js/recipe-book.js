@@ -40,7 +40,7 @@ function generatedCard(row) {
     </div>
     <div class="archive-card-body">
       <p class="archive-meal-type">${squareIcon(mealTypes[key].icon, 20)}${escapeHtml(mealName(key))}</p>
-      <h3><a class="recipe-main-link" href="${url}">${title}</a></h3>
+      <h3><a class="recipe-main-link" href="${url}">${escapeHtml(headingBreaks(row.title ?? "Recept"))}</a></h3>
       <p class="archive-description">${escapeHtml(row.description ?? "")}</p>
       <p class="archive-match">Eget recept</p>
       <div class="ingredient-chips">${chips.map((name) => `<span>${escapeHtml(name)}</span>`).join("")}</div>

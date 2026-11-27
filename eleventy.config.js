@@ -103,6 +103,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('otherFoods', (foods, items) => otherFoods(foods, frontMatter(items), taxonomy()));
   eleventyConfig.addFilter('shoppingDepartmentNames', foods => shoppingDepartmentNames({...foods, ...taxonomy().foods}));
   eleventyConfig.addFilter('pageStructuredData', pageStructuredData);
+  // Soft hyphens where a long compound meets an English loanword, for the recipe headings people see
+  // (headingBreaks in src/js/recipes.js, which the browser uses for the archive's cards).
+  eleventyConfig.addFilter('headingBreaks', title => taxonomy().headingBreaks(title));
 
   // For the guides (layouts/guide.njk, src/guider/): the recipes that use any of a guide's foodKeys,
   // in id order, and the recipes a card names by id, in the order given. `items` is collections.recipes.

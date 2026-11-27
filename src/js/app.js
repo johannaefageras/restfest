@@ -847,7 +847,7 @@ function archiveCard(recipe, match) {
     </div>
     <div class="archive-card-body">
       <p class="archive-meal-type">${squareIcon(meal.icon, 20)}${escapeHtml(mealName(recipe.meals[0]))}</p>
-      <h3><a class="recipe-main-link" href="${recipeUrl(recipe.id)}" data-open="${recipe.id}">${escapeHtml(recipe.title)}</a></h3>
+      <h3><a class="recipe-main-link" href="${recipeUrl(recipe.id)}" data-open="${recipe.id}">${escapeHtml(headingBreaks(recipe.title))}</a></h3>
       <p class="archive-description">${escapeHtml(recipe.description)}</p>
       ${archiveMatchLine(match)}
       <div class="ingredient-chips">${chips.map((name) => `<span>${escapeHtml(name)}</span>`).join("")}</div>
@@ -1777,7 +1777,8 @@ function enhanceRecipe(article) {
   } catch (error) {
     console.error(error);
   }
-  const title = $(".recipe-heading", article).textContent;
+  // Without the soft hyphens headingBreaks() (recipes.js) put in the heading.
+  const title = $(".recipe-heading", article).textContent.replace(/\u00AD/g, "");
   enhanceRecipeShare(article, title);
   // "Spara bilden" on Scrollstopp recipes (tiktok-save.js). If it fails, the link still downloads.
   try {

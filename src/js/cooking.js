@@ -751,7 +751,7 @@ function enhanceCooking(article) {
       {
         id,
         recipeId: article.dataset.recipe,
-        recipeTitle: article.querySelector(".recipe-heading")?.textContent.trim() ?? "",
+        recipeTitle: article.querySelector(".recipe-heading")?.textContent.replace(/\u00AD/g, "").trim() ?? "",
         recipeUrl: location.href.split("#")[0],
         stepLabel: button.dataset.stepLabel,
         phrase: button.dataset.phrase,

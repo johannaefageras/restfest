@@ -35,7 +35,7 @@ async function page({ online = true, book = snapshot(), signedIn = true } = {}) 
     archiveCard: recipe => `<article>${recipe.title}</article>`,
     escapeHtml: value => String(value).replaceAll('<', '&lt;'),
     assetUrl: path => '/' + path, squareIcon: () => '', heartIcon: () => '', faIcon: () => '',
-    mealTypes: { main: { icon: 'main' } }, mealName: () => 'Huvudrätt', recipeTagLabels: {}, showToast() {},
+    mealTypes: { main: { icon: 'main' } }, mealName: () => 'Huvudrätt', recipeTagLabels: {}, headingBreaks: title => title, showToast() {},
   };
   context.window.restfestAccount = {
     signedIn: () => data.signedIn, bookSnapshot: () => data.book, bookStatus: () => data.state,

@@ -11,7 +11,7 @@
           </div>
           <div class="archive-card-body">
             <p class="archive-meal-type"><img src="{{ base }}assets/icons/{{ card.mealIcon }}.svg" alt="" width="20" height="20">{{ card.mealName }}</p>
-            <h3><a class="recipe-main-link" href="{{ base }}recept/{{ card.id }}.html" data-open="{{ card.id }}">{{ card.title }}</a></h3>
+            <h3><a class="recipe-main-link" href="{{ base }}recept/{{ card.id }}.html" data-open="{{ card.id }}">{{ card.title | headingBreaks }}</a></h3>
             <p class="archive-description">{{ card.description }}</p>
             <div class="ingredient-chips">{% for chip in card.chips %}<span>{{ chip }}</span>{% endfor %}</div>
           </div>

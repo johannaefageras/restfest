@@ -24,7 +24,7 @@
           </div>
           <div class="archive-card-body">
             <p class="archive-meal-type"><span class="mini-badge cake-number">Nr {{ cake.nr }}</span><img src="{{ base }}assets/icons/{{ cakeLevels[level] }}.svg" alt="" width="20" height="20">{{ level }}{% if cakeFlags[cake.ursprung] %}<img class="cake-flag" src="{{ base }}assets/icons/flag-{{ cakeFlags[cake.ursprung] }}.svg" alt="{{ cake.ursprung }}" title="{{ cake.ursprung }}" width="22" height="17">{% else %}<span class="cake-flag">{{ cake.ursprung }}</span>{% endif %}</p>
-            <h3><a class="recipe-main-link" href="{{ base }}recept/{{ recipe.id }}.html" data-open="{{ recipe.id }}">{{ recipe.title }}</a></h3>
+            <h3><a class="recipe-main-link" href="{{ base }}recept/{{ recipe.id }}.html" data-open="{{ recipe.id }}">{{ recipe.title | headingBreaks }}</a></h3>
             <p class="archive-description">{{ recipe.description }}</p>
             {%- if cake.delar.length %}
             <div class="ingredient-chips">{% for part in cake.delar %}<span>{{ cakeParts[part].label }}</span>{% endfor %}</div>

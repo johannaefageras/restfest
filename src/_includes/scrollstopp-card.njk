@@ -15,7 +15,7 @@
           </div>
           <div class="archive-card-body">
             <p class="archive-meal-type"><span class="mini-badge">Nr {{ item.data.scrollstopp.nr }}</span>{% if cakeLevels[level] %}<img src="{{ base }}assets/icons/{{ cakeLevels[level] }}.svg" alt="" width="20" height="20">{% endif %}{{ level }}</p>
-            <h3><a class="recipe-main-link" href="{{ base }}recept/{{ recipe.id }}.html" data-open="{{ recipe.id }}">{{ recipe.title }}</a></h3>
+            <h3><a class="recipe-main-link" href="{{ base }}recept/{{ recipe.id }}.html" data-open="{{ recipe.id }}">{{ recipe.title | headingBreaks }}</a></h3>
             <p class="archive-description">{{ recipe.description }}</p>
           </div>
         </article>

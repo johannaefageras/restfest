@@ -375,3 +375,18 @@ test("a build by itself brings the WebP copies of the recipe photos up to date",
     .map(([, copy]) => copy);
   assert.deepEqual(outdated, []);
 });
+
+// Here as it needs a build too. headingBreaks() in src/js/recipes.js marks where a loanword compound
+// may break, in the headings people see; everything else keeps the title as it is.
+test("recipe headings mark where a loanword compound may break, and nothing else does", (t) => {
+  const site = build("");
+  t.after(() => rmSync(site.out, { recursive: true, force: true }));
+  const shy = "­";
+  const recipe = site.read("recept/347-halloncheesecake.html");
+  assert.ok(recipe.includes(`class="recipe-heading">Hallon${shy}cheesecake i rutor</h1>`));
+  for (const page of ["scrollstopp.html", "kategori/fika-och-bakning.html"])
+    assert.ok(site.read(page).includes(`>Hallon${shy}cheesecake i rutor</a></h3>`), page);
+  // The page title, the sharing preview, the structured data and the search index.
+  assert.ok(!recipe.replace(/<h1[\s\S]*?<\/h1>/, "").includes(shy));
+  assert.ok(!site.read("data/recipe-index.js").includes(shy));
+});

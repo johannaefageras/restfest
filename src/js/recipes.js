@@ -71,6 +71,40 @@ const difficultyLevels = {
 // Older saved recipes may still use the former name for the first level.
 const difficultyLabel = (value) => (value === "Lätt" ? "Nybörjare" : value);
 
+// Recipe headings may hyphenate words of 13 letters or more (styles.css), but Chrome's Swedish
+// hyphenation doesn't know English loanwords: it breaks "Halloncheesecake" as "Hallonchee-secake",
+// even where the word would fit, to even out the lines. headingBreaks() puts a soft hyphen where such
+// a compound meets one of these words, and the browser then breaks that word only there:
+// "Hallon-cheesecake". Only the headings people see get it (recipe.njk, the cards and the archive's
+// cards in app.js), so the titles stay as they are everywhere else; the scripts that read a heading's
+// text take it out again. Add a loanword here when a new title breaks in the wrong place.
+const headingLoanwords = [
+  "cheesecake",
+  "tiramisu",
+  "muffins",
+  "dumplings",
+  "churros",
+  "cookie",
+  "brownie",
+  "croissant",
+];
+function headingBreaks(text) {
+  return String(text).replace(/\p{L}{13,}/gu, (word) => {
+    const lower = word.toLowerCase();
+    const loanword = headingLoanwords.find(
+      (candidate) => lower !== candidate && lower.includes(candidate),
+    );
+    if (!loanword) return word;
+    const start = lower.indexOf(loanword);
+    return [start, start + loanword.length]
+      .filter((cut) => cut > 0 && cut < word.length)
+      .reduceRight(
+        (marked, cut) => `${marked.slice(0, cut)}­${marked.slice(cut)}`,
+        word,
+      );
+  });
+}
+
 // Spa, cleaning, pet and gardening recipes live on mer-an-mat.html, not in the food archive.
 const nonFoodMeals = ["spa", "household", "pets", "garden"];
 const isFood = (recipe) =>

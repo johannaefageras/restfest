@@ -145,7 +145,7 @@ function recipeHtml(recipe, data) {
             `<a href="${assetUrl(categoryPath(key))}">${escapeHtml(mealName(key))}</a>`,
         )
         .join(" · ")}</span></p>
-      <h1 id="recipe-title" class="recipe-heading">${escapeHtml(recipe.title)}</h1>
+      <h1 id="recipe-title" class="recipe-heading">${escapeHtml(headingBreaks(recipe.title))}</h1>
       <p class="dialog-intro">${escapeHtml(recipe.description)}</p>
       <p class="recipe-tip new-recipe-note"><b>Nytt och oprovat.</b> Vi skrev receptet ${made} utifrån en kyllista. Ingen har lagat det än, så läs igenom det och lita på din egen känsla för mängder och tider.${promoted}</p>
       <dl class="recipe-facts">${factsHtml(recipe)}</dl>
