@@ -46,7 +46,7 @@ test('the visited shopping page and all core scripts can reopen offline, includi
   const sw = worker();
   await sw.install();
   sw.down(true);
-  for (const path of ['inkopslista.html', 'delad-inkopslista.html', 'lista/', 'data/shopping-departments.js', 'js/shopping-departments.js', 'js/shopping-copy.js', 'js/shopping-copy-links.js', 'js/shopping-share.js', 'js/shopping-copy-view.js', 'css/shopping-share.css', 'receptbok.html', 'nytt-recept.html?id=abc', 'js/recipe-book.js', 'js/account-sync.js', 'js/account.js', 'js/shopping-account.js', 'js/shopping-sync.js', 'js/vendor/supabase.js', 'css/kitchen.css']) {
+  for (const path of ['inkopslista.html', 'delad-inkopslista.html', 'lista/', 'data/shopping-departments.js', 'js/shopping-departments.js', 'js/shopping-copy.js', 'js/shopping-copy-links.js', 'js/shopping-share.js', 'js/shopping-copy-view.js', 'css/shopping-share.css', 'receptbok.html', 'nytt-recept.html?id=abc', 'js/recipe-book.js', 'js/load-more.js', 'js/account-sync.js', 'js/account.js', 'js/shopping-account.js', 'js/shopping-sync.js', 'js/vendor/supabase.js', 'css/kitchen.css']) {
     const response = await sw.fetch(path);
     assert.equal(response.status, 200);
     assert.match(await response.text(), /cached https:\/\/example.test\/site\//);
