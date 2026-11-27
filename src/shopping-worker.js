@@ -1,6 +1,6 @@
 // Offline account pages and visited public recipes. Private API responses stay in per-user browser
 // storage; this worker never caches authentication or API traffic.
-const cacheName = "ofta-bra-efter-account-v25";
+const cacheName = "ofta-bra-efter-account-v26";
 const base = self.registration.scope;
 const files = [
   "inkopslista.html",
@@ -41,8 +41,8 @@ const files = [
   "js/shopping-copy-links.js",
   "js/shopping-share.js",
   "js/shopping-copy-view.js",
-  // The weights the account pages use: Trio for headings, Spot Grotesk for text, Spot Semi for labels.
-  "assets/fonts/TrioGrotesk-Bold.woff2",
+  // The weights the account pages use: Fala for headings, Spot Grotesk for text, Spot Semi for labels.
+  "assets/fonts/Fala-Regular.woff2",
   "assets/fonts/SpotGrotesk-Regular.woff2",
   "assets/fonts/SpotGrotesk-Medium.woff2",
   "assets/fonts/SpotGrotesk-Bold.woff2",

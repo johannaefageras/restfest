@@ -36,10 +36,10 @@ textarea:focus-visible,
 }
 .kitchen-hero h1 {
   margin-top: 12px;
-  /* Two lines beside the bowl: each is about 9.1em wide, and the text column about 9.2 × 5.2vw, so
-     anything up to 5.2vw fits. The line height leaves room for å, ä and ö under a line with g, j or p. */
-  font-size: clamp(36px, 4.4vw, 54px);
-  line-height: 1;
+  /* Two lines beside the bowl, "Vad blir det till" over "middag i kväll?". The longer is about 6.1em
+     wide in Fala and the text column about 47vw, so 5.6vw fits with room to spare. */
+  font-size: clamp(44px, 5.6vw, 72px);
+  line-height: var(--leading-display-lg);
   letter-spacing: var(--track-display-lg);
 }
 .kitchen-hero-intro {
@@ -77,7 +77,7 @@ textarea:focus-visible,
   margin-bottom: 10px;
 }
 .recipe-carousel-heading h2 {
-  font-size: clamp(19px, 10px + 3vw, 30px);
+  font-size: clamp(24px, 14px + 2.5vw, 34px);
   letter-spacing: var(--track-display-sm);
   hyphens: none;
 }
@@ -141,9 +141,9 @@ textarea:focus-visible,
   flex: 0 0 clamp(196px, 24%, 236px);
   scroll-snap-align: start;
 }
-/* The archive's card in short: the photo with its time, and the title. Trio is too wide for the long
-   titles on a card this narrow, so it is Spot Grotesk Bold, as headings below Trio's 20px are and as
-   the week's cards (.match-item) are on phones: three lines at most. */
+/* The archive's card in short: the photo with its time, and the title. The title is 18px, too small
+   for Fala, so it is Spot Grotesk Bold, as headings below Fala's 22px are and as the week's cards
+   (.match-item) are on phones: three lines at most. */
 .recipe-carousel-card {
   display: block;
   height: 100%;
@@ -217,8 +217,8 @@ textarea:focus-visible,
   align-self: end;
 }
 .account-invitation h2 {
-  font-size: clamp(24px, 3.2vw, 34px);
-  line-height: 1.08;
+  font-size: clamp(26px, 3.4vw, 38px);
+  line-height: var(--leading-display-sm);
   letter-spacing: var(--track-display-sm);
 }
 .account-invitation p {
@@ -309,8 +309,8 @@ textarea:focus-visible,
 .step-heading h2,
 .how-heading h2 {
   margin-top: 6px;
-  font-size: clamp(28px, 3vw, 36px);
-  line-height: 1.05;
+  font-size: clamp(30px, 3.4vw, 40px);
+  line-height: var(--leading-display-lg);
   letter-spacing: var(--track-display-lg);
 }
 .step-heading > a {
@@ -363,7 +363,7 @@ textarea:focus-visible,
 .photo-card h3,
 .pantry-panel .pane-heading h3 {
   font-size: 24px;
-  line-height: 1.15;
+  line-height: var(--leading-display-sm);
   letter-spacing: var(--track-display-sm);
 }
 .card-intro {
@@ -638,7 +638,7 @@ textarea:focus-visible,
 .featured-body h3 {
   font-size: clamp(22px, 2.3vw, 28px);
   letter-spacing: var(--track-display-sm);
-  line-height: 1.1;
+  line-height: var(--leading-display-sm);
 }
 
 .featured-description {
@@ -923,7 +923,7 @@ textarea:focus-visible,
   align-items: center;
   gap: 10px;
   font-size: 26px;
-  line-height: 1.15;
+  line-height: var(--leading-display-sm);
   letter-spacing: var(--track-display-sm);
 }
 
@@ -1517,7 +1517,7 @@ details[open] > summary > .fa-chevron-down {
 
 .archive-card-body h3 {
   font-size: 22px;
-  line-height: 1.15;
+  line-height: var(--leading-display-sm);
 }
 .archive-card-body > .archive-meal-type {
   display: flex;
@@ -1582,10 +1582,11 @@ details[open] > summary > .fa-chevron-down {
     width: 135px;
     margin: 0 0 16px;
   }
-  /* Three lines under the bowl; the longest, "Vad blir det", is about 7em wide. */
+  /* Under the bowl the text has the card's width, and at 12vw "Vad blir det till" (about 6.1em)
+     still fits on one line, so the title stays two lines on phones from about 340px. */
   .kitchen-hero h1 {
     margin-top: 10px;
-    font-size: clamp(30px, 9.4vw, 36px);
+    font-size: clamp(36px, 12vw, 52px);
     text-wrap: balance;
   }
   .kitchen-hero-intro {
@@ -1673,8 +1674,8 @@ details[open] > summary > .fa-chevron-down {
 
 .recipe-view .recipe-heading {
   margin: 13px 0 14px;
-  font-size: clamp(28px, 3.4vw, 36px);
-  line-height: 1.08;
+  font-size: clamp(30px, 3.6vw, 40px);
+  line-height: var(--leading-display-lg);
   letter-spacing: var(--track-display-lg);
 }
 
@@ -1762,7 +1763,7 @@ details[open] > summary > .fa-chevron-down {
 .recipe-section h2 {
   margin: 0;
   font-size: 22px;
-  line-height: 1.2;
+  line-height: var(--leading-display-sm);
   letter-spacing: var(--track-display-sm);
 }
 
@@ -2283,25 +2284,24 @@ body:has(#shopping-dialog[open]) {
   }
 }
 
-/* The three-word name is about 8.9em wide in Trio Bold, and the label's padding and border, the
-   buttons and the gaps take about 240px, so below 450px it doesn't fit beside the two buttons at
-   22px. It first shrinks a little (20px at 420px). On phones it would have to go down to 12–14px, so
-   there the label is stacked instead, "Ofta bra" over "efter": the first line is 5.3em wide, which
-   leaves room for 20px type (17px at 320px). The footer's label has its own row and stays on one
-   line. */
+/* The three-word name is about 6.1em wide in Fala, and the label's padding and border, the buttons
+   and the gaps take about 240px, so below about 390px it doesn't fit beside the two buttons at
+   24px. It shrinks with the screen down to 20px, at 360px. Narrower than that, the label is stacked
+   instead, "Ofta bra" over "efter": the first line is about 3.5em wide, which leaves room for 24px
+   type down to 320px. The footer's label has its own row and stays on one line. */
 @media (max-width: 449px) {
   .site-header .brand {
-    font-size: clamp(19px, calc((100vw - 240px) / 8.9), 22px);
+    font-size: clamp(20px, calc((100vw - 240px) / 6.1), 24px);
   }
 }
-@media (max-width: 419px) {
+@media (max-width: 359px) {
   .site-header .brand {
-    font-size: clamp(17px, calc((100vw - 232px) / 5.4), 20px);
+    font-size: clamp(20px, calc((100vw - 232px) / 3.6), 24px);
     line-height: 0.95;
   }
   .site-header .brand > span {
-    max-width: calc(5.6em + 24px);
-    padding: 6px 10px 7px;
+    max-width: calc(3.7em + 24px);
+    padding: 6px 10px;
     white-space: normal;
   }
 }
@@ -2621,8 +2621,8 @@ body:has(#shopping-dialog[open]) {
   width: 56px;
 }
 
-/* The values are Spot Grotesk Bold at text size: Trio isn't used below 20px, and at 20px it was too
-   loud for a row of small facts. */
+/* The values are Spot Grotesk Bold at text size: Fala isn't used below 22px, and at 22px it would be
+   too loud for a row of small facts. */
 .recipe-facts dd {
   margin: 4px 0 0;
   font-size: var(--text-base);
@@ -2763,7 +2763,9 @@ body:has(#shopping-dialog[open]) {
   padding-top: 7px;
   break-after: avoid;
   font-family: var(--font-body);
+  font-weight: var(--font-weight-bold);
   font-feature-settings: var(--spot-features);
+  line-height: 1.15;
   letter-spacing: 0;
 }
 .ingredient-note {
@@ -2784,7 +2786,7 @@ body:has(#shopping-dialog[open]) {
 .recipe-pastas h2 {
   margin: 0 0 8px;
   font-size: 22px;
-  line-height: 1.2;
+  line-height: var(--leading-display-sm);
 }
 .recipe-extra ul {
   margin: 0;
@@ -2857,7 +2859,9 @@ body:has(#shopping-dialog[open]) {
   margin: 6px 0 12px;
   font-size: 18px;
   font-family: var(--font-body);
+  font-weight: var(--font-weight-bold);
   font-feature-settings: var(--spot-features);
+  line-height: 1.15;
   letter-spacing: 0;
 }
 
@@ -3014,12 +3018,13 @@ dialog > .cook-tray {
   border-radius: var(--radius-button);
   background: var(--well);
 }
+/* Fala has no tabular figures, so the time is given room for its widest, "44:44" (about 2.3em), and
+   the row doesn't move as the time counts down. */
 .cook-tray-time {
-  min-width: 4.2ch;
+  min-width: 2.4em;
   font-family: var(--font-display);
   font-feature-settings: var(--display-features);
-  font-size: 26px;
-  font-variant-numeric: tabular-nums;
+  font-size: 28px;
   line-height: 1;
 }
 .cook-tray-info {
@@ -3179,8 +3184,8 @@ dialog > .cook-tray {
 }
 .steps h3 {
   margin-top: 8px;
-  font-size: clamp(22px, 2vw, 26px);
-  line-height: 1.15;
+  font-size: clamp(24px, 2.2vw, 28px);
+  line-height: var(--leading-display-sm);
   letter-spacing: var(--track-display-sm);
   text-wrap: balance;
 }
@@ -3355,7 +3360,7 @@ dialog > .cook-tray {
 }
 .tonight-empty h3 {
   font-size: 22px;
-  line-height: 1.2;
+  line-height: var(--leading-display-sm);
   letter-spacing: var(--track-display-sm);
 }
 .tonight-empty p {
@@ -3387,7 +3392,7 @@ dialog > .cook-tray {
   margin-top: 5px;
   font-size: 24px;
   letter-spacing: var(--track-display-sm);
-  line-height: 1.15;
+  line-height: var(--leading-display-sm);
 }
 .invent-recipe h3 + p {
   margin-top: 6px;
@@ -3551,21 +3556,23 @@ dialog > .cook-tray {
   text-underline-offset: 6px;
 }
 
-/* Everything is in em, so the cut falls in the same place at every size: through the middle of the
-   lowercase letters, which leaves the tops of O, f, t and b whole. The name is three words on one
-   line (about 8.5em wide in Trio Bold at this tracking): at 9.7vw it spans about 83% of the screen on
-   any phone or desktop, up to 132px type on wide screens. */
+/* Everything is in em, so the cut falls in the same place at every size. At line height 0.88, the
+   baseline is 0.79em down the line: the letters (0.7em tall) start 0.09em down, close under the
+   footer's row with no margin between, and the tallest of Fala's alternate f's (0.78em) still clears
+   the top, which overflow cuts too. A 0.49em cut shows the letters' top 0.4em, a little over half.
+   The name is three words on one line (about 5.8em wide in Fala): at 14.2vw it spans about 83% of the
+   screen on any phone or desktop, up to 190px type on wide screens. */
 .footer-mark {
-  height: 0.6em;
-  margin: clamp(8px, 1.5vw, 16px) 0 0;
+  height: 0.49em;
+  margin: 0;
   overflow: hidden;
   color: var(--yellow);
   font-family: var(--font-display);
   font-feature-settings: var(--display-features);
-  font-size: min(9.7vw, 132px);
+  font-size: min(14.2vw, 190px);
   white-space: nowrap;
-  font-weight: var(--font-weight-bold);
-  line-height: 1;
+  font-weight: var(--font-weight-display);
+  line-height: 0.88;
   letter-spacing: var(--track-display-lg);
   text-align: center;
   user-select: none;
@@ -4288,8 +4295,8 @@ a.dialog-save {
 .account-group legend {
   margin-bottom: 18px;
   font-size: 24px;
-  font-weight: var(--font-weight-bold);
-  line-height: 1.15;
+  font-weight: var(--font-weight-display);
+  line-height: var(--leading-display-sm);
   letter-spacing: var(--track-display-sm);
   font-family: var(--font-display);
   font-feature-settings: var(--display-features);
@@ -4445,7 +4452,7 @@ a.dialog-save {
 .account-section > h2 {
   margin-bottom: 18px;
   font-size: 24px;
-  line-height: 1.15;
+  line-height: var(--leading-display-sm);
   letter-spacing: var(--track-display-sm);
 }
 .account-section > .account-hint {
@@ -4495,7 +4502,7 @@ a.dialog-save {
   gap: 18px 28px;
 }
 .account-action-row h2 {
-  font-size: 20px;
+  font-size: 22px;
 }
 .account-action-row .account-hint {
   max-width: 58ch;
@@ -4640,11 +4647,11 @@ a.dialog-save {
 }
 .privacy-text h2 {
   font-size: clamp(26px, 3.2vw, 30px);
-  line-height: 1.1;
+  line-height: var(--leading-display-sm);
   letter-spacing: var(--track-display-sm);
 }
 .privacy-stored .pane-heading h3 {
-  font-size: 21px;
+  font-size: 22px;
 }
 .privacy-text :is(.privacy-section, .privacy-card) p {
   font-size: var(--text-base);
@@ -4897,7 +4904,7 @@ a.dialog-save {
 }
 .guide-card-body h3 {
   font-size: 22px;
-  line-height: 1.15;
+  line-height: var(--leading-display-sm);
 }
 .guide-card-meta {
   margin-top: -3px;
@@ -5024,9 +5031,6 @@ a.dialog-save {
   }
   .guide-card-body {
     padding: 12px 12px 13px;
-  }
-  .guide-card-body h3 {
-    font-size: 20px;
   }
 }
 
@@ -5206,8 +5210,8 @@ a.dialog-save {
 }
 .pasta-view .recipe-heading {
   margin: 13px 0 14px;
-  font-size: clamp(28px, 3.4vw, 36px);
-  line-height: 1.08;
+  font-size: clamp(30px, 3.6vw, 40px);
+  line-height: var(--leading-display-lg);
   letter-spacing: var(--track-display-lg);
 }
 .pasta-alias {
@@ -5468,7 +5472,7 @@ a.dialog-save {
 .cake-place h2 {
   margin: 0;
   font-size: 22px;
-  line-height: 1.2;
+  line-height: var(--leading-display-sm);
 }
 .cake-place-text p {
   margin: 8px 0 8px;
@@ -5544,7 +5548,6 @@ a.dialog-save {
   .cake-place h2 {
     grid-area: heading;
     margin-bottom: 6px;
-    font-size: 20px;
   }
   .cake-place-art {
     grid-area: art;
@@ -5590,7 +5593,7 @@ a.dialog-save {
 .recipe-tiktok h2 {
   margin: 0;
   font-size: 22px;
-  line-height: 1.2;
+  line-height: var(--leading-display-sm);
 }
 .recipe-tiktok-text p {
   margin: 8px 0 16px;

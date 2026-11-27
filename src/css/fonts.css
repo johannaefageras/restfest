@@ -1,62 +1,13 @@
-/* TRIO GROTESK */
+/* FALA */
 
+/* One style: Regular, which is drawn as heavy as a bold. */
 @font-face {
-  font-family: "Trio Grotesk";
+  font-family: "Fala";
   src:
-    url("../assets/fonts/TrioGrotesk-Regular.woff2") format("woff2"),
-    url("../assets/fonts/TrioGrotesk-Regular.woff") format("woff");
+    url("../assets/fonts/Fala-Regular.woff2") format("woff2"),
+    url("../assets/fonts/Fala-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Trio Grotesk";
-  src:
-    url("../assets/fonts/TrioGrotesk-RegularItalic.woff2") format("woff2"),
-    url("../assets/fonts/TrioGrotesk-RegularItalic.woff") format("woff");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Trio Grotesk";
-  src:
-    url("../assets/fonts/TrioGrotesk-Medium.woff2") format("woff2"),
-    url("../assets/fonts/TrioGrotesk-Medium.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Trio Grotesk";
-  src:
-    url("../assets/fonts/TrioGrotesk-MediumItalic.woff2") format("woff2"),
-    url("../assets/fonts/TrioGrotesk-MediumItalic.woff") format("woff");
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Trio Grotesk";
-  src:
-    url("../assets/fonts/TrioGrotesk-Bold.woff2") format("woff2"),
-    url("../assets/fonts/TrioGrotesk-Bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Trio Grotesk";
-  src:
-    url("../assets/fonts/TrioGrotesk-BoldItalic.woff2") format("woff2"),
-    url("../assets/fonts/TrioGrotesk-BoldItalic.woff") format("woff");
-  font-weight: 700;
-  font-style: italic;
   font-display: swap;
 }
 

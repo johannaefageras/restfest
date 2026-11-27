@@ -1,5 +1,10 @@
-/* Type: Trio Grotesk for headings, Spot Grotesk for text, Spot Semi for labels. The faces are
-   registered in fonts.css; the roles, sizes and tracking follow "Typography Guidelines.md". */
+/* Type: Fala for headings, Spot Grotesk for text, Spot Semi for labels. The faces are registered in
+   fonts.css.
+   Fala is a hand-lettered unicase: capitals and small letters are both drawn at capital height
+   (0.7em), with next to nothing below the line, and the accents of Å, Ä and Ö reach 0.86em. So it
+   looks bigger than a usual face at the same size, and it is narrow: about 0.6 times Trio Grotesk
+   Bold, the face it replaced. That leaves room for bigger titles, and lets it take a tighter line
+   height than a face with ascenders and descenders. */
 
 /* Spot has no ⅓ or ⅔, which scaled amounts use (app.js). Borrow them from a system font, scaled down
    to the height of Spot's figures, so the fallback doesn't stand taller than the digits beside it. */
@@ -10,20 +15,26 @@
   size-adjust: 82%;
 }
 :root {
-  --font-display: "Trio Grotesk", system-ui, sans-serif;
+  --font-display: "Fala", system-ui, sans-serif;
   --font-body: "Spot Grotesk", "Spot Fractions", system-ui, sans-serif;
   --font-label: "Spot Semi", "Spot Fractions", ui-monospace, monospace;
-  /* Only weights with a real file: there is no 600 or 900, and font-synthesis is off. Trio headings
-     are Bold. In Spot, Medium is the emphasis (buttons, strong, chosen options); Bold is kept for
-     headings too small for Trio. */
+  /* Only weights with a real file: there is no 600 or 900, and font-synthesis is off. Fala has
+     one weight, Regular, which is already as heavy as a bold. In Spot, Medium is the emphasis
+     (buttons, strong, chosen options); Bold is kept for headings too small for Fala. */
+  --font-weight-display: 400;
   --font-weight-body: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
-  /* Trio was drawn for small sizes and is loosely spaced, so it is tightened as it grows. Spot
-     Grotesk is never tracked; Spot Semi only in capitals. */
-  --track-display-lg: -0.045em; /* Trio from 36px */
-  --track-display-sm: -0.0225em; /* Trio at 20–32px */
+  /* Fala is spaced for display, so big titles keep its own spacing. Every letter is capital height,
+     so smaller headings are opened a little, as capitals are. Spot Grotesk is never tracked; Spot
+     Semi only in capitals. */
+  --track-display-lg: 0; /* Fala from 28px */
+  --track-display-sm: 0.015em; /* Fala at 22–26px, and headings that grow from there */
   --track-label: 0.08em; /* Spot Semi in capitals */
+  /* Fala's line heights. With almost nothing below the line, 1.04 still leaves room for Å, Ä and Ö
+     under a line above. Smaller headings get more room between lines. */
+  --leading-display-lg: 1.04; /* Fala from 28px */
+  --leading-display-sm: 1.1; /* Fala at 22–26px, and headings that grow from there */
   /* Spot is small on its body (x-height 0.44em), so text is set larger than the numbers suggest. */
   --text-base: 17px; /* running text */
   --text-lead: calc(var(--text-base) + 3px); /* intros under a page title */
@@ -35,12 +46,15 @@
   /* OpenType features. font-feature-settings replaces the whole list, so each role names all of its
      features. Spot uses its alternate A (ss01, rounded at the top) and & (ss02) everywhere, in both
      Spot Grotesk and Spot Semi; take the two tags out of the first two lines to go back to the plain
-     forms. In Trio, ss01 turns every digit into a circled numeral, so anything set in Trio must use
-     --display-features: the root's list is inherited. */
+     forms. Anything set in Fala uses --display-features, since the root's list is inherited. */
   --spot-features: "kern", "ss01", "ss02";
   /* Capitals also get capital-height punctuation and accents (Å, Ä, Ö). */
   --caps-features: "kern", "case", "ss01", "ss02";
-  --display-features: "kern", "liga";
+  /* Fala's calt swaps between up to seven drawings of each letter, so that repeated letters don't
+     look stamped. It is on by default, but Chrome turns it off in letter-spaced text unless it is
+     named. Fala's two discretionary ligatures (dlig) stay off: they swap the d of "de" and "do" for
+     a tall, lowercase d joined to the next letter, so "dold" would get two different d's. */
+  --display-features: "kern", "calt";
   /* Colours. css/dark.css swaps them for the dark theme. Neutrals first: */
   --paper: #fff; /* the page */
   --surface: #fff; /* buttons, fields, cards, menus and dialogs on the page */
@@ -154,21 +168,23 @@ h3,
 p {
   margin: 0;
 }
-/* Headings are Trio Grotesk Bold, tightened by size. Trio stays at 20px and above; smaller headings
-   (h4 and down, and the h2/h3 that set --font-body themselves) are Spot Grotesk Bold. */
+/* Headings are Fala, spaced and leaded by size. Fala stays at 22px and above: below that its drawn
+   irregularities turn from character into noise, so smaller headings (h4 and down, and the h2/h3
+   that set --font-body themselves) are Spot Grotesk Bold. */
 h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-display);
   font-feature-settings: var(--display-features);
   letter-spacing: var(--track-display-sm);
   text-wrap: balance;
   overflow-wrap: break-word;
 }
-/* Trio is wide, and Swedish compounds are long: "Champinjonbourguignon" is wider than a phone at any
-   heading size. Words of 13 letters or more may be hyphenated; without support for the limit, a word
-   that doesn't fit is just broken (overflow-wrap above), since plain auto would hyphenate short words. */
+/* Fala is narrow, but Swedish compounds are long: "Champinjonbourguignon" is about 9.7em, wider than
+   a phone from about 36px. Words of 13 letters or more may be hyphenated; without support for the
+   limit, a word that doesn't fit is just broken (overflow-wrap above), since plain auto would
+   hyphenate short words. */
 @supports (hyphenate-limit-chars: 13 4 4) {
   h1,
   h2,
@@ -179,11 +195,11 @@ h3 {
 }
 h2 {
   font-size: 26px;
-  line-height: 1.15;
+  line-height: var(--leading-display-sm);
 }
 h3 {
   font-size: 22px;
-  line-height: 1.15;
+  line-height: var(--leading-display-sm);
 }
 h4,
 h5,
@@ -227,16 +243,17 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-  font-weight: var(--font-weight-bold);
-  font-size: 24px;
+  font-weight: var(--font-weight-display);
+  font-size: 27px;
   letter-spacing: var(--track-display-sm);
   line-height: 1;
   font-family: var(--font-display);
   font-feature-settings: var(--display-features);
 }
+/* At line height 1, Fala's letters sit in the middle of the line, so the padding is even. */
 .brand > span {
   display: block;
-  padding: 8px 13px 9px;
+  padding: 8px 13px;
   background: var(--yellow);
   border: 2px solid var(--ink);
   border-radius: 6px 10px 7px 11px;
@@ -306,7 +323,7 @@ a:focus-visible {
   font-family: var(--font-label);
   font-size: var(--text-tag);
   font-weight: var(--font-weight-medium);
-  /* A counter often sits inside a heading, and must not take its tightening. */
+  /* A counter often sits inside a heading, and must not take its spacing. */
   letter-spacing: 0;
   padding-inline: 5px;
   line-height: 1;
@@ -345,11 +362,11 @@ a:focus-visible {
 .greeting .eyebrow {
   margin-bottom: 16px;
 }
-/* Page titles. The longest one-word title, "Receptarkivet.", is about 9em wide, so 8.6vw keeps it
-   inside the page on every phone. The line height leaves room for å, ä and ö under g, j and p. */
+/* Page titles. The longest one-word title, "Receptarkivet.", is about 5.8em wide in Fala, so 10vw
+   leaves it plenty of room on every phone. */
 h1 {
-  font-size: clamp(30px, 8.6vw, 44px);
-  line-height: 1.04;
+  font-size: clamp(32px, 10vw, 48px);
+  line-height: var(--leading-display-lg);
   letter-spacing: var(--track-display-lg);
 }
 
@@ -425,7 +442,7 @@ h1 {
 }
 .pane-heading h2 {
   font-size: 24px;
-  line-height: 1.15;
+  line-height: var(--leading-display-sm);
   letter-spacing: var(--track-display-sm);
 }
 .button {
@@ -510,8 +527,8 @@ h1 {
 }
 .recipe-title {
   font-size: 22px;
-  font-weight: var(--font-weight-bold);
-  line-height: 1.15;
+  font-weight: var(--font-weight-display);
+  line-height: var(--leading-display-sm);
   letter-spacing: var(--track-display-sm);
   padding-right: 38px;
   max-width: 455px;
@@ -600,7 +617,7 @@ h1 {
 .empty-saved h3 {
   font-size: 22px;
   letter-spacing: var(--track-display-sm);
-  line-height: 1.2;
+  line-height: var(--leading-display-sm);
 }
 .empty-saved > p {
   font-size: var(--text-base);
@@ -703,7 +720,7 @@ dialog::backdrop {
 .dialog-main h2 {
   font-size: 28px;
   letter-spacing: var(--track-display-sm);
-  line-height: 1.1;
+  line-height: var(--leading-display-lg);
   margin-top: 13px;
   margin-bottom: 14px;
 }
@@ -781,16 +798,18 @@ dialog::backdrop {
   top: 0;
   background: var(--yellow);
   border-radius: 3px;
-  /* One width for every number, wide enough for two digits in Trio (10 is the widest, about 20px). */
+  /* One width for every number, wide enough for two digits in Fala (10 is about 14px at 16px). */
   width: 24px;
   height: 21px;
   display: grid;
   place-items: center;
-  /* Trio, so its features (--display-features): the inherited ss01 would circle the digits. */
+  /* Fala's hand-drawn figures, like the name on the logo's label: one or two figures keep their
+     shape at a size where the words of a heading wouldn't. */
   font-family: var(--font-display);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-display);
   font-feature-settings: var(--display-features);
-  font-size: var(--text-tag);
+  font-size: 16px;
+  line-height: 1;
   color: var(--ink);
 }
 .recipe-tip {
@@ -881,7 +900,7 @@ dialog::backdrop {
     gap: 12px;
   }
   .brand {
-    font-size: 22px;
+    font-size: 24px;
   }
   .site-header nav {
     display: none;
@@ -970,9 +989,6 @@ dialog::backdrop {
   .empty-saved {
     padding: 25px 17px;
   }
-  .empty-saved h3 {
-    font-size: 20px;
-  }
   dialog {
     width: calc(100% - 28px);
     max-height: 92vh;
@@ -999,7 +1015,7 @@ dialog::backdrop {
   .dialog-main h2 {
     font-size: 26px;
     margin-top: 13px;
-    line-height: 1.1;
+    line-height: var(--leading-display-sm);
   }
   .dialog-save {
     gap: 6px;
@@ -1023,7 +1039,7 @@ dialog::backdrop {
     padding-inline: 18px;
   }
   .brand {
-    font-size: 20px;
+    font-size: 22px;
   }
   .saved-nav {
     padding-inline: 6px;
