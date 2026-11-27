@@ -189,4 +189,9 @@ test('long card grids ask to be paged, and the page is ready for it', () => {
   assert.ok(base.indexOf('js/load-more.js') < base.indexOf('js/app.js'));
   assert.match(read('css/kitchen.css'), /\.js \.recipe-grid\[data-load-more\]:not\(\[data-paging\]\) > :nth-child\(n \+ 13\)/);
   assert.match(read('js/app.js'), /querySelectorAll\("\[data-load-more\]"\)\.forEach\(\(grid\) => pagedGrid\(grid\)\.update\(\)\)/);
+  assert.match(read('pages/pastasorter.njk'), /id="pasta-grid" class="recipe-grid pasta-grid" data-load-more="sorter"/);
+  assert.match(read('pages/tartor.njk'), /id="cake-grid" class="recipe-grid" data-load-more="tårtor"/);
+  assert.match(read('pages/tartor.njk'), /cake-leftovers[\s\S]*class="recipe-grid" data-load-more="recept"/);
+  assert.match(read('js/pasta.js'), /pagedGrid\(grid\)\.update\(JSON\.stringify\(chosen\)\)/);
+  assert.match(read('js/tartor.js'), /pagedGrid\(grid\)\.update\(JSON\.stringify\(chosen\)\)/);
 });

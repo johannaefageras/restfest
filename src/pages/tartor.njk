@@ -107,7 +107,7 @@ scripts: [tartor.js]
           </details>
         </div>
       </div>
-      <div id="cake-grid" class="recipe-grid">
+      <div id="cake-grid" class="recipe-grid" data-load-more="tårtor">
         {%- for item in collections.cakes %}
         {{ cakeCard(item, '') }}
         {%- endfor %}
@@ -124,7 +124,7 @@ scripts: [tartor.js]
     <section class="recipes-section archive-recipes cake-leftovers" aria-labelledby="cake-leftovers-title">
       <h2 id="cake-leftovers-title" class="eyebrow">Rester i finkläder</h2>
       <p class="cake-leftovers-intro">Tårtbak lämnar ofta något efter sig: äggulor, äggvitor eller en sista bit. Under Dekoration och servering står vilken tårta det passar till, och de här recepten i arkivet är gjorda för just sådana rester.</p>
-      <div class="recipe-grid">
+      <div class="recipe-grid" data-load-more="recept">
         {%- for item in leftovers %}
         {{ recipeCard(item.data.recipe.card, '') }}
         {%- endfor %}

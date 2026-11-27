@@ -4950,6 +4950,22 @@ a.dialog-save {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+/* With more sorts to load (load-more.js), the faded row sits right under the cards and the space
+   goes under the button instead. Four across, the faded row shows four. */
+.archive-page .recipe-grid.pasta-grid:has(+ .archive-more:not([hidden])) {
+  padding-bottom: 0;
+}
+.recipe-grid.pasta-grid + .archive-more {
+  margin-bottom: 44px;
+}
+.archive-page .archive-preview.pasta-grid {
+  padding-bottom: 0;
+}
+@media (min-width: 1100px) {
+  .archive-preview.pasta-grid > :nth-child(4) {
+    display: flex;
+  }
+}
 
 /* The drawings are yellow, so their grounds are pink, lavender and sage, not the archive's butter. */
 .pasta-card:nth-child(3n + 1) .pasta-card-art {

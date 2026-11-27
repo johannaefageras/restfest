@@ -89,6 +89,9 @@
     reset.hidden = !filtered;
     empty.hidden = shown > 0;
     grid.hidden = shown === 0;
+    // 12 at a time (load-more.js). New choices start again at 12; the same ones, e.g. when Back
+    // runs the filter again, keep the cards already loaded.
+    pagedGrid(grid).update(JSON.stringify(chosen));
 
     // The choices go into the address in place of the old ones, so Back leaves the page as usual.
     const params = new URLSearchParams();
@@ -208,6 +211,8 @@
     document.body.style.overflow = "";
     document.title = previousTitle;
     const card = bySlug.get(open);
+    // Opened from the address, focus goes to the sort's card: load the list down to it first.
+    if (!opener?.isConnected && card) pagedGrid(grid).revealThrough(card);
     (opener?.isConnected ? opener : card?.querySelector("a"))?.focus({ preventScroll: true });
     open = null;
     opener = null;

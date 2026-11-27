@@ -114,7 +114,7 @@ scripts: [pasta.js]
         <button id="pasta-reset" class="text-button pasta-reset" type="button" data-pasta-clear hidden>Rensa filtren</button>
         {{- picker('region', 'Region', 'Alla regioner', 'globe', regionOptions, true) }}
       </div>
-      <div id="pasta-grid" class="recipe-grid pasta-grid">
+      <div id="pasta-grid" class="recipe-grid pasta-grid" data-load-more="sorter">
         {%- for pasta in collections.pastas %}
         {{ pastaCard(pasta, '') }}
         {%- endfor %}
