@@ -1310,7 +1310,7 @@ details[open] > summary > .fa-chevron-down {
 .recipe-grid > [data-paged-out] {
   display: none !important;
 }
-.js .recipe-grid[data-load-more]:not([data-paging]) > :nth-child(n + 13) {
+.paged-grids .recipe-grid[data-load-more]:not([data-paging]) > :nth-child(n + 13) {
   display: none;
 }
 /* The faded row holds up to four copies, for the four-across pasta grid; three-across grids show three.

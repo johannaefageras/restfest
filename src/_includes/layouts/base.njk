@@ -75,9 +75,10 @@
 <!doctype html>
 <html lang="{{ site.language | escape }}"{% if base %} data-base="{{ base }}"{% endif %}>
 <head>
-  <script>document.documentElement.classList.add('js')</script>
+  <script>document.documentElement.classList.add('paged-grids'); addEventListener('load', () => { if (document.querySelector('[data-load-more]:not([data-paging])')) document.documentElement.classList.remove('paged-grids') })</script>
   {#- With JavaScript on, CSS hides cards past the 12th in long grids (data-load-more) until js/load-more.js
-      takes over, so those pages don't jump from every card to 12 as they load. #}
+      takes over, so those pages don't jump from every card to 12 as they load. If a grid still has no
+      pager when the page has loaded (a script failed), the class goes and every card shows again. #}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {#- The browser bar: the page colour of each theme (--paper in styles.css and dark.css). The first

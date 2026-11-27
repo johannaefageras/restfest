@@ -199,15 +199,38 @@ test('long card grids ask to be paged, and the page is ready for it', () => {
   const read = path => readFileSync(new URL(`../src/${path}`, import.meta.url), 'utf8');
   assert.match(read('_includes/layouts/listing.njk'), /class="recipe-grid" data-load-more="recept"/);
   const base = read('_includes/layouts/base.njk');
-  assert.match(base, /<head>\s*<script>document\.documentElement\.classList\.add\('js'\)<\/script>/);
+  assert.match(base, /<head>\s*<script>document\.documentElement\.classList\.add\('paged-grids'\)/);
   assert.ok(base.indexOf('js/load-more.js') < base.indexOf('js/app.js'));
-  assert.match(read('css/kitchen.css'), /\.js \.recipe-grid\[data-load-more\]:not\(\[data-paging\]\) > :nth-child\(n \+ 13\)/);
+  assert.match(read('css/kitchen.css'), /\.paged-grids \.recipe-grid\[data-load-more\]:not\(\[data-paging\]\) > :nth-child\(n \+ 13\)/);
   assert.match(read('js/app.js'), /querySelectorAll\("\[data-load-more\]"\)\.forEach\(\(grid\) => pagedGrid\(grid\)\.update\(\)\)/);
   assert.match(read('pages/pastasorter.njk'), /id="pasta-grid" class="recipe-grid pasta-grid" data-load-more="sorter"/);
   assert.match(read('pages/tartor.njk'), /id="cake-grid" class="recipe-grid" data-load-more="tårtor"/);
   assert.match(read('pages/tartor.njk'), /cake-leftovers[\s\S]*class="recipe-grid" data-load-more="recept"/);
   assert.match(read('js/pasta.js'), /pagedGrid\(grid\)\.update\(JSON\.stringify\(chosen\)\)/);
   assert.match(read('js/tartor.js'), /pagedGrid\(grid\)\.update\(JSON\.stringify\(chosen\)\)/);
+});
+
+test('if the pager never takes over, every card shows once the page has loaded', () => {
+  const base = readFileSync(new URL('../src/_includes/layouts/base.njk', import.meta.url), 'utf8');
+  const script = base.match(/<head>\s*<script>([\s\S]*?)<\/script>/)[1];
+  // Runs the head script; `pending` says whether a long grid is still waiting for its pager at load.
+  const run = pending => {
+    const classes = new Set();
+    let onLoad = () => {};
+    const context = vm.createContext({
+      document: {
+        documentElement: { classList: { add: name => classes.add(name), remove: name => classes.delete(name) } },
+        querySelector: selector => (selector === '[data-load-more]:not([data-paging])' && pending ? {} : null),
+      },
+      addEventListener: (type, listener) => { if (type === 'load') onLoad = listener; },
+    });
+    vm.runInContext(script, context);
+    const before = classes.has('paged-grids');
+    onLoad();
+    return { before, after: classes.has('paged-grids') };
+  };
+  assert.deepEqual(run(false), { before: true, after: true });
+  assert.deepEqual(run(true), { before: true, after: false });
 });
 
 test('the faded row counts only cards, not the spacers, when it decides how many copies fit', () => {
