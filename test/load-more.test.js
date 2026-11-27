@@ -195,3 +195,9 @@ test('long card grids ask to be paged, and the page is ready for it', () => {
   assert.match(read('js/pasta.js'), /pagedGrid\(grid\)\.update\(JSON\.stringify\(chosen\)\)/);
   assert.match(read('js/tartor.js'), /pagedGrid\(grid\)\.update\(JSON\.stringify\(chosen\)\)/);
 });
+
+test('the recipe book flattens only its own grid, so its faded row keeps the gap above it', () => {
+  const css = readFileSync(new URL('../src/css/kitchen.css', import.meta.url), 'utf8');
+  assert.match(css, /\.book-page \[data-book-grid\] \{\s*margin-top: 0;\s*padding-top: 0;\s*border-top: 0;/);
+  assert.doesNotMatch(css, /\.book-page \.recipe-grid \{/);
+});

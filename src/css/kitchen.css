@@ -4022,7 +4022,8 @@ body:has(> :is(.book-page, .shopping-page)) > :is(.site-header, .site-footer) {
 .book-status:empty {
   display: none;
 }
-.book-page .recipe-grid {
+/* Only the book's own grid: its faded row (load-more.js) keeps the archive's gap above it. */
+.book-page [data-book-grid] {
   margin-top: 0;
   padding-top: 0;
   border-top: 0;
