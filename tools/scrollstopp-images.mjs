@@ -9,11 +9,11 @@
 // An original that isn't exactly 9:16 is cropped in the middle first (tiktokCrop), and every original
 // is then scaled to TikTok's 1080 × 1920. That adds no detail, but TikTok gets its own format and
 // crops nothing itself. The stamp, "oftabraefter.se", is design/scrollstopp-stamp.png
-// (tools/scrollstopp-stamp.mjs), laid 48 px from the left and 160 px from the top: below TikTok's
-// tabs, away from its buttons on the right and the caption at the bottom.
+// (tools/scrollstopp-stamp.mjs), centred 210 px from the top: below TikTok's tabs, away from its
+// buttons on the right and the caption at the bottom.
 //
-// Images whose files are newer than both their original and the stamp are skipped, so a new stamp
-// makes them all again. Every build runs this first, beside tools/photos.mjs (`eleventy.before` in
+// Images whose files are newer than their original, the stamp and this script are skipped, so a new
+// stamp, or a change here such as the stamp's place, makes them all again. Every build runs this first, beside tools/photos.mjs (`eleventy.before` in
 // eleventy.config.js); `node tools/scrollstopp-images.mjs` runs it by itself.
 import sharp from 'sharp';
 import {mkdir, readdir, stat} from 'node:fs/promises';
@@ -22,7 +22,7 @@ import {fileURLToPath} from 'node:url';
 import {scrollstoppFiles, tiktokCrop} from '../lib/scrollstopp.js';
 
 const size = {width: 1080, height: 1920};
-const stampAt = {left: 48, top: 160};
+const stampTop = 210;
 const shownWidth = 540;
 const cardWidth = 600;
 
@@ -47,13 +47,15 @@ export async function makeScrollstoppImages({
   stamp = 'design/scrollstopp-stamp.png'
 } = {}) {
   const files = (await readdir(input)).filter(file => file.endsWith('.png'));
-  const stamped = (await stat(stamp)).mtimeMs;
+  const {width: stampWidth} = await sharp(stamp).metadata();
+  const stampAt = {left: Math.round((size.width - stampWidth) / 2), top: stampTop};
+  const changed = Math.max((await stat(stamp)).mtimeMs, (await stat(fileURLToPath(import.meta.url))).mtimeMs);
   await mkdir(output, {recursive: true});
   let made = 0;
   await Promise.all(files.map(async file => {
     const source = path.join(input, file);
     const {save, shown, card} = outputs(path.parse(file).name, output);
-    const since = Math.max((await stat(source)).mtimeMs, stamped);
+    const since = Math.max((await stat(source)).mtimeMs, changed);
     if (await upToDate([save, shown, card], since)) return;
 
     const {width, height} = await sharp(source).metadata();

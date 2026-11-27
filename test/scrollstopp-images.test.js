@@ -66,10 +66,12 @@ test('the stamp is on the saved and shown images but not the card', async t => {
   const {input, output, stamp, made} = await folders(t);
 
   await makeScrollstoppImages({input, output, stamp});
-  // The stamp's top left corner is 48 px from the left and 160 px from the top of the 1080 px image.
-  assert.ok(isGreen(await pixel(made('photo.jpg'), 60, 170)));
-  assert.ok(isGreen(await pixel(made('photo-540.webp'), 30, 85)));
-  assert.ok(isBlue(await pixel(made('photo-card.webp'), 33, 94)));
+  // The 100 px wide stamp is centred, (1080 − 100) / 2 = 490 px from the left, and 210 px from the
+  // top of the 1080 px image; its middle is at (540, 230).
+  assert.ok(isGreen(await pixel(made('photo.jpg'), 540, 230)));
+  assert.ok(isBlue(await pixel(made('photo.jpg'), 60, 170)));
+  assert.ok(isGreen(await pixel(made('photo-540.webp'), 270, 115)));
+  assert.ok(isBlue(await pixel(made('photo-card.webp'), 300, 128)));
 });
 
 test('outputs newer than the source and the stamp are skipped', async t => {
@@ -87,6 +89,17 @@ test('a newer stamp makes them again', async t => {
   await makeScrollstoppImages({input, output, stamp});
   // The source is older than the outputs, and the stamp, just saved, is newer.
   utimesSync(source, new Date(0), new Date(0));
+  outputNames.forEach(name => utimesSync(made(name), new Date(1_000_000), new Date(1_000_000)));
+
+  assert.deepEqual(await makeScrollstoppImages({input, output, stamp}), {made: 1, upToDate: 0});
+});
+
+test('a change to the image script, such as the stamp\'s place, makes them again', async t => {
+  const {input, output, stamp, source, made} = await folders(t);
+  await makeScrollstoppImages({input, output, stamp});
+  // The source and the stamp are older than the outputs, and tools/scrollstopp-images.mjs is newer.
+  utimesSync(source, new Date(0), new Date(0));
+  utimesSync(stamp, new Date(0), new Date(0));
   outputNames.forEach(name => utimesSync(made(name), new Date(1_000_000), new Date(1_000_000)));
 
   assert.deepEqual(await makeScrollstoppImages({input, output, stamp}), {made: 1, upToDate: 0});
