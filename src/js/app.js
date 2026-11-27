@@ -61,7 +61,7 @@ let savedOnly =
   new URLSearchParams(location.search).get("vy") === "sparade";
 let revealedSavedFilters = false;
 let archiveSortChosen = false;
-const archivePageSize = 12;
+const archivePageSize = loadMorePageSize;
 const archiveDietTags = [
   "Lactose free",
   "Egg free",
@@ -941,7 +941,7 @@ function renderArchivePage(append = false) {
         .map(({ recipe, match }) => archiveCard(recipe, match))
         .join("")
     : "";
-  $("#archive-page-count").textContent = `${shown} av ${archiveItems.length} recept`;
+  $("#archive-page-count").textContent = loadMoreCount(shown, archiveItems.length, "recept");
   const label = savedOnly
     ? `${archiveItems.length === 1 ? "sparat" : "sparade"} recept`
     : "recept";
@@ -959,10 +959,7 @@ function loadMoreArchiveRecipes(event) {
   archiveVisibleCount += archivePageSize;
   renderArchivePage(true);
 
-  const link = firstNew?.querySelector(".recipe-main-link");
-  link?.focus({ preventScroll: true });
-  // Pointer activation keeps the viewport still. Keyboard activation keeps focus in view.
-  if (event.detail === 0) link?.scrollIntoView({ block: "nearest", behavior: "instant" });
+  focusFirstNew(firstNew, event);
 }
 
 function renderArchive() {

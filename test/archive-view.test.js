@@ -7,6 +7,8 @@ import test from 'node:test';
 import { taxonomy } from '../lib/taxonomy.js';
 
 const source = readFileSync(new URL('../src/js/app.js', import.meta.url), 'utf8');
+// The archive's page size, count and focus come from the shared pager, loaded before app.js.
+const loadMore = readFileSync(new URL('../src/js/load-more.js', import.meta.url), 'utf8');
 const state = source.slice(source.indexOf('const archivePageSize ='), source.indexOf('let activeRecipe ='));
 const archive = source.slice(source.indexOf('// The archive is for food.'), source.indexOf('// mer-an-mat.html:'));
 
@@ -67,7 +69,7 @@ function page(count = 29) {
     document: { querySelectorAll: () => [] },
     window: { matchMedia: () => ({ matches: false }) },
   });
-  vm.runInContext(state + archive, context);
+  vm.runInContext([loadMore, state, archive].join('\n'), context);
   return {
     $, context, grid: $('#recipe-grid'), preview: $('#archive-preview'),
     render: () => context.renderArchive(),
@@ -82,6 +84,7 @@ test('the archive starts with 12 usable recipes and previews only the next three
   assert.deepEqual(view.preview.children.map(card => card.id), ['13-recipe', '14-recipe', '15-recipe']);
   assert.equal(view.$('#archive-more').hidden, false);
   assert.equal(view.$('#archive-results').textContent, 'Visar 12 av 29 recept');
+  assert.equal(view.$('#archive-page-count').textContent, '12 av 29 recept');
 });
 
 test('loading reuses the preview cards, preserves the viewport on click and clears the fade at the end', () => {
