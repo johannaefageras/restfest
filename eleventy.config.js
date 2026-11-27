@@ -41,7 +41,7 @@ import {shoppingDepartmentNames} from './lib/shopping-departments.js';
 import {pageStructuredData} from './lib/metadata.js';
 import {makePhotos} from './tools/photos.mjs';
 import {makeScrollstoppImages} from './tools/scrollstopp-images.mjs';
-import {sortScrollstopp} from './lib/scrollstopp.js';
+import {scrollstoppFiles, sortScrollstopp} from './lib/scrollstopp.js';
 import {baseRecipes, cakeChoices, cakeNeighbours, cakeRegion, cakesMadeWith, flags as cakeFlags, leftoverRecipes, levels as cakeLevels, parts as cakeParts, sortCakes} from './lib/cakes.js';
 import {cookingTime, doughs, filterDoughs, forms, freshPastaRecipe, pastaChoices, pastaGround, pastaNeighbours, pastasBySlug, pastasMadeWith, sauceLabels, sauces, sortPastas} from './lib/pasta.js';
 
@@ -144,6 +144,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData('cakeFlags', cakeFlags);
   eleventyConfig.addGlobalData('cakeBaseRecipes', baseRecipes());
   eleventyConfig.addGlobalData('cakeLeftovers', leftoverRecipes);
+
+  // For Scrollstopp (lib/scrollstopp.js): a recipe's TikTok files, for its page and its card.
+  eleventyConfig.addFilter('scrollstoppFiles', scrollstoppFiles);
 
   // Keeps a range like "1–3" or "15–20" on one line: a word joiner (U+2060) either side of the dash
   // stops the browser breaking there. For the narrow boxes under a recipe's description (recipe.njk).

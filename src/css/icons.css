@@ -63,6 +63,9 @@
 .fa-chevron-down::before {
   content: "\f078";
 }
+.fa-download::before {
+  content: "\f019";
+}
 .fa-heart::before {
   content: "\f004";
 }

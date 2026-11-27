@@ -188,6 +188,22 @@ layout: layouts/base.njk
           <ul role="list">{% for item in section.items %}<li>{{ item.html | safe }}</li>{% endfor %}</ul>
         </section>
         {%- endfor %}
+        {#- A Scrollstopp recipe (lib/scrollstopp.js): its TikTok image with the site's address, to save and
+            post. It comes after "Dekoration och servering", since you decorate before you take the
+            picture. The link downloads the JPEG by itself; tiktok-save.js opens the share sheet on phones
+            and sets the link's address from the site root, as the dialog runs it before its address
+            changes to this page's. #}
+        {%- if scrollstopp %}
+        {%- set tiktok = recipe.id | scrollstoppFiles %}
+        <section class="recipe-tiktok" aria-labelledby="tiktok-heading">
+          <img src="{{ base }}{{ tiktok.shown }}" alt="{{ recipe.alt }}, i TikTok-format" width="540" height="960" loading="lazy" decoding="async">
+          <div class="recipe-tiktok-text">
+            <h2 id="tiktok-heading">Bilden till ditt inlägg</h2>
+            <p>Spara bilden och använd den när du berättar om receptet på TikTok.</p>
+            <a class="button primary" href="{{ base }}{{ tiktok.save }}" download="scrollstopp-{{ recipe.id }}.jpg" data-tiktok-save="{{ tiktok.save }}"><i class="fas fa-download" aria-hidden="true"></i> Spara bilden</a>
+          </div>
+        </section>
+        {%- endif %}
         {%- if not recipe.badge %}
         <details class="recipe-measurements">
           <summary>Mått och ugnstemperaturer<i class="fas fa-chevron-down" aria-hidden="true"></i></summary>

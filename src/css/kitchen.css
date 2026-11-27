@@ -5559,3 +5559,48 @@ a.dialog-save {
       "all all";
   }
 }
+
+/* On a Scrollstopp recipe's page (recipe.njk): its TikTok image and "Spara bilden", on the lavender
+   Scrollstopp has in the collections menu. On a phone the image comes first, centred, with the text
+   and the button under it; from 700px the image sits on the left of them. */
+.recipe-tiktok {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  margin-top: 28px;
+  padding: 20px;
+  border-radius: var(--radius-card);
+  background: var(--lavender-light);
+  text-align: center;
+}
+.recipe-tiktok img {
+  width: min(100%, 300px);
+  height: auto;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-card);
+}
+.recipe-tiktok h2 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+}
+.recipe-tiktok-text p {
+  margin: 8px 0 16px;
+  font-size: var(--text-ui);
+}
+.recipe-tiktok .button {
+  text-decoration: none;
+}
+@media (min-width: 700px) {
+  .recipe-tiktok {
+    grid-template-columns: 260px minmax(0, 1fr);
+    align-items: center;
+    justify-items: start;
+    column-gap: 28px;
+    padding: 22px;
+    text-align: start;
+  }
+  .recipe-tiktok img {
+    width: 260px;
+  }
+}

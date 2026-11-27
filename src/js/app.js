@@ -1779,6 +1779,12 @@ function enhanceRecipe(article) {
   }
   const title = $(".recipe-heading", article).textContent;
   enhanceRecipeShare(article, title);
+  // "Spara bilden" on Scrollstopp recipes (tiktok-save.js). If it fails, the link still downloads.
+  try {
+    enhanceTiktokSave(article, assetUrl);
+  } catch (error) {
+    console.error(error);
+  }
   const source =
     article.dataset.shoppingSource ||
     (article.dataset.recipe ? `archive:${article.dataset.recipe}` : "");
