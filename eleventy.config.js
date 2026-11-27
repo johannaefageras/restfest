@@ -30,6 +30,7 @@
 //   recipeTags         every tag, for tagg/<slug>.html (src/pages/tagg.njk)
 //   pastas             every pasta sort, A–Ö by name (lib/pasta.js)
 //   cakes              the recipes on tartor.html, by their number there (lib/cakes.js)
+//   scrollstopp        the recipes on scrollstopp.html, by their number there (lib/scrollstopp.js)
 // Eleventy also makes a collection per tag from the recipes' `tags`, e.g. collections.Vegan.
 
 import {otherFoods, recipeFoodKeys, recipeFoods} from './lib/foods.js';
@@ -40,6 +41,7 @@ import {shoppingDepartmentNames} from './lib/shopping-departments.js';
 import {pageStructuredData} from './lib/metadata.js';
 import {makePhotos} from './tools/photos.mjs';
 import {makeScrollstoppImages} from './tools/scrollstopp-images.mjs';
+import {sortScrollstopp} from './lib/scrollstopp.js';
 import {baseRecipes, cakeChoices, cakeNeighbours, cakeRegion, cakesMadeWith, flags as cakeFlags, leftoverRecipes, levels as cakeLevels, parts as cakeParts, sortCakes} from './lib/cakes.js';
 import {cookingTime, doughs, filterDoughs, forms, freshPastaRecipe, pastaChoices, pastaGround, pastaNeighbours, pastasBySlug, pastasMadeWith, sauceLabels, sauces, sortPastas} from './lib/pasta.js';
 
@@ -92,6 +94,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection('recipeTags', api => recipeListings(recipes(api)).tags);
   eleventyConfig.addCollection('pastas', api => sortPastas(api.getFilteredByGlob('src/pasta/*.md')));
   eleventyConfig.addCollection('cakes', api => sortCakes(recipes(api)));
+  eleventyConfig.addCollection('scrollstopp', api => sortScrollstopp(recipes(api)));
 
   // foods.json divided between data/recipe-index.js (the foods the recipes use, on every page) and
   // data/foods.js (the rest of the food list, on the pages that need it). `items` is collections.recipes.
