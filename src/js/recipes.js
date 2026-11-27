@@ -309,6 +309,19 @@ const recipeTagLabels = {
   Austrian: "Österrikiskt",
   Filipino: "Filippinskt",
   Easter: "Påsk",
+  Norwegian: "Norskt",
+  Meringue: "Maräng",
+  Almond: "Mandel",
+  Custard: "Vaniljkräm",
+  "17 May": "17 maj",
+  Coconut: "Kokos",
+  Caramel: "Karamell",
+  Traybake: "Långpannekaka",
+  "Puff pastry": "Smördeg",
+  "Bundt cake": "Kaka i kransform",
+  Pie: "Paj",
+  Lime: "Lime",
+  Citrus: "Citrus",
 };
 
 // The illustrated icon (assets/icons/) for a tag that has an obvious one. A tag's page shows it beside

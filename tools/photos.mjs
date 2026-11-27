@@ -12,8 +12,6 @@ import {readdir, stat} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
-// The narrowest originals are about 1670 px wide, and eleventy-img doesn't enlarge a photo, so a
-// wider copy would be missing for them.
 const widths = [600, 1200, 1600];
 
 export async function makePhotos({input = 'src/assets/recipes', output = '.cache/recipe-photos'} = {}) {
@@ -33,15 +31,30 @@ export async function makePhotos({input = 'src/assets/recipes', output = '.cache
     const source = path.join(input, file);
     const name = path.parse(file).name;
     if (await upToDate(source, name)) return;
-    await Image(source, {
-      widths,
+    const options = {
       formats: ['webp'],
       outputDir: output,
       // The copies keep their names when a photo is replaced, and with its cache eleventy-img leaves
       // a file that already exists as it is.
       useCache: false,
       filenameFormat: (id, src, width, format) => `${name}-${width}.${format}`
+    };
+    // Eleventy replaces oversized requests with a single native-width copy. Generate every width
+    // the site's srcsets advertise, even for smaller originals such as the cake-slice photos.
+    const {webp} = await Image(source, {
+      ...options,
+      widths,
+      transform(image, {width}) {
+        const requested = widths.find(target => target >= width);
+        if (requested > width) image.resize({width: requested});
+      }
     });
+    const madeWidths = new Set(webp.map(copy => copy.width));
+    await Promise.all(widths.filter(width => !madeWidths.has(width)).map(width => Image(source, {
+      ...options,
+      widths: [width],
+      transform: image => { image.resize({width}); }
+    })));
     made++;
   }));
   return {made, upToDate: files.length - made};

@@ -184,7 +184,7 @@ The allowed forms, sauces and doughs are in [lib/pasta.js](lib/pasta.js). Fresh 
 
 ## Add or edit cakes
 
-`tartor.html` lists the cakes as cards with a filter for level, parts and origin. The cakes are ordinary archive recipes (303–332), so a card opens the recipe in the recipe dialog, and they also appear in the archive under **Fika & bakning**. What makes a recipe a cake is a `tarta` block in its front matter:
+`tartor.html` lists the cakes as cards with a filter for level, parts and origin. The cakes are ordinary archive recipes, so a card opens the recipe in the recipe dialog, and they also appear in the archive under **Fika & bakning**. What makes a recipe a cake is a `tarta` block in its front matter:
 
 ```yaml
 tarta:
@@ -195,7 +195,7 @@ tarta:
 ```
 
 1. Add the recipe as usual (above), with the `tarta` block. The level filter uses `facts: Nivå`.
-2. Use the whole cake as `image` and a piece as `cardImage`, e.g. `assets/recipes/317-prinsesstarta.png` and `317-prinsesstarta-bit.png`. The piece is the cake's card in the archive (on `tartor.html` the card has the drawing). The cards show 16:9, and photos narrower than 1600 px get no 1600 px copy, so make the piece about 1672 × 941.
+2. Use the whole cake as `image` and a piece as `cardImage`, e.g. `assets/recipes/317-prinsesstarta.png` and `317-prinsesstarta-bit.png`. The piece is the cake's card in the archive (on `tartor.html` the card has the drawing). The archive cards show a centered 16:9 crop of the photo.
 3. Add its two drawings, named the same way: `assets/icons/tartor/317-prinsesstarta.svg` (the whole cake, on its card on `tartor.html`) and `317-prinsesstarta-bit.svg` (a piece, in the box at the bottom of its recipe's page and in the list on the base recipe's page). Give them a square `viewBox`, like the pasta drawings, so they all show at the same size.
 4. Run `npm test`: it reports gaps or repeats in the numbering, unknown parts or levels, an origin that belongs to no region and missing drawings, icons or recipes.
 
