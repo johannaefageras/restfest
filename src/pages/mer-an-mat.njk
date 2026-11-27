@@ -28,7 +28,7 @@ description: Hemmaspa, städning, godis till husdjuren och odling av sådant som
     <section class="more-section" aria-labelledby="more-{{ type.key }}">
       <h2 id="more-{{ type.key }}" class="more-heading"><a href="{{ type.path }}"><img src="assets/icons/{{ type.icon }}.svg" alt="" width="32" height="32"><span>{{ type.label }}&nbsp;<i class="fas fa-arrow-up-right more-heading-arrow" aria-hidden="true"></i></span></a></h2>
       <p class="more-intro">{{ type.intro }}</p>
-      <div class="recipe-grid" data-more="{{ type.key }}"></div>
+      <div class="recipe-grid" data-more="{{ type.key }}" data-load-more="recept"></div>
     </section>
     {%- endif %}{% endfor %}
   </main>

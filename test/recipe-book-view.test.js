@@ -24,8 +24,12 @@ async function page({ online = true, book = snapshot(), signedIn = true } = {}) 
   document.querySelector = () => ({ content: 'https://example.test' });
   document.querySelectorAll = () => filters;
   const data = { book, signedIn, state: { phase: online ? 'waiting' : 'saved', durable: true, pending: 0 } };
+  // The views the book hands its pager (load-more.js): a new one starts again at the first page.
+  const views = [];
+  const pagerSaw = [];
   const context = {
     document, window: new EventTarget(), navigator: { onLine: online },
+    pagedGrid: grid => ({ update: view => { views.push(view); pagerSaw.push(grid.innerHTML); } }),
     $: selector => nodes.get(selector), Event,
     recipes: [{ id: '01-rodbetspytt', title: 'Arkivmiddag' }],
     archiveCard: recipe => `<article>${recipe.title}</article>`,
@@ -43,8 +47,21 @@ async function page({ online = true, book = snapshot(), signedIn = true } = {}) 
   };
   vm.runInNewContext(source, context);
   await new Promise(resolve => setImmediate(resolve));
-  return { data, nodes, filters, document };
+  return { data, nodes, filters, document, views, pagerSaw };
 }
+
+test('switching the book filter starts again at the first page; a removal keeps the depth', async () => {
+  const view = await page();
+  assert.equal(view.views.at(-1), 'alla');
+  view.filters[1].dispatchEvent(new Event('click'));
+  assert.equal(view.views.at(-1), 'egna');
+  view.filters[0].dispatchEvent(new Event('click'));
+  const before = view.views.length;
+  view.data.book.generated = [];
+  view.document.dispatchEvent(new Event('restfest:book'));
+  assert.ok(view.views.length > before);
+  assert.equal(view.views.at(-1), 'alla');
+});
 
 test('offline recipe book renders cached archive and generated cards despite a failed refresh', async () => {
   const view = await page({ online: false });
@@ -81,4 +98,6 @@ test('signing out clears private cards immediately', async () => {
   view.document.dispatchEvent(new Event('restfest:account'));
   assert.equal(view.nodes.get('[data-book-grid]').innerHTML, '');
   assert.equal(view.nodes.get('[data-book-toolbar]').hidden, true);
+  // The pager saw the empty grid too, so its faded row holds no copies of the private cards.
+  assert.equal(view.pagerSaw.at(-1), '');
 });

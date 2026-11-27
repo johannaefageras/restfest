@@ -64,6 +64,9 @@ function render() {
         : archiveCard(entry.recipe),
     )
     .join("");
+  // 12 at a time (load-more.js). Another filter starts again at 12; a removed or synced recipe
+  // keeps what was loaded.
+  pagedGrid(grid).update(filter);
   empty.hidden = entries.length > 0;
   toolbar.hidden = entries.length === 0;
   if (!entries.length) status.textContent = "";
@@ -79,6 +82,8 @@ function render() {
 function drawSnapshot() {
   if (!account.signedIn()) {
     entries = []; grid.innerHTML = ""; toolbar.hidden = true; empty.hidden = true; status.textContent = "";
+    // The pager's faded row holds copies of the cards: empty it with them.
+    pagedGrid(grid).update(filter);
     loaded = false;
     return;
   }

@@ -1074,13 +1074,15 @@ function renderArchive() {
   });
 }
 
-// mer-an-mat.html: one grid per category, filled from the recipe index.
+// mer-an-mat.html: one grid per category, filled from the recipe index, each 12 at a time
+// (load-more.js). Drawn again when something is saved, keeping what each section has loaded.
 function renderMorePage() {
   document.querySelectorAll("[data-more]").forEach((grid) => {
     grid.innerHTML = recipes
       .filter((recipe) => recipe.meals[0] === grid.dataset.more)
       .map(archiveCard)
       .join("");
+    pagedGrid(grid).update();
   });
 }
 
