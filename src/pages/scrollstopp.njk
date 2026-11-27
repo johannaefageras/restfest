@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+permalink: scrollstopp.html
+title: Scrollstopp
+description: "Bak, desserter och drinkar för tolv och uppåt, och till varje recept en bild i TikTok-format att spara och lägga upp."
+back: {path: receptarkiv.html, label: Till receptarkivet}
+archivePicker: true
+---
+{#- Scrollstopp: archive recipes with a `scrollstopp` block (lib/scrollstopp.js), by their number, as
+    tall cards with their TikTok images (scrollstopp-card.njk), laid out like tartor.html without the
+    filter: 19 recipes need none. The grid shows 12 at a time (load-more.js, started by app.js for every
+    [data-load-more]); without JavaScript every card shows. A card opens its recipe in the recipe
+    dialog, where "Spara bilden" offers its TikTok image (tiktok-save.js). -#}
+{%- from 'scrollstopp-card.njk' import scrollstoppCard with context -%}
+  <main id="main" class="wrap archive-page scrollstopp-index">
+    <section class="greeting archive-greeting" aria-labelledby="scrollstopp-title">
+      <div>
+        <a class="text-button archive-back" href="{{ back.path }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> {{ back.label }}</a>
+        <h1 id="scrollstopp-title"><span class="marker">Scrollstopp.</span></h1>
+        <p class="greeting-intro">Bak för tolvåringar och uppåt, som klarar ugnen själva och helst slipper hjälp. Recepten är byggda för två: varsin halva, varsin topping, en hemlig fyllning att gissa. Allt ska se bra ut på bild, och den sista biten ska vara värd att bråka om. Till varje recept finns en bild i TikTok-format som du kan spara och lägga upp.</p>
+      </div>
+      <div class="greeting-aside" aria-hidden="true">
+        <img src="assets/icons/camera-illustration.svg" alt="" width="160" height="160">
+      </div>
+    </section>
+
+    <section class="recipes-section archive-recipes scrollstopp-list" aria-labelledby="scrollstopp-list-title">
+      <h2 id="scrollstopp-list-title" class="eyebrow">Alla recept</h2>
+      <div class="archive-results-row">
+        <p class="meta archive-results">{{ collections.scrollstopp.length }} recept</p>
+      </div>
+      <div class="recipe-grid" data-load-more="recept">
+        {%- for item in collections.scrollstopp %}
+        {{ scrollstoppCard(item, '') }}
+        {%- endfor %}
+      </div>
+    </section>
+  </main>

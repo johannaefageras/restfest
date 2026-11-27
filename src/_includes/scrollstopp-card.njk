@@ -1,0 +1,22 @@
+{#- A recipe's card on scrollstopp.html: the archive's recipe card (recipe-card.njk) with the recipe's
+    TikTok image, without the stamp, in a tall frame like the thumbnails on a TikTok profile, where the
+    archive has the landscape photo. Then its number as a badge like the cakes' (.mini-badge), its level's
+    icon and name, the title, which opens the recipe in the recipe dialog as on the archive's cards
+    (data-open, app.js), and the description. The page has no filter, so the card has no data attributes.
+    `item` is an item of collections.scrollstopp (lib/scrollstopp.js). -#}
+{%- macro scrollstoppCard(item, base) -%}
+{%- set recipe = item.data.recipe -%}
+{%- set level = recipe.facts['Nivå'] -%}
+<article class="archive-card scrollstopp-card">
+          <div class="archive-card-art has-photo scrollstopp-card-art">
+            <img src="{{ base }}{{ (item.fileSlug | scrollstoppFiles).card }}" alt="" width="600" height="1067" loading="lazy" decoding="async">
+            <span class="archive-time">{{ recipe.timeLabel }}</span>
+            <button class="favorite" data-save="{{ recipe.id }}" aria-label="Spara {{ recipe.title }}" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i></button>
+          </div>
+          <div class="archive-card-body">
+            <p class="archive-meal-type"><span class="mini-badge">Nr {{ item.data.scrollstopp.nr }}</span>{% if cakeLevels[level] %}<img src="{{ base }}assets/icons/{{ cakeLevels[level] }}.svg" alt="" width="20" height="20">{% endif %}{{ level }}</p>
+            <h3><a class="recipe-main-link" href="{{ base }}recept/{{ recipe.id }}.html" data-open="{{ recipe.id }}">{{ recipe.title }}</a></h3>
+            <p class="archive-description">{{ recipe.description }}</p>
+          </div>
+        </article>
+{%- endmacro %}

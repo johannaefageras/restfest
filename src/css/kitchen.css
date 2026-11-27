@@ -3718,6 +3718,9 @@ dialog > .cook-tray {
 .nav-menu-panel [data-collection="cakes"] {
   --menu-tint: var(--pink-light);
 }
+.nav-menu-panel [data-collection="scrollstopp"] {
+  --menu-tint: var(--lavender-light);
+}
 
 /* The footer's menu opens upwards, so its chevron points up until then. */
 .site-footer .nav-menu > summary > .fa-chevron-down {
@@ -5602,5 +5605,31 @@ a.dialog-save {
   }
   .recipe-tiktok img {
     width: 260px;
+  }
+}
+
+/* scrollstopp.html's cards (scrollstopp-card.njk): the TikTok image in a tall frame, like the thumbnails
+   on a TikTok profile, cropped from the middle of the 9:16 image. */
+.archive-card-art.scrollstopp-card-art {
+  aspect-ratio: 3 / 4;
+}
+
+/* A Scrollstopp recipe's place (recipe.njk): the cakes' box on Scrollstopp's lavender, with the card's
+   tall image framed where the cake has its drawing. */
+.scrollstopp-place {
+  background: var(--lavender-light);
+}
+.scrollstopp-place .cake-place-art {
+  width: 105px;
+  height: 140px;
+  justify-self: center;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-card);
+  object-fit: cover;
+}
+@media (max-width: 519px) {
+  .scrollstopp-place .cake-place-art {
+    width: 66px;
+    height: 88px;
   }
 }

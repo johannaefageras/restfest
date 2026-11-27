@@ -46,13 +46,14 @@
         </details>
 {%- endmacro -%}
 {#- The "Samlingar" menu in the footer, built like "Recept" above and opening upwards beside it: the
-    pasta sorts (src/pages/pastasorter.njk) and the cakes (src/pages/tartor.njk). The word is marked
-    as the current page on both pages and on a pasta sort's own page; the cakes' recipes are in the
-    archive, so a cake's page is not. -#}
+    pasta sorts (src/pages/pastasorter.njk), the cakes (src/pages/tartor.njk) and Scrollstopp
+    (src/pages/scrollstopp.njk). The word is marked as the current page on all three and on a pasta
+    sort's own page; the cakes' and Scrollstopp's recipes are in the archive, so their pages are not. -#}
 {%- macro collectionsMenu(base, url) %}
         {%- set entries = [
           {path: 'pastasorter.html', key: 'pasta', icon: 'spaghetti', label: 'Pasta', note: 'Sorter, såser och rester', current: url == '/pastasorter.html' or url.startsWith('/pasta/')},
-          {path: 'tartor.html', key: 'cakes', icon: 'birthday-cake', label: 'Tårtor', note: 'Världens mest kända tårtor', current: url == '/tartor.html'}
+          {path: 'tartor.html', key: 'cakes', icon: 'birthday-cake', label: 'Tårtor', note: 'Världens mest kända tårtor', current: url == '/tartor.html'},
+          {path: 'scrollstopp.html', key: 'scrollstopp', icon: 'camera', label: 'Scrollstopp', note: 'Bak att visa upp', current: url == '/scrollstopp.html'}
         ] %}
         <details class="nav-menu">
           <summary class="nav-link{% if entries | selectattr('current') | length %} is-current{% endif %}"><span>Samlingar</span><i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
