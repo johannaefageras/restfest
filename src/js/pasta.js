@@ -211,9 +211,10 @@
     document.body.style.overflow = "";
     document.title = previousTitle;
     const card = bySlug.get(open);
+    const target = opener?.isConnected ? opener : card?.querySelector("a");
     // Opened from the address, focus goes to the sort's card: load the list down to it first.
-    if (!opener?.isConnected && card) pagedGrid(grid).revealThrough(card);
-    (opener?.isConnected ? opener : card?.querySelector("a"))?.focus({ preventScroll: true });
+    showPagedCard(target);
+    target?.focus({ preventScroll: true });
     open = null;
     opener = null;
     request++;

@@ -1920,7 +1920,10 @@ if (recipeDialog) {
     document.title = previousTitle;
     const fallback =
       $(`[data-open="${id}"]`) ?? archiveSearch ?? $("#ingredient-input");
-    (opener?.isConnected ? opener : fallback)?.focus({ preventScroll: true });
+    const target = opener?.isConnected ? opener : fallback;
+    // A card further down a long list than it has loaded is shown first (load-more.js).
+    showPagedCard(target);
+    target?.focus({ preventScroll: true });
     activeRecipe = null;
     // Closed with ×, Esc or a click outside: step back so the address is the list page again.
     if (!closingFromHistory && history.state?.recipe === id) history.back();

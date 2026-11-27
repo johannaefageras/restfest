@@ -46,6 +46,13 @@ function focusFirstNew(card, event) {
     link?.scrollIntoView({ block: "nearest", behavior: "instant" });
 }
 
+// Focus is about to return to `element`, e.g. a card's link when a dialog closes: if it sits in a card
+// further down than its grid has loaded, load the grid down to that card first.
+function showPagedCard(element) {
+  const card = element?.closest("[data-paged-out]");
+  if (card) pagedGrid(card.parentElement).revealThrough(card);
+}
+
 // The pager for a grid whose cards are all in the page. The same grid always gets the same pager.
 //   update(view)        Shows the cards again. A different `view` (e.g. the filter's choices) starts
 //                       again at 12; the same one keeps what was loaded.

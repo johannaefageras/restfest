@@ -59,7 +59,9 @@ function fakeCard(n) {
   const link = {
     focus(options) { card.focused = options; },
     scrollIntoView(options) { card.scrolled = options; },
+    closest: selector => (selector === '[data-paged-out]' && card.hasAttribute('data-paged-out') ? card : null),
   };
+  card.link = link;
   card.querySelector = selector => (selector === '.recipe-main-link' ? link : null);
   return card;
 }
@@ -78,6 +80,7 @@ function makeGrid(count, noun) {
   if (noun) grid.dataset.loadMore = noun;
   const cards = Array.from({ length: count }, (_, index) => fakeCard(index + 1));
   grid.append(...cards);
+  for (const card of cards) card.parentElement = grid;
   return { grid, cards };
 }
 
@@ -187,6 +190,18 @@ test('revealing a card further down shows whole pages up to it', () => {
   assert.equal(shown(grid).length, 24);
   pager.revealThrough(cards[45]);
   assert.equal(shown(grid).length, 48);
+});
+
+test('a link in a card further down loads its grid down to that card', () => {
+  const { grid, cards } = makeGrid(30);
+  api.pagedGrid(grid).update();
+  api.showPagedCard(cards[20].link);
+  assert.equal(shown(grid).length, 24);
+  api.showPagedCard(cards[3].link);
+  assert.equal(shown(grid).length, 24);
+  api.showPagedCard(null);
+  api.showPagedCard({ closest: () => null });
+  assert.equal(shown(grid).length, 24);
 });
 
 test('the same grid gets the same pager and one block', () => {
