@@ -1,0 +1,182 @@
+// The shared pager for long card grids (src/js/load-more.js), run against a small fake DOM: a grid shows
+// 12 cards, previews the next row as inert copies, loads 12 more at a time, and starts again at 12 only
+// when the page's filter changes.
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import vm from 'node:vm';
+import test from 'node:test';
+
+const source = readFileSync(new URL('../src/js/load-more.js', import.meta.url), 'utf8');
+
+function fakeElement(tag = 'div') {
+  const attributes = new Map();
+  const listeners = {};
+  const node = {
+    tagName: tag.toUpperCase(), children: [], dataset: {}, hidden: false, id: '', className: '',
+    textContent: '', afterCalls: 0,
+    append(...nodes) { node.children.push(...nodes); },
+    replaceChildren(...nodes) { node.children = [...nodes]; },
+    after(other) { node.next = other; node.afterCalls++; },
+    setAttribute(name, value) { attributes.set(name, String(value)); },
+    getAttribute(name) { return attributes.has(name) ? attributes.get(name) : null; },
+    removeAttribute(name) { attributes.delete(name); },
+    hasAttribute(name) { return attributes.has(name); },
+    toggleAttribute(name, force) {
+      const on = force ?? !attributes.has(name);
+      if (on) attributes.set(name, ''); else attributes.delete(name);
+      return on;
+    },
+    addEventListener(type, listener) { (listeners[type] ??= []).push(listener); },
+    click(detail = 1) { for (const listener of listeners.click ?? []) listener({ detail }); },
+    cloneNode() {
+      const clone = fakeElement(tag);
+      for (const [name, value] of attributes) clone.setAttribute(name, value);
+      clone.className = node.className;
+      clone.original = node;
+      return clone;
+    },
+    // The first descendant with this tag name (`button`) or class (`.archive-page-count`).
+    querySelector(selector) {
+      const matches = child => selector.startsWith('.')
+        ? String(child.className).split(' ').includes(selector.slice(1))
+        : child.tagName === selector.toUpperCase();
+      for (const child of node.children) {
+        if (matches(child)) return child;
+        const found = child.querySelector?.(selector);
+        if (found) return found;
+      }
+      return null;
+    },
+  };
+  return node;
+}
+
+// A card whose title link records where focus and scrolling went.
+function fakeCard(n) {
+  const card = fakeElement('article');
+  card.n = n;
+  card.className = 'archive-card';
+  const link = {
+    focus(options) { card.focused = options; },
+    scrollIntoView(options) { card.scrolled = options; },
+  };
+  card.querySelector = selector => (selector === '.recipe-main-link' ? link : null);
+  return card;
+}
+
+function load() {
+  const context = vm.createContext({ document: { createElement: fakeElement } });
+  vm.runInContext(source, context);
+  return context;
+}
+
+const api = load();
+
+function makeGrid(count, noun) {
+  const grid = fakeElement('div');
+  grid.className = 'recipe-grid';
+  if (noun) grid.dataset.loadMore = noun;
+  const cards = Array.from({ length: count }, (_, index) => fakeCard(index + 1));
+  grid.append(...cards);
+  return { grid, cards };
+}
+
+const shown = grid => grid.children.filter(card => !card.hidden && !card.hasAttribute('data-paged-out'));
+
+test('the count reads like the archive', () => {
+  assert.equal(api.loadMoreCount(12, 263, 'recept'), '12 av 263 recept');
+});
+
+test('a paged view skips filtered cards and previews the next four', () => {
+  const cards = Array.from({ length: 30 }, (_, i) => ({ n: i + 1, hidden: i === 2 }));
+  const view = api.loadMoreView(cards, 12);
+  // Spread into this realm's arrays: the strict deepEqual compares prototypes, and the script runs in a vm.
+  assert.deepEqual([...view.shown].map(c => c.n), [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
+  assert.equal(view.later.length, 17);
+  assert.deepEqual([...view.preview].map(c => c.n), [14, 15, 16, 17]);
+});
+
+test('a grid of 30 shows 12 and an inert preview of copies', () => {
+  const { grid, cards } = makeGrid(30);
+  api.pagedGrid(grid).update();
+  const block = grid.next, preview = block.children[0];
+  assert.equal(shown(grid).length, 12);
+  assert.equal(block.hidden, false);
+  assert.ok(preview.hasAttribute('inert'));
+  assert.equal(preview.getAttribute('aria-hidden'), 'true');
+  assert.deepEqual(preview.children.map(c => c.original), cards.slice(12, 16));
+  assert.ok(preview.children.every(c => !c.hasAttribute('data-paged-out')));
+  assert.equal(block.querySelector('.archive-page-count').textContent, '12 av 30 recept');
+  assert.equal(block.querySelector('button').textContent, 'Visa fler recept');
+  assert.equal(block.querySelector('button').getAttribute('aria-controls'), grid.id);
+  assert.ok(grid.id);
+  assert.ok(grid.hasAttribute('data-paging'));
+});
+
+test('the noun comes from data-load-more', () => {
+  const { grid } = makeGrid(30, 'sorter');
+  api.pagedGrid(grid).update();
+  assert.equal(grid.next.querySelector('button').textContent, 'Visa fler sorter');
+  assert.equal(grid.next.querySelector('.archive-page-count').textContent, '12 av 30 sorter');
+});
+
+test('loading more shows 12 more, focuses the first new card and scrolls only for the keyboard', () => {
+  const { grid, cards } = makeGrid(30);
+  api.pagedGrid(grid).update();
+  grid.next.querySelector('button').click(1);
+  assert.equal(shown(grid).length, 24);
+  assert.equal(cards[12].focused?.preventScroll, true);
+  assert.equal(cards[12].scrolled, undefined);
+  grid.next.querySelector('button').click(0);
+  assert.equal(shown(grid).length, 30);
+  assert.equal(cards[24].scrolled?.block, 'nearest');
+  assert.equal(cards[24].scrolled?.behavior, 'instant');
+  assert.equal(grid.next.hidden, true);
+  assert.equal(grid.next.children[0].children.length, 0);
+});
+
+test('the same view keeps the depth; a new view starts again at 12', () => {
+  const { grid } = makeGrid(40);
+  const pager = api.pagedGrid(grid);
+  pager.update('a'); pager.loadMore({ detail: 1 });
+  pager.update('a');
+  assert.equal(shown(grid).length, 24);
+  pager.update('b');
+  assert.equal(shown(grid).length, 12);
+});
+
+test('cards a filter hides are neither shown nor counted', () => {
+  const { grid, cards } = makeGrid(30);
+  const pager = api.pagedGrid(grid);
+  pager.update();
+  cards.slice(10).forEach(card => { card.hidden = true; });
+  pager.update('filtered');
+  assert.equal(shown(grid).length, 10);
+  assert.equal(grid.next.hidden, true);
+  assert.equal(grid.next.children[0].children.length, 0);
+});
+
+test('a grid of 12 or fewer gets no button and no marks', () => {
+  const { grid } = makeGrid(12);
+  api.pagedGrid(grid).update();
+  assert.equal(grid.next.hidden, true);
+  assert.ok(grid.children.every(card => !card.hasAttribute('data-paged-out')));
+});
+
+test('revealing a card further down shows whole pages up to it', () => {
+  const { grid, cards } = makeGrid(50);
+  const pager = api.pagedGrid(grid);
+  pager.update();
+  pager.revealThrough(cards[5]);
+  assert.equal(shown(grid).length, 12);
+  pager.revealThrough(cards[20]);
+  assert.equal(shown(grid).length, 24);
+  pager.revealThrough(cards[45]);
+  assert.equal(shown(grid).length, 48);
+});
+
+test('the same grid gets the same pager and one block', () => {
+  const { grid } = makeGrid(30);
+  assert.equal(api.pagedGrid(grid), api.pagedGrid(grid));
+  assert.equal(grid.afterCalls, 1);
+});
