@@ -50,6 +50,8 @@ function enhanceTiktokSave(article, assetUrl) {
   // The file has to be ready before the click: fetching it inside the click would use up the user
   // activation Safari needs for share(). It is fetched once the section is near, not on every visit
   // to the recipe, and only where it can be shared. If it fails, the link still downloads.
+  // In the recipe dialog the dialog scrolls, not the page, and rootMargin only widens the root, so
+  // there the dialog is the root; on a recipe's own page closest() finds none and the page is.
   async function fetchFile() {
     try {
       const response = await fetch(url);
@@ -68,7 +70,7 @@ function enhanceTiktokSave(article, assetUrl) {
           observer.disconnect();
           fetchFile();
         },
-        { rootMargin: "600px 0px" },
+        { root: link.closest("dialog"), rootMargin: "600px 0px" },
       );
       observer.observe(link.closest("section") ?? link);
     } else {

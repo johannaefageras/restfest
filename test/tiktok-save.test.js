@@ -39,3 +39,40 @@ test('the share sheet gets the file and nothing else', async () => {
   assert.equal(shared.files.length, 1);
   assert.equal(shared.files[0], file);
 });
+
+// The recipe dialog scrolls by itself, and an observer's rootMargin only widens its root: with the page
+// as root, a section below the dialog's fold counts as near only once it is in view. So inside the
+// dialog the dialog is the root; on a recipe's own page there is none (the page).
+test('the early fetch watches from the dialog when the recipe is in one, and from the page otherwise', () => {
+  const observers = [];
+  class FakeObserver {
+    constructor(callback, options) { this.options = options; observers.push(this); }
+    observe(target) { this.target = target; }
+    disconnect() {}
+  }
+  const dialog = {element: 'dialog'};
+  const section = {element: 'section'};
+  const link = inDialog => ({
+    dataset: {tiktokSave: 'assets/scrollstopp/340-cookiepizza.jpg'},
+    getAttribute: () => 'scrollstopp-340-cookiepizza.jpg',
+    href: '',
+    closest: selector => ({dialog: inDialog ? dialog : null, section})[selector] ?? null,
+    addEventListener() {}
+  });
+  const page = vm.createContext({
+    navigator: {share() {}, canShare: () => true},
+    IntersectionObserver: FakeObserver,
+    fetch: async () => ({ok: false})
+  });
+  page.window = page;
+  page.matchMedia = () => ({matches: true});
+  vm.runInContext(source, page);
+
+  page.enhanceTiktokSave({querySelector: () => link(true)}, path => path);
+  page.enhanceTiktokSave({querySelector: () => link(false)}, path => path);
+  assert.equal(observers.length, 2);
+  assert.equal(observers[0].options.root, dialog);
+  assert.equal(observers[0].options.rootMargin, '600px 0px');
+  assert.equal(observers[0].target, section);
+  assert.equal(observers[1].options.root ?? null, null);
+});
