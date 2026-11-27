@@ -180,3 +180,13 @@ test('the same grid gets the same pager and one block', () => {
   assert.equal(api.pagedGrid(grid), api.pagedGrid(grid));
   assert.equal(grid.afterCalls, 1);
 });
+
+test('long card grids ask to be paged, and the page is ready for it', () => {
+  const read = path => readFileSync(new URL(`../src/${path}`, import.meta.url), 'utf8');
+  assert.match(read('_includes/layouts/listing.njk'), /class="recipe-grid" data-load-more="recept"/);
+  const base = read('_includes/layouts/base.njk');
+  assert.match(base, /<head>\s*<script>document\.documentElement\.classList\.add\('js'\)<\/script>/);
+  assert.ok(base.indexOf('js/load-more.js') < base.indexOf('js/app.js'));
+  assert.match(read('css/kitchen.css'), /\.js \.recipe-grid\[data-load-more\]:not\(\[data-paging\]\) > :nth-child\(n \+ 13\)/);
+  assert.match(read('js/app.js'), /querySelectorAll\("\[data-load-more\]"\)\.forEach\(\(grid\) => pagedGrid\(grid\)\.update\(\)\)/);
+});

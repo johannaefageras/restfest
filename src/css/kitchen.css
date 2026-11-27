@@ -1305,6 +1305,18 @@ details[open] > summary > .fa-chevron-down {
   -webkit-mask-image: linear-gradient(#000 0%, rgb(0 0 0 / 0.65) 32%, transparent 94%);
   mask-image: linear-gradient(#000 0%, rgb(0 0 0 / 0.65) 32%, transparent 94%);
 }
+/* Long card grids (data-load-more, js/load-more.js): cards past the current depth are left out. Until the
+   script takes over, CSS shows the first 12 (loadMorePageSize), so the page doesn't jump as it loads. */
+.recipe-grid > [data-paged-out] {
+  display: none !important;
+}
+.js .recipe-grid[data-load-more]:not([data-paging]) > :nth-child(n + 13) {
+  display: none;
+}
+/* The faded row holds up to four copies, for the four-across pasta grid; three-across grids show three. */
+.archive-preview > :nth-child(n + 4) {
+  display: none;
+}
 .archive-more-controls {
   position: relative;
   display: flex;

@@ -2343,6 +2343,8 @@ if (themeToggles.length && typeof applyTheme === "function") {
 const pageRecipe = $("main .recipe-view");
 if (pageRecipe) enhanceRecipe(pageRecipe);
 
+// Long card grids show 12 at a time (load-more.js). Mer än mat fills its grids in refreshSavedViews().
+document.querySelectorAll("[data-load-more]").forEach((grid) => pagedGrid(grid).update());
 refreshSavedViews();
 updateShoppingButtons();
 renderShoppingList();

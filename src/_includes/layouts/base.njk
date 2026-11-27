@@ -75,6 +75,9 @@
 <!doctype html>
 <html lang="{{ site.language | escape }}"{% if base %} data-base="{{ base }}"{% endif %}>
 <head>
+  <script>document.documentElement.classList.add('js')</script>
+  {#- With JavaScript on, CSS hides cards past the 12th in long grids (data-load-more) until js/load-more.js
+      takes over, so those pages don't jump from every card to 12 as they load. #}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {#- The browser bar: the page colour of each theme (--paper in styles.css and dark.css). The first
