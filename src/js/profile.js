@@ -22,7 +22,9 @@ import {
 const account = window.restfestAccount;
 const main = $("#main");
 // Where the Edge Functions answer (src/_data/ai.js).
-const functionsUrl = document.querySelector('meta[name="restfest-ai"]')?.content;
+const functionsUrl = document.querySelector(
+  'meta[name="restfest-ai"]',
+)?.content;
 
 async function profilePage(db, user) {
   const wait = $("[data-profile-wait]");
@@ -49,7 +51,9 @@ async function profilePage(db, user) {
   function followDiets() {
     for (const input of dietInputs) {
       const included = dietInputs.some(
-        (parent) => parent.checked && (impliedTags[parent.value] ?? []).includes(input.value),
+        (parent) =>
+          parent.checked &&
+          (impliedTags[parent.value] ?? []).includes(input.value),
       );
       if (included) input.checked = true;
       else if (input.disabled) input.checked = false;
@@ -96,7 +100,8 @@ async function profilePage(db, user) {
   avoid = Array.isArray(row?.avoid) ? row.avoid.slice(0, 30) : [];
   drawAvoid();
   servingsInput.value = row?.servings ?? "";
-  form.elements.namedItem("max_cooking_minutes").value = row?.max_cooking_minutes ?? "";
+  form.elements.namedItem("max_cooking_minutes").value =
+    row?.max_cooking_minutes ?? "";
   const minServings = Number(servingsInput.min);
   const maxServings = Number(servingsInput.max);
   function updateServingsSteps() {
@@ -106,9 +111,14 @@ async function profilePage(db, user) {
   }
   function stepServings(direction) {
     const value = servingsInput.valueAsNumber;
-    const next = !Number.isFinite(value) ? minServings
-      : direction < 0 ? Math.ceil(value) - 1 : Math.floor(value) + 1;
-    servingsInput.value = String(Math.max(minServings, Math.min(maxServings, next)));
+    const next = !Number.isFinite(value)
+      ? minServings
+      : direction < 0
+        ? Math.ceil(value) - 1
+        : Math.floor(value) + 1;
+    servingsInput.value = String(
+      Math.max(minServings, Math.min(maxServings, next)),
+    );
     servingsInput.dispatchEvent(new Event("input", { bubbles: true }));
   }
   servingsDown.addEventListener("click", () => stepServings(-1));
@@ -150,7 +160,10 @@ async function profilePage(db, user) {
     show(savedText, "");
     busy(form, $("[data-profile-error]"), async () => {
       if (!servingsInput.validity.valid)
-        throw problem("Välj ett helt antal portioner mellan 1 och 12, eller lämna fältet tomt.", servingsInput);
+        throw problem(
+          "Välj ett helt antal portioner mellan 1 och 12, eller lämna fältet tomt.",
+          servingsInput,
+        );
       // Something typed but not added yet is meant to be in the list.
       if (avoidInput.value.trim()) {
         addFromField();
@@ -162,7 +175,9 @@ async function profilePage(db, user) {
         .value.trim()
         .slice(0, 80);
       const servings = servingsInput.value;
-      const cookingMinutes = form.elements.namedItem("max_cooking_minutes").value;
+      const cookingMinutes = form.elements.namedItem(
+        "max_cooking_minutes",
+      ).value;
       checked(
         await db
           .from("profiles")
@@ -235,24 +250,29 @@ async function accountPage(db, sessionUser) {
     const status = $("[data-email-status]");
     show(status, "");
     const input = emailForm.elements.namedItem("email");
-    busy(emailForm, $("[data-email-error]"), async () => {
-      const address = emailValue(input);
-      if (address.toLowerCase() === (user.email ?? "").toLowerCase())
-        throw problem("Det är redan din e-postadress.", input);
-      checked(
-        await db.auth.updateUser(
-          { email: address },
-          { emailRedirectTo: assetUrl("konto.html") },
-        ),
-      );
-      emailForm.reset();
-      show(
-        status,
-        user.email
-          ? `Vi har skickat en länk till ${address}. Bytet gäller när du har klickat på den.`
-          : `Vi har skickat en länk till ${address}. Adressen läggs till när du har klickat på den.`,
-      );
-    }, { email: input });
+    busy(
+      emailForm,
+      $("[data-email-error]"),
+      async () => {
+        const address = emailValue(input);
+        if (address.toLowerCase() === (user.email ?? "").toLowerCase())
+          throw problem("Det är redan din e-postadress.", input);
+        checked(
+          await db.auth.updateUser(
+            { email: address },
+            { emailRedirectTo: assetUrl("konto.html") },
+          ),
+        );
+        emailForm.reset();
+        show(
+          status,
+          user.email
+            ? `Vi har skickat en länk till ${address}. Bytet gäller när du har klickat på den.`
+            : `Vi har skickat en länk till ${address}. Adressen läggs till när du har klickat på den.`,
+        );
+      },
+      { email: input },
+    );
   });
 
   passwordForm.addEventListener("submit", (event) => {
@@ -260,15 +280,22 @@ async function accountPage(db, sessionUser) {
     const status = $("[data-password-status]");
     show(status, "");
     const input = passwordForm.elements.namedItem("password");
-    busy(passwordForm, $("[data-password-error]"), async () => {
-      const short = passwordProblem(input.value);
-      if (short) throw problem(short, input);
-      const data = checked(await db.auth.updateUser({ password: input.value }));
-      if (data.user) user = data.user;
-      passwordForm.reset();
-      drawLogin();
-      show(status, "Lösenordet är sparat.");
-    }, { password: input });
+    busy(
+      passwordForm,
+      $("[data-password-error]"),
+      async () => {
+        const short = passwordProblem(input.value);
+        if (short) throw problem(short, input);
+        const data = checked(
+          await db.auth.updateUser({ password: input.value }),
+        );
+        if (data.user) user = data.user;
+        passwordForm.reset();
+        drawLogin();
+        show(status, "Lösenordet är sparat.");
+      },
+      { password: input },
+    );
   });
 
   // A new number: a code goes to it first, and the number is the account's once the code is typed.
@@ -284,7 +311,9 @@ async function accountPage(db, sessionUser) {
     pendingPhone = phone;
     codeField.hidden = !phone;
     codeInput.value = "";
-    $("[data-phone-submit]").textContent = phone ? "Spara numret" : "Skicka kod";
+    $("[data-phone-submit]").textContent = phone
+      ? "Spara numret"
+      : "Skicka kod";
   }
 
   // Another number needs a code of its own.
@@ -316,12 +345,15 @@ async function accountPage(db, sessionUser) {
         if (!phone)
           throw problem(
             phoneInput.value.trim()
-              ? "Skriv ett svenskt mobilnummer, till exempel 070-123 45 67."
+              ? "Skriv Ett svenskt mobilnummer, t.ex. 070-123 45 67."
               : "Skriv ditt mobilnummer.",
             phoneInput,
           );
         if (phone !== pendingPhone) {
-          if (loginMethods(user).phone && phone === phoneNumber(`+${user.phone}`))
+          if (
+            loginMethods(user).phone &&
+            phone === phoneNumber(`+${user.phone}`)
+          )
             throw problem("Det är redan ditt nummer.", phoneInput);
           await sendPhoneCode(phone);
           return;
@@ -382,7 +414,9 @@ async function accountPage(db, sessionUser) {
       }
       if (!response.ok) {
         const result = await response.json().catch(() => ({}));
-        throw problem(result.error || "Något gick fel. Prova igen om en stund.");
+        throw problem(
+          result.error || "Något gick fel. Prova igen om en stund.",
+        );
       }
       // The account is gone; this removes what the browser still holds of it and goes home.
       window.restfestShopping?.discard();
@@ -411,7 +445,9 @@ async function start() {
   if (!user) {
     // The sign-in has run out. account.js has noticed too, or will.
     if (!account.signedIn()) location.replace(account.loginUrl());
-    else wait.textContent = "Kunde inte nå Ofta bra efter. Kolla uppkopplingen och prova igen.";
+    else
+      wait.textContent =
+        "Kunde inte nå Ofta bra efter. Kolla uppkopplingen och prova igen.";
     return;
   }
   if (main.dataset.profilePage === "profil") profilePage(db, user);

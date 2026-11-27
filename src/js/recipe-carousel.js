@@ -13,13 +13,23 @@ function initRecipeCarousel(carousel) {
   let inView = false;
   let timer;
 
+  function edges() {
+    const end = track.scrollWidth - track.clientWidth;
+    const left = track.scrollLeft;
+    return { end, left, atStart: left <= 2, atEnd: left >= end - 2 };
+  }
+
+  // Fade a side only while there are cards beyond it (kitchen.css).
+  function showEdges() {
+    const { atStart, atEnd } = edges();
+    track.toggleAttribute("data-past-start", !atStart);
+    track.toggleAttribute("data-at-end", atEnd);
+  }
+
   function move(direction) {
     const [first, second] = track.children;
     const step = second.getBoundingClientRect().left - first.getBoundingClientRect().left;
-    const end = track.scrollWidth - track.clientWidth;
-    const left = track.scrollLeft;
-    const atStart = left <= 2;
-    const atEnd = left >= end - 2;
+    const { end, left, atStart, atEnd } = edges();
     const wraps = direction > 0 ? atEnd : atStart;
     let target;
     if (wraps) target = direction > 0 ? 0 : end;
@@ -55,7 +65,11 @@ function initRecipeCarousel(carousel) {
     if (matches) setPlaying(false);
   });
   document.addEventListener("visibilitychange", schedule);
-  track.addEventListener("scroll", schedule, { passive: true });
+  track.addEventListener("scroll", () => {
+    showEdges();
+    schedule();
+  }, { passive: true });
+  new ResizeObserver(showEdges).observe(track);
   track.addEventListener("pointerleave", schedule);
   track.addEventListener("focusout", schedule);
 

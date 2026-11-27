@@ -183,7 +183,44 @@ test("with a publishable key every page gets the account button and the account 
       html.indexOf("js/account.js") < html.indexOf("js/auth-forms.js"),
       `${page} loads account.js first`,
     );
+    // One column with the form only: no drawing panel beside it.
+    for (const gone of ["auth-art", "auth-body", "auth-card-icon-only", "data-art="]) {
+      assert.equal(html.includes(gone), false, `${page} has no ${gone}`);
+    }
   }
+  const login = site.read("logga-in.html");
+  assert.match(
+    login,
+    /<p class="auth-intro">Med ett konto får du en egen receptsamling, som följer med mellan mobilen och datorn\.<\/p>/,
+    "the intro line sits in the sign-in part",
+  );
+  assert.ok(
+    login.indexOf('class="auth-intro"') < login.indexOf('class="auth-providers"'),
+    "the intro line comes before the provider buttons",
+  );
+  // Buttons first: email is a way to sign in like the others, with its own step.
+  const providers = login.slice(
+    login.indexOf('class="auth-providers"'),
+    login.indexOf("</div>", login.indexOf('class="auth-providers"')),
+  );
+  assert.ok(
+    providers.indexOf("data-google") < providers.indexOf("data-phone-open") &&
+      providers.indexOf("data-phone-open") < providers.indexOf("data-email-open"),
+    "the buttons are Google, mobile number, email, in that order",
+  );
+  assert.match(login, /<div class="auth-part" data-email-part[^>]* hidden>/, "the email step starts hidden");
+  for (const hook of ["data-email-back", "data-email-error"]) {
+    assert.ok(login.includes(hook), `the email step has ${hook}`);
+  }
+  assert.equal(login.includes("account-or"), false, "no 'eller' between buttons and a form");
+  // Switching between "Logga in" and "Skapa konto" hides the link used, so focus goes to the title,
+  // which names the mode.
+  assert.match(login, /<h1 id="auth-title" class="auth-title" tabindex="-1">/, "the title can take focus");
+  assert.equal(
+    site.read("js/auth-forms.js").includes("authArt"),
+    false,
+    "auth-forms.js no longer switches drawings",
+  );
   const book = site.read("receptbok.html");
   assert.match(book, /<meta name="robots" content="noindex">/);
   assert.ok(

@@ -17,7 +17,9 @@ import {
 } from "./account-helpers.js";
 
 const account = window.restfestAccount;
-const siteName = document.querySelector('meta[name="application-name"]')?.content;
+const siteName = document.querySelector(
+  'meta[name="application-name"]',
+)?.content;
 const main = $("#main");
 const params = new URLSearchParams(location.search);
 const returnPath = safeReturnPath(params.get("till"), location.origin);
@@ -44,8 +46,12 @@ function addressError() {
 async function loginPage() {
   const title = $("[data-auth-title]");
   const mainBox = $("[data-auth-main]");
-  const form = $("[data-auth-form]");
+  // Errors from Google and from a link the visitor arrived by show with the buttons; the e-mail
+  // form has its own.
   const errorBox = $("[data-auth-error]");
+  const emailPart = $("[data-email-part]");
+  const form = $("[data-auth-form]");
+  const emailError = $("[data-email-error]");
   const submit = $("[data-auth-submit]");
   // Not form.name: that is the form's own name.
   const nameInput = form.elements.namedItem("name");
@@ -53,7 +59,7 @@ async function loginPage() {
   const sentBox = $("[data-auth-sent]");
   const phoneForm = $("[data-phone-form]");
   const codeForm = $("[data-code-form]");
-  const parts = [mainBox, resetForm, sentBox, phoneForm, codeForm];
+  const parts = [mainBox, emailPart, resetForm, sentBox, phoneForm, codeForm];
   const destination = returnPath
     ? location.origin + returnPath
     : assetUrl("receptbok.html");
@@ -61,17 +67,14 @@ async function loginPage() {
   const backHere =
     assetUrl("logga-in.html") +
     (returnPath ? `?till=${encodeURIComponent(returnPath)}` : "");
-  const arts = main.querySelectorAll("[data-auth-art]");
   let mode = "logga";
 
-  // The title and the drawing beside the form name what is on show: the part's own (data-title,
-  // data-art) for "Glömt lösenordet?", "Kolla din mejl." and the text-message parts, else the mode's.
+  // The title names what is on show: the part's own data-title for the e-mail and text-message
+  // parts, "Glömt lösenordet?" and "Kolla din mejl.", else the mode's.
   function label() {
     const part = parts.slice(1).find((element) => !element.hidden);
     title.textContent =
       part?.dataset.title ?? (mode === "skapa" ? "Skapa konto." : "Logga in.");
-    const art = part?.dataset.art ?? mode;
-    arts.forEach((image) => (image.hidden = image.dataset.authArt !== art));
   }
 
   function setMode(next, { address = true } = {}) {
@@ -80,14 +83,20 @@ async function loginPage() {
     main.querySelectorAll("[data-only]").forEach((element) => {
       element.hidden = element.dataset.only !== mode;
     });
-    label();
     submit.textContent = creating ? "Skapa konto" : "Logga in";
+    emailPart.dataset.title = creating
+      ? "Skapa konto med e-post."
+      : "Logga in med e-post.";
     phoneForm.dataset.title = creating
       ? "Skapa konto med mobilen."
       : "Logga in med mobilen.";
-    document.title = [creating ? "Skapa konto" : "Logga in", siteName].filter(Boolean).join(" · ");
+    label();
+    document.title = [creating ? "Skapa konto" : "Logga in", siteName]
+      .filter(Boolean)
+      .join(" · ");
     form.password.autocomplete = creating ? "new-password" : "current-password";
     show(errorBox, "");
+    show(emailError, "");
     if (address) {
       const url = new URL(location.href);
       if (creating) url.searchParams.set("lage", "skapa");
@@ -100,6 +109,19 @@ async function loginPage() {
     parts.forEach((element) => (element.hidden = element !== part));
     label();
     (part.querySelector("input") ?? part.querySelector("button"))?.focus();
+  }
+
+  // The e-mail part, with the first field to fill in focused: the name when creating an account,
+  // else the address, or the password when the address is already there.
+  function showEmail() {
+    showPart(emailPart);
+    const field =
+      mode === "skapa"
+        ? nameInput
+        : form.email.value
+          ? form.password
+          : form.email;
+    field.focus();
   }
 
   // The box with "Skicka igen": after signing up, and when signing in before confirming.
@@ -119,15 +141,18 @@ async function loginPage() {
     if (!link) return;
     event.preventDefault();
     setMode(link.dataset.mode);
-    (mode === "skapa" ? nameInput : form.email).focus();
+    // The link just clicked is hidden now, so focus moves on: to the e-mail form's first field, or
+    // to the title, which names the mode.
+    if (!emailPart.hidden) showEmail();
+    else $("#auth-title").focus();
   });
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const fields = { email: form.email, password: form.password };
     busy(
-      mainBox,
-      errorBox,
+      form,
+      emailError,
       async () => {
         const address = emailValue(form.email);
         const password = form.password.value;
@@ -192,6 +217,12 @@ async function loginPage() {
     });
   });
 
+  $("[data-email-open]").addEventListener("click", () => {
+    show(emailError, "");
+    showEmail();
+  });
+  $("[data-email-back]").addEventListener("click", () => showPart(mainBox));
+
   // Sign-in by text message. Supabase makes an account for a number it doesn't know, with the name
   // from "Skapa konto" when there is one; a number added on konto.html signs in to that account.
   const phoneInput = phoneForm.elements.namedItem("phone");
@@ -227,7 +258,7 @@ async function loginPage() {
         if (!phone)
           throw problem(
             phoneInput.value.trim()
-              ? "Skriv ett svenskt mobilnummer, till exempel 070-123 45 67."
+              ? "Skriv Ett svenskt mobilnummer, t.ex. 070-123 45 67."
               : "Skriv ditt mobilnummer.",
             phoneInput,
           );
@@ -303,14 +334,13 @@ async function loginPage() {
     show($("[data-reset-status]"), "");
     showPart(resetForm);
   });
-  $("[data-reset-back]").addEventListener("click", () => showPart(mainBox));
+  $("[data-reset-back]").addEventListener("click", showEmail);
   // Back from "Kolla din mejl", e.g. after confirming on another device: sign in with the same address.
   $("[data-sent-back]").addEventListener("click", () => {
     setMode("logga");
     form.email.value = sentBox.dataset.email ?? "";
     form.password.value = "";
-    showPart(mainBox);
-    (form.email.value ? form.password : form.email).focus();
+    showEmail();
   });
 
   resetForm.addEventListener("submit", (event) => {

@@ -456,6 +456,7 @@ function cookingTimeButton({ id, seconds, phrase, label }) {
 // --- The timer tray, at the bottom of every page while there are timers. They are saved with their end
 // times, so a reload, another page or a second tab shows the same ones.
 
+let cookingTrayHome = null;
 let cookingTray = null;
 let cookingTrayList = null;
 let cookingLive = null;
@@ -620,7 +621,7 @@ function cookingPlaceTray(records = []) {
     if (target.localName === "dialog")
       cookingModals = cookingModalStack(cookingModals, target, target.open && isModal(target));
   cookingModals = cookingModals.filter((dialog) => dialog.isConnected && dialog.open);
-  const home = cookingModals[cookingModals.length - 1] ?? document.body;
+  const home = cookingModals[cookingModals.length - 1] ?? cookingTrayHome;
   if (cookingTray.parentElement !== home) home.append(cookingTray, cookingLive);
   cookingRenderTray();
 }
@@ -804,14 +805,17 @@ function enhanceCooking(article) {
 }
 
 function cookingInitPage() {
-  document.body.insertAdjacentHTML(
+  cookingTrayHome = cookingElement("div", "cook-tray-home");
+  document.querySelector(".site-footer").before(cookingTrayHome);
+  cookingTrayHome.append(document.querySelector("#toast"));
+  cookingTrayHome.insertAdjacentHTML(
     "beforeend",
     `<section class="cook-tray" aria-label="Timers" hidden><ol class="cook-tray-list"></ol></section>
     <p class="sr-only cook-live" role="status"></p>`,
   );
-  cookingTray = document.querySelector(".cook-tray");
+  cookingTray = cookingTrayHome.querySelector(".cook-tray");
   cookingTrayList = cookingTray.querySelector(".cook-tray-list");
-  cookingLive = document.querySelector(".cook-live");
+  cookingLive = cookingTrayHome.querySelector(".cook-live");
   cookingTrayList.addEventListener("click", cookingTrayClick);
   // After a reload or on another page, the timers' sound is allowed again by the next click or key
   // press anywhere (an iPhone unlocks sound on a click, not on touch-start).

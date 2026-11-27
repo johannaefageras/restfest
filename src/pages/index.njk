@@ -20,8 +20,9 @@ carouselRecipes:
 ---
 {#- The home page: a purple hero, recipes from the archive, then three steps with the same heading:
     01 Inventera (the fridge list, and the fridge photo when it's turned on), 02 Matcha (tonight's dinner)
-    and 03 Planera (a week of dinners, shown once the list matches enough recipes). "Så funkar det" at
-    the bottom sums it up in four pictures (three without the photo) and a link to the archive. -#}
+    and 03 Planera (a week of dinners, shown once the list matches enough recipes). Then, for visitors
+    who aren't signed in, an invitation to make an account. "Så funkar det" at the bottom sums it up in
+    four pictures (three without the photo) and a link to the archive. -#}
   <main id="main" class="wrap kitchen-page">
     <section class="kitchen-hero" aria-labelledby="hero-heading">
       <div class="kitchen-hero-copy">
@@ -52,11 +53,21 @@ carouselRecipes:
         {%- set srcset = card.cardImage | webpSrcset %}
         <li>
           <a class="recipe-carousel-card" href="recept/{{ card.id }}.html" data-open="{{ card.id }}">
-            <img src="{{ card.cardImage | webp }}"{% if srcset %} srcset="{{ srcset }}" sizes="236px"{% endif %} alt="" width="600" height="338" loading="lazy" decoding="async">
-            <span>{{ card.title }}</span>
+            <span class="recipe-carousel-art">
+              <img src="{{ card.cardImage | webp }}"{% if srcset %} srcset="{{ srcset }}" sizes="236px"{% endif %} alt="" width="600" height="338" loading="lazy" decoding="async">
+              {%- if card.timeLabel %}<span class="recipe-carousel-time">{{ card.timeLabel }}</span>{% endif %}
+            </span>
+            <span class="recipe-carousel-title">{{ card.title }}</span>
           </a>
         </li>
         {%- endfor %}
+        {#- The last card leads on to the archive, so the row ends somewhere before it starts over. #}
+        <li>
+          <a class="recipe-carousel-card recipe-carousel-more" href="receptarkiv.html">
+            <span class="recipe-carousel-art"><img src="assets/icons/recipe-archive.svg" width="851" height="851" alt="" loading="lazy" decoding="async"></span>
+            <span class="recipe-carousel-title">Bläddra bland alla recept</span>
+          </a>
+        </li>
       </ul>
     </section>
     {%- endif %}
@@ -156,6 +167,25 @@ carouselRecipes:
         <ul id="week-list" class="match-list"></ul>
       </section>
     </div>
+
+    {%- if ai.accounts %}
+    {#- After the steps, once there is something worth keeping. The heart and the basket are the
+        header's "Sparat" and "Inköpslista": what an account keeps. #}
+    <section class="account-invitation when-signed-out" aria-labelledby="account-invitation-title">
+      <div class="account-invitation-art" aria-hidden="true">
+        <img class="account-invitation-basket" src="assets/icons/shopping-basket.svg" width="1063" height="1029" alt="" loading="lazy" decoding="async">
+        <img class="account-invitation-heart" src="assets/icons/heart.svg" width="866" height="781" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="account-invitation-copy">
+        <h2 id="account-invitation-title">Spara det goda till nästa gång.</h2>
+        <p>Samla dina favoritrecept och ha samma inköpslista på mobilen och datorn.</p>
+      </div>
+      <div class="account-invitation-actions">
+        <a class="button primary" href="logga-in.html?lage=skapa">Skapa konto</a>
+        <a class="text-button" href="logga-in.html" data-account-link>Logga in</a>
+      </div>
+    </section>
+    {%- endif %}
 
     <section id="sa-funkar-det" class="how-section" aria-labelledby="how-heading">
       <div class="how-heading"><p class="eyebrow">FRÅN KYL TILL KVÄLLSMAT</p><h2 id="how-heading">Så funkar det</h2></div>

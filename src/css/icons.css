@@ -69,6 +69,9 @@
 .fa-mobile-screen-button::before {
   content: "\f3cd";
 }
+.fa-envelope::before {
+  content: "\f0e0";
+}
 .fa-plus::before {
   content: "\2b";
 }

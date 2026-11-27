@@ -106,18 +106,29 @@ textarea:focus-visible,
   border: 0;
   border-inline: 3px solid currentColor;
 }
+/* The track reaches into the page's side padding by its own inset, so the first card lines up with
+   the heading and the hero. Each side fades only while there are cards beyond it:
+   recipe-carousel.js sets data-past-start and data-at-end as the row scrolls. */
 .recipe-carousel-track {
+  --fade-start: 0px;
+  --fade-end: var(--carousel-fade);
   display: flex;
   gap: 12px;
-  margin: 0;
+  margin: 0 calc(-1 * var(--carousel-inset));
   padding: 4px var(--carousel-inset);
   list-style: none;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: var(--carousel-inset);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--carousel-fade), #000 calc(100% - var(--carousel-fade)), transparent);
-  mask-image: linear-gradient(to right, transparent, #000 var(--carousel-fade), #000 calc(100% - var(--carousel-fade)), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--fade-start), #000 calc(100% - var(--fade-end)), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 var(--fade-start), #000 calc(100% - var(--fade-end)), transparent);
+}
+.recipe-carousel-track[data-past-start] {
+  --fade-start: var(--carousel-fade);
+}
+.recipe-carousel-track[data-at-end] {
+  --fade-end: 0px;
 }
 .recipe-carousel-track[data-ready] {
   scrollbar-width: none;
@@ -130,6 +141,9 @@ textarea:focus-visible,
   flex: 0 0 clamp(196px, 24%, 236px);
   scroll-snap-align: start;
 }
+/* The archive's card in short: the photo with its time, and the title. Trio is too wide for the long
+   titles on a card this narrow, so it is Spot Grotesk Bold, as headings below Trio's 20px are and as
+   the week's cards (.match-item) are on phones: three lines at most. */
 .recipe-carousel-card {
   display: block;
   height: 100%;
@@ -138,30 +152,138 @@ textarea:focus-visible,
   border-radius: var(--radius-card);
   background: var(--surface);
   color: var(--ink);
-  font-size: var(--text-base);
-  font-weight: var(--font-weight-medium);
-  line-height: 1.25;
   text-decoration: none;
 }
 .recipe-carousel-card:hover {
   border-color: var(--ink);
+}
+.recipe-carousel-card:hover .recipe-carousel-title {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 .recipe-carousel-card:focus-visible {
   outline-offset: -3px;
 }
-.recipe-carousel-card img {
+.recipe-carousel-art {
   display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  position: relative;
+  aspect-ratio: 4 / 3;
   background: var(--well);
 }
-.recipe-carousel-card span {
+.recipe-carousel-art > img {
   display: block;
-  padding: 10px 12px 12px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.recipe-carousel-title {
+  display: block;
+  padding: 12px 14px 14px;
+  font-size: 18px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+/* The last card: the archive's box on butter, like the archive cards without a photo. */
+.recipe-carousel-more .recipe-carousel-art {
+  display: grid;
+  place-items: center;
+  background: var(--butter);
+}
+.recipe-carousel-more .recipe-carousel-art > img {
+  width: 46%;
+  height: auto;
+  object-fit: contain;
+  transform: rotate(-6deg);
+}
+
+/* The invitation to sign up, after the steps for visitors who aren't signed in: a smaller sibling of
+   the hero, pink as the one card colour the page doesn't use yet. It keeps its colour in the dark theme
+   (css/dark.css). It sits as far below the steps as they sit from each other. */
+.account-invitation {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(130px, 19%, 190px);
+  grid-template-areas: "copy art" "actions art";
+  column-gap: clamp(20px, 5vw, 64px);
+  margin-top: clamp(40px, 5vw, 60px);
+  padding: clamp(22px, 3vw, 34px) clamp(19px, 4.5vw, 56px);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-card);
+  background: var(--pink);
+}
+.account-invitation-copy {
+  grid-area: copy;
+  align-self: end;
+}
+.account-invitation h2 {
+  font-size: clamp(24px, 3.2vw, 34px);
+  line-height: 1.08;
+  letter-spacing: var(--track-display-sm);
+}
+.account-invitation p {
+  max-width: 46ch;
+  margin-top: 8px;
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+.account-invitation-actions {
+  grid-area: actions;
+  align-self: start;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  margin-top: 18px;
+}
+/* The basket stands at the back and the heart leans on it, both tilted the hero's way. The pair
+   reaches a little into the top and bottom padding, as the hero's bowl does. */
+.account-invitation-art {
+  grid-area: art;
+  align-self: center;
+  position: relative;
+  aspect-ratio: 1.12;
+  margin-block: -14px;
+}
+.account-invitation-art img {
+  position: absolute;
+  height: auto;
+}
+.account-invitation-basket {
+  right: 0;
+  top: 0;
+  width: 78%;
+  transform: rotate(6deg);
+}
+.account-invitation-heart {
+  left: 0;
+  bottom: 0;
+  width: 54%;
+  transform: rotate(-12deg);
+}
+/* On phones the art shrinks to sit beside the heading, and the text and buttons take the full width. */
+@media (max-width: 599px) {
+  .account-invitation {
+    grid-template-columns: minmax(0, 1fr) clamp(78px, 24vw, 104px);
+    grid-template-areas: "title art" "text text" "actions actions";
+    align-items: center;
+  }
+  .account-invitation-copy {
+    display: contents;
+  }
+  .account-invitation h2 {
+    grid-area: title;
+  }
+  .account-invitation p {
+    grid-area: text;
+    margin-top: 12px;
+  }
+  .account-invitation-art {
+    margin-block: -6px;
+  }
+  .account-invitation-actions {
+    margin-top: 14px;
+  }
 }
 
 .kitchen-grid {
@@ -476,7 +598,8 @@ textarea:focus-visible,
 }
 
 .featured-time,
-.archive-time {
+.archive-time,
+.recipe-carousel-time {
   position: absolute;
   bottom: 11px;
   right: 12px;
@@ -2830,29 +2953,42 @@ body:has(#shopping-dialog[open]) {
   font-size: 0.85em;
 }
 
-/* The timer tray (cooking.js): fixed to the bottom of the screen, or of the open dialog's screen, as
-   cooking.js moves it into a modal dialog. The page and the dialog get room below their content
-   (--cook-tray-height, set by cooking.js), so the last step can scroll clear of it. */
-body:has(> .cook-tray:not([hidden])),
+/* On the page, the tray sticks to the bottom of the screen until the footer scrolls into view.
+   The tray's place in the page gives the last steps room to scroll clear of it. */
+.cook-tray-home:has(> .cook-tray:not([hidden])) {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+.cook-tray-home > .cook-tray {
+  pointer-events: auto;
+}
+.cook-tray-home:has(> .cook-tray:not([hidden])) > .toast {
+  position: absolute;
+  bottom: calc(100% + 12px);
+}
+
+/* In a modal, cooking.js moves the tray into the dialog and measures it for scroll clearance. */
 dialog:has(> .cook-tray:not([hidden])) {
   padding-bottom: var(--cook-tray-height, 0px);
 }
-body:has(> .cook-tray:not([hidden])) .toast {
-  bottom: calc(var(--cook-tray-height, 0px) + 12px);
-}
-.cook-tray {
+dialog > .cook-tray {
   position: fixed;
   inset-inline: 0;
   bottom: 0;
   z-index: 20;
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
+}
+.cook-tray {
   width: min(100%, 810px);
   max-height: 290px;
   margin-inline: auto;
   overflow: auto;
   padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
   border: 2px solid var(--ink);
-  border-bottom: 0;
-  border-radius: 12px 12px 0 0;
+  border-radius: 12px;
   background: var(--surface);
   color: var(--ink);
   box-shadow: 0 -4px 18px rgb(0 0 0 / 0.14);
@@ -3720,31 +3856,27 @@ body:has(> .cook-tray:not([hidden])) .toast {
 .account-sent[aria-busy="true"] .button {
   opacity: 0.6;
 }
-/* "Fortsätt med Google" and "Fortsätt med mobilnummer", stacked, with icons the same size. */
+/* The ways to sign in ("Fortsätt med Google", "… med mobilnummer", "… med e-post", and Facebook
+   later), stacked. Each icon sits in the same 20px slot at the start of its button, so the icons make
+   one column and the labels start in line, also when one wraps on a narrow phone. */
 .auth-providers {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+}
+.auth-providers .button {
+  justify-content: flex-start;
+  gap: 12px;
+  padding-inline: 16px;
+  text-align: left;
+}
+.auth-providers .button > :is(img, .fas) {
+  flex: none;
+  width: 20px;
 }
 .auth-providers .fas {
-  width: 20px;
   font-size: 20px;
-}
-/* "eller" between the buttons above and the form, with a rule on either side. */
-.account-or {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-block: 18px;
-  color: var(--muted);
-  font: var(--font-weight-body) var(--text-meta) var(--font-label);
-  font-feature-settings: var(--spot-features);
-}
-.account-or::before,
-.account-or::after {
-  content: "";
-  flex: 1;
-  border-top: 1px solid var(--line);
+  text-align: center;
 }
 .account-error {
   padding: 10px 12px;
@@ -3762,55 +3894,35 @@ body:has(> .cook-tray:not([hidden])) .toast {
   display: none;
 }
 
-/* Sign-in and new password (pages/logga-in.njk, nytt-losenord.njk): one outlined card, split like the
-   home page's hero: a drawing on a coloured ground beside the form on white. Below 760px the drawing
-   is a band above the form. The line between the halves belongs to the form side, so it takes the
-   card's outline colour in the dark theme, where the coloured ground has the light neutrals. */
+/* Sign-in and new password (pages/logga-in.njk, nytt-losenord.njk): one outlined card with the form,
+   kept short so each step fits on a laptop or phone screen without scrolling. It sits in the middle of
+   the space under the header: the page is at least a screen tall, so the footer starts below it. The
+   header is 76px tall, and about 120px where it takes two rows (styles.css, 899px). A card taller
+   than the space starts under the header. */
 .wrap.account-auth {
-  max-width: calc(920px + 64px);
-  padding-top: clamp(28px, 5vw, 56px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100vh - 76px);
+  min-height: calc(100svh - 76px);
+  max-width: calc(440px + 64px);
+  padding-block: clamp(16px, 2.5vw, 24px);
 }
 .auth-card {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  padding: clamp(20px, 3vw, 26px) clamp(20px, 4vw, 32px);
   border: 2px solid var(--ink);
   border-radius: var(--radius-card);
   background: var(--surface);
-  overflow: hidden;
-}
-.auth-art {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  padding: clamp(32px, 4vw, 52px) clamp(24px, 3.5vw, 44px);
-  /* Light pink, as the icons are purple, orange, green and yellow: on yellow the padlock disappears. */
-  background: var(--pink-light);
-  text-align: center;
-}
-/* The same square for each icon, so the panel keeps its size when the form changes part. */
-.auth-art img {
-  width: min(100%, 190px);
-  height: auto;
-  aspect-ratio: 1;
-  object-fit: contain;
-  transform: rotate(-4deg);
-}
-.auth-art p {
-  max-width: 24ch;
-  font-size: var(--text-lead);
-  line-height: 1.45;
-  text-wrap: balance;
-}
-.auth-body {
-  min-width: 0;
-  padding: clamp(32px, 4.5vw, 52px) clamp(24px, 4.5vw, 52px) clamp(30px, 4vw, 44px);
-  border-left: 2px solid var(--ink);
+  /* A long e-mail address in "Kolla din mejl." breaks rather than pushing the page sideways. */
+  overflow-wrap: break-word;
 }
 .auth-title {
   font-size: clamp(30px, 4.6vw, 40px);
   line-height: 1.12;
+}
+/* Smaller on the card than on the dialog that shares the class (shopping-share.js). */
+.auth-card .auth-title {
+  font-size: clamp(28px, 3.6vw, 32px);
 }
 /* The site's marker, drawn as a background here so it follows "Glömt lösenordet?" onto a second line. */
 .auth-title .marker {
@@ -3823,8 +3935,38 @@ body:has(> .cook-tray:not([hidden])) .toast {
 .auth-title .marker::before {
   content: none;
 }
+/* The title takes focus when the visitor switches between "Logga in" and "Skapa konto"; it isn't a
+   control, so it shows no ring. */
+.auth-title[tabindex="-1"]:focus {
+  outline: none;
+}
 .auth-part {
-  margin-top: 28px;
+  margin-top: 20px;
+}
+/* Under the title on the sign-in part: what an account is for, close to the title. */
+.auth-part:has(> .auth-intro) {
+  margin-top: 8px;
+}
+.auth-intro {
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: var(--text-small);
+  line-height: 1.45;
+}
+/* An error from Google, or from a link the visitor arrived by, under the buttons. */
+[data-auth-main] > .account-error {
+  margin-top: 12px;
+}
+/* Tighter than the account pages' forms, which share these classes. */
+.auth-card .account-form {
+  gap: 10px;
+}
+.auth-card .account-field label {
+  margin-bottom: 4px;
+}
+.auth-card .account-field input {
+  min-height: 44px;
+  padding-block: 7px;
 }
 .auth-lead {
   color: var(--ink-soft);
@@ -3860,8 +4002,8 @@ body:has(> .cook-tray:not([hidden])) .toast {
   text-decoration-color: currentColor;
 }
 .auth-switch {
-  margin-top: 30px;
-  padding-top: 20px;
+  margin-top: 16px;
+  padding-top: 12px;
   border-top: 1px solid var(--rule);
   font-size: var(--text-base);
 }
@@ -3895,36 +4037,18 @@ body:has(> .cook-tray:not([hidden])) .toast {
   background: var(--cream);
 }
 
+@media (max-width: 899px) {
+  .wrap.account-auth {
+    min-height: calc(100vh - 120px);
+    min-height: calc(100svh - 120px);
+  }
+}
 @media (max-width: 759px) {
   .auth-card {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .auth-art {
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 18px;
-    padding: 18px 20px;
-    text-align: left;
-  }
-  .auth-art img {
-    flex: none;
-    width: 64px;
-  }
-  .auth-card-icon-only .auth-art {
-    justify-content: center;
-    padding-block: 14px;
-  }
-  .auth-art p {
-    font-size: var(--text-base);
-    text-wrap: pretty;
-  }
-  .auth-body {
-    padding: 26px 20px 28px;
-    border-left: 0;
-    border-top: 2px solid var(--ink);
+    padding: 20px;
   }
   .auth-part {
-    margin-top: 22px;
+    margin-top: 18px;
   }
 }
 

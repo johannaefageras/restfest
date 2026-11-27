@@ -9,32 +9,26 @@ const modules = ['auth-forms.js'];
 const permalink = 'nytt-losenord.html';
 ---
   <main id="main" class="wrap account-page account-auth" data-auth-page="password">
-    <section class="auth-card auth-card-icon-only" aria-labelledby="auth-title">
-      <div class="auth-art">
-        <img src="assets/icons/forgot-password.svg" alt="" width="803" height="912">
-      </div>
+    <section class="auth-card" aria-labelledby="auth-title">
+      <h1 id="auth-title" class="auth-title"><span class="marker">Nytt lösenord.</span></h1>
+      <p class="account-status auth-part" role="status" data-password-wait>Kontrollerar länken …</p>
 
-      <div class="auth-body">
-        <h1 id="auth-title" class="auth-title"><span class="marker">Nytt lösenord.</span></h1>
-        <p class="account-status auth-part" role="status" data-password-wait>Kontrollerar länken …</p>
-
-        <form class="account-form auth-part" data-password-form novalidate hidden>
-          <p class="auth-lead">Välj ett nytt lösenord, så är du snart tillbaka bland dina sparade recept.</p>
-          <div class="account-field">
-            <label for="new-password">Nytt lösenord</label>
-            <input id="new-password" name="password" type="password" autocomplete="new-password" required aria-describedby="new-password-hint">
-            <p id="new-password-hint" class="account-hint">Minst 8 tecken.</p>
-          </div>
-          <p class="account-error" role="alert" data-password-error hidden></p>
-          <button class="button primary account-wide" type="submit">Spara lösenordet</button>
-        </form>
-
-        <div class="auth-part auth-expired" data-password-expired hidden>
-          <p class="auth-note">Länken har gått ut eller redan använts. Du kan be om en ny från inloggningen.</p>
-          <a class="button primary account-wide" href="logga-in.html">Till inloggningen</a>
+      <form class="account-form auth-part" data-password-form novalidate hidden>
+        <p class="auth-lead">Välj ett nytt lösenord, så är du snart tillbaka bland dina sparade recept.</p>
+        <div class="account-field">
+          <label for="new-password">Nytt lösenord</label>
+          <input id="new-password" name="password" type="password" autocomplete="new-password" required aria-describedby="new-password-hint">
+          <p id="new-password-hint" class="account-hint">Minst 8 tecken.</p>
         </div>
+        <p class="account-error" role="alert" data-password-error hidden></p>
+        <button class="button primary account-wide" type="submit">Spara lösenordet</button>
+      </form>
 
-        <noscript><p class="account-error">Sidan behöver JavaScript.</p></noscript>
+      <div class="auth-part auth-expired" data-password-expired hidden>
+        <p class="auth-note">Länken har gått ut eller redan använts. Du kan be om en ny från inloggningen.</p>
+        <a class="button primary account-wide" href="logga-in.html">Till inloggningen</a>
       </div>
+
+      <noscript><p class="account-error">Sidan behöver JavaScript.</p></noscript>
     </section>
   </main>

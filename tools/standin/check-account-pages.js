@@ -1,6 +1,7 @@
 // Checks the account pages in a browser, against the stand-in backend: the first sign-in's hearts in
 // one request, what receptbok.html fetches, the header's count, ?spara=1, the lock between tabs,
-// problems tied to their fields, and sign-in by text message, including a number added on konto.html.
+// problems tied to their fields, the e-mail step behind its button, and sign-in by text message,
+// including a number added on konto.html.
 // HANDOFF.md, "Konton och receptbok".
 //
 // It is a function for the Playwright tool (browser_run_code_unsafe with this file), not a script
@@ -26,7 +27,9 @@ async (page) => {
     await page.goto(`${site}/integritet.html`);
     await page.evaluate(() => { localStorage.clear(); sessionStorage.clear(); });
   };
+  // E-mail and password are a step of their own, behind "Fortsätt med e-post".
   const signIn = async (email) => {
+    await page.click('[data-email-open]');
     await page.fill('#auth-email', email);
     await page.fill('#auth-password', 'hemligt123');
     await page.click('[data-auth-submit]');
@@ -42,10 +45,38 @@ async (page) => {
   });
   const ids = Object.fromEntries((await state()).generated.map(g => [g.title, g.id]));
 
+  // 12. The e-mail step: its title follows the mode, the switch works there too, and "Glömt
+  // lösenordet?" leads back to it.
+  await clean();
+  await page.goto(`${site}/logga-in.html`);
+  await settle();
+  const view = () => page.evaluate(() => ({
+    title: document.querySelector('[data-auth-title]').textContent,
+    email: !document.querySelector('[data-email-part]').hidden,
+    name: !document.querySelector('#auth-name').closest('.account-field').hidden,
+    focus: document.activeElement.id || document.activeElement.tagName
+  }));
+  await page.click('[data-email-open]');
+  let step = await view();
+  check('12 e-post opens its own step, at the address', step.title === 'Logga in med e-post.' && step.email && !step.name && step.focus === 'auth-email', step);
+  await page.click('[data-email-part] [data-mode="skapa"]');
+  step = await view();
+  check('12 "Skapa konto" there stays on the step, with the name field', step.title === 'Skapa konto med e-post.' && step.email && step.name && step.focus === 'auth-name', step);
+  await page.click('[data-email-part] [data-mode="logga"]');
+  await page.fill('#auth-email', 'a@example.se');
+  await page.click('[data-forgot]');
+  await page.click('[data-reset-back]');
+  step = await view();
+  check('12 back from "Glömt lösenordet?" is the e-mail step, at the password', step.title === 'Logga in med e-post.' && step.email && step.focus === 'auth-password', step);
+  await page.click('[data-email-back]');
+  step = await view();
+  check('12 back from the e-mail step is the buttons', step.title === 'Logga in.' && !step.email, step);
+
   // 8. A problem with a field is tied to that field.
   await clean();
   await page.goto(`${site}/logga-in.html`);
   await settle();
+  await page.click('[data-email-open]');
   await page.click('[data-auth-submit]');
   let field = await page.evaluate(() => {
     const input = document.querySelector('#auth-email');
@@ -210,11 +241,14 @@ async (page) => {
     return { invalid: input.getAttribute('aria-invalid'), described: described.join(' | '), focused: document.activeElement === input };
   }, selector);
 
-  // 9. A new number gets an account, with the name typed under "Skapa konto".
+  // 9. A new number gets an account, with the name typed under "Skapa konto" (here on the e-mail step
+  // first, before the visitor changes their mind).
   await clean();
   await page.goto(`${site}/logga-in.html?lage=skapa`);
   await settle();
+  await page.click('[data-email-open]');
   await page.fill('#auth-name', 'Mona Mobil');
+  await page.click('[data-email-back]');
   await page.click('[data-phone-open]');
   field = await page.evaluate(() => ({ name: document.querySelector('#auth-phone-name').value, title: document.querySelector('[data-auth-title]').textContent }));
   check('9 the phone form takes the name along', field.name === 'Mona Mobil' && field.title === 'Skapa konto med mobilen.', field);
